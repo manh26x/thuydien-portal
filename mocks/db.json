@@ -1,0 +1,99 @@
+{
+  "login": {
+    "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MDYyMzA3NzYsInVzZXJfbmFtZSI6ImhlbnJ5IiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9jcmVhdGVfdXNlciJdLCJqdGkiOiI3MWE1YTMwZS04MGI1LTQxNjEtYmUyMi1jODdhMjRmOGFkMDYiLCJjbGllbnRfaWQiOiJicm93c2VyIiwic2NvcGUiOlsid2ViIl19.nG5_HiEsPZAuoHTGDOD65XABVsOcGC7W1oVPEjknNn8",
+    "token_type": "bearer",
+    "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJoZW5yeSIsInNjb3BlIjpbIndlYiJdLCJhdGkiOiI3MWE1YTMwZS04MGI1LTQxNjEtYmUyMi1jODdhMjRmOGFkMDYiLCJleHAiOjE2MDg3Nzk1NzYsImF1dGhvcml0aWVzIjpbIlJPTEVfY3JlYXRlX3VzZXIiXSwianRpIjoiMjY0NzljNWItNTlmYS00ZjViLTgyY2UtMmM5ZTIyOTg4ZDRjIiwiY2xpZW50X2lkIjoiYnJvd3NlciJ9.nFTH9xcVr_4X-naf3WMnP8-yIpcpo0tdWXIrGTJrjp0",
+    "expires_in": 43199,
+    "scope": "web",
+    "jti": "71a5a30e-80b5-4161-be22-c87a24f8ad06"
+  },
+  "product": {
+  	"responseCode": "000",
+  	"responseMessage": "Thành công",
+  	"data": [
+  			{
+  				"id": 1,
+  				"title": "Tài khoản",
+  				"image": "",
+  				"icon": "http://192.168.1.17:3000/upload/acc_icon.png",
+  				"child": 0
+  			},
+  			{
+  				"id": 2,
+  				"title": "Thẻ",
+  				"image": "",
+  				"icon": "http://192.168.1.17:3000/upload/card_icon.png",
+  				"child": 0
+  			},
+  			{
+  				"id": 3,
+  				"title": "Tiết kiệm",
+  				"image": "",
+  				"icon": "http://192.168.1.17:3000/upload/save_icon.png",
+  				"child": 1
+  			},
+  			{
+  				"id": 4,
+  				"title": "Tín dụng",
+  				"image": "",
+  				"icon": "http://192.168.1.17:3000/upload/credit_icon.png",
+  				"child": 0
+  			},
+  			{
+  				"id": 5,
+  				"title": "EBanking",
+  				"image": "",
+  				"icon": "http://192.168.1.17:3000/upload/ebanking_icon.png",
+  				"child": 0
+  			},
+  			{
+  				"id": 6,
+  				"title": "mPost",
+  				"image": "",
+  				"icon": "http://192.168.1.17:3000/upload/mPost_icon.png",
+  				"child": 0
+  			}
+  	]
+  },
+  "list-product": {
+  	"responseCode": "000",
+  	"responseMessage": "Thành công",
+  	"data": [
+  		{
+  			"id": 10,
+  			"image": "http://192.168.1.17:3000/upload/image_test.png",
+  			"title": "Bảo hiểm xe cơ giới liên kết Bảo Long",
+  			"timeStart": "18/7/2019",
+  			"timeEnd": "18/7/2020"
+  		},
+  		{
+  			"id": 11,
+  			"image": "http://192.168.1.17:3000/upload/image_test.png",
+  			"title": "Bảo hiểm xe cơ giới liên kết PTI",
+  			"timeStart": "18/7/2019",
+  			"timeEnd": "18/7/2020"
+  		},
+  		{
+  			"id": 12,
+  			"image": "http://192.168.1.17:3000/upload/image_test.png",
+  			"title": "Bảo hiểm xe cơ giới liên kết BSH",
+  			"timeStart": "18/7/2019",
+  			"timeEnd": "18/7/2020"
+  		},
+  		{
+  			"id": 12,
+  			"image": "http://192.168.1.17:3000/upload/image_test.png",
+  			"title": "Bảo hiểm xe cơ giới liên kết GIC",
+  			"timeStart": "18/7/2019",
+  			"timeEnd": "18/7/2020"
+  		},
+  		{
+  			"id": 12,
+  			"image": "http://192.168.1.17:3000/upload/image_test.png",
+  			"title": "Bảo hiểm xe cơ giới liên kết VNI",
+  			"timeStart": "18/7/2019",
+  			"timeEnd": "18/7/2020"
+  		}
+  	]
+  }
+}

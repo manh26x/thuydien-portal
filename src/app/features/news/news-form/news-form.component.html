@@ -1,0 +1,73 @@
+<form>
+  <div class="p-grid">
+    <div class="p-col-8">
+      <div class="p-fluid">
+        <div class="p-col-12 p-field">
+          <label for="n-title">Tiêu đề</label>
+          <input id="n-title" type="text" pInputText />
+        </div>
+        <div class="p-col-12 p-field">
+          <label>Nội dung</label>
+          <editor
+            [init]="{
+            base_url: '/tinymce',
+            suffix: '.min',
+            height: 500,
+            menubar: true,
+            plugins: [
+             'autolink lists link image charmap print preview anchor',
+             'searchreplace visualblocks code fullscreen',
+             'insertdatetime media table paste code wordcount'
+            ],
+            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | fullscreen'}">
+          </editor>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-col-4">
+      <div class="p-fluid">
+        <div class="p-col-12 p-field">
+          <label for="n-tags">Tags</label>
+          <p-dropdown inputId="n-tags" [options]="statusList"></p-dropdown>
+        </div>
+
+        <div class="p-col-12 p-field">
+          <label for="n-group-customer">Nhóm khách hàng</label>
+          <p-dropdown inputId="n-group-customer" [options]="statusList"></p-dropdown>
+        </div>
+
+        <div class="p-col-12 p-field">
+          <label for="n-order">Mức độ quan trọng</label>
+          <p-dropdown inputId="n-order" [options]="statusList"></p-dropdown>
+        </div>
+
+        <div class="p-col-12 p-field">
+          <label for="n-target">Nhóm đối tượng xem tin</label>
+          <p-dropdown inputId="n-target" [options]="statusList"></p-dropdown>
+        </div>
+
+        <div class="p-col-12 p-field">
+          <label for="n-date-publish">Thời gian xuất bản</label>
+          <p-calendar [showTime]="true" inputId="n-date-publish"></p-calendar>
+        </div>
+
+        <div class="p-col-12 p-field">
+          <label for="n-group-product">Ảnh đính kèm</label>
+          <p-fileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize="1000000"></p-fileUpload>
+        </div>
+
+        <div class="p-col-12 p-field-checkbox">
+          <p-checkbox binary="true" inputId="n-send-notification"></p-checkbox>
+          <label for="n-send-notification">Gửi thông báo cho người dùng</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</form>
+
+<ng-template pTemplate="footer">
+  <p-button label="Hủy" styleClass="p-button-text"></p-button>
+  <p-button label="Lưu thay đổi" styleClass="p-button-secondary"></p-button>
+</ng-template>

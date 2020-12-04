@@ -1,0 +1,31 @@
+.login-body {
+  background-color: #1d1f35;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  .logo-container{
+    text-align: center;
+    background-color: #5f2c82;
+    min-height: 65px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  .logo {
+    margin-top: 3px;
+    width: 160px;
+    height: 40px;
+  }
+  .form-container {
+    background-color: #FFFFFF;
+    padding: 15px;
+    width: 100%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  .login-panel {
+    max-width: 555px;
+    margin: 0 auto;
+  }
+}

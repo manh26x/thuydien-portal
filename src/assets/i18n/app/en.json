@@ -1,0 +1,55 @@
+{
+	"err": {
+		"api": {
+			"201": "Did not find the value you requested",
+			"400": "Invalid request",
+			"401": "Authentication Error",
+			"404": "Services are not supported. Please try again later",
+			"500": "System Error",
+			"jsonFormat": "Cannot convert data to JSON",
+			"noResponseCode": "No response code found",
+			"title": "An error occurred"
+		},
+		"http": {
+			"300": "The server is not responding",
+			"301": "An error occurred, please try again later",
+			"302": "An error occurred, please try again later",
+			"303": "An error occurred, please try again later",
+			"304": "An error occurred, please try again later",
+			"305": "An error occurred, please try again later",
+			"400": "An error occurred, please try again later",
+			"401": "An error occurred, please try again later",
+			"402": "An error occurred, please try again later",
+			"403": "You do not have access to the service",
+			"404": "An error occurred, please try again later",
+			"405": "An error occurred, please try again later",
+			"406": "An error occurred, please try again later",
+			"407": "The internet signal is not stable or you may be using an intermediary server to use the internet. Please check the internet and the device's network configuration.",
+			"408": "The server is not responding",
+			"409": "The server is not responding",
+			"410": "An error occurred, please try again later",
+			"411": "An error occurred, please try again later",
+			"412": "An error occurred, please try again later",
+			"413": "An error occurred, please try again later",
+			"414": "An error occurred, please try again later",
+			"415": "An error occurred, please try again later",
+			"416": "An error occurred, please try again later",
+			"417": "An error occurred, please try again later",
+			"421": "An error occurred, please try again later",
+			"429": "An error occurred, please try again later",
+			"431": "An error occurred, please try again later",
+			"500": "The server is not responding",
+			"501": "An error occurred, please try again later",
+			"502": "An error occurred, please try again later",
+			"503": "The server is not responding",
+			"504": "The server is not responding",
+			"505": "An error occurred, please try again later",
+			"511": "You do not have access to the service",
+			"notification": "Notification",
+			"title": "An error occurred"
+		},
+		"invalid": {
+			"title": "Invalid request"
+		}
+	}
+}

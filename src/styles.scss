@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+.input-wrapper{
+  position: relative;
+  small {
+    position: absolute;
+    left: 5px;
+    bottom: -1.2rem;
+  }
+}
+
+.normal-dialog {
+  width: 50vw;
+}
+
+@media screen and (max-width: 40em) {
+  .normal-dialog {
+    width: 85vw;
+  }
+}

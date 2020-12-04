@@ -1,0 +1,10 @@
+{
+	"error": "An error occurred, please try again later",
+	"invalid.message": "Username or password is invalid",
+	"invalid.password": "Please enter a password.",
+	"invalid.username": "Please enter your username.",
+	"login": "Login",
+	"password": "Password",
+	"username": "Username",
+	"welcome": "Login to Sales App System"
+}

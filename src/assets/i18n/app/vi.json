@@ -1,0 +1,55 @@
+{
+	"err": {
+		"api": {
+			"201": "Không tìm thấy giá trị bạn yêu cầu",
+			"400": "Yêu cầu không hợp lệ",
+			"401": "Lỗi xác thực",
+			"404": "Dịnh vụ không được hỗ trợ. Vui lòng thử lại sau",
+			"500": "Lỗi hệ thống",
+			"jsonFormat": "Không thể chuyển dữ liệu sang JSON",
+			"noResponseCode": "Không tìm thấy mã phản hồi",
+			"title": "Có lỗi xảy ra"
+		},
+		"http": {
+			"300": "Máy chủ không phản hồi",
+			"301": "Có lỗi xảy ra vui lòng thử lại sau",
+			"302": "Có lỗi xảy ra vui lòng thử lại sau",
+			"303": "Có lỗi xảy ra vui lòng thử lại sau",
+			"304": "Có lỗi xảy ra vui lòng thử lại sau",
+			"305": "Có lỗi xảy ra vui lòng thử lại sau",
+			"400": "Có lỗi xảy ra vui lòng thử lại sau",
+			"401": "Có lỗi xảy ra vui lòng thử lại sau",
+			"402": "Có lỗi xảy ra vui lòng thử lại sau",
+			"403": "Bạn không có quyền truy cập vào dịch vụ",
+			"404": "Có lỗi xảy ra vui lòng thử lại sau",
+			"405": "Có lỗi xảy ra vui lòng thử lại sau",
+			"406": "Có lỗi xảy ra vui lòng thử lại sau",
+			"407": "Tin hiệu internet không ổn định hoặc có thể bạn đang sử dụng máy chủ trung gian để sử dụng internet. Vui lòng kiểm tra lại internet và cấu hình mạng của thiết bị.",
+			"408": "Máy chủ không phản hồi",
+			"409": "Máy chủ không phản hồi",
+			"410": "Có lỗi xảy ra vui lòng thử lại sau",
+			"411": "Có lỗi xảy ra vui lòng thử lại sau",
+			"412": "Có lỗi xảy ra vui lòng thử lại sau",
+			"413": "Có lỗi xảy ra vui lòng thử lại sau",
+			"414": "Có lỗi xảy ra vui lòng thử lại sau",
+			"415": "Có lỗi xảy ra vui lòng thử lại sau",
+			"416": "Có lỗi xảy ra vui lòng thử lại sau",
+			"417": "Có lỗi xảy ra vui lòng thử lại sau",
+			"421": "Có lỗi xảy ra vui lòng thử lại sau",
+			"429": "Có lỗi xảy ra vui lòng thử lại sau",
+			"431": "Có lỗi xảy ra vui lòng thử lại sau ",
+			"500": "Máy chủ không phản hồi",
+			"501": "Có lỗi xảy ra vui lòng thử lại sau",
+			"502": "Có lỗi xảy ra vui lòng thử lại sau",
+			"503": "Máy chủ không phản hồi",
+			"504": "Máy chủ không phản hồi",
+			"505": "Có lỗi xảy ra vui lòng thử lại sau",
+			"511": "Bạn không có quyền truy cập vào dịch vụ",
+			"notification": "Thông báo",
+			"title": "Có lỗi xảy ra"
+		},
+		"invalid": {
+			"title": "Yêu cầu không hợp lệ"
+		}
+	}
+}
