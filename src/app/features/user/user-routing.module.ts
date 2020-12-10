@@ -1,0 +1,43 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import {UserComponent} from './user.component';
+import {UserDataComponent} from './user-data/user-data.component';
+import {AuthGuard} from '../../auth/auth.guard';
+import {UserCreateComponent} from './user-create/user-create.component';
+import {UserUpdateComponent} from './user-update/user-update.component';
+import {UserViewComponent} from './user-view/user-view.component';
+import {FormLeaveGuard} from '../../core/form-leave.guard';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: UserComponent,
+    children: [
+      {
+        path: '',
+        component: UserDataComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'create',
+        component: UserCreateComponent,
+        canActivate: [AuthGuard],
+        canDeactivate: [FormLeaveGuard]
+      },
+      {
+        path: 'update/:id',
+        component: UserUpdateComponent
+      },
+      {
+        path: 'view/:id',
+        component: UserViewComponent
+      }
+    ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class UserRoutingModule { }

@@ -1,0 +1,61 @@
+{
+	"addNew": "Add New Tags",
+	"breadcrumb": {
+		"create": "Add New Tags",
+		"home": "List of tags",
+		"update": "Edit Tags information",
+		"view": "Detail information Tags"
+	},
+	"btn": {
+		"cancel": "Cancel",
+		"create": "Create",
+		"save": "Save changes"
+	},
+	"confirm": {
+		"accept": "Yes",
+		"delete": "Confirm Delete",
+		"deleteMessage": "Are you sure you want to remove Tags \"{{name}}\"",
+		"reject": "No"
+	},
+	"detail": "Detailed information Tags",
+	"edit": "Edit Tags information",
+	"filter": "Filter",
+	"invalid": {
+		"assign": {
+			"required": "Value cannot be blank"
+		},
+		"name": {
+			"maxLength": "The tag name must not exceed {{length}} characters",
+			"required": "Value cannot be blank"
+		},
+		"type": {
+			"required": "Value cannot be blank"
+		}
+	},
+	"list": "List of tags",
+	"message": {
+		"deleteNotFound": "Tags do not exist or have been removed",
+		"deleteSuccess": "Successfully deleted tags",
+		"deleteUsed": "The {{name}} tag is already in use, you cannot delete this tag",
+		"insertExisted": "Tags already exist",
+		"insertSuccess": "Add new Tags success",
+		"updateSuccess": "Tags updated successfully"
+	},
+	"no": "No.",
+	"noData": "No results match",
+	"paging": "Showing {first} to {last} in {totalRecords} records",
+	"search": "Search for Tags",
+	"tags": {
+		"assignTo": "Assign to",
+		"id": "Tags ID",
+		"name": "Name Tags",
+		"type": "Type Tags"
+	},
+	"type": {
+		"all": "All",
+		"kpi": "Tags for KPIs",
+		"news": "Tags for sales news",
+		"qna": "Tags for Q&A",
+		"tool": "Tags for calculation engine"
+	}
+}

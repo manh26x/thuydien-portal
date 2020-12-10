@@ -7,7 +7,7 @@ export class BaseModule {
   constructor(private translateService: TranslateService, router: Router) {
     this.setTranslateLanguage();
     router.events.subscribe(events => {
-      if (events instanceof NavigationStart || events instanceof NavigationEnd) {
+      if (events instanceof NavigationStart) {
         this.translateService.use(this.getLanguage());
       }
     });

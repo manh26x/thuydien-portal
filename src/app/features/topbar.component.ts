@@ -1,5 +1,11 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { FeaturesComponent} from './features.component';
+import {MenuItem} from 'primeng/api';
+import {AuthService} from '../auth/auth.service';
+import {Router} from '@angular/router';
+import {ILanguage} from '../core/model/language';
+import {AppTranslateService} from '../core/service/translate.service';
+import {Language} from '../core/model/language.enum';
 
 @Component({
   selector: 'aw-topbar',
@@ -10,46 +16,58 @@ import { FeaturesComponent} from './features.component';
       </a>
 
       <div class="layout-topbar-menu-wrapper">
-        <ul class="topbar-menu fadeInDown" [ngClass]="{'topbar-menu-active': features.topbarMenuActive}">
-          <li class="profile-item" #profile [ngClass]="{'active-topmenuitem':features.activeTopbarItem === profile}">
-            <a href="#" (click)="features.onTopbarItemClick($event, profile)">
-              <img src="assets/images/avatar.png" alt="sale-app-layout" />
-              <span class="topbar-item-name profile-name">Madison Hughes</span>
-            </a>
-
-            <ul class="fadeInDown animated">
-              <li role="menuitem">
-                <a href="#" (click)="features.onTopbarSubItemClick($event, 'profile')">
-                  <i class="pi pi-fw pi-user"></i>
-                  <span>Profile</span>
-                  <span class="topbar-badge">5</span>
-                </a>
-              </li>
-              <li role="menuitem">
-                <a href="#" (click)="features.onTopbarSubItemClick($event, 'changePassword')">
-                  <i class="pi pi-fw pi-cog"></i>
-                  <span>Change password</span>
-                </a>
-              </li>
-              <li role="menuitem">
-                <a href="#" (click)="features.onTopbarSubItemClick($event, 'logout')">
-                  <i class="pi pi-fw pi-sign-out"></i>
-                  <span>Logout</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-
-        </ul>
-
-        <a href="#" class="topbar-menu-btn" (click)="features.onTopbarMenuButtonClick($event)">
-          <img src="assets/images/avatar.png" alt="sale-app-layout" />
-        </a>
+        <button type="button" pButton icon="pi pi-angle-down" label="{{currentLang.lang}}" class="p-button-text" iconPos="right" (click)="menuLang.toggle($event)">
+          <img src="{{currentLang.flag}}" alt="LG" width="30" height="20" class="img-flag">&nbsp;
+        </button>&nbsp;
+        <button type="button" pButton icon="pi pi-angle-down" label="Admin" class="p-button-outlined" iconPos="right" (click)="menu.toggle($event)"></button>
       </div>
     </div>
+    <p-menu #menu [popup]="true" [model]="userItems"></p-menu>
+    <p-menu #menuLang [popup]="true" [model]="langItems"></p-menu>
   `
 })
-export class TopBarComponent {
-  constructor(public features: FeaturesComponent) {}
+export class TopBarComponent implements OnInit {
+  userItems: MenuItem[];
+  langItems: MenuItem[];
+  currentLang: ILanguage;
+  constructor(
+    public features: FeaturesComponent,
+    private authService: AuthService,
+    private router: Router,
+    private appTranslate: AppTranslateService
+  ) {
+    this.currentLang = appTranslate.langs.find(lang => lang.key === localStorage.getItem(Language.LOCAL_KEY));
+  }
+
+  ngOnInit() {
+    this.userItems = [
+      {
+        label: 'Đăng xuất',
+        command: () => this.logout()
+      }
+    ];
+    // language
+    this.langItems = [
+      {
+        label: `<img src="${this.appTranslate.langs[0].flag}" alt="LG" width="30" height="20" class="img-flag"> <span class="p-ml-1">${this.appTranslate.langs[0].lang}</span>`,
+        escape: false,
+        command: () => this.changeLang(this.appTranslate.langs[0])
+      },
+      {
+        label: `<img src="${this.appTranslate.langs[1].flag}" alt="LG" width="30" height="20" class="img-flag"> <span class="p-ml-1">${this.appTranslate.langs[1].lang}</span>`,
+        escape: false,
+        command: () => this.changeLang(this.appTranslate.langs[1])
+      }
+    ];
+  }
+
+  changeLang(lang: ILanguage): void {
+    this.currentLang = lang;
+    this.appTranslate.changeLanguage(lang.key, true);
+  }
+
+  logout() {
+    this.authService.logOut();
+    this.router.navigate(['auth', 'login']);
+  }
 }

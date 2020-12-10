@@ -1,4 +1,10 @@
 {
+	"breadcrumb": {
+		"create": "Add New Tags",
+		"home": "List of tags",
+		"update": "Edit Tags information",
+		"view": "Detail information Tags"
+	},
 	"err": {
 		"api": {
 			"201": "Did not find the value you requested",
@@ -51,5 +57,16 @@
 		"invalid": {
 			"title": "Invalid request"
 		}
-	}
+	},
+	"menu": {
+		"home": "Home",
+		"news": "Sales news",
+		"qna": "Q&A management",
+		"tags": "Manage tags",
+		"user": "User management"
+	},
+	"message": {
+		"beforeLeave": "Are you sure you exit the screen?"
+	},
+	"welcome": "Hello"
 }

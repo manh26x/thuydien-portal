@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {PrimeNGConfig} from 'primeng/api';
 import {MenuService} from './menu.service';
-import {AuthService} from '../auth/auth.service';
-import {Router} from '@angular/router';
+import {NavigationCancel, NavigationEnd, NavigationStart, Router} from '@angular/router';
+import {IndicatorService} from '../shared/indicator/indicator.service';
 
 @Component({
   selector: 'aw-features',
   templateUrl: './features.component.html'
 })
 
-export class FeaturesComponent implements OnInit {
+export class FeaturesComponent implements OnInit, AfterViewInit {
   menuMode = 'static';
 
   topbarMenuActive: boolean;
@@ -50,15 +50,35 @@ export class FeaturesComponent implements OnInit {
 
   ripple: boolean;
 
+  isRouting = false;
+  routingTimeout = null;
+
   constructor(
     private menuService: MenuService,
     private primengConfig: PrimeNGConfig,
-    private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private indicator: IndicatorService
   ) { }
 
   ngOnInit() {
     this.primengConfig.ripple = true;
+  }
+
+  ngAfterViewInit() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.indicator.hideActivityIndicator();
+        clearTimeout(this.routingTimeout);
+        this.routingTimeout = setTimeout(() => {
+          this.isRouting = true;
+        }, 200);
+      } else if (event instanceof NavigationEnd || event instanceof NavigationCancel) {
+        clearTimeout(this.routingTimeout);
+        this.routingTimeout = setTimeout(() => {
+          this.isRouting = false;
+        }, 400);
+      }
+    });
   }
 
   onLayoutClick() {
@@ -142,45 +162,6 @@ export class FeaturesComponent implements OnInit {
     if (this.isSlim()) {
       this.slimMenuActive = false;
     }
-  }
-
-  onTopbarMenuButtonClick(event) {
-    this.topbarItemClick = true;
-    this.topbarMenuActive = !this.topbarMenuActive;
-
-    this.hideOverlayMenu();
-
-    event.preventDefault();
-  }
-
-  onTopbarItemClick(event, item) {
-    this.topbarItemClick = true;
-
-    if (this.activeTopbarItem === item) {
-      this.activeTopbarItem = null;
-    } else {
-      this.activeTopbarItem = item;
-    }
-
-    event.preventDefault();
-  }
-
-  onTopbarSubItemClick(event, action) {
-    event.preventDefault();
-    if (action === 'logout') {
-      this.authService.logOut();
-      this.router.navigate(['auth', 'login']);
-    }
-  }
-
-  onRightPanelButtonClick(event) {
-    this.rightPanelClick = true;
-    this.rightPanelActive = !this.rightPanelActive;
-    event.preventDefault();
-  }
-
-  onRightPanelClick() {
-    this.rightPanelClick = true;
   }
 
   onRippleChange(event) {

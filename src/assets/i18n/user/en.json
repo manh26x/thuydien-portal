@@ -1,0 +1,85 @@
+{
+	"addNew": "Add a new user",
+	"breadcrumb": {
+		"create": "Add a new user",
+		"home": "User List",
+		"update": "Edit User Information",
+		"view": "Detailed user information"
+	},
+	"btn": {
+		"cancel": "Cancel",
+		"create": "Create",
+		"save": "Save changes"
+	},
+	"confirm": {
+		"accept": "Yes",
+		"delete": "Confirm Delete",
+		"deleteMessage": "Are you sure you want to remove user \"{{name}}\"",
+		"reject": "No"
+	},
+	"const": {
+		"active": "Work",
+		"all": "All",
+		"inactive": "Stop working",
+		"roleAdmin": "Admin",
+		"supperAdmin": "Supper Admin"
+	},
+	"filter": "Filter the results",
+	"invalid": {
+		"email": {
+			"maxLength": "The value must not exceed {{length}} characters",
+			"pattern": "Email invalidate"
+		},
+		"fullName": {
+			"maxLength": "The value must not exceed {{length}} characters",
+			"required": "Value cannot be blank"
+		},
+		"password": {
+			"maxLength": "The value must not exceed {{length}} characters",
+			"required": "Value cannot be blank"
+		},
+		"phone": {
+			"maxLength": "The value must not exceed {{length}} characters",
+			"pattern": "Value must be a number"
+		},
+		"role": {
+			"required": "Value cannot be blank"
+		},
+		"userId": {
+			"maxLength": "The value must not exceed {{length}} characters",
+			"required": "Value cannot be blank"
+		}
+	},
+	"list": "User List",
+	"message": {
+		"deleteNotFound": "User does not exist or has been deleted",
+		"deleteSuccess": "Delete user successfully",
+		"insertExisted": "Username is already taken",
+		"insertSuccess": "Add new account successfully",
+		"passwordNotMatch": "The current password is incorrect",
+		"updateNotFound": "User does not exist or has been deleted",
+		"updateSuccess": "Successful account information update"
+	},
+	"no": "No.",
+	"paging": "Showing {first} to {last} in {totalRecords} records",
+	"search": "Search by first and last name, location",
+	"update": "Edit User Information",
+	"user": {
+		"branch": "Branch",
+		"currentPass": "Current password",
+		"email": "Email",
+		"fullName": "First and Last Name",
+		"location": "Location",
+		"newPass": "A new password",
+		"password": "Password",
+		"phone": "Phone Number",
+		"resetPass": "Reset Password",
+		"role": "Role",
+		"status": "Status",
+		"tagKpi": "Tags for KPIs",
+		"tagNews": "Tags for news",
+		"tagQna": "Tags for Q&A",
+		"tagTool": "Tags for calculation engine",
+		"userName": "Username"
+	}
+}

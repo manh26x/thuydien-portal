@@ -1,0 +1,85 @@
+{
+	"addNew": "Thêm mới người dùng",
+	"breadcrumb": {
+		"create": "Thêm mới người dùng",
+		"home": "Danh sách người dùng",
+		"update": "Chỉnh sửa thông tin người dùng",
+		"view": "Chi tiết thông tin người dùng"
+	},
+	"btn": {
+		"cancel": "Hủy",
+		"create": "Thêm mới",
+		"save": "Lưu thay đổi"
+	},
+	"confirm": {
+		"accept": "Có",
+		"delete": "Xác nhận xóa",
+		"deleteMessage": "Bạn có chắc chắn muốn xóa người dung \"{{name}}\"",
+		"reject": "Không"
+	},
+	"const": {
+		"active": "Hoạt động",
+		"all": "Tất cả",
+		"inactive": "Dừng hoạt động",
+		"roleAdmin": "Admin",
+		"supperAdmin": "Supper Admin"
+	},
+	"filter": "Lọc kết quả",
+	"invalid": {
+		"email": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+			"pattern": "Email không đúng định dạng"
+		},
+		"fullName": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+			"required": "Giá trị không được để trống"
+		},
+		"password": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+			"required": "Giá trị không được để trống"
+		},
+		"phone": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+			"pattern": "Giá trị phải là số"
+		},
+		"role": {
+			"required": "Giá trị không được để trống"
+		},
+		"userId": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+			"required": "Giá trị không được để trống"
+		}
+	},
+	"list": "Danh sách người dùng",
+	"message": {
+		"deleteNotFound": "User không tồn tại hoặc đã bị xóa",
+		"deleteSuccess": "Xóa user thành công",
+		"insertExisted": "Tên đăng nhập đã được sử dụng",
+		"insertSuccess": "Thêm mới tài khoản thành công",
+		"passwordNotMatch": "Mật khẩu hiện tại không đúng",
+		"updateNotFound": "User không tồn tại hoặc đã bị xóa",
+		"updateSuccess": "Cập nhật thông tin tài khoản thành công"
+	},
+	"no": "STT",
+	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
+	"search": "Tìm kiếm theo họ và tên, vị trí",
+	"update": "Chỉnh sửa thông tin người dùng",
+	"user": {
+		"branch": "Chi nhánh",
+		"currentPass": "Mật khẩu hiện tại",
+		"email": "Email",
+		"fullName": "Họ và tên",
+		"location": "Vị trí",
+		"newPass": "Mật khẩu mới",
+		"password": "Mật khẩu",
+		"phone": "Số điện thoại",
+		"resetPass": "Đặt lại mật khẩu",
+		"role": "Phân quyền",
+		"status": "Trạng thái",
+		"tagKpi": "Tags cho KPI",
+		"tagNews": "Tags cho bản tin",
+		"tagQna": "Tags cho Q&A",
+		"tagTool": "Tags cho công cụ tính toán",
+		"userName": "Tên dăng nhập"
+	}
+}

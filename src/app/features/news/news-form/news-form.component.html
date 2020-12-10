@@ -49,7 +49,18 @@
 
         <div class="p-col-12 p-field">
           <label for="n-date-publish">Thời gian xuất bản</label>
-          <p-calendar [showTime]="true" inputId="n-date-publish"></p-calendar>
+          <p-calendar
+            [showTime]="true"
+            inputId="n-date-publish"
+            [readonlyInput]="true"
+            [showSeconds]="true"
+            [showIcon]="true"
+            [monthNavigator]="true"
+            [yearNavigator]="true"
+            [yearRange]="yearSelect"
+            [minDate]="min"
+            styleClass="hour-only">
+          </p-calendar>
         </div>
 
         <div class="p-col-12 p-field">

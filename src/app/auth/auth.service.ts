@@ -28,7 +28,7 @@ export class AuthService {
     const header: HttpHeaders = new HttpHeaders()
       .append('Content-Type', 'application/x-www-form-urlencoded')
       .append('Authorization', `Basic ${environment.clientId}`);
-    return this.http.post(`${environment.baseUrl}${environment.basePath}/oauth/token`, body, {
+    return this.http.post(`${environment.baseUrl}${environment.basePath}/uaa/oauth/token`, body, {
       headers: header
     });
   }
@@ -51,7 +51,7 @@ export class AuthService {
     const header: HttpHeaders = new HttpHeaders()
       .append('Content-Type', 'application/x-www-form-urlencoded')
       .append('Authorization', `Basic ${environment.clientId}`);
-    return this.http.post(`${environment.baseUrl}${environment.basePath}/oauth/token`, body, {
+    return this.http.post(`${environment.baseUrl}${environment.basePath}/uaa/oauth/token`, body, {
       headers: header
     });
   }

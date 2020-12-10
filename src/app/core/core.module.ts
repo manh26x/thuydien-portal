@@ -9,6 +9,7 @@ import {RequestInterceptor} from './request.interceptor';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import {DialogErrorHandle} from './dialog-error-handle';
+import {AppTranslateService} from './service/translate.service';
 
 
 @NgModule({
@@ -17,7 +18,11 @@ import {DialogErrorHandle} from './dialog-error-handle';
     CommonModule,
     HttpClientModule,
     TranslateModule.forRoot({
-      loader: { provide: TranslateLoader, useFactory: (CustomTranslateLoader), deps: [LANGUAGE_FILE_PATH, HttpClient] },
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (CustomTranslateLoader),
+        deps: [LANGUAGE_FILE_PATH, HttpClient]
+      },
       isolate: true
     }),
     ConfirmDialogModule
@@ -41,7 +46,8 @@ import {DialogErrorHandle} from './dialog-error-handle';
       provide: LANGUAGE_FILE_PATH,
       useValue: { path: './assets/i18n/app/' }
     },
-    ConfirmationService
+    ConfirmationService,
+    AppTranslateService
   ],
   exports: [
     HttpClientModule,

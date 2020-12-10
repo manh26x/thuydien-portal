@@ -118,7 +118,7 @@ export class ResponseInterceptor implements HttpInterceptor {
   }
 
   private isResponseSuccess(result: any): boolean {
-    return result.code === '000';
+    return result.code === '200';
   }
 
   private getMessageTrace(req: HttpRequest<any>, status: string, elapsed: number) {

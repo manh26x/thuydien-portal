@@ -9,6 +9,11 @@ import {AuthService} from '../auth/auth.service';
 import {ApiErrorArgsInvalid, ApiErrorForbidden, ApiErrorResponse, ApiErrorTokenInvalid} from './model/error-response';
 import {Router} from '@angular/router';
 
+/**
+ * @author TruongNH
+ * date: 01/12/2020
+ * desc: error handle with global dialog notification in AppComponent
+ */
 @Injectable()
 export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
   constructor(
@@ -54,7 +59,10 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
       case ApiErrorTokenInvalid: {
         if (!this.auth.isAuthed()) {
           this.auth.logOut();
-          this.router.navigate(['auth', 'login']);
+          this.ngzone.run(() => {
+            // bypass form leave guard with queryParams expired is 1
+            this.router.navigate(['auth', 'login'], { queryParams: { expired: '1' } });
+          });
         }
         break;
       }
@@ -79,7 +87,7 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
   showDialog(title: string, msg: string): void {
     this.ngzone.run(() => {
       this.dialog.confirm({
-        key: 'errorDialog',
+        key: 'globalDialog',
         header: title,
         message: msg,
         acceptVisible: true,

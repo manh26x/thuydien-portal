@@ -1,0 +1,61 @@
+{
+	"addNew": "Thêm mới Tags",
+	"breadcrumb": {
+		"create": "Thêm mới Tags",
+		"home": "Danh sách Tags",
+		"update": "Chỉnh sửa thông tin Tags",
+		"view": "Chi tiết thông tin Tags"
+	},
+	"btn": {
+		"cancel": "Hủy",
+		"create": "Thêm mới",
+		"save": "Lưu thay đổi"
+	},
+	"confirm": {
+		"accept": "Có",
+		"delete": "Xác nhận xóa",
+		"deleteMessage": "Bạn có chắc chắn muốn xóa Tags \"{{name}}\"",
+		"reject": "Không"
+	},
+	"detail": "Chi tiết thông tin Tags",
+	"edit": "Chỉnh sửa thông tin Tags",
+	"filter": "Lọc",
+	"invalid": {
+		"assign": {
+			"required": "Giá trị không được để trống"
+		},
+		"name": {
+			"maxLength": "Tên tags không được vượt quá {{length}} ký tự",
+			"required": "Giá trị không được để trống"
+		},
+		"type": {
+			"required": "Giá trị không được để trống"
+		}
+	},
+	"list": "Danh sách Tags",
+	"message": {
+		"deleteNotFound": "Tags không tồn tại hoặc đã bị xóa",
+		"deleteSuccess": "Xóa tags thành công",
+		"deleteUsed": "Tag {{name}} đã được sử dụng, bạn không thể xóa tag này",
+		"insertExisted": "Tags đã tồn tại",
+		"insertSuccess": "Thêm mới Tags thành công",
+		"updateSuccess": "Cập nhật Tags thành công"
+	},
+	"no": "STT",
+	"noData": "Không có kết quả nào phù hợp",
+	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
+	"search": "Tìm kiếm tags",
+	"tags": {
+		"assignTo": "Gắn cho",
+		"id": "Tags ID",
+		"name": "Tên Tags",
+		"type": "Loại Tags"
+	},
+	"type": {
+		"all": "Tất cả",
+		"kpi": "Tags cho KPI",
+		"news": "Tags cho bản tin bán hàng",
+		"qna": "Tags cho  Q&A",
+		"tool": "Tags cho công cụ tính toán"
+	}
+}

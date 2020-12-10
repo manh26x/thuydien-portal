@@ -18,8 +18,16 @@ const routes: Routes = [
         loadChildren: () => import('./news/news.module').then(m => m.NewsModule)
       },
       {
-        path: 'system',
-        loadChildren: () => import('./system/system.module').then(m => m.SystemModule)
+        path: 'tags',
+        loadChildren: () => import('./tags/tags.module').then(m => m.TagsModule)
+      },
+      {
+        path: 'user',
+        loadChildren: () => import('./user/user.module').then(m => m.UserModule)
+      },
+      {
+        path: 'qna',
+        loadChildren: () => import('./qna/qna.module').then(m => m.QnaModule)
       }
     ]
   }

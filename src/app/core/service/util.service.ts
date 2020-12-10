@@ -60,7 +60,7 @@ export class UtilService {
 
   public formatAmount(str: string, thousandSeperator = ',', decimalPoint = '.') {
     if (!str) { return ''; }
-    let value = str.toString().replace(new RegExp(thousandSeperator, 'g'), '');
+    const value = str.toString().replace(new RegExp(thousandSeperator, 'g'), '');
     const parts = value.split(decimalPoint);
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeperator);
     if (parts[1]) {
@@ -71,5 +71,20 @@ export class UtilService {
 
   public padNumber(n: number) {
     return `0${n}`.slice(-2);
+  }
+
+  public removeAccents(str: string): string {
+    str = str.toLowerCase().trim();
+    str = str
+      .replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a')
+      .replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e')
+      .replace(/ì|í|ị|ỉ|ĩ/g, 'i')
+      .replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, 'o')
+      .replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, 'u')
+      .replace(/ỳ|ý|ỵ|ỷ|ỹ/g, 'y')
+      .replace(/đ/g, 'd')
+      .replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g,  '')
+      .replace(/\u02C6|\u0306|\u031B/g,  '');
+    return str;
   }
 }

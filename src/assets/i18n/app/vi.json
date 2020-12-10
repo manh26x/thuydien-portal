@@ -1,4 +1,10 @@
 {
+	"breadcrumb": {
+		"create": "Thêm mới Tags",
+		"home": "Danh sách Tags",
+		"update": "Chỉnh sửa thông tin Tags",
+		"view": "Chi tiết thông tin Tags"
+	},
 	"err": {
 		"api": {
 			"201": "Không tìm thấy giá trị bạn yêu cầu",
@@ -51,5 +57,16 @@
 		"invalid": {
 			"title": "Yêu cầu không hợp lệ"
 		}
-	}
+	},
+	"menu": {
+		"home": "Trang chủ",
+		"news": "Bản tin bán hàng",
+		"qna": "Quản lý Q&A",
+		"tags": "Quản lý Tags",
+		"user": "Quản lý người dùng"
+	},
+	"message": {
+		"beforeLeave": "Bạn có chắc chắn thoát ra khỏi màn hình không?"
+	},
+	"welcome": "Xin chào"
 }

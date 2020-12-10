@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { Subject } from 'rxjs';
+import {TranslateService} from '@ngx-translate/core';
+import {Observable, Subject} from 'rxjs';
 import { ILanguage } from '../model/language';
 import { Language } from '../model/language.enum';
+import {Router} from '@angular/router';
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class AppTranslateService {
   readonly langs: ILanguage[] = [
-    { key: Language.VIET_NAM, lang: 'VN', flag: 'vn' },
-    { key: Language.ENGLISH, lang: 'EN', flag: 'en' }
+    { key: Language.VIET_NAM, lang: 'VN', flag: './assets/images/flag/vn.png' },
+    { key: Language.ENGLISH, lang: 'EN', flag: './assets/images/flag/en.png' }
   ];
   private onLanguageChanged = new Subject<string>();
   languageChanged$ = this.onLanguageChanged.asObservable();
 
-  constructor(private translate: TranslateService) {
+  constructor(private translate: TranslateService, private router: Router) {
   }
 
   initialize(): ILanguage {
@@ -29,7 +30,7 @@ export class AppTranslateService {
     return lang;
   }
 
-  changeLanguage(language: string): string {
+  changeLanguage(language: string, reload?: boolean): string {
 
     if (!language) {
       language = this.translate.defaultLang;
@@ -38,9 +39,16 @@ export class AppTranslateService {
     if (language !== this.translate.currentLang) {
       localStorage.setItem(Language.LOCAL_KEY, language);
       this.translate.use(language);
+      if (reload) {
+        this.router.navigate([this.router.routerState.snapshot.url]);
+      }
       this.onLanguageChanged.next(language);
     }
 
     return language;
+  }
+
+  getTranslationAsync(key: string, interpolateParams?: any): Observable<string | any> {
+    return this.translate.get(key, interpolateParams);
   }
 }

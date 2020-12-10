@@ -2,5 +2,6 @@
   "/mock/*": "/$1",
   "/oauth/token": "/login",
   "/saleskit/product/menu": "/product",
-  "/saleskit/product/list": "/list-product"
+  "/saleskit/product/list": "/list-product",
+  "/saleskit/tags/searchType": "/tags"
 }

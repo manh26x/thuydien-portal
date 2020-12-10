@@ -1,0 +1,82 @@
+<p-panel header="{{'list' | translate}}" [toggleable]="true">
+  <ng-template pTemplate="icons">
+    <button class="p-panel-header-icon p-link" (click)="refreshSearch()">
+      <i class="pi pi-refresh"></i>
+    </button>
+  </ng-template>
+  <form class="p-grid p-fluid p-mb-3">
+    <div class="p-lg-7 p-col-12">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input type="text" [formControl]="formSearch" pInputText placeholder="{{'search' | translate}}" />
+     </span>
+    </div>
+    <div class="p-lg-3 p-col-12">
+      <p-dropdown inputId="n-type" [options]="tagsType" optionLabel="name" dataKey="code" [formControl]="typeSearch"></p-dropdown>
+    </div>
+    <div class="p-lg-2 p-col-12">
+      <button (click)="getListTags()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 100%"></button>
+    </div>
+  </form>
+  <p-table
+    [lazy]="true"
+    (onLazyLoad)="lazyLoadTags($event)"
+    [paginator]="true" [rows]="pageSize"
+    [totalRecords]="totalItem"
+    [rowsPerPageOptions]="[10, 20, 50, 100]"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="{{ 'paging' | translate }}"
+    sortField="id"
+    [sortOrder]="-1"
+    [value]="tagsList">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>{{'no' | translate}}</th>
+        <th pSortableColumn="id">{{'tags.id' | translate}} <p-sortIcon field="id"></p-sortIcon></th>
+        <th pSortableColumn="value">{{'tags.name' | translate}} <p-sortIcon field="value"></p-sortIcon></th>
+        <th>{{'tags.type' | translate}}</th>
+        <th>{{'tags.assignTo' | translate}}</th>
+        <th>
+          <button (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-tags let-index="rowIndex">
+      <tr>
+        <td>{{index + 1}}</td>
+        <td>{{tags.tagId}}</td>
+        <td>{{tags.tagValue}}</td>
+        <td>
+          <div *ngFor="let item of tags.tagType;index as i" [ngClass]="{'p-mt-2': i != 0}">
+            <ng-container [ngSwitch]="item">
+              <ng-container *ngSwitchCase="tagType.NEWS">{{'type.news' | translate}}</ng-container>
+              <ng-container *ngSwitchCase="tagType.KPI">{{'type.kpi' | translate}}</ng-container>
+              <ng-container *ngSwitchCase="tagType.QNA">{{'type.qna' | translate}}</ng-container>
+              <ng-container *ngSwitchCase="tagType.TOOL">{{'type.tool' | translate}}</ng-container>
+              <ng-container *ngSwitchDefault>-</ng-container>
+            </ng-container>
+          </div>
+        </td>
+        <td>
+          <div *ngFor="let item of tags.assignee;index as i" [ngClass]="{'p-mt-2': i != 0}">
+            <ng-container>{{item.fullName}}</ng-container>
+          </div>
+        </td>
+        <td>
+          <button (click)="gotoView(tags.tagId)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
+          <button (click)="gotoUpdate(tags.tagId)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-secondary p-button-text"></button>
+          <button (click)="doDelete(tags)" pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="6">
+          {{'noData' | translate}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-panel>

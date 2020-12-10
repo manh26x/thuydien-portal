@@ -1,0 +1,73 @@
+<p-panel header="{{'list' | translate}}" [toggleable]="true">
+<!--  <ng-template pTemplate="icons">-->
+<!--    <button class="p-panel-header-icon p-link">-->
+<!--      <i class="pi pi-refresh"></i>-->
+<!--    </button>-->
+<!--  </ng-template>-->
+  <form class="p-grid p-fluid p-mb-3" [formGroup]="searchForm">
+    <div class="p-lg-6 p-col-6">
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input type="text" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
+     </span>
+    </div>
+    <div class="p-lg-2 p-col-6">
+      <p-dropdown [options]="roleList" optionLabel="name" dataKey="code" formControlName="role"></p-dropdown>
+    </div>
+    <div class="p-lg-2 p-col-6">
+      <p-dropdown [options]="statusList" optionLabel="name" dataKey="code" formControlName="status"></p-dropdown>
+    </div>
+    <div class="p-lg-2 p-col-6">
+      <button (click)="getUserList()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 100%"></button>
+    </div>
+  </form>
+  <p-table
+    [paginator]="true"
+    [rows]="10"
+    [totalRecords]="userList.length"
+    [rowsPerPageOptions]="[10, 20, 50, 100]"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="{{ 'paging' | translate }}"
+    [value]="userList">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>{{'no' | translate}}</th>
+        <th pSortableColumn="userPortal.fullName">{{'user.fullName' | translate}}<p-sortIcon field="userPortal.fullName"></p-sortIcon></th>
+        <th pSortableColumn="userPortal.userId">{{'user.userName' | translate}}<p-sortIcon field="userPortal.userId"></p-sortIcon></th>
+        <th pSortableColumn="userPortal.role">{{'user.role' | translate}}<p-sortIcon field="userPortal.role"></p-sortIcon></th>
+        <th>{{'user.location' | translate}}</th>
+        <th>{{'user.branch' | translate}}</th>
+        <th pSortableColumn="userPortal.status">{{'user.status' | translate}}<p-sortIcon field="userPortal.status"></p-sortIcon></th>
+        <th>
+          <button (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-user let-index="rowIndex">
+      <tr>
+        <td>{{index + 1}}</td>
+        <td>{{user.userPortal.fullName}}</td>
+        <td>{{user.userPortal.userId}}</td>
+        <td>{{user.userPortal.role}}</td>
+        <td>{{user.userPortal.position}}</td>
+        <td>
+          <div *ngFor="let item of user.listBranch;index as i" [ngClass]="{'p-mt-2': i != 0}">
+            <ng-container>{{item.branchName}}</ng-container>
+          </div>
+        </td>
+        <td>
+          <ng-container [ngSwitch]="user.userPortal.status">
+            <ng-container *ngSwitchCase="userConst.ACTIVE">{{'const.active' | translate}}</ng-container>
+            <ng-container *ngSwitchCase="userConst.INACTIVE">{{'const.inactive' | translate}}</ng-container>
+          </ng-container>
+         </td>
+        <td>
+          <button (click)="gotoView(user.userPortal.userId)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
+          <button (click)="gotoUpdate(user.userPortal.userId)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-secondary p-button-text"></button>
+          <button (click)="doDelete(user)" pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-panel>

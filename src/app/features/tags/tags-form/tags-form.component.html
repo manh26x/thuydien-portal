@@ -1,0 +1,38 @@
+<form [formGroup]="formTags">
+  <div class="p-fluid p-grid">
+    <div class="p-md-6 p-col-12 p-field">
+      <label for="n-name">{{'tags.name' | translate}}</label>
+      <input id="n-name" type="text" pInputText formControlName="name" />
+      <small *ngIf="hasErrorInput('name', 'required')" class="p-invalid">
+        {{'invalid.name.required' | translate}}
+      </small>
+      <small *ngIf="hasErrorInput('name', 'maxlength')" class="p-invalid">
+        {{ 'invalid.name.maxLength' | translate:{length: nameMaxLength} }}
+      </small>
+    </div>
+
+    <div class="p-md-6 p-col-12 p-field">
+      <label for="n-type">{{'tags.type' | translate}}</label>
+      <p-multiSelect inputId="n-type" [options]="tagsType" optionLabel="name" dataKey="code" formControlName="type"></p-multiSelect>
+      <small *ngIf="hasErrorInput('type', 'required')" class="p-invalid">
+        {{'invalid.type.required' | translate}}
+      </small>
+    </div>
+  </div>
+
+  <div class="p-fluid p-grid">
+    <div class="p-md-6 p-col-12 p-field">
+      <label for="n-assign">{{'tags.assignTo' | translate}}</label>
+      <p-multiSelect inputId="n-assign" [options]="userList" optionLabel="fullName" dataKey="userId" formControlName="assign"></p-multiSelect>
+      <small *ngIf="hasErrorInput('assign', 'required')" class="p-invalid">
+        {{'invalid.assign.required' | translate}}
+      </small>
+    </div>
+  </div>
+</form>
+
+<div class="split-horizontal"></div>
+<div class="p-text-center">
+  <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
+  <button *ngIf="mode != 'view'" pButton (click)="doSave()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised p-button-secondary"></button>
+</div>
