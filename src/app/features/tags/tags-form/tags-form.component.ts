@@ -57,15 +57,7 @@ export class TagsFormComponent implements OnInit, OnChanges {
       ];
     });
 
-    this.userService.getAllUser().pipe(
-      map(res => {
-        const userResult = [];
-        if (this.util.canForEach(res)) {
-          res.forEach(item => { userResult.push(item.userPortal); });
-        }
-        return userResult;
-      })
-    ).subscribe(res => {
+    this.userService.getAllUser().subscribe(res => {
       this.userList = res;
     });
   }

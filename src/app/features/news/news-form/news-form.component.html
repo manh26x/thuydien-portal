@@ -1,26 +1,36 @@
-<form>
+<form [formGroup]="formNews">
   <div class="p-grid">
     <div class="p-col-8">
       <div class="p-fluid">
         <div class="p-col-12 p-field">
-          <label for="n-title">Tiêu đề</label>
-          <input id="n-title" type="text" pInputText />
+          <label for="n-title">{{'news.title' | translate}}</label>
+          <input formControlName="title" id="n-title" type="text" pInputText />
         </div>
         <div class="p-col-12 p-field">
-          <label>Nội dung</label>
+          <label for="n-short-content">{{'news.shortContent' | translate}}</label>
+          <input formControlName="shortContent" id="n-short-content" type="text" pInputText />
+        </div>
+        <div class="p-col-12 p-field">
+          <label>{{'news.content' | translate}}</label>
           <editor
+            *ngIf="mode != 'view'; else viewContent"
+            formControlName="content"
             [init]="{
-            base_url: '/tinymce',
-            suffix: '.min',
-            height: 500,
-            menubar: true,
-            plugins: [
-             'autolink lists link image charmap print preview anchor',
-             'searchreplace visualblocks code fullscreen',
-             'insertdatetime media table paste code wordcount'
-            ],
-            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | fullscreen'}">
+              base_url: '/tinymce',
+              suffix: '.min',
+              height: 500,
+              menubar: true,
+              plugins: [
+               'autolink lists link image charmap print preview anchor',
+               'searchreplace visualblocks code fullscreen',
+               'insertdatetime media table paste code wordcount'
+              ],
+              toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | fullscreen'
+            }">
           </editor>
+          <ng-template #viewContent>
+            <div class="content-readonly" [innerHTML]="contentReadable"></div>
+          </ng-template>
         </div>
       </div>
     </div>
@@ -28,28 +38,20 @@
     <div class="p-col-4">
       <div class="p-fluid">
         <div class="p-col-12 p-field">
-          <label for="n-tags">Tags</label>
-          <p-dropdown inputId="n-tags" [options]="statusList"></p-dropdown>
+          <label for="n-tags">{{'news.tags' | translate}}</label>
+          <p-multiSelect formControlName="tags" inputId="n-tags" [options]="tagList" dataKey="tagId" optionLabel="tagValue"></p-multiSelect>
         </div>
 
         <div class="p-col-12 p-field">
-          <label for="n-group-customer">Nhóm khách hàng</label>
-          <p-dropdown inputId="n-group-customer" [options]="statusList"></p-dropdown>
+          <label for="n-group-customer">{{'news.groupView' | translate}}</label>
+          <p-multiSelect formControlName="groupView" inputId="n-group-customer" [options]="roleList" dataKey="id" optionLabel="name"></p-multiSelect>
         </div>
 
         <div class="p-col-12 p-field">
-          <label for="n-order">Mức độ quan trọng</label>
-          <p-dropdown inputId="n-order" [options]="statusList"></p-dropdown>
-        </div>
-
-        <div class="p-col-12 p-field">
-          <label for="n-target">Nhóm đối tượng xem tin</label>
-          <p-dropdown inputId="n-target" [options]="statusList"></p-dropdown>
-        </div>
-
-        <div class="p-col-12 p-field">
-          <label for="n-date-publish">Thời gian xuất bản</label>
+          <label for="n-date-publish">{{'news.publishDate' | translate}}</label>
           <p-calendar
+            formControlName="publishDate"
+            dateFormat="dd/mm/yy"
             [showTime]="true"
             inputId="n-date-publish"
             [readonlyInput]="true"
@@ -64,13 +66,49 @@
         </div>
 
         <div class="p-col-12 p-field">
-          <label for="n-group-product">Ảnh đính kèm</label>
-          <p-fileUpload mode="basic" name="demo[]" url="./upload.php" accept="image/*" maxFileSize="1000000"></p-fileUpload>
+          <label for="n-order">{{'news.level' | translate}}</label>
+          <p-dropdown formControlName="level" inputId="n-order" [options]="levelList"></p-dropdown>
+        </div>
+
+        <div class="p-col-12 p-field">
+          <label for="n-group-product">{{'news.docs' | translate}}</label>
+          <p-fileUpload
+            (onSelect)="doSelectDoc($event)"
+            (onClear)="doClearDoc()"
+            mode="advanced"
+            name="docsNews"
+            accept=".pdf"
+            [customUpload]="true"
+            [showUploadButton]="false"
+            [showCancelButton]="true"
+            maxFileSize="5000000">
+            <ng-template let-file pTemplate="file">
+              <div style="max-width: 100%">{{file.name}}</div>
+            </ng-template>
+          </p-fileUpload>
+        </div>
+
+        <div class="p-col-12 p-field">
+          <label for="n-group-product">{{'news.image' | translate}}</label>
+          <p-fileUpload
+            (onSelect)="doSelectImage($event)"
+            (onClear)="doClearImage()"
+            mode="advanced"
+            name="imageNews"
+            accept="image/*"
+            [customUpload]="true"
+            [showUploadButton]="false"
+            [showCancelButton]="true"
+            maxFileSize="5000000">
+            <ng-template let-file pTemplate="file">
+                <img [attr.src]="file.objectURL" style="max-width: 100%">
+            </ng-template>
+          </p-fileUpload>
         </div>
 
         <div class="p-col-12 p-field-checkbox">
-          <p-checkbox binary="true" inputId="n-send-notification"></p-checkbox>
-          <label for="n-send-notification">Gửi thông báo cho người dùng</label>
+          <p-checkbox formControlName="isSendNotification" binary="true" inputId="n-send-notification"></p-checkbox>
+          <label for="n-send-notification">{{'news.isSendNotification' | translate}}</label>
         </div>
       </div>
     </div>
@@ -78,7 +116,10 @@
 
 </form>
 
-<ng-template pTemplate="footer">
-  <p-button label="Hủy" styleClass="p-button-text"></p-button>
-  <p-button label="Lưu thay đổi" styleClass="p-button-secondary"></p-button>
-</ng-template>
+<div class="split-horizontal"></div>
+<div class="p-text-center">
+  <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
+  <button *ngIf="mode == 'create'" pButton (click)="doSaveDraft()" type="button" label="{{'btn.draft' | translate}}" class="p-button-raised p-button-secondary p-mr-3"></button>
+  <button *ngIf="mode != 'view'" pButton (click)="doSave()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised"></button>
+
+</div>

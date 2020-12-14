@@ -7,14 +7,14 @@ import {UserService} from './service/user.service';
 import {concatMap, delay, map, startWith, switchMap} from 'rxjs/operators';
 
 @Component({
-  selector: 'aw-tags',
+  selector: 'aw-user',
   templateUrl: './user.component.html',
   styleUrls: []
 })
 
 export class UserComponent implements AfterViewInit {
   items: MenuItem[];
-  home: MenuItem;
+  home: MenuItem = {icon: 'pi pi-home', routerLink: '/'};
   constructor(
     private util: UtilService,
     private translate: TranslateService,
@@ -35,11 +35,13 @@ export class UserComponent implements AfterViewInit {
         })
       ))
     ).subscribe(res => {
-      this.home = { label: res.lang.home, routerLink: '/user' };
       if (!this.util.isNullOrEmpty(res.page)) {
-        this.items = [{label: res.lang[res.page]}];
+        this.items = [
+          { label: res.lang.home, routerLink: '/user' },
+          {label: res.lang[res.page]}
+        ];
       } else {
-        this.items = [];
+        this.items = [{ label: res.lang.home, routerLink: '/user' }];
       }
     });
   }

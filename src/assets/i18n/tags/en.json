@@ -9,6 +9,7 @@
 	"btn": {
 		"cancel": "Cancel",
 		"create": "Create",
+		"refresh": "Refresh",
 		"save": "Save changes"
 	},
 	"confirm": {

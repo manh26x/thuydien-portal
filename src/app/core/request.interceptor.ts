@@ -17,7 +17,7 @@ export class RequestInterceptor implements HttpInterceptor {
         req = this.updateHeader(req);
       }
     }
-    return next.handle(req).pipe(timeout(5000));
+    return next.handle(req).pipe(timeout(10000));
   }
 
   private updateHeader(req: HttpRequest<any>) {

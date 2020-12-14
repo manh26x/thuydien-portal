@@ -98,14 +98,14 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.indicator.showActivityIndicator();
-        this.tagsService.deleteTag(tags.tagId).pipe(
-          finalize(() => this.getListTags())
-        ).subscribe(() => {
+        this.tagsService.deleteTag(tags.tagId).subscribe(() => {
           this.messageService.add({
             severity: 'success',
             detail: this.translate.instant('message.deleteSuccess')
           });
+          this.getListTags();
         }, err => {
+          this.indicator.hideActivityIndicator();
           if (err instanceof ApiErrorResponse && err.code === '201') {
             this.messageService.add({
               severity: 'error',

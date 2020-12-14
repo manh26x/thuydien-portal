@@ -1,4 +1,66 @@
 {
+	"breadcrumb": {
+		"create": "Soạn bản tin",
+		"home": "Danh sách bản tin bán hàng",
+		"update": "Chỉnh sửa bản tin",
+		"view": "Chi tiết bản tin"
+	},
+	"btn": {
+		"cancel": "Hủy",
+		"draft": "Lưu bản nháp",
+		"refresh": "Tải lại",
+		"save": "Lưu thay đổi"
+	},
+	"confirm": {
+		"accept": "Có",
+		"delete": "Xác nhận xóa",
+		"deleteMessage": "Bạn có chắc chắn muốn xóa bản tin \"{{name}}\"",
+		"reject": "Không"
+	},
+	"const": {
+		"active": "Hoạt động",
+		"all": "Tất cả",
+		"inactive": "Không hoạt động",
+		"levelImportant": "Quan trọng",
+		"levelNormal": "Bình thường",
+		"levelVeryImportant": "Rất quan trọng"
+	},
+	"create": "Biên soạn bản tin",
+	"edit": "Chỉnh sửa bản tin",
+	"filter": "Lọc kết quả",
+	"level": "Mức độ quan trọng",
+	"levelList": {
+		"important": "Quan trọng",
+		"normal": "Bình thường",
+		"veryImportant": "Rất quan trọng"
+	},
 	"list": "Danh sách bản tin khách hàng",
-	"news.name": "Tên bản tin"
+	"message": {
+		"deleteNotFound": "Bản tin không tồn tại hoặc đã bị xóa",
+		"deleteSuccess": "Xóa bản tin thành công",
+		"insertSuccess": "Thêm mới bản tin thành công",
+		"updateNotFound": "Bản tin không tồn tại hoặc đã bị xóa",
+		"updateSuccess": "Cập nhật bản tin thành công"
+	},
+	"news": {
+		"author": "Tác giả",
+		"content": "Nội dung",
+		"docs": "Tài liệu đính kèm PDF (dưới 5MB)",
+		"groupView": "Nhóm đối tượng xem bản tin",
+		"id": "ID",
+		"image": "Ảnh đính kèm",
+		"isSendNotification": "Gửi thông báo cho người dùng",
+		"level": "Mức độ quan trọng",
+		"name": "Tên bản tin",
+		"publishDate": "Thời gian đăng",
+		"shortContent": "Nội dung tóm tắt",
+		"status": "Trạng thái",
+		"tags": "Tags",
+		"title": "Tiêu đề"
+	},
+	"no": "STT",
+	"noData": "Không có kết quả nào phù hợp",
+	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
+	"search": "Tìm kiếm bản tin",
+	"view": "Chi tiết bản tin"
 }

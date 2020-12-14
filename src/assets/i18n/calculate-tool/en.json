@@ -1,0 +1,32 @@
+{
+	"breadcrumb": {
+		"home": "List of calculation tools"
+	},
+	"btn": {
+		"refresh": "Refresh"
+	},
+	"const": {
+		"active": "Entry into force",
+		"all": "All",
+		"inactive": "Expire",
+		"levelImportant": "Important",
+		"levelNormal": "Normal",
+		"levelVeryImportant": "Very important"
+	},
+	"filter": "Filter the results",
+	"list": "List of calculation tools",
+	"message": {
+		"updateError": "The update failed. Please try again later",
+		"updateSuccess": "Successful calculation tool update"
+	},
+	"no": "No.",
+	"noData": "No results match",
+	"paging": "Showing {first} to {last} in {totalRecords} records",
+	"tool": {
+		"action": "Action",
+		"customerType": "Customer type",
+		"level": "Priority Level",
+		"name": "Tool Name",
+		"status": "Status"
+	}
+}

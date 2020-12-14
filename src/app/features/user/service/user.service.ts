@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {BaseService} from '../../../core/service/base.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {FilterUserRequest, UserDetail, UserBranch, UpdateUserRequest} from '../model/user';
+import {FilterUserRequest, UserDetail, UserBranch, UpdateUserRequest, UserInfo} from '../model/user';
 import {map} from 'rxjs/operators';
 
 @Injectable()
@@ -25,9 +25,8 @@ export class UserService extends BaseService{
     );
   }
 
-  getAllUser(): Observable<UserBranch[]> {
-    const request: FilterUserRequest = { status: -1, role: '', keyword: '' };
-    return this.doPost('/admin/userPortal/filter', request).pipe(
+  getAllUser(): Observable<UserInfo[]> {
+    return this.doGet('/admin/userPortal/listAll').pipe(
       map(res => res.data)
     );
   }

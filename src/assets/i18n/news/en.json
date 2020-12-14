@@ -1,4 +1,66 @@
 {
+	"breadcrumb": {
+		"create": "News composing",
+		"home": "List of sales news",
+		"update": "News editing",
+		"view": "News details"
+	},
+	"btn": {
+		"cancel": "Cancel",
+		"draft": "Save the draft",
+		"refresh": "Refresh",
+		"save": "Save changes"
+	},
+	"confirm": {
+		"accept": "Yes",
+		"delete": "Confirm Delete",
+		"deleteMessage": "Are you sure you want to remove news \"{{name}}\"",
+		"reject": "No"
+	},
+	"const": {
+		"active": "Active",
+		"all": "All",
+		"inactive": "Inactive",
+		"levelImportant": "Important",
+		"levelNormal": "Normal",
+		"levelVeryImportant": "Very important"
+	},
+	"create": "News compilation",
+	"edit": "News editing",
+	"filter": "Filter",
+	"level": "Critical level",
+	"levelList": {
+		"important": "Important",
+		"normal": "Normal",
+		"veryImportant": "Very important"
+	},
 	"list": "List of customer news",
-	"news.name": "News name"
+	"message": {
+		"deleteNotFound": "The news does not exist or has been deleted",
+		"deleteSuccess": "Successfully deleted news",
+		"insertSuccess": "New news added successfully",
+		"updateNotFound": "The news does not exist or has been deleted",
+		"updateSuccess": "Successful news update"
+	},
+	"news": {
+		"author": "Author",
+		"content": "Content",
+		"docs": "Attachment PDF (less than 5MB)",
+		"groupView": "Audience group viewing news",
+		"id": "ID",
+		"image": "Photo attached",
+		"isSendNotification": "Send notifications to users",
+		"level": "Critical level",
+		"name": "News name",
+		"publishDate": "Post time",
+		"shortContent": "Content short",
+		"status": "Status",
+		"tags": "Tags",
+		"title": "Title"
+	},
+	"no": "No.",
+	"noData": "No results match",
+	"paging": "Showing {first} to {last} in {totalRecords} records",
+	"search": "News search",
+	"view": "News details"
 }

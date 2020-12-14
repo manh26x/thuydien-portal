@@ -4,7 +4,6 @@ export interface Tags {
   idAny?: string;
   typeAny?: string;
   assgnee?: string;
-  searchNg?: string;
 }
 
 export interface TagsInsertRequest {

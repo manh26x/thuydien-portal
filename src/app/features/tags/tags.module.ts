@@ -26,6 +26,7 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import { TagsViewComponent } from './tags-view/tags-view.component';
+import {TooltipModule} from 'primeng/tooltip';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { TagsViewComponent } from './tags-view/tags-view.component';
     PaginatorModule,
     MultiSelectModule,
     BreadcrumbModule,
-    ToastModule
+    ToastModule,
+    TooltipModule
   ],
   providers: [
     {

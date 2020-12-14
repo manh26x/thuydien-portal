@@ -4,6 +4,8 @@ import {NewsComponent} from './news.component';
 import {AuthGuard} from '../../auth/auth.guard';
 import {NewsDataComponent} from './news-data/news-data.component';
 import {NewsCreateComponent} from './news-create/news-create.component';
+import {NewsUpdateComponent} from './news-update/news-update.component';
+import {NewsViewComponent} from './news-view/news-view.component';
 
 const routes: Routes = [
   { path: '',
@@ -17,6 +19,14 @@ const routes: Routes = [
       {
         path: 'create',
         component: NewsCreateComponent
+      },
+      {
+        path: 'update/:id',
+        component: NewsUpdateComponent
+      },
+      {
+        path: 'view/:id',
+        component: NewsViewComponent
       }
     ]
   }

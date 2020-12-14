@@ -87,7 +87,7 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
   showDialog(title: string, msg: string): void {
     this.ngzone.run(() => {
       this.dialog.confirm({
-        key: 'globalDialog',
+        key: 'errorDialog',
         header: title,
         message: msg,
         acceptVisible: true,

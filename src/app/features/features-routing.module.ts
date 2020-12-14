@@ -28,6 +28,10 @@ const routes: Routes = [
       {
         path: 'qna',
         loadChildren: () => import('./qna/qna.module').then(m => m.QnaModule)
+      },
+      {
+        path: 'calculate-tool',
+        loadChildren: () => import('./calculate-tool/calculate-tool.module').then(m => m.CalculateToolModule)
       }
     ]
   }

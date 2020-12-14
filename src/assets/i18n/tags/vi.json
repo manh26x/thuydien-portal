@@ -9,6 +9,7 @@
 	"btn": {
 		"cancel": "Hủy",
 		"create": "Thêm mới",
+		"refresh": "Tải lại",
 		"save": "Lưu thay đổi"
 	},
 	"confirm": {

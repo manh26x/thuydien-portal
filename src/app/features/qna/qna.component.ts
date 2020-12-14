@@ -1,7 +1,7 @@
 import {AfterViewInit, Component} from '@angular/core';
 
 @Component({
-  selector: 'aw-tags',
+  selector: 'aw-qna',
   template: `<p>Tính năng đang phát triển</p>`
 })
 

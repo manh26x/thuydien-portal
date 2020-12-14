@@ -14,7 +14,7 @@ import {TranslateService} from '@ngx-translate/core';
 
 export class TagsComponent implements AfterViewInit {
   items: MenuItem[];
-  home: MenuItem;
+  home: MenuItem = {icon: 'pi pi-home', routerLink: '/'};
   constructor(
     private appTranslate: AppTranslateService,
     private tagsService: TagsService,
@@ -35,11 +35,13 @@ export class TagsComponent implements AfterViewInit {
         })
       ))
     ).subscribe(res => {
-      this.home = { label: res.lang.home, routerLink: '/tags' };
       if (!this.util.isNullOrEmpty(res.page)) {
-        this.items = [{label: res.lang[res.page]}];
+        this.items = [
+          { label: res.lang.home, routerLink: '/tags' },
+          {label: res.lang[res.page]}
+        ];
       } else {
-        this.items = [];
+        this.items = [{ label: res.lang.home, routerLink: '/tags' }];
       }
     });
   }

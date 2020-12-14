@@ -9,12 +9,13 @@
 	"btn": {
 		"cancel": "Hủy",
 		"create": "Thêm mới",
+		"refresh": "Tải lại",
 		"save": "Lưu thay đổi"
 	},
 	"confirm": {
 		"accept": "Có",
 		"delete": "Xác nhận xóa",
-		"deleteMessage": "Bạn có chắc chắn muốn xóa người dung \"{{name}}\"",
+		"deleteMessage": "Bạn có chắc chắn muốn xóa người dùng \"{{name}}\"",
 		"reject": "Không"
 	},
 	"const": {
@@ -61,6 +62,7 @@
 		"updateSuccess": "Cập nhật thông tin tài khoản thành công"
 	},
 	"no": "STT",
+	"noData": "Không có kết quả nào phù hợp",
 	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
 	"search": "Tìm kiếm theo họ và tên, vị trí",
 	"update": "Chỉnh sửa thông tin người dùng",
@@ -80,6 +82,6 @@
 		"tagNews": "Tags cho bản tin",
 		"tagQna": "Tags cho Q&A",
 		"tagTool": "Tags cho công cụ tính toán",
-		"userName": "Tên dăng nhập"
+		"userName": "Tên đăng nhập"
 	}
 }

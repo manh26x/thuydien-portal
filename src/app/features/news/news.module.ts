@@ -23,51 +23,71 @@ import {NewsService} from './service/news.service';
 import { NewsFormComponent } from './news-form/news-form.component';
 import { NewsCreateComponent } from './news-create/news-create.component';
 import { NewsDataComponent } from './news-data/news-data.component';
-import { NewsFilterFormComponent } from './news-filter-form/news-filter-form.component';
 import { EditorModule } from '@tinymce/tinymce-angular';
 import {CheckboxModule} from 'primeng/checkbox';
 import {CalendarModule} from 'primeng/calendar';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {ReactiveFormsModule} from '@angular/forms';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
+import {ToastModule} from 'primeng/toast';
+import { NewsViewComponent } from './news-view/news-view.component';
+import { NewsUpdateComponent } from './news-update/news-update.component';
+import {MessageService} from 'primeng/api';
+import {TooltipModule} from 'primeng/tooltip';
 
 
 @NgModule({
-  declarations: [NewsComponent, NewsFormComponent, NewsCreateComponent, NewsDataComponent, NewsFilterFormComponent],
-  imports: [
-    CommonModule,
-    NewsRoutingModule,
-    PanelModule,
-    TableModule,
-    PaginatorModule,
-    InputTextModule,
-    InputTextareaModule,
-    DropdownModule,
-    ButtonModule,
-    DialogModule,
-    FileUploadModule,
-    RadioButtonModule,
-    TranslateModule.forChild({
-      missingTranslationHandler: {
-        provide: MissingTranslationHandler,
-        useClass: CustomMissingTranslationHandler,
-        deps: [AppTranslateService]
-      },
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (CustomTranslateLoader),
-        deps: [LANGUAGE_FILE_PATH, HttpClient]
-      },
-      isolate: true,
-      useDefaultLang: false
-    }),
-    EditorModule,
-    CheckboxModule,
-    CalendarModule
+  declarations: [
+    NewsComponent,
+    NewsFormComponent,
+    NewsCreateComponent,
+    NewsDataComponent,
+    NewsViewComponent,
+    NewsUpdateComponent
   ],
+    imports: [
+        CommonModule,
+        NewsRoutingModule,
+        PanelModule,
+        TableModule,
+        PaginatorModule,
+        InputTextModule,
+        InputTextareaModule,
+        DropdownModule,
+        ButtonModule,
+        DialogModule,
+        FileUploadModule,
+        RadioButtonModule,
+        TranslateModule.forChild({
+            missingTranslationHandler: {
+                provide: MissingTranslationHandler,
+                useClass: CustomMissingTranslationHandler,
+                deps: [AppTranslateService]
+            },
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (CustomTranslateLoader),
+                deps: [LANGUAGE_FILE_PATH, HttpClient]
+            },
+            isolate: true,
+            useDefaultLang: false
+        }),
+        EditorModule,
+        CheckboxModule,
+        CalendarModule,
+        MultiSelectModule,
+        ReactiveFormsModule,
+        BreadcrumbModule,
+        ToastModule,
+        TooltipModule
+    ],
   providers: [
     {
       provide: LANGUAGE_FILE_PATH,
       useValue: { path: './assets/i18n/news/' }
     },
-    NewsService
+    NewsService,
+    MessageService
   ],
 })
 export class NewsModule extends BaseModule {

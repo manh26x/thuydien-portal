@@ -92,14 +92,13 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.indicator.showActivityIndicator();
-        this.userService.deleteUser(user.userPortal.userId).pipe(
-          finalize(() => this.getUserList())
-        ).subscribe(() => {
+        this.userService.deleteUser(user.userPortal.userId).subscribe(() => {
           this.messageService.add({
             severity: 'success',
             detail: this.translate.instant('message.deleteSuccess')
           });
         }, err => {
+          this.indicator.hideActivityIndicator();
           if (err instanceof ApiErrorResponse && err.code === '201') {
             this.messageService.add({
               severity: 'error',
@@ -112,6 +111,11 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       },
       reject: () => {}
     });
+  }
+
+  refreshSearch() {
+    this.initSearchForm();
+    this.getUserList();
   }
 
   gotoCreate() {

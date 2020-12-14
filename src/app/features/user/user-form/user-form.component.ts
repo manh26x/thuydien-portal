@@ -97,7 +97,7 @@ export class UserFormComponent implements OnInit, OnChanges {
           role: {code: userInfo.userPortal.role},
           status: {code: userInfo.userPortal.status},
           userId: userInfo.userPortal.userId,
-          password: '',
+          password: userInfo.userPortal.password,
           email: userInfo.userPortal.email,
           phone: userInfo.userPortal.phone,
           position: userInfo.userPortal.position,

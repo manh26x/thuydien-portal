@@ -1,6 +1,6 @@
-<p-panel header="{{'list' | translate}}" [toggleable]="true">
+<p-panel header="{{'list' | translate}}">
   <ng-template pTemplate="icons">
-    <button class="p-panel-header-icon p-link" (click)="refreshSearch()">
+    <button class="p-panel-header-icon p-link" (click)="refreshSearch()" pTooltip="{{'btn.refresh' | translate}}" tooltipPosition="bottom">
       <i class="pi pi-refresh"></i>
     </button>
   </ng-template>

@@ -1,9 +1,9 @@
-<p-panel header="{{'list' | translate}}" [toggleable]="true">
-<!--  <ng-template pTemplate="icons">-->
-<!--    <button class="p-panel-header-icon p-link">-->
-<!--      <i class="pi pi-refresh"></i>-->
-<!--    </button>-->
-<!--  </ng-template>-->
+<p-panel header="{{'list' | translate}}">
+  <ng-template pTemplate="icons">
+    <button class="p-panel-header-icon p-link" (click)="refreshSearch()" pTooltip="{{'btn.refresh' | translate}}" tooltipPosition="bottom">
+      <i class="pi pi-refresh"></i>
+    </button>
+  </ng-template>
   <form class="p-grid p-fluid p-mb-3" [formGroup]="searchForm">
     <div class="p-lg-6 p-col-6">
       <span class="p-input-icon-left">
@@ -66,6 +66,13 @@
           <button (click)="gotoView(user.userPortal.userId)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
           <button (click)="gotoUpdate(user.userPortal.userId)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-secondary p-button-text"></button>
           <button (click)="doDelete(user)" pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="8">
+          {{'noData' | translate}}
         </td>
       </tr>
     </ng-template>
