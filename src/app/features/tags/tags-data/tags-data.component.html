@@ -5,17 +5,16 @@
     </button>
   </ng-template>
   <form class="p-grid p-fluid p-mb-3">
-    <div class="p-lg-7 p-col-12">
-      <span class="p-input-icon-left">
-        <i class="pi pi-search"></i>
-        <input type="text" [formControl]="formSearch" pInputText placeholder="{{'search' | translate}}" />
-     </span>
+    <div class="p-lg-7 p-col-12 p-field">
+      <label>{{'tags.name' | translate}}</label>
+      <input type="text" [formControl]="formSearch" pInputText placeholder="{{'search' | translate}}" />
     </div>
-    <div class="p-lg-3 p-col-12">
+    <div class="p-lg-3 p-col-12 p-field">
+      <label>{{'tags.type' | translate}}</label>
       <p-dropdown inputId="n-type" [options]="tagsType" optionLabel="name" dataKey="code" [formControl]="typeSearch"></p-dropdown>
     </div>
-    <div class="p-lg-2 p-col-12">
-      <button (click)="getListTags()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 100%"></button>
+    <div class="p-md-2 p-col-6 p-field p-d-flex p-align-end">
+      <button (click)="getListTags()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
     </div>
   </form>
   <p-table

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TagsService} from '../../tags/service/tags.service';
 import {forkJoin} from 'rxjs';
 import {TagsUser} from '../../tags/model/tags';
@@ -24,6 +24,7 @@ import {DomSanitizer} from '@angular/platform-browser';
       opacity: 1;
       max-height: 600px;
       overflow: auto;
+      border-radius: 4px;
     }
   `],
   providers: [TagsService, RoleService]
@@ -37,7 +38,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
   levelList: SelectItem[] = [];
   filesImage: any[];
   filesDoc: any[];
-  contentReadable: any = '';
+  contentReadonly: any = '';
   @Input() mode = 'create';
   @Input() valueForm: NewsDetail;
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
@@ -97,7 +98,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
             this.formNews.get('publishDate').disable();
           }
         }
-        this.contentReadable = this.sanitizer.bypassSecurityTrustHtml(news.newsDto.content);
+        this.contentReadonly = this.sanitizer.bypassSecurityTrustHtml(news.newsDto.content);
         this.formNews.setValue({
           id: news.newsDto.id,
           title: news.newsDto.title,
@@ -128,11 +129,11 @@ export class NewsFormComponent implements OnInit, OnChanges {
   }
 
   doSaveDraft() {
-    if (this.formNews.invalid) {
-      this.util.validateAllFields(this.formNews);
-    } else {
-      this.draft.emit(this.formNews.getRawValue());
-    }
+//    if (this.formNews.invalid) {
+//      this.util.validateAllFields(this.formNews);
+//    } else {
+      this.draft.emit({ news: this.formNews.getRawValue(), fileImageList: this.filesImage, fileDocList: this.filesDoc });
+//    }
   }
 
   doCancel() {
@@ -157,20 +158,29 @@ export class NewsFormComponent implements OnInit, OnChanges {
 
   initForm() {
     const now = new Date();
+    now.setHours(now.getHours() + 1);
     now.setMinutes(0, 0);
     this.formNews = this.fb.group({
       id: [],
-      title: [''],
-      shortContent: [''],
+      title: ['', [Validators.required, Validators.maxLength(500)]],
+      shortContent: ['', [Validators.maxLength(400)]],
       content: [''],
-      tags: [],
-      groupView: [],
+      tags: [null, [Validators.required]],
+      groupView: [null, [Validators.required]],
       publishDate: [now],
-      level: [NewsEnum.LEVEL_NORMAL],
+      level: [NewsEnum.LEVEL_NORMAL, [Validators.required]],
       docs: [''],
       image: [''],
       isSendNotification: [false]
     });
+  }
+
+  hasErrorInput(controlName: string, errorName: string): boolean {
+    const control = this.formNews.get(controlName);
+    if (control == null) {
+      return false;
+    }
+    return (control.dirty || control.touched) && control.hasError(errorName);
   }
 
 }

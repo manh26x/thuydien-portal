@@ -7,10 +7,7 @@
   <form class="p-grid p-fluid p-mb-3" [formGroup]="formFilter">
     <div class="p-md-3 p-col-6 p-field">
       <label>{{'news.name' | translate}}</label>
-      <span class="p-input-icon-left">
-        <i class="pi pi-search"></i>
-        <input type="text" pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
-     </span>
+      <input type="text" pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
     </div>
 
     <div class="p-md-3 p-col-6 p-field">
@@ -51,7 +48,7 @@
         <th>{{'news.tags' | translate}}</th>
         <th pSortableColumn="priority">{{'news.level' | translate}} <p-sortIcon field="priority"></p-sortIcon></th>
         <th>
-          <button pButton type="button" label="Thêm mới" icon="pi pi-plus" class="p-button-secondary p-button-outlined" (click)="gotoCreate()"></button>
+          <button pButton type="button" label="{{'btn.insert' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined" (click)="gotoCreate()"></button>
         </th>
       </tr>
     </ng-template>
@@ -62,8 +59,15 @@
         <td>{{news.title}}</td>
         <td>
           <ng-container [ngSwitch]="news.status">
-            <ng-container *ngSwitchCase="newsConst.STATUS_ACTIVE">{{'const.active' | translate}}</ng-container>
-            <ng-container *ngSwitchCase="newsConst.STATUS_INACTIVE">{{'const.inactive' | translate}}</ng-container>
+            <ng-container *ngSwitchCase="newsConst.STATUS_PUBLISHED">
+              <div class="text-primary">{{'const.publish' | translate}}</div>
+            </ng-container>
+            <ng-container *ngSwitchCase="newsConst.STATUS_PENDING_PUBLISH">
+              <div class="text-primary in-active">{{'const.pending' | translate}}</div>
+            </ng-container>
+            <ng-container *ngSwitchCase="newsConst.STATUS_DRAFT">
+              <div>{{'const.draft' | translate}}</div>
+            </ng-container>
             <ng-container *ngSwitchDefault>-</ng-container>
           </ng-container>
         </td>

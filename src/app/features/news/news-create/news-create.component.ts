@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {NewsService} from '../service/news.service';
 import {NewsInfoRequest} from '../model/news';
 import {UtilService} from '../../../core/service/util.service';
@@ -9,6 +9,7 @@ import {finalize} from 'rxjs/operators';
 import {MessageService} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
+import {BeforeLeave} from '../../../core/model/before-leave';
 
 @Component({
   selector: 'aw-news-create',
@@ -16,8 +17,8 @@ import {Router} from '@angular/router';
   styles: [
   ]
 })
-export class NewsCreateComponent implements OnInit {
-
+export class NewsCreateComponent implements OnInit, BeforeLeave {
+  isLeave = false;
   constructor(
     private newsService: NewsService,
     private util: UtilService,
@@ -31,7 +32,7 @@ export class NewsCreateComponent implements OnInit {
     this.newsService.setPage('create');
   }
 
-  doSave(evt) {
+  doSave(evt, draft: boolean) {
 //    if (evt.fileImageList && Array.isArray(evt.fileImageList) && evt.fileImageList.length > 0) {
 //      const listFormData: FormData = new FormData();
 //      listFormData.append('file', evt.fileImageList[0], evt.fileImageList[0].name);
@@ -40,7 +41,6 @@ export class NewsCreateComponent implements OnInit {
 //      });
 //    }
     const value = evt.news;
-    this.indicator.showActivityIndicator();
     const tagsInsert: Tags[] = [];
     if (this.util.canForEach(value.tags)) {
       value.tags.forEach(t => {
@@ -67,23 +67,29 @@ export class NewsCreateComponent implements OnInit {
       listRole: roleInsert,
       priority: value.level,
       publishTime: value.publishDate,
-      sendNotification: value.isSendNotification ? 1 : 0
+      sendNotification: value.isSendNotification ? 1 : 0,
+      isDraft: draft ? 1 : 0
     };
+    this.indicator.showActivityIndicator();
     this.newsService.createNews(body).pipe(
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe(res => {
       this.messageService.add({
         severity: 'success',
-        detail: this.translate.instant('message.insertSuccess')
+        detail: draft ? this.translate.instant('message.draftSuccess') : this.translate.instant('message.insertSuccess')
       });
+      this.isLeave = true;
       this.router.navigate(['news']);
     });
   }
 
-  doSaveDraft() {}
-
   doCancel() {
     this.router.navigate(['news']);
+  }
+
+  @HostListener('window:beforeunload')
+  canLeave(): boolean {
+    return this.isLeave;
   }
 
 }

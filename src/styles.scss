@@ -51,3 +51,10 @@
 .p-field > label {
   font-weight: 700;
 }
+
+.text-primary {
+  color: #582E91;
+  &.in-active {
+    opacity: 0.7;
+  }
+}

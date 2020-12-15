@@ -6,6 +6,7 @@ import {NewsDataComponent} from './news-data/news-data.component';
 import {NewsCreateComponent} from './news-create/news-create.component';
 import {NewsUpdateComponent} from './news-update/news-update.component';
 import {NewsViewComponent} from './news-view/news-view.component';
+import {FormLeaveGuard} from '../../core/form-leave.guard';
 
 const routes: Routes = [
   { path: '',
@@ -18,7 +19,8 @@ const routes: Routes = [
       },
       {
         path: 'create',
-        component: NewsCreateComponent
+        component: NewsCreateComponent,
+        canDeactivate: [FormLeaveGuard]
       },
       {
         path: 'update/:id',

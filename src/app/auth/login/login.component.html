@@ -33,6 +33,11 @@
         <div class="p-col-12 button-container">
           <button type="submit" pButton label="{{'login' | translate}}" class="p-button-raised" (click)="doLogin()" [disabled]="isLoading"></button>
         </div>
+
+        <div class="p-col-12">
+          <a href="javascript:void(0)" (click)="changeLang('vi')">Tiếng Việt | </a>
+          <a href="javascript:void(0)" (click)="changeLang('en')">English</a>
+        </div>
       </form>
     </div>
   </div>

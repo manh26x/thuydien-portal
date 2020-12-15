@@ -6,6 +6,8 @@ import {Router} from '@angular/router';
 import {ILanguage} from '../core/model/language';
 import {AppTranslateService} from '../core/service/translate.service';
 import {Language} from '../core/model/language.enum';
+import {concatMap, startWith} from 'rxjs/operators';
+import {NewsEnum} from './news/model/news.enum';
 
 @Component({
   selector: 'aw-topbar',
@@ -40,12 +42,19 @@ export class TopBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userItems = [
-      {
-        label: 'Đăng xuất',
-        command: () => this.logout()
-      }
-    ];
+    this.appTranslate.languageChanged$.pipe(
+      startWith(''),
+      concatMap(() => this.appTranslate.getTranslationAsync('logout').pipe(
+        res => res
+      ))
+    ).subscribe(res => {
+      this.userItems = [
+        {
+          label: res,
+          command: () => this.logout()
+        }
+      ];
+    });
     // language
     this.langItems = [
       {

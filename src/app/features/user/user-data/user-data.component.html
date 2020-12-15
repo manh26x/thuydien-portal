@@ -5,20 +5,20 @@
     </button>
   </ng-template>
   <form class="p-grid p-fluid p-mb-3" [formGroup]="searchForm">
-    <div class="p-lg-6 p-col-6">
-      <span class="p-input-icon-left">
-        <i class="pi pi-search"></i>
-        <input type="text" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
-     </span>
+    <div class="p-lg-6 p-col-6 p-field">
+      <label>{{'user.fullName' | translate}}, {{'user.location' | translate}}</label>
+      <input type="text" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
     </div>
-    <div class="p-lg-2 p-col-6">
+    <div class="p-lg-2 p-col-6 p-field">
+      <label>{{'user.role' | translate}}</label>
       <p-dropdown [options]="roleList" optionLabel="name" dataKey="code" formControlName="role"></p-dropdown>
     </div>
-    <div class="p-lg-2 p-col-6">
+    <div class="p-lg-2 p-col-6 p-field">
+      <label>{{'user.status' | translate}}</label>
       <p-dropdown [options]="statusList" optionLabel="name" dataKey="code" formControlName="status"></p-dropdown>
     </div>
-    <div class="p-lg-2 p-col-6">
-      <button (click)="getUserList()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 100%"></button>
+    <div class="p-md-2 p-col-6 p-field p-d-flex p-align-end">
+      <button (click)="getUserList()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
     </div>
   </form>
   <p-table
@@ -49,7 +49,16 @@
         <td>{{index + 1}}</td>
         <td>{{user.userPortal.fullName}}</td>
         <td>{{user.userPortal.userId}}</td>
-        <td>{{user.userPortal.role}}</td>
+        <td class="text-primary">
+          <ng-container [ngSwitch]="user.userPortal.role">
+            <ng-container *ngSwitchCase="userConst.SUPPER_ADMIN">
+              {{user.userPortal.role}} <i class="pi pi-star supper-admin"></i>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              {{user.userPortal.role}}
+            </ng-container>
+          </ng-container>
+        </td>
         <td>{{user.userPortal.position}}</td>
         <td>
           <div *ngFor="let item of user.listBranch;index as i" [ngClass]="{'p-mt-2': i != 0}">

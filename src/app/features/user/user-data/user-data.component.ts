@@ -3,7 +3,7 @@ import {BaseComponent} from '../../../core/base.component';
 import {UserService} from '../service/user.service';
 import {FilterUserRequest, UserBranch} from '../model/user';
 import {Router} from '@angular/router';
-import {UserEnum, UserRoleEnum} from '../model/user.enum';
+import {UserEnum} from '../model/user.enum';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {AppTranslateService} from '../../../core/service/translate.service';
@@ -15,8 +15,19 @@ import {ApiErrorResponse} from '../../../core/model/error-response';
 @Component({
   selector: 'aw-user-data',
   templateUrl: './user-data.component.html',
-  styles: [
-  ]
+  styles: [`
+    .supper-admin {
+      color: #ffffff;
+      background: #FEAC3E;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: inline-flex;
+      justify-content: center;
+      padding: 4px;
+      font-size: 11px;
+    }
+  `]
 })
 export class UserDataComponent extends BaseComponent implements OnInit {
   public userConst = UserEnum;
@@ -51,8 +62,8 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       ];
       this.roleList = [
         {code: '', name: res.all},
-        {code: UserRoleEnum.ADMIN, name: res.roleAdmin},
-        {code: UserRoleEnum.SUPPER_ADMIN, name: res.supperAdmin},
+        {code: UserEnum.ADMIN, name: res.roleAdmin},
+        {code: UserEnum.SUPPER_ADMIN, name: res.supperAdmin},
       ];
     });
     this.getUserList();

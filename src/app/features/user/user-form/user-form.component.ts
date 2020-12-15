@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {TranslateService} from '@ngx-translate/core';
 import {AppTranslateService} from '../../../core/service/translate.service';
 import {concatMap, startWith} from 'rxjs/operators';
-import {UserEnum, UserRoleEnum} from '../model/user.enum';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UserEnum} from '../model/user.enum';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UtilService} from '../../../core/service/util.service';
 import {UserService} from '../service/user.service';
 import {TagsService} from '../../tags/service/tags.service';
@@ -69,8 +69,8 @@ export class UserFormComponent implements OnInit, OnChanges {
         {code: UserEnum.INACTIVE, name: res.inactive}
       ];
       this.roleList = [
-        {code: UserRoleEnum.ADMIN, name: res.roleAdmin},
-        {code: UserRoleEnum.SUPPER_ADMIN, name: res.supperAdmin},
+        {code: UserEnum.ADMIN, name: res.roleAdmin},
+        {code: UserEnum.SUPPER_ADMIN, name: res.supperAdmin},
       ];
     });
 
@@ -140,7 +140,7 @@ export class UserFormComponent implements OnInit, OnChanges {
   initForm() {
     this.formUser = this.fb.group({
       fullName: ['', [Validators.required, Validators.maxLength(100)]],
-      role: [{code: UserRoleEnum.ADMIN}, [Validators.required]],
+      role: [{code: UserEnum.ADMIN}, [Validators.required]],
       status: [{code: UserEnum.ACTIVE}],
       userId: ['', [Validators.required, Validators.maxLength(100)]],
       password: ['', [Validators.required, Validators.maxLength(100)]],
@@ -152,7 +152,7 @@ export class UserFormComponent implements OnInit, OnChanges {
       tagNews: [],
       tagKpi: [],
       tagTool: []
-    });
+    }, { validators: this.tagsMatcher });
   }
 
   hasErrorInput(controlName: string, errorName: string): boolean {
@@ -161,6 +161,24 @@ export class UserFormComponent implements OnInit, OnChanges {
       return false;
     }
     return (control.dirty || control.touched) && control.hasError(errorName);
+  }
+
+  public tagsMatcher(abstract: AbstractControl): { [key: string]: boolean } | null {
+    const tagQna = abstract.get('tagQna');
+    const tagNews = abstract.get('tagNews');
+    const tagKpi = abstract.get('tagKpi');
+    const tagTool = abstract.get('tagTool');
+    if (
+      (Array.isArray(tagQna.value) && tagQna.value.length > 0)
+      || (Array.isArray(tagNews.value) && tagNews.value.length > 0 )
+      || (Array.isArray(tagKpi.value) && tagKpi.value.length > 0 )
+      || (Array.isArray(tagTool.value) && tagTool.value.length > 0 )
+    ) {
+      tagQna.setErrors(null);
+      return null;
+    }
+    tagQna.setErrors({oneTagRequired: true});
+    return { match: true };
   }
 
 }

@@ -17,6 +17,7 @@
 			"title": "Có lỗi xảy ra"
 		},
 		"http": {
+			"0": "Hệ thống đang bận. Vui lòng thử lại sau",
 			"300": "Máy chủ không phản hồi",
 			"301": "Có lỗi xảy ra vui lòng thử lại sau",
 			"302": "Có lỗi xảy ra vui lòng thử lại sau",
@@ -30,7 +31,7 @@
 			"404": "Có lỗi xảy ra vui lòng thử lại sau",
 			"405": "Có lỗi xảy ra vui lòng thử lại sau",
 			"406": "Có lỗi xảy ra vui lòng thử lại sau",
-			"407": "Tin hiệu internet không ổn định hoặc có thể bạn đang sử dụng máy chủ trung gian để sử dụng internet. Vui lòng kiểm tra lại internet và cấu hình mạng của thiết bị.",
+			"407": "Tin hiệu internet không ổn định. Vui lòng kiểm tra lại internet và cấu hình mạng của thiết bị.",
 			"408": "Máy chủ không phản hồi",
 			"409": "Máy chủ không phản hồi",
 			"410": "Có lỗi xảy ra vui lòng thử lại sau",
@@ -58,7 +59,9 @@
 			"title": "Yêu cầu không hợp lệ"
 		}
 	},
+	"logout": "Đăng xuất",
 	"menu": {
+		"calculateTool": "Quản lý công cụ tính toán",
 		"home": "Trang chủ",
 		"news": "Bản tin bán hàng",
 		"qna": "Quản lý Q&A",

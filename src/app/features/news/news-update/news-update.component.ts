@@ -52,7 +52,7 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
     });
   }
 
-  doSave(evt) {
+  doSave(evt, draft) {
     const value = evt.news;
     this.indicator.showActivityIndicator();
     const tagsInsert: Tags[] = [];
@@ -82,7 +82,8 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
       listRole: roleInsert,
       priority: value.level,
       publishTime: value.publishDate,
-      sendNotification: value.isSendNotification ? 1 : 0
+      sendNotification: value.isSendNotification ? 1 : 0,
+      isDraft: draft ? 1: 0
     };
     this.newsService.updateNews(body).pipe(
       finalize(() => this.indicator.hideActivityIndicator())
@@ -96,7 +97,7 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
       if (err instanceof ApiErrorResponse && err.code === '201') {
         this.messageService.add({
           severity: 'error',
-          detail: this.translate.instant('message.updateNotFound')
+          detail: draft ? this.translate.instant('message.draftSuccess') : this.translate.instant('message.updateNotFound')
         });
       } else {
         throw err;

@@ -34,5 +34,6 @@
 <div class="split-horizontal"></div>
 <div class="p-text-center">
   <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
-  <button *ngIf="mode != 'view'" pButton (click)="doSave()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised p-button-secondary"></button>
+  <button *ngIf="mode == 'create'" pButton (click)="doSave()" type="button" label="{{'btn.create' | translate}}" class="p-button-raised p-button-secondary"></button>
+  <button *ngIf="mode == 'update'" pButton (click)="doSave()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised p-button-secondary"></button>
 </div>

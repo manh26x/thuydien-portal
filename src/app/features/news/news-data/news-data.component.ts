@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {NewsService} from '../service/news.service';
 import {FilterNewsRequest, News} from '../model/news';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
-import {concatMap, delay, finalize, startWith} from 'rxjs/operators';
+import {concatMap, delay, finalize, map, startWith} from 'rxjs/operators';
 import {NewsEnum} from '../model/news.enum';
 import {ConfirmationService, LazyLoadEvent, MessageService, SelectItem} from 'primeng/api';
 import {TagsUser} from '../../tags/model/tags';
@@ -62,8 +62,9 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
     ).subscribe(res => {
       this.statusList = [
         { label: res.all, value: -1 },
-        { label: res.active, value: NewsEnum.STATUS_ACTIVE },
-        { label: res.inactive, value: NewsEnum.STATUS_INACTIVE }
+        { label: res.publish, value: NewsEnum.STATUS_PUBLISHED },
+        { label: res.pending, value: NewsEnum.STATUS_PENDING_PUBLISH },
+        { label: res.draft, value: NewsEnum.STATUS_DRAFT }
       ];
       this.levelList = [
         { label: res.all, value: '' },
@@ -117,7 +118,6 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
       },
       reject: () => {}
     });
-    console.log(news);
   }
 
   lazyLoadTags(evt: LazyLoadEvent) {

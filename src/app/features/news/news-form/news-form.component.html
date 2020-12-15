@@ -3,12 +3,21 @@
     <div class="p-col-8">
       <div class="p-fluid">
         <div class="p-col-12 p-field">
-          <label for="n-title">{{'news.title' | translate}}</label>
+          <label for="n-title">{{'news.title' | translate}} <span class="p-invalid">*</span></label>
           <input formControlName="title" id="n-title" type="text" pInputText />
+          <small *ngIf="hasErrorInput('title', 'required')" class="p-invalid">
+            {{'invalid.title.required' | translate}}
+          </small>
+          <small *ngIf="hasErrorInput('title', 'maxlength')" class="p-invalid">
+            {{ 'invalid.title.maxLength' | translate:{length: 500} }}
+          </small>
         </div>
         <div class="p-col-12 p-field">
           <label for="n-short-content">{{'news.shortContent' | translate}}</label>
           <input formControlName="shortContent" id="n-short-content" type="text" pInputText />
+          <small *ngIf="hasErrorInput('shortContent', 'maxlength')" class="p-invalid">
+            {{ 'invalid.shortContent.maxLength' | translate:{length: 400} }}
+          </small>
         </div>
         <div class="p-col-12 p-field">
           <label>{{'news.content' | translate}}</label>
@@ -29,7 +38,7 @@
             }">
           </editor>
           <ng-template #viewContent>
-            <div class="content-readonly" [innerHTML]="contentReadable"></div>
+            <div class="content-readonly" [innerHTML]="contentReadonly"></div>
           </ng-template>
         </div>
       </div>
@@ -38,13 +47,19 @@
     <div class="p-col-4">
       <div class="p-fluid">
         <div class="p-col-12 p-field">
-          <label for="n-tags">{{'news.tags' | translate}}</label>
+          <label for="n-tags">{{'news.tags' | translate}} <span class="p-invalid">*</span></label>
           <p-multiSelect formControlName="tags" inputId="n-tags" [options]="tagList" dataKey="tagId" optionLabel="tagValue"></p-multiSelect>
+          <small *ngIf="hasErrorInput('tags', 'required')" class="p-invalid">
+            {{'invalid.tags.required' | translate}}
+          </small>
         </div>
 
         <div class="p-col-12 p-field">
-          <label for="n-group-customer">{{'news.groupView' | translate}}</label>
+          <label for="n-group-customer">{{'news.groupView' | translate}} <span class="p-invalid">*</span></label>
           <p-multiSelect formControlName="groupView" inputId="n-group-customer" [options]="roleList" dataKey="id" optionLabel="name"></p-multiSelect>
+          <small *ngIf="hasErrorInput('groupView', 'required')" class="p-invalid">
+            {{'invalid.groupView.required' | translate}}
+          </small>
         </div>
 
         <div class="p-col-12 p-field">
@@ -66,7 +81,7 @@
         </div>
 
         <div class="p-col-12 p-field">
-          <label for="n-order">{{'news.level' | translate}}</label>
+          <label for="n-order">{{'news.level' | translate}} <span class="p-invalid">*</span></label>
           <p-dropdown formControlName="level" inputId="n-order" [options]="levelList"></p-dropdown>
         </div>
 
@@ -119,7 +134,12 @@
 <div class="split-horizontal"></div>
 <div class="p-text-center">
   <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
-  <button *ngIf="mode == 'create'" pButton (click)="doSaveDraft()" type="button" label="{{'btn.draft' | translate}}" class="p-button-raised p-button-secondary p-mr-3"></button>
-  <button *ngIf="mode != 'view'" pButton (click)="doSave()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised"></button>
-
+  <ng-container *ngIf="mode == 'create'">
+    <button pButton (click)="doSaveDraft()" type="button" label="{{'btn.draft' | translate}}" class="p-button-raised p-button-secondary p-mr-3"></button>
+    <button pButton (click)="doSave()" type="button" label="{{'btn.insert' | translate}}" class="p-button-raised p-mr-3"></button>
+  </ng-container>
+  <ng-container *ngIf="mode == 'update'">
+    <button pButton (click)="doSaveDraft()" type="button" label="{{'btn.draft' | translate}}" class="p-button-raised p-button-secondary p-mr-3"></button>
+    <button pButton (click)="doSave()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised"></button>
+  </ng-container>
 </div>

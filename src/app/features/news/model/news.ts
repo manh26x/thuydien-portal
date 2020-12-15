@@ -24,6 +24,7 @@ export interface NewsInfoRequest {
   sendNotification?: number; // 0 or 1
   listNewsTag?: Tags[];
   listRole?: Role[];
+  isDraft?: number;
 }
 
 export interface News {

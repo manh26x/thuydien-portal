@@ -9,6 +9,7 @@
 	"btn": {
 		"cancel": "Cancel",
 		"create": "Create",
+		"refresh": "Refresh",
 		"save": "Save changes"
 	},
 	"confirm": {
@@ -34,6 +35,7 @@
 			"maxLength": "The value must not exceed {{length}} characters",
 			"required": "Value cannot be blank"
 		},
+		"oneTagRequired": "Please select 1 of the Tags above",
 		"password": {
 			"maxLength": "The value must not exceed {{length}} characters",
 			"required": "Value cannot be blank"
@@ -61,8 +63,9 @@
 		"updateSuccess": "Successful account information update"
 	},
 	"no": "No.",
+	"noData": "No results match",
 	"paging": "Showing {first} to {last} in {totalRecords} records",
-	"search": "Search by first and last name, location",
+	"search": "Enter your first and last name or location",
 	"update": "Edit User Information",
 	"user": {
 		"branch": "Branch",

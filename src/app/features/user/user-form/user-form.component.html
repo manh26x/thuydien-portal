@@ -1,7 +1,7 @@
 <form [formGroup]="formUser">
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
-      <label for="n-fullName">{{'user.fullName' | translate}}</label>
+      <label for="n-fullName">{{'user.fullName' | translate}} <span class="p-invalid">*</span></label>
       <input id="n-fullName" type="text" pInputText formControlName="fullName"/>
       <small *ngIf="hasErrorInput('fullName', 'required')" class="p-invalid">
         {{'invalid.fullName.required' | translate}}
@@ -12,19 +12,19 @@
     </div>
 
     <div class="p-md-3 p-col-12 p-field">
-      <label for="n-role">{{'user.role' | translate}}</label>
+      <label for="n-role">{{'user.role' | translate}} <span class="p-invalid">*</span></label>
       <p-dropdown formControlName="role" inputId="n-role" [options]="roleList" optionLabel="name" dataKey="code"></p-dropdown>
     </div>
 
     <div class="p-md-3 p-col-12 p-field">
-      <label for="n-status">{{'user.status' | translate}}</label>
+      <label for="n-status">{{'user.status' | translate}} <span class="p-invalid">*</span></label>
       <p-dropdown formControlName="status" inputId="n-status" [options]="statusList" optionLabel="name" dataKey="code"></p-dropdown>
     </div>
   </div>
 
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
-      <label for="n-user-id">{{'user.userName' | translate}}</label>
+      <label for="n-user-id">{{'user.userName' | translate}} <span class="p-invalid">*</span></label>
       <input id="n-user-id" type="text" pInputText formControlName="userId" />
       <small *ngIf="hasErrorInput('userId', 'required')" class="p-invalid">
         {{'invalid.userId.required' | translate}}
@@ -35,7 +35,7 @@
     </div>
 
     <div class="p-md-6 p-col-12 p-field" *ngIf="mode === 'create'">
-      <label for="n-password">{{'user.password' | translate}}</label>
+      <label for="n-password">{{'user.password' | translate}} <span class="p-invalid">*</span></label>
       <input id="n-password" type="password" pInputText formControlName="password" />
       <small *ngIf="hasErrorInput('password', 'required')" class="p-invalid">
         {{'invalid.password.required' | translate}}
@@ -86,6 +86,9 @@
     <div class="p-md-3 p-col-12 p-field">
       <label for="n-tag-qna">{{'user.tagQna' | translate}}</label>
       <p-multiSelect formControlName="tagQna" inputId="n-tag-qna" [options]="tagQnaList" optionLabel="tagValue" dataKey="tagId"></p-multiSelect>
+      <small *ngIf="hasErrorInput('tagQna', 'oneTagRequired')" class="p-invalid">
+        {{'invalid.oneTagRequired' | translate}}
+      </small>
     </div>
 
     <div class="p-md-3 p-col-12 p-field">
@@ -110,5 +113,6 @@
 <div class="split-horizontal"></div>
 <div class="p-text-center">
   <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
-  <button *ngIf="mode != 'view'" pButton (click)="doSave()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised p-button-secondary"></button>
+  <button *ngIf="mode == 'update'" pButton (click)="doSave()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised p-button-secondary"></button>
+  <button *ngIf="mode == 'create'" pButton (click)="doSave()" type="button" label="{{'btn.create' | translate}}" class="p-button-raised p-button-secondary"></button>
 </div>

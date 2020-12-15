@@ -93,6 +93,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.router.navigate([uri]);
   }
 
+  changeLang(key) {
+    localStorage.setItem('lang', key);
+    location.reload();
+  }
+
   ngOnDestroy() {
     this.render.removeClass(document.body, 'login-body');
   }

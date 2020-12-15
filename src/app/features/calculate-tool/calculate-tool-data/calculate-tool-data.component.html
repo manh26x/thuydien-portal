@@ -7,10 +7,7 @@
   <form class="p-grid p-fluid p-mb-3" [formGroup]="formFilter">
     <div class="p-md-3 p-col-6 p-field">
       <label>{{'tool.name' | translate}}</label>
-      <span class="p-input-icon-left">
-        <i class="pi pi-search"></i>
-        <input type="text" pInputText placeholder="{{'tool.name' | translate}}" formControlName="searchValue" />
-     </span>
+      <input type="text" pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
     </div>
 
     <div class="p-md-3 p-col-6 p-field">
