@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TagsService} from '../../tags/service/tags.service';
 import {forkJoin} from 'rxjs';
 import {TagsUser} from '../../tags/model/tags';
@@ -94,7 +94,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
       if (!changes.valueForm.firstChange) {
         const news: NewsDetail = changes.valueForm.currentValue;
         if (this.mode === 'update') {
-          if (news.newsDto.publishTime <= new Date().getTime()) {
+          if (news.newsDto.status === NewsEnum.STATUS_PUBLISHED) {
             this.formNews.get('publishDate').disable();
           }
         }
@@ -129,11 +129,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
   }
 
   doSaveDraft() {
-//    if (this.formNews.invalid) {
-//      this.util.validateAllFields(this.formNews);
-//    } else {
-      this.draft.emit({ news: this.formNews.getRawValue(), fileImageList: this.filesImage, fileDocList: this.filesDoc });
-//    }
+    this.draft.emit({ news: this.formNews.getRawValue(), fileImageList: this.filesImage, fileDocList: this.filesDoc });
   }
 
   doCancel() {
@@ -172,7 +168,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
       docs: [''],
       image: [''],
       isSendNotification: [false]
-    });
+    }, { validators: this.publishDateMatcher, updateOn: 'blur' });
   }
 
   hasErrorInput(controlName: string, errorName: string): boolean {
@@ -181,6 +177,21 @@ export class NewsFormComponent implements OnInit, OnChanges {
       return false;
     }
     return (control.dirty || control.touched) && control.hasError(errorName);
+  }
+
+  publishDateMatcher(abstract: AbstractControl): { [key: string]: boolean } | null {
+    const publishDateControl = abstract.get('publishDate');
+    if (publishDateControl.value === null || publishDateControl.disabled) {
+      return null;
+    }
+    const now = new Date();
+    const publishDate = publishDateControl.value;
+    if (now > publishDate) {
+      publishDateControl.setErrors({mustAfterNow: true});
+      return { match: true };
+    }
+    publishDateControl.setErrors(null);
+    return null;
   }
 
 }

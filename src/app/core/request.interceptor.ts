@@ -23,7 +23,6 @@ export class RequestInterceptor implements HttpInterceptor {
   private updateHeader(req: HttpRequest<any>) {
     req = req.clone({
       setHeaders: {
-        'Content-Type': 'application/json',
         Authorization: 'Bearer ' + this.authService.getToken()
       }
     });

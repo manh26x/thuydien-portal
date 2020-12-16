@@ -22,6 +22,7 @@
 	"no": "No.",
 	"noData": "No results match",
 	"paging": "Showing {first} to {last} in {totalRecords} records",
+	"search": "Enter a tool name",
 	"tool": {
 		"action": "Action",
 		"customerType": "Customer type",

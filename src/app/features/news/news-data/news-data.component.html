@@ -26,21 +26,16 @@
       <button (click)="getListNews()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
     </div>
   </form>
-  <p-table
-    [lazy]="true"
-    (onLazyLoad)="lazyLoadTags($event)"
-    [paginator]="true" [rows]="pageSize"
-    [totalRecords]="totalItem"
-    [rowsPerPageOptions]="[10, 20, 50, 100]"
-    [showCurrentPageReport]="true"
-    sortField="id"
-    [sortOrder]="-1"
-    currentPageReportTemplate="{{ 'paging' | translate }}"
-    [value]="newsList">
+  <p-table [value]="newsList"
+           [customSort]="true"
+           [lazy]="true"
+           sortField="id"
+           [sortOrder]="-1"
+           (onLazyLoad)="lazyLoadNews($event)">
     <ng-template pTemplate="header">
       <tr>
-        <th>{{'no' | translate}}</th>
-        <th pSortableColumn="id">{{'news.id' | translate}} <p-sortIcon field="id"></p-sortIcon></th>
+        <th style="width: 50px;">{{'no' | translate}}</th>
+        <th style="width: 70px;" pSortableColumn="id">{{'news.id' | translate}} <p-sortIcon field="id"></p-sortIcon></th>
         <th pSortableColumn="title">{{'news.name' | translate}} <p-sortIcon field="title"></p-sortIcon></th>
         <th pSortableColumn="status">{{'news.status' | translate}} <p-sortIcon field="status"></p-sortIcon></th>
         <th pSortableColumn="pubDate">{{'news.publishDate' | translate}} <p-sortIcon field="pubDate"></p-sortIcon></th>
@@ -54,7 +49,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-news let-index="rowIndex">
       <tr>
-        <td>{{index + 1}}</td>
+        <td>{{(page * pageSize) + 1 + index}}</td>
         <td>{{news.id}}</td>
         <td>{{news.title}}</td>
         <td>
@@ -95,11 +90,17 @@
     </ng-template>
     <ng-template pTemplate="emptymessage">
       <tr>
-        <td [attr.colspan]="6">
+        <td [attr.colspan]="9">
           {{'noData' | translate}}
         </td>
       </tr>
     </ng-template>
   </p-table>
-
+  <p-paginator [rows]="pageSize"
+               [totalRecords]="totalItem"
+               [rowsPerPageOptions]="[10, 20, 50, 100]"
+               [showCurrentPageReport]="true"
+               (onPageChange)="changePage($event)"
+               currentPageReportTemplate="{{ 'paging' | translate }}">
+  </p-paginator>
 </p-panel>

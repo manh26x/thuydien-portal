@@ -78,6 +78,9 @@
             [minDate]="min"
             styleClass="hour-only">
           </p-calendar>
+          <small *ngIf="hasErrorInput('publishDate', 'mustAfterNow')" class="p-invalid">
+            {{'invalid.publishDate.mustAfterNow' | translate}}
+          </small>
         </div>
 
         <div class="p-col-12 p-field">

@@ -8,6 +8,7 @@
 	"btn": {
 		"cancel": "Hủy",
 		"draft": "Lưu bản nháp",
+		"insert": "Thêm mới",
 		"refresh": "Tải lại",
 		"save": "Lưu thay đổi"
 	},
@@ -20,24 +21,46 @@
 	"const": {
 		"active": "Hoạt động",
 		"all": "Tất cả",
+		"draft": "Bản nháp",
 		"inactive": "Không hoạt động",
 		"levelImportant": "Quan trọng",
 		"levelNormal": "Bình thường",
-		"levelVeryImportant": "Rất quan trọng"
+		"levelVeryImportant": "Rất quan trọng",
+		"pending": "Chờ xuất bản",
+		"publish": "Đã xuất bản"
 	},
 	"create": "Biên soạn bản tin",
 	"edit": "Chỉnh sửa bản tin",
 	"filter": "Lọc kết quả",
+	"invalid": {
+		"groupView": {
+			"required": "Giá trị không được để trống"
+		},
+		"publishDate": {
+			"mustAfterNow": "Thời gian đăng phải lớn hơn hiện tại"
+		},
+		"shortContent": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự"
+		},
+		"tags": {
+			"required": "Giá trị không được để trống"
+		},
+		"title": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+			"required": "Giá trị không được để trống"
+		}
+	},
 	"level": "Mức độ quan trọng",
 	"levelList": {
 		"important": "Quan trọng",
 		"normal": "Bình thường",
 		"veryImportant": "Rất quan trọng"
 	},
-	"list": "Danh sách bản tin khách hàng",
+	"list": "Danh sách bản tin bán hàng",
 	"message": {
 		"deleteNotFound": "Bản tin không tồn tại hoặc đã bị xóa",
 		"deleteSuccess": "Xóa bản tin thành công",
+		"draftSuccess": "Lưu bản nháp thành công",
 		"insertSuccess": "Thêm mới bản tin thành công",
 		"updateNotFound": "Bản tin không tồn tại hoặc đã bị xóa",
 		"updateSuccess": "Cập nhật bản tin thành công"
@@ -61,6 +84,6 @@
 	"no": "STT",
 	"noData": "Không có kết quả nào phù hợp",
 	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
-	"search": "Tìm kiếm bản tin",
+	"search": "Nhập tên bản tin",
 	"view": "Chi tiết bản tin"
 }

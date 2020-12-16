@@ -12,6 +12,7 @@ import {BaseComponent} from '../../../core/base.component';
 import {AppTranslateService} from '../../../core/service/translate.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ApiErrorResponse} from '../../../core/model/error-response';
+import {PageChangeEvent} from '../../../shared/model/page-change-event';
 
 @Component({
   selector: 'aw-tags-data',
@@ -62,10 +63,14 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
   }
 
   lazyLoadTags(evt: LazyLoadEvent) {
-    this.page = evt.first === 0 ? 0 : evt.first / evt.rows;
-    this.pageSize = evt.rows;
     this.sortBy = evt.sortField;
     this.sortOrder = evt.sortOrder === 1 ? 'ASC' : 'DESC';
+    this.getListTags();
+  }
+
+  changePage(evt: PageChangeEvent) {
+    this.page = evt.page;
+    this.pageSize = evt.rows;
     this.getListTags();
   }
 

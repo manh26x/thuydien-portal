@@ -22,6 +22,7 @@
 	"no": "STT",
 	"noData": "Không có kết quả nào phù hợp",
 	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
+	"search": "Nhập tên công cụ",
 	"tool": {
 		"action": "Thao tác",
 		"customerType": "Loại khách hàng",

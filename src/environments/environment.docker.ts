@@ -4,7 +4,7 @@ export const environment = {
   refreshTokenEx: 43199,
   clientId: 'YnJvd3NlcjoxMjM0',
   baseUrl: '',
-  basePath: '/gateway',
+  basePath: '/',
   logServer: false,
   logClient: true,
   version: '1.0.0'

@@ -17,21 +17,16 @@
       <button (click)="getListTags()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
     </div>
   </form>
-  <p-table
-    [lazy]="true"
-    (onLazyLoad)="lazyLoadTags($event)"
-    [paginator]="true" [rows]="pageSize"
-    [totalRecords]="totalItem"
-    [rowsPerPageOptions]="[10, 20, 50, 100]"
-    [showCurrentPageReport]="true"
-    currentPageReportTemplate="{{ 'paging' | translate }}"
-    sortField="id"
-    [sortOrder]="-1"
-    [value]="tagsList">
+  <p-table [value]="tagsList"
+           [customSort]="true"
+           [lazy]="true"
+           sortField="id"
+           [sortOrder]="-1"
+           (onLazyLoad)="lazyLoadTags($event)">
     <ng-template pTemplate="header">
       <tr>
-        <th>{{'no' | translate}}</th>
-        <th pSortableColumn="id">{{'tags.id' | translate}} <p-sortIcon field="id"></p-sortIcon></th>
+        <th style="width: 50px;">{{'no' | translate}}</th>
+        <th style="width: 100px;" pSortableColumn="id">{{'tags.id' | translate}} <p-sortIcon field="id"></p-sortIcon></th>
         <th pSortableColumn="value">{{'tags.name' | translate}} <p-sortIcon field="value"></p-sortIcon></th>
         <th>{{'tags.type' | translate}}</th>
         <th>{{'tags.assignTo' | translate}}</th>
@@ -78,4 +73,11 @@
       </tr>
     </ng-template>
   </p-table>
+  <p-paginator [rows]="pageSize"
+               [totalRecords]="totalItem"
+               [rowsPerPageOptions]="[10, 20, 50, 100]"
+               [showCurrentPageReport]="true"
+               (onPageChange)="changePage($event)"
+               currentPageReportTemplate="{{ 'paging' | translate }}">
+  </p-paginator>
 </p-panel>

@@ -5,7 +5,7 @@ import {FilterNewsRequest, News} from '../model/news';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {concatMap, delay, finalize, map, startWith} from 'rxjs/operators';
 import {NewsEnum} from '../model/news.enum';
-import {ConfirmationService, LazyLoadEvent, MessageService, SelectItem} from 'primeng/api';
+import {ConfirmationService, LazyLoadEvent, MessageService, SelectItem, SortEvent} from 'primeng/api';
 import {TagsUser} from '../../tags/model/tags';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
@@ -14,12 +14,12 @@ import {TagsService} from '../../tags/service/tags.service';
 import {BaseComponent} from '../../../core/base.component';
 import {UtilService} from '../../../core/service/util.service';
 import {ApiErrorResponse} from '../../../core/model/error-response';
+import {PageChangeEvent} from '../../../shared/model/page-change-event';
 
 @Component({
   selector: 'aw-news-data',
   templateUrl: './news-data.component.html',
-  styles: [
-  ],
+  styles: [],
   providers: [TagsService]
 })
 export class NewsDataComponent extends BaseComponent implements OnInit {
@@ -77,6 +77,7 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
     this.tagService.getAllTag().subscribe(res => {
       this.tagsList = res;
     });
+//    this.getListNews();
   }
 
   gotoView(id) {
@@ -120,12 +121,16 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
     });
   }
 
-  lazyLoadTags(evt: LazyLoadEvent) {
-    this.page = evt.first === 0 ? 0 : evt.first / evt.rows;
+  changePage(evt: PageChangeEvent) {
+    this.page = evt.page;
     this.pageSize = evt.rows;
-    this.sortBy = evt.sortField;
-    this.sortOrder = evt.sortOrder === 1 ? 'ASC' : 'DESC';
     this.getListNews();
+  }
+
+  lazyLoadNews(evt: LazyLoadEvent) {
+      this.sortBy = evt.sortField;
+      this.sortOrder = evt.sortOrder === 1 ? 'ASC' : 'DESC';
+      this.getListNews();
   }
 
   getListNews() {

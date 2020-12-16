@@ -35,6 +35,7 @@
 			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
 			"required": "Giá trị không được để trống"
 		},
+		"oneTagRequired": "Vui lòng chọn 1 trong các Tags trên",
 		"password": {
 			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
 			"required": "Giá trị không được để trống"
@@ -64,7 +65,7 @@
 	"no": "STT",
 	"noData": "Không có kết quả nào phù hợp",
 	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
-	"search": "Tìm kiếm theo họ và tên, vị trí",
+	"search": "Nhập họ và tên hoặc vị trí",
 	"update": "Chỉnh sửa thông tin người dùng",
 	"user": {
 		"branch": "Chi nhánh",

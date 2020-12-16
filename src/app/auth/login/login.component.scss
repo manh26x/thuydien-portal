@@ -1,5 +1,5 @@
 .login-body {
-  background-color: #1d1f35;
+  background: linear-gradient(180deg, #583894 0%, #2C1653 100%);
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -7,10 +7,9 @@
   padding: 10px;
   .logo-container{
     text-align: center;
-    background-color: #5f2c82;
     min-height: 65px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    //border-top-left-radius: 5px;
+    //border-top-right-radius: 5px;
   }
   .logo {
     margin-top: 3px;
@@ -21,8 +20,9 @@
     background-color: #FFFFFF;
     padding: 15px;
     width: 100%;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-radius: 5px;
+    //border-bottom-left-radius: 5px;
+    //border-bottom-right-radius: 5px;
   }
   .login-panel {
     max-width: 555px;

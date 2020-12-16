@@ -45,7 +45,7 @@
 	"no": "STT",
 	"noData": "Không có kết quả nào phù hợp",
 	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
-	"search": "Tìm kiếm tags",
+	"search": "Nhập tên tags",
 	"tags": {
 		"assignTo": "Gắn cho",
 		"id": "Tags ID",

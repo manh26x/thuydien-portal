@@ -152,7 +152,7 @@ export class UserFormComponent implements OnInit, OnChanges {
       tagNews: [],
       tagKpi: [],
       tagTool: []
-    }, { validators: this.tagsMatcher });
+    }, { validators: this.tagsMatcher, updateOn: 'blur' });
   }
 
   hasErrorInput(controlName: string, errorName: string): boolean {
@@ -163,7 +163,7 @@ export class UserFormComponent implements OnInit, OnChanges {
     return (control.dirty || control.touched) && control.hasError(errorName);
   }
 
-  public tagsMatcher(abstract: AbstractControl): { [key: string]: boolean } | null {
+  tagsMatcher(abstract: AbstractControl): { [key: string]: boolean } | null {
     const tagQna = abstract.get('tagQna');
     const tagNews = abstract.get('tagNews');
     const tagKpi = abstract.get('tagKpi');

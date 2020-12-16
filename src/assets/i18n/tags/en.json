@@ -45,7 +45,7 @@
 	"no": "No.",
 	"noData": "No results match",
 	"paging": "Showing {first} to {last} in {totalRecords} records",
-	"search": "Search for Tags",
+	"search": "Enter a tags name",
 	"tags": {
 		"assignTo": "Assign to",
 		"id": "Tags ID",

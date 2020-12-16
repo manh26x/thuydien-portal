@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from '../../../core/service/base.service';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {FilterNewsRequest, NewsInfoRequest, News, NewsDetail, NewsPaging} from '../model/news';
 import {map} from 'rxjs/operators';
@@ -49,6 +49,7 @@ export class NewsService extends BaseService{
   }
 
   uploadFile(file: FormData) {
+    const header = new HttpHeaders().append('Content-Type', 'multipart/form-data');
     return this.doPost('/saleskit/news/uploadFile', file).pipe(
       map(res => res.data)
     );

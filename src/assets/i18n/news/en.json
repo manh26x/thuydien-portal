@@ -8,6 +8,7 @@
 	"btn": {
 		"cancel": "Cancel",
 		"draft": "Save the draft",
+		"insert": "Insert",
 		"refresh": "Refresh",
 		"save": "Save changes"
 	},
@@ -20,24 +21,46 @@
 	"const": {
 		"active": "Active",
 		"all": "All",
+		"draft": "Draft",
 		"inactive": "Inactive",
 		"levelImportant": "Important",
 		"levelNormal": "Normal",
-		"levelVeryImportant": "Very important"
+		"levelVeryImportant": "Very important",
+		"pending": "Wait for publishing",
+		"publish": "Published"
 	},
 	"create": "News compilation",
 	"edit": "News editing",
 	"filter": "Filter",
+	"invalid": {
+		"groupView": {
+			"required": "Value cannot be blank"
+		},
+		"publishDate": {
+			"mustAfterNow": "Post time must be greater than current"
+		},
+		"shortContent": {
+			"maxLength": "The value must not exceed {{length}} characters"
+		},
+		"tags": {
+			"required": "Value cannot be blank"
+		},
+		"title": {
+			"maxLength": "The value must not exceed {{length}} characters",
+			"required": "Value cannot be blank"
+		}
+	},
 	"level": "Critical level",
 	"levelList": {
 		"important": "Important",
 		"normal": "Normal",
 		"veryImportant": "Very important"
 	},
-	"list": "List of customer news",
+	"list": "List of sales news",
 	"message": {
 		"deleteNotFound": "The news does not exist or has been deleted",
 		"deleteSuccess": "Successfully deleted news",
+		"draftSuccess": "Successfully saved the draft",
 		"insertSuccess": "New news added successfully",
 		"updateNotFound": "The news does not exist or has been deleted",
 		"updateSuccess": "Successful news update"
@@ -61,6 +84,6 @@
 	"no": "No.",
 	"noData": "No results match",
 	"paging": "Showing {first} to {last} in {totalRecords} records",
-	"search": "News search",
+	"search": "Enter a news name",
 	"view": "News details"
 }
