@@ -1,13 +1,15 @@
 .login-body {
-  background: linear-gradient(180deg, #583894 0%, #2C1653 100%);
+  //background: linear-gradient(180deg, #583894 0%, #2C1653 100%);
   background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
+  background-image: url("../../../assets/images/bg-logo-full.png");
   .logo-container{
     text-align: center;
     min-height: 65px;
+    margin-bottom: 100px;
     //border-top-left-radius: 5px;
     //border-top-right-radius: 5px;
   }

@@ -11,9 +11,9 @@
       </div>
       <form [formGroup]="formLogin" class="form-group">
         <div class="p-col-12">
-          <div class="input-wrapper p-field p-fluid p-float-label">
-            <input type="text" id="username" autocomplete="off" pInputText formControlName="username">
+          <div class="input-wrapper p-field p-fluid">
             <label for="username">{{'username' | translate}}</label>
+            <input type="text" id="username" autocomplete="off" pInputText formControlName="username">
             <small *ngIf="hasErrorInput('username', 'required')" class="p-invalid">
               {{'invalid.username' | translate}}
             </small>
@@ -21,9 +21,9 @@
         </div>
 
         <div class="p-col-12">
-          <div class="input-wrapper p-field p-fluid p-float-label">
-            <input type="password" id="password" autocomplete="off" pInputText formControlName="password">
+          <div class="input-wrapper p-field p-fluid">
             <label for="password">{{'password' | translate}}</label>
+            <input type="password" id="password" autocomplete="off" pInputText formControlName="password">
             <small *ngIf="hasErrorInput('password', 'required')" class="p-invalid">
               {{'invalid.password' | translate}}
             </small>
@@ -31,10 +31,10 @@
         </div>
 
         <div class="p-col-12 button-container">
-          <button type="submit" pButton label="{{'login' | translate}}" class="p-button-raised" (click)="doLogin()" [disabled]="isLoading"></button>
+          <button type="submit" pButton label="{{'login' | translate}}" class="p-button-raised" (click)="doLogin()" [disabled]="isLoading" style="width: 100%;"></button>
         </div>
 
-        <div class="p-col-12">
+        <div class="p-col-12 p-text-center">
           <a href="javascript:void(0)" (click)="changeLang('vi')">Tiếng Việt | </a>
           <a href="javascript:void(0)" (click)="changeLang('en')">English</a>
         </div>

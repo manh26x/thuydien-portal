@@ -34,7 +34,7 @@ export class TagsService extends BaseService {
   getTagsList(tagsType): Observable<Tags[]> {
     const param = new HttpParams().append('type', tagsType);
     return this.doGet('/saleskit/tags/searchType', param).pipe(
-      map(res => res.data)
+      map(res => res.data || [])
     );
   }
 
@@ -101,13 +101,13 @@ export class TagsService extends BaseService {
    */
   getAllTag(): Observable<TagsUser[]> {
     return this.doGet('/saleskit/tags/getAll').pipe(
-      map(res => res.data)
+      map(res => res.data || [])
     );
   }
 
   /**
    * @author TruongNH
-   * @param id: id of tags
+   * @param page: name of page
    * date: 08/12/2020
    * desc: set breadcrumb in TagComponent
    */

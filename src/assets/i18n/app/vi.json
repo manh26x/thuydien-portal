@@ -69,7 +69,8 @@
 		"user": "Quản lý người dùng"
 	},
 	"message": {
-		"beforeLeave": "Bạn có chắc chắn thoát ra khỏi màn hình không?"
+		"beforeLeave": "Bạn có chắc chắn thoát ra khỏi màn hình không?",
+		"ok": "Đồng ý"
 	},
 	"welcome": "Xin chào"
 }

@@ -1,3 +1,38 @@
-<p-panel header="{{'detail' | translate}}">
-  <aw-tags-form mode="view" [valueForm]="initValue" (cancel)="doCancel()"></aw-tags-form>
+<p-panel header="{{'detail' | translate }}">
+  <div class="split-header-panel"></div>
+  <div class="p-fluid p-grid">
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'tags.name' | translate}}:</label>
+      <div class="title-right">{{tagDetail.tagValue}}</div>
+    </div>
+
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'tags.type' | translate}}:</label>
+      <div class="title-right">
+        <ng-container *ngFor="let item of tagDetail.tagType">
+          <ng-container [ngSwitch]="item">
+            <li *ngSwitchCase="tagConst.QNA">{{'type.qna' | translate}}</li>
+            <li *ngSwitchCase="tagConst.KPI">{{'type.kpi' | translate}}</li>
+            <li *ngSwitchCase="tagConst.TOOL">{{'type.tool' | translate}}</li>
+            <li *ngSwitchCase="tagConst.NEWS">{{'type.news' | translate}}</li>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-fluid p-grid p-mt-2">
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'tags.assignTo' | translate}}:</label>
+      <div class="title-right">
+        <ng-container *ngFor="let item of tagDetail.assignee">
+          <li>{{item.fullName}}</li>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="split-horizontal"></div>
+  <div class="p-text-center">
+    <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
+  </div>
 </p-panel>

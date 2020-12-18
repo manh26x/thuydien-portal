@@ -1,9 +1,8 @@
 import { TranslateService } from '@ngx-translate/core';
-import { Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 import { Language } from './model/language.enum';
 
 export class BaseModule {
-  private readonly CURRENT_LANG = 'lang';
   constructor(private translateService: TranslateService, router: Router) {
     this.setTranslateLanguage();
     router.events.subscribe(events => {
@@ -21,7 +20,7 @@ export class BaseModule {
   }
 
   public getLanguage(): string {
-    const currentLang = localStorage.getItem(this.CURRENT_LANG);
+    const currentLang = localStorage.getItem(Language.LOCAL_KEY);
     return currentLang && currentLang !== '' ? currentLang : Language.DEFAULT;
   }
 }

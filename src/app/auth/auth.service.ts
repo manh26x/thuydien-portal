@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpBackend, HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {Language} from '../core/model/language.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -34,11 +35,11 @@ export class AuthService {
   }
 
   logOut() {
-    const currentLang = localStorage.getItem('lang');
+    const currentLang = localStorage.getItem(Language.LOCAL_KEY);
     this.deleteCookie(this.TOKEN_KEY);
     this.deleteCookie(this.REFRESH_TOKEN_KEY);
     localStorage.clear();
-    localStorage.setItem('lang', currentLang);
+    localStorage.setItem(Language.LOCAL_KEY, currentLang);
   }
 
   /**

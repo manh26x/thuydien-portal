@@ -8,6 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {concatMap, map, takeUntil} from 'rxjs/operators';
 import {TagsUser} from '../model/tags';
 import {ApiErrorResponse} from '../../../core/model/error-response';
+import {TagsEnum} from '../model/tags.enum';
 
 @Component({
   selector: 'aw-tags-view',
@@ -16,7 +17,8 @@ import {ApiErrorResponse} from '../../../core/model/error-response';
   ]
 })
 export class TagsViewComponent extends BaseComponent implements OnInit {
-  initValue: TagsUser;
+  tagDetail: TagsUser = {};
+  tagConst = TagsEnum;
   constructor(
     private tagService: TagsService,
     private route: ActivatedRoute,
@@ -35,7 +37,8 @@ export class TagsViewComponent extends BaseComponent implements OnInit {
       map(res => res.get('id')),
       concatMap(id => this.tagService.getDetail(id))
     ).subscribe(res => {
-      this.initValue = res;
+      this.tagDetail = res;
+      console.log(res);
     }, err => {
       if (err instanceof ApiErrorResponse && err.code === '201') {
         this.router.navigate(['public', 'not-found']);

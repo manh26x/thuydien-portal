@@ -34,6 +34,7 @@ import { NewsViewComponent } from './news-view/news-view.component';
 import { NewsUpdateComponent } from './news-update/news-update.component';
 import {MessageService} from 'primeng/api';
 import {TooltipModule} from 'primeng/tooltip';
+import {CustomFileUploadModule} from '../../shared/custom-file-upload/custom-file-upload.module';
 
 
 @NgModule({
@@ -46,40 +47,41 @@ import {TooltipModule} from 'primeng/tooltip';
     NewsUpdateComponent
   ],
     imports: [
-        CommonModule,
-        NewsRoutingModule,
-        PanelModule,
-        TableModule,
-        PaginatorModule,
-        InputTextModule,
-        InputTextareaModule,
-        DropdownModule,
-        ButtonModule,
-        DialogModule,
-        FileUploadModule,
-        RadioButtonModule,
-        TranslateModule.forChild({
-            missingTranslationHandler: {
-                provide: MissingTranslationHandler,
-                useClass: CustomMissingTranslationHandler,
-                deps: [AppTranslateService]
-            },
-            loader: {
-                provide: TranslateLoader,
-                useFactory: (CustomTranslateLoader),
-                deps: [LANGUAGE_FILE_PATH, HttpClient]
-            },
-            isolate: true,
-            useDefaultLang: false
-        }),
-        EditorModule,
-        CheckboxModule,
-        CalendarModule,
-        MultiSelectModule,
-        ReactiveFormsModule,
-        BreadcrumbModule,
-        ToastModule,
-        TooltipModule
+      CommonModule,
+      NewsRoutingModule,
+      PanelModule,
+      TableModule,
+      PaginatorModule,
+      InputTextModule,
+      InputTextareaModule,
+      DropdownModule,
+      ButtonModule,
+      DialogModule,
+      FileUploadModule,
+      RadioButtonModule,
+      TranslateModule.forChild({
+        missingTranslationHandler: {
+          provide: MissingTranslationHandler,
+          useClass: CustomMissingTranslationHandler,
+          deps: [AppTranslateService]
+        },
+        loader: {
+          provide: TranslateLoader,
+          useFactory: (CustomTranslateLoader),
+          deps: [LANGUAGE_FILE_PATH, HttpClient]
+        },
+        isolate: true,
+        useDefaultLang: false
+      }),
+      EditorModule,
+      CheckboxModule,
+      CalendarModule,
+      MultiSelectModule,
+      ReactiveFormsModule,
+      BreadcrumbModule,
+      ToastModule,
+      TooltipModule,
+      CustomFileUploadModule
     ],
   providers: [
     {

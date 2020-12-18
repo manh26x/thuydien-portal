@@ -20,9 +20,9 @@
           </small>
         </div>
         <div class="p-col-12 p-field">
-          <label>{{'news.content' | translate}}</label>
+          <label>{{'news.content' | translate}} <span class="p-invalid">*</span></label>
+<!--          *ngIf="mode != 'view'; else viewContent"-->
           <editor
-            *ngIf="mode != 'view'; else viewContent"
             formControlName="content"
             [init]="{
               base_url: '/tinymce',
@@ -37,9 +37,12 @@
               toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | fullscreen'
             }">
           </editor>
-          <ng-template #viewContent>
-            <div class="content-readonly" [innerHTML]="contentReadonly"></div>
-          </ng-template>
+          <small *ngIf="hasErrorInput('content', 'required')" class="p-invalid">
+            {{'invalid.content.required' | translate}}
+          </small>
+<!--          <ng-template #viewContent>-->
+<!--            <div class="content-readonly" [innerHTML]="contentReadonly"></div>-->
+<!--          </ng-template>-->
         </div>
       </div>
     </div>
@@ -89,7 +92,7 @@
         </div>
 
         <div class="p-col-12 p-field">
-          <label for="n-group-product">{{'news.docs' | translate}}</label>
+          <label for="n-group-product">{{'news.docs' | translate}} ({{'news.lessThan' | translate}})</label>
           <p-fileUpload
             (onSelect)="doSelectDoc($event)"
             (onClear)="doClearDoc()"
@@ -99,6 +102,8 @@
             [customUpload]="true"
             [showUploadButton]="false"
             [showCancelButton]="true"
+            chooseLabel="{{'uploadFile.docs' | translate}}"
+            cancelLabel="{{'uploadFile.clear' | translate}}"
             maxFileSize="5000000">
             <ng-template let-file pTemplate="file">
               <div style="max-width: 100%">{{file.name}}</div>
@@ -108,20 +113,14 @@
 
         <div class="p-col-12 p-field">
           <label for="n-group-product">{{'news.image' | translate}}</label>
-          <p-fileUpload
-            (onSelect)="doSelectImage($event)"
-            (onClear)="doClearImage()"
-            mode="advanced"
-            name="imageNews"
-            accept="image/*"
-            [customUpload]="true"
-            [showUploadButton]="false"
-            [showCancelButton]="true"
-            maxFileSize="5000000">
-            <ng-template let-file pTemplate="file">
-                <img [attr.src]="file.objectURL" style="max-width: 100%">
-            </ng-template>
-          </p-fileUpload>
+          <aw-image-upload
+            (changeFile)="doChangeImage($event)"
+            (clearFile)="doClearImage()"
+            fileExtErrorMsg="{{'uploadFile.invalid.ext' | translate: {ext: 'jpg, png, gif'} }}"
+            fileSizeErrorMsg="{{'uploadFile.invalid.size' | translate: {size: '5MB'} }}"
+            maxFileErrorMsg="{{'uploadFile.invalid.max' | translate: {max: 1} }}"
+            uploadTitle="{{'uploadFile.image' | translate}}">
+          </aw-image-upload>
         </div>
 
         <div class="p-col-12 p-field-checkbox">

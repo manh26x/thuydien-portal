@@ -5,11 +5,12 @@ import {UtilService} from '../../../core/service/util.service';
 import {Tags} from '../../tags/model/tags';
 import {Role} from '../../../shared/model/role';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
-import {finalize} from 'rxjs/operators';
+import {concatMap, finalize, map} from 'rxjs/operators';
 import {MessageService} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 import {BeforeLeave} from '../../../core/model/before-leave';
+import {forkJoin, Observable, of} from 'rxjs';
 
 @Component({
   selector: 'aw-news-create',
@@ -33,13 +34,29 @@ export class NewsCreateComponent implements OnInit, BeforeLeave {
   }
 
   doSave(evt, draft: boolean) {
-//    if (evt.fileImageList && Array.isArray(evt.fileImageList) && evt.fileImageList.length > 0) {
-//      const listFormData: FormData = new FormData();
-//      listFormData.append('file', evt.fileImageList[0], evt.fileImageList[0].name);
-//      this.newsService.uploadFile(listFormData).subscribe(res => {
-//        console.log(res);
-//      });
-//    }
+    // 0: file docs 1: file image
+    const listObs: Observable<string>[] = [];
+    // file docs
+    if (this.util.canForEach(evt.fileDocList)) {
+      const listFormData: FormData = new FormData();
+      listFormData.append('file', evt.fileDocList[0], evt.fileDocList[0].name);
+      listObs.push(this.newsService.uploadFile(listFormData).pipe(
+        map(res => res.message.message)
+      ));
+    } else {
+      listObs.push(of(''));
+    }
+    // file image
+    if (evt.fileImageList && evt.fileImageList.length > 0) {
+      const listFormData: FormData = new FormData();
+      listFormData.append('file', evt.fileImageList[0], evt.fileImageList[0].name);
+      listObs.push(this.newsService.uploadFile(listFormData).pipe(
+        map(res => res.message.message)
+      ));
+    } else {
+      listObs.push(of(''));
+    }
+
     const value = evt.news;
     const tagsInsert: Tags[] = [];
     if (this.util.canForEach(value.tags)) {
@@ -71,9 +88,15 @@ export class NewsCreateComponent implements OnInit, BeforeLeave {
       isDraft: draft ? 1 : 0
     };
     this.indicator.showActivityIndicator();
-    this.newsService.createNews(body).pipe(
-      finalize(() => this.indicator.hideActivityIndicator())
-    ).subscribe(res => {
+    forkJoin(listObs).pipe(
+      concatMap(fileInfo => {
+        body.filePath = fileInfo[0];
+        body.imgPath = fileInfo[1];
+        return this.newsService.createNews(body).pipe(
+          finalize(() => this.indicator.hideActivityIndicator())
+        );
+      })
+    ).subscribe(() => {
       this.messageService.add({
         severity: 'success',
         detail: draft ? this.translate.instant('message.draftSuccess') : this.translate.instant('message.insertSuccess')

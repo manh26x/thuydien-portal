@@ -3,9 +3,9 @@ import {Router} from '@angular/router';
 import {NewsService} from '../service/news.service';
 import {FilterNewsRequest, News} from '../model/news';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
-import {concatMap, delay, finalize, map, startWith} from 'rxjs/operators';
+import {concatMap, finalize, map, startWith} from 'rxjs/operators';
 import {NewsEnum} from '../model/news.enum';
-import {ConfirmationService, LazyLoadEvent, MessageService, SelectItem, SortEvent} from 'primeng/api';
+import {ConfirmationService, LazyLoadEvent, MessageService, SelectItem} from 'primeng/api';
 import {TagsUser} from '../../tags/model/tags';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
@@ -36,6 +36,7 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
   sortBy = 'id';
   sortOrder = 'DESC';
   totalItem = 0;
+  initMaxShow = 2;
   constructor(
     private router: Router,
     private newsService: NewsService,
@@ -153,6 +154,14 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
       tagValue: tagSearch
     };
     this.newsService.filterNews(body).pipe(
+      map(res => {
+        if (this.util.canForEach(res.listNews)) {
+          res.listNews.forEach(item => {
+            item.maxShowTag = this.initMaxShow;
+          });
+        }
+        return res;
+      }),
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe(res => {
       this.newsList = res.listNews;

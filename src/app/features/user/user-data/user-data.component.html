@@ -6,8 +6,8 @@
   </ng-template>
   <form class="p-grid p-fluid p-mb-3" [formGroup]="searchForm">
     <div class="p-lg-6 p-col-6 p-field">
-      <label>{{'user.fullName' | translate}}, {{'user.location' | translate}}</label>
-      <input type="text" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
+      <label for="s-value">{{'user.fullName' | translate}}, {{'user.position' | translate}}</label>
+      <input type="text" id="s-value" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
     </div>
     <div class="p-lg-2 p-col-6 p-field">
       <label>{{'user.role' | translate}}</label>
@@ -35,7 +35,7 @@
         <th pSortableColumn="userPortal.fullName">{{'user.fullName' | translate}}<p-sortIcon field="userPortal.fullName"></p-sortIcon></th>
         <th pSortableColumn="userPortal.userId">{{'user.userName' | translate}}<p-sortIcon field="userPortal.userId"></p-sortIcon></th>
         <th pSortableColumn="userPortal.role">{{'user.role' | translate}}<p-sortIcon field="userPortal.role"></p-sortIcon></th>
-        <th>{{'user.location' | translate}}</th>
+        <th>{{'user.position' | translate}}</th>
         <th>{{'user.branch' | translate}}</th>
         <th pSortableColumn="userPortal.status">{{'user.status' | translate}}<p-sortIcon field="userPortal.status"></p-sortIcon></th>
         <th>

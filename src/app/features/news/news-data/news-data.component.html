@@ -6,8 +6,8 @@
   </ng-template>
   <form class="p-grid p-fluid p-mb-3" [formGroup]="formFilter">
     <div class="p-md-3 p-col-6 p-field">
-      <label>{{'news.name' | translate}}</label>
-      <input type="text" pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
+      <label for="s-value">{{'news.name' | translate}}</label>
+      <input type="text" id="s-value" pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
     </div>
 
     <div class="p-md-3 p-col-6 p-field">
@@ -26,7 +26,7 @@
       <button (click)="getListNews()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
     </div>
   </form>
-  <p-table [value]="newsList"
+  <p-table [value]="newsList" styleClass="table-responsive"
            [customSort]="true"
            [lazy]="true"
            sortField="id"
@@ -69,8 +69,12 @@
         <td>{{news.publishTime | date: 'dd/MM/yyyy HH:mm'}}</td>
         <td>{{news.publisher}}</td>
         <td>
-          <div *ngFor="let item of news.tagList;index as i" [ngClass]="{'p-mt-2': i != 0}">
+          <div *ngFor="let item of news.tagList | slice:0:news.maxShowTag;index as i" [ngClass]="{'p-mt-2': i != 0}">
             <ng-container>{{item.value}}</ng-container>
+          </div>
+          <div *ngIf="news.tagList?.length > initMaxShow" class="p-mt-1">
+            <a *ngIf="news.maxShowTag != news.tagList.length; else showLess" (click)="news.maxShowTag = news.tagList.length" href="javascript:void('view more');">{{'viewMore' | translate}}</a>
+            <ng-template #showLess><a (click)="news.maxShowTag = initMaxShow" href="javascript:void('view less');">{{'viewLess' | translate}}</a></ng-template>
           </div>
         </td>
         <td>

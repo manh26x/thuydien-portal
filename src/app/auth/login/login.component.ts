@@ -7,6 +7,7 @@ import {of} from 'rxjs';
 import {UtilService} from '../../core/service/util.service';
 import {Message} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
+import {Language} from '../../core/model/language.enum';
 
 @Component({
   selector: 'aw-login',
@@ -34,8 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     of(this.activeRoute.snapshot.queryParams['logout']).pipe(
       filter(params => {
-        if (params) { return true; }
-        return false;
+        return !!params;
       }),
       tap(() => {
         this.formLogin.get('username').setValue(this.activeRoute.snapshot.queryParams['uid']);
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   changeLang(key) {
-    localStorage.setItem('lang', key);
+    localStorage.setItem(Language.LOCAL_KEY, key);
     location.reload();
   }
 

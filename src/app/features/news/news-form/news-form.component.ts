@@ -12,21 +12,20 @@ import {AppTranslateService} from '../../../core/service/translate.service';
 import {concatMap, startWith} from 'rxjs/operators';
 import {NewsEnum} from '../model/news.enum';
 import {NewsDetail} from '../model/news';
-import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'aw-news-form',
   templateUrl: './news-form.component.html',
-  styles: [`
-    .content-readonly {
-      border: 1px solid #c5c5c5;
-      padding: 1rem;
-      opacity: 1;
-      max-height: 600px;
-      overflow: auto;
-      border-radius: 4px;
-    }
-  `],
+//  styles: [`
+//    .content-readonly {
+//      border: 1px solid #c5c5c5;
+//      padding: 1rem;
+//      opacity: 1;
+//      max-height: 600px;
+//      overflow: auto;
+//      border-radius: 4px;
+//    }
+//  `],
   providers: [TagsService, RoleService]
 })
 export class NewsFormComponent implements OnInit, OnChanges {
@@ -38,7 +37,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
   levelList: SelectItem[] = [];
   filesImage: any[];
   filesDoc: any[];
-  contentReadonly: any = '';
+//  contentReadonly: any = '';
   @Input() mode = 'create';
   @Input() valueForm: NewsDetail;
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
@@ -50,25 +49,25 @@ export class NewsFormComponent implements OnInit, OnChanges {
     private roleService: RoleService,
     private util: UtilService,
     private translate: TranslateService,
-    private appTranslate: AppTranslateService,
-    private sanitizer: DomSanitizer
+    private appTranslate: AppTranslateService
+//    private sanitizer: DomSanitizer
   ) {
     this.initForm();
   }
 
   ngOnInit(): void {
-    if (this.mode === 'view') {
-      this.formNews.get('title').disable();
-      this.formNews.get('shortContent').disable();
-      this.formNews.get('content').disable();
-      this.formNews.get('tags').disable();
-      this.formNews.get('groupView').disable();
-      this.formNews.get('publishDate').disable();
-      this.formNews.get('level').disable();
-      this.formNews.get('docs').disable();
-      this.formNews.get('image').disable();
-      this.formNews.get('isSendNotification').disable();
-    }
+//    if (this.mode === 'view') {
+//      this.formNews.get('title').disable();
+//      this.formNews.get('shortContent').disable();
+//      this.formNews.get('content').disable();
+//      this.formNews.get('tags').disable();
+//      this.formNews.get('groupView').disable();
+//      this.formNews.get('publishDate').disable();
+//      this.formNews.get('level').disable();
+//      this.formNews.get('docs').disable();
+//      this.formNews.get('image').disable();
+//      this.formNews.get('isSendNotification').disable();
+//    }
     this.appTranslate.languageChanged$.pipe(
       startWith(''),
       concatMap(() => this.translate.get('levelList').pipe(
@@ -98,7 +97,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
             this.formNews.get('publishDate').disable();
           }
         }
-        this.contentReadonly = this.sanitizer.bypassSecurityTrustHtml(news.newsDto.content);
+//        this.contentReadonly = this.sanitizer.bypassSecurityTrustHtml(news.newsDto.content);
         this.formNews.setValue({
           id: news.newsDto.id,
           title: news.newsDto.title,
@@ -136,8 +135,8 @@ export class NewsFormComponent implements OnInit, OnChanges {
     this.cancel.emit();
   }
 
-  doSelectImage(evt) {
-    this.filesImage = evt.currentFiles;
+  doChangeImage(files) {
+    this.filesImage = files;
   }
 
   doClearImage() {
@@ -160,7 +159,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
       id: [],
       title: ['', [Validators.required, Validators.maxLength(500)]],
       shortContent: ['', [Validators.maxLength(400)]],
-      content: [''],
+      content: ['', [Validators.required]],
       tags: [null, [Validators.required]],
       groupView: [null, [Validators.required]],
       publishDate: [now],

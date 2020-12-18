@@ -58,5 +58,7 @@
 		"news": "Tags for sales news",
 		"qna": "Tags for Q&A",
 		"tool": "Tags for calculation engine"
-	}
+	},
+	"viewLess": "[View less]",
+	"viewMore": "[View more]"
 }

@@ -69,7 +69,8 @@
 		"user": "User management"
 	},
 	"message": {
-		"beforeLeave": "Are you sure you exit the screen?"
+		"beforeLeave": "Are you sure you exit the screen?",
+		"ok": "Ok"
 	},
 	"welcome": "Hello"
 }

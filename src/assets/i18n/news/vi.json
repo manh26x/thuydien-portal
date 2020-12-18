@@ -33,6 +33,9 @@
 	"edit": "Chỉnh sửa bản tin",
 	"filter": "Lọc kết quả",
 	"invalid": {
+		"content": {
+			"required": "Giá trị không được để trống"
+		},
 		"groupView": {
 			"required": "Giá trị không được để trống"
 		},
@@ -68,11 +71,12 @@
 	"news": {
 		"author": "Tác giả",
 		"content": "Nội dung",
-		"docs": "Tài liệu đính kèm PDF (dưới 5MB)",
+		"docs": "Tài liệu đính kèm PDF",
 		"groupView": "Nhóm đối tượng xem bản tin",
 		"id": "ID",
 		"image": "Ảnh đính kèm",
 		"isSendNotification": "Gửi thông báo cho người dùng",
+		"lessThan": "dưới 5MB",
 		"level": "Mức độ quan trọng",
 		"name": "Tên bản tin",
 		"publishDate": "Thời gian đăng",
@@ -85,5 +89,17 @@
 	"noData": "Không có kết quả nào phù hợp",
 	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
 	"search": "Nhập tên bản tin",
-	"view": "Chi tiết bản tin"
+	"uploadFile": {
+		"clear": "Xóa",
+		"docs": "Tải tệp lên",
+		"image": "Tải ảnh lên",
+		"invalid": {
+			"ext": "Tệp tin không đúng định dạng {{ext}}",
+			"max": "Số lượng file vượt quá giới hạn cho phép {{max}}",
+			"size": "Tệp tải lên vượt quá dung lượng cho phép {{size}}"
+		}
+	},
+	"view": "Chi tiết bản tin",
+	"viewLess": "[Ẩn bớt]",
+	"viewMore": "[Xem thêm]"
 }

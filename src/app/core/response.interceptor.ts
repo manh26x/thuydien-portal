@@ -15,7 +15,7 @@ export class ResponseInterceptor implements HttpInterceptor {
   private readonly BASE_URL = environment.basePath;
   private readonly IGNORE_URLS = ['/assets/i18n'];
   private readonly CLIENT_LOG_API = '/common/log';
-
+  private readonly CODE_SUCCESS = ['200', '201'];
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
@@ -99,10 +99,8 @@ export class ResponseInterceptor implements HttpInterceptor {
   }
 
   private isRequestToApi(requestUrl: string): boolean {
-    if (requestUrl.startsWith(this.BASE_URL)) {
-      return true;
-    }
-    return false;
+    return requestUrl.startsWith(this.BASE_URL);
+
   }
 
   private safeParseJson(raw: any): { isParseJsonError: boolean, response: any } {
@@ -118,7 +116,7 @@ export class ResponseInterceptor implements HttpInterceptor {
   }
 
   private isResponseSuccess(result: any): boolean {
-    return result.code === '200';
+    return this.CODE_SUCCESS.includes(result.code);
   }
 
   private getMessageTrace(req: HttpRequest<any>, status: string, elapsed: number) {

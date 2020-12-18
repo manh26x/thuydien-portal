@@ -25,6 +25,7 @@
 		"roleAdmin": "Admin",
 		"supperAdmin": "Supper Admin"
 	},
+	"detail": "Detailed user information",
 	"filter": "Filter the results",
 	"invalid": {
 		"email": {
@@ -72,10 +73,10 @@
 		"currentPass": "Current password",
 		"email": "Email",
 		"fullName": "First and Last Name",
-		"location": "Location",
 		"newPass": "A new password",
 		"password": "Password",
 		"phone": "Phone Number",
+		"position": "Location",
 		"resetPass": "Reset Password",
 		"role": "Role",
 		"status": "Status",

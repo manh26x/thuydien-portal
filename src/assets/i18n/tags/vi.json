@@ -58,5 +58,7 @@
 		"news": "Tags cho bản tin bán hàng",
 		"qna": "Tags cho  Q&A",
 		"tool": "Tags cho công cụ tính toán"
-	}
+	},
+	"viewLess": "[Ẩn bớt]",
+	"viewMore": "[Xem thêm]"
 }

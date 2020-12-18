@@ -3,7 +3,7 @@ import {TagsSearchRequest, TagsUser} from '../model/tags';
 import {TagsService} from '../service/tags.service';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
-import {concatMap, finalize, startWith, takeUntil} from 'rxjs/operators';
+import {concatMap, finalize, map, startWith, takeUntil} from 'rxjs/operators';
 import {TagsEnum} from '../model/tags.enum';
 import {UtilService} from '../../../core/service/util.service';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
@@ -30,7 +30,8 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
   formSearch = new FormControl('');
   typeSearch = new FormControl('');
   tagsType = [];
-  public tagType = TagsEnum;
+  tagType = TagsEnum;
+  readonly initMaxShow = 2;
   constructor(
     private tagsService: TagsService,
     private router: Router,
@@ -86,7 +87,16 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
     };
     this.tagsService.searchTags(request).pipe(
       takeUntil(this.nextOnDestroy),
-      finalize(() => this.indicator.hideActivityIndicator())
+      finalize(() => this.indicator.hideActivityIndicator()),
+      map(res => {
+        if (this.util.canForEach(res.tagsList)) {
+          res.tagsList.forEach(item => {
+            item.maxShowAssignee = this.initMaxShow;
+            item.maxShowTag = this.initMaxShow;
+          });
+        }
+        return res;
+      })
     ).subscribe(res => {
       this.tagsList = res.tagsList;
       this.totalItem = res.totalItem;
@@ -119,7 +129,7 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
           } else if (err instanceof ApiErrorResponse && err.code === '203') {
             this.messageService.add({
               severity: 'warn',
-              detail: this.translate.instant('message.deleteUsed')
+              detail: this.translate.instant('message.deleteUsed', { name: tags.tagValue })
             });
           } else {
             throw err;

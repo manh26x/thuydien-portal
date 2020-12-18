@@ -46,6 +46,7 @@ export interface News {
   filePath?: string;
   modifyDate?: Date;
   shortContent?: string;
+  maxShowTag?: number;
 }
 
 export interface NewsPaging {
@@ -61,7 +62,7 @@ export interface FileUpload {
 }
 
 export interface NewsDetail {
-  newsDto: News;
-  tagOfNews: Tags[];
-  listRole: UserRole[];
+  newsDto?: News;
+  tagOfNews?: Tags[];
+  listRole?: UserRole[];
 }

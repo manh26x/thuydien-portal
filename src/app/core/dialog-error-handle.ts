@@ -92,6 +92,7 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
         message: msg,
         acceptVisible: true,
         rejectVisible: false,
+        acceptLabel: this.translate.instant('message.ok'),
         accept: () => {}
       });
     });

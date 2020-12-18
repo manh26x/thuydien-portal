@@ -25,6 +25,7 @@
 		"roleAdmin": "Admin",
 		"supperAdmin": "Supper Admin"
 	},
+	"detail": "Chi tiết thông tin người dùng",
 	"filter": "Lọc kết quả",
 	"invalid": {
 		"email": {
@@ -72,10 +73,10 @@
 		"currentPass": "Mật khẩu hiện tại",
 		"email": "Email",
 		"fullName": "Họ và tên",
-		"location": "Vị trí",
 		"newPass": "Mật khẩu mới",
 		"password": "Mật khẩu",
 		"phone": "Số điện thoại",
+		"position": "Vị trí",
 		"resetPass": "Đặt lại mật khẩu",
 		"role": "Phân quyền",
 		"status": "Trạng thái",

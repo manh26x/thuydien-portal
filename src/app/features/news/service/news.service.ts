@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from '../../../core/service/base.service';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {FilterNewsRequest, NewsInfoRequest, News, NewsDetail, NewsPaging} from '../model/news';
+import {FilterNewsRequest, NewsInfoRequest, NewsDetail, NewsPaging} from '../model/news';
 import {map} from 'rxjs/operators';
+import {ApiResultResponse} from '../../../core/model/result-response';
 
 @Injectable()
 export class NewsService extends BaseService{
@@ -23,23 +24,17 @@ export class NewsService extends BaseService{
     );
   }
 
-  createNews(body: NewsInfoRequest): Observable<any> {
-    return this.doPost('/saleskit/news/insert', body).pipe(
-      map(res => res.data)
-    );
+  createNews(body: NewsInfoRequest): Observable<ApiResultResponse> {
+    return this.doPost('/saleskit/news/insert', body);
   }
 
-  updateNews(body: NewsInfoRequest): Observable<any> {
-    return this.doPost('/saleskit/news/update', body).pipe(
-      map(res => res.data)
-    );
+  updateNews(body: NewsInfoRequest): Observable<ApiResultResponse> {
+    return this.doPost('/saleskit/news/update', body);
   }
 
-  deleteNews(id: string): Observable<any> {
+  deleteNews(id: string): Observable<ApiResultResponse> {
     const param = new HttpParams().append('newsId', id);
-    return this.doGet('/saleskit/news/delete', param).pipe(
-      map(res => res.data)
-    );
+    return this.doGet('/saleskit/news/delete', param);
   }
 
   filterNews(request: FilterNewsRequest): Observable<NewsPaging> {
@@ -48,11 +43,8 @@ export class NewsService extends BaseService{
     );
   }
 
-  uploadFile(file: FormData) {
-    const header = new HttpHeaders().append('Content-Type', 'multipart/form-data');
-    return this.doPost('/saleskit/news/uploadFile', file).pipe(
-      map(res => res.data)
-    );
+  uploadFile(file: FormData): Observable<ApiResultResponse> {
+    return this.doPost('/saleskit/news/uploadFile', file);
   }
 
   getServiceName(): string {

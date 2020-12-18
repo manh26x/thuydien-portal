@@ -33,6 +33,9 @@
 	"edit": "News editing",
 	"filter": "Filter",
 	"invalid": {
+		"content": {
+			"required": "Value cannot be blank"
+		},
 		"groupView": {
 			"required": "Value cannot be blank"
 		},
@@ -68,11 +71,12 @@
 	"news": {
 		"author": "Author",
 		"content": "Content",
-		"docs": "Attachment PDF (less than 5MB)",
+		"docs": "Attachment PDF",
 		"groupView": "Audience group viewing news",
 		"id": "ID",
 		"image": "Photo attached",
 		"isSendNotification": "Send notifications to users",
+		"lessThan": "less than 5MB",
 		"level": "Critical level",
 		"name": "News name",
 		"publishDate": "Post time",
@@ -85,5 +89,17 @@
 	"noData": "No results match",
 	"paging": "Showing {first} to {last} in {totalRecords} records",
 	"search": "Enter a news name",
-	"view": "News details"
+	"uploadFile": {
+		"clear": "Delete",
+		"docs": "Upload the file",
+		"image": "Upload photos",
+		"invalid": {
+			"ext": "File is incorrectly formatted {{ext}}",
+			"max": "The number of files exceeded the allowed limit {{max}}",
+			"size": "The file uploaded is exceeding the allowed size {{size}}"
+		}
+	},
+	"view": "News details",
+	"viewLess": "[View less]",
+	"viewMore": "[View more]"
 }

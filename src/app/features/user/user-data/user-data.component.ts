@@ -108,6 +108,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
             severity: 'success',
             detail: this.translate.instant('message.deleteSuccess')
           });
+          this.getUserList();
         }, err => {
           this.indicator.hideActivityIndicator();
           if (err instanceof ApiErrorResponse && err.code === '201') {

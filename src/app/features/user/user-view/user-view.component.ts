@@ -5,6 +5,7 @@ import {concatMap, finalize, map, takeUntil} from 'rxjs/operators';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {BaseComponent} from '../../../core/base.component';
 import {UserDetail} from '../model/user';
+import {UserEnum} from '../model/user.enum';
 
 @Component({
   selector: 'aw-user-view',
@@ -13,7 +14,8 @@ import {UserDetail} from '../model/user';
   ]
 })
 export class UserViewComponent extends BaseComponent implements OnInit {
-  initValue: UserDetail;
+  userDetail: UserDetail = {};
+  userConst = UserEnum;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -33,7 +35,7 @@ export class UserViewComponent extends BaseComponent implements OnInit {
         finalize(() => this.indicator.hideActivityIndicator())
       ))
     ).subscribe(res => {
-      this.initValue = res;
+      this.userDetail = res;
     });
   }
 

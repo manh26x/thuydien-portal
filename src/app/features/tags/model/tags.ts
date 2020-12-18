@@ -27,6 +27,8 @@ export interface TagsUser {
   tagKey?: string;
   tagType?: string[];
   assignee?: {userId: string, fullName: string}[];
+  maxShowTag?: number;
+  maxShowAssignee?: number;
 }
 
 export interface TagsSearchResponse {
