@@ -1,10 +1,10 @@
 {
-	"addNew": "Thêm mới Tags",
+	"addNew": "Thêm mới Tag",
 	"breadcrumb": {
-		"create": "Thêm mới Tags",
+		"create": "Thêm mới Tag",
 		"home": "Danh sách Tags",
-		"update": "Chỉnh sửa thông tin Tags",
-		"view": "Chi tiết thông tin Tags"
+		"update": "Chỉnh sửa thông tin Tag",
+		"view": "Thông tin chi tiết Tag"
 	},
 	"btn": {
 		"cancel": "Hủy",
@@ -15,10 +15,10 @@
 	"confirm": {
 		"accept": "Có",
 		"delete": "Xác nhận xóa",
-		"deleteMessage": "Bạn có chắc chắn muốn xóa Tags \"{{name}}\"",
+		"deleteMessage": "Bạn có chắc chắn muốn xóa Tag \"{{name}}\"",
 		"reject": "Không"
 	},
-	"detail": "Chi tiết thông tin Tags",
+	"detail": "Thông tin chi tiết Tag",
 	"edit": "Chỉnh sửa thông tin Tags",
 	"filter": "Lọc",
 	"invalid": {
@@ -26,7 +26,7 @@
 			"required": "Giá trị không được để trống"
 		},
 		"name": {
-			"maxLength": "Tên tags không được vượt quá {{length}} ký tự",
+			"maxLength": "Tên tag không được vượt quá {{length}} ký tự",
 			"required": "Giá trị không được để trống"
 		},
 		"type": {
@@ -35,22 +35,22 @@
 	},
 	"list": "Danh sách Tags",
 	"message": {
-		"deleteNotFound": "Tags không tồn tại hoặc đã bị xóa",
-		"deleteSuccess": "Xóa tags thành công",
+		"deleteNotFound": "Tag không tồn tại hoặc đã bị xóa",
+		"deleteSuccess": "Xóa tag thành công",
 		"deleteUsed": "Tag {{name}} đã được sử dụng, bạn không thể xóa tag này",
-		"insertExisted": "Tags đã tồn tại",
-		"insertSuccess": "Thêm mới Tags thành công",
-		"updateSuccess": "Cập nhật Tags thành công"
+		"insertExisted": "Tag đã tồn tại",
+		"insertSuccess": "Thêm mới tag thành công",
+		"updateSuccess": "Cập nhật tag thành công"
 	},
 	"no": "STT",
 	"noData": "Không có kết quả nào phù hợp",
 	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
-	"search": "Nhập tên tags",
+	"search": "Nhập tên tag",
 	"tags": {
-		"assignTo": "Gắn cho",
-		"id": "Tags ID",
-		"name": "Tên Tags",
-		"type": "Loại Tags"
+		"assignTo": "Gán cho",
+		"id": "Tag ID",
+		"name": "Tên tag",
+		"type": "Loại Tag"
 	},
 	"type": {
 		"all": "Tất cả",

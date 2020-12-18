@@ -1,10 +1,10 @@
 {
-	"addNew": "Add New Tags",
+	"addNew": "Add New Tag",
 	"breadcrumb": {
-		"create": "Add New Tags",
+		"create": "Add New Tag",
 		"home": "List of tags",
-		"update": "Edit Tags information",
-		"view": "Detail information Tags"
+		"update": "Edit Tag information",
+		"view": "Tag Detail  "
 	},
 	"btn": {
 		"cancel": "Cancel",
@@ -14,12 +14,12 @@
 	},
 	"confirm": {
 		"accept": "Yes",
-		"delete": "Confirm Delete",
-		"deleteMessage": "Are you sure you want to remove Tags \"{{name}}\"",
+		"delete": "Confirmation of deletion",
+		"deleteMessage": "Are you sure you want to remove Tag \"{{name}}\"",
 		"reject": "No"
 	},
-	"detail": "Detailed information Tags",
-	"edit": "Edit Tags information",
+	"detail": "Tag Detail ",
+	"edit": "Edit Tag information",
 	"filter": "Filter",
 	"invalid": {
 		"assign": {
@@ -35,22 +35,22 @@
 	},
 	"list": "List of tags",
 	"message": {
-		"deleteNotFound": "Tags do not exist or have been removed",
-		"deleteSuccess": "Successfully deleted tags",
+		"deleteNotFound": "Tag does not exist or has been removed",
+		"deleteSuccess": "Successfully delete tag",
 		"deleteUsed": "The {{name}} tag is already in use, you cannot delete this tag",
-		"insertExisted": "Tags already exist",
-		"insertSuccess": "Add new Tags success",
-		"updateSuccess": "Tags updated successfully"
+		"insertExisted": "Tag already exists",
+		"insertSuccess": "Add new tag successfully",
+		"updateSuccess": "Update tag successfully"
 	},
 	"no": "No.",
-	"noData": "No results match",
+	"noData": "No results found",
 	"paging": "Showing {first} to {last} in {totalRecords} records",
-	"search": "Enter a tags name",
+	"search": "Enter a tag name",
 	"tags": {
 		"assignTo": "Assign to",
-		"id": "Tags ID",
-		"name": "Name Tags",
-		"type": "Type Tags"
+		"id": "Tag ID",
+		"name": "Tag title",
+		"type": "Tag type"
 	},
 	"type": {
 		"all": "All",
@@ -59,6 +59,6 @@
 		"qna": "Tags for Q&A",
 		"tool": "Tags for calculation engine"
 	},
-	"viewLess": "[View less]",
-	"viewMore": "[View more]"
+	"viewLess": "[See less]",
+	"viewMore": "[See more]"
 }
