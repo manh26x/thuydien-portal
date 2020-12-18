@@ -40,9 +40,7 @@ export class NewsCreateComponent implements OnInit, BeforeLeave {
     if (this.util.canForEach(evt.fileDocList)) {
       const listFormData: FormData = new FormData();
       listFormData.append('file', evt.fileDocList[0], evt.fileDocList[0].name);
-      listObs.push(this.newsService.uploadFile(listFormData).pipe(
-        map(res => res.message.message)
-      ));
+      listObs.push(this.newsService.uploadFile(listFormData));
     } else {
       listObs.push(of(''));
     }
@@ -50,9 +48,7 @@ export class NewsCreateComponent implements OnInit, BeforeLeave {
     if (evt.fileImageList && evt.fileImageList.length > 0) {
       const listFormData: FormData = new FormData();
       listFormData.append('file', evt.fileImageList[0], evt.fileImageList[0].name);
-      listObs.push(this.newsService.uploadFile(listFormData).pipe(
-        map(res => res.message.message)
-      ));
+      listObs.push(this.newsService.uploadFile(listFormData));
     } else {
       listObs.push(of(''));
     }
