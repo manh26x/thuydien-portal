@@ -76,9 +76,9 @@ export class AuthService {
    * set token to auth with api
    * @param token token value
    */
-  setToken(token) {
+  setToken(token, expireIn) {
     this.deleteCookie(this.TOKEN_KEY);
-    this.setCookie(this.TOKEN_KEY, token, environment.tokenEx);
+    this.setCookie(this.TOKEN_KEY, token, expireIn);
   }
 
   /**

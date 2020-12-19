@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         (res: any) => {
-          this.auth.setToken(res.access_token);
+          this.auth.setToken(res.access_token, res.expires_in);
           this.auth.setRefreshToken(res.refresh_token);
           this.gotoView();
         },
