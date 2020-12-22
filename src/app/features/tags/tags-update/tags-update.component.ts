@@ -8,7 +8,10 @@ import {UserInfo} from '../../user/model/user';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {MessageService} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
-import {ApiErrorResponse} from '../../../core/model/error-response';
+import {ApiErrorForbidden, ApiErrorResponse} from '../../../core/model/error-response';
+import {throwError} from 'rxjs';
+import {UserAuth} from '../../../auth/model/user-auth';
+import {AuthService} from '../../../auth/auth.service';
 
 @Component({
   selector: 'aw-tags-update',
@@ -18,15 +21,18 @@ import {ApiErrorResponse} from '../../../core/model/error-response';
 })
 export class TagsUpdateComponent extends BaseComponent implements OnInit {
   initValue: TagsUser;
+  userLogged: UserAuth;
   constructor(
     private tagService: TagsService,
     private route: ActivatedRoute,
     private indicator: IndicatorService,
     private messageService: MessageService,
     private translate: TranslateService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) {
     super();
+    this.userLogged = this.auth.getUserInfo();
   }
 
   ngOnInit(): void {
@@ -37,6 +43,12 @@ export class TagsUpdateComponent extends BaseComponent implements OnInit {
       map(res => res.get('id')),
       concatMap(id => this.tagService.getDetail(id).pipe(
         delay(200),
+        map(res => {
+          if (!this.userLogged.isSupperAdmin && this.userLogged.userName !== res.createBy) {
+            throw new ApiErrorForbidden('', '');
+          }
+          return res;
+        }),
         finalize(() => this.indicator.hideActivityIndicator())
       ))
     ).subscribe(res => {
@@ -55,7 +67,7 @@ export class TagsUpdateComponent extends BaseComponent implements OnInit {
     const userList = [];
     const typeList = [];
     value.assign.forEach(user => {
-      userList.push(user.userId);
+      userList.push(user.userName);
     });
     value.type.forEach(item => {
       typeList.push(item.code);

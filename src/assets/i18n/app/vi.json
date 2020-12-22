@@ -76,5 +76,12 @@
 		"ok": "Đồng ý",
 		"reject": "Không"
 	},
+	"public": {
+		"accessDenied": "Bạn không có quyền truy cập vào tính năng",
+		"backHome": "Trở về màn hình trang chủ",
+		"btnBack": "Trở lại",
+		"error": "Có lỗi xảy ra, vui lòng thử lại sau",
+		"notFound": "Trang bạn yêu cầu không tồn tại..."
+	},
 	"welcome": "Xin chào"
 }

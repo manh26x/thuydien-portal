@@ -67,7 +67,9 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
         break;
       }
       case ApiErrorForbidden: {
-        this.router.navigate(['public', 'access-denied']);
+        this.ngzone.run(() => {
+          this.router.navigate(['public', 'access-denied']);
+        });
         break;
       }
       default: {

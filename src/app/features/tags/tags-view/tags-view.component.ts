@@ -5,10 +5,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {MessageService} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
-import {concatMap, finalize, map, takeUntil} from 'rxjs/operators';
+import {concatMap, finalize, map, takeUntil, tap} from 'rxjs/operators';
 import {TagsUser} from '../model/tags';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {TagsEnum} from '../model/tags.enum';
+import {AuthService} from '../../../auth/auth.service';
 
 @Component({
   selector: 'aw-tags-view',
@@ -19,6 +20,7 @@ import {TagsEnum} from '../model/tags.enum';
 export class TagsViewComponent extends BaseComponent implements OnInit {
   tagDetail: TagsUser = {};
   tagConst = TagsEnum;
+
   constructor(
     private tagService: TagsService,
     private route: ActivatedRoute,

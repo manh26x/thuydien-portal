@@ -1,5 +1,6 @@
 {
 	"error": "An error occurred, please try again later",
+	"errorGetUserInfo": "An error occurred while retrieving account information",
 	"invalid.message": "Username or password is invalid",
 	"invalid.password": "Please enter a password.",
 	"invalid.username": "Please enter your username.",

@@ -34,16 +34,16 @@
       </small>
     </div>
 
-    <div class="p-md-6 p-col-12 p-field" *ngIf="mode === 'create'">
-      <label for="n-password">{{'user.password' | translate}} <span class="p-invalid">*</span></label>
-      <input id="n-password" type="password" pInputText formControlName="password" />
-      <small *ngIf="hasErrorInput('password', 'required')" class="p-invalid">
-        {{'invalid.password.required' | translate}}
-      </small>
-      <small *ngIf="hasErrorInput('password', 'maxlength')" class="p-invalid">
-        {{ 'invalid.password.maxLength' | translate:{length: 100} }}
-      </small>
-    </div>
+<!--    <div class="p-md-6 p-col-12 p-field" *ngIf="mode === 'create'">-->
+<!--      <label for="n-password">{{'user.password' | translate}} <span class="p-invalid">*</span></label>-->
+<!--      <input id="n-password" type="password" pInputText formControlName="password" />-->
+<!--      <small *ngIf="hasErrorInput('password', 'required')" class="p-invalid">-->
+<!--        {{'invalid.password.required' | translate}}-->
+<!--      </small>-->
+<!--      <small *ngIf="hasErrorInput('password', 'maxlength')" class="p-invalid">-->
+<!--        {{ 'invalid.password.maxLength' | translate:{length: 100} }}-->
+<!--      </small>-->
+<!--    </div>-->
   </div>
 
   <div class="p-fluid p-grid">

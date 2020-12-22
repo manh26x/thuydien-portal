@@ -21,7 +21,7 @@ import {TranslateService} from '@ngx-translate/core';
         <button type="button" pButton icon="pi pi-angle-down" label="{{currentLang.lang}}" class="p-button-text" iconPos="right" (click)="menuLang.toggle($event)">
           <img src="{{currentLang.flag}}" alt="LG" width="30" height="20" class="img-flag">&nbsp;
         </button>&nbsp;
-        <button type="button" pButton icon="pi pi-angle-down" label="Admin" class="p-button-outlined" iconPos="right" (click)="menu.toggle($event)"></button>
+        <button type="button" pButton icon="pi pi-angle-down" label="{{username}}" class="p-button-outlined" iconPos="right" (click)="menu.toggle($event)"></button>
       </div>
     </div>
     <p-menu #menu [popup]="true" [model]="userItems"></p-menu>
@@ -32,6 +32,7 @@ export class TopBarComponent implements OnInit {
   userItems: MenuItem[];
   langItems: MenuItem[];
   currentLang: ILanguage;
+  username = '';
   constructor(
     public features: FeaturesComponent,
     private authService: AuthService,
@@ -40,6 +41,8 @@ export class TopBarComponent implements OnInit {
     private confirm: ConfirmationService,
     private translate: TranslateService
   ) {
+    const userInfo = this.authService.getUserInfo();
+    if (userInfo) { this.username = userInfo.userName; }
     this.currentLang = appTranslate.langs.find(lang => lang.key === localStorage.getItem(Language.LOCAL_KEY));
   }
 

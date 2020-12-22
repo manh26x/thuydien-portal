@@ -76,5 +76,12 @@
 		"ok": "Ok",
 		"reject": "Cancel"
 	},
+	"public": {
+		"accessDenied": "You don't have the necessary permissons",
+		"backHome": "Return to the Home screen",
+		"btnBack": "Back",
+		"error": "An error occurred, please try again later",
+		"notFound": "That wasn't supposed to happen..."
+	},
 	"welcome": "Hello"
 }

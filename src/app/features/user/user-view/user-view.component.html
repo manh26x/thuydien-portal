@@ -4,18 +4,18 @@
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 detail">
       <label class="title-left">{{'user.fullName' | translate}}:</label>
-      <div class="title-right">{{userDetail.userPortal?.fullName}}</div>
+      <div class="title-right">{{userDetail.user?.fullName}}</div>
     </div>
 
     <div class="p-md-3 p-col-12 detail">
       <label class="title-left">{{'user.role' | translate}}:</label>
-      <div class="title-right">{{userDetail.userPortal?.role}}</div>
+      <div class="title-right">{{userDetail.user?.role}}</div>
     </div>
 
     <div class="p-md-3 p-col-12 detail">
       <label class="title-left">{{'user.status' | translate}}:</label>
       <div class="title-right">
-        <ng-container [ngSwitch]="userDetail.userPortal?.status">
+        <ng-container [ngSwitch]="userDetail.user?.statusCode">
           <ng-container *ngSwitchCase="userConst.ACTIVE">
             {{'const.active' | translate}}
           </ng-container>
@@ -30,26 +30,26 @@
   <div class="p-fluid p-grid p-mt-2">
     <div class="p-md-6 p-col-12 detail">
       <label class="title-left">{{'user.userName' | translate}}:</label>
-      <div class="title-right">{{userDetail.userPortal?.userId}}</div>
+      <div class="title-right">{{userDetail.user?.userName}}</div>
     </div>
   </div>
 
   <div class="p-fluid p-grid p-mt-2">
     <div class="p-md-6 p-col-12 detail">
       <label class="title-left">{{'user.email' | translate}}:</label>
-      <div class="title-right">{{userDetail.userPortal?.email}}</div>
+      <div class="title-right">{{userDetail.user?.email}}</div>
     </div>
 
     <div class="p-md-6 p-col-12 detail">
       <label class="title-left">{{'user.phone' | translate}}:</label>
-      <div class="title-right">{{userDetail.userPortal?.phone}}</div>
+      <div class="title-right">{{userDetail.user?.phone}}</div>
     </div>
   </div>
 
   <div class="p-fluid p-grid p-mt-2">
     <div class="p-md-6 p-col-12 detail">
       <label class="title-left">{{'user.position' | translate}}:</label>
-      <div class="title-right">{{userDetail.userPortal?.position}}</div>
+      <div class="title-right">{{userDetail.user?.position}}</div>
     </div>
 
     <div class="p-md-6 p-col-12 detail">

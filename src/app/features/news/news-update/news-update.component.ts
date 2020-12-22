@@ -4,13 +4,15 @@ import {NewsDetail, NewsInfoRequest} from '../model/news';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {concatMap, delay, finalize, map, takeUntil} from 'rxjs/operators';
-import {ApiErrorResponse} from '../../../core/model/error-response';
+import {ApiErrorForbidden, ApiErrorResponse} from '../../../core/model/error-response';
 import {BaseComponent} from '../../../core/base.component';
 import {Tags} from '../../tags/model/tags';
 import {Role} from '../../../shared/model/role';
 import {UtilService} from '../../../core/service/util.service';
 import {TranslateService} from '@ngx-translate/core';
 import {MessageService} from 'primeng/api';
+import {AuthService} from '../../../auth/auth.service';
+import {UserAuth} from '../../../auth/model/user-auth';
 
 @Component({
   selector: 'aw-news-update',
@@ -20,6 +22,7 @@ import {MessageService} from 'primeng/api';
 })
 export class NewsUpdateComponent extends BaseComponent implements OnInit {
   initValue: NewsDetail;
+  userLogged: UserAuth;
   constructor(
     private newsService: NewsService,
     private router: Router,
@@ -27,9 +30,11 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
     private indicator: IndicatorService,
     private util: UtilService,
     private translate: TranslateService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private auth: AuthService
   ) {
     super();
+    this.userLogged = this.auth.getUserInfo();
   }
 
   ngOnInit(): void {
@@ -40,6 +45,12 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
       map(res => res.get('id')),
       concatMap(id => this.newsService.getNewsDetail(id).pipe(
         delay(200),
+        map(res => {
+          if (!this.userLogged.isSupperAdmin && this.userLogged.userName !== res.newsDto.createBy) {
+            throw new ApiErrorForbidden('', '');
+          }
+          return res;
+        }),
         finalize(() => this.indicator.hideActivityIndicator())
       ))
     ).subscribe(res => {

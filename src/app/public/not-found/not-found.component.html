@@ -15,12 +15,12 @@
   <div class="exception-panel">
     <div class="exception-panel-content">
       <h1 class="title">404</h1>
-      <span><strong>That wasn't supposed to happen...</strong></span>
-      <p>Better get back home and forget about that</p>
+      <span><strong>{{'public.notFound' | translate}}</strong></span>
+      <p>{{'public.backHome' | translate}}</p>
     </div>
 
     <div class="exception-panel-footer">
-      <button type="button" pButton label="Go To Dashboard" [routerLink]="['/']"></button>
+      <button type="button" pButton label="{{'public.btnBack' | translate}}" [routerLink]="['/']"></button>
     </div>
   </div>
 </div>

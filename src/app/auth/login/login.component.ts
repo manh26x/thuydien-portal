@@ -2,12 +2,13 @@ import {Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation} from '@angul
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {filter, finalize, tap} from 'rxjs/operators';
-import {of} from 'rxjs';
+import {catchError, concatMap, filter, finalize, tap} from 'rxjs/operators';
+import {of, throwError} from 'rxjs';
 import {UtilService} from '../../core/service/util.service';
 import {Message} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {Language} from '../../core/model/language.enum';
+import {ApiErrorGetUserInfo} from '../../core/model/error-response';
 
 @Component({
   selector: 'aw-login',
@@ -53,17 +54,25 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.auth.login(this.formLogin.value)
       .pipe(
+        tap(auth => {
+          this.auth.setToken(auth.access_token, auth.expires_in);
+          this.auth.setRefreshToken(auth.refresh_token);
+        }),
+        concatMap(auth => this.auth.getUserRole(auth.access_token).pipe(
+          catchError(err => throwError(new ApiErrorGetUserInfo() ))
+        )),
         finalize(() => this.isLoading = false)
       )
       .subscribe(
-        (res: any) => {
-          this.auth.setToken(res.access_token, res.expires_in);
-          this.auth.setRefreshToken(res.refresh_token);
+        resRole => {
+          this.auth.setUserInfo(resRole.data[0] || {});
           this.gotoView();
         },
         err => {
           this.msgInvalid = [];
-          if (err.status === 400) {
+          if (err instanceof ApiErrorGetUserInfo) {
+            this.msgInvalid.push({ severity: 'error', summary: 'Error', detail: this.translate.instant('errorGetUserInfo') });
+          } else if (err.status === 400) {
               this.msgInvalid.push({ severity: 'error', summary: 'Error', detail: this.translate.instant('invalid.message') });
           } else {
             this.msgInvalid.push({ severity: 'error', summary: 'Error', detail: this.translate.instant('error') });

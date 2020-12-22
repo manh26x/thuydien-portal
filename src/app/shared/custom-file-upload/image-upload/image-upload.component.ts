@@ -86,16 +86,11 @@ export class ImageUploadComponent implements OnInit {
   }
 
   previewFile(files) {
-    if (files.length > 0) {
-      this.file.nativeElement.value = '';
-      return;
-    } else {
-      const objUrl = window.URL.createObjectURL(files[0]);
-      this.imgPreview.nativeElement.onload = () => window.URL.revokeObjectURL(objUrl);
-      this.imgPreview.nativeElement.src = objUrl;
-      this.isSelect = false;
-      this.changeFile.emit(files);
-    }
+    const objUrl = window.URL.createObjectURL(files[0]);
+    this.imgPreview.nativeElement.onload = () => window.URL.revokeObjectURL(objUrl);
+    this.imgPreview.nativeElement.src = objUrl;
+    this.isSelect = false;
+    this.changeFile.emit(files);
   }
 
   private isValidFiles(files) {

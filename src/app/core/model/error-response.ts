@@ -30,3 +30,10 @@ export class ApiErrorArgsInvalid extends Error {
     Object.setPrototypeOf(this, ApiErrorArgsInvalid.prototype);
   }
 }
+
+export class ApiErrorGetUserInfo extends Error {
+  constructor() {
+    super();
+    Object.setPrototypeOf(this, ApiErrorGetUserInfo.prototype);
+  }
+}

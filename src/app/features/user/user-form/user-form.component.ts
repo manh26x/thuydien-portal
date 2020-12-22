@@ -93,14 +93,14 @@ export class UserFormComponent implements OnInit, OnChanges {
       if (!changes.valueForm.firstChange) {
         const userInfo: UserDetail = changes.valueForm.currentValue;
         this.formUser.setValue({
-          fullName: userInfo.userPortal.fullName,
-          role: {code: userInfo.userPortal.role},
-          status: {code: userInfo.userPortal.status},
-          userId: userInfo.userPortal.userId,
-          password: userInfo.userPortal.password,
-          email: userInfo.userPortal.email,
-          phone: userInfo.userPortal.phone,
-          position: userInfo.userPortal.position,
+          fullName: userInfo.user.fullName,
+          role: {code: userInfo.user.role},
+          status: {code: userInfo.user.statusCode},
+          userId: userInfo.user.userName,
+          // password: userInfo.userPortal.password,
+          email: userInfo.user.email,
+          phone: userInfo.user.phone,
+          position: userInfo.user.position,
           branch: userInfo.userBranchList.map(br => {
             return { id: br.branchId };
           }),
@@ -143,7 +143,7 @@ export class UserFormComponent implements OnInit, OnChanges {
       role: [{code: UserEnum.ADMIN}, [Validators.required]],
       status: [{code: UserEnum.ACTIVE}],
       userId: ['', [Validators.required, Validators.maxLength(100)]],
-      password: ['', [Validators.required, Validators.maxLength(100)]],
+      // password: ['', [Validators.required, Validators.maxLength(100)]],
       email: ['', [Validators.email, Validators.maxLength(100)]],
       phone: ['', [Validators.pattern(/^[\d\s]*$/), Validators.maxLength(20)]],
       position: [''],

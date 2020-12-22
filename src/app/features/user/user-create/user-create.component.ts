@@ -31,14 +31,14 @@ export class UserCreateComponent implements OnInit, BeforeLeave {
 
   doSave(value) {
     const info: UserInfo = {
-      userId: value.userId,
+      userName: value.userId,
       fullName: value.fullName,
       email: value.email,
-      password: value.password,
+      // password: value.password,
       phone: value.phone,
       position: value.position,
       role: value.role.code,
-      status: value.status.code
+      statusCode: value.status.code
     };
     const userBranch: Branch[] = [];
     if (this.util.canForEach(value.branch)) {
@@ -92,7 +92,7 @@ export class UserCreateComponent implements OnInit, BeforeLeave {
       });
     }
     const body: UserDetail = {
-      userPortal: info,
+      user: info,
       userBranchList: userBranch,
       listTagKPI: userKpi,
       listTagNews: userNews,

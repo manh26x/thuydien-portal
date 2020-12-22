@@ -14,13 +14,14 @@ export class UserService extends BaseService{
   }
 
   getUserInfo(userId: string): Observable<UserDetail> {
-    const param = new HttpParams().append('userPortalId', userId);
+    const param = new HttpParams().append('userId', userId);
     return this.doGet('/admin/userPortal/detail', param).pipe(
       map(res => res.data[0])
     );
   }
 
   filterUser(request: FilterUserRequest): Observable<UserBranch[]> {
+    request.userType = '';
     return this.doPost('/admin/userPortal/filter', request).pipe(
       map(res => res.data || [])
     );

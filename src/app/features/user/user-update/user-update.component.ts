@@ -45,8 +45,6 @@ export class UserUpdateComponent extends BaseComponent implements OnInit {
         finalize(() => this.indicator.hideActivityIndicator())
       ))
     ).subscribe(res => {
-      // bypass validate required password
-      res.userPortal.password = 'none';
       this.initValue = res;
     });
   }
@@ -59,14 +57,13 @@ export class UserUpdateComponent extends BaseComponent implements OnInit {
     this.indicator.showActivityIndicator();
     const passValue = this.formChangePass.value;
     const info: UserInfo = {
-      userId: value.userId,
+      userName: value.userId,
       fullName: value.fullName,
       email: value.email,
-      password: passValue.isChangePass ? passValue.newPass : '',
       phone: value.phone,
       position: value.position,
       role: value.role.code,
-      status: value.status.code
+      statusCode: value.status.code
     };
     const userBranch: Branch[] = [];
     if (this.util.canForEach(value.branch)) {
