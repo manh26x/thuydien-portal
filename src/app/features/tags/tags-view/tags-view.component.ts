@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {MessageService} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
-import {concatMap, map, takeUntil} from 'rxjs/operators';
+import {concatMap, finalize, map, takeUntil} from 'rxjs/operators';
 import {TagsUser} from '../model/tags';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {TagsEnum} from '../model/tags.enum';
@@ -32,10 +32,13 @@ export class TagsViewComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.tagService.setPage('view');
+    this.indicator.showActivityIndicator();
     this.route.paramMap.pipe(
       takeUntil(this.nextOnDestroy),
       map(res => res.get('id')),
-      concatMap(id => this.tagService.getDetail(id))
+      concatMap(id => this.tagService.getDetail(id).pipe(
+        finalize(() => this.indicator.hideActivityIndicator())
+      ))
     ).subscribe(res => {
       this.tagDetail = res;
       console.log(res);

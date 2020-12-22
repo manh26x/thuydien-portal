@@ -69,8 +69,12 @@
 		"user": "User management"
 	},
 	"message": {
+		"accept": "Yes",
 		"beforeLeave": "Are you sure you exit the screen?",
-		"ok": "Ok"
+		"confirmLogout": "Are you sure you want to log out of the system?",
+		"notification": "Notification",
+		"ok": "Ok",
+		"reject": "Cancel"
 	},
 	"welcome": "Hello"
 }

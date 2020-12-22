@@ -86,7 +86,7 @@ export class ImageUploadComponent implements OnInit {
   }
 
   previewFile(files) {
-    if (files.length > 0 && (!this.isValidFiles(files))) {
+    if (files.length > 0) {
       this.file.nativeElement.value = '';
       return;
     } else {

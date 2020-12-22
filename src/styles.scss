@@ -10,6 +10,19 @@
 
 .normal-dialog {
   width: 50vw;
+  .p-dialog-header {
+    justify-content: center;
+  }
+  .p-dialog-header-icons {
+    display: none !important;
+  }
+  .p-dialog-content {
+    align-items: initial !important;
+    min-height: 120px;
+  }
+  .p-confirm-dialog-accept {
+    float: right;
+  }
 }
 
 .p-menuitem-text {
@@ -75,6 +88,7 @@
     border-radius: 4px;
     margin-top: 5px;
     min-height: 48px;
+    background-color: #F7F7F7;
     li:not(:first-child) {
       margin-top: 0.5rem;
     }

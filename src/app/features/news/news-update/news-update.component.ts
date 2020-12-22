@@ -3,7 +3,7 @@ import {NewsService} from '../service/news.service';
 import {NewsDetail, NewsInfoRequest} from '../model/news';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
-import {concatMap, finalize, map, takeUntil} from 'rxjs/operators';
+import {concatMap, delay, finalize, map, takeUntil} from 'rxjs/operators';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {BaseComponent} from '../../../core/base.component';
 import {Tags} from '../../tags/model/tags';
@@ -39,6 +39,7 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
       takeUntil(this.nextOnDestroy),
       map(res => res.get('id')),
       concatMap(id => this.newsService.getNewsDetail(id).pipe(
+        delay(200),
         finalize(() => this.indicator.hideActivityIndicator())
       ))
     ).subscribe(res => {

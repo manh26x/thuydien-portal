@@ -53,8 +53,12 @@
     </div>
 
     <div class="p-md-6 p-col-12 detail">
-      <label class="title-left">{{'user.phone' | translate}}:</label>
-      <div class="title-right">{{userDetail.userPortal?.phone}}</div>
+      <label class="title-left">{{'user.branch' | translate}}:</label>
+      <div class="title-right">
+        <ng-container *ngFor="let item of userDetail.userBranchList">
+          <li>{{item.branchName}}</li>
+        </ng-container>
+      </div>
     </div>
   </div>
 

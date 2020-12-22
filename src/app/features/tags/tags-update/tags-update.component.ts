@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {BaseComponent} from '../../../core/base.component';
 import {TagsService} from '../service/tags.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {concatMap, finalize, map, takeUntil} from 'rxjs/operators';
+import {concatMap, delay, finalize, map, takeUntil} from 'rxjs/operators';
 import {TagsUpdateRequest, TagsUser} from '../model/tags';
 import {UserInfo} from '../../user/model/user';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
@@ -31,10 +31,14 @@ export class TagsUpdateComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.tagService.setPage('update');
+    this.indicator.showActivityIndicator();
     this.route.paramMap.pipe(
       takeUntil(this.nextOnDestroy),
       map(res => res.get('id')),
-      concatMap(id => this.tagService.getDetail(id))
+      concatMap(id => this.tagService.getDetail(id).pipe(
+        delay(200),
+        finalize(() => this.indicator.hideActivityIndicator())
+      ))
     ).subscribe(res => {
       this.initValue = res;
     }, err => {

@@ -68,7 +68,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           } else {
             this.msgInvalid.push({ severity: 'error', summary: 'Error', detail: this.translate.instant('error') });
           }
-          throw err;
         }
       );
   }

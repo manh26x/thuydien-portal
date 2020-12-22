@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import { FeaturesComponent} from './features.component';
-import {MenuItem} from 'primeng/api';
+import {ConfirmationService, MenuItem} from 'primeng/api';
 import {AuthService} from '../auth/auth.service';
 import {Router} from '@angular/router';
 import {ILanguage} from '../core/model/language';
 import {AppTranslateService} from '../core/service/translate.service';
 import {Language} from '../core/model/language.enum';
 import {concatMap, startWith} from 'rxjs/operators';
-import {NewsEnum} from './news/model/news.enum';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'aw-topbar',
@@ -36,7 +36,9 @@ export class TopBarComponent implements OnInit {
     public features: FeaturesComponent,
     private authService: AuthService,
     private router: Router,
-    private appTranslate: AppTranslateService
+    private appTranslate: AppTranslateService,
+    private confirm: ConfirmationService,
+    private translate: TranslateService
   ) {
     this.currentLang = appTranslate.langs.find(lang => lang.key === localStorage.getItem(Language.LOCAL_KEY));
   }
@@ -76,7 +78,20 @@ export class TopBarComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logOut();
-    this.router.navigate(['auth', 'login']);
+    this.confirm.confirm({
+      key: 'globalDialog',
+      header: this.translate.instant('message.notification'),
+      message: this.translate.instant('message.confirmLogout'),
+      acceptVisible: true,
+      rejectVisible: true,
+      acceptLabel: this.translate.instant('message.accept'),
+      rejectLabel: this.translate.instant('message.reject'),
+      accept: () => {
+        this.authService.logOut();
+        this.router.navigate(['auth', 'login']);
+      },
+      reject: () => {}
+    });
+
   }
 }

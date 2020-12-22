@@ -69,8 +69,12 @@
 		"user": "Quản lý người dùng"
 	},
 	"message": {
+		"accept": "Có",
 		"beforeLeave": "Bạn có chắc chắn thoát ra khỏi màn hình không?",
-		"ok": "Đồng ý"
+		"confirmLogout": "Bạn có chắc chắn muốn đăng xuất khỏi hệ thống?",
+		"notification": "Thông báo",
+		"ok": "Đồng ý",
+		"reject": "Không"
 	},
 	"welcome": "Xin chào"
 }

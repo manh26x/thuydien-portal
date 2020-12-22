@@ -120,10 +120,14 @@ export class NewsFormComponent implements OnInit, OnChanges {
   }
 
   doSave() {
+    const value = this.formNews.getRawValue();
+    this.formNews.patchValue({
+      title: value.title.trim()
+    });
     if (this.formNews.invalid) {
       this.util.validateAllFields(this.formNews);
     } else {
-      this.save.emit( { news: this.formNews.getRawValue(), fileImageList: this.filesImage, fileDocList: this.filesDoc });
+      this.save.emit( { news: value, fileImageList: this.filesImage, fileDocList: this.filesDoc });
     }
   }
 
@@ -157,7 +161,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
     now.setMinutes(0, 0);
     this.formNews = this.fb.group({
       id: [],
-      title: ['', [Validators.required, Validators.maxLength(500)]],
+      title: ['', [Validators.required, Validators.maxLength(500)] ],
       shortContent: ['', [Validators.maxLength(400)]],
       content: ['', [Validators.required]],
       tags: [null, [Validators.required]],
