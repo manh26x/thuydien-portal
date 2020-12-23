@@ -15,7 +15,14 @@ import {UserDetail} from '../model/user';
 @Component({
   selector: 'aw-user-form',
   templateUrl: './user-form.component.html',
-  styles: [],
+  styles: [`
+    .tag-item {
+      display: flex;
+      align-items: center;
+      padding: 0;
+      width: 100%;
+    }
+  `],
   providers: [TagsService]
 })
 export class UserFormComponent implements OnInit, OnChanges {
@@ -23,10 +30,9 @@ export class UserFormComponent implements OnInit, OnChanges {
   statusList = [];
   branchList = [];
   formUser: FormGroup;
-  tagQnaList: TagsUser[];
   tagNewsList: TagsUser[];
+  tagNewsSelectedList: TagsUser[] = [];
   tagKpiList: TagsUser[];
-  tagToolList: TagsUser[];
   tagTypeEnum = TagsEnum;
   filteredUser = [];
   @Input() mode = 'create';
@@ -76,16 +82,12 @@ export class UserFormComponent implements OnInit, OnChanges {
     });
 
     const obsTagNews = this.filterTagByType('', TagsEnum.NEWS);
-    const obsTagTool = this.filterTagByType('', TagsEnum.TOOL);
     const obsTagKpi = this.filterTagByType('', TagsEnum.KPI);
-    const obsTagQna = this.filterTagByType('', TagsEnum.QNA);
     const obsBranch = this.userService.getBranchList();
-    forkJoin([obsBranch, obsTagNews, obsTagTool, obsTagKpi, obsTagQna]).subscribe(res => {
+    forkJoin([obsBranch, obsTagNews, obsTagKpi]).subscribe(res => {
       this.branchList = res[0];
       this.tagNewsList = res[1].tagsList;
-      this.tagToolList = res[2].tagsList;
-      this.tagKpiList = res[3].tagsList;
-      this.tagQnaList = res[4].tagsList;
+      this.tagKpiList = res[2].tagsList;
     });
   }
 
@@ -141,7 +143,14 @@ export class UserFormComponent implements OnInit, OnChanges {
 
   doSelectUser(evt) {
     this.userService.getUserInfo(evt).subscribe(res => {
-      console.log(res);
+      this.formUser.patchValue({
+        status: res.user.statusCode,
+        fullName: res.user.fullName,
+        phone: res.user.phone,
+        email: res.user.email,
+        branch: res.userBranchList.map(item => { return { id: item.branchId }; }),
+        position: res.user.position
+      });
     });
   }
 
@@ -151,18 +160,16 @@ export class UserFormComponent implements OnInit, OnChanges {
 
   initForm() {
     this.formUser = this.fb.group({
-      fullName: [{value: '', disabled: true}, [Validators.required, Validators.maxLength(100)]],
+      fullName: [{value: '', disabled: true}],
       role: [ {value: {code: UserEnum.ADMIN}, disabled: true }, [Validators.required]],
       status: [{code: UserEnum.ACTIVE}],
-      userId: ['', [Validators.required, Validators.maxLength(100)]],
-      email: [{value: '', disabled: true}, [Validators.email, Validators.maxLength(100)]],
-      phone: [{value: '', disabled: true}, [Validators.pattern(/^[\d\s]*$/), Validators.maxLength(20)]],
+      userId: ['', [Validators.required]],
+      email: [{value: '', disabled: true}],
+      phone: [{value: '', disabled: true}],
       position: [{value: '', disabled: true}],
       branch: [{value: '', disabled: true}],
-      tagQna: [],
-      tagNews: []
-//      tagKpi: [],
-//      tagTool: []
+      tagNews: [],
+      tagKpi: []
     }, { validators: this.tagsMatcher, updateOn: 'blur' });
   }
 
@@ -175,20 +182,16 @@ export class UserFormComponent implements OnInit, OnChanges {
   }
 
   tagsMatcher(abstract: AbstractControl): { [key: string]: boolean } | null {
-    const tagQna = abstract.get('tagQna');
     const tagNews = abstract.get('tagNews');
-//    const tagKpi = abstract.get('tagKpi');
-//    const tagTool = abstract.get('tagTool');
+    const tagKpi = abstract.get('tagKpi');
     if (
-      (Array.isArray(tagQna.value) && tagQna.value.length > 0)
-      || (Array.isArray(tagNews.value) && tagNews.value.length > 0 )
-//      || (Array.isArray(tagKpi.value) && tagKpi.value.length > 0 )
-//      || (Array.isArray(tagTool.value) && tagTool.value.length > 0 )
+      (Array.isArray(tagNews.value) && tagNews.value.length > 0 )
+      || (Array.isArray(tagKpi.value) && tagKpi.value.length > 0 )
     ) {
-      tagQna.setErrors(null);
+      tagNews.setErrors(null);
       return null;
     }
-    tagQna.setErrors({oneTagRequired: true});
+    tagNews.setErrors({oneTagRequired: true});
     return { match: true };
   }
 
