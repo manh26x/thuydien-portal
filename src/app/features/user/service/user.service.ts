@@ -27,6 +27,13 @@ export class UserService extends BaseService{
     );
   }
 
+  getUserByUsername(username: string): Observable<string[]> {
+    const pr: HttpParams = new HttpParams().append('keyword', username);
+    return this.doGet('/admin/userPortal/search', pr ).pipe(
+      map((res) => res.data || [])
+    );
+  }
+
   getAllUser(): Observable<UserInfo[]> {
     return this.doGet('/admin/userPortal/listAll').pipe(
       map(res => res.data || [])

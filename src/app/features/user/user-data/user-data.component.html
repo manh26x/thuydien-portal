@@ -39,7 +39,7 @@
         <th>{{'user.branch' | translate}}</th>
         <th pSortableColumn="user.status">{{'user.status' | translate}}<p-sortIcon field="user.status"></p-sortIcon></th>
         <th>
-          <button (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
+          <button *ngIf="userLogged.isSupperAdmin" (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
         </th>
       </tr>
     </ng-template>

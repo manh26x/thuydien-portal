@@ -28,6 +28,7 @@ export class UserFormComponent implements OnInit, OnChanges {
   tagKpiList: TagsUser[];
   tagToolList: TagsUser[];
   tagTypeEnum = TagsEnum;
+  filteredUser = [];
   @Input() mode = 'create';
   @Input() valueForm: UserDetail;
   @Output() save: EventEmitter<any> = new EventEmitter<any>();
@@ -97,7 +98,6 @@ export class UserFormComponent implements OnInit, OnChanges {
           role: {code: userInfo.user.role},
           status: {code: userInfo.user.statusCode},
           userId: userInfo.user.userName,
-          // password: userInfo.userPortal.password,
           email: userInfo.user.email,
           phone: userInfo.user.phone,
           position: userInfo.user.position,
@@ -133,25 +133,36 @@ export class UserFormComponent implements OnInit, OnChanges {
     this.cancel.emit();
   }
 
+  filterUser(evt) {
+    this.userService.getUserByUsername(evt.query).subscribe(res => {
+      this.filteredUser = res;
+    });
+  }
+
+  doSelectUser(evt) {
+    this.userService.getUserInfo(evt).subscribe(res => {
+      console.log(res);
+    });
+  }
+
   filterTagByType(query, type) {
     return this.tagService.searchTagExp({tagType: type, sortOrder: 'ASC', sortBy: 'id', page: 0, pageSize: 500, searchValue: query });
   }
 
   initForm() {
     this.formUser = this.fb.group({
-      fullName: ['', [Validators.required, Validators.maxLength(100)]],
-      role: [{code: UserEnum.ADMIN}, [Validators.required]],
+      fullName: [{value: '', disabled: true}, [Validators.required, Validators.maxLength(100)]],
+      role: [ {value: {code: UserEnum.ADMIN}, disabled: true }, [Validators.required]],
       status: [{code: UserEnum.ACTIVE}],
       userId: ['', [Validators.required, Validators.maxLength(100)]],
-      // password: ['', [Validators.required, Validators.maxLength(100)]],
-      email: ['', [Validators.email, Validators.maxLength(100)]],
-      phone: ['', [Validators.pattern(/^[\d\s]*$/), Validators.maxLength(20)]],
-      position: [''],
-      branch: [],
+      email: [{value: '', disabled: true}, [Validators.email, Validators.maxLength(100)]],
+      phone: [{value: '', disabled: true}, [Validators.pattern(/^[\d\s]*$/), Validators.maxLength(20)]],
+      position: [{value: '', disabled: true}],
+      branch: [{value: '', disabled: true}],
       tagQna: [],
-      tagNews: [],
-      tagKpi: [],
-      tagTool: []
+      tagNews: []
+//      tagKpi: [],
+//      tagTool: []
     }, { validators: this.tagsMatcher, updateOn: 'blur' });
   }
 
@@ -166,13 +177,13 @@ export class UserFormComponent implements OnInit, OnChanges {
   tagsMatcher(abstract: AbstractControl): { [key: string]: boolean } | null {
     const tagQna = abstract.get('tagQna');
     const tagNews = abstract.get('tagNews');
-    const tagKpi = abstract.get('tagKpi');
-    const tagTool = abstract.get('tagTool');
+//    const tagKpi = abstract.get('tagKpi');
+//    const tagTool = abstract.get('tagTool');
     if (
       (Array.isArray(tagQna.value) && tagQna.value.length > 0)
       || (Array.isArray(tagNews.value) && tagNews.value.length > 0 )
-      || (Array.isArray(tagKpi.value) && tagKpi.value.length > 0 )
-      || (Array.isArray(tagTool.value) && tagTool.value.length > 0 )
+//      || (Array.isArray(tagKpi.value) && tagKpi.value.length > 0 )
+//      || (Array.isArray(tagTool.value) && tagTool.value.length > 0 )
     ) {
       tagQna.setErrors(null);
       return null;

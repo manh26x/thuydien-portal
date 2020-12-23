@@ -11,6 +11,8 @@ import {concatMap, delay, finalize, startWith, takeUntil} from 'rxjs/operators';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {ApiErrorResponse} from '../../../core/model/error-response';
+import {UserAuth} from '../../../auth/model/user-auth';
+import {AuthService} from '../../../auth/auth.service';
 
 @Component({
   selector: 'aw-user-data',
@@ -35,6 +37,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   searchForm: FormGroup;
   roleList = [];
   statusList = [];
+  userLogged: UserAuth;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -44,8 +47,10 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     private indicator: IndicatorService,
     private messageService: MessageService,
     private dialog: ConfirmationService,
+    private auth: AuthService
   ) {
     super();
+    this.userLogged = this.auth.getUserInfo();
     this.initSearchForm();
   }
 

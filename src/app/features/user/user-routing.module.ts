@@ -22,7 +22,7 @@ const routes: Routes = [
       {
         path: 'create',
         component: UserCreateComponent,
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, SupperAdminGuard],
         canDeactivate: [FormLeaveGuard]
       },
       {
