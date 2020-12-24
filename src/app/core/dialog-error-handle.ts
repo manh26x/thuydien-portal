@@ -67,10 +67,19 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
         break;
       }
       case ApiErrorForbidden: {
-        this.router.navigate(['public', 'access-denied']);
+        this.ngzone.run(() => {
+          this.router.navigate(['public', 'access-denied']);
+        });
         break;
       }
       default: {
+        if (err.name === 'TimeoutError') {
+          this.showDialog(
+            this.translate.instant('err.api.title'),
+            this.translate.instant(`err.api.timeout`)
+          );
+          break;
+        }
         if (environment.logServer) {
           this.sendLogToServer(err);
         }
@@ -79,7 +88,6 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
             console.error(this.getClientStack(err));
           }
         }
-        break;
       }
     }
   }

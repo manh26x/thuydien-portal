@@ -6,28 +6,35 @@ import {UserEnum} from '../model/user.enum';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UtilService} from '../../../core/service/util.service';
 import {UserService} from '../service/user.service';
-import {TagsService} from '../../tags/service/tags.service';
 import {TagsEnum} from '../../tags/model/tags.enum';
 import {TagsUser} from '../../tags/model/tags';
-import {forkJoin} from 'rxjs';
 import {UserDetail} from '../model/user';
+import {xorBy} from 'lodash-es';
 
 @Component({
   selector: 'aw-user-form',
   templateUrl: './user-form.component.html',
-  styles: [],
-  providers: [TagsService]
+  styles: [`
+    .tag-item {
+      display: flex;
+      align-items: center;
+      padding: 0;
+      width: 100%;
+    }
+  `]
 })
 export class UserFormComponent implements OnInit, OnChanges {
   roleList = [];
   statusList = [];
-  branchList = [];
+
   formUser: FormGroup;
-  tagQnaList: TagsUser[];
-  tagNewsList: TagsUser[];
-  tagKpiList: TagsUser[];
-  tagToolList: TagsUser[];
   tagTypeEnum = TagsEnum;
+  filteredUser = [];
+  tagNewsSelectedList: TagsUser[] = [];
+  tagKpiSelectedList: TagsUser[] = [];
+  @Input() branchList = [];
+  @Input() tagNewsList: TagsUser[];
+  @Input() tagKpiList: TagsUser[];
   @Input() mode = 'create';
   @Input() valueForm: UserDetail;
   @Output() save: EventEmitter<any> = new EventEmitter<any>();
@@ -37,8 +44,7 @@ export class UserFormComponent implements OnInit, OnChanges {
     private appTranslate: AppTranslateService,
     private fb: FormBuilder,
     private util: UtilService,
-    private userService: UserService,
-    private tagService: TagsService
+    private userService: UserService
   ) {
     this.initForm();
   }
@@ -46,19 +52,7 @@ export class UserFormComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     if (this.mode === 'update') {
       this.formUser.get('userId').disable();
-    } else if (this.mode === 'view') {
-      this.formUser.get('fullName').disable();
-      this.formUser.get('role').disable();
       this.formUser.get('status').disable();
-      this.formUser.get('userId').disable();
-      this.formUser.get('email').disable();
-      this.formUser.get('phone').disable();
-      this.formUser.get('position').disable();
-      this.formUser.get('branch').disable();
-      this.formUser.get('tagQna').disable();
-      this.formUser.get('tagNews').disable();
-      this.formUser.get('tagKpi').disable();
-      this.formUser.get('tagTool').disable();
     }
     this.appTranslate.languageChanged$.pipe(
       startWith(''),
@@ -73,55 +67,33 @@ export class UserFormComponent implements OnInit, OnChanges {
         {code: UserEnum.SUPPER_ADMIN, name: res.supperAdmin},
       ];
     });
-
-    const obsTagNews = this.filterTagByType('', TagsEnum.NEWS);
-    const obsTagTool = this.filterTagByType('', TagsEnum.TOOL);
-    const obsTagKpi = this.filterTagByType('', TagsEnum.KPI);
-    const obsTagQna = this.filterTagByType('', TagsEnum.QNA);
-    const obsBranch = this.userService.getBranchList();
-    forkJoin([obsBranch, obsTagNews, obsTagTool, obsTagKpi, obsTagQna]).subscribe(res => {
-      this.branchList = res[0];
-      this.tagNewsList = res[1].tagsList;
-      this.tagToolList = res[2].tagsList;
-      this.tagKpiList = res[3].tagsList;
-      this.tagQnaList = res[4].tagsList;
-    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.valueForm) {
       if (!changes.valueForm.firstChange) {
         const userInfo: UserDetail = changes.valueForm.currentValue;
-        this.formUser.setValue({
-          fullName: userInfo.userPortal.fullName,
-          role: {code: userInfo.userPortal.role},
-          status: {code: userInfo.userPortal.status},
-          userId: userInfo.userPortal.userId,
-          password: userInfo.userPortal.password,
-          email: userInfo.userPortal.email,
-          phone: userInfo.userPortal.phone,
-          position: userInfo.userPortal.position,
-          branch: userInfo.userBranchList.map(br => {
-            return { id: br.branchId };
-          }),
-          tagQna: userInfo.listTagQnA.map(qna => {
-            return { tagId:  qna.tagId };
-          }),
-          tagNews: userInfo.listTagNews.map(qna => {
-            return { tagId:  qna.tagId };
-          }),
-          tagKpi: userInfo.listTagKPI.map(qna => {
-            return { tagId:  qna.tagId };
-          }),
-          tagTool: userInfo.listTagTool.map(qna => {
-            return { tagId:  qna.tagId };
-          }),
+        this.formUser.patchValue({
+          userId: userInfo.user.userName,
+          status: {code: userInfo.user.statusCode},
+          fullName: userInfo.user.fullName,
+          phone: userInfo.user.phone,
+          email: userInfo.user.email,
+          branch: userInfo.userBranchList.map(item => ({ id: item.branchId })),
+          position: userInfo.user.position,
+          role: {code: userInfo.user.role}
         });
+        this.tagKpiSelectedList = userInfo.listTagKPI;
+        this.tagNewsSelectedList = userInfo.listTagNews;
       }
     }
   }
 
   doSave() {
+    this.formUser.patchValue({
+      tagNews: this.tagNewsSelectedList,
+      tagKpi: this.tagKpiSelectedList
+    });
     if (this.formUser.invalid) {
       this.util.validateAllFields(this.formUser);
     } else {
@@ -133,25 +105,48 @@ export class UserFormComponent implements OnInit, OnChanges {
     this.cancel.emit();
   }
 
-  filterTagByType(query, type) {
-    return this.tagService.searchTagExp({tagType: type, sortOrder: 'ASC', sortBy: 'id', page: 0, pageSize: 500, searchValue: query });
+  filterUser(evt?: any) {
+    const query = evt ? evt.query : this.formUser.value.userId;
+    this.userService.getUserByUsername(query).subscribe(res => {
+      this.filteredUser = res;
+    }, err => {
+      this.filteredUser = [];
+      throw err;
+    });
+  }
+
+  doSelectUser(evt) {
+    this.tagKpiList = [...this.tagKpiSelectedList, ...this.tagKpiList];
+    this.tagNewsList = [...this.tagNewsSelectedList, ...this.tagNewsList];
+    this.userService.getUserInfo(evt).subscribe(res => {
+      this.formUser.patchValue({
+        status: {code: res.user.statusCode},
+        fullName: res.user.fullName,
+        phone: res.user.phone,
+        email: res.user.email,
+        branch: res.userBranchList.map(item => ({ id: item.branchId })),
+        position: res.user.position,
+        role: {code: res.user.role}
+      });
+      this.tagKpiList = xorBy(this.tagKpiList, res.listTagKPI, 'tagId');
+      this.tagKpiSelectedList = res.listTagKPI;
+      this.tagNewsList = xorBy(this.tagNewsList, res.listTagNews, 'tagId');
+      this.tagNewsSelectedList = res.listTagNews;
+    });
   }
 
   initForm() {
     this.formUser = this.fb.group({
-      fullName: ['', [Validators.required, Validators.maxLength(100)]],
-      role: [{code: UserEnum.ADMIN}, [Validators.required]],
+      fullName: [{value: '', disabled: true}],
+      role: [ {value: {code: UserEnum.ADMIN}, disabled: true }, [Validators.required]],
       status: [{code: UserEnum.ACTIVE}],
-      userId: ['', [Validators.required, Validators.maxLength(100)]],
-      password: ['', [Validators.required, Validators.maxLength(100)]],
-      email: ['', [Validators.email, Validators.maxLength(100)]],
-      phone: ['', [Validators.pattern(/^[\d\s]*$/), Validators.maxLength(20)]],
-      position: [''],
-      branch: [],
-      tagQna: [],
+      userId: ['', [Validators.required]],
+      email: [{value: '', disabled: true}],
+      phone: [{value: '', disabled: true}],
+      position: [{value: '', disabled: true}],
+      branch: [{value: '', disabled: true}],
       tagNews: [],
-      tagKpi: [],
-      tagTool: []
+      tagKpi: []
     }, { validators: this.tagsMatcher, updateOn: 'blur' });
   }
 
@@ -164,20 +159,16 @@ export class UserFormComponent implements OnInit, OnChanges {
   }
 
   tagsMatcher(abstract: AbstractControl): { [key: string]: boolean } | null {
-    const tagQna = abstract.get('tagQna');
     const tagNews = abstract.get('tagNews');
     const tagKpi = abstract.get('tagKpi');
-    const tagTool = abstract.get('tagTool');
     if (
-      (Array.isArray(tagQna.value) && tagQna.value.length > 0)
-      || (Array.isArray(tagNews.value) && tagNews.value.length > 0 )
+      (Array.isArray(tagNews.value) && tagNews.value.length > 0 )
       || (Array.isArray(tagKpi.value) && tagKpi.value.length > 0 )
-      || (Array.isArray(tagTool.value) && tagTool.value.length > 0 )
     ) {
-      tagQna.setErrors(null);
+      tagNews.setErrors(null);
       return null;
     }
-    tagQna.setErrors({oneTagRequired: true});
+    tagNews.setErrors({oneTagRequired: true});
     return { match: true };
   }
 

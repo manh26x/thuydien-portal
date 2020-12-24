@@ -16,6 +16,10 @@
 	"filter": "Lọc kết quả",
 	"list": "Danh sách công cụ tính toán",
 	"message": {
+		"accept": "Có",
+		"confirmOff": "Nếu tắt công cụ tính toán này, chuyên viên bán hàng sẽ không nhìn thấy chức năng. Bạn có chắc chắn muốn tắt?",
+		"notification": "Thông báo",
+		"reject": "Không",
 		"updateError": "Cập nhật thất bại. Vui lòng thử lại sau",
 		"updateSuccess": "Cập nhật công cụ tính toán thành công"
 	},

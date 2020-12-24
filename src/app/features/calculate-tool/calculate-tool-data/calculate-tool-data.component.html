@@ -42,7 +42,7 @@
         <th pSortableColumn="toolName">{{'tool.name' | translate}}<p-sortIcon field="toolName"></p-sortIcon></th>
         <th pSortableColumn="status">{{'tool.status' | translate}}<p-sortIcon field="status"></p-sortIcon></th>
         <th pSortableColumn="priority">{{'tool.level' | translate}}<p-sortIcon field="priority"></p-sortIcon></th>
-        <th>{{'tool.action' | translate}}</th>
+        <th *ngIf="userLogged.isSupperAdmin">{{'tool.action' | translate}}</th>
       </tr>
     </ng-template>
 
@@ -52,12 +52,12 @@
         <td>{{tool.customerType}}</td>
         <td>{{tool.toolName}}</td>
         <td>
-          <ng-container [ngSwitch]="tool.status">
-            <ng-container *ngSwitchCase="toolConst.STATUS_ACTIVE">
+          <ng-container [ngSwitch]="tool.isActive">
+            <ng-container *ngSwitchCase="true">
               <div>{{'const.active' | translate}}</div>
             </ng-container>
-            <ng-container *ngSwitchCase="toolConst.STATUS_INACTIVE">
-              <div>{{'const.inactive' | translate}}</div>
+            <ng-container *ngSwitchCase="false">
+              <div class="p-invalid">{{'const.inactive' | translate}}</div>
             </ng-container>
             <ng-container *ngSwitchDefault>-</ng-container>
           </ng-container>
@@ -75,7 +75,7 @@
             <ng-container *ngSwitchDefault>-</ng-container>
           </ng-container>
         </td>
-        <td>
+        <td *ngIf="userLogged.isSupperAdmin">
           <p-inputSwitch [(ngModel)]="tool.isActive" (onChange)="doChangeStatus(index)"></p-inputSwitch>
         </td>
       </tr>

@@ -1,4 +1,5 @@
 import {Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'aw-image-upload',
@@ -50,20 +51,20 @@ import {Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output
 })
 export class ImageUploadComponent implements OnInit {
   @ViewChild('file', { static: true }) file: ElementRef;
-  @ViewChild('imgPreview', { static: true }) imgPreview: ElementRef;
   errors: Array<string> = [];
   maxFiles = 1;
   fileExt = '.jpg, .gif, .png';
   maxSize = 5; // MB
   zoneFileClass = 'drag-area';
   isSelect = true;
+  previewUrl: any = '';
   @Input() uploadTitle = 'Tải ảnh lên';
   @Input() maxFileErrorMsg = 'Vượt quá số lượng cho phép';
   @Input() fileExtErrorMsg = 'File không đúng định dạng';
   @Input() fileSizeErrorMsg = 'File vượt quá dung lượng cho phép';
   @Output() changeFile: EventEmitter<any> = new EventEmitter<any>();
   @Output() clearFile: EventEmitter<any> = new EventEmitter<any>();
-  constructor() { }
+  constructor(private sanitizer: DomSanitizer ) { }
 
   ngOnInit(): void {
   }
@@ -86,16 +87,15 @@ export class ImageUploadComponent implements OnInit {
   }
 
   previewFile(files) {
-    if (files.length > 0) {
-      this.file.nativeElement.value = '';
-      return;
-    } else {
-      const objUrl = window.URL.createObjectURL(files[0]);
-      this.imgPreview.nativeElement.onload = () => window.URL.revokeObjectURL(objUrl);
-      this.imgPreview.nativeElement.src = objUrl;
-      this.isSelect = false;
-      this.changeFile.emit(files);
-    }
+    const objUrl = window.URL.createObjectURL(files[0]);
+    this.previewUrl = this.sanitizer.bypassSecurityTrustUrl(objUrl);
+    this.isSelect = false;
+    this.changeFile.emit(files);
+  }
+
+  previewAsUrl(trustedUrl: string) {
+    this.previewUrl = this.sanitizer.bypassSecurityTrustUrl(trustedUrl);
+    this.isSelect = false;
   }
 
   private isValidFiles(files) {

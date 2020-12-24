@@ -61,12 +61,15 @@
 		"insertSuccess": "Thêm mới tài khoản thành công",
 		"passwordNotMatch": "Mật khẩu hiện tại không đúng",
 		"updateNotFound": "User không tồn tại hoặc đã bị xóa",
+		"updateNotPermission": "Bạn không có quyền cập nhật tài khoản",
 		"updateSuccess": "Cập nhật thông tin tài khoản thành công"
 	},
 	"no": "STT",
 	"noData": "Không có kết quả nào phù hợp",
 	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
 	"search": "Nhập họ và tên hoặc vị trí",
+	"selectedList": "Danh sách tags đã chọn",
+	"tagList": "Danh sách tags",
 	"update": "Chỉnh sửa thông tin người dùng",
 	"user": {
 		"branch": "Chi nhánh",

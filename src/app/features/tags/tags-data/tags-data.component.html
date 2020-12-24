@@ -66,9 +66,16 @@
           </div>
         </td>
         <td>
-          <button (click)="gotoView(tags.tagId)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
-          <button (click)="gotoUpdate(tags.tagId)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-secondary p-button-text"></button>
-          <button (click)="doDelete(tags)" pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
+          <button (click)="gotoView(tags.tagId)" pButton
+                  type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
+          <button *ngIf="userLogged.isSupperAdmin || userLogged.username == tags.createBy"
+                  (click)="gotoUpdate(tags.tagId)" pButton type="button" icon="pi pi-pencil"
+                  class="p-button-rounded p-button-secondary p-button-text">
+          </button>
+          <button *ngIf="userLogged.isSupperAdmin || userLogged.username == tags.createBy"
+                  (click)="doDelete(tags)" pButton type="button" icon="pi pi-trash"
+                  class="p-button-rounded p-button-danger p-button-text">
+          </button>
         </td>
       </tr>
     </ng-template>

@@ -11,3 +11,8 @@ export interface UserRole {
   roleName: string;
   status: number;
 }
+
+export enum RoleEnum {
+  ADMIN = 'admin',
+  SUPPER_ADMIN = 'SuperAdmin'
+}

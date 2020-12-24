@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpBackend, HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Language} from '../core/model/language.enum';
+import {Observable} from 'rxjs';
+import {RoleEnum} from '../shared/model/role';
+import {UserAuth} from './model/user-auth';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +13,7 @@ export class AuthService {
   private http: HttpClient;
   public readonly TOKEN_KEY = 'token';
   public readonly REFRESH_TOKEN_KEY = 'refresh-token';
+  private readonly USER_INFO_KEY = 'user-info';
 
   constructor(
     private handler: HttpBackend
@@ -21,7 +25,7 @@ export class AuthService {
    * login user
    * @param value login object username and password
    */
-  login(value) {
+  login(value): Observable<any> {
     const body = new HttpParams()
       .append('username', value.username)
       .append('password', value.password)
@@ -57,6 +61,11 @@ export class AuthService {
     });
   }
 
+  getUserRole(token: string): Observable<any> {
+    const header: HttpHeaders = new HttpHeaders().append('Authorization', `Bearer ${token}`);
+    return this.http.get('/admin/role/getRole', { headers: header });
+  }
+
   /**
    * check user logged in
    */
@@ -70,6 +79,12 @@ export class AuthService {
 
   getRefreshToken() {
     return this.getCookie(this.REFRESH_TOKEN_KEY);
+  }
+
+  getUserInfo(): UserAuth {
+    const data = localStorage.getItem(this.USER_INFO_KEY);
+    const jsonData = JSON.parse(data);
+    return { userName: jsonData.userName, role: jsonData.role, isSupperAdmin: jsonData.role === RoleEnum.SUPPER_ADMIN };
   }
 
   /**
@@ -88,6 +103,10 @@ export class AuthService {
   setRefreshToken(token) {
     this.deleteCookie(this.REFRESH_TOKEN_KEY);
     this.setCookie(this.REFRESH_TOKEN_KEY, token, environment.refreshTokenEx);
+  }
+
+  setUserInfo(user) {
+    localStorage.setItem(this.USER_INFO_KEY, JSON.stringify(user));
   }
 
   // cookie utils docs https://www.w3schools.com/js/js_cookies.asp

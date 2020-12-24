@@ -34,10 +34,10 @@
         </div>
 
         <div class="p-col-12 detail">
-          <label class="title-left">{{'news.groupView' | translate}}:</label>
+          <label class="title-left">{{'news.branch' | translate}}:</label>
           <div class="title-right">
-            <ng-container *ngFor="let item of newsDetail.listRole">
-              <li>{{item.roleName}}</li>
+            <ng-container *ngFor="let item of newsDetail.listBranch">
+              <li>{{item.code}} - {{item.name}}</li>
             </ng-container>
           </div>
         </div>
@@ -60,12 +60,16 @@
 
         <div class="p-col-12 detail">
           <label class="title-left">{{'news.docs' | translate}}:</label>
-          <div class="title-right">{{newsDetail.newsDto?.filePath}}</div>
+          <div class="title-right">
+            <a target="_blank" [href]="trustUrlDoc">{{newsDetail.newsDto?.filePath}}</a>
+          </div>
         </div>
 
         <div class="p-col-12 detail">
           <label class="title-left">{{'news.image' | translate}}:</label>
-          <div class="title-right">{{newsDetail.newsDto?.image}}</div>
+          <div class="title-right">
+            <img style="width: 100%;" [src]="trustUrlImg">
+          </div>
         </div>
 
       </div>

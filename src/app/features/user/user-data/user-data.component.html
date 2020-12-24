@@ -32,14 +32,14 @@
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 50px;">{{'no' | translate}}</th>
-        <th pSortableColumn="userPortal.fullName">{{'user.fullName' | translate}}<p-sortIcon field="userPortal.fullName"></p-sortIcon></th>
-        <th pSortableColumn="userPortal.userId">{{'user.userName' | translate}}<p-sortIcon field="userPortal.userId"></p-sortIcon></th>
-        <th pSortableColumn="userPortal.role">{{'user.role' | translate}}<p-sortIcon field="userPortal.role"></p-sortIcon></th>
+        <th pSortableColumn="user.fullName">{{'user.fullName' | translate}}<p-sortIcon field="user.fullName"></p-sortIcon></th>
+        <th pSortableColumn="user.userId">{{'user.userName' | translate}}<p-sortIcon field="user.userId"></p-sortIcon></th>
+        <th pSortableColumn="user.role">{{'user.role' | translate}}<p-sortIcon field="user.role"></p-sortIcon></th>
         <th>{{'user.position' | translate}}</th>
         <th>{{'user.branch' | translate}}</th>
-        <th pSortableColumn="userPortal.status">{{'user.status' | translate}}<p-sortIcon field="userPortal.status"></p-sortIcon></th>
+        <th pSortableColumn="user.status">{{'user.status' | translate}}<p-sortIcon field="user.status"></p-sortIcon></th>
         <th>
-          <button (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
+          <button *ngIf="userLogged.isSupperAdmin" (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
         </th>
       </tr>
     </ng-template>
@@ -47,33 +47,35 @@
     <ng-template pTemplate="body" let-user let-index="rowIndex">
       <tr>
         <td>{{index + 1}}</td>
-        <td>{{user.userPortal.fullName}}</td>
-        <td>{{user.userPortal.userId}}</td>
+        <td>{{user.user.fullName}}</td>
+        <td>{{user.user.userName}}</td>
         <td class="text-primary">
-          <ng-container [ngSwitch]="user.userPortal.role">
+          <ng-container [ngSwitch]="user.user.role">
             <ng-container *ngSwitchCase="userConst.SUPPER_ADMIN">
-              {{user.userPortal.role}} <i class="pi pi-star supper-admin"></i>
+              {{user.user.role}} <i class="pi pi-star supper-admin"></i>
             </ng-container>
             <ng-container *ngSwitchDefault>
-              {{user.userPortal.role}}
+              {{user.user.role}}
             </ng-container>
           </ng-container>
         </td>
-        <td>{{user.userPortal.position}}</td>
+        <td>{{user.user.position}}</td>
         <td>
           <div *ngFor="let item of user.listBranch;index as i" [ngClass]="{'p-mt-2': i != 0}">
             <ng-container>{{item.branchName}}</ng-container>
           </div>
         </td>
         <td>
-          <ng-container [ngSwitch]="user.userPortal.status">
+          <ng-container [ngSwitch]="user.user.status">
             <ng-container *ngSwitchCase="userConst.ACTIVE">{{'const.active' | translate}}</ng-container>
             <ng-container *ngSwitchCase="userConst.INACTIVE">{{'const.inactive' | translate}}</ng-container>
           </ng-container>
          </td>
         <td>
-          <button (click)="gotoView(user.userPortal.userId)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
-          <button (click)="gotoUpdate(user.userPortal.userId)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-secondary p-button-text"></button>
+          <button (click)="gotoView(user.user.userName)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
+          <button *ngIf="userLogged.isSupperAdmin || user.user.userName == userLogged.userName" (click)="gotoUpdate(user.user.userName)" pButton
+                  type="button" icon="pi pi-pencil" class="p-button-rounded p-button-secondary p-button-text">
+          </button>
 <!--          <button (click)="doDelete(user)" pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>-->
         </td>
       </tr>

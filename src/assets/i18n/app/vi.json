@@ -14,6 +14,7 @@
 			"500": "Lỗi hệ thống",
 			"jsonFormat": "Không thể chuyển dữ liệu sang JSON",
 			"noResponseCode": "Không tìm thấy mã phản hồi",
+			"timeout": "Server không phản hồi",
 			"title": "Có lỗi xảy ra"
 		},
 		"http": {
@@ -75,6 +76,13 @@
 		"notification": "Thông báo",
 		"ok": "Đồng ý",
 		"reject": "Không"
+	},
+	"public": {
+		"accessDenied": "Bạn không có quyền truy cập vào tính năng",
+		"backHome": "Trở về màn hình trang chủ",
+		"btnBack": "Trở lại",
+		"error": "Có lỗi xảy ra, vui lòng thử lại sau",
+		"notFound": "Trang bạn yêu cầu không tồn tại..."
 	},
 	"welcome": "Xin chào"
 }

@@ -1,5 +1,6 @@
 import {Tags} from '../../tags/model/tags';
 import {Role, UserRole} from '../../../shared/model/role';
+import {Branch} from '../../../shared/model/branch';
 
 export interface FilterNewsRequest {
   keyword: string;
@@ -23,7 +24,7 @@ export interface NewsInfoRequest {
   filePath?: string;
   sendNotification?: number; // 0 or 1
   listNewsTag?: Tags[];
-  listRole?: Role[];
+  listBranch?: Role[];
   isDraft?: number;
 }
 
@@ -64,5 +65,5 @@ export interface FileUpload {
 export interface NewsDetail {
   newsDto?: News;
   tagOfNews?: Tags[];
-  listRole?: UserRole[];
+  listBranch?: Branch[];
 }

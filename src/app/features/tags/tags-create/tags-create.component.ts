@@ -35,7 +35,7 @@ export class TagsCreateComponent implements OnInit, BeforeLeave {
     const userList = [];
     const typeList = [];
     value.assign.forEach(user => {
-      userList.push(user.userId);
+      userList.push(user.userName);
     });
     value.type.forEach(item => {
       typeList.push(item.code);

@@ -1,17 +1,24 @@
 import {TagsUser} from '../../tags/model/tags';
 
 export interface UserInfo {
-  userId?: string;
-  password?: string;
-  fullName?: string;
-  phone?: string;
+  avatar?: string;
+  createdBy?: string;
+  createdDate?: Date;
   email?: string;
-  role?: string;
-  status?: number;
+  fullName?: string;
+  id?: string;
+  modifiedBy?: string;
+  modifiedDate?: Date;
+  phone?: string;
   position?: string;
+  role?: string;
+  statusCode?: string;
+  userName?: string;
+  userType?: string;
+  status?: string;
 }
 
-export interface Branch {
+export interface BranchUser {
   branchId?: string;
   userId?: string;
   branchName?: string;
@@ -26,12 +33,13 @@ export interface UserBranch {
 export interface FilterUserRequest {
   keyword?: string;
   role?: string;
-  status?: number;
+  status?: string;
+  userType?: string;
 }
 
 export interface UserDetail {
-  userPortal?: UserInfo;
-  userBranchList?: Branch[];
+  user?: UserInfo;
+  userBranchList?: BranchUser[];
   listTagQnA?: TagsUser[];
   listTagNews?: TagsUser[];
   listTagKPI?: TagsUser[];
@@ -42,7 +50,7 @@ export interface UpdateUserRequest {
   isChangePassword?: number;
   currentPassword?: string;
   userPortal?: UserInfo;
-  userBranchList?: Branch[];
+  userBranchList?: BranchUser[];
   listTagQnA?: TagsUser[];
   listTagNews?: TagsUser[];
   listTagKPI?: TagsUser[];

@@ -1,13 +1,21 @@
 <form [formGroup]="formUser">
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
-      <label for="n-fullName">{{'user.fullName' | translate}} <span class="p-invalid">*</span></label>
-      <input id="n-fullName" type="text" pInputText formControlName="fullName"/>
-      <small *ngIf="hasErrorInput('fullName', 'required')" class="p-invalid">
-        {{'invalid.fullName.required' | translate}}
-      </small>
-      <small *ngIf="hasErrorInput('fullName', 'maxlength')" class="p-invalid">
-        {{ 'invalid.fullName.maxLength' | translate:{length: 100} }}
+      <label for="n-user-id">{{'user.userName' | translate}} <span class="p-invalid">*</span></label>
+      <p-autoComplete
+        inputId="n-user-id"
+        formControlName="userId"
+        dropdownMode="current"
+        dropdownIcon="pi pi-search"
+        [forceSelection]="false"
+        [dropdown]="true"
+        [suggestions]="filteredUser"
+        [minLength]="1"
+        (onSelect)="doSelectUser($event)"
+        (completeMethod)="filterUser($event)">
+      </p-autoComplete>
+      <small *ngIf="hasErrorInput('userId', 'required')" class="p-invalid">
+        {{'invalid.userId.required' | translate}}
       </small>
     </div>
 
@@ -24,25 +32,13 @@
 
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
-      <label for="n-user-id">{{'user.userName' | translate}} <span class="p-invalid">*</span></label>
-      <input id="n-user-id" type="text" pInputText formControlName="userId" />
-      <small *ngIf="hasErrorInput('userId', 'required')" class="p-invalid">
-        {{'invalid.userId.required' | translate}}
-      </small>
-      <small *ngIf="hasErrorInput('userId', 'maxlength')" class="p-invalid">
-        {{ 'invalid.userId.maxLength' | translate:{length: 100} }}
-      </small>
+      <label for="n-fullName">{{'user.fullName' | translate}}</label>
+      <input id="n-fullName" type="text" pInputText formControlName="fullName"/>
     </div>
 
-    <div class="p-md-6 p-col-12 p-field" *ngIf="mode === 'create'">
-      <label for="n-password">{{'user.password' | translate}} <span class="p-invalid">*</span></label>
-      <input id="n-password" type="password" pInputText formControlName="password" />
-      <small *ngIf="hasErrorInput('password', 'required')" class="p-invalid">
-        {{'invalid.password.required' | translate}}
-      </small>
-      <small *ngIf="hasErrorInput('password', 'maxlength')" class="p-invalid">
-        {{ 'invalid.password.maxLength' | translate:{length: 100} }}
-      </small>
+    <div class="p-md-6 p-col-12 p-field">
+      <label for="n-phone">{{'user.phone' | translate}}</label>
+      <input id="n-phone" type="text" pInputText formControlName="phone" />
     </div>
   </div>
 
@@ -50,23 +46,10 @@
     <div class="p-md-6 p-col-12 p-field">
       <label for="n-email">{{'user.email' | translate}}</label>
       <input id="n-email" type="text" pInputText formControlName="email" />
-      <small *ngIf="hasErrorInput('email', 'email')" class="p-invalid">
-        {{'invalid.email.pattern' | translate}}
-      </small>
-      <small *ngIf="hasErrorInput('email', 'maxlength')" class="p-invalid">
-        {{ 'invalid.email.maxLength' | translate:{length: 100} }}
-      </small>
     </div>
-
     <div class="p-md-6 p-col-12 p-field">
-      <label for="n-phone">{{'user.phone' | translate}}</label>
-      <input id="n-phone" type="text" pInputText formControlName="phone" />
-      <small *ngIf="hasErrorInput('phone', 'pattern')" class="p-invalid">
-        {{'invalid.phone.pattern' | translate}}
-      </small>
-      <small *ngIf="hasErrorInput('phone', 'maxlength')" class="p-invalid">
-        {{ 'invalid.phone.maxLength' | translate:{length: 20} }}
-      </small>
+      <label for="n-branch">{{'user.branch' | translate}}</label>
+      <p-multiSelect formControlName="branch" inputId="n-branch" [options]="branchList" optionLabel="name" dataKey="id"></p-multiSelect>
     </div>
   </div>
 
@@ -75,36 +58,45 @@
       <label for="n-location">{{'user.position' | translate}}</label>
       <input id="n-location" type="text" pInputText formControlName="position" />
     </div>
-
-    <div class="p-md-6 p-col-12 p-field">
-      <label for="n-branch">{{'user.branch' | translate}}</label>
-      <p-multiSelect formControlName="branch" inputId="n-branch" [options]="branchList" optionLabel="name" dataKey="id"></p-multiSelect>
-    </div>
   </div>
 
   <div class="p-fluid p-grid">
-    <div class="p-md-3 p-col-12 p-field">
-      <label for="n-tag-qna">{{'user.tagQna' | translate}}</label>
-      <p-multiSelect formControlName="tagQna" inputId="n-tag-qna" [options]="tagQnaList" optionLabel="tagValue" dataKey="tagId"></p-multiSelect>
-      <small *ngIf="hasErrorInput('tagQna', 'oneTagRequired')" class="p-invalid">
-        {{'invalid.oneTagRequired' | translate}}
-      </small>
+    <div class="p-md-6 p-col-12 p-field">
+      <label>{{'user.tagNews' | translate}}</label>
+      <p-pickList
+        sourceHeader="{{'tagList' | translate}}" targetHeader="{{'selectedList' | translate}}"
+        filterBy="tagValue"
+        [dragdrop]="true"
+        [responsive]="true"
+        [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}"
+        [showSourceControls]="false"
+        [showTargetControls]="false"
+        [source]="tagNewsList"
+        [target]="tagNewsSelectedList">
+        <ng-template let-tag pTemplate="item">
+          <div class="tag-item">{{tag.tagValue}}</div>
+        </ng-template>
+      </p-pickList>
     </div>
 
-    <div class="p-md-3 p-col-12 p-field">
-      <label for="n-tag-news">{{'user.tagNews' | translate}}</label>
-      <p-multiSelect formControlName="tagNews" inputId="n-tag-news" [options]="tagNewsList" optionLabel="tagValue" dataKey="tagId"></p-multiSelect>
+    <div class="p-md-6 p-col-12 p-field">
+      <label>{{'user.tagKpi' | translate}}</label>
+      <p-pickList
+        sourceHeader="{{'tagList' | translate}}" targetHeader="{{'selectedList' | translate}}"
+        filterBy="tagValue"
+        [dragdrop]="true"
+        [responsive]="true"
+        [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}"
+        [showSourceControls]="false"
+        [showTargetControls]="false"
+        [source]="tagKpiList"
+        [target]="tagKpiSelectedList">
+        <ng-template let-tag pTemplate="item">
+          <div class="tag-item">{{tag.tagValue}}</div>
+        </ng-template>
+      </p-pickList>
     </div>
 
-    <div class="p-md-3 p-col-12 p-field">
-      <label for="n-tag-kpi">{{'user.tagKpi' | translate}}</label>
-      <p-multiSelect formControlName="tagKpi" inputId="n-tag-kpi" [options]="tagKpiList" optionLabel="tagValue" dataKey="tagId"></p-multiSelect>
-    </div>
-
-    <div class="p-md-3 p-col-12 p-field">
-      <label for="n-tag-tool">{{'user.tagTool' | translate}}</label>
-      <p-multiSelect formControlName="tagTool" inputId="n-tag-tool" [options]="tagToolList" optionLabel="tagValue" dataKey="tagId"></p-multiSelect>
-    </div>
   </div>
 </form>
 

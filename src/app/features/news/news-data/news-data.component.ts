@@ -15,6 +15,8 @@ import {BaseComponent} from '../../../core/base.component';
 import {UtilService} from '../../../core/service/util.service';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {PageChangeEvent} from '../../../shared/model/page-change-event';
+import {AuthService} from '../../../auth/auth.service';
+import {UserAuth} from '../../../auth/model/user-auth';
 
 @Component({
   selector: 'aw-news-data',
@@ -37,6 +39,7 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
   sortOrder = 'DESC';
   totalItem = 0;
   initMaxShow = 2;
+  userLogged: UserAuth;
   constructor(
     private router: Router,
     private newsService: NewsService,
@@ -47,10 +50,12 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
     private fb: FormBuilder,
     private util: UtilService,
     private dialog: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private auth: AuthService
   ) {
     super();
     this.initFormFilter();
+    this.userLogged = this.auth.getUserInfo();
   }
 
   ngOnInit(): void {

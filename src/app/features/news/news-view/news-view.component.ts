@@ -8,6 +8,7 @@ import {NewsDetail} from '../model/news';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {NewsEnum} from '../model/news.enum';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'aw-news-view',
@@ -17,6 +18,8 @@ import {NewsEnum} from '../model/news.enum';
 export class NewsViewComponent extends BaseComponent implements OnInit {
   newsDetail: NewsDetail = {};
   trustHtmlContent: any = '';
+  trustUrlImg: any = '';
+  trustUrlDoc: any = '';
   newsConst = NewsEnum;
   constructor(
     private newsService: NewsService,
@@ -40,6 +43,12 @@ export class NewsViewComponent extends BaseComponent implements OnInit {
     ).subscribe(res => {
       if (res.newsDto) {
         this.trustHtmlContent = this.sanitizer.bypassSecurityTrustHtml(res.newsDto.content);
+      }
+      if (res.newsDto?.image) {
+        this.trustUrlImg = this.sanitizer.bypassSecurityTrustUrl(`${environment.mediaUrl}${res.newsDto.image}`);
+      }
+      if (res.newsDto?.filePath) {
+        this.trustUrlDoc = this.sanitizer.bypassSecurityTrustUrl(`${environment.mediaUrl}${res.newsDto.filePath}`);
       }
       this.newsDetail = res;
     }, err => {

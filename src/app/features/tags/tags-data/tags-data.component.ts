@@ -13,6 +13,8 @@ import {AppTranslateService} from '../../../core/service/translate.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {PageChangeEvent} from '../../../shared/model/page-change-event';
+import {AuthService} from '../../../auth/auth.service';
+import {UserAuth} from '../../../auth/model/user-auth';
 
 @Component({
   selector: 'aw-tags-data',
@@ -32,6 +34,7 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
   tagsType = [];
   tagType = TagsEnum;
   readonly initMaxShow = 2;
+  userLogged: UserAuth;
   constructor(
     private tagsService: TagsService,
     private router: Router,
@@ -40,9 +43,11 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
     private appTranslate: AppTranslateService,
     private translate: TranslateService,
     private dialog: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private auth: AuthService
   ) {
     super();
+    this.userLogged = this.auth.getUserInfo();
   }
 
   ngOnInit(): void {

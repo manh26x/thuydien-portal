@@ -29,6 +29,7 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import {MessageService} from 'primeng/api';
 import {CheckboxModule} from 'primeng/checkbox';
 import {TooltipModule} from 'primeng/tooltip';
+import {PickListModule} from 'primeng/picklist';
 
 
 @NgModule({
@@ -41,35 +42,36 @@ import {TooltipModule} from 'primeng/tooltip';
     UserUpdateComponent
   ],
     imports: [
-        CommonModule,
-        UserRoutingModule,
-        TranslateModule.forChild({
-            missingTranslationHandler: {
-                provide: MissingTranslationHandler,
-                useClass: CustomMissingTranslationHandler,
-                deps: [AppTranslateService]
-            },
-            loader: {
-                provide: TranslateLoader,
-                useFactory: (CustomTranslateLoader),
-                deps: [LANGUAGE_FILE_PATH, HttpClient]
-            },
-            isolate: true,
-            useDefaultLang: false
-        }),
-        PanelModule,
-        InputTextModule,
-        ButtonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        TableModule,
-        PaginatorModule,
-        MultiSelectModule,
-        BreadcrumbModule,
-        ToastModule,
-        AutoCompleteModule,
-        CheckboxModule,
-        TooltipModule
+      CommonModule,
+      UserRoutingModule,
+      TranslateModule.forChild({
+          missingTranslationHandler: {
+              provide: MissingTranslationHandler,
+              useClass: CustomMissingTranslationHandler,
+              deps: [AppTranslateService]
+          },
+          loader: {
+              provide: TranslateLoader,
+              useFactory: (CustomTranslateLoader),
+              deps: [LANGUAGE_FILE_PATH, HttpClient]
+          },
+          isolate: true,
+          useDefaultLang: false
+      }),
+      PanelModule,
+      InputTextModule,
+      ButtonModule,
+      FormsModule,
+      ReactiveFormsModule,
+      TableModule,
+      PaginatorModule,
+      MultiSelectModule,
+      BreadcrumbModule,
+      ToastModule,
+      AutoCompleteModule,
+      CheckboxModule,
+      TooltipModule,
+      PickListModule
     ],
   providers: [
     UserService,

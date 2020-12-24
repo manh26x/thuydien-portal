@@ -45,7 +45,7 @@ export class MenuComponent implements OnInit {
         {label: res.home, icon: 'pi pi-fw pi-home', routerLink: ['/']},
         {label: res.news, icon: 'pi pi-fw pi-book', routerLink: ['/news']},
         {label: res.user, icon: 'pi pi-fw pi-user', routerLink: ['/user']},
-        {label: res.qna, icon: 'pi pi-fw pi-question-circle', routerLink: ['/qna']},
+        // {label: res.qna, icon: 'pi pi-fw pi-question-circle', routerLink: ['/qna']},
         {label: res.tags, icon: 'pi pi-fw pi-list', routerLink: ['/tags']},
         {label: res.calculateTool, icon: 'pi pi-fw pi-desktop', routerLink: ['/calculate-tool']}
       ];

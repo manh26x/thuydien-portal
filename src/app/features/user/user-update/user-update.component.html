@@ -1,23 +1,6 @@
 <p-panel header="{{'update' | translate}}">
-  <aw-user-form (cancel)="doCancel()" (save)="doSave($event)" mode="update" [valueForm]="initValue">
-    <form [formGroup]="formChangePass">
-      <div class="p-fluid p-grid">
-        <div class="p-md-12 p-col-12 p-field-checkbox">
-          <p-checkbox formControlName="isChangePass" binary="true" inputId="is-change-pass"></p-checkbox>
-          <label for="is-change-pass">{{'user.resetPass' | translate}}</label>
-        </div>
-      </div>
-      <div class="p-fluid p-grid" *ngIf="formChangePass.get('isChangePass').value">
-        <div class="p-md-6 p-col-12 p-field">
-          <label for="cp-current-pass">{{'user.currentPass' | translate}}</label>
-          <input formControlName="currentPass" id="cp-current-pass" type="password" pInputText/>
-        </div>
-
-        <div class="p-md-6 p-col-12 p-field">
-          <label for="cp-new-pass">{{'user.newPass' | translate}}</label>
-          <input formControlName="newPass" id="cp-new-pass" type="password" pInputText/>
-        </div>
-      </div>
-    </form>
+  <aw-user-form (cancel)="doCancel()" (save)="doSave($event)" mode="update"
+                [valueForm]="initValue"
+                [branchList]="branchList" [tagKpiList]="tagKpiList" [tagNewsList]="tagNewsList">
   </aw-user-form>
 </p-panel>

@@ -14,15 +14,23 @@ export class UserService extends BaseService{
   }
 
   getUserInfo(userId: string): Observable<UserDetail> {
-    const param = new HttpParams().append('userPortalId', userId);
+    const param = new HttpParams().append('userId', userId);
     return this.doGet('/admin/userPortal/detail', param).pipe(
       map(res => res.data[0])
     );
   }
 
   filterUser(request: FilterUserRequest): Observable<UserBranch[]> {
+    request.userType = '';
     return this.doPost('/admin/userPortal/filter', request).pipe(
       map(res => res.data || [])
+    );
+  }
+
+  getUserByUsername(username: string): Observable<string[]> {
+    const pr: HttpParams = new HttpParams().append('keyword', username);
+    return this.doGet('/admin/userPortal/search', pr ).pipe(
+      map((res) => res.data || [])
     );
   }
 
@@ -32,14 +40,8 @@ export class UserService extends BaseService{
     );
   }
 
-  getBranchList(): Observable<any> {
-    return this.doGet('/admin/branch/list').pipe(
-      map(res => res.data || [])
-    );
-  }
-
   insertUser(request: UserDetail): Observable<any> {
-    return this.doPost('/admin/userPortal/add', request).pipe(
+    return this.doPost('/admin/userPortal/update', request).pipe(
       map(res => res)
     );
   }

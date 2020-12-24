@@ -5,6 +5,7 @@ import { AccessDeniedComponent } from './access-denied/access-denied.component';
 import { ErrorComponent } from './error/error.component';
 import {PublicRoutingModule} from './public-routing.module';
 import {ButtonModule} from 'primeng/button';
+import {TranslateModule} from '@ngx-translate/core';
 
 
 
@@ -13,7 +14,8 @@ import {ButtonModule} from 'primeng/button';
   imports: [
     CommonModule,
     PublicRoutingModule,
-    ButtonModule
+    ButtonModule,
+    TranslateModule
   ]
 })
 export class PublicModule { }
