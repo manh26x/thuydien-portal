@@ -32,6 +32,10 @@ const routes: Routes = [
       {
         path: 'calculate-tool',
         loadChildren: () => import('./calculate-tool/calculate-tool.module').then(m => m.CalculateToolModule)
+      },
+      {
+        path: 'role',
+        loadChildren: () => import('./role/role.module').then(m => m.RoleModule)
       }
     ]
   }
