@@ -73,7 +73,7 @@ export class TagsFormComponent implements OnInit, OnChanges {
             return { code: tagType };
           }),
           assign: tag.assignee.map(tagUser => {
-            return { userId: tagUser.userId };
+            return { userName: tagUser.userId };
           })
         });
       }

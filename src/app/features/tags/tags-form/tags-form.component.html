@@ -23,7 +23,7 @@
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
       <label for="n-assign">{{'tags.assignTo' | translate}}</label>
-      <p-multiSelect inputId="n-assign" [options]="userList" optionLabel="userName" dataKey="userId" formControlName="assign"></p-multiSelect>
+      <p-multiSelect inputId="n-assign" [options]="userList" optionLabel="fullName" dataKey="userName" formControlName="assign"></p-multiSelect>
       <small *ngIf="hasErrorInput('assign', 'required')" class="p-invalid">
         {{'invalid.assign.required' | translate}}
       </small>
