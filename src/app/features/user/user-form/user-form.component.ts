@@ -6,11 +6,10 @@ import {UserEnum} from '../model/user.enum';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UtilService} from '../../../core/service/util.service';
 import {UserService} from '../service/user.service';
-import {TagsService} from '../../tags/service/tags.service';
 import {TagsEnum} from '../../tags/model/tags.enum';
 import {TagsUser} from '../../tags/model/tags';
-import {forkJoin} from 'rxjs';
 import {UserDetail} from '../model/user';
+import {xorBy} from 'lodash-es';
 
 @Component({
   selector: 'aw-user-form',
@@ -22,19 +21,20 @@ import {UserDetail} from '../model/user';
       padding: 0;
       width: 100%;
     }
-  `],
-  providers: [TagsService]
+  `]
 })
 export class UserFormComponent implements OnInit, OnChanges {
   roleList = [];
   statusList = [];
-  branchList = [];
+
   formUser: FormGroup;
-  tagNewsList: TagsUser[];
-  tagNewsSelectedList: TagsUser[] = [];
-  tagKpiList: TagsUser[];
   tagTypeEnum = TagsEnum;
   filteredUser = [];
+  tagNewsSelectedList: TagsUser[] = [];
+  tagKpiSelectedList: TagsUser[] = [];
+  @Input() branchList = [];
+  @Input() tagNewsList: TagsUser[];
+  @Input() tagKpiList: TagsUser[];
   @Input() mode = 'create';
   @Input() valueForm: UserDetail;
   @Output() save: EventEmitter<any> = new EventEmitter<any>();
@@ -44,8 +44,7 @@ export class UserFormComponent implements OnInit, OnChanges {
     private appTranslate: AppTranslateService,
     private fb: FormBuilder,
     private util: UtilService,
-    private userService: UserService,
-    private tagService: TagsService
+    private userService: UserService
   ) {
     this.initForm();
   }
@@ -53,19 +52,7 @@ export class UserFormComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     if (this.mode === 'update') {
       this.formUser.get('userId').disable();
-    } else if (this.mode === 'view') {
-      this.formUser.get('fullName').disable();
-      this.formUser.get('role').disable();
       this.formUser.get('status').disable();
-      this.formUser.get('userId').disable();
-      this.formUser.get('email').disable();
-      this.formUser.get('phone').disable();
-      this.formUser.get('position').disable();
-      this.formUser.get('branch').disable();
-      this.formUser.get('tagQna').disable();
-      this.formUser.get('tagNews').disable();
-      this.formUser.get('tagKpi').disable();
-      this.formUser.get('tagTool').disable();
     }
     this.appTranslate.languageChanged$.pipe(
       startWith(''),
@@ -80,50 +67,33 @@ export class UserFormComponent implements OnInit, OnChanges {
         {code: UserEnum.SUPPER_ADMIN, name: res.supperAdmin},
       ];
     });
-
-    const obsTagNews = this.filterTagByType('', TagsEnum.NEWS);
-    const obsTagKpi = this.filterTagByType('', TagsEnum.KPI);
-    const obsBranch = this.userService.getBranchList();
-    forkJoin([obsBranch, obsTagNews, obsTagKpi]).subscribe(res => {
-      this.branchList = res[0];
-      this.tagNewsList = res[1].tagsList;
-      this.tagKpiList = res[2].tagsList;
-    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.valueForm) {
       if (!changes.valueForm.firstChange) {
         const userInfo: UserDetail = changes.valueForm.currentValue;
-        this.formUser.setValue({
-          fullName: userInfo.user.fullName,
-          role: {code: userInfo.user.role},
-          status: {code: userInfo.user.statusCode},
+        this.formUser.patchValue({
           userId: userInfo.user.userName,
-          email: userInfo.user.email,
+          status: {code: userInfo.user.statusCode},
+          fullName: userInfo.user.fullName,
           phone: userInfo.user.phone,
+          email: userInfo.user.email,
+          branch: userInfo.userBranchList.map(item => ({ id: item.branchId })),
           position: userInfo.user.position,
-          branch: userInfo.userBranchList.map(br => {
-            return { id: br.branchId };
-          }),
-          tagQna: userInfo.listTagQnA.map(qna => {
-            return { tagId:  qna.tagId };
-          }),
-          tagNews: userInfo.listTagNews.map(qna => {
-            return { tagId:  qna.tagId };
-          }),
-          tagKpi: userInfo.listTagKPI.map(qna => {
-            return { tagId:  qna.tagId };
-          }),
-          tagTool: userInfo.listTagTool.map(qna => {
-            return { tagId:  qna.tagId };
-          }),
+          role: {code: userInfo.user.role}
         });
+        this.tagKpiSelectedList = userInfo.listTagKPI;
+        this.tagNewsSelectedList = userInfo.listTagNews;
       }
     }
   }
 
   doSave() {
+    this.formUser.patchValue({
+      tagNews: this.tagNewsSelectedList,
+      tagKpi: this.tagKpiSelectedList
+    });
     if (this.formUser.invalid) {
       this.util.validateAllFields(this.formUser);
     } else {
@@ -135,27 +105,34 @@ export class UserFormComponent implements OnInit, OnChanges {
     this.cancel.emit();
   }
 
-  filterUser(evt) {
-    this.userService.getUserByUsername(evt.query).subscribe(res => {
+  filterUser(evt?: any) {
+    const query = evt ? evt.query : this.formUser.value.userId;
+    this.userService.getUserByUsername(query).subscribe(res => {
       this.filteredUser = res;
+    }, err => {
+      this.filteredUser = [];
+      throw err;
     });
   }
 
   doSelectUser(evt) {
+    this.tagKpiList = [...this.tagKpiSelectedList, ...this.tagKpiList];
+    this.tagNewsList = [...this.tagNewsSelectedList, ...this.tagNewsList];
     this.userService.getUserInfo(evt).subscribe(res => {
       this.formUser.patchValue({
-        status: res.user.statusCode,
+        status: {code: res.user.statusCode},
         fullName: res.user.fullName,
         phone: res.user.phone,
         email: res.user.email,
-        branch: res.userBranchList.map(item => { return { id: item.branchId }; }),
-        position: res.user.position
+        branch: res.userBranchList.map(item => ({ id: item.branchId })),
+        position: res.user.position,
+        role: {code: res.user.role}
       });
+      this.tagKpiList = xorBy(this.tagKpiList, res.listTagKPI, 'tagId');
+      this.tagKpiSelectedList = res.listTagKPI;
+      this.tagNewsList = xorBy(this.tagNewsList, res.listTagNews, 'tagId');
+      this.tagNewsSelectedList = res.listTagNews;
     });
-  }
-
-  filterTagByType(query, type) {
-    return this.tagService.searchTagExp({tagType: type, sortOrder: 'ASC', sortBy: 'id', page: 0, pageSize: 500, searchValue: query });
   }
 
   initForm() {

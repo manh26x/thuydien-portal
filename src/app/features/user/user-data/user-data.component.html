@@ -73,7 +73,9 @@
          </td>
         <td>
           <button (click)="gotoView(user.user.userName)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
-          <button (click)="gotoUpdate(user.user.userName)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-secondary p-button-text"></button>
+          <button *ngIf="userLogged.isSupperAdmin || user.user.userName == userLogged.userName" (click)="gotoUpdate(user.user.userName)" pButton
+                  type="button" icon="pi pi-pencil" class="p-button-rounded p-button-secondary p-button-text">
+          </button>
 <!--          <button (click)="doDelete(user)" pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>-->
         </td>
       </tr>

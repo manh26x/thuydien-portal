@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="image-preview" [ngStyle]="{'display': isSelect ? 'none':'block' }">
-    <img #imgPreview alt="IMG" src="">
+    <img alt="IMG" [src]="previewUrl">
     <div class="img-action">
       <button class="btn-action" (click)="file.click()">
         <i class="pi pi-refresh"></i>

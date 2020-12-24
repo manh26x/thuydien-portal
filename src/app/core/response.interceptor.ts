@@ -9,6 +9,7 @@ import {Observable, of, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {catchError, finalize, tap} from 'rxjs/operators';
 import {ApiErrorArgsInvalid, ApiErrorForbidden, ApiErrorResponse, ApiErrorTokenInvalid} from './model/error-response';
+import { attempt, isError } from 'lodash-es';
 
 @Injectable()
 export class ResponseInterceptor implements HttpInterceptor {
@@ -106,11 +107,8 @@ export class ResponseInterceptor implements HttpInterceptor {
     if (typeof raw === 'object') {
       return { isParseJsonError: false, response: raw };
     } else {
-      try {
-        return { isParseJsonError: true, response: JSON.parse(raw) };
-      } catch {
-        return { isParseJsonError: false, response: raw };
-      }
+      const response = attempt(JSON.parse, raw);
+      return { isParseJsonError: isError(response), response };
     }
   }
 

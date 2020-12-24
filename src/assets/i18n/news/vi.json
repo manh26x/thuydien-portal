@@ -7,6 +7,7 @@
 	},
 	"btn": {
 		"cancel": "Hủy",
+		"delete": "Xóa",
 		"draft": "Lưu bản nháp",
 		"insert": "Thêm mới",
 		"refresh": "Tải lại",
@@ -15,6 +16,7 @@
 	"confirm": {
 		"accept": "Có",
 		"delete": "Xác nhận xóa",
+		"deleteImage": "Bạn có chắc chắn xóa ảnh từ bản tin?",
 		"deleteMessage": "Bạn có chắc chắn muốn xóa bản tin \"{{name}}\"",
 		"reject": "Không"
 	},
@@ -33,10 +35,10 @@
 	"edit": "Chỉnh sửa bản tin",
 	"filter": "Lọc kết quả",
 	"invalid": {
-		"content": {
+		"branch": {
 			"required": "Giá trị không được để trống"
 		},
-		"groupView": {
+		"content": {
 			"required": "Giá trị không được để trống"
 		},
 		"publishDate": {
@@ -70,6 +72,7 @@
 	},
 	"news": {
 		"author": "Tác giả",
+		"branch": "Chi nhánh",
 		"content": "Nội dung",
 		"docs": "Tài liệu đính kèm PDF",
 		"groupView": "Nhóm đối tượng xem bản tin",

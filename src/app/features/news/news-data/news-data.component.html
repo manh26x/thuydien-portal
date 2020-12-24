@@ -87,12 +87,12 @@
         </td>
         <td>
           <button (click)="gotoView(news.id)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
-          <button *ngIf="!userLogged.isSupperAdmin && userLogged.username == news.createBy" (click)="gotoUpdate(news.id)" pButton
+          <button *ngIf="userLogged.isSupperAdmin || userLogged.username == news.createBy" (click)="gotoUpdate(news.id)" pButton
                   type="button"
                   icon="pi pi-pencil"
                   class="p-button-rounded p-button-secondary p-button-text">
           </button>
-          <button *ngIf="!userLogged.isSupperAdmin && userLogged.username == news.createBy" (click)="doDelete(news)" pButton
+          <button *ngIf="userLogged.isSupperAdmin || userLogged.username == news.createBy" (click)="doDelete(news)" pButton
                   type="button"
                   icon="pi pi-trash"
                   class="p-button-rounded p-button-danger p-button-text">

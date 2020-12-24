@@ -27,11 +27,13 @@ const routes: Routes = [
       },
       {
         path: 'update/:id',
-        component: UserUpdateComponent
+        component: UserUpdateComponent,
+        canActivate: [AuthGuard, SupperAdminGuard]
       },
       {
         path: 'view/:id',
-        component: UserViewComponent
+        component: UserViewComponent,
+        canActivate: [AuthGuard]
       }
     ]
   }

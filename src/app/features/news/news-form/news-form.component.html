@@ -40,9 +40,6 @@
           <small *ngIf="hasErrorInput('content', 'required')" class="p-invalid">
             {{'invalid.content.required' | translate}}
           </small>
-<!--          <ng-template #viewContent>-->
-<!--            <div class="content-readonly" [innerHTML]="contentReadonly"></div>-->
-<!--          </ng-template>-->
         </div>
       </div>
     </div>
@@ -58,10 +55,17 @@
         </div>
 
         <div class="p-col-12 p-field">
-          <label for="n-group-customer">{{'news.groupView' | translate}} <span class="p-invalid">*</span></label>
-          <p-multiSelect formControlName="groupView" inputId="n-group-customer" [options]="roleList" dataKey="id" optionLabel="name"></p-multiSelect>
-          <small *ngIf="hasErrorInput('groupView', 'required')" class="p-invalid">
-            {{'invalid.groupView.required' | translate}}
+          <label for="n-group-customer">{{'news.branch' | translate}} <span class="p-invalid">*</span></label>
+          <p-multiSelect
+            [virtualScroll]="true"
+            formControlName="branch"
+            inputId="n-group-customer"
+            [options]="branchList"
+            dataKey="id"
+            optionLabel="name">
+          </p-multiSelect>
+          <small *ngIf="hasErrorInput('branch', 'required')" class="p-invalid">
+            {{'invalid.branch.required' | translate}}
           </small>
         </div>
 
@@ -109,6 +113,10 @@
               <div style="max-width: 100%">{{file.name}}</div>
             </ng-template>
           </p-fileUpload>
+          <div *ngIf="mode == 'update' && !isChangeDoc" class="p-d-flex p-mt-1">
+            <a target="_blank" [href]="fileDocPreview">{{formNews.value.docs}}</a>
+            <p-button label="{{'btn.delete' | translate}}" styleClass="p-button-sm" (click)="doClearImagePreview()"></p-button>
+          </div>
         </div>
 
         <div class="p-col-12 p-field">
@@ -142,6 +150,6 @@
   </ng-container>
   <ng-container *ngIf="mode == 'update'">
     <button pButton (click)="doSaveDraft()" type="button" label="{{'btn.draft' | translate}}" class="p-button-raised p-button-secondary p-mr-3"></button>
-    <button pButton (click)="doSave()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised"></button>
+    <button pButton (click)="doUpdate()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised"></button>
   </ng-container>
 </div>

@@ -14,6 +14,7 @@
 			"500": "System Error",
 			"jsonFormat": "Cannot convert data to JSON",
 			"noResponseCode": "No response code found",
+			"timeout": "The server did not respond",
 			"title": "An error occurred"
 		},
 		"http": {

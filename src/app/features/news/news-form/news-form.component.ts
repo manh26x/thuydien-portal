@@ -1,43 +1,40 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TagsService} from '../../tags/service/tags.service';
 import {forkJoin} from 'rxjs';
 import {TagsUser} from '../../tags/model/tags';
-import {RoleService} from '../../../shared/service/role.service';
-import {Role} from '../../../shared/model/role';
 import {UtilService} from '../../../core/service/util.service';
-import {SelectItem} from 'primeng/api';
+import {ConfirmationService, SelectItem} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {AppTranslateService} from '../../../core/service/translate.service';
 import {concatMap, startWith} from 'rxjs/operators';
 import {NewsEnum} from '../model/news.enum';
 import {NewsDetail} from '../model/news';
+import {environment} from '../../../../environments/environment';
+import {ImageUploadComponent} from '../../../shared/custom-file-upload/image-upload/image-upload.component';
+import {DomSanitizer} from '@angular/platform-browser';
+import {BranchService} from '../../../shared/service/branch.service';
+import {Branch} from '../../../shared/model/branch';
 
 @Component({
   selector: 'aw-news-form',
   templateUrl: './news-form.component.html',
-//  styles: [`
-//    .content-readonly {
-//      border: 1px solid #c5c5c5;
-//      padding: 1rem;
-//      opacity: 1;
-//      max-height: 600px;
-//      overflow: auto;
-//      border-radius: 4px;
-//    }
-//  `],
-  providers: [TagsService, RoleService]
+  providers: [TagsService]
 })
 export class NewsFormComponent implements OnInit, OnChanges {
   yearSelect = `${new Date().getFullYear()}:${new Date().getFullYear() + 10}`;
   min = new Date();
   formNews: FormGroup;
   tagList: TagsUser[] = [];
-  roleList: Role[] = [];
+  branchList: Branch[] = [];
   levelList: SelectItem[] = [];
   filesImage: any[];
-  filesDoc: any[];
-//  contentReadonly: any = '';
+  filesDoc: any[] = [];
+  // update mode
+  fileDocPreview: any = '';
+  isChangeImage = false;
+  isChangeDoc = false;
+  @ViewChild(ImageUploadComponent, {static: true}) imgUploadComponent: ImageUploadComponent;
   @Input() mode = 'create';
   @Input() valueForm: NewsDetail;
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
@@ -46,28 +43,17 @@ export class NewsFormComponent implements OnInit, OnChanges {
   constructor(
     private fb: FormBuilder,
     private tagService: TagsService,
-    private roleService: RoleService,
     private util: UtilService,
     private translate: TranslateService,
-    private appTranslate: AppTranslateService
-//    private sanitizer: DomSanitizer
+    private appTranslate: AppTranslateService,
+    private sanitizer: DomSanitizer,
+    private dialog: ConfirmationService,
+    private branchService: BranchService
   ) {
     this.initForm();
   }
 
   ngOnInit(): void {
-//    if (this.mode === 'view') {
-//      this.formNews.get('title').disable();
-//      this.formNews.get('shortContent').disable();
-//      this.formNews.get('content').disable();
-//      this.formNews.get('tags').disable();
-//      this.formNews.get('groupView').disable();
-//      this.formNews.get('publishDate').disable();
-//      this.formNews.get('level').disable();
-//      this.formNews.get('docs').disable();
-//      this.formNews.get('image').disable();
-//      this.formNews.get('isSendNotification').disable();
-//    }
     this.appTranslate.languageChanged$.pipe(
       startWith(''),
       concatMap(() => this.translate.get('levelList').pipe(
@@ -81,10 +67,10 @@ export class NewsFormComponent implements OnInit, OnChanges {
       ];
     });
     const obsTag = this.tagService.getAllTag();
-    const obsRole = this.roleService.searchRole('');
+    const obsRole = this.branchService.getBranchList();
     forkJoin([obsTag, obsRole]).subscribe(res => {
       this.tagList = res[0];
-      this.roleList = res[1];
+      this.branchList = res[1];
     });
   }
 
@@ -96,8 +82,13 @@ export class NewsFormComponent implements OnInit, OnChanges {
           if (news.newsDto.status === NewsEnum.STATUS_PUBLISHED) {
             this.formNews.get('publishDate').disable();
           }
+          if (news.newsDto?.image) {
+            this.imgUploadComponent.previewAsUrl(`${environment.mediaUrl}${news.newsDto.image}`);
+          }
+          if (news.newsDto?.filePath) {
+            this.fileDocPreview = this.sanitizer.bypassSecurityTrustUrl(`${environment.mediaUrl}${news.newsDto.filePath}`);
+          }
         }
-//        this.contentReadonly = this.sanitizer.bypassSecurityTrustHtml(news.newsDto.content);
         this.formNews.setValue({
           id: news.newsDto.id,
           title: news.newsDto.title,
@@ -106,8 +97,8 @@ export class NewsFormComponent implements OnInit, OnChanges {
           tags: news.tagOfNews ? news.tagOfNews.map(tags => {
             return { tagId: tags.idTag };
           }) : [],
-          groupView: news.listRole ? news.listRole.map(role => {
-            return { id: role.roleId };
+          branch: news.listBranch ? news.listBranch.map(branch => {
+            return { id: branch.id };
           }) : [],
           publishDate: new Date(news.newsDto.publishTime),
           level: news.newsDto.priority,
@@ -131,6 +122,24 @@ export class NewsFormComponent implements OnInit, OnChanges {
     }
   }
 
+  doUpdate() {
+    const value = this.formNews.getRawValue();
+    this.formNews.patchValue({
+      title: value.title.trim()
+    });
+    if (this.formNews.invalid) {
+      this.util.validateAllFields(this.formNews);
+    } else {
+      this.save.emit( {
+        news: value,
+        fileImageList: this.filesImage,
+        fileDocList: this.filesDoc,
+        isChangeImage: this.isChangeImage,
+        isChangeDoc: this.isChangeDoc
+      });
+    }
+  }
+
   doSaveDraft() {
     this.draft.emit({ news: this.formNews.getRawValue(), fileImageList: this.filesImage, fileDocList: this.filesDoc });
   }
@@ -140,19 +149,37 @@ export class NewsFormComponent implements OnInit, OnChanges {
   }
 
   doChangeImage(files) {
+    this.isChangeImage = true;
     this.filesImage = files;
   }
 
   doClearImage() {
+    this.isChangeImage = true;
     this.filesImage = [];
   }
 
   doSelectDoc(evt) {
+    this.isChangeDoc = true;
     this.filesDoc = evt.currentFiles;
   }
 
   doClearDoc() {
+    this.isChangeDoc = true;
     this.filesDoc = [];
+  }
+
+  doClearImagePreview() {
+    this.dialog.confirm({
+      key: 'globalDialog',
+      header: this.translate.instant('confirm.delete'),
+      message: this.translate.instant('confirm.deleteImage'),
+      rejectLabel: this.translate.instant('confirm.reject'),
+      acceptLabel: this.translate.instant('confirm.accept'),
+      accept: () => {
+        this.isChangeDoc = true;
+      },
+      reject: () => {}
+    });
   }
 
   initForm() {
@@ -165,7 +192,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
       shortContent: ['', [Validators.maxLength(400)]],
       content: ['', [Validators.required]],
       tags: [null, [Validators.required]],
-      groupView: [null, [Validators.required]],
+      branch: [null, [Validators.required]],
       publishDate: [now],
       level: [NewsEnum.LEVEL_NORMAL, [Validators.required]],
       docs: [''],

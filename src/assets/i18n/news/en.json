@@ -7,6 +7,7 @@
 	},
 	"btn": {
 		"cancel": "Cancel",
+		"delete": "Delete",
 		"draft": "Save the draft",
 		"insert": "Insert",
 		"refresh": "Refresh",
@@ -15,6 +16,7 @@
 	"confirm": {
 		"accept": "Yes",
 		"delete": "Confirm Delete",
+		"deleteImage": "Are you sure to delete the photos from the newsletter?",
 		"deleteMessage": "Are you sure you want to remove news \"{{name}}\"",
 		"reject": "No"
 	},
@@ -33,10 +35,10 @@
 	"edit": "News editing",
 	"filter": "Filter",
 	"invalid": {
-		"content": {
+		"branch": {
 			"required": "Value cannot be blank"
 		},
-		"groupView": {
+		"content": {
 			"required": "Value cannot be blank"
 		},
 		"publishDate": {
@@ -70,6 +72,7 @@
 	},
 	"news": {
 		"author": "Author",
+		"branch": "Branch",
 		"content": "Content",
 		"docs": "Attachment PDF",
 		"groupView": "Audience group viewing news",

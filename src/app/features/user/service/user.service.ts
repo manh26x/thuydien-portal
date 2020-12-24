@@ -40,14 +40,8 @@ export class UserService extends BaseService{
     );
   }
 
-  getBranchList(): Observable<any> {
-    return this.doGet('/admin/branch/list').pipe(
-      map(res => res.data || [])
-    );
-  }
-
   insertUser(request: UserDetail): Observable<any> {
-    return this.doPost('/admin/userPortal/add', request).pipe(
+    return this.doPost('/admin/userPortal/update', request).pipe(
       map(res => res)
     );
   }

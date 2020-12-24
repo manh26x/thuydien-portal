@@ -5,7 +5,7 @@ import {UtilService} from '../../../core/service/util.service';
 import {Tags} from '../../tags/model/tags';
 import {Role} from '../../../shared/model/role';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
-import {concatMap, finalize, map} from 'rxjs/operators';
+import {concatMap, finalize} from 'rxjs/operators';
 import {MessageService} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
@@ -62,10 +62,10 @@ export class NewsCreateComponent implements OnInit, BeforeLeave {
         });
       });
     }
-    const roleInsert: Role[] = [];
-    if (this.util.canForEach(value.groupView)) {
-      value.groupView.forEach(g => {
-        roleInsert.push({
+    const branchInsert: Role[] = [];
+    if (this.util.canForEach(value.branch)) {
+      value.branch.forEach(g => {
+        branchInsert.push({
           id: g.id
         });
       });
@@ -77,7 +77,7 @@ export class NewsCreateComponent implements OnInit, BeforeLeave {
       filePath: '',
       imgPath: '',
       listNewsTag: tagsInsert,
-      listRole: roleInsert,
+      listBranch: branchInsert,
       priority: value.level,
       publishTime: value.publishDate,
       sendNotification: value.isSendNotification ? 1 : 0,
@@ -99,6 +99,9 @@ export class NewsCreateComponent implements OnInit, BeforeLeave {
       });
       this.isLeave = true;
       this.router.navigate(['news']);
+    }, err => {
+      this.indicator.hideActivityIndicator();
+      throw err;
     });
   }
 

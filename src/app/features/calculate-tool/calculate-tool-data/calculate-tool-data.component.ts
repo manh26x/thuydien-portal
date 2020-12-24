@@ -11,7 +11,9 @@ import {Product} from '../../../shared/model/product';
 import {CalculateTool, SearchToolRequest} from '../model/calculate-tool';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {UtilService} from '../../../core/service/util.service';
-import {MessageService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
+import {UserAuth} from '../../../auth/model/user-auth';
+import {AuthService} from '../../../auth/auth.service';
 
 @Component({
   selector: 'aw-calculate-tool-data',
@@ -27,6 +29,7 @@ export class CalculateToolDataComponent extends BaseComponent implements OnInit 
   customerTypeList: Product[] = [];
   toolList: CalculateTool[] = [];
   toolConst = CalculateToolEnum;
+  userLogged: UserAuth;
   constructor(
     private toolService: CalculateToolService,
     private translate: TranslateService,
@@ -35,9 +38,12 @@ export class CalculateToolDataComponent extends BaseComponent implements OnInit 
     private fb: FormBuilder,
     private indicator: IndicatorService,
     private util: UtilService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private auth: AuthService,
+    private confirmService: ConfirmationService
   ) {
     super();
+    this.userLogged = this.auth.getUserInfo();
     this.initForm();
   }
 
@@ -71,8 +77,26 @@ export class CalculateToolDataComponent extends BaseComponent implements OnInit 
   doChangeStatus(index: number) {
     const data = this.toolList[index];
     const newStatus = data.isActive ? 1 : 0;
+    if (!data.isActive) {
+      this.confirmService.confirm({
+        key: 'globalDialog',
+        header: this.translate.instant('message.notification'),
+        message: this.translate.instant('message.confirmOff'),
+        acceptVisible: true,
+        rejectVisible: true,
+        acceptLabel: this.translate.instant('message.accept'),
+        rejectLabel: this.translate.instant('message.reject'),
+        accept: () => this.changeStatus(index, newStatus),
+        reject: () => { this.toolList[index].isActive = !data.isActive; }
+      });
+    } else {
+      this.changeStatus(index, newStatus);
+    }
+  }
+
+  changeStatus(index, newStatus) {
+    const data = this.toolList[index];
     this.toolService.changeStatus(data.id, newStatus).subscribe(res => {
-      this.toolList[index].status = newStatus;
       this.messageService.add({
         severity: 'success',
         detail: this.translate.instant('message.updateSuccess')

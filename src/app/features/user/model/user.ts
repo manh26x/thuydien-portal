@@ -18,7 +18,7 @@ export interface UserInfo {
   status?: string;
 }
 
-export interface Branch {
+export interface BranchUser {
   branchId?: string;
   userId?: string;
   branchName?: string;
@@ -39,7 +39,7 @@ export interface FilterUserRequest {
 
 export interface UserDetail {
   user?: UserInfo;
-  userBranchList?: Branch[];
+  userBranchList?: BranchUser[];
   listTagQnA?: TagsUser[];
   listTagNews?: TagsUser[];
   listTagKPI?: TagsUser[];
@@ -50,7 +50,7 @@ export interface UpdateUserRequest {
   isChangePassword?: number;
   currentPassword?: string;
   userPortal?: UserInfo;
-  userBranchList?: Branch[];
+  userBranchList?: BranchUser[];
   listTagQnA?: TagsUser[];
   listTagNews?: TagsUser[];
   listTagKPI?: TagsUser[];

@@ -61,12 +61,15 @@
 		"insertSuccess": "Add new account successfully",
 		"passwordNotMatch": "The current password is incorrect",
 		"updateNotFound": "User does not exist or has been deleted",
+		"updateNotPermission": "You do not have permission to update your account",
 		"updateSuccess": "Successful account information update"
 	},
 	"no": "No.",
 	"noData": "No results match",
 	"paging": "Showing {first} to {last} in {totalRecords} records",
 	"search": "Enter your first and last name or location",
+	"selectedList": "List of selected tags",
+	"tagList": "List of tags",
 	"update": "Edit User Information",
 	"user": {
 		"branch": "Branch",

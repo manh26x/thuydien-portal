@@ -13,6 +13,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {MessageService} from 'primeng/api';
 import {AuthService} from '../../../auth/auth.service';
 import {UserAuth} from '../../../auth/model/user-auth';
+import {forkJoin, Observable, of} from 'rxjs';
 
 @Component({
   selector: 'aw-news-update',
@@ -65,8 +66,26 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
   }
 
   doSave(evt, draft) {
+    // 0: file docs 1: file image
+    const listObs: Observable<string>[] = [];
+    // file docs
+    if (evt.isChangeDoc && this.util.canForEach(evt.fileDocList)) {
+      const listFormData: FormData = new FormData();
+      listFormData.append('file', evt.fileDocList[0], evt.fileDocList[0].name);
+      listObs.push(this.newsService.uploadFile(listFormData));
+    } else {
+      listObs.push(of(evt.news.docs));
+    }
+    // file image
+    if (evt.isChangeImage && evt.fileImageList && evt.fileImageList.length > 0) {
+      const listFormData: FormData = new FormData();
+      listFormData.append('file', evt.fileImageList[0], evt.fileImageList[0].name);
+      listObs.push(this.newsService.uploadFile(listFormData));
+    } else {
+      listObs.push(of(evt.news.image));
+    }
+
     const value = evt.news;
-    this.indicator.showActivityIndicator();
     const tagsInsert: Tags[] = [];
     if (this.util.canForEach(value.tags)) {
       value.tags.forEach(t => {
@@ -75,10 +94,10 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
         });
       });
     }
-    const roleInsert: Role[] = [];
-    if (this.util.canForEach(value.groupView)) {
-      value.groupView.forEach(g => {
-        roleInsert.push({
+    const branchInsert: Role[] = [];
+    if (this.util.canForEach(value.branch)) {
+      value.branch.forEach(g => {
+        branchInsert.push({
           id: g.id
         });
       });
@@ -91,14 +110,21 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
       filePath: '',
       imgPath: '',
       listNewsTag: tagsInsert,
-      listRole: roleInsert,
+      listBranch: branchInsert,
       priority: value.level,
       publishTime: value.publishDate,
       sendNotification: value.isSendNotification ? 1 : 0,
-      isDraft: draft ? 1: 0
+      isDraft: draft ? 1 : 0
     };
-    this.newsService.updateNews(body).pipe(
-      finalize(() => this.indicator.hideActivityIndicator())
+    this.indicator.showActivityIndicator();
+    forkJoin(listObs).pipe(
+      concatMap(fileInfo => {
+        body.filePath = fileInfo[0];
+        body.imgPath = fileInfo[1];
+        return this.newsService.updateNews(body).pipe(
+          finalize(() => this.indicator.hideActivityIndicator())
+        );
+      })
     ).subscribe(res => {
       this.messageService.add({
         severity: 'success',
@@ -106,6 +132,7 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
       });
       this.router.navigate(['news']);
     }, err => {
+      this.indicator.hideActivityIndicator();
       if (err instanceof ApiErrorResponse && err.code === '201') {
         this.messageService.add({
           severity: 'error',

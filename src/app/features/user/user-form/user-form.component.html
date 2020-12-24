@@ -5,6 +5,10 @@
       <p-autoComplete
         inputId="n-user-id"
         formControlName="userId"
+        dropdownMode="current"
+        dropdownIcon="pi pi-search"
+        [forceSelection]="false"
+        [dropdown]="true"
         [suggestions]="filteredUser"
         [minLength]="1"
         (onSelect)="doSelectUser($event)"
@@ -75,15 +79,23 @@
       </p-pickList>
     </div>
 
-<!--    <div class="p-md-6 p-col-12 p-field">-->
-<!--      <label for="n-tag-news">{{'user.tagNews' | translate}}</label>-->
-<!--      <p-multiSelect formControlName="tagNews" inputId="n-tag-news" [options]="tagNewsList" optionLabel="tagValue" dataKey="tagId"></p-multiSelect>-->
-<!--    </div>-->
-
-<!--    <div class="p-md-6 p-col-12 p-field">-->
-<!--      <label for="n-tag-kpi">{{'user.tagKpi' | translate}}</label>-->
-<!--      <p-multiSelect formControlName="tagKpi" inputId="n-tag-kpi" [options]="tagKpiList" optionLabel="tagValue" dataKey="tagId"></p-multiSelect>-->
-<!--    </div>-->
+    <div class="p-md-6 p-col-12 p-field">
+      <label>{{'user.tagKpi' | translate}}</label>
+      <p-pickList
+        sourceHeader="{{'tagList' | translate}}" targetHeader="{{'selectedList' | translate}}"
+        filterBy="tagValue"
+        [dragdrop]="true"
+        [responsive]="true"
+        [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}"
+        [showSourceControls]="false"
+        [showTargetControls]="false"
+        [source]="tagKpiList"
+        [target]="tagKpiSelectedList">
+        <ng-template let-tag pTemplate="item">
+          <div class="tag-item">{{tag.tagValue}}</div>
+        </ng-template>
+      </p-pickList>
+    </div>
 
   </div>
 </form>
