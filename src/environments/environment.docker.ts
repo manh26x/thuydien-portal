@@ -6,7 +6,7 @@ export const environment = {
   baseUrl: '',
   basePath: '/',
   logServer: false,
-  logClient: true,
+  logClient: false,
   version: '1.0.0',
   mediaUrl: 'http://222.252.25.241:10023'
 };
