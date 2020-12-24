@@ -1,0 +1,7 @@
+version: '3.3'
+services:
+  sale-web-portal:
+    image: sale-web-portal
+    container_name: sale-web-portal
+    ports:
+      - '80:80'

@@ -2,6 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
+## Triển khai ứng dụng lên Docker
+1. Cài đặt biến môi trường cho ứng dụng trên Docker tại: [environment.docker](http://222.252.25.241:50000/truongnh/sale-web-portal/-/blob/dev/src/environments/environment.docker.ts).
+1. Chạy `docker build -t sale-web-portal .` để tạo Docker image
+1. Chạy ứng dụng
+- Run command `docker run --name sale-web-portal -d -p 80:80 sale-web-portal`
+- Use docker-compose `docker-compose up -d`
+
+
 ## Development server
 
 Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
