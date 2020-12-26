@@ -53,6 +53,7 @@
 			"504": "The server is not responding",
 			"505": "An error occurred, please try again later",
 			"511": "You do not have access to the service",
+			"noInternet": "Network connection is not stable. Please try again later",
 			"notification": "Notification",
 			"title": "An error occurred"
 		},

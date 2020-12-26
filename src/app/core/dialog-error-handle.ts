@@ -6,7 +6,13 @@ import { UtilService } from './service/util.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import {ConfirmationService} from 'primeng/api';
 import {AuthService} from '../auth/auth.service';
-import {ApiErrorArgsInvalid, ApiErrorForbidden, ApiErrorResponse, ApiErrorTokenInvalid} from './model/error-response';
+import {
+  ApiErrorArgsInvalid,
+  ApiErrorForbidden,
+  ApiErrorNotFound,
+  ApiErrorResponse,
+  ApiErrorTokenInvalid
+} from './model/error-response';
 import {Router} from '@angular/router';
 
 /**
@@ -32,7 +38,7 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
       case HttpErrorResponse: {
         this.showDialog(
           this.translate.instant('err.http.title'),
-          this.translate.instant(`err.http.${err.status}`)
+          this.translate.instant(`err.http.${this.getHttpStatusCode(err)}`)
         );
         break;
       }
@@ -69,6 +75,12 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
       case ApiErrorForbidden: {
         this.ngzone.run(() => {
           this.router.navigate(['public', 'access-denied']);
+        });
+        break;
+      }
+      case ApiErrorNotFound: {
+        this.ngzone.run(() => {
+          this.router.navigate(['public', 'not-found']);
         });
         break;
       }

@@ -53,6 +53,7 @@
 			"504": "Máy chủ không phản hồi",
 			"505": "Có lỗi xảy ra vui lòng thử lại sau",
 			"511": "Bạn không có quyền truy cập vào dịch vụ",
+			"noInternet": "Kết nối mạng không ổn định. Vui lòng thử lại sau",
 			"notification": "Thông báo",
 			"title": "Có lỗi xảy ra"
 		},

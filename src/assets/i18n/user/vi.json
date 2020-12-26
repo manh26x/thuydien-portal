@@ -14,8 +14,8 @@
 	},
 	"confirm": {
 		"accept": "Có",
-		"delete": "Xác nhận xóa",
-		"deleteMessage": "Bạn có chắc chắn muốn xóa người dùng \"{{name}}\"",
+		"delete": "Xác nhận khóa",
+		"deleteMessage": "Bạn có chắc chắn muốn khóa người dùng \"{{name}}\"",
 		"reject": "Không"
 	},
 	"const": {

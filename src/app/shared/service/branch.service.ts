@@ -5,9 +5,7 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Branch} from '../model/branch';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class BranchService extends BaseService {
 
   constructor(private http: HttpClient) {

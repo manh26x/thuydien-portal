@@ -108,6 +108,12 @@
             mode="advanced"
             name="docsNews"
             accept=".pdf"
+            invalidFileSizeMessageSummary=""
+            invalidFileSizeMessageDetail="{{'invalid.docs.zize' | translate}}"
+            invalidFileTypeMessageSummary=""
+            invalidFileLimitMessageDetail="{{'invalid.docs.limit' | translate}}"
+            invalidFileLimitMessageSummary=""
+            invalidFileTypeMessageDetail="{{'invalid.docs.type' | translate}}"
             [customUpload]="true"
             [showUploadButton]="false"
             [showCancelButton]="true"
@@ -118,9 +124,9 @@
               <div style="max-width: 100%">{{file.name}}</div>
             </ng-template>
           </p-fileUpload>
-          <div *ngIf="mode == 'update' && !isChangeDoc" class="p-d-flex p-mt-1">
+          <div *ngIf="mode == 'update' && !isChangeDoc && formNews.value.docs" class="p-d-flex p-mt-1 p-jc-between">
             <a target="_blank" [href]="fileDocPreview">{{formNews.value.docs}}</a>
-            <p-button label="{{'btn.delete' | translate}}" styleClass="p-button-sm" (click)="doClearImagePreview()"></p-button>
+            <p-button label="" icon="pi pi-times" styleClass="p-button-sm p-button-danger" (click)="doClearImagePreview()"></p-button>
           </div>
         </div>
 
@@ -155,6 +161,6 @@
   </ng-container>
   <ng-container *ngIf="mode == 'update'">
     <button pButton (click)="doSaveDraft()" type="button" label="{{'btn.draft' | translate}}" class="p-button-raised p-button-secondary p-mr-3"></button>
-    <button pButton (click)="doUpdate()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised"></button>
+    <button pButton (click)="doUpdate()" type="button" label="{{'btn.saveAndPublish' | translate}}" class="p-button-raised"></button>
   </ng-container>
 </div>

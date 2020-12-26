@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
 import { Observable } from 'rxjs';
-import {AuthService} from '../auth/auth.service';
-import {UserAuth} from '../auth/model/user-auth';
+import {AuthService} from '../../auth/auth.service';
+import {UserAuth} from '../../auth/model/user-auth';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class SupperAdminGuard implements CanActivate {
+@Injectable()
+export class ViewOnlyGuard implements CanActivate {
   constructor(private auth: AuthService, private router: Router) {
   }
-
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
@@ -18,7 +15,7 @@ export class SupperAdminGuard implements CanActivate {
     if (userLogged.isSupperAdmin) {
       return true;
     } else {
-      this.router.navigate(['public', 'access-denied']);
+      this.router.navigate(['user', 'view', userLogged.userName]);
       return false;
     }
 

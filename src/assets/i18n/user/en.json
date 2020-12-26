@@ -14,8 +14,8 @@
 	},
 	"confirm": {
 		"accept": "Yes",
-		"delete": "Confirm Delete",
-		"deleteMessage": "Are you sure you want to remove user \"{{name}}\"",
+		"delete": "Confirm block user",
+		"deleteMessage": "Are you sure you want to block the user \"{{name}}\"",
 		"reject": "No"
 	},
 	"const": {

@@ -11,7 +11,8 @@
 		"draft": "Save the draft",
 		"insert": "Insert",
 		"refresh": "Refresh",
-		"save": "Save changes"
+		"save": "Save changes",
+		"saveAndPublish": "Save changes and publish"
 	},
 	"confirm": {
 		"accept": "Yes",
@@ -41,8 +42,13 @@
 		"content": {
 			"required": "Value cannot be blank"
 		},
+		"docs": {
+			"limit": "The number of files exceeded the allowed limit",
+			"type": "The file is not in PDF format",
+			"zize": "Uploaded file exceeds the allowed size of 5MB"
+		},
 		"publishDate": {
-			"mustAfterNow": "Post time must be greater than current"
+			"mustAfterNow": "The required posting time must be greater than the current time"
 		},
 		"shortContent": {
 			"maxLength": "The value must not exceed {{length}} characters"

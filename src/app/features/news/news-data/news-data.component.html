@@ -7,7 +7,7 @@
   <form class="p-grid p-fluid p-mb-3" [formGroup]="formFilter">
     <div class="p-md-3 p-col-6 p-field">
       <label for="s-value">{{'news.name' | translate}}</label>
-      <input type="text" id="s-value" pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
+      <input type="text" id="s-value" (keyup.enter)="getListNews()" pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
     </div>
 
     <div class="p-md-3 p-col-6 p-field">
@@ -29,7 +29,7 @@
   <p-table [value]="newsList" styleClass="table-responsive"
            [customSort]="true"
            [lazy]="true"
-           sortField="id"
+           sortField="pubDate"
            [sortOrder]="-1"
            (onLazyLoad)="lazyLoadNews($event)">
     <ng-template pTemplate="header">
@@ -87,12 +87,12 @@
         </td>
         <td>
           <button (click)="gotoView(news.id)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
-          <button *ngIf="userLogged.isSupperAdmin || userLogged.username == news.createBy" (click)="gotoUpdate(news.id)" pButton
+          <button *ngIf="userLogged.isSupperAdmin || userLogged.userName == news.createBy" (click)="gotoUpdate(news.id)" pButton
                   type="button"
                   icon="pi pi-pencil"
                   class="p-button-rounded p-button-secondary p-button-text">
           </button>
-          <button *ngIf="userLogged.isSupperAdmin || userLogged.username == news.createBy" (click)="doDelete(news)" pButton
+          <button *ngIf="userLogged.isSupperAdmin || userLogged.userName == news.createBy" (click)="doDelete(news)" pButton
                   type="button"
                   icon="pi pi-trash"
                   class="p-button-rounded p-button-danger p-button-text">

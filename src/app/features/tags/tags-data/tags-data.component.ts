@@ -59,10 +59,7 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
       ))
     ).subscribe(res => {
       this.tagsType = [
-        { name: res.all, code: ''},
         { name: res.news, code: TagsEnum.NEWS },
-        { name: res.tool, code: TagsEnum.TOOL },
-        { name: res.qna, code: TagsEnum.QNA },
         { name: res.kpi, code: TagsEnum.KPI }
       ];
     });
@@ -88,7 +85,7 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
       pageSize: this.pageSize,
       sortBy: this.sortBy,
       sortOrder: this.sortOrder,
-      tagType: this.typeSearch.value.code
+      tagType: this.typeSearch.value ? this.typeSearch.value.map(item => item.code) : []
     };
     this.tagsService.searchTags(request).pipe(
       takeUntil(this.nextOnDestroy),

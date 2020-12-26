@@ -19,7 +19,7 @@ import {Branch} from '../../../shared/model/branch';
 @Component({
   selector: 'aw-news-form',
   templateUrl: './news-form.component.html',
-  providers: [TagsService]
+  providers: [TagsService, BranchService]
 })
 export class NewsFormComponent implements OnInit, OnChanges {
   yearSelect = `${new Date().getFullYear()}:${new Date().getFullYear() + 10}`;
@@ -141,7 +141,11 @@ export class NewsFormComponent implements OnInit, OnChanges {
   }
 
   doSaveDraft() {
-    this.draft.emit({ news: this.formNews.getRawValue(), fileImageList: this.filesImage, fileDocList: this.filesDoc });
+    const value = this.formNews.getRawValue();
+    if (value.title.length > 500 || value.shortContent.length > 400) {
+      return;
+    }
+    this.draft.emit({ news: value, fileImageList: this.filesImage, fileDocList: this.filesDoc });
   }
 
   doCancel() {

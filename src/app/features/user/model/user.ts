@@ -26,7 +26,7 @@ export interface BranchUser {
 }
 
 export interface UserBranch {
-  userPortal?: UserInfo;
+  user?: UserInfo;
   listBranch?: any[];
 }
 

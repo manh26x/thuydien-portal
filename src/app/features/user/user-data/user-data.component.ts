@@ -102,13 +102,13 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     this.dialog.confirm({
       key: 'globalDialog',
       header: this.translate.instant('confirm.delete'),
-      message: this.translate.instant('confirm.deleteMessage', { name: user.userPortal.fullName }),
+      message: this.translate.instant('confirm.deleteMessage', { name: user.user.fullName }),
       acceptLabel: this.translate.instant('confirm.accept'),
       rejectLabel: this.translate.instant('confirm.reject'),
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.indicator.showActivityIndicator();
-        this.userService.deleteUser(user.userPortal.userName).subscribe(() => {
+        this.userService.deleteUser(user.user.fullName).subscribe(() => {
           this.messageService.add({
             severity: 'success',
             detail: this.translate.instant('message.deleteSuccess')

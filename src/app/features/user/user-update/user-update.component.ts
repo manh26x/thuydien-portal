@@ -21,7 +21,7 @@ import {BranchService} from '../../../shared/service/branch.service';
   templateUrl: './user-update.component.html',
   styles: [
   ],
-  providers: [TagsService]
+  providers: [TagsService, BranchService]
 })
 export class UserUpdateComponent extends BaseComponent implements OnInit {
   initValue: UserDetail;
