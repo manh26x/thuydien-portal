@@ -35,7 +35,7 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
   newsConst = NewsEnum;
   page = 0;
   pageSize = 10;
-  sortBy = 'id';
+  sortBy = 'pubDate';
   sortOrder = 'DESC';
   totalItem = 0;
   initMaxShow = 2;

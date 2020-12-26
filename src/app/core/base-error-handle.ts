@@ -1,4 +1,11 @@
 export class BaseErrorHandle {
+  getHttpStatusCode(error: any) {
+    if (!navigator.onLine) {
+      return 'noInternet';
+    }
+    return error.status;
+  }
+
   getClientMessage(error: Error): string {
     if (!navigator.onLine) {
       return 'No Internet Connection';

@@ -37,3 +37,10 @@ export class ApiErrorGetUserInfo extends Error {
     Object.setPrototypeOf(this, ApiErrorGetUserInfo.prototype);
   }
 }
+
+export class ApiErrorNotFound extends Error {
+  constructor() {
+    super();
+    Object.setPrototypeOf(this, ApiErrorNotFound.prototype);
+  }
+}

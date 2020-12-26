@@ -51,8 +51,6 @@ export class TagsFormComponent implements OnInit, OnChanges {
     ).subscribe(res => {
       this.tagsType = [
         { name: res.news, code: TagsEnum.NEWS },
-        { name: res.tool, code: TagsEnum.TOOL },
-        { name: res.qna, code: TagsEnum.QNA },
         { name: res.kpi, code: TagsEnum.KPI }
       ];
     });

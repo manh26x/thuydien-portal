@@ -18,7 +18,7 @@ export interface TagsSearchRequest {
   pageSize?: number;
   sortOrder?: string;
   sortBy?: string;
-  tagType?: string;
+  tagType?: string[];
 }
 
 export interface TagsUser {

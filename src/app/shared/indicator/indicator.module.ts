@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { GlobalIndicatorComponent } from './global-indicator.component';
 import { SectionIndicatorComponent } from './section-indicator.component';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {ButtonModule} from 'primeng/button';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
   ],
   imports: [
     CommonModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ButtonModule
   ]
 })
 export class IndicatorModule { }

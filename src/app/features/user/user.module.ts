@@ -30,6 +30,7 @@ import {MessageService} from 'primeng/api';
 import {CheckboxModule} from 'primeng/checkbox';
 import {TooltipModule} from 'primeng/tooltip';
 import {PickListModule} from 'primeng/picklist';
+import {ViewOnlyGuard} from './view-only.guard';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import {PickListModule} from 'primeng/picklist';
       provide: LANGUAGE_FILE_PATH,
       useValue: { path: './assets/i18n/user/' }
     },
-    MessageService
+    MessageService,
+    ViewOnlyGuard
   ]
 })
 export class UserModule extends BaseModule {

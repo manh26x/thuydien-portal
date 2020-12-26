@@ -11,7 +11,8 @@
 		"draft": "Lưu bản nháp",
 		"insert": "Thêm mới",
 		"refresh": "Tải lại",
-		"save": "Lưu thay đổi"
+		"save": "Lưu thay đổi",
+		"saveAndPublish": "Lưu thay đổi và xuất bản"
 	},
 	"confirm": {
 		"accept": "Có",
@@ -41,8 +42,13 @@
 		"content": {
 			"required": "Giá trị không được để trống"
 		},
+		"docs": {
+			"limit": "Số lượng file vượt quá giới hạn cho phép",
+			"type": "Tệp tin không đúng định dạng PDF",
+			"zize": "Tệp tải lên vượt quá dung lượng cho phép 5MB"
+		},
 		"publishDate": {
-			"mustAfterNow": "Thời gian đăng phải lớn hơn hiện tại"
+			"mustAfterNow": "Thời gian đăng bắt buộc phải lớn hơn thời gian hiện tại"
 		},
 		"shortContent": {
 			"maxLength": "Giá trị không được vượt quá {{length}} ký tự"

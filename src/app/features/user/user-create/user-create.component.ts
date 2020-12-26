@@ -20,7 +20,7 @@ import {BranchService} from '../../../shared/service/branch.service';
   templateUrl: './user-create.component.html',
   styles: [
   ],
-  providers: [TagsService]
+  providers: [TagsService, BranchService]
 })
 export class UserCreateComponent implements OnInit, BeforeLeave {
   isLeave = false;

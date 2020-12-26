@@ -8,7 +8,13 @@ import {
 import {Observable, of, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {catchError, finalize, tap} from 'rxjs/operators';
-import {ApiErrorArgsInvalid, ApiErrorForbidden, ApiErrorResponse, ApiErrorTokenInvalid} from './model/error-response';
+import {
+  ApiErrorArgsInvalid,
+  ApiErrorForbidden,
+  ApiErrorNotFound,
+  ApiErrorResponse,
+  ApiErrorTokenInvalid
+} from './model/error-response';
 import { attempt, isError } from 'lodash-es';
 
 @Injectable()
@@ -16,6 +22,7 @@ export class ResponseInterceptor implements HttpInterceptor {
   private readonly BASE_URL = environment.basePath;
   private readonly IGNORE_URLS = ['/assets/i18n'];
   private readonly CLIENT_LOG_API = '/common/log';
+  private readonly NOT_FOUND_WILL_THROW = ['/userPortal/detail', 'news/detail', '/tags/getInfoTag'];
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
@@ -62,6 +69,11 @@ export class ResponseInterceptor implements HttpInterceptor {
         throw new ApiErrorResponse('noResponseCode', 'Cant get response code');
       }
       const rsCode = response.message.code;
+      if (this.isResponseNotFound(response.message)
+        && this.NOT_FOUND_WILL_THROW.find(url => requestUrl.includes(url))
+      ) {
+        throw new ApiErrorNotFound();
+      }
       if (!this.isResponseSuccess(response.message)) {
         throw new ApiErrorResponse(rsCode, response.message.message);
       }
@@ -113,7 +125,11 @@ export class ResponseInterceptor implements HttpInterceptor {
   }
 
   private isResponseSuccess(result: any): boolean {
-    return result.code === '200' || result.code === '201';
+    return result.code === '200';
+  }
+
+  private isResponseNotFound(result: any): boolean {
+    return result.code === '201';
   }
 
   private getMessageTrace(req: HttpRequest<any>, status: string, elapsed: number) {

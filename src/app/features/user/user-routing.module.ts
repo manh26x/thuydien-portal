@@ -8,6 +8,7 @@ import {UserUpdateComponent} from './user-update/user-update.component';
 import {UserViewComponent} from './user-view/user-view.component';
 import {FormLeaveGuard} from '../../core/form-leave.guard';
 import {SupperAdminGuard} from '../supper-admin.guard';
+import {ViewOnlyGuard} from './view-only.guard';
 
 const routes: Routes = [
   {
@@ -17,7 +18,7 @@ const routes: Routes = [
       {
         path: '',
         component: UserDataComponent,
-        canActivate: [AuthGuard, SupperAdminGuard]
+        canActivate: [AuthGuard, ViewOnlyGuard]
       },
       {
         path: 'create',

@@ -8,8 +8,6 @@ import {UserDetail} from '../model/user';
 import {UserEnum} from '../model/user.enum';
 import {UserAuth} from '../../../auth/model/user-auth';
 import {AuthService} from '../../../auth/auth.service';
-import {Message} from 'primeng/api';
-import {TranslateService} from '@ngx-translate/core';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 
 @Component({

@@ -27,7 +27,7 @@ export class AuthService {
    */
   login(value): Observable<any> {
     const body = new HttpParams()
-      .append('username', value.username)
+      .append('username', value.username.toLowerCase())
       .append('password', value.password)
       .append('grant_type', 'password');
     const header: HttpHeaders = new HttpHeaders()

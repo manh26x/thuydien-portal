@@ -11,7 +11,7 @@
     </div>
     <div class="p-lg-3 p-col-12 p-field">
       <label>{{'tags.type' | translate}}</label>
-      <p-dropdown inputId="n-type" [options]="tagsType" optionLabel="name" dataKey="code" [formControl]="typeSearch"></p-dropdown>
+      <p-multiSelect inputId="n-type" [options]="tagsType" optionLabel="name" dataKey="code" [formControl]="typeSearch"></p-multiSelect>
     </div>
     <div class="p-md-2 p-col-6 p-field p-d-flex p-align-end">
       <button (click)="getListTags()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
@@ -68,11 +68,11 @@
         <td>
           <button (click)="gotoView(tags.tagId)" pButton
                   type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
-          <button *ngIf="userLogged.isSupperAdmin || userLogged.username == tags.createBy"
+          <button *ngIf="userLogged.isSupperAdmin || userLogged.userName == tags.createBy"
                   (click)="gotoUpdate(tags.tagId)" pButton type="button" icon="pi pi-pencil"
                   class="p-button-rounded p-button-secondary p-button-text">
           </button>
-          <button *ngIf="userLogged.isSupperAdmin || userLogged.username == tags.createBy"
+          <button *ngIf="userLogged.isSupperAdmin || userLogged.userName == tags.createBy"
                   (click)="doDelete(tags)" pButton type="button" icon="pi pi-trash"
                   class="p-button-rounded p-button-danger p-button-text">
           </button>
