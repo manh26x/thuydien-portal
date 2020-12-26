@@ -86,6 +86,7 @@ export class CalculateToolDataComponent extends BaseComponent implements OnInit 
         rejectVisible: true,
         acceptLabel: this.translate.instant('message.accept'),
         rejectLabel: this.translate.instant('message.reject'),
+        defaultFocus: 'reject',
         accept: () => this.changeStatus(index, newStatus),
         reject: () => { this.toolList[index].isActive = !data.isActive; }
       });
