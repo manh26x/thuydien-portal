@@ -16,5 +16,6 @@ export const environment = {
   logServer: false,
   logClient: false,
   version: '1.0.0',
-  mediaUrl: 'http://222.252.25.241:10023'
+  mediaUrl: 'http://222.252.25.241:10023',
+  clientTimeout: 10000
 };
