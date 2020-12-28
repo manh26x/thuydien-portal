@@ -1,23 +1,23 @@
 {
 	"breadcrumb": {
-		"create": "News composing",
+		"create": "Compose news",
 		"home": "List of sales news",
-		"update": "News editing",
-		"view": "News details"
+		"update": "Edit news ",
+		"view": "News detail"
 	},
 	"btn": {
 		"cancel": "Cancel",
 		"delete": "Delete",
 		"draft": "Save the draft",
-		"insert": "Insert",
+		"insert": "Publish",
 		"refresh": "Refresh",
 		"save": "Save changes",
 		"saveAndPublish": "Save changes and publish"
 	},
 	"confirm": {
 		"accept": "Yes",
-		"delete": "Confirm Delete",
-		"deleteImage": "Are you sure to delete the photos from the newsletter?",
+		"delete": "Delete Confirmation",
+		"deleteImage": "Are you sure to delete the photo from the newsletter?",
 		"deleteMessage": "Are you sure you want to remove news \"{{name}}\"",
 		"reject": "No"
 	},
@@ -33,7 +33,7 @@
 		"publish": "Published"
 	},
 	"create": "News compilation",
-	"edit": "News editing",
+	"edit": "Edit news ",
 	"filter": "Filter",
 	"invalid": {
 		"branch": {
@@ -48,7 +48,7 @@
 			"zize": "Uploaded file exceeds the allowed size of 5MB"
 		},
 		"publishDate": {
-			"mustAfterNow": "The required posting time must be greater than the current time"
+			"mustAfterNow": "The posting time must be greater than the current time"
 		},
 		"shortContent": {
 			"maxLength": "The value must not exceed {{length}} characters"
@@ -70,11 +70,11 @@
 	"list": "List of sales news",
 	"message": {
 		"deleteNotFound": "The news does not exist or has been deleted",
-		"deleteSuccess": "Successfully deleted news",
-		"draftSuccess": "Successfully saved the draft",
-		"insertSuccess": "New news added successfully",
+		"deleteSuccess": "Deleted news successfully",
+		"draftSuccess": "Saved the draft successfully",
+		"insertSuccess": "New news is added successfully",
 		"updateNotFound": "The news does not exist or has been deleted",
-		"updateSuccess": "Successful news update"
+		"updateSuccess": "Update news successfully"
 	},
 	"news": {
 		"author": "Author",
@@ -89,7 +89,7 @@
 		"level": "Critical level",
 		"name": "News name",
 		"publishDate": "Post time",
-		"shortContent": "Content short",
+		"shortContent": "Short content ",
 		"status": "Status",
 		"tags": "Tags",
 		"title": "Title"
@@ -101,14 +101,14 @@
 	"uploadFile": {
 		"clear": "Delete",
 		"docs": "Upload the file",
-		"image": "Upload photos",
+		"image": "Upload photo",
 		"invalid": {
 			"ext": "File is incorrectly formatted {{ext}}",
 			"max": "The number of files exceeded the allowed limit {{max}}",
 			"size": "The file uploaded is exceeding the allowed size {{size}}"
 		}
 	},
-	"view": "News details",
+	"view": "News detail",
 	"viewLess": "[View less]",
 	"viewMore": "[View more]"
 }

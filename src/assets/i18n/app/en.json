@@ -1,9 +1,9 @@
 {
 	"breadcrumb": {
-		"create": "Add New Tags",
+		"create": "Add new Tag",
 		"home": "List of tags",
-		"update": "Edit Tags information",
-		"view": "Detail information Tags"
+		"update": "Edit tag information",
+		"view": "Tag detail"
 	},
 	"err": {
 		"api": {
@@ -68,23 +68,23 @@
 		"news": "Sales news",
 		"qna": "Q&A management",
 		"role": "Role Management",
-		"tags": "Manage tags",
+		"tags": "Tag Management",
 		"user": "User management"
 	},
 	"message": {
 		"accept": "Yes",
-		"beforeLeave": "Are you sure you exit the screen?",
+		"beforeLeave": "Are you sure you want to exit the screen?",
 		"confirmLogout": "Are you sure you want to log out of the system?",
 		"notification": "Notification",
 		"ok": "Ok",
 		"reject": "Cancel"
 	},
 	"public": {
-		"accessDenied": "You don't have the necessary permissons",
+		"accessDenied": "You don't have the permission to access this",
 		"backHome": "Return to the Home screen",
 		"btnBack": "Back",
 		"error": "An error occurred, please try again later",
 		"notFound": "That wasn't supposed to happen..."
 	},
-	"welcome": "Hello"
+	"welcome": "Welcome to TP bank"
 }

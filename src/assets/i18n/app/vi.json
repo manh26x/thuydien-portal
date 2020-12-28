@@ -1,9 +1,9 @@
 {
 	"breadcrumb": {
-		"create": "Thêm mới Tags",
+		"create": "Thêm mới Tag",
 		"home": "Danh sách Tags",
-		"update": "Chỉnh sửa thông tin Tags",
-		"view": "Chi tiết thông tin Tags"
+		"update": "Chỉnh sửa thông tin Tag",
+		"view": "Chi tiết thông tin Tag"
 	},
 	"err": {
 		"api": {
@@ -86,5 +86,5 @@
 		"error": "Có lỗi xảy ra, vui lòng thử lại sau",
 		"notFound": "Trang bạn yêu cầu không tồn tại..."
 	},
-	"welcome": "Xin chào"
+	"welcome": "Chào mừng đến với TP bank"
 }

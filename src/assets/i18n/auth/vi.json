@@ -1,7 +1,7 @@
 {
 	"error": "Có lỗi xảy ra, vui lòng thử lại sau",
 	"errorGetUserInfo": "Có lỗi xảy ra khi lấy thông tin tài khoản",
-	"invalid.message": "Tài khoản hoặc mật khẩu không chính xác",
+	"invalid.message": "Tên tài khoản hoặc mật khẩu không chính xác",
 	"invalid.password": "Vui lòng nhập mật khẩu.",
 	"invalid.username": "Vui lòng nhập tên tài khoản.",
 	"login": "Đăng nhập",

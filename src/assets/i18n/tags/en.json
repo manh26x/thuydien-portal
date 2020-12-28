@@ -1,7 +1,7 @@
 {
-	"addNew": "Add New Tag",
+	"addNew": "Add new Tag",
 	"breadcrumb": {
-		"create": "Add New Tag",
+		"create": "Add new Tag",
 		"home": "List of tags",
 		"update": "Edit Tag information",
 		"view": "Tag Detail  "
@@ -18,7 +18,7 @@
 		"deleteMessage": "Are you sure you want to remove Tag \"{{name}}\"",
 		"reject": "No"
 	},
-	"detail": "Tag Detail ",
+	"detail": "View Tag detail ",
 	"edit": "Edit Tag information",
 	"filter": "Filter",
 	"invalid": {
