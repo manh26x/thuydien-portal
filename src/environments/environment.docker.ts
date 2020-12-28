@@ -1,4 +1,4 @@
-// This file can be replaced during build by using the `configuration=docker` array.
+// This file can be replaced during build by using the `configuration=docker`.
 
 /**
  * baseUrl: Api Host
@@ -11,11 +11,10 @@ export const environment = {
   tokenEx: 43199,
   refreshTokenEx: 43199,
   clientId: 'YnJvd3NlcjoxMjM0',
-  baseUrl: '',
+  baseUrl: 'https://10.1.28.56:443',
   basePath: '',
   logServer: false,
   logClient: false,
   version: '1.0.0',
-  mediaUrl: 'http://222.252.25.241:10023',
-  clientTimeout: 10000
+  mediaUrl: 'https://10.1.28.56/salekit-media'
 };

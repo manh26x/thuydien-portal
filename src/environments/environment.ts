@@ -12,8 +12,7 @@ export const environment = {
   logServer: false,
   logClient: true,
   version: '1.0.0',
-  mediaUrl: 'http://222.252.25.241:10023/',
-  clientTimeout: 10000
+  mediaUrl: 'https://10.1.28.56/salekit-media'
 };
 
 /*
