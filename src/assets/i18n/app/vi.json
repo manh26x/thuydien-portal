@@ -14,7 +14,7 @@
 			"500": "Lỗi hệ thống",
 			"jsonFormat": "Không thể chuyển dữ liệu sang JSON",
 			"noResponseCode": "Không tìm thấy mã phản hồi",
-			"timeout": "Server không phản hồi",
+			"timeout": "Server mất quá nhiều thời gian để phẩn hồi",
 			"title": "Có lỗi xảy ra"
 		},
 		"http": {
