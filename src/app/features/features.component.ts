@@ -1,8 +1,12 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {PrimeNGConfig} from 'primeng/api';
+import {ConfirmationService, PrimeNGConfig} from 'primeng/api';
 import {MenuService} from './menu.service';
 import {NavigationCancel, NavigationEnd, NavigationStart, Router} from '@angular/router';
 import {IndicatorService} from '../shared/indicator/indicator.service';
+import {IdleService} from '../core/service/idle.service';
+import {environment} from '../../environments/environment';
+import {AuthService} from '../auth/auth.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'aw-features',
@@ -57,11 +61,20 @@ export class FeaturesComponent implements OnInit, AfterViewInit {
     private menuService: MenuService,
     private primengConfig: PrimeNGConfig,
     private router: Router,
-    private indicator: IndicatorService
+    private indicator: IndicatorService,
+    private idle: IdleService,
+    private auth: AuthService,
+    private confirm: ConfirmationService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
     this.primengConfig.ripple = true;
+    this.idle.startWatching(environment.idleTimeout).subscribe((isTimedOut) => {
+      if (isTimedOut) {
+        this.logout(false, 'message.sessionExpire');
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -79,6 +92,26 @@ export class FeaturesComponent implements OnInit, AfterViewInit {
         }, 400);
       }
     });
+  }
+
+  logout(rejectAble: boolean, msgTranslateKey: string) {
+    const okBtn = rejectAble ? 'message.accept' : 'message.ok';
+    this.confirm.confirm({
+      key: 'globalDialog',
+      header: this.translate.instant('message.notification'),
+      message: this.translate.instant(msgTranslateKey),
+      acceptVisible: true,
+      rejectVisible: rejectAble,
+      acceptLabel: this.translate.instant(okBtn),
+      rejectLabel: this.translate.instant('message.reject'),
+      accept: () => {
+        this.auth.logOut();
+        this.router.navigate(['auth', 'login']);
+        this.idle.stopTimer();
+      },
+      reject: () => {}
+    });
+
   }
 
   onLayoutClick() {
