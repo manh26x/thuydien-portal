@@ -77,7 +77,8 @@
 		"confirmLogout": "Bạn có chắc chắn muốn đăng xuất khỏi hệ thống?",
 		"notification": "Thông báo",
 		"ok": "Đồng ý",
-		"reject": "Không"
+		"reject": "Không",
+		"sessionExpire": "Phiên giao dịch đã hết hạn. Vui lòng thử lại."
 	},
 	"public": {
 		"accessDenied": "Bạn không có quyền truy cập vào tính năng",

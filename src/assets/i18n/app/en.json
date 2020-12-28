@@ -77,7 +77,8 @@
 		"confirmLogout": "Are you sure you want to log out of the system?",
 		"notification": "Notification",
 		"ok": "Ok",
-		"reject": "Cancel"
+		"reject": "Cancel",
+		"sessionExpire": "The session has expired. Please try again."
 	},
 	"public": {
 		"accessDenied": "You don't have the permission to access this",
