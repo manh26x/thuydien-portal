@@ -67,12 +67,12 @@ export class TagsFormComponent implements OnInit, OnChanges {
         this.formTags.setValue({
           id: tag.tagId,
           name: tag.tagValue,
-          type: tag.tagType.map(tagType => {
+          type: tag.tagType ? tag.tagType.map(tagType => {
             return { code: tagType };
-          }),
-          assign: tag.assignee.map(tagUser => {
+          }) : null,
+          assign: tag.assignee ? tag.assignee.map(tagUser => {
             return { userName: tagUser.userId };
-          })
+          }) : null
         });
       }
     }

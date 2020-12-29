@@ -6,7 +6,7 @@
 		"refresh": "Refresh"
 	},
 	"const": {
-		"active": "Entry into force",
+		"active": "Effective",
 		"all": "All",
 		"inactive": "Expire",
 		"levelImportant": "Important",
@@ -17,11 +17,11 @@
 	"list": "List of calculation tools",
 	"message": {
 		"accept": "Yes",
-		"confirmOff": "If this calculator is turned off, the sales specialist will not see the function. Are you sure you want to turn it off?",
+		"confirmOff": "If this calculation is turned off, the sales specialist will not see the function. Are you sure you want to turn it off?",
 		"notification": "Notification",
 		"reject": "No",
-		"updateError": "The update failed. Please try again later",
-		"updateSuccess": "Successful calculation tool update"
+		"updateError": "Fail to update. Please try again later",
+		"updateSuccess": "Update calculation tool successfully"
 	},
 	"no": "No.",
 	"noData": "No results match",
@@ -31,7 +31,7 @@
 		"action": "Action",
 		"customerType": "Customer type",
 		"level": "Priority Level",
-		"name": "Tool Name",
+		"name": "Tool name",
 		"status": "Status"
 	}
 }

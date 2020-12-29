@@ -1,18 +1,18 @@
 {
   "/admin": {
-    "target": "https://10.1.28.56:443",
+    "target": "http://192.168.1.15:8080",
     "secure": false,
     "changeOrigin": false,
     "logLevel": "debug"
   },
   "/saleskit": {
-    "target": "https://10.1.28.56:443",
+    "target": "http://192.168.1.15:8080",
     "secure": false,
     "changeOrigin": false,
     "logLevel": "debug"
   },
   "/uaa": {
-    "target": "https://10.1.28.56:443",
+    "target": "http://192.168.1.15:8080",
     "secure": false,
     "changeOrigin": false,
     "logLevel": "debug"

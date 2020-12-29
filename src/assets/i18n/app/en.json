@@ -1,12 +1,13 @@
 {
 	"breadcrumb": {
-		"create": "Add New Tags",
+		"create": "Add new Tag",
 		"home": "List of tags",
-		"update": "Edit Tags information",
-		"view": "Detail information Tags"
+		"update": "Edit tag information",
+		"view": "Tag detail"
 	},
 	"err": {
 		"api": {
+			"103": "An error occurred. We are sorry about this issue and will take care of it as soon as possible.",
 			"201": "Did not find the value you requested",
 			"400": "Invalid request",
 			"401": "Authentication Error",
@@ -68,23 +69,24 @@
 		"news": "Sales news",
 		"qna": "Q&A management",
 		"role": "Role Management",
-		"tags": "Manage tags",
+		"tags": "Tag Management",
 		"user": "User management"
 	},
 	"message": {
 		"accept": "Yes",
-		"beforeLeave": "Are you sure you exit the screen?",
+		"beforeLeave": "Are you sure you want to exit the screen?",
 		"confirmLogout": "Are you sure you want to log out of the system?",
 		"notification": "Notification",
 		"ok": "Ok",
-		"reject": "Cancel"
+		"reject": "Cancel",
+		"sessionExpire": "The session has expired. Please try again."
 	},
 	"public": {
-		"accessDenied": "You don't have the necessary permissons",
+		"accessDenied": "You don't have the permission to access this",
 		"backHome": "Return to the Home screen",
 		"btnBack": "Back",
 		"error": "An error occurred, please try again later",
 		"notFound": "That wasn't supposed to happen..."
 	},
-	"welcome": "Hello"
+	"welcome": "Welcome to TP bank"
 }

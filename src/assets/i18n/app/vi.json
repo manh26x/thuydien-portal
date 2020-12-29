@@ -1,12 +1,13 @@
 {
 	"breadcrumb": {
-		"create": "Thêm mới Tags",
+		"create": "Thêm mới Tag",
 		"home": "Danh sách Tags",
-		"update": "Chỉnh sửa thông tin Tags",
-		"view": "Chi tiết thông tin Tags"
+		"update": "Chỉnh sửa thông tin Tag",
+		"view": "Chi tiết thông tin Tag"
 	},
 	"err": {
 		"api": {
+			"103": "Có lỗi xảy ra. Chúng tôi rất tiếc về sự cố này và sẽ xử lý trong thời gian sớm nhất.",
 			"201": "Không tìm thấy giá trị bạn yêu cầu",
 			"400": "Yêu cầu không hợp lệ",
 			"401": "Lỗi xác thực",
@@ -77,7 +78,8 @@
 		"confirmLogout": "Bạn có chắc chắn muốn đăng xuất khỏi hệ thống?",
 		"notification": "Thông báo",
 		"ok": "Đồng ý",
-		"reject": "Không"
+		"reject": "Không",
+		"sessionExpire": "Phiên giao dịch đã hết hạn. Vui lòng thử lại."
 	},
 	"public": {
 		"accessDenied": "Bạn không có quyền truy cập vào tính năng",
@@ -86,5 +88,5 @@
 		"error": "Có lỗi xảy ra, vui lòng thử lại sau",
 		"notFound": "Trang bạn yêu cầu không tồn tại..."
 	},
-	"welcome": "Xin chào"
+	"welcome": "Chào mừng đến với TP bank"
 }

@@ -54,7 +54,7 @@ export class UserCreateComponent implements OnInit, BeforeLeave {
   }
 
   filterTagByType(query, type) {
-    return this.tagService.searchTagExp({tagType: type, sortOrder: 'ASC', sortBy: 'id', page: 0, pageSize: 500, searchValue: query });
+    return this.tagService.searchTagExp({tagType: [type], sortOrder: 'ASC', sortBy: 'id', page: 0, pageSize: 500, searchValue: query });
   }
 
   doSave(value) {

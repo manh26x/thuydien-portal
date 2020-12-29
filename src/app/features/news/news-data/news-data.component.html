@@ -28,6 +28,7 @@
   </form>
   <p-table [value]="newsList" styleClass="table-responsive"
            [customSort]="true"
+           [autoLayout]="true"
            [lazy]="true"
            sortField="pubDate"
            [sortOrder]="-1"
@@ -40,7 +41,7 @@
         <th pSortableColumn="status">{{'news.status' | translate}} <p-sortIcon field="status"></p-sortIcon></th>
         <th pSortableColumn="pubDate">{{'news.publishDate' | translate}} <p-sortIcon field="pubDate"></p-sortIcon></th>
         <th pSortableColumn="publisher">{{'news.author' | translate}} <p-sortIcon field="publisher"></p-sortIcon></th>
-        <th>{{'news.tags' | translate}}</th>
+        <th style="width: 150px;">{{'news.tags' | translate}}</th>
         <th pSortableColumn="priority">{{'news.level' | translate}} <p-sortIcon field="priority"></p-sortIcon></th>
         <th>
           <button pButton type="button" label="{{'btn.insert' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined" (click)="gotoCreate()"></button>

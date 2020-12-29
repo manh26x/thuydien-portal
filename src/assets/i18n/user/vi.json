@@ -23,7 +23,7 @@
 		"all": "Tất cả",
 		"inactive": "Dừng hoạt động",
 		"roleAdmin": "Admin",
-		"supperAdmin": "Supper Admin"
+		"supperAdmin": "SupperAdmin"
 	},
 	"detail": "Chi tiết thông tin người dùng",
 	"filter": "Lọc kết quả",
@@ -36,7 +36,7 @@
 			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
 			"required": "Giá trị không được để trống"
 		},
-		"oneTagRequired": "Vui lòng chọn 1 trong các Tags trên",
+		"oneTagRequired": "Vui lòng chọn 1 trong các loại Tags trên",
 		"password": {
 			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
 			"required": "Giá trị không được để trống"

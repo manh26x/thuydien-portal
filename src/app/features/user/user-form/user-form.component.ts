@@ -74,14 +74,14 @@ export class UserFormComponent implements OnInit, OnChanges {
       if (!changes.valueForm.firstChange) {
         const userInfo: UserDetail = changes.valueForm.currentValue;
         this.formUser.patchValue({
-          userId: userInfo.user.userName,
-          status: {code: userInfo.user.statusCode},
+          userId: userInfo.user ? userInfo.user.userName : null,
+          status: userInfo.user ? {code: userInfo.user.statusCode} : null,
           fullName: userInfo.user.fullName,
           phone: userInfo.user.phone,
           email: userInfo.user.email,
-          branch: userInfo.userBranchList.map(item => ({ id: item.branchId })),
+          branch: userInfo.userBranchList ? userInfo.userBranchList.map(item => ({ id: item.branchId })) : null,
           position: userInfo.user.position,
-          role: {code: userInfo.user.role}
+          role: userInfo.user ? {code: userInfo.user.role} : null
         });
         this.tagKpiSelectedList = userInfo.listTagKPI;
         this.tagNewsSelectedList = userInfo.listTagNews;

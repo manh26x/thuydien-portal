@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import { FeaturesComponent} from './features.component';
-import {ConfirmationService, MenuItem} from 'primeng/api';
+import {MenuItem} from 'primeng/api';
 import {AuthService} from '../auth/auth.service';
 import {Router} from '@angular/router';
 import {ILanguage} from '../core/model/language';
 import {AppTranslateService} from '../core/service/translate.service';
 import {Language} from '../core/model/language.enum';
 import {concatMap, startWith} from 'rxjs/operators';
-import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'aw-topbar',
@@ -37,9 +36,7 @@ export class TopBarComponent implements OnInit {
     public features: FeaturesComponent,
     private authService: AuthService,
     private router: Router,
-    private appTranslate: AppTranslateService,
-    private confirm: ConfirmationService,
-    private translate: TranslateService
+    private appTranslate: AppTranslateService
   ) {
     const userInfo = this.authService.getUserInfo();
     if (userInfo) { this.username = userInfo.userName; }
@@ -56,7 +53,7 @@ export class TopBarComponent implements OnInit {
       this.userItems = [
         {
           label: res,
-          command: () => this.logout()
+          command: () => this.features.logout(true, 'message.confirmLogout')
         }
       ];
     });
@@ -78,23 +75,5 @@ export class TopBarComponent implements OnInit {
   changeLang(lang: ILanguage): void {
     this.currentLang = lang;
     this.appTranslate.changeLanguage(lang.key, true);
-  }
-
-  logout() {
-    this.confirm.confirm({
-      key: 'globalDialog',
-      header: this.translate.instant('message.notification'),
-      message: this.translate.instant('message.confirmLogout'),
-      acceptVisible: true,
-      rejectVisible: true,
-      acceptLabel: this.translate.instant('message.accept'),
-      rejectLabel: this.translate.instant('message.reject'),
-      accept: () => {
-        this.authService.logOut();
-        this.router.navigate(['auth', 'login']);
-      },
-      reject: () => {}
-    });
-
   }
 }

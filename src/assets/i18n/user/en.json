@@ -3,8 +3,8 @@
 	"breadcrumb": {
 		"create": "Add a new user",
 		"home": "User List",
-		"update": "Edit User Information",
-		"view": "Detailed user information"
+		"update": "Edit user information",
+		"view": "User detail"
 	},
 	"btn": {
 		"cancel": "Cancel",
@@ -19,24 +19,24 @@
 		"reject": "No"
 	},
 	"const": {
-		"active": "Work",
+		"active": "Active",
 		"all": "All",
-		"inactive": "Stop working",
+		"inactive": "Inactive",
 		"roleAdmin": "Admin",
-		"supperAdmin": "Supper Admin"
+		"supperAdmin": "SupperAdmin"
 	},
-	"detail": "Detailed user information",
+	"detail": "View user detail",
 	"filter": "Filter the results",
 	"invalid": {
 		"email": {
 			"maxLength": "The value must not exceed {{length}} characters",
-			"pattern": "Email invalidate"
+			"pattern": "Email format is incorrrect"
 		},
 		"fullName": {
 			"maxLength": "The value must not exceed {{length}} characters",
 			"required": "Value cannot be blank"
 		},
-		"oneTagRequired": "Please select 1 of the Tags above",
+		"oneTagRequired": "Please select at least one of the Tag types above",
 		"password": {
 			"maxLength": "The value must not exceed {{length}} characters",
 			"required": "Value cannot be blank"
@@ -86,7 +86,7 @@
 		"tagKpi": "Tags for KPIs",
 		"tagNews": "Tags for news",
 		"tagQna": "Tags for Q&A",
-		"tagTool": "Tags for calculation engine",
+		"tagTool": "Tags for calculation tool",
 		"userName": "Username"
 	}
 }

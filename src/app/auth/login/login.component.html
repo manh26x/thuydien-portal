@@ -13,7 +13,7 @@
         <div class="p-col-12">
           <div class="input-wrapper p-field p-fluid">
             <label for="username">{{'username' | translate}}</label>
-            <input type="text" id="username" autocomplete="off" pInputText formControlName="username">
+            <input type="text" id="username" autocomplete="off" pInputText formControlName="username" maxlength="100">
             <small *ngIf="hasErrorInput('username', 'required')" class="p-invalid">
               {{'invalid.username' | translate}}
             </small>
