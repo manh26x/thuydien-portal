@@ -202,7 +202,12 @@ export class NewsFormComponent implements OnInit, OnChanges {
       docs: [''],
       image: [''],
       isSendNotification: [false]
-    }, { validators: this.publishDateMatcher, updateOn: 'blur' });
+    }, { validators: this.publishDateMatcher, updateOn: 'change' });
+  }
+
+  toDayClick(evt: Date) {
+    evt.setMinutes(0, 0);
+    return evt;
   }
 
   hasErrorInput(controlName: string, errorName: string): boolean {

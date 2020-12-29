@@ -56,7 +56,7 @@
         <div class="p-col-12 p-field">
           <label for="n-group-customer">{{'news.branch' | translate}} <span class="p-invalid">*</span></label>
           <p-multiSelect
-            [showToggleAll]="false"
+            [showToggleAll]="true"
             [filter]="true"
             filterBy="label,value.code"
             formControlName="branch"
@@ -87,6 +87,7 @@
             [yearNavigator]="true"
             [yearRange]="yearSelect"
             [minDate]="min"
+            (onSelect)="toDayClick($event)"
             styleClass="hour-only">
           </p-calendar>
           <small *ngIf="hasErrorInput('publishDate', 'mustAfterNow')" class="p-invalid">

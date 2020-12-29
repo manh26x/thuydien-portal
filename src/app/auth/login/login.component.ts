@@ -71,11 +71,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         err => {
           this.msgInvalid = [];
           if (err instanceof ApiErrorGetUserInfo) {
-            this.msgInvalid.push({ severity: 'error', summary: 'Error', detail: this.translate.instant('errorGetUserInfo') });
+            this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('errorGetUserInfo') });
           } else if (err.status === 400) {
-              this.msgInvalid.push({ severity: 'error', summary: 'Error', detail: this.translate.instant('invalid.message') });
+              this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('invalid.message') });
           } else {
-            this.msgInvalid.push({ severity: 'error', summary: 'Error', detail: this.translate.instant('error') });
+            this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('error') });
           }
         }
       );
