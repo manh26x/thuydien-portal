@@ -72,7 +72,7 @@ export class UserUpdateComponent extends BaseComponent implements OnInit {
   }
 
   filterTagByType(query, type) {
-    return this.tagService.searchTagExp({tagType: type, sortOrder: 'ASC', sortBy: 'id', page: 0, pageSize: 500, searchValue: query });
+    return this.tagService.searchTagExp({tagType: [type], sortOrder: 'ASC', sortBy: 'id', page: 0, pageSize: 500, searchValue: query });
   }
 
   doSave(value) {

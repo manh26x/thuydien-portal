@@ -7,6 +7,7 @@
 	},
 	"err": {
 		"api": {
+			"103": "An error occurred. We are sorry about this issue and will take care of it as soon as possible.",
 			"201": "Did not find the value you requested",
 			"400": "Invalid request",
 			"401": "Authentication Error",
