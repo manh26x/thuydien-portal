@@ -4,5 +4,13 @@
 		"home": "Role List",
 		"update": "Edit Role",
 		"view": "Role Details"
-	}
+	},
+	"filter": "Filter the results",
+	"role": {
+		"code": "Role code",
+		"desc": "Describe",
+		"name": "Role Name",
+		"status": "Status"
+	},
+	"search": "Enter the role name"
 }

@@ -1,1 +1,25 @@
-<p>role-data works!</p>
+<p-panel header="Danh sách vai trò">
+  <ng-template pTemplate="icons">
+    <button class="p-panel-header-icon p-link" pTooltip="{{'btn.refresh' | translate}}" tooltipPosition="bottom">
+      <i class="pi pi-refresh"></i>
+    </button>
+  </ng-template>
+
+  <form class="p-grid p-fluid p-mb-3" [formGroup]="formFilter">
+    <div class="p-md-7 p-col-6 p-field">
+      <label for="s-value">{{'news.name' | translate}}</label>
+      <input type="text" id="s-value" pInputText placeholder="{{'search' | translate}}" formControlName="name" />
+    </div>
+
+    <div class="p-md-3 p-col-6 p-field">
+      <label>{{'news.level' | translate}}</label>
+      <p-dropdown formControlName="status" [options]="statusList"></p-dropdown>
+    </div>
+    <div class="p-md-2 p-col-12 p-field p-d-flex p-align-end">
+      <button pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
+    </div>
+  </form>
+
+
+
+</p-panel>

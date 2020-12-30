@@ -15,6 +15,12 @@ import {CustomTranslateLoader, LANGUAGE_FILE_PATH} from '../../core/translate.lo
 import {HttpClient} from '@angular/common/http';
 import {BaseModule} from '../../core/base-module';
 import {Router} from '@angular/router';
+import {PanelModule} from 'primeng/panel';
+import {TooltipModule} from 'primeng/tooltip';
+import {ReactiveFormsModule} from '@angular/forms';
+import {ButtonModule} from 'primeng/button';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputTextModule} from 'primeng/inputtext';
 
 
 @NgModule({
@@ -38,6 +44,12 @@ import {Router} from '@angular/router';
       isolate: true,
       useDefaultLang: false
     }),
+    PanelModule,
+    TooltipModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    DropdownModule,
+    InputTextModule,
   ],
   providers: [
     {

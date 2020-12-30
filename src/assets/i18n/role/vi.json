@@ -4,5 +4,13 @@
 		"home": "Danh sách vai trò",
 		"update": "Chỉnh sửa vai trò",
 		"view": "Chi tiết vai trò"
-	}
+	},
+	"filter": "Lọc kết quả",
+	"role": {
+		"code": "Mã vai trò",
+		"desc": "Mô tả",
+		"name": "Tên vai trò",
+		"status": "Trạng thái"
+	},
+	"search": "Nhập tên vai trò"
 }
