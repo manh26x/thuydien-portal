@@ -160,6 +160,9 @@ export class NewsFormComponent implements OnInit, OnChanges {
   doClearImage() {
     this.isChangeImage = true;
     this.filesImage = [];
+    this.formNews.patchValue({
+      image: ''
+    });
   }
 
   doSelectDoc(evt) {
@@ -170,6 +173,9 @@ export class NewsFormComponent implements OnInit, OnChanges {
   doClearDoc() {
     this.isChangeDoc = true;
     this.filesDoc = [];
+    this.formNews.patchValue({
+      docs: ''
+    });
   }
 
   doClearImagePreview() {
@@ -181,6 +187,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
       acceptLabel: this.translate.instant('confirm.accept'),
       accept: () => {
         this.isChangeDoc = true;
+        this.formNews.get('docs').setValue('');
       },
       reject: () => {}
     });
