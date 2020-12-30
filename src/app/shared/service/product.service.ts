@@ -21,7 +21,7 @@ export class ProductService extends BaseService{
   }
 
   getServiceName(): string {
-    return 'RoleService';
+    return 'ProductService';
   }
 
 }

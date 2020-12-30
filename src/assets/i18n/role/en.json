@@ -1,0 +1,8 @@
+{
+	"breadcrumb": {
+		"create": "Add new role",
+		"home": "Role List",
+		"update": "Edit Role",
+		"view": "Role Details"
+	}
+}
