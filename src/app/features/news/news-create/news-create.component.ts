@@ -3,7 +3,6 @@ import {NewsService} from '../service/news.service';
 import {NewsInfoRequest} from '../model/news';
 import {UtilService} from '../../../core/service/util.service';
 import {Tags} from '../../tags/model/tags';
-import {Role} from '../../../shared/model/role';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {concatMap, finalize} from 'rxjs/operators';
 import {MessageService} from 'primeng/api';
