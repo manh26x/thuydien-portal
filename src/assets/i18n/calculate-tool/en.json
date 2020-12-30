@@ -18,6 +18,7 @@
 	"message": {
 		"accept": "Yes",
 		"confirmOff": "If this calculation is turned off, the sales specialist will not see the function. Are you sure you want to turn it off?",
+		"confirmOn": "Are you sure you turn on this calculator?",
 		"notification": "Notification",
 		"reject": "No",
 		"updateError": "Fail to update. Please try again later",

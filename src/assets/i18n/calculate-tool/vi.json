@@ -18,6 +18,7 @@
 	"message": {
 		"accept": "Có",
 		"confirmOff": "Nếu tắt công cụ tính toán này, chuyên viên bán hàng sẽ không nhìn thấy chức năng. Bạn có chắc chắn muốn tắt?",
+		"confirmOn": "Bạn có chắc chắn bật công cụ tính toán này?",
 		"notification": "Thông báo",
 		"reject": "Không",
 		"updateError": "Cập nhật thất bại. Vui lòng thử lại sau",
