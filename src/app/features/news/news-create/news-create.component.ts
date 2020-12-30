@@ -11,6 +11,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
 import {BeforeLeave} from '../../../core/model/before-leave';
 import {forkJoin, Observable, of} from 'rxjs';
+import {Branch} from '../../../shared/model/branch';
 
 @Component({
   selector: 'aw-news-create',
@@ -62,11 +63,12 @@ export class NewsCreateComponent implements OnInit, BeforeLeave {
         });
       });
     }
-    const branchInsert: Role[] = [];
+    const branchInsert: Branch[] = [];
     if (this.util.canForEach(value.branch)) {
       value.branch.forEach(g => {
         branchInsert.push({
-          id: g.id
+          id: g.id,
+          code: g.code
         });
       });
     }

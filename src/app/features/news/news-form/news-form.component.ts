@@ -98,7 +98,7 @@ export class NewsFormComponent implements OnInit, OnChanges {
             return { tagId: tags.idTag };
           }) : [],
           branch: news.listBranch ? news.listBranch.map(branch => {
-            return { id: branch.id };
+            return { id: branch.id, code: branch.code };
           }) : [],
           publishDate: new Date(news.newsDto.publishTime),
           level: news.newsDto.priority,
