@@ -77,22 +77,19 @@ export class CalculateToolDataComponent extends BaseComponent implements OnInit 
   doChangeStatus(index: number) {
     const data = this.toolList[index];
     const newStatus = data.isActive ? 1 : 0;
-    if (!data.isActive) {
-      this.confirmService.confirm({
-        key: 'globalDialog',
-        header: this.translate.instant('message.notification'),
-        message: this.translate.instant('message.confirmOff'),
-        acceptVisible: true,
-        rejectVisible: true,
-        acceptLabel: this.translate.instant('message.accept'),
-        rejectLabel: this.translate.instant('message.reject'),
-        defaultFocus: 'reject',
-        accept: () => this.changeStatus(index, newStatus),
-        reject: () => { this.toolList[index].isActive = !data.isActive; }
-      });
-    } else {
-      this.changeStatus(index, newStatus);
-    }
+    const msg = data.isActive ? 'message.confirmOn' : 'message.confirmOff';
+    this.confirmService.confirm({
+      key: 'globalDialog',
+      header: this.translate.instant('message.notification'),
+      message: this.translate.instant(msg),
+      acceptVisible: true,
+      rejectVisible: true,
+      acceptLabel: this.translate.instant('message.accept'),
+      rejectLabel: this.translate.instant('message.reject'),
+      defaultFocus: 'reject',
+      accept: () => this.changeStatus(index, newStatus),
+      reject: () => { this.toolList[index].isActive = !data.isActive; }
+    });
   }
 
   changeStatus(index, newStatus) {
