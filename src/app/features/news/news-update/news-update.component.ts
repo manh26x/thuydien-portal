@@ -14,6 +14,7 @@ import {MessageService} from 'primeng/api';
 import {AuthService} from '../../../auth/auth.service';
 import {UserAuth} from '../../../auth/model/user-auth';
 import {forkJoin, Observable, of} from 'rxjs';
+import {Branch} from '../../../shared/model/branch';
 
 @Component({
   selector: 'aw-news-update',
@@ -94,11 +95,12 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
         });
       });
     }
-    const branchInsert: Role[] = [];
+    const branchInsert: Branch[] = [];
     if (this.util.canForEach(value.branch)) {
       value.branch.forEach(g => {
         branchInsert.push({
-          id: g.id
+          id: g.id,
+          code: g.code
         });
       });
     }

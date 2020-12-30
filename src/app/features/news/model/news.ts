@@ -24,7 +24,7 @@ export interface NewsInfoRequest {
   filePath?: string;
   sendNotification?: number; // 0 or 1
   listNewsTag?: Tags[];
-  listBranch?: Role[];
+  listBranch?: Branch[];
   isDraft?: number;
 }
 
