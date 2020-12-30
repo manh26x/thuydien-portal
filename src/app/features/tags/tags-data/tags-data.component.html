@@ -59,7 +59,7 @@
         </td>
         <td>
           <div *ngFor="let item of tags.assignee | slice:0:tags.maxShowAssignee;index as i" [ngClass]="{'p-mt-1': i != 0}">
-            <ng-container>{{item.fullName}}</ng-container>
+            <ng-container>{{item.userId}}</ng-container>
           </div>
           <div *ngIf="tags.assignee?.length > initMaxShow" class="p-mt-1">
             <a *ngIf="tags.maxShowAssignee != tags.assignee.length; else showLessAss" (click)="tags.maxShowAssignee = tags.assignee.length" href="javascript:void('view more');">{{'viewMore' | translate}}</a>
