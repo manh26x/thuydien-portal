@@ -17,14 +17,29 @@ import {BaseModule} from '../../core/base-module';
 import {Router} from '@angular/router';
 import {PanelModule} from 'primeng/panel';
 import {TooltipModule} from 'primeng/tooltip';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ButtonModule} from 'primeng/button';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputTextModule} from 'primeng/inputtext';
+import {TableModule} from 'primeng/table';
+import { RoleCreateComponent } from './role-create/role-create.component';
+import {TabViewModule} from 'primeng/tabview';
+import { RoleFormComponent } from './role-form/role-form.component';
+import { TagListComponent } from './tag-list/tag-list.component';
+import { FeatureListComponent } from './feature-list/feature-list.component';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {CheckboxModule} from 'primeng/checkbox';
+import {PickListModule} from 'primeng/picklist';
+import {TagsService} from '../tags/service/tags.service';
+import {FeatureService} from './service/feature.service';
+import {CardModule} from 'primeng/card';
+import {MessagesModule} from 'primeng/messages';
+import { RoleUpdateComponent } from './role-update/role-update.component';
+import {SharedModule} from '../../shared/shared.module';
 
 
 @NgModule({
-  declarations: [RoleComponent, RoleDataComponent],
+  declarations: [RoleComponent, RoleDataComponent, RoleCreateComponent, RoleFormComponent, TagListComponent, FeatureListComponent, RoleUpdateComponent],
   imports: [
     CommonModule,
     RoleRoutingModule,
@@ -50,6 +65,15 @@ import {InputTextModule} from 'primeng/inputtext';
     ButtonModule,
     DropdownModule,
     InputTextModule,
+    TableModule,
+    TabViewModule,
+    InputTextareaModule,
+    CheckboxModule,
+    FormsModule,
+    PickListModule,
+    CardModule,
+    MessagesModule,
+    SharedModule,
   ],
   providers: [
     {
@@ -57,7 +81,9 @@ import {InputTextModule} from 'primeng/inputtext';
       useValue: { path: './assets/i18n/role/' }
     },
     RoleService,
-    MessageService
+    MessageService,
+    TagsService,
+    FeatureService
   ]
 })
 export class RoleModule extends BaseModule {

@@ -1,16 +1,70 @@
 {
+	"action": {
+		"add": "Thêm",
+		"delete": "Xóa",
+		"edit": "Sửa",
+		"onOff": "Bật/Tắt",
+		"title": "Tên chức năng",
+		"view": "Xem"
+	},
+	"addNewRole": "Thêm mới role",
+	"assignFeatureToRole": "Gán tính năng cho role",
+	"assignTagToRole": "Gán Tags cho role",
 	"breadcrumb": {
-		"create": "Thêm mới vai trò",
-		"home": "Danh sách vai trò",
-		"update": "Chỉnh sửa vai trò",
-		"view": "Chi tiết vai trò"
+		"create": "Thêm mới role",
+		"home": "Danh sách role",
+		"update": "Chỉnh sửa role",
+		"view": "Chi tiết role"
 	},
+	"btn": {
+		"cancel": "Hủy",
+		"insert": "Thêm mới",
+		"next": "Tiếp",
+		"no": "Không",
+		"refresh": "Tải lại",
+		"save": "Lưu",
+		"yes": "Có"
+	},
+	"client": {
+		"mobile": "Sale App Mobile",
+		"portal": "Admin Portal",
+		"title": "Phân loại người dùng"
+	},
+	"const": {
+		"active": "Hoạt động",
+		"all": "Tất cả",
+		"inactive": "Không hoạt động"
+	},
+	"editRole": "Chỉnh sửa role",
 	"filter": "Lọc kết quả",
-	"role": {
-		"code": "Mã vai trò",
-		"desc": "Mô tả",
-		"name": "Tên vai trò",
-		"status": "Trạng thái"
+	"invalid": {
+		"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+		"required": "Giá trị không được để trống",
+		"requiredFeature": "Vui lòng gán chức năng cho role",
+		"requiredTag": "Vui lòng gán tag cho role"
 	},
-	"search": "Nhập tên vai trò"
+	"message": {
+		"confirmDelete": "Bạn chắc chắn muốn xóa vai trò {{name}}?",
+		"delete": "Xác nhận xóa",
+		"deleteSuccess": "Xóa role thành công",
+		"insertSuccess": "Thêm mới role thành công",
+		"notFound": "Không tìm thấy bản ghi bạn yêu cầu",
+		"notPermission": "Bạn không có quyền xóa role",
+		"roleExisted": "Mã quyền đã tồn tại",
+		"updateSuccess": "Cập nhật role thành công"
+	},
+	"no": "STT",
+	"noData": "Không có kết quả nào phù hợp",
+	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
+	"role": {
+		"code": "Mã role",
+		"desc": "Mô tả",
+		"name": "Tên role",
+		"status": "Trạng thái",
+		"tagKpi": "Tag cho KPI",
+		"tagNews": "Tags cho bản tin"
+	},
+	"search": "Nhập tên role",
+	"selectedList": "Danh sách Tags đã chọn",
+	"tagList": "Danh sách Tags"
 }

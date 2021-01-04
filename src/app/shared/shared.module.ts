@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AutoUppercaseDirective } from './directive/auto-uppercase.directive';
 
 /**
  * @author: TruongNH
@@ -7,10 +8,10 @@ import { CommonModule } from '@angular/common';
  * module include custom pipe and directive
  */
 @NgModule({
-  declarations: [],
+  declarations: [AutoUppercaseDirective],
   imports: [
     CommonModule
   ],
-  exports: []
+  exports: [AutoUppercaseDirective]
 })
 export class SharedModule { }

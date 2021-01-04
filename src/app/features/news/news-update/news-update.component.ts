@@ -57,12 +57,6 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
       ))
     ).subscribe(res => {
       this.initValue = res;
-    }, err => {
-      if (err instanceof ApiErrorResponse && err.code === '201') {
-        this.router.navigate(['public', 'not-found']);
-      } else {
-        throw err;
-      }
     });
   }
 

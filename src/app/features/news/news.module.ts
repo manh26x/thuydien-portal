@@ -38,59 +38,62 @@ import {CustomFileUploadModule} from '../../shared/custom-file-upload/custom-fil
 
 
 @NgModule({
-  declarations: [
-    NewsComponent,
-    NewsFormComponent,
-    NewsCreateComponent,
-    NewsDataComponent,
-    NewsViewComponent,
-    NewsUpdateComponent
-  ],
-    imports: [
-      CommonModule,
-      NewsRoutingModule,
-      PanelModule,
-      TableModule,
-      PaginatorModule,
-      InputTextModule,
-      InputTextareaModule,
-      DropdownModule,
-      ButtonModule,
-      DialogModule,
-      FileUploadModule,
-      RadioButtonModule,
-      TranslateModule.forChild({
-        missingTranslationHandler: {
-          provide: MissingTranslationHandler,
-          useClass: CustomMissingTranslationHandler,
-          deps: [AppTranslateService]
-        },
-        loader: {
-          provide: TranslateLoader,
-          useFactory: (CustomTranslateLoader),
-          deps: [LANGUAGE_FILE_PATH, HttpClient]
-        },
-        isolate: true,
-        useDefaultLang: false
-      }),
-      EditorModule,
-      CheckboxModule,
-      CalendarModule,
-      MultiSelectModule,
-      ReactiveFormsModule,
-      BreadcrumbModule,
-      ToastModule,
-      TooltipModule,
-      CustomFileUploadModule
+    declarations: [
+        NewsComponent,
+        NewsFormComponent,
+        NewsCreateComponent,
+        NewsDataComponent,
+        NewsViewComponent,
+        NewsUpdateComponent
     ],
-  providers: [
-    {
-      provide: LANGUAGE_FILE_PATH,
-      useValue: { path: './assets/i18n/news/' }
-    },
-    NewsService,
-    MessageService
-  ],
+    imports: [
+        CommonModule,
+        NewsRoutingModule,
+        PanelModule,
+        TableModule,
+        PaginatorModule,
+        InputTextModule,
+        InputTextareaModule,
+        DropdownModule,
+        ButtonModule,
+        DialogModule,
+        FileUploadModule,
+        RadioButtonModule,
+        TranslateModule.forChild({
+            missingTranslationHandler: {
+                provide: MissingTranslationHandler,
+                useClass: CustomMissingTranslationHandler,
+                deps: [AppTranslateService]
+            },
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (CustomTranslateLoader),
+                deps: [LANGUAGE_FILE_PATH, HttpClient]
+            },
+            isolate: true,
+            useDefaultLang: false
+        }),
+        EditorModule,
+        CheckboxModule,
+        CalendarModule,
+        MultiSelectModule,
+        ReactiveFormsModule,
+        BreadcrumbModule,
+        ToastModule,
+        TooltipModule,
+        CustomFileUploadModule
+    ],
+    providers: [
+        {
+            provide: LANGUAGE_FILE_PATH,
+            useValue: {path: './assets/i18n/news/'}
+        },
+        NewsService,
+        MessageService
+    ],
+    exports: [
+        NewsFormComponent
+    ]
 })
 export class NewsModule extends BaseModule {
   constructor(translateService: TranslateService, router: Router) {
