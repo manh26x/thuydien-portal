@@ -64,6 +64,7 @@
 		"tagKpi": "Tag for KPIs",
 		"tagNews": "Tags for newsletter"
 	},
+	"roleList": "List of Roles",
 	"search": "Enter the role name",
 	"selectedList": "List of selected tags",
 	"tagList": "List of tags"
