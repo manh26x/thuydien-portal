@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       )
       .subscribe(
         resRole => {
-          this.auth.setUserInfo(resRole.data[0] || {});
+          this.auth.setUserInfo(resRole.user || {});
           this.gotoView();
         },
         err => {

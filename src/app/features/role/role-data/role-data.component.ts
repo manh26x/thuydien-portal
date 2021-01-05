@@ -10,6 +10,7 @@ import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {Router} from '@angular/router';
 import {Role, RoleEnum} from '../../../shared/model/role';
 import {ApiErrorResponse} from '../../../core/model/error-response';
+import {ExportService} from '../../../shared/service/export.service';
 
 @Component({
   selector: 'aw-role-data',
@@ -30,7 +31,8 @@ export class RoleDataComponent extends BaseComponent implements OnInit {
     private indicator: IndicatorService,
     private router: Router,
     private dialog: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private exportService: ExportService
   ) {
     super();
     this.initForm();
@@ -65,6 +67,12 @@ export class RoleDataComponent extends BaseComponent implements OnInit {
     ).subscribe(res => {
       this.roleList = res;
     });
+  }
+
+  doExportExcel() {
+    this.indicator.showActivityIndicator();
+    this.exportService.exportAsExcelFile(this.roleList, 'role-export');
+    this.indicator.hideActivityIndicator();
   }
 
   initForm() {
