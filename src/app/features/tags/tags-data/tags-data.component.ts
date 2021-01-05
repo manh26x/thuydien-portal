@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {TagsSearchRequest, TagsUser} from '../model/tags';
+import {TagDetail, TagsSearchRequest, TagsUser} from '../model/tags';
 import {TagsService} from '../service/tags.service';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
@@ -23,7 +23,7 @@ import {UserAuth} from '../../../auth/model/user-auth';
   ]
 })
 export class TagsDataComponent extends BaseComponent implements OnInit {
-  tagsList: TagsUser[] = [];
+  tagsList: TagDetail[] = [];
   totalItem = 0;
   page = 0;
   pageSize = 10;
@@ -54,7 +54,7 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
     this.tagsService.setPage('');
     this.appTranslate.languageChanged$.pipe(
       startWith(''),
-      concatMap(() => this.translate.get('type').pipe(
+      concatMap(() => this.translate.get('const').pipe(
         res => res
       ))
     ).subscribe(res => {
@@ -89,33 +89,24 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
     };
     this.tagsService.searchTags(request).pipe(
       takeUntil(this.nextOnDestroy),
-      finalize(() => this.indicator.hideActivityIndicator()),
-      map(res => {
-        if (this.util.canForEach(res.tagsList)) {
-          res.tagsList.forEach(item => {
-            item.maxShowAssignee = this.initMaxShow;
-            item.maxShowTag = this.initMaxShow;
-          });
-        }
-        return res;
-      })
+      finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe(res => {
       this.tagsList = res.tagsList;
       this.totalItem = res.totalItem;
     });
   }
 
-  doDelete(tags: TagsUser) {
+  doDelete(tags: TagDetail) {
     this.dialog.confirm({
       key: 'globalDialog',
       header: this.translate.instant('confirm.delete'),
-      message: this.translate.instant('confirm.deleteMessage', { name: tags.tagValue }),
+      message: this.translate.instant('confirm.deleteMessage', { name: tags.value }),
       acceptLabel: this.translate.instant('confirm.accept'),
       rejectLabel: this.translate.instant('confirm.reject'),
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.indicator.showActivityIndicator();
-        this.tagsService.deleteTag(tags.tagId).subscribe(() => {
+        this.tagsService.deleteTag(tags.id).subscribe(() => {
           this.messageService.add({
             severity: 'success',
             detail: this.translate.instant('message.deleteSuccess')
@@ -131,7 +122,7 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
           } else if (err instanceof ApiErrorResponse && err.code === '203') {
             this.messageService.add({
               severity: 'warn',
-              detail: this.translate.instant('message.deleteUsed', { name: tags.tagValue })
+              detail: this.translate.instant('message.deleteUsed', { name: tags.value })
             });
           } else {
             throw err;

@@ -3,5 +3,7 @@ export enum TagsEnum {
   KPI = 'KPI',
   USER = 'USER',
   TOOL = 'TOOL',
-  QNA = 'QNA'
+  QNA = 'QNA',
+  STATUS_ACTIVE = 1,
+  STATUS_INACTIVE = 0
 }

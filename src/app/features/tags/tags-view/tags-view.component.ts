@@ -6,7 +6,7 @@ import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {MessageService} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {concatMap, finalize, map, takeUntil} from 'rxjs/operators';
-import {TagsUser} from '../model/tags';
+import {TagDetail, TagsUser} from '../model/tags';
 import {TagsEnum} from '../model/tags.enum';
 
 @Component({
@@ -16,7 +16,7 @@ import {TagsEnum} from '../model/tags.enum';
   ]
 })
 export class TagsViewComponent extends BaseComponent implements OnInit {
-  tagDetail: TagsUser = {};
+  tagDetail: TagDetail = {};
   tagConst = TagsEnum;
 
   constructor(

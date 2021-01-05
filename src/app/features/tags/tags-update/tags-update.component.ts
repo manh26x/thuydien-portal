@@ -9,7 +9,6 @@ import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {MessageService} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {ApiErrorForbidden, ApiErrorResponse} from '../../../core/model/error-response';
-import {throwError} from 'rxjs';
 import {UserAuth} from '../../../auth/model/user-auth';
 import {AuthService} from '../../../auth/auth.service';
 
@@ -62,21 +61,14 @@ export class TagsUpdateComponent extends BaseComponent implements OnInit {
     });
   }
 
-  doUpdate(value: {id: number, name: string, assign: UserInfo[], type: any[]}) {
+  doUpdate(value: any) {
     this.indicator.showActivityIndicator();
-    const userList = [];
-    const typeList = [];
-    value.assign.forEach(user => {
-      userList.push(user.userName);
-    });
-    value.type.forEach(item => {
-      typeList.push(item.code);
-    });
     const body: TagsUpdateRequest = {
       tagId: value.id,
       tagValue: value.name,
-      tagType: typeList,
-      assignee: userList
+      keyTag: value.code,
+      tagType: value.type.code,
+      tagStatus: value.status.code
     };
     this.tagService.updateTags(body).pipe(
       finalize(() => this.indicator.hideActivityIndicator())

@@ -27,6 +27,7 @@ import {ToastModule} from 'primeng/toast';
 import {MessageService} from 'primeng/api';
 import { TagsViewComponent } from './tags-view/tags-view.component';
 import {TooltipModule} from 'primeng/tooltip';
+import {SharedModule} from '../../shared/shared.module';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import {TooltipModule} from 'primeng/tooltip';
     MultiSelectModule,
     BreadcrumbModule,
     ToastModule,
-    TooltipModule
+    TooltipModule,
+    SharedModule
   ],
   providers: [
     {

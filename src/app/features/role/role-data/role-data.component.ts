@@ -98,7 +98,14 @@ export class RoleDataComponent extends BaseComponent implements OnInit {
         });
       });
     }
-    this.exportService.exportAsExcelFile(header, dataExport, 'role-export');
+    if (dataExport.length === 0) {
+      this.messageService.add({
+        severity: 'info',
+        detail: this.translate.instant('message.noDataExport')
+      });
+    } else {
+      this.exportService.exportAsExcelFile(header, dataExport, 'role-export');
+    }
     this.indicator.hideActivityIndicator();
   }
 

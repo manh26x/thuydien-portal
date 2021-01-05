@@ -8,8 +8,9 @@ export interface Tags {
 
 export interface TagsInsertRequest {
   tagValue?: string;
-  tagType?: string[];
+  tagType?: string;
   assignee?: string[];
+  keyTag?: string;
 }
 
 export interface TagsSearchRequest {
@@ -32,14 +33,28 @@ export interface TagsUser {
   createBy?: string;
 }
 
+export interface TagDetail {
+  id?: number;
+  key?: string;
+  keyTag?: string;
+  status?: number;
+  type?: string;
+  value?: string;
+  createBy?: string;
+  createDate?: Date;
+  modifyDate?: Date;
+  modifyBy?: string;
+}
+
 export interface TagsSearchResponse {
-  tagsList: TagsUser[];
+  tagsList: TagDetail[];
   totalItem: number;
 }
 
 export interface TagsUpdateRequest {
   tagId: number;
+  keyTag: string;
   tagValue: string;
-  tagType: string[];
-  assignee: string[];
+  tagType: string;
+  tagStatus: number;
 }
