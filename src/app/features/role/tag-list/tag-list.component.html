@@ -4,7 +4,7 @@
     <p-pickList
       sourceHeader="{{'tagList' | translate}}"
       targetHeader="{{'selectedList' | translate}}"
-      filterBy="tagValue"
+      filterBy="value"
       [dragdrop]="true"
       [responsive]="true"
       [sourceStyle]="{'height':'300px'}"
@@ -14,7 +14,7 @@
       [source]="tagNewsList"
       [target]="tagNewsSelectedList">
       <ng-template let-tag pTemplate="item">
-        <div class="tag-item">{{tag.tagValue}}</div>
+        <div class="tag-item">{{tag.value}}</div>
       </ng-template>
     </p-pickList>
   </div>
@@ -24,7 +24,7 @@
     <p-pickList
       sourceHeader="{{'tagList' | translate}}"
       targetHeader="{{'selectedList' | translate}}"
-      filterBy="tagValue"
+      filterBy="value"
       [dragdrop]="true"
       [responsive]="true"
       [sourceStyle]="{'height':'300px'}"
@@ -34,7 +34,7 @@
       [source]="tagKpiList"
       [target]="tagKpiSelectedList">
       <ng-template let-tag pTemplate="item">
-        <div class="tag-item">{{tag.tagValue}}</div>
+        <div class="tag-item">{{tag.value}}</div>
       </ng-template>
     </p-pickList>
   </div>

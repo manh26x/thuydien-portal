@@ -4,7 +4,7 @@ import {TagsEnum} from '../../tags/model/tags.enum';
 import {forkJoin} from 'rxjs';
 import {concatMap, finalize, map, mergeMap, startWith, takeUntil, tap} from 'rxjs/operators';
 import {TagsService} from '../../tags/service/tags.service';
-import {TagsUser} from '../../tags/model/tags';
+import {TagDetail, TagsUser} from '../../tags/model/tags';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {TabView} from 'primeng/tabview';
 import {AppTranslateService} from '../../../core/service/translate.service';
@@ -29,10 +29,10 @@ import {ApiErrorResponse} from '../../../core/model/error-response';
 export class RoleCreateComponent extends BaseComponent implements OnInit, AfterViewInit, BeforeLeave {
   roleForm: FormGroup;
   @ViewChild('tabView') tabView: TabView;
-  tagNewsList: TagsUser[] = [];
-  tagKpiList: TagsUser[] = [];
-  tagNewsSelectedList: TagsUser[] = [];
-  tagKpiSelectedList: TagsUser[] = [];
+  tagNewsList: TagDetail[] = [];
+  tagKpiList: TagDetail[] = [];
+  tagNewsSelectedList: TagDetail[] = [];
+  tagKpiSelectedList: TagDetail[] = [];
   featureList: FeatureMenu[] = [];
   isLoadedTag = false;
   isLoadedFeature = false;
@@ -78,7 +78,7 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
         portalActive: value.isAdminPortal ? 1 : 0
       };
 
-      const tagData: RoleTag[] = [...this.tagKpiSelectedList, ...this.tagNewsSelectedList].map(item => ({ tagId: item.tagId }));
+      const tagData: RoleTag[] = [...this.tagKpiSelectedList, ...this.tagNewsSelectedList].map(item => ({ tagId: item.id }));
 
       if (tagData.length === 0) {
         this.messageService.add({ key: 'add-role', severity: 'error', detail: this.translate.instant('invalid.requiredTag') });

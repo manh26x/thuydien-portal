@@ -1,7 +1,18 @@
 <form [formGroup]="formTags">
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
-      <label for="n-name">{{'tags.name' | translate}}</label>
+      <label for="n-code">{{'tags.code' | translate}} <span class="p-invalid">*</span></label>
+      <input awAutoUppercase id="n-code" type="text" pInputText formControlName="code" />
+      <small *ngIf="hasErrorInput('code', 'required')" class="p-invalid">
+        {{'invalid.code.required' | translate}}
+      </small>
+      <small *ngIf="hasErrorInput('name', 'maxlength')" class="p-invalid">
+        {{ 'invalid.code.maxLength' | translate:{length: 50} }}
+      </small>
+    </div>
+
+    <div class="p-md-6 p-col-12 p-field">
+      <label for="n-name">{{'tags.name' | translate}} <span class="p-invalid">*</span></label>
       <input id="n-name" type="text" pInputText formControlName="name" />
       <small *ngIf="hasErrorInput('name', 'required')" class="p-invalid">
         {{'invalid.name.required' | translate}}
@@ -11,22 +22,20 @@
       </small>
     </div>
 
-    <div class="p-md-6 p-col-12 p-field">
-      <label for="n-type">{{'tags.type' | translate}}</label>
-      <p-multiSelect inputId="n-type" [options]="tagsType" optionLabel="name" dataKey="code" formControlName="type"></p-multiSelect>
-      <small *ngIf="hasErrorInput('type', 'required')" class="p-invalid">
-        {{'invalid.type.required' | translate}}
-      </small>
-    </div>
   </div>
 
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
-      <label for="n-assign">{{'tags.assignTo' | translate}}</label>
-      <p-multiSelect inputId="n-assign" [options]="userList" optionLabel="userName" dataKey="userName" formControlName="assign"></p-multiSelect>
-      <small *ngIf="hasErrorInput('assign', 'required')" class="p-invalid">
-        {{'invalid.assign.required' | translate}}
+      <label for="n-type">{{'tags.type' | translate}} <span class="p-invalid">*</span></label>
+      <p-dropdown inputId="n-type" [options]="tagsType" optionLabel="name" dataKey="code" formControlName="type"></p-dropdown>
+      <small *ngIf="hasErrorInput('type', 'required')" class="p-invalid">
+        {{'invalid.type.required' | translate}}
       </small>
+    </div>
+
+    <div class="p-md-6 p-col-12 p-field">
+      <label for="n-status">{{'tags.status' | translate}}</label>
+      <p-dropdown inputId="n-status" [options]="statusList" optionLabel="name" dataKey="code" formControlName="status"></p-dropdown>
     </div>
   </div>
 </form>

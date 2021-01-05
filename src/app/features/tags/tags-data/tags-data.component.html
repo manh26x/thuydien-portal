@@ -7,7 +7,7 @@
   <form class="p-grid p-fluid p-mb-3">
     <div class="p-lg-7 p-col-12 p-field">
       <label for="s-value">{{'tags.name' | translate}}</label>
-      <input type="text" id="s-value" [formControl]="formSearch" pInputText placeholder="{{'search' | translate}}" />
+      <input (keyup.enter)="getListTags()" type="text" id="s-value" [formControl]="formSearch" pInputText placeholder="{{'search' | translate}}" />
     </div>
     <div class="p-lg-3 p-col-12 p-field">
       <label>{{'tags.type' | translate}}</label>
@@ -29,8 +29,8 @@
         <th style="width: 50px;">{{'no' | translate}}</th>
         <th style="width: 100px;" pSortableColumn="id">{{'tags.id' | translate}} <p-sortIcon field="id"></p-sortIcon></th>
         <th pSortableColumn="value">{{'tags.name' | translate}} <p-sortIcon field="value"></p-sortIcon></th>
-        <th>{{'tags.type' | translate}}</th>
-        <th>{{'tags.assignTo' | translate}}</th>
+        <th pSortableColumn="type">{{'tags.type' | translate}} <p-sortIcon field="type"></p-sortIcon></th>
+        <th pSortableColumn="status">{{'tags.status' | translate}} <p-sortIcon field="status"></p-sortIcon></th>
         <th>
           <button (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
         </th>
@@ -40,41 +40,29 @@
     <ng-template pTemplate="body" let-tags let-index="rowIndex">
       <tr>
         <td>{{index + 1}}</td>
-        <td>{{tags.tagId}}</td>
-        <td>{{tags.tagValue}}</td>
+        <td>{{tags.key}}</td>
+        <td>{{tags.value}}</td>
         <td>
-          <div *ngFor="let item of tags.tagType | slice:0:tags.maxShowTag;index as i" [ngClass]="{'p-mt-1': i != 0}">
-            <ng-container [ngSwitch]="item">
-              <ng-container *ngSwitchCase="tagType.NEWS">{{'type.news' | translate}}</ng-container>
-              <ng-container *ngSwitchCase="tagType.KPI">{{'type.kpi' | translate}}</ng-container>
-              <ng-container *ngSwitchCase="tagType.QNA">{{'type.qna' | translate}}</ng-container>
-              <ng-container *ngSwitchCase="tagType.TOOL">{{'type.tool' | translate}}</ng-container>
-              <ng-container *ngSwitchDefault>-</ng-container>
-            </ng-container>
-          </div>
-          <div *ngIf="tags.tagType?.length > initMaxShow" class="p-mt-1">
-            <a *ngIf="tags.maxShowTag != tags.tagType.length; else showLess" (click)="tags.maxShowTag = tags.tagType.length" href="javascript:void('view more');">{{'viewMore' | translate}}</a>
-            <ng-template #showLess><a (click)="tags.maxShowTag = initMaxShow" href="javascript:void('view less');">{{'viewLess' | translate}}</a></ng-template>
-          </div>
+          <ng-container [ngSwitch]="tags.type">
+            <ng-container *ngSwitchCase="tagType.NEWS">{{'const.news' | translate}}</ng-container>
+            <ng-container *ngSwitchCase="tagType.KPI">{{'const.kpi' | translate}}</ng-container>
+            <ng-container *ngSwitchDefault>-</ng-container>
+          </ng-container>
         </td>
         <td>
-          <div *ngFor="let item of tags.assignee | slice:0:tags.maxShowAssignee;index as i" [ngClass]="{'p-mt-1': i != 0}">
-            <ng-container>{{item.userId}}</ng-container>
-          </div>
-          <div *ngIf="tags.assignee?.length > initMaxShow" class="p-mt-1">
-            <a *ngIf="tags.maxShowAssignee != tags.assignee.length; else showLessAss" (click)="tags.maxShowAssignee = tags.assignee.length" href="javascript:void('view more');">{{'viewMore' | translate}}</a>
-            <ng-template #showLessAss><a (click)="tags.maxShowAssignee = initMaxShow" href="javascript:void('view less');">{{'viewLess' | translate}}</a></ng-template>
-          </div>
+          <ng-container [ngSwitch]="tags.status">
+            <ng-container *ngSwitchCase="tagType.STATUS_ACTIVE">{{'const.active' | translate}}</ng-container>
+            <ng-container *ngSwitchCase="tagType.STATUS_INACTIVE">{{'const.inactive' | translate}}</ng-container>
+            <ng-container *ngSwitchDefault>-</ng-container>
+          </ng-container>
         </td>
         <td>
-          <button (click)="gotoView(tags.tagId)" pButton
+          <button (click)="gotoView(tags.id)" pButton
                   type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
-          <button *ngIf="userLogged.isSupperAdmin || userLogged.userName == tags.createBy"
-                  (click)="gotoUpdate(tags.tagId)" pButton type="button" icon="pi pi-pencil"
+          <button (click)="gotoUpdate(tags.id)" pButton type="button" icon="pi pi-pencil"
                   class="p-button-rounded p-button-secondary p-button-text">
           </button>
-          <button *ngIf="userLogged.isSupperAdmin || userLogged.userName == tags.createBy"
-                  (click)="doDelete(tags)" pButton type="button" icon="pi pi-trash"
+          <button (click)="doDelete(tags)" pButton type="button" icon="pi pi-trash"
                   class="p-button-rounded p-button-danger p-button-text">
           </button>
         </td>

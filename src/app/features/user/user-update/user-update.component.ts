@@ -5,7 +5,7 @@ import {finalize, map, takeUntil} from 'rxjs/operators';
 import {BaseComponent} from '../../../core/base.component';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {BranchUser, UpdateUserRequest, UserDetail, UserInfo} from '../model/user';
-import {TagsUser} from '../../tags/model/tags';
+import {TagDetail, TagsUser} from '../../tags/model/tags';
 import {UtilService} from '../../../core/service/util.service';
 import {TranslateService} from '@ngx-translate/core';
 import {MessageService} from 'primeng/api';
@@ -26,8 +26,8 @@ import {BranchService} from '../../../shared/service/branch.service';
 export class UserUpdateComponent extends BaseComponent implements OnInit {
   initValue: UserDetail;
   branchList = [];
-  tagNewsList: TagsUser[];
-  tagKpiList: TagsUser[];
+  tagNewsList: TagDetail[];
+  tagKpiList: TagDetail[];
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,

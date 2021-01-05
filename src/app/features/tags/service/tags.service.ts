@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {BaseService} from '../../../core/service/base.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {Tags, TagsInsertRequest, TagsSearchRequest, TagsSearchResponse, TagsUpdateRequest, TagsUser} from '../model/tags';
+import {TagDetail, Tags, TagsInsertRequest, TagsSearchRequest, TagsSearchResponse, TagsUpdateRequest, TagsUser} from '../model/tags';
 import {map} from 'rxjs/operators';
 import {ApiResultResponse} from '../../../core/model/result-response';
 
@@ -18,7 +18,7 @@ export class TagsService extends BaseService {
    * date: 09/12/2020
    * desc: get detail tags
    */
-  getDetail(id: string): Observable<TagsUser> {
+  getDetail(id: string): Observable<TagDetail> {
     const param = new HttpParams().append('tagId', id);
     return this.doGet('/saleskit/tags/getInfoTag', param).pipe(
       map(res => res.data[0])

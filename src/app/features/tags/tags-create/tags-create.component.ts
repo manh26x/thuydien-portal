@@ -1,7 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {TagsService} from '../service/tags.service';
-import {UserInfo} from '../../user/model/user';
 import {TagsInsertRequest} from '../model/tags';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {ApiErrorResponse} from '../../../core/model/error-response';
@@ -30,20 +29,13 @@ export class TagsCreateComponent implements OnInit, BeforeLeave {
     this.tagService.setPage('create');
   }
 
-  doSave(value: {name: string, assign: UserInfo[], type: any[]}) {
+  doSave(value: any) {
     this.indicator.showActivityIndicator();
-    const userList = [];
-    const typeList = [];
-    value.assign.forEach(user => {
-      userList.push(user.userName);
-    });
-    value.type.forEach(item => {
-      typeList.push(item.code);
-    });
+    this.tagService.logDebug(value);
     const body: TagsInsertRequest = {
+      keyTag: value.code.toUpperCase(),
       tagValue: value.name,
-      tagType: typeList,
-      assignee: userList
+      tagType: value.type.code
     };
     this.tagService.createTags(body).pipe(
       finalize(() => this.indicator.hideActivityIndicator())

@@ -6,7 +6,7 @@ import {UserService} from '../../user/service/user.service';
 import {UtilService} from '../../../core/service/util.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
-import {TagsUser} from '../model/tags';
+import {TagDetail, TagsUser} from '../model/tags';
 
 @Component({
   selector: 'aw-tags-form',
@@ -24,6 +24,7 @@ export class TagsFormComponent implements OnInit, OnChanges {
   @Input() valueForm: TagsUser;
   @Output() save: EventEmitter<any> = new EventEmitter<any>();
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
+  statusList = [];
   constructor(
     private appTranslate: AppTranslateService,
     private translate: TranslateService,
@@ -36,22 +37,25 @@ export class TagsFormComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     if (this.mode === 'update') {
-      this.formTags.get('name').disable();
+      this.formTags.get('code').disable();
     }
-    if (this.mode === 'view') {
-      this.formTags.get('name').disable();
-      this.formTags.get('type').disable();
-      this.formTags.get('assign').disable();
+    if (this.mode === 'create') {
+      this.formTags.get('status').disable();
     }
     this.appTranslate.languageChanged$.pipe(
       startWith(''),
-      concatMap(() => this.translate.get('type').pipe(
+      concatMap(() => this.translate.get('const').pipe(
         res => res
       ))
     ).subscribe(res => {
       this.tagsType = [
+        { name: res.select, code: ''},
         { name: res.news, code: TagsEnum.NEWS },
         { name: res.kpi, code: TagsEnum.KPI }
+      ];
+      this.statusList = [
+        { name: res.active, code: TagsEnum.STATUS_ACTIVE },
+        { name: res.inactive, code: TagsEnum.STATUS_INACTIVE }
       ];
     });
 
@@ -63,16 +67,13 @@ export class TagsFormComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     if (changes.valueForm) {
       if (!changes.valueForm.firstChange) {
-        const tag: TagsUser = changes.valueForm.currentValue;
-        this.formTags.setValue({
-          id: tag.tagId,
-          name: tag.tagValue,
-          type: tag.tagType ? tag.tagType.map(tagType => {
-            return { code: tagType };
-          }) : null,
-          assign: tag.assignee ? tag.assignee.map(tagUser => {
-            return { userName: tagUser.userId };
-          }) : null
+        const tag: TagDetail = changes.valueForm.currentValue;
+        this.formTags.patchValue({
+          id: tag.id,
+          name: tag.value,
+          type: { code: tag.type },
+          code: tag.keyTag,
+          status: { code: tag.status }
         });
       }
     }
@@ -94,9 +95,11 @@ export class TagsFormComponent implements OnInit, OnChanges {
   initForm() {
     this.formTags = this.fb.group({
       id: [],
+      code: ['', [Validators.required, Validators.maxLength(50)]],
       name: ['', [Validators.required, Validators.maxLength(this.nameMaxLength)]],
       type: [null, [Validators.required]],
-      assign: [null, [Validators.required]]
+      assign: [null],
+      status: [TagsEnum.STATUS_ACTIVE]
     });
   }
 

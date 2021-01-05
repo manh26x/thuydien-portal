@@ -203,7 +203,7 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
         const selectedTagKpi: TagsUser[] = [];
         if (this.util.canForEach(res[0].tagsList)) {
           res[0].tagsList.forEach(item => {
-            if (this.roleInfo.tagList.find(role => role.tagId === item.tagId)) {
+            if (this.roleInfo.tagList.find(role => role.tagId === item.id)) {
               selectedTagNews.push(item);
             } else {
               sourceTagNews.push(item);
@@ -212,7 +212,7 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
         }
         if (this.util.canForEach(res[1].tagsList)) {
           res[1].tagsList.filter(item => {
-            if (this.roleInfo.tagList.find(role => role.tagId === item.tagId)) {
+            if (this.roleInfo.tagList.find(role => role.tagId === item.id)) {
               selectedTagKpi.push(item);
             } else {
               sourceTagKpi.push(item);
