@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 import {Role, RoleEnum} from '../../../shared/model/role';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {ExportService} from '../../../shared/service/export.service';
+import {UtilService} from '../../../core/service/util.service';
 
 @Component({
   selector: 'aw-role-data',
@@ -32,7 +33,8 @@ export class RoleDataComponent extends BaseComponent implements OnInit {
     private router: Router,
     private dialog: ConfirmationService,
     private messageService: MessageService,
-    private exportService: ExportService
+    private exportService: ExportService,
+    private util: UtilService
   ) {
     super();
     this.initForm();
@@ -71,7 +73,32 @@ export class RoleDataComponent extends BaseComponent implements OnInit {
 
   doExportExcel() {
     this.indicator.showActivityIndicator();
-    this.exportService.exportAsExcelFile(this.roleList, 'role-export');
+    const header = [{
+      id: this.translate.instant('role.code'),
+      name: this.translate.instant('role.name'),
+      description: this.translate.instant('role.desc'),
+      status: this.translate.instant('role.status')
+    }];
+    const dataExport = [];
+    if (this.util.canForEach(this.roleList)) {
+      this.roleList.forEach(item => {
+        let statusDisplay = '';
+        if (item.status === RoleEnum.STATUS_ACTIVE) {
+          statusDisplay = this.translate.instant('const.active');
+        } else if (item.status === RoleEnum.STATUS_INACTIVE) {
+          statusDisplay = this.translate.instant('const.inactive');
+        } else {
+          statusDisplay = '-';
+        }
+        dataExport.push({
+          id: item.id,
+          name: item.name,
+          description: item.description,
+          status: statusDisplay
+        });
+      });
+    }
+    this.exportService.exportAsExcelFile(header, dataExport, 'role-export');
     this.indicator.hideActivityIndicator();
   }
 
