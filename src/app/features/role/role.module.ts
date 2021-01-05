@@ -36,6 +36,7 @@ import {CardModule} from 'primeng/card';
 import {MessagesModule} from 'primeng/messages';
 import { RoleUpdateComponent } from './role-update/role-update.component';
 import {SharedModule} from '../../shared/shared.module';
+import {ExportService} from '../../shared/service/export.service';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import {SharedModule} from '../../shared/shared.module';
     RoleService,
     MessageService,
     TagsService,
-    FeatureService
+    FeatureService,
+    ExportService
   ]
 })
 export class RoleModule extends BaseModule {

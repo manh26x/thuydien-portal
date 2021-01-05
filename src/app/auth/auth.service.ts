@@ -4,7 +4,9 @@ import {environment} from '../../environments/environment';
 import {Language} from '../core/model/language.enum';
 import {Observable} from 'rxjs';
 import {RoleEnum} from '../shared/model/role';
-import {UserAuth} from './model/user-auth';
+import {UserAuth, UserAuthDetail} from './model/user-auth';
+import {ApiResultResponse} from '../core/model/result-response';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -61,9 +63,11 @@ export class AuthService {
     });
   }
 
-  getUserRole(token: string): Observable<any> {
+  getUserRole(token: string): Observable<UserAuthDetail> {
     const header: HttpHeaders = new HttpHeaders().append('Authorization', `Bearer ${token}`);
-    return this.http.get('/admin/role/getRole', { headers: header });
+    return this.http.get('/admin/role/getRole', { headers: header }).pipe(
+      map((res: ApiResultResponse) => res.data[0] || {})
+    );
   }
 
   /**
