@@ -70,11 +70,11 @@ export class FeaturesComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.primengConfig.ripple = true;
-//    this.idle.startWatching(environment.idleTimeout).subscribe((isTimedOut) => {
-//      if (isTimedOut) {
-//        this.logout(false, 'message.sessionExpire');
-//      }
-//    });
+    this.idle.startWatching(environment.idleTimeout).subscribe((isTimedOut) => {
+      if (isTimedOut) {
+        this.logout(false, 'message.sessionExpire');
+      }
+    });
   }
 
   ngAfterViewInit() {
