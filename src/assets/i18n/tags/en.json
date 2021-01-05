@@ -18,11 +18,25 @@
 		"deleteMessage": "Are you sure you want to remove Tag \"{{name}}\"",
 		"reject": "No"
 	},
+	"const": {
+		"active": "Active",
+		"all": "All",
+		"inactive": "Inactive",
+		"kpi": "Tags for KPIs",
+		"news": "Tags for sales news",
+		"qna": "Tags for Q&A",
+		"select": "Select a tag type",
+		"tool": "Tags for calculation engine"
+	},
 	"detail": "View Tag detail ",
 	"edit": "Edit Tag information",
 	"filter": "Filter",
 	"invalid": {
 		"assign": {
+			"required": "Value cannot be blank"
+		},
+		"code": {
+			"maxLength": "The tag name must not exceed {{length}} characters",
 			"required": "Value cannot be blank"
 		},
 		"name": {
@@ -48,16 +62,11 @@
 	"search": "Enter a tag name",
 	"tags": {
 		"assignTo": "Assign to",
+		"code": "Tag code",
 		"id": "Tag ID",
 		"name": "Tag title",
+		"status": "Status",
 		"type": "Tag type"
-	},
-	"type": {
-		"all": "All",
-		"kpi": "Tags for KPIs",
-		"news": "Tags for sales news",
-		"qna": "Tags for Q&A",
-		"tool": "Tags for calculation engine"
 	},
 	"viewLess": "[See less]",
 	"viewMore": "[See more]"

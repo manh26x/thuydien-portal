@@ -18,6 +18,7 @@
 	},
 	"btn": {
 		"cancel": "Hủy",
+		"export": "Xuất báo cáo",
 		"insert": "Thêm mới",
 		"next": "Tiếp",
 		"no": "Không",
@@ -48,6 +49,7 @@
 		"delete": "Xác nhận xóa",
 		"deleteSuccess": "Xóa role thành công",
 		"insertSuccess": "Thêm mới role thành công",
+		"noDataExport": "Không có dữ liệu để xuất báo cáo",
 		"notFound": "Không tìm thấy bản ghi bạn yêu cầu",
 		"notPermission": "Bạn không có quyền xóa role",
 		"roleExisted": "Mã quyền đã tồn tại",
