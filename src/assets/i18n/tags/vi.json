@@ -18,11 +18,25 @@
 		"deleteMessage": "Bạn có chắc chắn muốn xóa Tag \"{{name}}\"",
 		"reject": "Không"
 	},
+	"const": {
+		"active": "Hoạt động",
+		"all": "Tất cả",
+		"inactive": "Không hoạt động",
+		"kpi": "Tags cho KPI",
+		"news": "Tags cho bản tin bán hàng",
+		"qna": "Tags cho  Q&A",
+		"select": "Chọn loại tag",
+		"tool": "Tags cho công cụ tính toán"
+	},
 	"detail": "Thông tin chi tiết Tag",
 	"edit": "Chỉnh sửa thông tin Tags",
 	"filter": "Lọc",
 	"invalid": {
 		"assign": {
+			"required": "Giá trị không được để trống"
+		},
+		"code": {
+			"maxLength": "Tên tag không được vượt quá {{length}} ký tự",
 			"required": "Giá trị không được để trống"
 		},
 		"name": {
@@ -48,16 +62,11 @@
 	"search": "Nhập tên tag",
 	"tags": {
 		"assignTo": "Gán cho",
+		"code": "Mã tag",
 		"id": "Tag ID",
 		"name": "Tên tag",
+		"status": "Trạng thái",
 		"type": "Loại Tag"
-	},
-	"type": {
-		"all": "Tất cả",
-		"kpi": "Tags cho KPI",
-		"news": "Tags cho bản tin bán hàng",
-		"qna": "Tags cho  Q&A",
-		"tool": "Tags cho công cụ tính toán"
 	},
 	"viewLess": "[Ẩn bớt]",
 	"viewMore": "[Xem thêm]"

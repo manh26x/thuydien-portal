@@ -18,6 +18,7 @@
 	},
 	"btn": {
 		"cancel": "Cancel",
+		"export": "Export Report",
 		"insert": "Add New",
 		"next": "Next",
 		"no": "No",
@@ -48,6 +49,7 @@
 		"delete": "Confirm Delete",
 		"deleteSuccess": "Successfully deleted the role",
 		"insertSuccess": "Successfully added the new role",
+		"noDataExport": "There is no data to export reports",
 		"notFound": "Could not find the record you requested",
 		"notPermission": "You do not have the right to delete a role",
 		"roleExisted": "The right code already exists",
