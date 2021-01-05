@@ -7,7 +7,7 @@
   <form class="p-grid p-fluid p-mb-3">
     <div class="p-lg-7 p-col-12 p-field">
       <label for="s-value">{{'tags.name' | translate}}</label>
-      <input type="text" id="s-value" [formControl]="formSearch" pInputText placeholder="{{'search' | translate}}" />
+      <input (keyup.enter)="getListTags()" type="text" id="s-value" [formControl]="formSearch" pInputText placeholder="{{'search' | translate}}" />
     </div>
     <div class="p-lg-3 p-col-12 p-field">
       <label>{{'tags.type' | translate}}</label>
