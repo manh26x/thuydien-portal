@@ -22,7 +22,12 @@ export class ResponseInterceptor implements HttpInterceptor {
   private readonly BASE_URL = environment.basePath;
   private readonly IGNORE_URLS = ['/assets/i18n'];
   private readonly CLIENT_LOG_API = '/common/log';
-  private readonly NOT_FOUND_WILL_THROW = ['/userPortal/detail', 'news/detail', '/tags/getInfoTag'];
+  private readonly NOT_FOUND_WILL_THROW = [
+    '/userPortal/detail'
+    , '/news/detail'
+    , '/tags/getInfoTag'
+    , '/role/detail'
+  ];
   constructor() {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
@@ -125,7 +130,7 @@ export class ResponseInterceptor implements HttpInterceptor {
   }
 
   private isResponseSuccess(result: any): boolean {
-    return result.code === '200';
+    return result.code === '200' || result.code === '201';
   }
 
   private isResponseNotFound(result: any): boolean {

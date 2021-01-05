@@ -1,0 +1,71 @@
+{
+	"action": {
+		"add": "Add New",
+		"delete": "Delete",
+		"edit": "Edit",
+		"onOff": "On/Off",
+		"title": "Function name",
+		"view": "View"
+	},
+	"addNewRole": "Add a new role",
+	"assignFeatureToRole": "Assign features to a role",
+	"assignTagToRole": "Assign Tags to the role",
+	"breadcrumb": {
+		"create": "Add new role",
+		"home": "Role List",
+		"update": "Edit Role",
+		"view": "Role Details"
+	},
+	"btn": {
+		"cancel": "Cancel",
+		"insert": "Add New",
+		"next": "Next",
+		"no": "No",
+		"refresh": "Refresh",
+		"save": "Save",
+		"yes": "Yes"
+	},
+	"client": {
+		"mobile": "Sale App Mobile",
+		"portal": "Admin portal",
+		"title": "User classification"
+	},
+	"const": {
+		"active": "Active",
+		"all": "All",
+		"inactive": "Inactive"
+	},
+	"editRole": "Edit the role",
+	"filter": "Filter the results",
+	"invalid": {
+		"maxLength": "The value must not exceed {{length}} characters",
+		"required": "Value cannot be blank",
+		"requiredFeature": "Please assign functions to the role",
+		"requiredTag": "Please assign tag the role"
+	},
+	"message": {
+		"confirmDelete": "Are you sure you want to delete the role {{name}}?",
+		"delete": "Confirm Delete",
+		"deleteSuccess": "Successfully deleted the role",
+		"insertSuccess": "Successfully added the new role",
+		"notFound": "Could not find the record you requested",
+		"notPermission": "You do not have the right to delete a role",
+		"roleExisted": "The right code already exists",
+		"updateSuccess": "Successful role update"
+	},
+	"no": "No.",
+	"noData": "No results match",
+	"paging": "Showing {first} to {last} in {totalRecords} records",
+	"role": {
+		"code": "Role code",
+		"desc": "Description",
+		"name": "Role Name",
+		"status": "Status",
+		"tagKpi": "Tag for KPIs",
+		"tagNews": "Tags for newsletter"
+	},
+	"roleList": "List of Roles",
+	"search": "Enter the role name",
+	"selectedList": "List of selected tags",
+	"tagList": "List of tags"
+}

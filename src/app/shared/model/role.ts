@@ -3,6 +3,9 @@ export interface Role {
   name?: string;
   statusCode?: string;
   description?: string;
+  status?: string;
+  mobileActive?: number;
+  portalActive?: number;
 }
 
 export interface UserRole {
@@ -14,5 +17,33 @@ export interface UserRole {
 
 export enum RoleEnum {
   ADMIN = 'admin',
-  SUPPER_ADMIN = 'SuperAdmin'
+  SUPPER_ADMIN = 'SuperAdmin',
+  ACTION_INSERT = '1',
+  ACTION_VIEW = '4',
+  ACTION_EDIT = '2',
+  ACTION_DELETE = '3',
+  ACTION_ON_OFF = '5',
+  STATUS_ACTIVE= '1',
+  STATUS_INACTIVE = '0'
+}
+
+export interface RoleTag {
+  tagId?: number;
+}
+
+export interface RoleFeature {
+  menuId: string;
+  rightId: string;
+}
+
+export interface InsertRoleRequest {
+  roleInfo: Role;
+  tagList: RoleTag[];
+  menuRightList: RoleFeature[];
+}
+
+export interface RoleDetail {
+  menuRightList?: RoleFeature[];
+  roleInfo?: Role;
+  tagList?: RoleTag[];
 }
