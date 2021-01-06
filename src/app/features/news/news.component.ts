@@ -1,10 +1,11 @@
 import {AfterViewInit, Component} from '@angular/core';
 import {MenuItem} from 'primeng/api';
-import {concatMap, delay, map, startWith, switchMap} from 'rxjs/operators';
+import {concatMap, delay, map, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import {AppTranslateService} from '../../core/service/translate.service';
 import {TranslateService} from '@ngx-translate/core';
 import {NewsService} from './service/news.service';
 import {UtilService} from '../../core/service/util.service';
+import {BaseComponent} from '../../core/base.component';
 
 @Component({
   selector: 'aw-news',
@@ -12,7 +13,7 @@ import {UtilService} from '../../core/service/util.service';
   styleUrls: []
 })
 
-export class NewsComponent implements AfterViewInit {
+export class NewsComponent extends BaseComponent implements AfterViewInit {
   items: MenuItem[];
   home: MenuItem = {icon: 'pi pi-home', routerLink: '/'};
 
@@ -22,10 +23,12 @@ export class NewsComponent implements AfterViewInit {
     private newsService: NewsService,
     private util: UtilService
   ) {
+    super();
   }
 
   ngAfterViewInit() {
     this.appTranslate.languageChanged$.pipe(
+      takeUntil(this.nextOnDestroy),
       startWith(''),
       concatMap(() => this.translate.get('breadcrumb').pipe(
         res => res

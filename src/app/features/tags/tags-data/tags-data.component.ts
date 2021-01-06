@@ -53,6 +53,7 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.tagsService.setPage('');
     this.appTranslate.languageChanged$.pipe(
+      takeUntil(this.nextOnDestroy),
       startWith(''),
       concatMap(() => this.translate.get('const').pipe(
         res => res

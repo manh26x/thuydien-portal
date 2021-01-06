@@ -4,7 +4,8 @@ import {UtilService} from '../../core/service/util.service';
 import {TranslateService} from '@ngx-translate/core';
 import {AppTranslateService} from '../../core/service/translate.service';
 import {UserService} from './service/user.service';
-import {concatMap, delay, map, startWith, switchMap} from 'rxjs/operators';
+import {concatMap, delay, map, startWith, switchMap, takeUntil} from 'rxjs/operators';
+import {BaseComponent} from '../../core/base.component';
 
 @Component({
   selector: 'aw-user',
@@ -12,7 +13,7 @@ import {concatMap, delay, map, startWith, switchMap} from 'rxjs/operators';
   styleUrls: []
 })
 
-export class UserComponent implements AfterViewInit {
+export class UserComponent extends BaseComponent implements AfterViewInit {
   items: MenuItem[];
   home: MenuItem = {icon: 'pi pi-home', routerLink: '/'};
   constructor(
@@ -21,9 +22,11 @@ export class UserComponent implements AfterViewInit {
     private appTranslate: AppTranslateService,
     private userService: UserService
   ) {
+    super();
   }
   ngAfterViewInit() {
     this.appTranslate.languageChanged$.pipe(
+      takeUntil(this.nextOnDestroy),
       startWith(''),
       concatMap(() => this.translate.get('breadcrumb').pipe(
         res => res

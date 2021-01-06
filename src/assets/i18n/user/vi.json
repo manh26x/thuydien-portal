@@ -8,9 +8,11 @@
 	},
 	"btn": {
 		"cancel": "Hủy",
+		"checkData": "Kiểm tra dữ liệu",
 		"create": "Thêm mới",
 		"refresh": "Tải lại",
-		"save": "Lưu thay đổi"
+		"save": "Lưu thay đổi",
+		"save2": "Lưu"
 	},
 	"confirm": {
 		"accept": "Có",
@@ -74,6 +76,7 @@
 	"user": {
 		"branch": "Chi nhánh",
 		"currentPass": "Mật khẩu hiện tại",
+		"department": "Khối",
 		"email": "Email",
 		"fullName": "Họ và tên",
 		"newPass": "Mật khẩu mới",
@@ -81,12 +84,13 @@
 		"phone": "Số điện thoại",
 		"position": "Vị trí",
 		"resetPass": "Đặt lại mật khẩu",
-		"role": "Phân quyền",
+		"role": "Role",
 		"status": "Trạng thái",
 		"tagKpi": "Tags cho KPI",
 		"tagNews": "Tags cho bản tin",
 		"tagQna": "Tags cho Q&A",
 		"tagTool": "Tags cho công cụ tính toán",
+		"unit": "Đơn vị",
 		"userName": "Tên đăng nhập"
 	}
 }

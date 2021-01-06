@@ -1,4 +1,5 @@
 import {TagsUser} from '../../tags/model/tags';
+import {Role} from '../../../shared/model/role';
 
 export interface UserInfo {
   avatar?: string;
@@ -35,6 +36,21 @@ export interface FilterUserRequest {
   role?: string;
   status?: string;
   userType?: string;
+  page: number;
+  pageSize: number;
+  sortBy: string;
+  sortOrder: string;
+}
+
+export interface FilterUserData {
+  user: UserInfo;
+  userBranchList: BranchUser[];
+  userRoleList: Role[];
+}
+
+export interface FilterUserResponse {
+  listUser: FilterUserData[];
+  totalRecord: number;
 }
 
 export interface UserDetail {
@@ -55,4 +71,16 @@ export interface UpdateUserRequest {
   listTagNews?: TagsUser[];
   listTagKPI?: TagsUser[];
   listTagTool?: TagsUser[];
+}
+
+export interface PreviewUser {
+  userName: string;
+  fullName: string;
+  email: string;
+  phone: string;
+  branch: string;
+  unit: string;
+  department: string;
+  position: string;
+  role: string;
 }

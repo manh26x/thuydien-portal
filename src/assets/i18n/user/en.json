@@ -8,9 +8,11 @@
 	},
 	"btn": {
 		"cancel": "Cancel",
+		"checkData": "Check data",
 		"create": "Create",
 		"refresh": "Refresh",
-		"save": "Save changes"
+		"save": "Save changes",
+		"save2": "Save"
 	},
 	"confirm": {
 		"accept": "Yes",
@@ -74,6 +76,7 @@
 	"user": {
 		"branch": "Branch",
 		"currentPass": "Current password",
+		"department": "Department",
 		"email": "Email",
 		"fullName": "First and Last Name",
 		"newPass": "A new password",
@@ -87,6 +90,7 @@
 		"tagNews": "Tags for news",
 		"tagQna": "Tags for Q&A",
 		"tagTool": "Tags for calculation tool",
+		"unit": "Unit",
 		"userName": "Username"
 	}
 }

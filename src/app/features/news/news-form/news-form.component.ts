@@ -7,7 +7,7 @@ import {UtilService} from '../../../core/service/util.service';
 import {ConfirmationService, SelectItem} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {AppTranslateService} from '../../../core/service/translate.service';
-import {concatMap, startWith} from 'rxjs/operators';
+import {concatMap, startWith, takeUntil} from 'rxjs/operators';
 import {NewsEnum} from '../model/news.enum';
 import {NewsDetail} from '../model/news';
 import {environment} from '../../../../environments/environment';
@@ -15,13 +15,14 @@ import {ImageUploadComponent} from '../../../shared/custom-file-upload/image-upl
 import {DomSanitizer} from '@angular/platform-browser';
 import {BranchService} from '../../../shared/service/branch.service';
 import {Branch} from '../../../shared/model/branch';
+import {BaseComponent} from '../../../core/base.component';
 
 @Component({
   selector: 'aw-news-form',
   templateUrl: './news-form.component.html',
   providers: [TagsService, BranchService]
 })
-export class NewsFormComponent implements OnInit, OnChanges {
+export class NewsFormComponent extends BaseComponent implements OnInit, OnChanges {
   yearSelect = `${new Date().getFullYear()}:${new Date().getFullYear() + 10}`;
   min = new Date();
   formNews: FormGroup;
@@ -50,11 +51,13 @@ export class NewsFormComponent implements OnInit, OnChanges {
     private dialog: ConfirmationService,
     private branchService: BranchService
   ) {
+    super();
     this.initForm();
   }
 
   ngOnInit(): void {
     this.appTranslate.languageChanged$.pipe(
+      takeUntil(this.nextOnDestroy),
       startWith(''),
       concatMap(() => this.translate.get('levelList').pipe(
         res => res

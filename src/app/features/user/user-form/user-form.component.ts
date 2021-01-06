@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {AppTranslateService} from '../../../core/service/translate.service';
-import {concatMap, startWith} from 'rxjs/operators';
+import {concatMap, startWith, takeUntil} from 'rxjs/operators';
 import {UserEnum} from '../model/user.enum';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UtilService} from '../../../core/service/util.service';
@@ -10,6 +10,7 @@ import {TagsEnum} from '../../tags/model/tags.enum';
 import {TagsUser} from '../../tags/model/tags';
 import {UserDetail} from '../model/user';
 import {xorBy} from 'lodash-es';
+import {BaseComponent} from '../../../core/base.component';
 
 @Component({
   selector: 'aw-user-form',
@@ -23,7 +24,7 @@ import {xorBy} from 'lodash-es';
     }
   `]
 })
-export class UserFormComponent implements OnInit, OnChanges {
+export class UserFormComponent extends BaseComponent implements OnInit, OnChanges {
   roleList = [];
   statusList = [];
 
@@ -46,6 +47,7 @@ export class UserFormComponent implements OnInit, OnChanges {
     private util: UtilService,
     private userService: UserService
   ) {
+    super();
     this.initForm();
   }
 
@@ -55,6 +57,7 @@ export class UserFormComponent implements OnInit, OnChanges {
       this.formUser.get('status').disable();
     }
     this.appTranslate.languageChanged$.pipe(
+      takeUntil(this.nextOnDestroy),
       startWith(''),
       concatMap(() => this.translate.get('const').pipe(res => res))
     ).subscribe(res => {

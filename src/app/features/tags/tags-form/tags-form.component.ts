@@ -1,12 +1,13 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {TagsEnum} from '../model/tags.enum';
 import {AppTranslateService} from '../../../core/service/translate.service';
-import {concatMap, map, startWith} from 'rxjs/operators';
+import {concatMap, map, startWith, takeUntil} from 'rxjs/operators';
 import {UserService} from '../../user/service/user.service';
 import {UtilService} from '../../../core/service/util.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {TagDetail, TagsUser} from '../model/tags';
+import {BaseComponent} from '../../../core/base.component';
 
 @Component({
   selector: 'aw-tags-form',
@@ -15,7 +16,7 @@ import {TagDetail, TagsUser} from '../model/tags';
   ],
   providers: [UserService]
 })
-export class TagsFormComponent implements OnInit, OnChanges {
+export class TagsFormComponent extends BaseComponent implements OnInit, OnChanges {
   tagsType = [];
   userList = [];
   formTags: FormGroup;
@@ -32,6 +33,7 @@ export class TagsFormComponent implements OnInit, OnChanges {
     private util: UtilService,
     private fb: FormBuilder
   ) {
+    super();
     this.initForm();
   }
 
@@ -43,6 +45,7 @@ export class TagsFormComponent implements OnInit, OnChanges {
       this.formTags.get('status').disable();
     }
     this.appTranslate.languageChanged$.pipe(
+      takeUntil(this.nextOnDestroy),
       startWith(''),
       concatMap(() => this.translate.get('const').pipe(
         res => res
@@ -59,7 +62,9 @@ export class TagsFormComponent implements OnInit, OnChanges {
       ];
     });
 
-    this.userService.getAllUser().subscribe(res => {
+    this.userService.getAllUser().pipe(
+      takeUntil(this.nextOnDestroy)
+    ).subscribe(res => {
       this.userList = res;
     });
   }

@@ -31,6 +31,9 @@ import {CheckboxModule} from 'primeng/checkbox';
 import {TooltipModule} from 'primeng/tooltip';
 import {PickListModule} from 'primeng/picklist';
 import {ViewOnlyGuard} from './view-only.guard';
+import {CustomFileUploadModule} from '../../shared/custom-file-upload/custom-file-upload.module';
+import { DialogPreviewComponent } from './dialog-preview/dialog-preview.component';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
 
 
 @NgModule({
@@ -40,39 +43,42 @@ import {ViewOnlyGuard} from './view-only.guard';
     UserCreateComponent,
     UserFormComponent,
     UserViewComponent,
-    UserUpdateComponent
+    UserUpdateComponent,
+    DialogPreviewComponent
   ],
     imports: [
-      CommonModule,
-      UserRoutingModule,
-      TranslateModule.forChild({
-          missingTranslationHandler: {
-              provide: MissingTranslationHandler,
-              useClass: CustomMissingTranslationHandler,
-              deps: [AppTranslateService]
-          },
-          loader: {
-              provide: TranslateLoader,
-              useFactory: (CustomTranslateLoader),
-              deps: [LANGUAGE_FILE_PATH, HttpClient]
-          },
-          isolate: true,
-          useDefaultLang: false
-      }),
-      PanelModule,
-      InputTextModule,
-      ButtonModule,
-      FormsModule,
-      ReactiveFormsModule,
-      TableModule,
-      PaginatorModule,
-      MultiSelectModule,
-      BreadcrumbModule,
-      ToastModule,
-      AutoCompleteModule,
-      CheckboxModule,
-      TooltipModule,
-      PickListModule
+        CommonModule,
+        UserRoutingModule,
+        TranslateModule.forChild({
+            missingTranslationHandler: {
+                provide: MissingTranslationHandler,
+                useClass: CustomMissingTranslationHandler,
+                deps: [AppTranslateService]
+            },
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (CustomTranslateLoader),
+                deps: [LANGUAGE_FILE_PATH, HttpClient]
+            },
+            isolate: true,
+            useDefaultLang: false
+        }),
+        PanelModule,
+        InputTextModule,
+        ButtonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        TableModule,
+        PaginatorModule,
+        MultiSelectModule,
+        BreadcrumbModule,
+        ToastModule,
+        AutoCompleteModule,
+        CheckboxModule,
+        TooltipModule,
+        PickListModule,
+        CustomFileUploadModule,
+        DynamicDialogModule
     ],
   providers: [
     UserService,
