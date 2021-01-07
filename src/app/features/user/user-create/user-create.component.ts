@@ -40,17 +40,17 @@ export class UserCreateComponent implements OnInit, BeforeLeave {
 
   ngOnInit(): void {
     this.userService.setPage('create');
-    this.indicator.showActivityIndicator();
-    const obsTagNews = this.filterTagByType('', TagsEnum.NEWS);
-    const obsTagKpi = this.filterTagByType('', TagsEnum.KPI);
-    const obsBranch = this.branchService.getBranchList();
-    forkJoin([obsBranch, obsTagNews, obsTagKpi]).pipe(
-      finalize(() => this.indicator.hideActivityIndicator())
-    ).subscribe(res => {
-      this.branchList = res[0];
-      this.tagNewsList = res[1].tagsList;
-      this.tagKpiList = res[2].tagsList;
-    });
+//    this.indicator.showActivityIndicator();
+//    const obsTagNews = this.filterTagByType('', TagsEnum.NEWS);
+//    const obsTagKpi = this.filterTagByType('', TagsEnum.KPI);
+//    const obsBranch = this.branchService.getBranchList();
+//    forkJoin([obsBranch, obsTagNews, obsTagKpi]).pipe(
+//      finalize(() => this.indicator.hideActivityIndicator())
+//    ).subscribe(res => {
+//      this.branchList = res[0];
+//      this.tagNewsList = res[1].tagsList;
+//      this.tagKpiList = res[2].tagsList;
+//    });
   }
 
   filterTagByType(query, type) {

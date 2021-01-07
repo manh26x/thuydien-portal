@@ -13,6 +13,10 @@ export class UserService extends BaseService{
     super();
   }
 
+  batchInsert(data: PreviewUser[]): Observable<ApiResultResponse> {
+    return this.doPost('/admin/userPortal/addList', data);
+  }
+
   readImportFile(file: FormData): Observable<PreviewUser[]> {
     return this.doPost('/admin/userPortal/readUserWithExcel', file).pipe(
       map(res => res.data || [])

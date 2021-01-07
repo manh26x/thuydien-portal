@@ -33,6 +33,10 @@
 </p-table>
 <div class="p-text-center p-mt-3">
   <button (click)="doCancel()" pButton type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
-  <button (click)="doSave()" pButton type="button" label="{{'btn.save2' | translate}}" class="p-button-raised p-button-secondary"></button>
+  <button
+    iconPos="right"
+    [disabled]="userList.length === 0"
+    (click)="doSave()" pButton type="button"
+    label="{{'btn.save2' | translate}}" class="p-button-raised p-button-secondary"></button>
 </div>
 

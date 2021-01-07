@@ -19,11 +19,11 @@
   <form class="p-grid p-fluid p-mb-3" [formGroup]="searchForm">
     <div class="p-lg-6 p-col-6 p-field">
       <label for="s-value">{{'user.fullName' | translate}}, {{'user.position' | translate}}</label>
-      <input type="text" id="s-value" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
+      <input (keyup.enter)="getUserList()" type="text" id="s-value" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
     </div>
     <div class="p-lg-2 p-col-6 p-field">
       <label>{{'user.role' | translate}}</label>
-      <p-dropdown [options]="roleList" optionLabel="name" dataKey="code" formControlName="role"></p-dropdown>
+      <p-dropdown [filter]="true" [options]="roleList" optionLabel="name" dataKey="id" formControlName="role"></p-dropdown>
     </div>
     <div class="p-lg-2 p-col-6 p-field">
       <label>{{'user.status' | translate}}</label>
@@ -62,13 +62,13 @@
         <td>{{user.user.userName}}</td>
         <td class="text-primary">
           <ng-container *ngFor="let item of user.userRoleList;">
-            {{item.id}};
+            {{item.name}};
           </ng-container>
         </td>
         <td>{{user.user.position}}</td>
         <td>
           <div *ngFor="let item of user.userBranchList;index as i" [ngClass]="{'p-mt-2': i != 0}">
-            <ng-container>{{item.branchName}}</ng-container>
+            <ng-container>{{item.branchName}}</ng-container>&nbsp;
           </div>
         </td>
         <td>
