@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {concatMap, finalize, map, takeUntil} from 'rxjs/operators';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {BaseComponent} from '../../../core/base.component';
-import {UserDetail} from '../model/user';
+import {FilterUserData, UserDetail} from '../model/user';
 import {UserEnum} from '../model/user.enum';
 import {UserAuth} from '../../../auth/model/user-auth';
 import {AuthService} from '../../../auth/auth.service';
@@ -17,7 +17,7 @@ import {ApiErrorResponse} from '../../../core/model/error-response';
   ]
 })
 export class UserViewComponent extends BaseComponent implements OnInit {
-  userDetail: UserDetail = {};
+  userDetail: FilterUserData = {};
   userConst = UserEnum;
   userLogged: UserAuth;
   constructor(

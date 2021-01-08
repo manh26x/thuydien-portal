@@ -59,7 +59,7 @@
         formControlName="branch"
         inputId="n-branch" [options]="branchList"
         optionLabel="name"
-        dataKey="id">
+        dataKey="code">
         <ng-template let-branch pTemplate="item">
           <div>{{branch.value.code}} - {{branch.value.name}}</div>
         </ng-template>
