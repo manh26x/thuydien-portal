@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TagsService} from '../../tags/service/tags.service';
 import {forkJoin} from 'rxjs';
@@ -7,7 +7,7 @@ import {UtilService} from '../../../core/service/util.service';
 import {ConfirmationService, SelectItem} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {AppTranslateService} from '../../../core/service/translate.service';
-import {concatMap, startWith, takeUntil} from 'rxjs/operators';
+import {concatMap, map, startWith, takeUntil} from 'rxjs/operators';
 import {NewsEnum} from '../model/news.enum';
 import {NewsDetail} from '../model/news';
 import {environment} from '../../../../environments/environment';
@@ -16,6 +16,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {BranchService} from '../../../shared/service/branch.service';
 import {Branch} from '../../../shared/model/branch';
 import {BaseComponent} from '../../../core/base.component';
+import {NewsService} from '../service/news.service';
 
 @Component({
   selector: 'aw-news-form',
@@ -23,6 +24,8 @@ import {BaseComponent} from '../../../core/base.component';
   providers: [TagsService, BranchService]
 })
 export class NewsFormComponent extends BaseComponent implements OnInit, OnChanges {
+  @ViewChild('fileContent', {static: true}) fileContent: ElementRef;
+  callbackEvent: any;
   yearSelect = `${new Date().getFullYear()}:${new Date().getFullYear() + 10}`;
   min = new Date();
   formNews: FormGroup;
@@ -35,6 +38,24 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
   fileDocPreview: any = '';
   isChangeImage = false;
   isChangeDoc = false;
+  tinyMceInit = {
+    base_url: '/tinymce',
+    suffix: '.min',
+    height: 500,
+    menubar: true,
+    plugins: [
+      'autolink lists link image charmap print preview anchor',
+      'searchreplace visualblocks code fullscreen',
+      'insertdatetime media table paste code wordcount'
+    ],
+    toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | fullscreen',
+    file_picker_types: 'image',
+    automatic_uploads: false,
+    file_picker_callback: (cb, value, meta) => {
+      this.callbackEvent = cb;
+      this.fileContent.nativeElement.click();
+    }
+  };
   @ViewChild(ImageUploadComponent, {static: true}) imgUploadComponent: ImageUploadComponent;
   @Input() mode = 'create';
   @Input() valueForm: NewsDetail;
@@ -49,7 +70,8 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
     private appTranslate: AppTranslateService,
     private sanitizer: DomSanitizer,
     private dialog: ConfirmationService,
-    private branchService: BranchService
+    private branchService: BranchService,
+    private newsService: NewsService
   ) {
     super();
     this.initForm();
@@ -59,9 +81,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
     this.appTranslate.languageChanged$.pipe(
       takeUntil(this.nextOnDestroy),
       startWith(''),
-      concatMap(() => this.translate.get('levelList').pipe(
-        res => res
-      ))
+      concatMap(() => this.translate.get('levelList'))
     ).subscribe(res => {
       this.levelList = [
         { label: res.normal, value: NewsEnum.LEVEL_NORMAL },
@@ -145,7 +165,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
 
   doSaveDraft() {
     const value = this.formNews.getRawValue();
-    if (value.title.length > 500 || value.shortContent.length > 400) {
+    if ((value.title && value.title.length > 500) || (value.shortContent && value.shortContent.length > 400)) {
       return;
     }
     this.draft.emit({ news: value, fileImageList: this.filesImage, fileDocList: this.filesDoc });
@@ -241,6 +261,16 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
     }
     publishDateControl.setErrors(null);
     return null;
+  }
+
+  fileContentChange(event) {
+    const files = event.target.files;
+    const fileFormData: FormData = new FormData();
+    fileFormData.append('file', files[0], files[0].name);
+    this.newsService.uploadFile(fileFormData).subscribe(res => {
+      this.fileContent.nativeElement.value = '';
+      this.callbackEvent(`${environment.mediaUrl}${res}`);
+    });
   }
 
 }

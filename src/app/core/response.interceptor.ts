@@ -79,7 +79,7 @@ export class ResponseInterceptor implements HttpInterceptor {
       ) {
         throw new ApiErrorNotFound();
       }
-      if (!this.isResponseSuccess(response.message)) {
+      if (this.isResponseError(response.message)) {
         throw new ApiErrorResponse(rsCode, response.message.message);
       }
     }
@@ -129,8 +129,8 @@ export class ResponseInterceptor implements HttpInterceptor {
     }
   }
 
-  private isResponseSuccess(result: any): boolean {
-    return result.code === '200' || result.code === '201';
+  private isResponseError(result: any): boolean {
+    return result.code !== '200';
   }
 
   private isResponseNotFound(result: any): boolean {

@@ -51,7 +51,7 @@ export class UserService extends BaseService{
   }
 
   insertUser(request: UserDetail): Observable<any> {
-    return this.doPost('/admin/userPortal/update', request).pipe(
+    return this.doPost('/admin/userPortal/add', request).pipe(
       map(res => res)
     );
   }

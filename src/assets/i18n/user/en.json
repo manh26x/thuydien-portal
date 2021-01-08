@@ -30,6 +30,12 @@
 	"detail": "View user detail",
 	"filter": "Filter the results",
 	"invalid": {
+		"branch": {
+			"required": "Value cannot be blank"
+		},
+		"department": {
+			"required": "Value cannot be blank"
+		},
 		"email": {
 			"maxLength": "The value must not exceed {{length}} characters",
 			"pattern": "Email format is incorrrect"
@@ -50,6 +56,9 @@
 		"role": {
 			"required": "Value cannot be blank"
 		},
+		"unit": {
+			"required": "Value cannot be blank"
+		},
 		"userId": {
 			"maxLength": "The value must not exceed {{length}} characters",
 			"required": "Value cannot be blank"
@@ -59,6 +68,7 @@
 	"message": {
 		"deleteNotFound": "User does not exist or has been deleted",
 		"deleteSuccess": "Delete user successfully",
+		"importSuccess": "Import user success",
 		"insertExisted": "Username is already taken",
 		"insertSuccess": "Add new account successfully",
 		"passwordNotMatch": "The current password is incorrect",
@@ -69,8 +79,10 @@
 	"no": "No.",
 	"noData": "No results match",
 	"paging": "Showing {first} to {last} in {totalRecords} records",
-	"search": "Enter your first and last name or location",
+	"roleList": "Roles list",
+	"search": "Enter first and last name, position and branch",
 	"selectedList": "List of selected tags",
+	"selectedRoleList": "Selected Roles list",
 	"tagList": "List of tags",
 	"update": "Edit User Information",
 	"user": {
@@ -82,7 +94,7 @@
 		"newPass": "A new password",
 		"password": "Password",
 		"phone": "Phone Number",
-		"position": "Location",
+		"position": "Position",
 		"resetPass": "Reset Password",
 		"role": "Role",
 		"status": "Status",

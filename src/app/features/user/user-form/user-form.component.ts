@@ -120,7 +120,7 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
     if (this.formUser.invalid) {
       this.util.validateAllFields(this.formUser);
     } else {
-      console.log(this.formUser.getRawValue());
+      this.save.emit(this.formUser.getRawValue());
     }
   }
 
