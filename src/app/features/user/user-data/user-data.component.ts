@@ -78,10 +78,8 @@ export class UserDataComponent extends BaseComponent implements OnInit {
         map(res => res)
       )),
       switchMap(lang => this.roleService.getRoleList('', RoleEnum.STATUS_ACTIVE).pipe(
-        map((roles) => ({ resLang: lang, resRole: roles })),
-        finalize(() => this.indicator.hideActivityIndicator())
-      )),
-      finalize(() => this.indicator.hideActivityIndicator())
+        map((roles) => ({ resLang: lang, resRole: roles }))
+      ))
     ).subscribe(res => {
       this.statusList = [
         {code: null, name: res.resLang.all},
