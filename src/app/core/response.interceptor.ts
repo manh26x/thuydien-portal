@@ -78,8 +78,7 @@ export class ResponseInterceptor implements HttpInterceptor {
         && this.NOT_FOUND_WILL_THROW.find(url => requestUrl.includes(url))
       ) {
         throw new ApiErrorNotFound();
-      }
-      if (this.isResponseError(response.message)) {
+      } else if (this.isResponseError(response.message)) {
         throw new ApiErrorResponse(rsCode, response.message.message);
       }
     }
