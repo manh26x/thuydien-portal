@@ -52,12 +52,12 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 export class ImageUploadComponent implements OnInit {
   @ViewChild('file', { static: true }) file: ElementRef;
   errors: Array<string> = [];
-  maxFiles = 1;
-  fileExt = '.jpg, .gif, .png';
-  maxSize = 5; // MB
   zoneFileClass = 'drag-area';
   isSelect = true;
   previewUrl: any = '';
+  @Input() maxFiles = 1;
+  @Input() fileExt = '.jpg, .gif, .png';
+  @Input() maxSize = 5; // MB
   @Input() uploadTitle = 'Tải ảnh lên';
   @Input() maxFileErrorMsg = 'Vượt quá số lượng cho phép';
   @Input() fileExtErrorMsg = 'File không đúng định dạng';

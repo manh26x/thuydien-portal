@@ -4,14 +4,15 @@ import {AppTranslateService} from '../../core/service/translate.service';
 import {TranslateService} from '@ngx-translate/core';
 import {UtilService} from '../../core/service/util.service';
 import {RoleService} from './service/role.service';
-import {concatMap, delay, map, startWith, switchMap} from 'rxjs/operators';
+import {concatMap, delay, map, startWith, switchMap, takeUntil} from 'rxjs/operators';
+import {BaseComponent} from '../../core/base.component';
 
 @Component({
   selector: 'aw-role',
   templateUrl: './role.component.html'
 })
 
-export class RoleComponent implements AfterViewInit {
+export class RoleComponent extends BaseComponent implements AfterViewInit {
   items: MenuItem[];
   home: MenuItem = {icon: 'pi pi-home', routerLink: '/'};
   constructor(
@@ -20,10 +21,12 @@ export class RoleComponent implements AfterViewInit {
     private roleManageService: RoleService,
     private util: UtilService
   ) {
+    super();
   }
 
   ngAfterViewInit() {
     this.appTranslate.languageChanged$.pipe(
+      takeUntil(this.nextOnDestroy),
       startWith(''),
       concatMap(() => this.translate.get('breadcrumb').pipe(
         res => res

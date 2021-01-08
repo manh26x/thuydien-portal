@@ -43,6 +43,7 @@ export class RoleDataComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.roleService.setPage('');
     this.appTranslate.languageChanged$.pipe(
+      takeUntil(this.nextOnDestroy),
       startWith(''),
       concatMap(() => this.translate.get('const'))
     ).subscribe(res => {

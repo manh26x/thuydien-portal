@@ -49,6 +49,7 @@ export class CalculateToolDataComponent extends BaseComponent implements OnInit 
 
   ngOnInit(): void {
     this.appTranslate.languageChanged$.pipe(
+      takeUntil(this.nextOnDestroy),
       startWith(''),
       mergeMap(() => this.translate.get('const').pipe(
         concatMap(resLang => this.productService.getGroupProduct().pipe(

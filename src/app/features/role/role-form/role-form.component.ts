@@ -1,10 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {SelectItem} from 'primeng/api';
-import {concatMap, startWith} from 'rxjs/operators';
+import {concatMap, startWith, takeUntil} from 'rxjs/operators';
 import {AppTranslateService} from '../../../core/service/translate.service';
 import {TranslateService} from '@ngx-translate/core';
 import {RoleEnum} from '../../../shared/model/role';
+import {BaseComponent} from '../../../core/base.component';
 
 @Component({
   selector: 'aw-role-form',
@@ -12,17 +13,20 @@ import {RoleEnum} from '../../../shared/model/role';
   styles: [
   ]
 })
-export class RoleFormComponent implements OnInit {
+export class RoleFormComponent extends BaseComponent implements OnInit {
   @Input() roleForm: FormGroup;
   statusList: SelectItem[] = [];
   constructor(
     private fb: FormBuilder,
     private appTranslate: AppTranslateService,
     private translate: TranslateService
-  ) { }
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.appTranslate.languageChanged$.pipe(
+      takeUntil(this.nextOnDestroy),
       startWith(''),
       concatMap(() => this.translate.get('const'))
     ).subscribe(res => {

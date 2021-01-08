@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {BaseService} from '../../../core/service/base.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {FilterUserRequest, UserDetail, UserBranch, UpdateUserRequest, UserInfo} from '../model/user';
+import {FilterUserRequest, UserDetail, UpdateUserRequest, UserInfo, PreviewUser, FilterUserResponse} from '../model/user';
 import {map} from 'rxjs/operators';
 import {ApiResultResponse} from '../../../core/model/result-response';
 
@@ -13,6 +13,16 @@ export class UserService extends BaseService{
     super();
   }
 
+  batchInsert(data: PreviewUser[]): Observable<ApiResultResponse> {
+    return this.doPost('/admin/userPortal/addList', data);
+  }
+
+  readImportFile(file: FormData): Observable<PreviewUser[]> {
+    return this.doPost('/admin/userPortal/readUserWithExcel', file).pipe(
+      map(res => res.data || [])
+    );
+  }
+
   getUserInfo(userId: string): Observable<UserDetail> {
     const param = new HttpParams().append('userId', userId);
     return this.doGet('/admin/userPortal/detail', param).pipe(
@@ -20,10 +30,10 @@ export class UserService extends BaseService{
     );
   }
 
-  filterUser(request: FilterUserRequest): Observable<UserBranch[]> {
+  filterUser(request: FilterUserRequest): Observable<FilterUserResponse> {
     request.userType = '';
     return this.doPost('/admin/userPortal/filter', request).pipe(
-      map(res => res.data || [])
+      map(res => res.data[0] || {})
     );
   }
 
@@ -41,7 +51,7 @@ export class UserService extends BaseService{
   }
 
   insertUser(request: UserDetail): Observable<any> {
-    return this.doPost('/admin/userPortal/update', request).pipe(
+    return this.doPost('/admin/userPortal/add', request).pipe(
       map(res => res)
     );
   }

@@ -1,3 +1,15 @@
+<p-panel header="Import User" [toggleable]="true">
+  <div class="p-grid p-fluid">
+    <div class="p-col-12 p-md-5">
+      <aw-input-upload (changeFile)="doChangeFile($event)"></aw-input-upload>
+    </div>
+
+    <div class="p-col-12 p-md-2">
+      <button (click)="doCheckFile()" pButton type="button" label="{{'btn.checkData' | translate}}" class="p-button-secondary" style="height: 46px;"></button>
+    </div>
+  </div>
+</p-panel>
+<div class="p-my-3"></div>
 <p-panel header="{{'list' | translate}}">
   <ng-template pTemplate="icons">
     <button class="p-panel-header-icon p-link" (click)="refreshSearch()" pTooltip="{{'btn.refresh' | translate}}" tooltipPosition="bottom">
@@ -7,11 +19,11 @@
   <form class="p-grid p-fluid p-mb-3" [formGroup]="searchForm">
     <div class="p-lg-6 p-col-6 p-field">
       <label for="s-value">{{'user.fullName' | translate}}, {{'user.position' | translate}}</label>
-      <input type="text" id="s-value" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
+      <input (keyup.enter)="getUserList()" type="text" id="s-value" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
     </div>
     <div class="p-lg-2 p-col-6 p-field">
       <label>{{'user.role' | translate}}</label>
-      <p-dropdown [options]="roleList" optionLabel="name" dataKey="code" formControlName="role"></p-dropdown>
+      <p-dropdown [filter]="true" [options]="roleList" optionLabel="name" dataKey="id" formControlName="role"></p-dropdown>
     </div>
     <div class="p-lg-2 p-col-6 p-field">
       <label>{{'user.status' | translate}}</label>
@@ -21,28 +33,24 @@
       <button (click)="getUserList()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
     </div>
   </form>
-  <p-table
-    [autoLayout]="true"
-    [paginator]="true"
-    [rows]="10"
-    [totalRecords]="userList.length"
-    [rowsPerPageOptions]="[10, 20, 50, 100]"
-    [showCurrentPageReport]="true"
-    sortField="user.fullName"
-    [sortOrder]="-1"
-    currentPageReportTemplate="{{ 'paging' | translate }}"
-    [value]="userList">
+  <p-table [value]="userList" styleClass="table-responsive"
+           [customSort]="true"
+           [autoLayout]="true"
+           [lazy]="true"
+           sortField="fullName"
+           [sortOrder]="-1"
+           (onLazyLoad)="lazyLoadUser($event)">
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 50px;">{{'no' | translate}}</th>
-        <th pSortableColumn="user.fullName">{{'user.fullName' | translate}}<p-sortIcon field="user.fullName"></p-sortIcon></th>
-        <th pSortableColumn="user.userId">{{'user.userName' | translate}}<p-sortIcon field="user.userId"></p-sortIcon></th>
-        <th pSortableColumn="user.role">{{'user.role' | translate}}<p-sortIcon field="user.role"></p-sortIcon></th>
+        <th pSortableColumn="fullName">{{'user.fullName' | translate}}<p-sortIcon field="fullName"></p-sortIcon></th>
+        <th>{{'user.userName' | translate}}</th>
+        <th>{{'user.role' | translate}}</th>
         <th>{{'user.position' | translate}}</th>
         <th>{{'user.branch' | translate}}</th>
-        <th pSortableColumn="user.status">{{'user.status' | translate}}<p-sortIcon field="user.status"></p-sortIcon></th>
+        <th>{{'user.status' | translate}}</th>
         <th>
-          <button *ngIf="userLogged.isSupperAdmin" (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
+          <button (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
         </th>
       </tr>
     </ng-template>
@@ -53,19 +61,14 @@
         <td>{{user.user.fullName}}</td>
         <td>{{user.user.userName}}</td>
         <td class="text-primary">
-          <ng-container [ngSwitch]="user.user.role">
-            <ng-container *ngSwitchCase="userConst.SUPPER_ADMIN">
-              {{user.user.role}} <i class="pi pi-star supper-admin"></i>
-            </ng-container>
-            <ng-container *ngSwitchDefault>
-              {{user.user.role}}
-            </ng-container>
+          <ng-container *ngFor="let item of user.userRoleList;">
+            {{item.name}};
           </ng-container>
         </td>
         <td>{{user.user.position}}</td>
         <td>
-          <div *ngFor="let item of user.listBranch;index as i" [ngClass]="{'p-mt-2': i != 0}">
-            <ng-container>{{item.branchName}}</ng-container>
+          <div *ngFor="let item of user.userBranchList;index as i" [ngClass]="{'p-mt-2': i != 0}">
+            <ng-container>{{item.branchName}}</ng-container>&nbsp;
           </div>
         </td>
         <td>
@@ -91,4 +94,11 @@
       </tr>
     </ng-template>
   </p-table>
+  <p-paginator [rows]="pageSize"
+               [totalRecords]="totalItem"
+               [rowsPerPageOptions]="[10, 20, 50, 100]"
+               [showCurrentPageReport]="true"
+               (onPageChange)="changePage($event)"
+               currentPageReportTemplate="{{ 'paging' | translate }}">
+  </p-paginator>
 </p-panel>

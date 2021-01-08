@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {AppTranslateService} from '../../../core/service/translate.service';
-import {concatMap, startWith} from 'rxjs/operators';
+import {concatMap, finalize, startWith, takeUntil} from 'rxjs/operators';
 import {UserEnum} from '../model/user.enum';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UtilService} from '../../../core/service/util.service';
@@ -10,6 +10,16 @@ import {TagsEnum} from '../../tags/model/tags.enum';
 import {TagsUser} from '../../tags/model/tags';
 import {UserDetail} from '../model/user';
 import {xorBy} from 'lodash-es';
+import {BaseComponent} from '../../../core/base.component';
+import {RoleService} from '../../role/service/role.service';
+import {Role, RoleEnum} from '../../../shared/model/role';
+import {UnitService} from '../../../shared/service/unit.service';
+import {BranchService} from '../../../shared/service/branch.service';
+import {DepartmentService} from '../../../shared/service/department.service';
+import {forkJoin} from 'rxjs';
+import {Unit} from '../../../shared/model/unit';
+import {Department} from '../../../shared/model/department';
+import {IndicatorService} from '../../../shared/indicator/indicator.service';
 
 @Component({
   selector: 'aw-user-form',
@@ -21,20 +31,20 @@ import {xorBy} from 'lodash-es';
       padding: 0;
       width: 100%;
     }
-  `]
+  `],
+  providers: [RoleService, UnitService, BranchService, DepartmentService]
 })
-export class UserFormComponent implements OnInit, OnChanges {
-  roleList = [];
+export class UserFormComponent extends BaseComponent implements OnInit, OnChanges {
+  roleList: Role[] = [];
   statusList = [];
+  unitList: Unit[] = [];
+  departmentList: Department[] = [];
 
   formUser: FormGroup;
   tagTypeEnum = TagsEnum;
   filteredUser = [];
-  tagNewsSelectedList: TagsUser[] = [];
-  tagKpiSelectedList: TagsUser[] = [];
-  @Input() branchList = [];
-  @Input() tagNewsList: TagsUser[];
-  @Input() tagKpiList: TagsUser[];
+  roleSelectedList: Role[] = [];
+  branchList = [];
   @Input() mode = 'create';
   @Input() valueForm: UserDetail;
   @Output() save: EventEmitter<any> = new EventEmitter<any>();
@@ -44,8 +54,14 @@ export class UserFormComponent implements OnInit, OnChanges {
     private appTranslate: AppTranslateService,
     private fb: FormBuilder,
     private util: UtilService,
-    private userService: UserService
+    private userService: UserService,
+    private roleService: RoleService,
+    private unitService: UnitService,
+    private branchService: BranchService,
+    private departmentService: DepartmentService,
+    private indicator: IndicatorService
   ) {
+    super();
     this.initForm();
   }
 
@@ -55,6 +71,7 @@ export class UserFormComponent implements OnInit, OnChanges {
       this.formUser.get('status').disable();
     }
     this.appTranslate.languageChanged$.pipe(
+      takeUntil(this.nextOnDestroy),
       startWith(''),
       concatMap(() => this.translate.get('const').pipe(res => res))
     ).subscribe(res => {
@@ -62,10 +79,19 @@ export class UserFormComponent implements OnInit, OnChanges {
         {code: UserEnum.ACTIVE, name: res.active},
         {code: UserEnum.INACTIVE, name: res.inactive}
       ];
-      this.roleList = [
-        {code: UserEnum.ADMIN, name: res.roleAdmin},
-        {code: UserEnum.SUPPER_ADMIN, name: res.supperAdmin},
-      ];
+    });
+    this.indicator.showActivityIndicator();
+    const obsUnit = this.unitService.getAllUnit();
+    const obsBranch = this.branchService.getBranchList();
+    const obsDepartment = this.departmentService.getAllDepartment();
+    const obsRole = this.roleService.getRoleList('', RoleEnum.STATUS_ACTIVE);
+    forkJoin([obsUnit, obsBranch, obsDepartment, obsRole]).pipe(
+      finalize(() => this.indicator.hideActivityIndicator())
+    ).subscribe((res) => {
+      this.unitList = res[0];
+      this.branchList = res[1];
+      this.departmentList = res[2];
+      this.roleList = res[3];
     });
   }
 
@@ -83,16 +109,13 @@ export class UserFormComponent implements OnInit, OnChanges {
           position: userInfo.user.position,
           role: userInfo.user ? {code: userInfo.user.role} : null
         });
-        this.tagKpiSelectedList = userInfo.listTagKPI;
-        this.tagNewsSelectedList = userInfo.listTagNews;
       }
     }
   }
 
   doSave() {
     this.formUser.patchValue({
-      tagNews: this.tagNewsSelectedList,
-      tagKpi: this.tagKpiSelectedList
+      role: this.roleSelectedList
     });
     if (this.formUser.invalid) {
       this.util.validateAllFields(this.formUser);
@@ -115,39 +138,22 @@ export class UserFormComponent implements OnInit, OnChanges {
     });
   }
 
-  doSelectUser(evt) {
-    this.tagKpiList = [...this.tagKpiSelectedList, ...this.tagKpiList];
-    this.tagNewsList = [...this.tagNewsSelectedList, ...this.tagNewsList];
-    this.userService.getUserInfo(evt).subscribe(res => {
-      this.formUser.patchValue({
-        status: {code: res.user.statusCode},
-        fullName: res.user.fullName,
-        phone: res.user.phone,
-        email: res.user.email,
-        branch: res.userBranchList.map(item => ({ id: item.branchId })),
-        position: res.user.position,
-        role: {code: res.user.role}
-      });
-      this.tagKpiList = xorBy(this.tagKpiList, res.listTagKPI, 'tagId');
-      this.tagKpiSelectedList = res.listTagKPI;
-      this.tagNewsList = xorBy(this.tagNewsList, res.listTagNews, 'tagId');
-      this.tagNewsSelectedList = res.listTagNews;
-    });
-  }
 
   initForm() {
     this.formUser = this.fb.group({
-      fullName: [{value: '', disabled: true}],
-      role: [ {value: {code: UserEnum.ADMIN}, disabled: true }, [Validators.required]],
-      status: [{code: UserEnum.ACTIVE}],
+      fullName: ['', Validators.required],
+      role: ['', [Validators.required]],
+      status: [{ value: {code: UserEnum.ACTIVE}, disabled: true }, [Validators.required]],
       userId: ['', [Validators.required]],
-      email: [{value: '', disabled: true}],
-      phone: [{value: '', disabled: true}],
-      position: [{value: '', disabled: true}],
-      branch: [{value: '', disabled: true}],
+      email: [''],
+      phone: [''],
+      position: ['', [Validators.maxLength(100)]],
+      branch: ['', [Validators.required]],
       tagNews: [],
-      tagKpi: []
-    }, { validators: this.tagsMatcher, updateOn: 'blur' });
+      tagKpi: [],
+      unit: ['', [Validators.required]],
+      department: ['', [Validators.required]]
+    }, { updateOn: 'blur' });
   }
 
   hasErrorInput(controlName: string, errorName: string): boolean {

@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {NewsService} from '../service/news.service';
 import {FilterNewsRequest, News} from '../model/news';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
-import {concatMap, finalize, map, startWith} from 'rxjs/operators';
+import {concatMap, finalize, map, startWith, takeUntil} from 'rxjs/operators';
 import {NewsEnum} from '../model/news.enum';
 import {ConfirmationService, LazyLoadEvent, MessageService, SelectItem} from 'primeng/api';
 import {TagsUser} from '../../tags/model/tags';
@@ -61,6 +61,7 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.newsService.setPage('');
     this.appTranslate.languageChanged$.pipe(
+      takeUntil(this.nextOnDestroy),
       startWith(''),
       concatMap(() => this.translate.get('const').pipe(
         res => res

@@ -9,10 +9,10 @@ export interface Role {
 }
 
 export interface UserRole {
-  userId: string;
-  roleId: string;
-  roleName: string;
-  status: number;
+  userId?: string;
+  roleId?: string;
+  roleName?: string;
+  status?: number;
 }
 
 export enum RoleEnum {

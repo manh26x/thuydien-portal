@@ -1,0 +1,11 @@
+<input type="file" #inputFile style="display:none;" [accept]="fileExt" [multiple]="(maxFiles > 1)" (change)="onFileChange($event)">
+<div class="p-inputgroup">
+  <input type="text" pInputText placeholder="" [formControl]="fromFile">
+  <button type="button" pButton [label]="selectLabel" (click)="inputFile.click()"></button>
+</div>
+<div class="ui-g-12" *ngIf="errors.length > 0">
+  <ul class="p-pl-1 p-my-1" style="list-style: none">
+    <li class="p-invalid" *ngFor="let err of errors">{{err}}</li>
+  </ul>
+</div>
+

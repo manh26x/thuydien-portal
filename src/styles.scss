@@ -49,6 +49,12 @@
   }
 }
 
+.large-dialog {
+  .p-dialog-header-icons {
+    display: none !important;
+  }
+}
+
 .p-menuitem-text {
   display: flex;
   align-items: center;

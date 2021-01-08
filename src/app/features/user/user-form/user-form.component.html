@@ -2,29 +2,13 @@
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
       <label for="n-user-id">{{'user.userName' | translate}} <span class="p-invalid">*</span></label>
-      <p-autoComplete
-        inputId="n-user-id"
-        formControlName="userId"
-        dropdownMode="current"
-        dropdownIcon="pi pi-search"
-        [forceSelection]="false"
-        [dropdown]="true"
-        [suggestions]="filteredUser"
-        [minLength]="1"
-        (onSelect)="doSelectUser($event)"
-        (completeMethod)="filterUser($event)">
-      </p-autoComplete>
+      <input pInputText id="n-user-id" formControlName="userId"/>
       <small *ngIf="hasErrorInput('userId', 'required')" class="p-invalid">
         {{'invalid.userId.required' | translate}}
       </small>
     </div>
 
-    <div class="p-md-3 p-col-12 p-field">
-      <label for="n-role">{{'user.role' | translate}} <span class="p-invalid">*</span></label>
-      <p-dropdown formControlName="role" inputId="n-role" [options]="roleList" optionLabel="name" dataKey="code"></p-dropdown>
-    </div>
-
-    <div class="p-md-3 p-col-12 p-field">
+    <div class="p-md-6 p-col-12 p-field">
       <label for="n-status">{{'user.status' | translate}} <span class="p-invalid">*</span></label>
       <p-dropdown formControlName="status" inputId="n-status" [options]="statusList" optionLabel="name" dataKey="code"></p-dropdown>
     </div>
@@ -32,8 +16,11 @@
 
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
-      <label for="n-fullName">{{'user.fullName' | translate}}</label>
+      <label for="n-fullName">{{'user.fullName' | translate}} <span class="p-invalid">*</span></label>
       <input id="n-fullName" type="text" pInputText formControlName="fullName"/>
+      <small *ngIf="hasErrorInput('fullName', 'required')" class="p-invalid">
+        {{'invalid.fullName.required' | translate}}
+      </small>
     </div>
 
     <div class="p-md-6 p-col-12 p-field">
@@ -47,54 +34,74 @@
       <label for="n-email">{{'user.email' | translate}}</label>
       <input id="n-email" type="text" pInputText formControlName="email" />
     </div>
-    <div class="p-md-6 p-col-12 p-field">
-      <label for="n-branch">{{'user.branch' | translate}}</label>
-      <p-multiSelect formControlName="branch" inputId="n-branch" [options]="branchList" optionLabel="name" dataKey="id"></p-multiSelect>
-    </div>
-  </div>
 
-  <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
       <label for="n-location">{{'user.position' | translate}}</label>
       <input id="n-location" type="text" pInputText formControlName="position" />
     </div>
+
   </div>
 
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
-      <label>{{'user.tagNews' | translate}}</label>
-      <p-pickList
-        sourceHeader="{{'tagList' | translate}}" targetHeader="{{'selectedList' | translate}}"
-        filterBy="tagValue"
-        [dragdrop]="true"
-        [responsive]="true"
-        [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}"
-        [showSourceControls]="false"
-        [showTargetControls]="false"
-        [source]="tagNewsList"
-        [target]="tagNewsSelectedList">
-        <ng-template let-tag pTemplate="item">
-          <div class="tag-item">{{tag.tagValue}}</div>
-        </ng-template>
-      </p-pickList>
+      <label for="n-unit">{{'user.unit' | translate}} <span class="p-invalid">*</span></label>
+      <p-dropdown [autoDisplayFirst]="false" [filter]="true" formControlName="unit" inputId="n-unit" [options]="unitList" optionLabel="name" dataKey="id"></p-dropdown>
+      <small *ngIf="hasErrorInput('unit', 'required')" class="p-invalid">
+        {{'invalid.unit.required' | translate}}
+      </small>
     </div>
 
     <div class="p-md-6 p-col-12 p-field">
-      <label>{{'user.tagKpi' | translate}}</label>
+      <label for="n-branch">{{'user.branch' | translate}} <span class="p-invalid">*</span></label>
+      <p-multiSelect
+        [filter]="true"
+        filterBy="label,value.code"
+        formControlName="branch"
+        inputId="n-branch" [options]="branchList"
+        optionLabel="name"
+        dataKey="id">
+        <ng-template let-branch pTemplate="item">
+          <div>{{branch.value.code}} - {{branch.value.name}}</div>
+        </ng-template>
+      </p-multiSelect>
+      <small *ngIf="hasErrorInput('branch', 'required')" class="p-invalid">
+        {{'invalid.branch.required' | translate}}
+      </small>
+    </div>
+  </div>
+
+  <div class="p-fluid p-grid">
+    <div class="p-md-6 p-col-12 p-field">
+      <label for="n-department">{{'user.department' | translate}} <span class="p-invalid">*</span></label>
+      <p-dropdown [autoDisplayFirst]="false" [filter]="true" formControlName="department" inputId="n-department" [options]="departmentList" optionLabel="name" dataKey="id"></p-dropdown>
+      <small *ngIf="hasErrorInput('department', 'required')" class="p-invalid">
+        {{'invalid.department.required' | translate}}
+      </small>
+    </div>
+  </div>
+
+  <div class="split-horizontal"></div>
+
+  <div class="p-fluid p-grid">
+    <div class="p-col-12 p-field">
+      <label>{{'user.role' | translate}} <span class="p-invalid">*</span></label>
       <p-pickList
-        sourceHeader="{{'tagList' | translate}}" targetHeader="{{'selectedList' | translate}}"
-        filterBy="tagValue"
+        sourceHeader="{{'roleList' | translate}}" targetHeader="{{'selectedRoleList' | translate}}"
+        filterBy="name"
         [dragdrop]="true"
         [responsive]="true"
         [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}"
         [showSourceControls]="false"
         [showTargetControls]="false"
-        [source]="tagKpiList"
-        [target]="tagKpiSelectedList">
-        <ng-template let-tag pTemplate="item">
-          <div class="tag-item">{{tag.tagValue}}</div>
+        [source]="roleList"
+        [target]="roleSelectedList">
+        <ng-template let-role pTemplate="item">
+          <div class="tag-item">{{role.name}}</div>
         </ng-template>
       </p-pickList>
+      <small *ngIf="hasErrorInput('role', 'required')" class="p-invalid">
+        {{'invalid.role.required' | translate}}
+      </small>
     </div>
 
   </div>

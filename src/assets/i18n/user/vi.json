@@ -8,9 +8,11 @@
 	},
 	"btn": {
 		"cancel": "Hủy",
+		"checkData": "Kiểm tra dữ liệu",
 		"create": "Thêm mới",
 		"refresh": "Tải lại",
-		"save": "Lưu thay đổi"
+		"save": "Lưu thay đổi",
+		"save2": "Lưu"
 	},
 	"confirm": {
 		"accept": "Có",
@@ -28,6 +30,12 @@
 	"detail": "Chi tiết thông tin người dùng",
 	"filter": "Lọc kết quả",
 	"invalid": {
+		"branch": {
+			"required": "Giá trị không được để trống"
+		},
+		"department": {
+			"required": "Giá trị không được để trống"
+		},
 		"email": {
 			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
 			"pattern": "Email không đúng định dạng"
@@ -48,6 +56,9 @@
 		"role": {
 			"required": "Giá trị không được để trống"
 		},
+		"unit": {
+			"required": "Giá trị không được để trống"
+		},
 		"userId": {
 			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
 			"required": "Giá trị không được để trống"
@@ -57,6 +68,7 @@
 	"message": {
 		"deleteNotFound": "User không tồn tại hoặc đã bị xóa",
 		"deleteSuccess": "Xóa user thành công",
+		"importSuccess": "Import tài khoản thành công",
 		"insertExisted": "Tên đăng nhập đã được sử dụng",
 		"insertSuccess": "Thêm mới tài khoản thành công",
 		"passwordNotMatch": "Mật khẩu hiện tại không đúng",
@@ -67,26 +79,30 @@
 	"no": "STT",
 	"noData": "Không có kết quả nào phù hợp",
 	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
-	"search": "Nhập họ và tên hoặc vị trí",
+	"roleList": "Danh sách Roles",
+	"search": "Nhập họ và tên, vị trí và chi nhánh",
 	"selectedList": "Danh sách tags đã chọn",
+	"selectedRoleList": "Danh sách Roles đã chọn",
 	"tagList": "Danh sách tags",
 	"update": "Chỉnh sửa thông tin người dùng",
 	"user": {
 		"branch": "Chi nhánh",
 		"currentPass": "Mật khẩu hiện tại",
+		"department": "Khối",
 		"email": "Email",
 		"fullName": "Họ và tên",
 		"newPass": "Mật khẩu mới",
 		"password": "Mật khẩu",
 		"phone": "Số điện thoại",
-		"position": "Vị trí",
+		"position": "Chức danh",
 		"resetPass": "Đặt lại mật khẩu",
-		"role": "Phân quyền",
+		"role": "Role",
 		"status": "Trạng thái",
 		"tagKpi": "Tags cho KPI",
 		"tagNews": "Tags cho bản tin",
 		"tagQna": "Tags cho Q&A",
 		"tagTool": "Tags cho công cụ tính toán",
+		"unit": "Đơn vị",
 		"userName": "Tên đăng nhập"
 	}
 }
