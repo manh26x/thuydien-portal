@@ -45,7 +45,7 @@
 
   <div class="p-fluid p-grid">
     <div class="p-md-12 p-col-12 p-field">
-      <label for="r-desc">{{'client.title' | translate}}</label>
+      <label for="r-desc">{{'client.title' | translate}} <span class="p-invalid">*</span></label>
       <div class="p-field-checkbox">
         <p-checkbox name="client" binary="true" formControlName="isAdminPortal" inputId="admin-portal"></p-checkbox>
         <label for="admin-portal">{{'client.portal' | translate}}</label>
@@ -54,6 +54,9 @@
         <p-checkbox name="client" binary="true" formControlName="isMobileApp" inputId="mobile-app"></p-checkbox>
         <label for="mobile-app">{{'client.mobile' | translate}}</label>
       </div>
+      <small *ngIf="hasErrorInput('isMobileApp', 'clientRequired')" class="p-invalid">
+        {{'invalid.required' | translate}}
+      </small>
     </div>
   </div>
 </form>

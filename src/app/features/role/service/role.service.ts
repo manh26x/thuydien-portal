@@ -5,6 +5,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {InsertRoleRequest, Role, RoleDetail} from '../../../shared/model/role';
 import {map} from 'rxjs/operators';
 import {ApiResultResponse} from '../../../core/model/result-response';
+import {AbstractControl} from '@angular/forms';
 
 @Injectable()
 export class RoleService extends BaseService{
@@ -44,6 +45,25 @@ export class RoleService extends BaseService{
     return this.doGet('/admin/role/detail', param).pipe(
       map(res => res.data[0])
     );
+  }
+
+  clientMatcher(abstract: AbstractControl): { [key: string]: boolean } | null {
+    const isPortal = abstract.get('isAdminPortal');
+    const isMobile = abstract.get('isMobileApp');
+    if (isPortal === null || isMobile === null) {
+      return null;
+    }
+    if (isPortal.disabled || isMobile.disabled) {
+      return null;
+    }
+    if (isPortal.value === false && isMobile.value === false) {
+      isMobile.setErrors({ clientRequired: true });
+      isPortal.setErrors({ clientRequired: true });
+      return { match: true };
+    }
+    isMobile.setErrors(null);
+    isPortal.setErrors(null);
+    return null;
   }
 
   setPage(page: '' | 'create' | 'update' | 'view') {

@@ -30,14 +30,17 @@
            [totalRecords]="roleList.length"
            [rowsPerPageOptions]="[10, 20, 50, 100]"
            [showCurrentPageReport]="true"
+           [(first)]="page"
+           sortField="name"
+           sortOrder="1"
            currentPageReportTemplate="{{ 'paging' | translate }}">
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 50px;">{{'no' | translate}}</th>
-        <th style="width: 100px;">{{'role.code' | translate}}</th>
-        <th>{{'role.name' | translate}}</th>
-        <th>{{'role.desc' | translate}}</th>
-        <th>{{'role.status' | translate}}</th>
+        <th pSortableColumn="id" style="width: 100px;">{{'role.code' | translate}}<p-sortIcon field="id"></p-sortIcon></th>
+        <th pSortableColumn="name">{{'role.name' | translate}}<p-sortIcon field="name"></p-sortIcon></th>
+        <th pSortableColumn="description">{{'role.desc' | translate}}<p-sortIcon field="description"></p-sortIcon></th>
+        <th pSortableColumn="status">{{'role.status' | translate}}<p-sortIcon field="status"></p-sortIcon></th>
         <th>
           <button (click)="gotoCreate()" pButton type="button" label="{{'btn.insert' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
         </th>
