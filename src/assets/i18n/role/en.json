@@ -67,7 +67,7 @@
 		"tagNews": "Tags for newsletter"
 	},
 	"roleList": "List of Roles",
-	"search": "Enter the role name",
+	"search": "Enter Name or Role Code",
 	"selectedList": "List of selected tags",
 	"tagList": "List of tags"
 }

@@ -1,4 +1,3 @@
-import {TagsUser} from '../../tags/model/tags';
 import {Role, UserRole} from '../../../shared/model/role';
 
 export interface UserInfo {
@@ -18,7 +17,9 @@ export interface UserInfo {
   userType?: string;
   status?: string;
   departmentId?: number;
+  departmentName?: string;
   unitId?: number;
+  unitName?: string;
 }
 
 export interface BranchUser {
@@ -44,18 +45,18 @@ export interface FilterUserRequest {
   sortOrder: string;
 }
 
-export interface FilterUserData {
+export interface UserDetail {
   user?: UserInfo;
   userBranchList?: BranchUser[];
   userRoleList?: Role[];
 }
 
 export interface FilterUserResponse {
-  listUser: FilterUserData[];
+  listUser: UserDetail[];
   totalRecord: number;
 }
 
-export interface UserDetail {
+export interface UserData {
   user?: UserInfo;
   userBranchList?: BranchUser[];
   userRoleList?: UserRole[];

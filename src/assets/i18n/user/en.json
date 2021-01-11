@@ -1,5 +1,6 @@
 {
 	"addNew": "Add a new user",
+	"atHere": "Here",
 	"breadcrumb": {
 		"create": "Add a new user",
 		"home": "User List",
@@ -28,6 +29,7 @@
 		"supperAdmin": "SupperAdmin"
 	},
 	"detail": "View user detail",
+	"downloadPattern": "Download the pattern file",
 	"filter": "Filter the results",
 	"invalid": {
 		"branch": {

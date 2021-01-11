@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BaseComponent} from '../../../core/base.component';
 import {UserService} from '../service/user.service';
-import {FilterUserData, FilterUserRequest, FilterUserResponse, UserBranch} from '../model/user';
+import {UserDetail, FilterUserRequest, FilterUserResponse, UserBranch} from '../model/user';
 import {Router} from '@angular/router';
 import {UserEnum} from '../model/user.enum';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -39,7 +39,7 @@ import {Role, RoleEnum} from '../../../shared/model/role';
 })
 export class UserDataComponent extends BaseComponent implements OnInit {
   public userConst = UserEnum;
-  userList: FilterUserData[] = [];
+  userList: UserDetail[] = [];
   searchForm: FormGroup;
   roleList: Role[] = [];
   statusList = [];
@@ -176,7 +176,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.indicator.showActivityIndicator();
-        this.userService.deleteUser(user.user.fullName).subscribe(() => {
+        this.userService.deleteUser(user.user.userName).subscribe(() => {
           this.messageService.add({
             severity: 'success',
             detail: this.translate.instant('message.deleteSuccess')
