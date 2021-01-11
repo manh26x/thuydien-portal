@@ -9,6 +9,8 @@
       <th>{{'action.edit' | translate}}</th>
       <th>{{'action.delete' | translate}}</th>
       <th>{{'action.onOff' | translate}}</th>
+      <th>{{'action.import' | translate}}</th>
+      <th>{{'action.export' | translate}}</th>
     </tr>
   </ng-template>
 
@@ -29,6 +31,12 @@
       </td>
       <td>
         <p-checkbox [disabled]="!feature.canOnOff" binary="true" [(ngModel)]="feature.isOnOffAble" inputId="binary-on-off"></p-checkbox>
+      </td>
+      <td>
+        <p-checkbox [disabled]="!feature.canImport" binary="true" [(ngModel)]="feature.isImportAble" inputId="binary-del"></p-checkbox>
+      </td>
+      <td>
+        <p-checkbox [disabled]="!feature.canExport" binary="true" [(ngModel)]="feature.isExportAble" inputId="binary-on-off"></p-checkbox>
       </td>
     </tr>
   </ng-template>

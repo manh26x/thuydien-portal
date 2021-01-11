@@ -11,11 +11,15 @@ export interface FeatureMenu {
   canAdd?: boolean;
   canDel?: boolean;
   canOnOff?: boolean;
+  canImport?: boolean;
+  canExport?: boolean;
   isViewAble?: boolean;
   isEditAble?: boolean;
   isAddAble?: boolean;
   isDelAble?: boolean;
   isOnOffAble?: boolean;
+  isImportAble?: boolean;
+  isExportAble?: boolean;
 }
 
 export interface FeatureAction {

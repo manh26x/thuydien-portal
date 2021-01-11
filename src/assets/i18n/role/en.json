@@ -3,6 +3,8 @@
 		"add": "Add New",
 		"delete": "Delete",
 		"edit": "Edit",
+		"export": "Export",
+		"import": "Import",
 		"onOff": "On/Off",
 		"title": "Function name",
 		"view": "View"

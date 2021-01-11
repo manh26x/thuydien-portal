@@ -3,6 +3,8 @@
 		"add": "Thêm",
 		"delete": "Xóa",
 		"edit": "Sửa",
+		"export": "Export",
+		"import": "Import",
 		"onOff": "Bật/Tắt",
 		"title": "Tên chức năng",
 		"view": "Xem"

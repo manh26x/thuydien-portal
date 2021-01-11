@@ -23,6 +23,8 @@ export enum RoleEnum {
   ACTION_EDIT = '2',
   ACTION_DELETE = '3',
   ACTION_ON_OFF = '5',
+  ACTION_IMPORT = '6',
+  ACTION_EXPORT = '7',
   STATUS_ACTIVE= '1',
   STATUS_INACTIVE = '0'
 }
