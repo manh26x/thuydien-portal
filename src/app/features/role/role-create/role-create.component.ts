@@ -200,11 +200,15 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
                   canEdit: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_EDIT),
                   canOnOff: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_ON_OFF),
                   canView: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_VIEW),
+                  canImport: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_IMPORT),
+                  canExport: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_EXPORT),
                   isViewAble: false,
                   isOnOffAble: false,
                   isEditAble: false,
                   isAddAble: false,
-                  isDelAble: false
+                  isDelAble: false,
+                  isImportAble: false,
+                  isExportAble: false
                 });
               });
             }

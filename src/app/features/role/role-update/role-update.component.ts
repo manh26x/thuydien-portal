@@ -4,7 +4,7 @@ import {TagsEnum} from '../../tags/model/tags.enum';
 import {forkJoin} from 'rxjs';
 import {concatMap, delay, finalize, map, mergeMap, startWith, takeUntil, tap} from 'rxjs/operators';
 import {TagsService} from '../../tags/service/tags.service';
-import {TagsUser} from '../../tags/model/tags';
+import {TagDetail, TagsUser} from '../../tags/model/tags';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {TabView} from 'primeng/tabview';
 import {AppTranslateService} from '../../../core/service/translate.service';
@@ -30,10 +30,10 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
 
   roleForm: FormGroup;
   @ViewChild('tabView') tabView: TabView;
-  tagNewsList: TagsUser[] = [];
-  tagKpiList: TagsUser[] = [];
-  tagNewsSelectedList: TagsUser[] = [];
-  tagKpiSelectedList: TagsUser[] = [];
+  tagNewsList: TagDetail[] = [];
+  tagKpiList: TagDetail[] = [];
+  tagNewsSelectedList: TagDetail[] = [];
+  tagKpiSelectedList: TagDetail[] = [];
   featureList: FeatureMenu[] = [];
   isLoadedTag = false;
   isLoadedFeature = false;
@@ -107,7 +107,7 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
 
       let tagData: RoleTag[];
       if (this.isLoadedTag) {
-        tagData = [...this.tagKpiSelectedList, ...this.tagNewsSelectedList].map(item => ({ tagId: item.tagId }));
+        tagData = [...this.tagKpiSelectedList, ...this.tagNewsSelectedList].map(item => ({ tagId: item.id }));
       } else {
         tagData = this.roleInfo.tagList;
       }
@@ -264,11 +264,15 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
                   canEdit: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_EDIT),
                   canOnOff: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_ON_OFF),
                   canView: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_VIEW),
+                  canImport: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_IMPORT),
+                  canExport: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_EXPORT),
                   isViewAble: this.isRoleActive(item.menuId, RoleEnum.ACTION_VIEW),
                   isOnOffAble: this.isRoleActive(item.menuId, RoleEnum.ACTION_ON_OFF),
                   isEditAble: this.isRoleActive(item.menuId, RoleEnum.ACTION_EDIT),
                   isAddAble: this.isRoleActive(item.menuId, RoleEnum.ACTION_INSERT),
-                  isDelAble: this.isRoleActive(item.menuId, RoleEnum.ACTION_DELETE)
+                  isDelAble: this.isRoleActive(item.menuId, RoleEnum.ACTION_DELETE),
+                  isImportAble: this.isRoleActive(item.menuId, RoleEnum.ACTION_IMPORT),
+                  isExportAble: this.isRoleActive(item.menuId, RoleEnum.ACTION_EXPORT),
                 });
               });
             }
