@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {RoleService} from '../service/role.service';
 import {TagsEnum} from '../../tags/model/tags.enum';
 import {forkJoin} from 'rxjs';
-import {concatMap, finalize, map, mergeMap, startWith, takeUntil, tap} from 'rxjs/operators';
+import {concatMap, delay, finalize, map, mergeMap, startWith, takeUntil, tap} from 'rxjs/operators';
 import {TagsService} from '../../tags/service/tags.service';
 import {TagsUser} from '../../tags/model/tags';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
@@ -18,6 +18,7 @@ import {Message, MessageService} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiErrorResponse} from '../../../core/model/error-response';
+import {BeforeLeave} from '../../../core/model/before-leave';
 
 @Component({
   selector: 'aw-role-update',
@@ -25,7 +26,7 @@ import {ApiErrorResponse} from '../../../core/model/error-response';
   styles: [
   ]
 })
-export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterViewInit {
+export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterViewInit, BeforeLeave {
 
   roleForm: FormGroup;
   @ViewChild('tabView') tabView: TabView;
@@ -38,6 +39,7 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
   isLoadedFeature = false;
   msg: Message[] = [];
   roleInfo: RoleDetail = {};
+  isLeave = false;
   constructor(
     private roleService: RoleService,
     private tagService: TagsService,
@@ -80,9 +82,13 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
+    this.appTranslate.languageChanged$.pipe(
+      startWith(''),
+      delay(100),
+      takeUntil(this.nextOnDestroy)
+    ).subscribe(_ => {
       this.tabView.cd.markForCheck();
-    }, 100);
+    });
   }
 
   doSave() {
@@ -147,6 +153,7 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
         roleInfo: roleData,
         tagList: tagData
       }).subscribe(_ => {
+        this.isLeave = true;
         this.messageService.add({
           severity: 'success',
           detail: this.translate.instant('message.updateSuccess')
@@ -291,12 +298,17 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
   initForm() {
     this.roleForm = this.fb.group({
       code: [{value: '', disabled: true}, [Validators.required, Validators.maxLength(100)]],
-      status: [RoleEnum.STATUS_ACTIVE, [Validators.required]],
+      status: [{value: RoleEnum.STATUS_ACTIVE, disabled: true}, [Validators.required]],
       name: ['', [Validators.required, Validators.maxLength(500)]],
       desc: ['', [Validators.required, Validators.maxLength(1000)]],
       isAdminPortal: [false],
       isMobileApp: [false]
     }, { updateOn: 'blur' });
+  }
+
+  @HostListener('window:beforeunload')
+  canLeave(): boolean {
+    return this.isLeave;
   }
 
 }

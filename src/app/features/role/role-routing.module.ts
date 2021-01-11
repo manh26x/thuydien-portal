@@ -24,7 +24,8 @@ const routes: Routes = [
       },
       {
         path: 'update/:id',
-        component: RoleUpdateComponent
+        component: RoleUpdateComponent,
+        canDeactivate: [FormLeaveGuard]
       }
     ]
   }

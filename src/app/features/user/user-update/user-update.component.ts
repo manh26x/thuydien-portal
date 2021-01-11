@@ -4,30 +4,36 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {finalize, map, takeUntil} from 'rxjs/operators';
 import {BaseComponent} from '../../../core/base.component';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
-import {BranchUser, UpdateUserRequest, UserDetail, UserInfo} from '../model/user';
+import {BranchUser, FilterUserData, UserDetail, UserInfo} from '../model/user';
 import {TagDetail, TagsUser} from '../../tags/model/tags';
 import {UtilService} from '../../../core/service/util.service';
 import {TranslateService} from '@ngx-translate/core';
 import {MessageService} from 'primeng/api';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {TagsService} from '../../tags/service/tags.service';
-import {TagsEnum} from '../../tags/model/tags.enum';
+import {BranchService} from '../../../shared/service/branch.service';
+import {Role, RoleEnum, UserRole} from '../../../shared/model/role';
+import {Unit} from '../../../shared/model/unit';
+import {Department} from '../../../shared/model/department';
+import {RoleService} from '../../role/service/role.service';
+import {UnitService} from '../../../shared/service/unit.service';
+import {DepartmentService} from '../../../shared/service/department.service';
 import {forkJoin} from 'rxjs';
 import {xorBy} from 'lodash-es';
-import {BranchService} from '../../../shared/service/branch.service';
 
 @Component({
   selector: 'aw-user-update',
   templateUrl: './user-update.component.html',
   styles: [
   ],
-  providers: [TagsService, BranchService]
+  providers: [RoleService, UnitService, BranchService, DepartmentService]
 })
 export class UserUpdateComponent extends BaseComponent implements OnInit {
-  initValue: UserDetail;
+  initValue: FilterUserData;
+  roleList: Role[] = [];
+  unitList: Unit[] = [];
+  departmentList: Department[] = [];
   branchList = [];
-  tagNewsList: TagDetail[];
-  tagKpiList: TagDetail[];
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
@@ -36,43 +42,40 @@ export class UserUpdateComponent extends BaseComponent implements OnInit {
     private util: UtilService,
     private translate: TranslateService,
     private messageService: MessageService,
-    private tagService: TagsService,
-    private branchService: BranchService
+    private roleService: RoleService,
+    private unitService: UnitService,
+    private branchService: BranchService,
+    private departmentService: DepartmentService,
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.userService.setPage('update');
-    this.indicator.showActivityIndicator();
-    const obsTagNews = this.filterTagByType('', TagsEnum.NEWS);
-    const obsTagKpi = this.filterTagByType('', TagsEnum.KPI);
-    const obsBranch = this.branchService.getBranchList();
     const obsUserInfo = this.userService.getUserInfo(
       this.route.snapshot.paramMap.get('id')
     );
-    forkJoin([obsBranch, obsTagNews, obsTagKpi, obsUserInfo]).pipe(
-      takeUntil(this.nextOnDestroy),
+
+    this.indicator.showActivityIndicator();
+    const obsUnit = this.unitService.getAllUnit();
+    const obsBranch = this.branchService.getBranchList();
+    const obsDepartment = this.departmentService.getAllDepartment();
+    const obsRole = this.roleService.getRoleList('', RoleEnum.STATUS_ACTIVE);
+    forkJoin([obsUnit, obsBranch, obsDepartment, obsRole, obsUserInfo]).pipe(
       map(res => {
-        if (this.util.canForEach(res[3].listTagNews)) {
-          res[1].tagsList = xorBy(res[1].tagsList, res[3].listTagNews, 'tagId');
-        }
-        if (this.util.canForEach(res[3].listTagKPI)) {
-          res[2].tagsList = xorBy(res[2].tagsList, res[3].listTagKPI, 'tagId');
+        if (this.util.canForEach(res[3]) && this.util.canForEach(res[4].userRoleList)) {
+          res[3] = xorBy(res[3], res[4].userRoleList, 'id');
         }
         return res;
       }),
       finalize(() => this.indicator.hideActivityIndicator())
-    ).subscribe(res => {
-      this.branchList = res[0];
-      this.tagNewsList = res[1].tagsList;
-      this.tagKpiList = res[2].tagsList;
-      this.initValue = res[3];
+    ).subscribe((res) => {
+      this.unitList = res[0];
+      this.branchList = res[1];
+      this.departmentList = res[2];
+      this.roleList = res[3];
+      this.initValue = res[4];
     });
-  }
-
-  filterTagByType(query, type) {
-    return this.tagService.searchTagExp({tagType: [type], sortOrder: 'ASC', sortBy: 'id', page: 0, pageSize: 500, searchValue: query });
   }
 
   doSave(value) {
@@ -84,47 +87,29 @@ export class UserUpdateComponent extends BaseComponent implements OnInit {
       email: value.email,
       phone: value.phone,
       position: value.position,
-      role: value.role.code,
       status: value.status.code,
-      userType: '',
-      avatar: ''
+      departmentId: value.department.id,
+      unitId: value.unit.id,
+      role: 'Admin'
     };
     const userBranch: BranchUser[] = [];
     if (this.util.canForEach(value.branch)) {
       value.branch.forEach(br => {
         userBranch.push({
-          branchId: br.id,
-          branchName: br.name,
-          branchAddress: br.address,
-          userId: ''
+          branchId: br.code,
         });
       });
     }
-    const userNews: TagsUser[] = [];
-    if (this.util.canForEach(value.tagNews)) {
-      value.tagNews.forEach(t => {
-        userNews.push({
-          tagId: t.tagId,
-          tagValue: t.tagValue,
-          tagKey: t.tagKey
-        });
-      });
-    }
-    const userKpi: TagsUser[] = [];
-    if (this.util.canForEach(value.tagKpi)) {
-      value.tagKpi.forEach(t => {
-        userKpi.push({
-          tagId: t.tagId,
-          tagValue: t.tagValue,
-          tagKey: t.tagKey
-        });
+    const roleList: UserRole[] = [];
+    if (this.util.canForEach(value.role)) {
+      value.role.forEach(item => {
+        roleList.push({ roleId: item.id });
       });
     }
     const body: UserDetail = {
       user: info,
       userBranchList: userBranch,
-      listTagKPI: userKpi,
-      listTagNews: userNews
+      userRoleList: roleList
     };
     this.userService.updateUser(body).pipe(
       finalize(() => this.indicator.hideActivityIndicator())

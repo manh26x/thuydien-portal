@@ -2,9 +2,9 @@ import {AfterViewInit, Component, HostListener, OnInit, ViewChild} from '@angula
 import {RoleService} from '../service/role.service';
 import {TagsEnum} from '../../tags/model/tags.enum';
 import {forkJoin} from 'rxjs';
-import {concatMap, finalize, map, mergeMap, startWith, takeUntil, tap} from 'rxjs/operators';
+import {concatMap, delay, finalize, map, mergeMap, startWith, takeUntil, tap} from 'rxjs/operators';
 import {TagsService} from '../../tags/service/tags.service';
-import {TagDetail, TagsUser} from '../../tags/model/tags';
+import {TagDetail} from '../../tags/model/tags';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {TabView} from 'primeng/tabview';
 import {AppTranslateService} from '../../../core/service/translate.service';
@@ -59,9 +59,13 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
+    this.appTranslate.languageChanged$.pipe(
+      startWith(''),
+      delay(100),
+      takeUntil(this.nextOnDestroy)
+    ).subscribe(_ => {
       this.tabView.cd.markForCheck();
-    }, 100);
+    });
   }
 
   doSave() {
@@ -226,12 +230,12 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
   initForm() {
     this.roleForm = this.fb.group({
       code: ['', [Validators.required, Validators.maxLength(100)]],
-      status: [RoleEnum.STATUS_ACTIVE, [Validators.required]],
+      status: [{ value: RoleEnum.STATUS_ACTIVE, disabled: true }, [Validators.required]],
       name: ['', [Validators.required, Validators.maxLength(500)]],
       desc: ['', [Validators.required, Validators.maxLength(1000)]],
       isAdminPortal: [false],
       isMobileApp: [false]
-    }, { updateOn: 'blur' });
+    }, { validators: this.roleService.clientMatcher,  updateOn: 'change' });
   }
 
   @HostListener('window:beforeunload')

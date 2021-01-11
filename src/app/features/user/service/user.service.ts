@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {BaseService} from '../../../core/service/base.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {FilterUserRequest, UserDetail, UpdateUserRequest, UserInfo, PreviewUser, FilterUserResponse} from '../model/user';
+import {FilterUserRequest, UserDetail, UserInfo, PreviewUser, FilterUserResponse, FilterUserData} from '../model/user';
 import {map} from 'rxjs/operators';
 import {ApiResultResponse} from '../../../core/model/result-response';
 
@@ -23,7 +23,7 @@ export class UserService extends BaseService{
     );
   }
 
-  getUserInfo(userId: string): Observable<UserDetail> {
+  getUserInfo(userId: string): Observable<FilterUserData> {
     const param = new HttpParams().append('userId', userId);
     return this.doGet('/admin/userPortal/detail', param).pipe(
       map(res => res.data[0])
@@ -56,7 +56,7 @@ export class UserService extends BaseService{
     );
   }
 
-  updateUser(request: UpdateUserRequest): Observable<ApiResultResponse> {
+  updateUser(request: UserDetail): Observable<ApiResultResponse> {
     return this.doPost('/admin/userPortal/update', request);
   }
 

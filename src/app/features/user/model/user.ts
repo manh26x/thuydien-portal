@@ -45,9 +45,9 @@ export interface FilterUserRequest {
 }
 
 export interface FilterUserData {
-  user: UserInfo;
-  userBranchList: BranchUser[];
-  userRoleList: Role[];
+  user?: UserInfo;
+  userBranchList?: BranchUser[];
+  userRoleList?: Role[];
 }
 
 export interface FilterUserResponse {
@@ -59,17 +59,6 @@ export interface UserDetail {
   user?: UserInfo;
   userBranchList?: BranchUser[];
   userRoleList?: UserRole[];
-  listTagQnA?: TagsUser[];
-  listTagNews?: TagsUser[];
-  listTagKPI?: TagsUser[];
-  listTagTool?: TagsUser[];
-}
-
-export interface UpdateUserRequest {
-  isChangePassword?: number;
-  currentPassword?: string;
-  userPortal?: UserInfo;
-  userBranchList?: BranchUser[];
 }
 
 export interface PreviewUser {

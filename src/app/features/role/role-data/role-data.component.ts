@@ -24,6 +24,7 @@ export class RoleDataComponent extends BaseComponent implements OnInit {
   statusList: SelectItem[] = [];
   roleList: Role[] = [];
   roleConst = RoleEnum;
+  page = 0;
   constructor(
     private fb: FormBuilder,
     private roleService: RoleService,
@@ -68,6 +69,7 @@ export class RoleDataComponent extends BaseComponent implements OnInit {
       takeUntil(this.nextOnDestroy),
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe(res => {
+      this.page = 0;
       this.roleList = res;
     });
   }
