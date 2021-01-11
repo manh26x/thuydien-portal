@@ -1,5 +1,6 @@
 {
 	"addNew": "Thêm mới người dùng",
+	"atHere": "Tại đây",
 	"breadcrumb": {
 		"create": "Thêm mới người dùng",
 		"home": "Danh sách người dùng",
@@ -28,6 +29,7 @@
 		"supperAdmin": "SupperAdmin"
 	},
 	"detail": "Chi tiết thông tin người dùng",
+	"downloadPattern": "Tải file mẫu",
 	"filter": "Lọc kết quả",
 	"invalid": {
 		"branch": {
@@ -80,7 +82,7 @@
 	"noData": "Không có kết quả nào phù hợp",
 	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
 	"roleList": "Danh sách Roles",
-	"search": "Nhập họ và tên, vị trí và chi nhánh",
+	"search": "Nhập họ và tên, chức danh và chi nhánh",
 	"selectedList": "Danh sách tags đã chọn",
 	"selectedRoleList": "Danh sách Roles đã chọn",
 	"tagList": "Danh sách tags",

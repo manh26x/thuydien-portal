@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {finalize, map, takeUntil} from 'rxjs/operators';
 import {BaseComponent} from '../../../core/base.component';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
-import {BranchUser, FilterUserData, UserDetail, UserInfo} from '../model/user';
+import {BranchUser, UserDetail, UserData, UserInfo} from '../model/user';
 import {TagDetail, TagsUser} from '../../tags/model/tags';
 import {UtilService} from '../../../core/service/util.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -29,7 +29,7 @@ import {xorBy} from 'lodash-es';
   providers: [RoleService, UnitService, BranchService, DepartmentService]
 })
 export class UserUpdateComponent extends BaseComponent implements OnInit {
-  initValue: FilterUserData;
+  initValue: UserDetail;
   roleList: Role[] = [];
   unitList: Unit[] = [];
   departmentList: Department[] = [];
@@ -106,7 +106,7 @@ export class UserUpdateComponent extends BaseComponent implements OnInit {
         roleList.push({ roleId: item.id });
       });
     }
-    const body: UserDetail = {
+    const body: UserData = {
       user: info,
       userBranchList: userBranch,
       userRoleList: roleList

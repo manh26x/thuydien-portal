@@ -4,7 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {concatMap, finalize, map, takeUntil} from 'rxjs/operators';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {BaseComponent} from '../../../core/base.component';
-import {FilterUserData, UserDetail} from '../model/user';
+import {UserDetail, UserData} from '../model/user';
 import {UserEnum} from '../model/user.enum';
 import {UserAuth} from '../../../auth/model/user-auth';
 import {AuthService} from '../../../auth/auth.service';
@@ -17,7 +17,7 @@ import {ApiErrorResponse} from '../../../core/model/error-response';
   ]
 })
 export class UserViewComponent extends BaseComponent implements OnInit {
-  userDetail: FilterUserData = {};
+  userDetail: UserDetail = {};
   userConst = UserEnum;
   userLogged: UserAuth;
   constructor(
@@ -41,6 +41,7 @@ export class UserViewComponent extends BaseComponent implements OnInit {
         finalize(() => this.indicator.hideActivityIndicator())
       ))
     ).subscribe(res => {
+      this.userService.logDebug(res);
       this.userDetail = res;
     }, err => {
       if (err instanceof ApiErrorResponse && err.code === '205') {

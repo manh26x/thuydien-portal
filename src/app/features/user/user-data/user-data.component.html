@@ -2,6 +2,9 @@
   <div class="p-grid p-fluid">
     <div class="p-col-12 p-md-5">
       <aw-input-upload (changeFile)="doChangeFile($event)"></aw-input-upload>
+      <span class="p-mt-2 p-d-block">{{'downloadPattern' | translate}}
+        <a href="assets/resource/User%20TitleSalesApp_v1.xlsx" target="_blank"> {{'atHere' | translate}}</a>
+      </span>
     </div>
 
     <div class="p-col-12 p-md-2">
@@ -45,7 +48,7 @@
         <th style="width: 50px;">{{'no' | translate}}</th>
         <th pSortableColumn="fullName">{{'user.fullName' | translate}}<p-sortIcon field="fullName"></p-sortIcon></th>
         <th>{{'user.userName' | translate}}</th>
-        <th>{{'user.role' | translate}}</th>
+        <th style="width: 250px;">{{'user.role' | translate}}</th>
         <th>{{'user.position' | translate}}</th>
         <th>{{'user.branch' | translate}}</th>
         <th>{{'user.status' | translate}}</th>

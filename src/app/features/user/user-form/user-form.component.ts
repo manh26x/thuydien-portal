@@ -5,7 +5,7 @@ import {concatMap, startWith, takeUntil} from 'rxjs/operators';
 import {UserEnum} from '../model/user.enum';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UtilService} from '../../../core/service/util.service';
-import {FilterUserData, UserDetail} from '../model/user';
+import {UserDetail, UserData} from '../model/user';
 import {BaseComponent} from '../../../core/base.component';
 import {Role} from '../../../shared/model/role';
 import {Unit} from '../../../shared/model/unit';
@@ -33,7 +33,7 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
   @Input() roleList: Role[] = [];
   @Input() branchList = [];
   @Input() mode = 'create';
-  @Input() valueForm: FilterUserData;
+  @Input() valueForm: UserDetail;
   @Output() save: EventEmitter<any> = new EventEmitter<any>();
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
   constructor(
@@ -66,7 +66,7 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
   ngOnChanges(changes: SimpleChanges) {
     if (changes.valueForm) {
       if (!changes.valueForm.firstChange) {
-        const userInfo: FilterUserData = changes.valueForm.currentValue;
+        const userInfo: UserDetail = changes.valueForm.currentValue;
         this.formUser.patchValue({
           userId: userInfo.user ? userInfo.user.userName : null,
           status: userInfo.user ? {code: userInfo.user.status} : null,

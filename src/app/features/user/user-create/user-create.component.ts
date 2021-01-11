@@ -1,6 +1,6 @@
 import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {BranchUser, UserDetail, UserInfo} from '../model/user';
+import {BranchUser, UserData, UserInfo} from '../model/user';
 import {UserService} from '../service/user.service';
 import {UtilService} from '../../../core/service/util.service';
 import {ApiErrorResponse} from '../../../core/model/error-response';
@@ -89,7 +89,7 @@ export class UserCreateComponent implements OnInit, BeforeLeave {
         roleList.push({ roleId: item.id });
       });
     }
-    const body: UserDetail = {
+    const body: UserData = {
       user: info,
       userBranchList: userBranch,
       userRoleList: roleList
