@@ -4,9 +4,7 @@ import {environment} from '../../environments/environment';
 import {Language} from '../core/model/language.enum';
 import {Observable} from 'rxjs';
 import {RoleEnum} from '../shared/model/role';
-import {UserAuth, UserAuthDetail} from './model/user-auth';
-import {ApiResultResponse} from '../core/model/result-response';
-import {map} from 'rxjs/operators';
+import {FeatureGroupByRole, UserAuth} from './model/user-auth';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +14,7 @@ export class AuthService {
   public readonly TOKEN_KEY = 'token';
   public readonly REFRESH_TOKEN_KEY = 'refresh-token';
   private readonly USER_INFO_KEY = 'user-info';
+  private readonly USER_ROLE_KEY = 'user-role';
 
   constructor(
     private handler: HttpBackend
@@ -63,13 +62,6 @@ export class AuthService {
     });
   }
 
-  getUserRole(token: string): Observable<UserAuthDetail> {
-    const header: HttpHeaders = new HttpHeaders().append('Authorization', `Bearer ${token}`);
-    return this.http.get('/admin/role/getRole', { headers: header }).pipe(
-      map((res: ApiResultResponse) => res.data[0] || {})
-    );
-  }
-
   /**
    * check user logged in
    */
@@ -111,6 +103,16 @@ export class AuthService {
 
   setUserInfo(user) {
     localStorage.setItem(this.USER_INFO_KEY, JSON.stringify(user));
+  }
+
+  setUserRole(roleList) {
+    localStorage.setItem(this.USER_ROLE_KEY, JSON.stringify(roleList));
+  }
+
+  getUserRole(): FeatureGroupByRole {
+    const data = localStorage.getItem(this.USER_ROLE_KEY);
+    const jsonData = JSON.parse(data);
+    return jsonData;
   }
 
   // cookie utils docs https://www.w3schools.com/js/js_cookies.asp

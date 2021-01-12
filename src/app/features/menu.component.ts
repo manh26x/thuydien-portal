@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FeaturesComponent} from './features.component';
 import {AppTranslateService} from '../core/service/translate.service';
-import {concatMap, startWith} from 'rxjs/operators';
+import {concatMap, map, startWith} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
+import {AuthService} from '../auth/auth.service';
+import {FeatureEnum} from '../shared/model/feature.enum';
 
 @Component({
   selector: 'aw-menu',
@@ -25,34 +28,32 @@ import {concatMap, startWith} from 'rxjs/operators';
 
   `
 })
-export class MenuComponent implements OnInit {
+export class MenuComponent implements OnInit, OnDestroy {
 
   model: any[];
-
+  menuSubscription: Subscription;
   constructor(
     public features: FeaturesComponent,
-    private appTranslate: AppTranslateService
+    private appTranslate: AppTranslateService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
-    this.appTranslate.languageChanged$.pipe(
+    this.menuSubscription = this.appTranslate.languageChanged$.pipe(
       startWith(''),
       concatMap(() => this.appTranslate.getTranslationAsync('menu').pipe(
         res => res
       ))
     ).subscribe(res => {
-      this.model = [
-        {label: res.home, icon: 'pi pi-fw pi-home', routerLink: ['/']},
-        {label: res.news, icon: 'pi pi-fw pi-book', routerLink: ['/news']},
-        {label: res.user, icon: 'pi pi-fw pi-user', routerLink: ['/user']},
-        {label: res.tags, icon: 'pi pi-fw pi-list', routerLink: ['/tags']},
-        {label: res.calculateTool, icon: 'pi pi-fw pi-desktop', routerLink: ['/calculate-tool']},
-        {label: res.role, icon: 'pi pi-fw pi-key', routerLink: ['/role']}
-      ];
+      this.model = res;
     });
   }
 
   onMenuClick(event) {
     this.features.onMenuClick(event);
+  }
+
+  ngOnDestroy() {
+    this.menuSubscription.unsubscribe();
   }
 }

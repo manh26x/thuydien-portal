@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import {BaseService} from '../../../core/service/base.service';
+import {BaseService} from '../../core/service/base.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {InsertRoleRequest, Role, RoleDetail} from '../../../shared/model/role';
+import {InsertRoleRequest, Role, RoleDetail} from '../model/role';
 import {map} from 'rxjs/operators';
-import {ApiResultResponse} from '../../../core/model/result-response';
+import {ApiResultResponse} from '../../core/model/result-response';
 import {AbstractControl} from '@angular/forms';
+import {UserAuthDetail} from '../../auth/model/user-auth';
 
 @Injectable()
 export class RoleService extends BaseService{
@@ -44,6 +45,12 @@ export class RoleService extends BaseService{
       .append('roleId', id);
     return this.doGet('/admin/role/detail', param).pipe(
       map(res => res.data[0])
+    );
+  }
+
+  getUserRole(): Observable<UserAuthDetail> {
+    return this.doGet('/admin/role/getRole').pipe(
+      map(res => res.data[0] || {})
     );
   }
 

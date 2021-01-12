@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {ConfirmationService, PrimeNGConfig} from 'primeng/api';
 import {MenuService} from './menu.service';
 import {NavigationCancel, NavigationEnd, NavigationStart, Router} from '@angular/router';
@@ -7,13 +7,26 @@ import {IdleService} from '../core/service/idle.service';
 import {environment} from '../../environments/environment';
 import {AuthService} from '../auth/auth.service';
 import {TranslateService} from '@ngx-translate/core';
+import {Subscription} from 'rxjs';
+import {concatMap, map, startWith, switchMap, tap} from 'rxjs/operators';
+import {FeatureEnum} from '../shared/model/feature.enum';
+import {AppTranslateService} from '../core/service/translate.service';
+import {RoleService} from '../shared/service/role.service';
+import {groupBy} from 'lodash-es';
+import {UserAuthInfo} from '../auth/model/user-auth';
 
 @Component({
   selector: 'aw-features',
   templateUrl: './features.component.html'
 })
 
-export class FeaturesComponent implements OnInit, AfterViewInit {
+export class FeaturesComponent implements OnInit, AfterViewInit, OnDestroy {
+  model: any[];
+
+  userInfo: UserAuthInfo;
+
+  menuSubscription: Subscription;
+
   menuMode = 'static';
 
   topbarMenuActive: boolean;
@@ -65,11 +78,47 @@ export class FeaturesComponent implements OnInit, AfterViewInit {
     private idle: IdleService,
     private auth: AuthService,
     private confirm: ConfirmationService,
-    private translate: TranslateService
-  ) { }
+    private translate: TranslateService,
+    private appTranslate: AppTranslateService,
+    private roleService: RoleService
+  ) {
+    this.model = [];
+    this.userInfo = {};
+  }
 
   ngOnInit() {
     this.primengConfig.ripple = true;
+
+    this.menuSubscription = this.appTranslate.languageChanged$.pipe(
+      startWith(''),
+      switchMap(() => this.appTranslate.getTranslationAsync('menu').pipe(
+        concatMap((lang) => this.roleService.getUserRole().pipe(
+          map((authDetail) => ({
+            resLang: lang,
+            resUser: authDetail.user,
+            resRole: authDetail.listRole
+          }))
+        ))
+      )),
+      map(({resLang, resUser, resRole}) => {
+        const menuList = [];
+        const userFeature = groupBy(resRole, 'menuName');
+        menuList.push({label: resLang[FeatureEnum.HOME], icon: 'pi pi-fw pi-home', routerLink: ['/']});
+        Object.keys(userFeature).forEach((featureId) => {
+          const feature = userFeature[featureId];
+          menuList.push({label: resLang[featureId], icon: feature[0].menuIcon, routerLink: [feature[0].menuUrl]});
+        });
+        return {resLang, resUser, userFeature, menuList};
+      }),
+      tap(({resUser, userFeature}) => {
+        this.auth.setUserInfo(resUser);
+        this.auth.setUserRole(userFeature);
+      })
+    ).subscribe(res => {
+      this.userInfo = res.resUser;
+      this.model = res.menuList;
+    });
+
     this.idle.startWatching(environment.idleTimeout).subscribe((isTimedOut) => {
       if (isTimedOut) {
         this.logout(false, 'message.sessionExpire');
@@ -92,6 +141,10 @@ export class FeaturesComponent implements OnInit, AfterViewInit {
         }, 400);
       }
     });
+  }
+
+  topBarLogoutClick(): void {
+    this.logout(true, 'message.confirmLogout');
   }
 
   logout(rejectAble: boolean, msgTranslateKey: string) {
@@ -251,6 +304,10 @@ export class FeaturesComponent implements OnInit, AfterViewInit {
   hideToggleMenu() {
     this.toggleMenuActive = false;
     this.staticMenuMobileActive = false;
+  }
+
+  ngOnDestroy() {
+    this.menuSubscription.unsubscribe();
   }
 }
 

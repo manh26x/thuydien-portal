@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {BaseService} from '../../../core/service/base.service';
+import {BaseService} from '../../core/service/base.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {FeatureMenu} from '../model/feature';
+import {FeatureMenu} from '../../features/role/model/feature';
 import {map} from 'rxjs/operators';
 
 @Injectable()

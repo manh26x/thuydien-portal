@@ -15,6 +15,7 @@ import {RippleModule} from 'primeng/ripple';
 import {ButtonModule} from 'primeng/button';
 import {MenuModule} from 'primeng/menu';
 import {IndicatorModule} from '../shared/indicator/indicator.module';
+import {RoleService} from '../shared/service/role.service';
 
 
 
@@ -32,7 +33,8 @@ import {IndicatorModule} from '../shared/indicator/indicator.module';
       IndicatorModule
     ],
   providers: [
-    MenuService
+    MenuService,
+    RoleService
   ]
 })
 export class FeaturesModule { }

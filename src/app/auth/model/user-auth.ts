@@ -34,3 +34,7 @@ export interface UserAuthDetail {
   listRole: UserRole[];
   user: UserAuthInfo;
 }
+
+export interface FeatureGroupByRole {
+  [featureId: string]: UserRole[];
+}

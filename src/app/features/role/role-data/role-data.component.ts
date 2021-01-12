@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {BaseComponent} from '../../../core/base.component';
-import {RoleService} from '../service/role.service';
+import {RoleService} from '../../../shared/service/role.service';
 import {TranslateService} from '@ngx-translate/core';
 import {AppTranslateService} from '../../../core/service/translate.service';
 import {concatMap, finalize, startWith, takeUntil} from 'rxjs/operators';

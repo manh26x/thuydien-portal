@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, HostListener, OnInit, ViewChild} from '@angular/core';
-import {RoleService} from '../service/role.service';
+import {RoleService} from '../../../shared/service/role.service';
 import {TagsEnum} from '../../tags/model/tags.enum';
 import {forkJoin} from 'rxjs';
 import {concatMap, delay, finalize, map, mergeMap, startWith, takeUntil, tap} from 'rxjs/operators';
@@ -8,7 +8,7 @@ import {TagDetail} from '../../tags/model/tags';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {TabView} from 'primeng/tabview';
 import {AppTranslateService} from '../../../core/service/translate.service';
-import {FeatureService} from '../service/feature.service';
+import {FeatureService} from '../../../shared/service/feature.service';
 import {FeatureMenu} from '../model/feature';
 import {UtilService} from '../../../core/service/util.service';
 import {BaseComponent} from '../../../core/base.component';

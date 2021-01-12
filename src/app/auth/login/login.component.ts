@@ -2,8 +2,8 @@ import {Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation} from '@angul
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {catchError, concatMap, filter, finalize, tap} from 'rxjs/operators';
-import {of, throwError} from 'rxjs';
+import {filter, finalize, tap} from 'rxjs/operators';
+import {of} from 'rxjs';
 import {UtilService} from '../../core/service/util.service';
 import {Message} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
@@ -58,14 +58,12 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.auth.setToken(auth.access_token, auth.expires_in);
           this.auth.setRefreshToken(auth.refresh_token);
         }),
-        concatMap(auth => this.auth.getUserRole(auth.access_token).pipe(
-          catchError(err => throwError(new ApiErrorGetUserInfo() ))
-        )),
         finalize(() => this.isLoading = false)
       )
       .subscribe(
         resRole => {
           this.auth.setUserInfo(resRole.user || {});
+          this.auth.setUserRole(resRole.listRole || []);
           this.gotoView();
         },
         err => {
