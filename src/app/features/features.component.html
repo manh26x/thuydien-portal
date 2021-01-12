@@ -3,7 +3,7 @@
 
 
   <div class="layout-main">
-    <aw-topbar (topBarLogout)="topBarLogoutClick()" [userInfo]="userInfo"></aw-topbar>
+    <aw-topbar (topBarLogout)="topBarLogoutClick()" (toggleMenu)="onMenuButtonClick($event)" [userInfo]="userInfo"></aw-topbar>
 
     <div class="layout-content">
       <aw-global-indicator></aw-global-indicator>
@@ -13,22 +13,15 @@
     <div class="layout-main-mask"></div>
   </div>
 
-  <aw-menu></aw-menu>
-  <div
-    class="layout-sidebar"
-    (click)="onMenuClick($event)">
-<!--    (mouseenter)="features.onMenuMouseEnter($event)"-->
-<!--    (mouseleave)="features.onMenuMouseLeave($event)"-->
+  <div class="layout-sidebar" (click)="onMenuClick($event)">
     <div class="layout-sidebar-logo">
       <a href="/">
         <img src="assets/images/logo.png" alt="sale-app-layout" />
       </a>
-<!--      <a href="#" id="layout-sidebar-anchor" class="layout-sidebar-anchor" title="Slim Menu" (click)="features.onAnchorClick($event)">-->
-<!--        <i class="pi" [ngClass]="{'pi-circle-on': features.slimMenuAnchor, 'pi-circle-off': !features.slimMenuAnchor}"></i>-->
-<!--      </a>-->
     </div>
 
     <div class="layout-menu-container">
+      <aw-section-indicator (tryAgain)="tryAgain()" [isFailed]="isLoadFailed" [isLoading]="isLoading"></aw-section-indicator>
       <ul class="layout-menu">
         <li aw-menuitem *ngFor="let item of model; let i = index;" [item]="item" [index]="i" [root]="true"></li>
       </ul>

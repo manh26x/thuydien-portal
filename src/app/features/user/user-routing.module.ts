@@ -18,18 +18,18 @@ const routes: Routes = [
       {
         path: '',
         component: UserDataComponent,
-        canActivate: [AuthGuard, ViewOnlyGuard]
+        canActivate: [AuthGuard]
       },
       {
         path: 'create',
         component: UserCreateComponent,
-        canActivate: [AuthGuard, SupperAdminGuard],
+        canActivate: [AuthGuard],
         canDeactivate: [FormLeaveGuard]
       },
       {
         path: 'update/:id',
         component: UserUpdateComponent,
-        canActivate: [AuthGuard, SupperAdminGuard]
+        canActivate: [AuthGuard]
       },
       {
         path: 'view/:id',

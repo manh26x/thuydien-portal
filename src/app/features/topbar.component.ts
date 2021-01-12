@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { FeaturesComponent} from './features.component';
 import {MenuItem} from 'primeng/api';
 import {AuthService} from '../auth/auth.service';
 import {Router} from '@angular/router';
@@ -36,7 +35,6 @@ export class TopBarComponent implements OnInit {
   @Output() toggleMenu: EventEmitter<any> = new EventEmitter<any>();
   @Output() topBarLogout: EventEmitter<any> = new EventEmitter<any>();
   constructor(
-    public features: FeaturesComponent,
     private authService: AuthService,
     private router: Router,
     private appTranslate: AppTranslateService
@@ -74,8 +72,7 @@ export class TopBarComponent implements OnInit {
   }
 
   onMenuButtonClick(event: Event) {
-    this.toggleMenu.emit();
-    event.preventDefault();
+    this.toggleMenu.emit(event);
   }
 
   changeLang(lang: ILanguage): void {

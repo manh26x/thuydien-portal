@@ -54,16 +54,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.auth.login(this.formLogin.value)
       .pipe(
-        tap(auth => {
-          this.auth.setToken(auth.access_token, auth.expires_in);
-          this.auth.setRefreshToken(auth.refresh_token);
-        }),
         finalize(() => this.isLoading = false)
       )
-      .subscribe(
-        resRole => {
-          this.auth.setUserInfo(resRole.user || {});
-          this.auth.setUserRole(resRole.listRole || []);
+      .subscribe(auth => {
+          this.auth.setToken(auth.access_token, auth.expires_in);
+          this.auth.setRefreshToken(auth.refresh_token);
           this.gotoView();
         },
         err => {

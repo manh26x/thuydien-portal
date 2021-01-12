@@ -76,7 +76,7 @@
             <ng-container *ngSwitchDefault>-</ng-container>
           </ng-container>
         </td>
-        <td *ngIf="userLogged.isSupperAdmin">
+        <td>
           <p-inputSwitch [(ngModel)]="tool.isActive" (onChange)="doChangeStatus(index)"></p-inputSwitch>
         </td>
       </tr>

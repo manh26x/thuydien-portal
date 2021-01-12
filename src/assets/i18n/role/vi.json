@@ -53,7 +53,7 @@
 		"insertSuccess": "Thêm mới role thành công",
 		"noDataExport": "Không có dữ liệu để xuất báo cáo",
 		"notFound": "Không tìm thấy bản ghi bạn yêu cầu",
-		"notPermission": "Bạn không có quyền xóa role",
+		"notPermission": "Bạn không có quyền thực hiện thao tác này",
 		"roleExisted": "Mã quyền đã tồn tại",
 		"updateSuccess": "Cập nhật role thành công"
 	},

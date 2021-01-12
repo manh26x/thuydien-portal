@@ -14,6 +14,7 @@ import {UtilService} from '../../../core/service/util.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {UserAuth} from '../../../auth/model/user-auth';
 import {AuthService} from '../../../auth/auth.service';
+import {ApiErrorResponse} from '../../../core/model/error-response';
 
 @Component({
   selector: 'aw-calculate-tool-data',
@@ -102,10 +103,7 @@ export class CalculateToolDataComponent extends BaseComponent implements OnInit 
       });
     }, err => {
       this.toolList[index].isActive = !data.isActive;
-      this.messageService.add({
-        severity: 'error',
-        detail: this.translate.instant('message.updateError')
-      });
+      throw err;
     });
   }
 

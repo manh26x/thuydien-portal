@@ -3,9 +3,6 @@ import { CommonModule } from '@angular/common';
 import {FeaturesComponent} from './features.component';
 import {FeaturesRoutingModule} from './features-routing.module';
 import {TopBarComponent} from './topbar.component';
-import {FooterComponent} from './footer.component';
-import {ConfigComponent} from './config.component';
-import {MenuComponent} from './menu.component';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {FormsModule} from '@angular/forms';
@@ -20,18 +17,18 @@ import {RoleService} from '../shared/service/role.service';
 
 
 @NgModule({
-  declarations: [FeaturesComponent, TopBarComponent, FooterComponent, ConfigComponent, MenuComponent, MenuitemComponent],
-    imports: [
-      CommonModule,
-      FeaturesRoutingModule,
-      RadioButtonModule,
-      InputSwitchModule,
-      FormsModule,
-      RippleModule,
-      ButtonModule,
-      MenuModule,
-      IndicatorModule
-    ],
+  declarations: [FeaturesComponent, TopBarComponent, MenuitemComponent],
+  imports: [
+    CommonModule,
+    FeaturesRoutingModule,
+    RadioButtonModule,
+    InputSwitchModule,
+    FormsModule,
+    RippleModule,
+    ButtonModule,
+    MenuModule,
+    IndicatorModule
+  ],
   providers: [
     MenuService,
     RoleService

@@ -148,11 +148,14 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
         this.messageService.add({ key: 'update-role', severity: 'error', detail: this.translate.instant('invalid.requiredFeature') });
         return;
       }
+      this.indicator.showActivityIndicator();
       this.roleService.updateRole({
         menuRightList: featureData,
         roleInfo: roleData,
         tagList: tagData
-      }).subscribe(_ => {
+      }).pipe(
+        finalize(() => this.indicator.hideActivityIndicator())
+      ).subscribe(_ => {
         this.isLeave = true;
         this.messageService.add({
           severity: 'success',
