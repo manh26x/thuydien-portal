@@ -123,7 +123,12 @@ export class FeaturesComponent extends IndicatorComponent implements OnInit, Aft
   }
 
   logout(rejectAble: boolean, msgTranslateKey: string) {
-    const okBtn = rejectAble ? 'message.accept' : 'message.ok';
+    let okBtn = 'message.accept';
+    if (!rejectAble) {
+      okBtn = 'message.ok';
+      this.auth.logOut();
+      this.idle.stopTimer();
+    }
     this.confirm.confirm({
       key: 'globalDialog',
       header: this.translate.instant('message.notification'),
@@ -133,9 +138,7 @@ export class FeaturesComponent extends IndicatorComponent implements OnInit, Aft
       acceptLabel: this.translate.instant(okBtn),
       rejectLabel: this.translate.instant('message.reject'),
       accept: () => {
-        this.auth.logOut();
         this.router.navigate(['auth', 'login']);
-        this.idle.stopTimer();
       },
       reject: () => {}
     });
