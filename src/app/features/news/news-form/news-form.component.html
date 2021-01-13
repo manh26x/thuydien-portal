@@ -36,7 +36,7 @@
       <div class="p-fluid">
         <div class="p-col-12 p-field">
           <label for="n-tags">{{'news.tags' | translate}} <span class="p-invalid">*</span></label>
-          <p-multiSelect formControlName="tags" inputId="n-tags" [options]="tagList" dataKey="tagId" optionLabel="tagValue"></p-multiSelect>
+          <p-multiSelect formControlName="tags" inputId="n-tags" [options]="tagList" dataKey="id" optionLabel="value"></p-multiSelect>
           <small *ngIf="hasErrorInput('tags', 'required')" class="p-invalid">
             {{'invalid.tags.required' | translate}}
           </small>
