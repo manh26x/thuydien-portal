@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {AuthService} from '../auth/auth.service';
 import {Router} from '@angular/router';
@@ -20,12 +20,16 @@ import {UserAuthInfo} from '../auth/model/user-auth';
         <button type="button" pButton icon="pi pi-angle-down" label="{{currentLang.lang}}" class="p-button-text" iconPos="right" (click)="menuLang.toggle($event)">
           <img src="{{currentLang.flag}}" alt="LG" width="30" height="20" class="img-flag">&nbsp;
         </button>&nbsp;
-        <button type="button" pButton icon="pi pi-angle-down" label="{{userInfo?.userName}}" class="p-button-outlined" iconPos="right" (click)="menu.toggle($event)"></button>
+        <button type="button" pButton label="." class="p-button-outlined fix-label" (click)="menu.toggle($event)">
+          <span>{{userInfo?.userName}}</span>&nbsp;
+          <i class="pi pi-angle-down"></i>
+        </button>
       </div>
     </div>
     <p-menu #menu [popup]="true" [model]="userItems"></p-menu>
     <p-menu #menuLang [popup]="true" [model]="langItems"></p-menu>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TopBarComponent implements OnInit {
   userItems: MenuItem[];

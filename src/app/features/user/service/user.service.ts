@@ -24,8 +24,9 @@ export class UserService extends BaseService{
   }
 
   getUserInfo(userId: string): Observable<UserDetail> {
-    const param = new HttpParams().append('userId', userId);
-    return this.doGet('/admin/userPortal/detail', param).pipe(
+    // const param = new HttpParams().append('userId', userId);
+    const body = userId;
+    return this.doPost('/admin/userPortal/detail', body).pipe(
       map(res => res.data[0])
     );
   }
@@ -38,8 +39,9 @@ export class UserService extends BaseService{
   }
 
   getUserByUsername(username: string): Observable<string[]> {
-    const pr: HttpParams = new HttpParams().append('keyword', username);
-    return this.doGet('/admin/userPortal/search', pr ).pipe(
+    // const pr: HttpParams = new HttpParams().append('keyword', username);
+    const body = username;
+    return this.doPost('/admin/userPortal/search', body ).pipe(
       map((res) => res.data || [])
     );
   }
@@ -61,8 +63,9 @@ export class UserService extends BaseService{
   }
 
   deleteUser(userId: string): Observable<ApiResultResponse> {
-    const param = new HttpParams().append('userId', userId);
-    return this.doGet('/admin/userPortal/delete', param);
+    // const param = new HttpParams().append('userId', userId);
+    const body = userId;
+    return this.doPost('/admin/userPortal/delete', body);
   }
 
   setPage(page: '' | 'create' | 'update' | 'view') {

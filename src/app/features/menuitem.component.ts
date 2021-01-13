@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Subscription} from 'rxjs';
@@ -59,7 +59,8 @@ import {MenuService} from './menu.service';
       transition('void => visibleAnimated, visibleAnimated => void',
         animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
     ])
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuitemComponent implements OnInit, OnDestroy {
   @HostBinding('class.active-menuitem') active = false;

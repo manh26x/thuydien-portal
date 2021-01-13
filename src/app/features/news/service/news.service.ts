@@ -18,8 +18,9 @@ export class NewsService extends BaseService{
   }
 
   getNewsDetail(id): Observable<NewsDetail> {
-    const param = new HttpParams().append('newsId', id);
-    return this.doGet('/saleskit/news/detail', param).pipe(
+    // const param = new HttpParams().append('newsId', id);
+    const body = +id;
+    return this.doPost('/saleskit/news/detail', body).pipe(
       map(res => res.data[0])
     );
   }
@@ -33,8 +34,9 @@ export class NewsService extends BaseService{
   }
 
   deleteNews(id: string): Observable<ApiResultResponse> {
-    const param = new HttpParams().append('newsId', id);
-    return this.doGet('/saleskit/news/delete', param);
+    // const param = new HttpParams().append('newsId', id);
+    const body = +id;
+    return this.doPost('/saleskit/news/delete', body);
   }
 
   filterNews(request: FilterNewsRequest): Observable<NewsPaging> {
