@@ -32,7 +32,7 @@
            [showCurrentPageReport]="true"
            [(first)]="page"
            sortField="name"
-           sortOrder="1"
+           [sortOrder]="1"
            currentPageReportTemplate="{{ 'paging' | translate }}">
     <ng-template pTemplate="header">
       <tr>

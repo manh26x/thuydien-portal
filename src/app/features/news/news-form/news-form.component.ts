@@ -2,12 +2,12 @@ import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, S
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TagsService} from '../../tags/service/tags.service';
 import {forkJoin} from 'rxjs';
-import {TagsUser} from '../../tags/model/tags';
+import {TagDetail} from '../../tags/model/tags';
 import {UtilService} from '../../../core/service/util.service';
 import {ConfirmationService, SelectItem} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {AppTranslateService} from '../../../core/service/translate.service';
-import {concatMap, map, startWith, takeUntil} from 'rxjs/operators';
+import {concatMap, startWith, takeUntil} from 'rxjs/operators';
 import {NewsEnum} from '../model/news.enum';
 import {NewsDetail} from '../model/news';
 import {environment} from '../../../../environments/environment';
@@ -29,7 +29,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
   yearSelect = `${new Date().getFullYear()}:${new Date().getFullYear() + 10}`;
   min = new Date();
   formNews: FormGroup;
-  tagList: TagsUser[] = [];
+  tagList: TagDetail[] = [];
   branchList: Branch[] = [];
   levelList: SelectItem[] = [];
   filesImage: any[];
@@ -89,7 +89,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
         { label: res.veryImportant, value: NewsEnum.LEVEL_VERY_IMPORTANT }
       ];
     });
-    const obsTag = this.tagService.getAllTag();
+    const obsTag = this.tagService.getAllTagNews();
     const obsRole = this.branchService.getBranchList();
     forkJoin([obsTag, obsRole]).subscribe(res => {
       this.tagList = res[0];
@@ -118,7 +118,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
           shortContent: news.newsDto.shortContent,
           content: news.newsDto.content,
           tags: news.tagOfNews ? news.tagOfNews.map(tags => {
-            return { tagId: tags.idTag };
+            return { id: tags.idTag };
           }) : [],
           branch: news.listBranch ? news.listBranch.map(branch => {
             return { id: branch.id, code: branch.code };

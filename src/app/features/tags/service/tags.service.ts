@@ -108,6 +108,12 @@ export class TagsService extends BaseService {
     );
   }
 
+  getAllTagNews(): Observable<TagDetail[]> {
+    return this.doGet('/saleskit/tags/all').pipe(
+      map(res => res.data || [])
+    );
+  }
+
   /**
    * @author TruongNH
    * @param page: name of page
