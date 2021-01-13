@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import { FeaturesComponent} from './features.component';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MenuItem} from 'primeng/api';
 import {AuthService} from '../auth/auth.service';
 import {Router} from '@angular/router';
@@ -7,12 +6,13 @@ import {ILanguage} from '../core/model/language';
 import {AppTranslateService} from '../core/service/translate.service';
 import {Language} from '../core/model/language.enum';
 import {concatMap, startWith} from 'rxjs/operators';
+import {UserAuthInfo} from '../auth/model/user-auth';
 
 @Component({
   selector: 'aw-topbar',
   template: `
     <div class="layout-topbar">
-      <a href="#" id="layout-menu-btn" class="menu-btn" (click)="features.onMenuButtonClick($event)">
+      <a href="#" id="layout-menu-btn" class="menu-btn" (click)="onMenuButtonClick($event)">
         <i class="pi pi-bars"></i>
       </a>
 
@@ -20,26 +20,29 @@ import {concatMap, startWith} from 'rxjs/operators';
         <button type="button" pButton icon="pi pi-angle-down" label="{{currentLang.lang}}" class="p-button-text" iconPos="right" (click)="menuLang.toggle($event)">
           <img src="{{currentLang.flag}}" alt="LG" width="30" height="20" class="img-flag">&nbsp;
         </button>&nbsp;
-        <button type="button" pButton icon="pi pi-angle-down" label="{{username}}" class="p-button-outlined" iconPos="right" (click)="menu.toggle($event)"></button>
+        <button type="button" pButton label="." class="p-button-outlined fix-label" (click)="menu.toggle($event)">
+          <span>{{userInfo?.userName}}</span>&nbsp;
+          <i class="pi pi-angle-down"></i>
+        </button>
       </div>
     </div>
     <p-menu #menu [popup]="true" [model]="userItems"></p-menu>
     <p-menu #menuLang [popup]="true" [model]="langItems"></p-menu>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TopBarComponent implements OnInit {
   userItems: MenuItem[];
   langItems: MenuItem[];
   currentLang: ILanguage;
-  username = '';
+  @Input() userInfo: UserAuthInfo;
+  @Output() toggleMenu: EventEmitter<any> = new EventEmitter<any>();
+  @Output() topBarLogout: EventEmitter<any> = new EventEmitter<any>();
   constructor(
-    public features: FeaturesComponent,
     private authService: AuthService,
     private router: Router,
     private appTranslate: AppTranslateService
   ) {
-    const userInfo = this.authService.getUserInfo();
-    if (userInfo) { this.username = userInfo.userName; }
     this.currentLang = appTranslate.langs.find(lang => lang.key === localStorage.getItem(Language.LOCAL_KEY));
   }
 
@@ -53,7 +56,7 @@ export class TopBarComponent implements OnInit {
       this.userItems = [
         {
           label: res,
-          command: () => this.features.logout(true, 'message.confirmLogout')
+          command: () => this.topBarLogout.emit()
         }
       ];
     });
@@ -70,6 +73,10 @@ export class TopBarComponent implements OnInit {
         command: () => this.changeLang(this.appTranslate.langs[1])
       }
     ];
+  }
+
+  onMenuButtonClick(event: Event) {
+    this.toggleMenu.emit(event);
   }
 
   changeLang(lang: ILanguage): void {

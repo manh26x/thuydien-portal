@@ -16,7 +16,7 @@ import {AuthService} from '../../../auth/auth.service';
 import {DialogService} from 'primeng/dynamicdialog';
 import {DialogPreviewComponent} from '../dialog-preview/dialog-preview.component';
 import {PageChangeEvent} from '../../../shared/model/page-change-event';
-import {RoleService} from '../../role/service/role.service';
+import {RoleService} from '../../../shared/service/role.service';
 import {Role, RoleEnum} from '../../../shared/model/role';
 
 @Component({

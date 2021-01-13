@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import {BaseService} from '../../../core/service/base.service';
+import {BaseService} from '../../core/service/base.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {InsertRoleRequest, Role, RoleDetail} from '../../../shared/model/role';
+import {InsertRoleRequest, Role, RoleDetail} from '../model/role';
 import {map} from 'rxjs/operators';
-import {ApiResultResponse} from '../../../core/model/result-response';
+import {ApiResultResponse} from '../../core/model/result-response';
 import {AbstractControl} from '@angular/forms';
+import {UserAuthDetail} from '../../auth/model/user-auth';
 
 @Injectable()
 export class RoleService extends BaseService{
@@ -25,25 +26,34 @@ export class RoleService extends BaseService{
   }
 
   deleteRole(id: string): Observable<ApiResultResponse> {
-    const param: HttpParams = new HttpParams()
-      .append('deleteId', id);
-    return this.doGet('/admin/role/delete', param);
+//    const param: HttpParams = new HttpParams()
+//      .append('deleteId', id);
+    const body = id;
+    return this.doPost('/admin/role/delete', body);
   }
 
-  getRoleList(name: string, status: string): Observable<Role[]> {
-    const param: HttpParams = new HttpParams()
-      .append('keySearch', name)
-      .append('status', status);
-    return this.doGet('/admin/role/search', param).pipe(
+  getRoleList(name: string, statusCode: string): Observable<Role[]> {
+//    const param: HttpParams = new HttpParams()
+//      .append('keySearch', name)
+//      .append('status', status);
+    const body = {keySearch: name, status: statusCode};
+    return this.doPost('/admin/role/search', body).pipe(
       map(res => res.data || [])
     );
   }
 
   getRoleDetail(id: string): Observable<RoleDetail> {
-    const param: HttpParams = new HttpParams()
-      .append('roleId', id);
-    return this.doGet('/admin/role/detail', param).pipe(
+//    const param: HttpParams = new HttpParams()
+//      .append('roleId', id);
+    const body = id;
+    return this.doPost('/admin/role/detail', body).pipe(
       map(res => res.data[0])
+    );
+  }
+
+  getUserRole(): Observable<UserAuthDetail> {
+    return this.doGet('/admin/role/getRole').pipe(
+      map(res => res.data[0] || {})
     );
   }
 

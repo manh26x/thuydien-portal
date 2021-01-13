@@ -8,9 +8,10 @@ import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   declarations: [GlobalIndicatorComponent, SectionIndicatorComponent],
-  exports: [
-    GlobalIndicatorComponent
-  ],
+    exports: [
+        GlobalIndicatorComponent,
+        SectionIndicatorComponent
+    ],
   imports: [
     CommonModule,
     ProgressSpinnerModule,

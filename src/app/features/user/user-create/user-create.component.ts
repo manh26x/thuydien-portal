@@ -11,7 +11,7 @@ import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {finalize} from 'rxjs/operators';
 import {Role, RoleEnum, UserRole} from '../../../shared/model/role';
 import {forkJoin} from 'rxjs';
-import {RoleService} from '../../role/service/role.service';
+import {RoleService} from '../../../shared/service/role.service';
 import {UnitService} from '../../../shared/service/unit.service';
 import {BranchService} from '../../../shared/service/branch.service';
 import {DepartmentService} from '../../../shared/service/department.service';

@@ -4,13 +4,10 @@ import {TagsService} from '../service/tags.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {concatMap, delay, finalize, map, takeUntil} from 'rxjs/operators';
 import {TagsUpdateRequest, TagsUser} from '../model/tags';
-import {UserInfo} from '../../user/model/user';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {MessageService} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
-import {ApiErrorForbidden, ApiErrorResponse} from '../../../core/model/error-response';
-import {UserAuth} from '../../../auth/model/user-auth';
-import {AuthService} from '../../../auth/auth.service';
+import {ApiErrorResponse} from '../../../core/model/error-response';
 
 @Component({
   selector: 'aw-tags-update',
@@ -20,18 +17,15 @@ import {AuthService} from '../../../auth/auth.service';
 })
 export class TagsUpdateComponent extends BaseComponent implements OnInit {
   initValue: TagsUser;
-  userLogged: UserAuth;
   constructor(
     private tagService: TagsService,
     private route: ActivatedRoute,
     private indicator: IndicatorService,
     private messageService: MessageService,
     private translate: TranslateService,
-    private router: Router,
-    private auth: AuthService
+    private router: Router
   ) {
     super();
-    this.userLogged = this.auth.getUserInfo();
   }
 
   ngOnInit(): void {
@@ -42,12 +36,6 @@ export class TagsUpdateComponent extends BaseComponent implements OnInit {
       map(res => res.get('id')),
       concatMap(id => this.tagService.getDetail(id).pipe(
         delay(200),
-        map(res => {
-          if (!this.userLogged.isSupperAdmin && this.userLogged.userName !== res.createBy) {
-            throw new ApiErrorForbidden('', '');
-          }
-          return res;
-        }),
         finalize(() => this.indicator.hideActivityIndicator())
       ))
     ).subscribe(res => {
@@ -72,7 +60,7 @@ export class TagsUpdateComponent extends BaseComponent implements OnInit {
     };
     this.tagService.updateTags(body).pipe(
       finalize(() => this.indicator.hideActivityIndicator())
-    ).subscribe(res => {
+    ).subscribe(_ => {
       this.messageService.add({
         severity: 'success',
         detail: this.translate.instant('message.updateSuccess')

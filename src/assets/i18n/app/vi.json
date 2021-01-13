@@ -9,6 +9,8 @@
 		"api": {
 			"103": "Có lỗi xảy ra. Chúng tôi rất tiếc về sự cố này và sẽ xử lý trong thời gian sớm nhất.",
 			"201": "Không tìm thấy giá trị bạn yêu cầu",
+			"202": "Giá trị bạn yêu cầu đã tồn tại.",
+			"205": "Bạn không có quyền thực hiện thao tác này",
 			"400": "Yêu cầu không hợp lệ",
 			"401": "Lỗi xác thực",
 			"404": "Dịnh vụ không được hỗ trợ. Vui lòng thử lại sau",

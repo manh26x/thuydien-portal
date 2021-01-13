@@ -15,7 +15,7 @@ import {BranchService} from '../../../shared/service/branch.service';
 import {Role, RoleEnum, UserRole} from '../../../shared/model/role';
 import {Unit} from '../../../shared/model/unit';
 import {Department} from '../../../shared/model/department';
-import {RoleService} from '../../role/service/role.service';
+import {RoleService} from '../../../shared/service/role.service';
 import {UnitService} from '../../../shared/service/unit.service';
 import {DepartmentService} from '../../../shared/service/department.service';
 import {forkJoin} from 'rxjs';

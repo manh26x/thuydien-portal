@@ -19,8 +19,9 @@ export class TagsService extends BaseService {
    * desc: get detail tags
    */
   getDetail(id: string): Observable<TagDetail> {
-    const param = new HttpParams().append('tagId', id);
-    return this.doGet('/saleskit/tags/getInfoTag', param).pipe(
+    // const param = new HttpParams().append('tagId', id);
+    const body = +id;
+    return this.doPost('/saleskit/tags/getInfoTag', body).pipe(
       map(res => res.data[0])
     );
   }
@@ -31,9 +32,10 @@ export class TagsService extends BaseService {
    * date: 07/12/2020
    * desc: get list tags by type
    */
-  getTagsList(tagsType): Observable<Tags[]> {
-    const param = new HttpParams().append('type', tagsType);
-    return this.doGet('/saleskit/tags/searchType', param).pipe(
+  getTagsList(tagsType: string): Observable<Tags[]> {
+    // const param = new HttpParams().append('type', tagsType);
+    const body = tagsType;
+    return this.doPost('/saleskit/tags/searchType', body).pipe(
       map(res => res.data || [])
     );
   }
@@ -90,9 +92,10 @@ export class TagsService extends BaseService {
    * date: 09/12/2020
    * desc: create new tags
    */
-  deleteTag(id): Observable<any> {
-    const param = new HttpParams().append('tagId', id);
-    return this.doDelete('/saleskit/tags/delete', param);
+  deleteTag(id: number): Observable<any> {
+    // const param = new HttpParams().append('tagId', id);
+    const body = id;
+    return this.doPost('/saleskit/tags/delete', body);
   }
 
   /**

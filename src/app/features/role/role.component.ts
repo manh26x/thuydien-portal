@@ -3,7 +3,7 @@ import {MenuItem} from 'primeng/api';
 import {AppTranslateService} from '../../core/service/translate.service';
 import {TranslateService} from '@ngx-translate/core';
 import {UtilService} from '../../core/service/util.service';
-import {RoleService} from './service/role.service';
+import {RoleService} from '../../shared/service/role.service';
 import {concatMap, delay, map, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import {BaseComponent} from '../../core/base.component';
 

@@ -1,10 +1,9 @@
-import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {MenuService} from './menu.service';
-import {FeaturesComponent} from './features.component';
 
 @Component({
   /* tslint:disable:component-selector */
@@ -29,16 +28,13 @@ import {FeaturesComponent} from './features.component';
 				<span class="menuitem-badge" *ngIf="item.badge">{{item.badge}}</span>
 			</a>
 			<ul *ngIf="item.items && active"
-				[@children]="(features.isHorizontal() && root) ? (active ? 'visible' : 'hidden') : (active ? 'visibleAnimated' : 'hiddenAnimated')">
+				[@children]="(active ? 'visibleAnimated' : 'hiddenAnimated')">
 				<ng-template ngFor let-child let-i="index" [ngForOf]="item.items">
 					<li aw-menuitem [item]="child" [index]="i" [parentKey]="key"></li>
 				</ng-template>
 			</ul>
 		</ng-container>
-    `,
-  host: {
-    '[class.active-menuitem]': 'active'
-  },
+  `,
   animations: [
     trigger('children', [
       state('void', style({
@@ -63,10 +59,11 @@ import {FeaturesComponent} from './features.component';
       transition('void => visibleAnimated, visibleAnimated => void',
         animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
     ])
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuitemComponent implements OnInit, OnDestroy {
-
+  @HostBinding('class.active-menuitem') active = false;
   @Input() item: any;
 
   @Input() index: number;
@@ -75,15 +72,13 @@ export class MenuitemComponent implements OnInit, OnDestroy {
 
   @Input() parentKey: string;
 
-  active = false;
-
   menuSourceSubscription: Subscription;
 
   menuResetSubscription: Subscription;
 
   key: string;
 
-  constructor(public features: FeaturesComponent, public router: Router, private cd: ChangeDetectorRef, private menuService: MenuService) {
+  constructor(public router: Router, private cd: ChangeDetectorRef, private menuService: MenuService) {
     this.menuSourceSubscription = this.menuService.menuSource$.subscribe(key => {
       // deactivate current active menu
       if (this.active && this.key !== key && key.indexOf(this.key) !== 0) {
@@ -96,24 +91,17 @@ export class MenuitemComponent implements OnInit, OnDestroy {
     });
 
     this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(params => {
-        if (this.features.isHorizontal()) {
-          this.active = false;
+      .subscribe(_ => {
+        if (this.item.routerLink) {
+          this.updateActiveStateFromRoute();
         } else {
-          if (this.item.routerLink) {
-            this.updateActiveStateFromRoute();
-          } else {
-            this.active = false;
-          }
+          this.active = false;
         }
       });
   }
 
   ngOnInit() {
-    if (!this.features.isHorizontal() && this.item.routerLink) {
-      this.updateActiveStateFromRoute();
-    }
-
+    this.updateActiveStateFromRoute();
     this.key = this.parentKey ? this.parentKey + '-' + this.index : String(this.index);
   }
 
@@ -126,11 +114,6 @@ export class MenuitemComponent implements OnInit, OnDestroy {
     if (this.item.disabled) {
       event.preventDefault();
       return true;
-    }
-
-    // navigate with hover in horizontal mode
-    if (this.root) {
-      this.features.menuHoverActive = !this.features.menuHoverActive;
     }
 
     // notify other items
@@ -147,27 +130,11 @@ export class MenuitemComponent implements OnInit, OnDestroy {
     } else {
       // activate item
       this.active = true;
-
-      // hide overlay menus
-      if (this.features.isMobile()) {
-        this.features.overlayMenuActive = false;
-        this.features.staticMenuMobileActive = false;
-        this.features.menuHoverActive = !this.features.menuHoverActive;
-      }
-
-      // reset horizontal menu
-      if (this.features.isHorizontal()) {
-        this.menuService.reset();
-      }
     }
   }
 
   onMouseEnter() {
-    // activate item on hover
-    if (this.root && this.features.menuHoverActive && this.features.isHorizontal() && this.features.isDesktop()) {
-      this.menuService.onMenuStateChange(this.key);
-      this.active = true;
-    }
+
   }
 
   ngOnDestroy() {
