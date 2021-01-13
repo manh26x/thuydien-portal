@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {TagsEnum} from '../model/tags.enum';
 import {AppTranslateService} from '../../../core/service/translate.service';
-import {concatMap, map, startWith, takeUntil} from 'rxjs/operators';
+import {concatMap, startWith, takeUntil} from 'rxjs/operators';
 import {UserService} from '../../user/service/user.service';
 import {UtilService} from '../../../core/service/util.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -40,9 +40,6 @@ export class TagsFormComponent extends BaseComponent implements OnInit, OnChange
   ngOnInit(): void {
     if (this.mode === 'update') {
       this.formTags.get('code').disable();
-    }
-    if (this.mode === 'create') {
-      this.formTags.get('status').disable();
     }
     this.appTranslate.languageChanged$.pipe(
       takeUntil(this.nextOnDestroy),
@@ -85,6 +82,11 @@ export class TagsFormComponent extends BaseComponent implements OnInit, OnChange
   }
 
   doSave() {
+    const value = this.formTags.getRawValue();
+    this.formTags.patchValue({
+      code: value.code?.trim(),
+      name: value.name?.trim()
+    });
     if (this.formTags.invalid) {
       this.util.validateAllFields(this.formTags);
     } else {
@@ -104,7 +106,7 @@ export class TagsFormComponent extends BaseComponent implements OnInit, OnChange
       name: ['', [Validators.required, Validators.maxLength(this.nameMaxLength)]],
       type: [null, [Validators.required]],
       assign: [null],
-      status: [TagsEnum.STATUS_ACTIVE]
+      status: [{value: TagsEnum.STATUS_ACTIVE, disabled: true}]
     });
   }
 

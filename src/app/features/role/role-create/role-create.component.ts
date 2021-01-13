@@ -72,7 +72,7 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
     if (this.roleForm.invalid) {
       this.util.validateAllFields(this.roleForm);
     } else {
-      const value = this.roleForm.value;
+      const value = this.roleForm.getRawValue();
       const roleData: Role = {
         id: value.code,
         name: value.name,
