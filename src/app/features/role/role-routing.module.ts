@@ -6,26 +6,34 @@ import {RoleCreateComponent} from './role-create/role-create.component';
 import {RoleUpdateComponent} from './role-update/role-update.component';
 import {AuthGuard} from '../../auth/auth.guard';
 import {FormLeaveGuard} from '../../core/form-leave.guard';
+import {FeatureGuard} from '../feature.guard';
+import {RoleEnum} from '../../shared/model/role';
+import {FeatureEnum} from '../../shared/model/feature.enum';
 
 const routes: Routes = [
   {
     path: '',
     component: RoleComponent,
-    canActivate: [AuthGuard],
     children: [
       {
         path: '',
-        component: RoleDataComponent
+        component: RoleDataComponent,
+        canActivate: [AuthGuard, FeatureGuard],
+        data: {feature: FeatureEnum.ROLE, role: RoleEnum.ACTION_VIEW}
       },
       {
         path: 'create',
         component: RoleCreateComponent,
-        canDeactivate: [FormLeaveGuard]
+        canActivate: [AuthGuard, FeatureGuard],
+        canDeactivate: [FormLeaveGuard],
+        data: {feature: FeatureEnum.ROLE, role: RoleEnum.ACTION_INSERT}
       },
       {
         path: 'update/:id',
         component: RoleUpdateComponent,
-        canDeactivate: [FormLeaveGuard]
+        canActivate: [AuthGuard, FeatureGuard],
+        canDeactivate: [FormLeaveGuard],
+        data: {feature: FeatureEnum.ROLE, role: RoleEnum.ACTION_EDIT}
       }
     ]
   }

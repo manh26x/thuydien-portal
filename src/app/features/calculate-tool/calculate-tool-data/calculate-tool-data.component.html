@@ -43,7 +43,7 @@
         <th pSortableColumn="toolName">{{'tool.name' | translate}}<p-sortIcon field="toolName"></p-sortIcon></th>
         <th pSortableColumn="status">{{'tool.status' | translate}}<p-sortIcon field="status"></p-sortIcon></th>
         <th pSortableColumn="priority">{{'tool.level' | translate}}<p-sortIcon field="priority"></p-sortIcon></th>
-        <th *ngIf="userLogged.isSupperAdmin">{{'tool.action' | translate}}</th>
+        <th *ngIf="isHasOnOff">{{'tool.action' | translate}}</th>
       </tr>
     </ng-template>
 
@@ -76,7 +76,7 @@
             <ng-container *ngSwitchDefault>-</ng-container>
           </ng-container>
         </td>
-        <td>
+        <td *ngIf="isHasOnOff">
           <p-inputSwitch [(ngModel)]="tool.isActive" (onChange)="doChangeStatus(index)"></p-inputSwitch>
         </td>
       </tr>

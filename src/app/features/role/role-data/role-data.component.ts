@@ -12,6 +12,8 @@ import {Role, RoleEnum} from '../../../shared/model/role';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {ExportService} from '../../../shared/service/export.service';
 import {UtilService} from '../../../core/service/util.service';
+import {AuthService} from '../../../auth/auth.service';
+import {FeatureEnum} from '../../../shared/model/feature.enum';
 
 @Component({
   selector: 'aw-role-data',
@@ -25,6 +27,10 @@ export class RoleDataComponent extends BaseComponent implements OnInit {
   roleList: Role[] = [];
   roleConst = RoleEnum;
   page = 0;
+  isHasInsert = false;
+  isHasEdit = false;
+  isHasDel = false;
+  isHasExport = false;
   constructor(
     private fb: FormBuilder,
     private roleService: RoleService,
@@ -35,10 +41,15 @@ export class RoleDataComponent extends BaseComponent implements OnInit {
     private dialog: ConfirmationService,
     private messageService: MessageService,
     private exportService: ExportService,
-    private util: UtilService
+    private util: UtilService,
+    private auth: AuthService
   ) {
     super();
     this.initForm();
+    this.isHasInsert = this.auth.isHasRole(FeatureEnum.ROLE, RoleEnum.ACTION_INSERT);
+    this.isHasEdit = this.auth.isHasRole(FeatureEnum.ROLE, RoleEnum.ACTION_EDIT);
+    this.isHasDel = this.auth.isHasRole(FeatureEnum.ROLE, RoleEnum.ACTION_DELETE);
+    this.isHasExport = this.auth.isHasRole(FeatureEnum.ROLE, RoleEnum.ACTION_EXPORT);
   }
 
   ngOnInit(): void {
@@ -75,41 +86,43 @@ export class RoleDataComponent extends BaseComponent implements OnInit {
   }
 
   doExportExcel() {
-    this.indicator.showActivityIndicator();
-    const header = [{
-      id: this.translate.instant('role.code'),
-      name: this.translate.instant('role.name'),
-      description: this.translate.instant('role.desc'),
-      status: this.translate.instant('role.status')
-    }];
-    const dataExport = [];
-    if (this.util.canForEach(this.roleList)) {
-      this.roleList.forEach(item => {
-        let statusDisplay = '';
-        if (item.status === RoleEnum.STATUS_ACTIVE) {
-          statusDisplay = this.translate.instant('const.active');
-        } else if (item.status === RoleEnum.STATUS_INACTIVE) {
-          statusDisplay = this.translate.instant('const.inactive');
-        } else {
-          statusDisplay = '-';
-        }
-        dataExport.push({
-          id: item.id,
-          name: item.name,
-          description: item.description,
-          status: statusDisplay
+    if (this.isHasExport) {
+      this.indicator.showActivityIndicator();
+      const header = [{
+        id: this.translate.instant('role.code'),
+        name: this.translate.instant('role.name'),
+        description: this.translate.instant('role.desc'),
+        status: this.translate.instant('role.status')
+      }];
+      const dataExport = [];
+      if (this.util.canForEach(this.roleList)) {
+        this.roleList.forEach(item => {
+          let statusDisplay = '';
+          if (item.status === RoleEnum.STATUS_ACTIVE) {
+            statusDisplay = this.translate.instant('const.active');
+          } else if (item.status === RoleEnum.STATUS_INACTIVE) {
+            statusDisplay = this.translate.instant('const.inactive');
+          } else {
+            statusDisplay = '-';
+          }
+          dataExport.push({
+            id: item.id,
+            name: item.name,
+            description: item.description,
+            status: statusDisplay
+          });
         });
-      });
+      }
+      if (dataExport.length === 0) {
+        this.messageService.add({
+          severity: 'info',
+          detail: this.translate.instant('message.noDataExport')
+        });
+      } else {
+        this.exportService.exportAsExcelFile(header, dataExport, 'role-export');
+      }
+      this.indicator.hideActivityIndicator();
     }
-    if (dataExport.length === 0) {
-      this.messageService.add({
-        severity: 'info',
-        detail: this.translate.instant('message.noDataExport')
-      });
-    } else {
-      this.exportService.exportAsExcelFile(header, dataExport, 'role-export');
-    }
-    this.indicator.hideActivityIndicator();
   }
 
   initForm() {

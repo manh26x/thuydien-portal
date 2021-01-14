@@ -3,6 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import {CalculateToolComponent} from './calculate-tool.component';
 import {AuthGuard} from '../../auth/auth.guard';
 import {CalculateToolDataComponent} from './calculate-tool-data/calculate-tool-data.component';
+import {FeatureGuard} from '../feature.guard';
+import {RoleEnum} from '../../shared/model/role';
+import {FeatureEnum} from '../../shared/model/feature.enum';
 
 const routes: Routes = [
   {
@@ -12,7 +15,8 @@ const routes: Routes = [
       {
         path: '',
         component: CalculateToolDataComponent,
-        canActivate: [AuthGuard]
+        data: {feature: FeatureEnum.TOOL, role: RoleEnum.ACTION_VIEW},
+        canActivate: [AuthGuard, FeatureGuard]
       }
     ]
   }

@@ -15,6 +15,8 @@ import {ConfirmationService, MessageService} from 'primeng/api';
 import {UserAuth} from '../../../auth/model/user-auth';
 import {AuthService} from '../../../auth/auth.service';
 import {ApiErrorResponse} from '../../../core/model/error-response';
+import {FeatureEnum} from '../../../shared/model/feature.enum';
+import {RoleEnum} from '../../../shared/model/role';
 
 @Component({
   selector: 'aw-calculate-tool-data',
@@ -31,6 +33,7 @@ export class CalculateToolDataComponent extends BaseComponent implements OnInit 
   toolList: CalculateTool[] = [];
   toolConst = CalculateToolEnum;
   userLogged: UserAuth;
+  isHasOnOff = false;
   constructor(
     private toolService: CalculateToolService,
     private translate: TranslateService,
@@ -45,6 +48,7 @@ export class CalculateToolDataComponent extends BaseComponent implements OnInit 
   ) {
     super();
     this.userLogged = this.auth.getUserInfo();
+    this.isHasOnOff = this.auth.isHasRole(FeatureEnum.TOOL, RoleEnum.ACTION_ON_OFF);
     this.initForm();
   }
 

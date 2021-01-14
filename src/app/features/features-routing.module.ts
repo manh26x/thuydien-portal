@@ -1,5 +1,5 @@
-import { Routes, RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {NgModule} from '@angular/core';
 import {FeaturesComponent} from './features.component';
 import {AuthGuard} from '../auth/auth.guard';
 

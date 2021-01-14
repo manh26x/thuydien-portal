@@ -7,9 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "mock": "json-server mocks/db.json --host 0.0.0.0 --routes mocks/route.json --middlewares mocks/middleware.js",
-    "start-mock": "ng serve sale-web-portal --configuration=mock"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {

@@ -18,23 +18,12 @@ import {DialogPreviewComponent} from '../dialog-preview/dialog-preview.component
 import {PageChangeEvent} from '../../../shared/model/page-change-event';
 import {RoleService} from '../../../shared/service/role.service';
 import {Role, RoleEnum} from '../../../shared/model/role';
+import {FeatureEnum} from '../../../shared/model/feature.enum';
 
 @Component({
   selector: 'aw-user-data',
   templateUrl: './user-data.component.html',
-  styles: [`
-    .supper-admin {
-      color: #ffffff;
-      background: #FEAC3E;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: inline-flex;
-      justify-content: center;
-      padding: 4px;
-      font-size: 11px;
-    }
-  `],
+  styles: [],
   providers: [DialogService, RoleService]
 })
 export class UserDataComponent extends BaseComponent implements OnInit {
@@ -43,13 +32,17 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   searchForm: FormGroup;
   roleList: Role[] = [];
   statusList = [];
-  userLogged: UserAuth;
   fileImport: any[];
   sortBy = 'pubDate';
   sortOrder = 'DESC';
   page = 0;
   pageSize = 10;
   totalItem = 0;
+  isHasInsert = false;
+  isHasImport = false;
+  isHasExport = false;
+  isHasEdit = false;
+  isHasDel = false;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -64,7 +57,11 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     private roleService: RoleService
   ) {
     super();
-    this.userLogged = this.auth.getUserInfo();
+    this.isHasInsert = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_INSERT);
+    this.isHasImport = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_IMPORT);
+    this.isHasExport = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_EXPORT);
+    this.isHasEdit = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_EDIT);
+    this.isHasDel = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_DELETE);
     this.initSearchForm();
   }
 
