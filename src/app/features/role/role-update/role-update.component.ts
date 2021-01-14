@@ -139,6 +139,14 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
           if (item.isViewAble) {
             featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_VIEW });
           }
+
+          if (item.isImportAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_IMPORT });
+          }
+
+          if (item.isExportAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_EXPORT });
+          }
         });
       } else {
         featureData = this.roleInfo.menuRightList;
