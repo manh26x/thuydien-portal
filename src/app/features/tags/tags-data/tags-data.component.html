@@ -32,7 +32,7 @@
         <th pSortableColumn="type">{{'tags.type' | translate}} <p-sortIcon field="type"></p-sortIcon></th>
         <th pSortableColumn="status">{{'tags.status' | translate}} <p-sortIcon field="status"></p-sortIcon></th>
         <th>
-          <button (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
+          <button *ngIf="isHasInsert" (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
         </th>
       </tr>
     </ng-template>
@@ -57,14 +57,9 @@
           </ng-container>
         </td>
         <td>
-          <button (click)="gotoView(tags.id)" pButton
-                  type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
-          <button (click)="gotoUpdate(tags.id)" pButton type="button" icon="pi pi-pencil"
-                  class="p-button-rounded p-button-secondary p-button-text">
-          </button>
-          <button (click)="doDelete(tags)" pButton type="button" icon="pi pi-trash"
-                  class="p-button-rounded p-button-danger p-button-text">
-          </button>
+          <button (click)="gotoView(tags.id)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
+          <button *ngIf="isHasEdit" (click)="gotoUpdate(tags.id)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-secondary p-button-text"></button>
+          <button *ngIf="isHasDel" (click)="doDelete(tags)" pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
         </td>
       </tr>
     </ng-template>

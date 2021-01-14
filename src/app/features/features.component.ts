@@ -93,7 +93,9 @@ export class FeaturesComponent extends IndicatorComponent implements OnInit, Aft
       map(({resLang, resUser, resRole}) => {
         const menuList = [];
         const userFeature = groupBy(resRole, 'menuName');
+        // add home menu
         menuList.push({label: resLang[FeatureEnum.HOME], icon: 'pi pi-fw pi-home', routerLink: ['/']});
+        // map feature to menu on client
         Object.keys(userFeature).forEach((featureId) => {
           const feature = userFeature[featureId];
           menuList.push({label: resLang[featureId], icon: feature[0].menuIcon, routerLink: [feature[0].menuUrl]});
@@ -101,6 +103,7 @@ export class FeaturesComponent extends IndicatorComponent implements OnInit, Aft
         return {resLang, resUser, userFeature, menuList};
       }),
       tap(({resUser, userFeature}) => {
+        // set to local storage
         this.auth.setUserInfo(resUser);
         this.auth.setUserRole(userFeature);
       })

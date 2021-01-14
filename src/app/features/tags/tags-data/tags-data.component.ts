@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {TagDetail, TagsSearchRequest, TagsUser} from '../model/tags';
+import {TagDetail, TagsSearchRequest} from '../model/tags';
 import {TagsService} from '../service/tags.service';
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
-import {concatMap, finalize, map, startWith, takeUntil} from 'rxjs/operators';
+import {concatMap, finalize, startWith, takeUntil} from 'rxjs/operators';
 import {TagsEnum} from '../model/tags.enum';
 import {UtilService} from '../../../core/service/util.service';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
@@ -14,7 +14,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {PageChangeEvent} from '../../../shared/model/page-change-event';
 import {AuthService} from '../../../auth/auth.service';
-import {UserAuth} from '../../../auth/model/user-auth';
+import {FeatureEnum} from '../../../shared/model/feature.enum';
+import {RoleEnum} from '../../../shared/model/role';
 
 @Component({
   selector: 'aw-tags-data',
@@ -33,8 +34,9 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
   typeSearch = new FormControl('');
   tagsType = [];
   tagType = TagsEnum;
-  readonly initMaxShow = 2;
-  userLogged: UserAuth;
+  isHasInsert = false;
+  isHasEdit = false;
+  isHasDel = false;
   constructor(
     private tagsService: TagsService,
     private router: Router,
@@ -47,7 +49,9 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
     private auth: AuthService
   ) {
     super();
-    this.userLogged = this.auth.getUserInfo();
+    this.isHasInsert = this.auth.isHasRole(FeatureEnum.TAG, RoleEnum.ACTION_INSERT);
+    this.isHasEdit = this.auth.isHasRole(FeatureEnum.TAG, RoleEnum.ACTION_EDIT);
+    this.isHasDel = this.auth.isHasRole(FeatureEnum.TAG, RoleEnum.ACTION_DELETE);
   }
 
   ngOnInit(): void {

@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {ILanguage} from '../core/model/language';
 import {AppTranslateService} from '../core/service/translate.service';
 import {Language} from '../core/model/language.enum';
-import {concatMap, startWith} from 'rxjs/operators';
+import {startWith, switchMap} from 'rxjs/operators';
 import {UserAuthInfo} from '../auth/model/user-auth';
 
 @Component({
@@ -49,9 +49,7 @@ export class TopBarComponent implements OnInit {
   ngOnInit() {
     this.appTranslate.languageChanged$.pipe(
       startWith(''),
-      concatMap(() => this.appTranslate.getTranslationAsync('logout').pipe(
-        res => res
-      ))
+      switchMap(() => this.appTranslate.getTranslationAsync('logout'))
     ).subscribe(res => {
       this.userItems = [
         {

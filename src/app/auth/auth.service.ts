@@ -4,7 +4,7 @@ import {environment} from '../../environments/environment';
 import {Language} from '../core/model/language.enum';
 import {Observable} from 'rxjs';
 import {RoleEnum} from '../shared/model/role';
-import {FeatureGroupByRole, UserAuth} from './model/user-auth';
+import {FeatureGroupByRole, UserAuth, UserRole} from './model/user-auth';
 
 @Injectable({
   providedIn: 'root'
@@ -113,6 +113,12 @@ export class AuthService {
     const data = localStorage.getItem(this.USER_ROLE_KEY);
     const jsonData = JSON.parse(data);
     return jsonData;
+  }
+
+  isHasRole(feature: string, role: string): boolean {
+    const featureList: FeatureGroupByRole = this.getUserRole();
+    const roleList: UserRole[] = featureList[feature];
+    return roleList && !!roleList.find(x => x.rightId === role);
   }
 
   // cookie utils docs https://www.w3schools.com/js/js_cookies.asp

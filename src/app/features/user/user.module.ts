@@ -30,7 +30,6 @@ import {MessageService} from 'primeng/api';
 import {CheckboxModule} from 'primeng/checkbox';
 import {TooltipModule} from 'primeng/tooltip';
 import {PickListModule} from 'primeng/picklist';
-import {ViewOnlyGuard} from './view-only.guard';
 import {CustomFileUploadModule} from '../../shared/custom-file-upload/custom-file-upload.module';
 import { DialogPreviewComponent } from './dialog-preview/dialog-preview.component';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
@@ -86,8 +85,7 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
       provide: LANGUAGE_FILE_PATH,
       useValue: { path: './assets/i18n/user/' }
     },
-    MessageService,
-    ViewOnlyGuard
+    MessageService
   ]
 })
 export class UserModule extends BaseModule {
