@@ -141,6 +141,10 @@ export class FeaturesComponent extends IndicatorComponent implements OnInit, Aft
       acceptLabel: this.translate.instant(okBtn),
       rejectLabel: this.translate.instant('message.reject'),
       accept: () => {
+        if (rejectAble) {
+          this.auth.logOut();
+          this.idle.stopTimer();
+        }
         this.router.navigate(['auth', 'login']);
       },
       reject: () => {}
