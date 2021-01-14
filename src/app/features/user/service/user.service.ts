@@ -34,7 +34,7 @@ export class UserService extends BaseService{
   filterUser(request: FilterUserRequest): Observable<FilterUserResponse> {
     request.userType = '';
     return this.doPost('/admin/userPortal/filter', request).pipe(
-      map(res => res.data[0] || {})
+      map(res => res.data ? res.data[0] : { listUser: [], totalRecord: 0 })
     );
   }
 
