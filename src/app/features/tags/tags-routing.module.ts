@@ -33,7 +33,7 @@ const routes: Routes = [
         path: 'update/:id',
         component: TagsUpdateComponent,
         canActivate: [AuthGuard, FeatureGuard],
-        data: { role: RoleEnum.ACTION_EDIT }
+        data: {feature: FeatureEnum.TAG, role: RoleEnum.ACTION_EDIT}
       },
       {
         path: 'view/:id',
