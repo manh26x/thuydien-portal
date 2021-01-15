@@ -16,7 +16,8 @@ import {UtilService} from '../../../core/service/util.service';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {PageChangeEvent} from '../../../shared/model/page-change-event';
 import {AuthService} from '../../../auth/auth.service';
-import {UserAuth} from '../../../auth/model/user-auth';
+import {FeatureEnum} from '../../../shared/model/feature.enum';
+import {RoleEnum} from '../../../shared/model/role';
 
 @Component({
   selector: 'aw-news-data',
@@ -37,7 +38,9 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
   sortOrder = 'DESC';
   totalItem = 0;
   initMaxShow = 2;
-  userLogged: UserAuth;
+  isHasInsert = false;
+  isHasEdit = false;
+  isHasDel = false;
   constructor(
     private router: Router,
     private newsService: NewsService,
@@ -53,7 +56,9 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
   ) {
     super();
     this.initFormFilter();
-    this.userLogged = this.auth.getUserInfo();
+    this.isHasInsert = this.auth.isHasRole(FeatureEnum.NEWS, RoleEnum.ACTION_INSERT);
+    this.isHasEdit = this.auth.isHasRole(FeatureEnum.NEWS, RoleEnum.ACTION_EDIT);
+    this.isHasDel = this.auth.isHasRole(FeatureEnum.NEWS, RoleEnum.ACTION_DELETE);
   }
 
   ngOnInit(): void {
@@ -79,7 +84,7 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
       ];
     });
 
-    this.tagService.getAllTag().subscribe(res => {
+    this.tagService.getAllTagNews().subscribe(res => {
       this.tagsList = res;
     });
 //    this.getListNews();
