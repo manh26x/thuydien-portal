@@ -1,6 +1,7 @@
 import {Tags} from '../../tags/model/tags';
 import {Role, UserRole} from '../../../shared/model/role';
 import {Branch} from '../../../shared/model/branch';
+import {Unit} from '../../../shared/model/unit';
 
 export interface FilterNewsRequest {
   keyword: string;
@@ -24,8 +25,9 @@ export interface NewsInfoRequest {
   filePath?: string;
   sendNotification?: number; // 0 or 1
   listNewsTag?: Tags[];
-  listBranch?: Branch[];
+  listAnyId?: string[];
   isDraft?: number;
+  userViewType?: string;
 }
 
 export interface News {
@@ -48,6 +50,9 @@ export interface News {
   modifyDate?: Date;
   shortContent?: string;
   maxShowTag?: number;
+  userViewType?: string;
+  groupViewValue?: MultiSelectItem[];
+  fileName?: string;
 }
 
 export interface NewsPaging {
@@ -66,4 +71,18 @@ export interface NewsDetail {
   newsDto?: News;
   tagOfNews?: Tags[];
   listBranch?: Branch[];
+  listRole?: Role[];
+  listUnit?: Unit[];
+}
+
+export interface MultiSelectItem {
+  id: string;
+  code: string;
+  name: string;
+}
+
+export interface GroupViewState {
+  branchList: MultiSelectItem[];
+  unitList: MultiSelectItem[];
+  roleList: MultiSelectItem[];
 }

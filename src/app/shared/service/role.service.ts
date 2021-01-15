@@ -57,6 +57,12 @@ export class RoleService extends BaseService{
     );
   }
 
+  getRoleActive(): Observable<Role[]> {
+    return this.doPost('/admin/role/getActiveRole', null).pipe(
+      map(res => res.data || [])
+    );
+  }
+
   clientMatcher(abstract: AbstractControl): { [key: string]: boolean } | null {
     const isPortal = abstract.get('isAdminPortal');
     const isMobile = abstract.get('isMobileApp');

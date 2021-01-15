@@ -35,6 +35,11 @@ import { NewsUpdateComponent } from './news-update/news-update.component';
 import {MessageService} from 'primeng/api';
 import {TooltipModule} from 'primeng/tooltip';
 import {CustomFileUploadModule} from '../../shared/custom-file-upload/custom-file-upload.module';
+import {MatRadioModule} from '@angular/material/radio';
+import {TagsService} from '../tags/service/tags.service';
+import {BranchService} from '../../shared/service/branch.service';
+import {RoleService} from '../../shared/service/role.service';
+import {UnitService} from '../../shared/service/unit.service';
 
 
 @NgModule({
@@ -81,15 +86,20 @@ import {CustomFileUploadModule} from '../../shared/custom-file-upload/custom-fil
         BreadcrumbModule,
         ToastModule,
         TooltipModule,
-        CustomFileUploadModule
+        CustomFileUploadModule,
+        MatRadioModule
     ],
     providers: [
-        {
-            provide: LANGUAGE_FILE_PATH,
-            useValue: {path: './assets/i18n/news/'}
-        },
-        NewsService,
-        MessageService
+      {
+          provide: LANGUAGE_FILE_PATH,
+          useValue: {path: './assets/i18n/news/'}
+      },
+      NewsService,
+      MessageService,
+      TagsService,
+      BranchService,
+      RoleService,
+      UnitService
     ],
     exports: [
         NewsFormComponent

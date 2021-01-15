@@ -1,7 +1,17 @@
-import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TagsService} from '../../tags/service/tags.service';
-import {forkJoin} from 'rxjs';
 import {TagDetail} from '../../tags/model/tags';
 import {UtilService} from '../../../core/service/util.service';
 import {ConfirmationService, SelectItem} from 'primeng/api';
@@ -9,36 +19,37 @@ import {TranslateService} from '@ngx-translate/core';
 import {AppTranslateService} from '../../../core/service/translate.service';
 import {concatMap, startWith, takeUntil} from 'rxjs/operators';
 import {NewsEnum} from '../model/news.enum';
-import {NewsDetail} from '../model/news';
+import {GroupViewState, MultiSelectItem, NewsDetail} from '../model/news';
 import {environment} from '../../../../environments/environment';
 import {ImageUploadComponent} from '../../../shared/custom-file-upload/image-upload/image-upload.component';
 import {DomSanitizer} from '@angular/platform-browser';
 import {BranchService} from '../../../shared/service/branch.service';
-import {Branch} from '../../../shared/model/branch';
 import {BaseComponent} from '../../../core/base.component';
 import {NewsService} from '../service/news.service';
+import {MatRadioChange} from '@angular/material/radio';
+
 
 @Component({
   selector: 'aw-news-form',
   templateUrl: './news-form.component.html',
-  providers: [TagsService, BranchService]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NewsFormComponent extends BaseComponent implements OnInit, OnChanges {
   @ViewChild('fileContent', {static: true}) fileContent: ElementRef;
   callbackEvent: any;
-  yearSelect = `${new Date().getFullYear()}:${new Date().getFullYear() + 10}`;
-  min = new Date();
+  readonly yearSelect = `${new Date().getFullYear()}:${new Date().getFullYear() + 10}`;
+  readonly min = new Date();
   formNews: FormGroup;
-  tagList: TagDetail[] = [];
-  branchList: Branch[] = [];
+  @Input() groupViewList: MultiSelectItem[] = [];
   levelList: SelectItem[] = [];
   filesImage: any[];
   filesDoc: any[] = [];
   // update mode
   fileDocPreview: any = '';
+  fileDocDisplay = '';
   isChangeImage = false;
   isChangeDoc = false;
-  tinyMceInit = {
+  readonly tinyMceInit = {
     base_url: '/tinymce',
     suffix: '.min',
     height: 500,
@@ -56,12 +67,15 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
       this.fileContent.nativeElement.click();
     }
   };
+  newsConst = NewsEnum;
   @ViewChild(ImageUploadComponent, {static: true}) imgUploadComponent: ImageUploadComponent;
   @Input() mode = 'create';
   @Input() valueForm: NewsDetail;
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
   @Output() save: EventEmitter<any> = new EventEmitter<any>();
   @Output() draft: EventEmitter<any> = new EventEmitter<any>();
+  @Input() groupViewState: GroupViewState = {branchList: [], roleList: [], unitList: []};
+  @Input() tagList: TagDetail[] = [];
   constructor(
     private fb: FormBuilder,
     private tagService: TagsService,
@@ -89,12 +103,6 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
         { label: res.veryImportant, value: NewsEnum.LEVEL_VERY_IMPORTANT }
       ];
     });
-    const obsTag = this.tagService.getAllTagNews();
-    const obsRole = this.branchService.getBranchList();
-    forkJoin([obsTag, obsRole]).subscribe(res => {
-      this.tagList = res[0];
-      this.branchList = res[1];
-    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -109,9 +117,11 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
             this.imgUploadComponent.previewAsUrl(`${environment.mediaUrl}${news.newsDto.image}`);
           }
           if (news.newsDto?.filePath) {
+            this.fileDocDisplay = news.newsDto.fileName;
             this.fileDocPreview = this.sanitizer.bypassSecurityTrustUrl(`${environment.mediaUrl}${news.newsDto.filePath}`);
           }
         }
+
         this.formNews.setValue({
           id: news.newsDto.id,
           title: news.newsDto.title,
@@ -120,16 +130,34 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
           tags: news.tagOfNews ? news.tagOfNews.map(tags => {
             return { id: tags.idTag };
           }) : [],
-          branch: news.listBranch ? news.listBranch.map(branch => {
-            return { id: branch.id, code: branch.code };
-          }) : [],
           publishDate: new Date(news.newsDto.publishTime),
           level: news.newsDto.priority,
           docs: news.newsDto.filePath,
           image: news.newsDto.image,
-          isSendNotification: false
+          isSendNotification: false,
+          groupViewType: news.newsDto.userViewType,
+          groupViewValue: news.newsDto.groupViewValue
         });
       }
+    }
+  }
+
+  doChangeGroupView(event: MatRadioChange) {
+    this.formNews.patchValue({
+      groupViewValue: []
+    });
+    switch (event.value) {
+      case NewsEnum.GROUP_VIEW_BRANCH:
+        this.groupViewList = this.groupViewState.branchList;
+        break;
+      case NewsEnum.GROUP_VIEW_ROLE:
+        this.groupViewList = this.groupViewState.roleList;
+        break;
+      case NewsEnum.GROUP_VIEW_UNIT:
+        this.groupViewList = this.groupViewState.unitList;
+        break;
+      default:
+        break;
     }
   }
 
@@ -226,12 +254,13 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
       shortContent: ['', [Validators.maxLength(400)]],
       content: ['', [Validators.required]],
       tags: [null, [Validators.required]],
-      branch: [null, [Validators.required]],
       publishDate: [now],
       level: [NewsEnum.LEVEL_NORMAL, [Validators.required]],
       docs: [''],
       image: [''],
-      isSendNotification: [false]
+      isSendNotification: [false],
+      groupViewType: [NewsEnum.GROUP_VIEW_BRANCH],
+      groupViewValue: ['', Validators.required]
     }, { validators: this.publishDateMatcher, updateOn: 'change' });
   }
 

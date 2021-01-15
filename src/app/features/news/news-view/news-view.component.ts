@@ -12,8 +12,7 @@ import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'aw-news-view',
-  templateUrl: './news-view.component.html',
-  styles: []
+  templateUrl: './news-view.component.html'
 })
 export class NewsViewComponent extends BaseComponent implements OnInit {
   newsDetail: NewsDetail = {};
