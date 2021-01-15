@@ -2,9 +2,15 @@
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
       <label for="n-user-id">{{'user.userName' | translate}} <span class="p-invalid">*</span></label>
-      <input pInputText id="n-user-id" formControlName="userId"/>
+      <input awAutoUppercase pInputText id="n-user-id" formControlName="userId"/>
       <small *ngIf="hasErrorInput('userId', 'required')" class="p-invalid">
         {{'invalid.userId.required' | translate}}
+      </small>
+      <small *ngIf="hasErrorInput('userId', 'pattern')" class="p-invalid">
+        {{'invalid.userId.pattern' | translate}}
+      </small>
+      <small *ngIf="hasErrorInput('userId', 'maxlength')" class="p-invalid">
+        {{'invalid.userId.maxLength' | translate: {length: 100} }}
       </small>
     </div>
 
@@ -99,7 +105,7 @@
           <div class="tag-item">{{role.name}}</div>
         </ng-template>
       </p-pickList>
-      <small *ngIf="hasErrorInput('role', 'required')" class="p-invalid">
+      <small *ngIf="hasErrorInput('role', 'required')" class="p-invalid" style="float: right;">
         {{'invalid.role.required' | translate}}
       </small>
     </div>

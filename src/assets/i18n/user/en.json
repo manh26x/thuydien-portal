@@ -63,6 +63,7 @@
 		},
 		"userId": {
 			"maxLength": "The value must not exceed {{length}} characters",
+			"pattern": "Invalid input value: A-Z 0-9 \".\"",
 			"required": "Value cannot be blank"
 		}
 	},
@@ -106,5 +107,7 @@
 		"tagTool": "Tags for calculation tool",
 		"unit": "Unit",
 		"userName": "Username"
-	}
+	},
+	"viewLess": "[View less]",
+	"viewMore": "[View more]"
 }

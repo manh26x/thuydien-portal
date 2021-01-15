@@ -241,7 +241,7 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
 
   initForm() {
     this.roleForm = this.fb.group({
-      code: ['', [Validators.required, Validators.maxLength(100)]],
+      code: ['', [Validators.required, Validators.maxLength(100), Validators.pattern(/^\w*$/)]],
       status: [{ value: RoleEnum.STATUS_ACTIVE, disabled: true }, [Validators.required]],
       name: ['', [Validators.required, Validators.maxLength(500)]],
       desc: ['', [Validators.required, Validators.maxLength(1000)]],
