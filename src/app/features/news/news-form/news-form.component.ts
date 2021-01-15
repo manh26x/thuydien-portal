@@ -261,7 +261,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
       isSendNotification: [false],
       groupViewType: [NewsEnum.GROUP_VIEW_BRANCH],
       groupViewValue: ['', Validators.required]
-    }, { validators: this.publishDateMatcher, updateOn: 'change' });
+    }, { validators: this.publishDateMatcher });
   }
 
   toDayClick(evt: Date) {
