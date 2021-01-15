@@ -19,6 +19,7 @@ import {PageChangeEvent} from '../../../shared/model/page-change-event';
 import {RoleService} from '../../../shared/service/role.service';
 import {Role, RoleEnum} from '../../../shared/model/role';
 import {FeatureEnum} from '../../../shared/model/feature.enum';
+import {UtilService} from '../../../core/service/util.service';
 
 @Component({
   selector: 'aw-user-data',
@@ -43,6 +44,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   isHasExport = false;
   isHasEdit = false;
   isHasDel = false;
+  maxShowBranchInit = 3;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -54,7 +56,8 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     private confirmationService: ConfirmationService,
     private auth: AuthService,
     private dialogService: DialogService,
-    private roleService: RoleService
+    private roleService: RoleService,
+    private util: UtilService
   ) {
     super();
     this.isHasInsert = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_INSERT);
@@ -122,6 +125,11 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     }
   }
 
+  doFilterUser() {
+    this.page = 0;
+    this.getUserList();
+  }
+
   lazyLoadUser(evt: LazyLoadEvent) {
     this.sortBy = evt.sortField;
     this.sortOrder = evt.sortOrder === 1 ? 'ASC' : 'DESC';
@@ -148,6 +156,14 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     this.userService.filterUser(request).pipe(
       delay(300),
       takeUntil(this.nextOnDestroy),
+      map(res => {
+        if (this.util.canForEach(res.listUser)) {
+          res.listUser.forEach(item => {
+            item.maxShowBranch = this.maxShowBranchInit;
+          });
+        }
+        return res;
+      }),
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe(res => {
       this.userList = res.listUser;

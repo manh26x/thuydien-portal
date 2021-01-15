@@ -42,6 +42,7 @@
 	"filter": "Filter the results",
 	"invalid": {
 		"maxLength": "The value must not exceed {{length}} characters",
+		"pattern": "Input value is not valid",
 		"required": "Value cannot be blank",
 		"requiredFeature": "Please assign functions to the role",
 		"requiredTag": "Please assign tag the role"

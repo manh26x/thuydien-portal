@@ -68,6 +68,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
     }
   };
   newsConst = NewsEnum;
+  isDisableDraft = false;
   @ViewChild(ImageUploadComponent, {static: true}) imgUploadComponent: ImageUploadComponent;
   @Input() mode = 'create';
   @Input() valueForm: NewsDetail;
@@ -111,6 +112,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
         const news: NewsDetail = changes.valueForm.currentValue;
         if (this.mode === 'update') {
           if (news.newsDto.status === NewsEnum.STATUS_PUBLISHED) {
+            this.isDisableDraft = true;
             this.formNews.get('publishDate').disable();
           }
           if (news.newsDto?.image) {

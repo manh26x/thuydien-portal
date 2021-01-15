@@ -37,6 +37,7 @@
 		},
 		"code": {
 			"maxLength": "Tên tag không được vượt quá {{length}} ký tự",
+			"pattern": "Giá trị nhập không hơpj lệ",
 			"required": "Giá trị không được để trống"
 		},
 		"name": {

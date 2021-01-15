@@ -33,6 +33,7 @@ import {PickListModule} from 'primeng/picklist';
 import {CustomFileUploadModule} from '../../shared/custom-file-upload/custom-file-upload.module';
 import { DialogPreviewComponent } from './dialog-preview/dialog-preview.component';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import {SharedModule} from '../../shared/shared.module';
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
         TooltipModule,
         PickListModule,
         CustomFileUploadModule,
-        DynamicDialogModule
+        DynamicDialogModule,
+        SharedModule
     ],
   providers: [
     UserService,

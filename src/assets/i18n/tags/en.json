@@ -37,6 +37,7 @@
 		},
 		"code": {
 			"maxLength": "The tag name must not exceed {{length}} characters",
+			"pattern": "The entered value is not valid",
 			"required": "Value cannot be blank"
 		},
 		"name": {
@@ -68,6 +69,6 @@
 		"status": "Status",
 		"type": "Tag type"
 	},
-	"viewLess": "[See less]",
-	"viewMore": "[See more]"
+	"viewLess": "[View less]",
+	"viewMore": "[View more]"
 }

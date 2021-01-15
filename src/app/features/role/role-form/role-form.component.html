@@ -9,6 +9,9 @@
       <small *ngIf="hasErrorInput('code', 'maxlength')" class="p-invalid">
         {{ 'invalid.maxLength' | translate:{length: 100} }}
       </small>
+      <small *ngIf="hasErrorInput('code', 'pattern')" class="p-invalid">
+        {{'invalid.pattern' | translate}}
+      </small>
     </div>
 
     <div class="p-md-6 p-col-12 p-field">

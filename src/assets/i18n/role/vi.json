@@ -42,6 +42,7 @@
 	"filter": "Lọc kết quả",
 	"invalid": {
 		"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+		"pattern": "Giá trị nhập không hợp lệ",
 		"required": "Giá trị không được để trống",
 		"requiredFeature": "Vui lòng gán chức năng cho role",
 		"requiredTag": "Vui lòng gán tag cho role"

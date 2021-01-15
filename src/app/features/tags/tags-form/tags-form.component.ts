@@ -102,7 +102,7 @@ export class TagsFormComponent extends BaseComponent implements OnInit, OnChange
   initForm() {
     this.formTags = this.fb.group({
       id: [],
-      code: ['', [Validators.required, Validators.maxLength(50)]],
+      code: ['', [Validators.required, Validators.maxLength(50), Validators.pattern(/^\w*$/)]],
       name: ['', [Validators.required, Validators.maxLength(this.nameMaxLength)]],
       type: [null, [Validators.required]],
       assign: [null],

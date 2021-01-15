@@ -63,6 +63,7 @@
 		},
 		"userId": {
 			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+			"pattern": "Giá trị nhập không hợp lệ: A-Z 0-9 \".\"",
 			"required": "Giá trị không được để trống"
 		}
 	},
@@ -106,5 +107,7 @@
 		"tagTool": "Tags cho công cụ tính toán",
 		"unit": "Đơn vị",
 		"userName": "Tên đăng nhập"
-	}
+	},
+	"viewLess": "[Ẩn bớt]",
+	"viewMore": "[Xem thêm]"
 }

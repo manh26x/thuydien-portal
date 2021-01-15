@@ -23,7 +23,7 @@
         <div class="p-col-12">
           <div class="input-wrapper p-field p-fluid">
             <label for="password">{{'password' | translate}}</label>
-            <input type="password" id="password" autocomplete="off" pInputText formControlName="password">
+            <input type="password" id="password" autocomplete="off" pInputText formControlName="password" maxlength="100">
             <small *ngIf="hasErrorInput('password', 'required')" class="p-invalid">
               {{'invalid.password' | translate}}
             </small>

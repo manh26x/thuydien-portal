@@ -49,6 +49,7 @@ export interface UserDetail {
   user?: UserInfo;
   userBranchList?: BranchUser[];
   userRoleList?: Role[];
+  maxShowBranch?: number;
 }
 
 export interface FilterUserResponse {

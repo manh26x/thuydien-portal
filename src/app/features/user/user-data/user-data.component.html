@@ -21,8 +21,8 @@
   </ng-template>
   <form class="p-grid p-fluid p-mb-3" [formGroup]="searchForm">
     <div class="p-lg-6 p-col-6 p-field">
-      <label for="s-value">{{'user.fullName' | translate}}, {{'user.position' | translate}}</label>
-      <input (keyup.enter)="getUserList()" type="text" id="s-value" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
+      <label for="s-value">{{'user.fullName' | translate}}, {{'user.position' | translate}}, {{'user.branch' | translate}}</label>
+      <input (keyup.enter)="doFilterUser()" type="text" id="s-value" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
     </div>
     <div class="p-lg-2 p-col-6 p-field">
       <label>{{'user.role' | translate}}</label>
@@ -33,7 +33,7 @@
       <p-dropdown [options]="statusList" optionLabel="name" dataKey="code" formControlName="status"></p-dropdown>
     </div>
     <div class="p-md-2 p-col-6 p-field p-d-flex p-align-end">
-      <button (click)="getUserList()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
+      <button (click)="doFilterUser()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
     </div>
   </form>
   <p-table [value]="userList" styleClass="table-responsive"
@@ -70,8 +70,12 @@
         </td>
         <td>{{user.user.position}}</td>
         <td>
-          <div *ngFor="let item of user.userBranchList;index as i" [ngClass]="{'p-mt-2': i != 0}">
-            <ng-container>{{item.branchName}}</ng-container>&nbsp;
+          <div *ngFor="let item of user.userBranchList | slice:0:user.maxShowBranch;index as i" [ngClass]="{'p-mt-2': i != 0}">
+            <ng-container>{{item.branchId}} - {{item.branchName}}</ng-container>&nbsp;
+          </div>
+          <div *ngIf="user.userBranchList?.length > maxShowBranchInit" class="p-mt-1">
+            <a *ngIf="user.maxShowBranch != user.userBranchList.length; else showLessAss" (click)="user.maxShowBranch = user.userBranchList.length" href="javascript:void('view more');">{{'viewMore' | translate}}</a>
+            <ng-template #showLessAss><a (click)="user.maxShowBranch = maxShowBranchInit" href="javascript:void('view less');">{{'viewLess' | translate}}</a></ng-template>
           </div>
         </td>
         <td>
