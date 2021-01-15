@@ -44,7 +44,7 @@
         <th style="width: 150px;">{{'news.tags' | translate}}</th>
         <th pSortableColumn="priority">{{'news.level' | translate}} <p-sortIcon field="priority"></p-sortIcon></th>
         <th>
-          <button pButton type="button" label="{{'btn.insert' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined" (click)="gotoCreate()"></button>
+          <button *ngIf="isHasInsert" pButton type="button" label="{{'btn.insert' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined" (click)="gotoCreate()"></button>
         </th>
       </tr>
     </ng-template>
@@ -88,12 +88,12 @@
         </td>
         <td>
           <button (click)="gotoView(news.id)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
-          <button *ngIf="userLogged.isSupperAdmin || userLogged.userName == news.createBy" (click)="gotoUpdate(news.id)" pButton
+          <button *ngIf="isHasEdit" (click)="gotoUpdate(news.id)" pButton
                   type="button"
                   icon="pi pi-pencil"
                   class="p-button-rounded p-button-secondary p-button-text">
           </button>
-          <button *ngIf="userLogged.isSupperAdmin || userLogged.userName == news.createBy" (click)="doDelete(news)" pButton
+          <button *ngIf="isHasDel" (click)="doDelete(news)" pButton
                   type="button"
                   icon="pi pi-trash"
                   class="p-button-rounded p-button-danger p-button-text">
