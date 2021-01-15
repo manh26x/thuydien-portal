@@ -148,7 +148,7 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
     const tagSearch: number[] = [];
     if (this.util.canForEach(filterValue.tags)) {
       filterValue.tags.forEach(x => {
-        tagSearch.push(x.tagId);
+        tagSearch.push(x.id);
       });
     }
     this.indicator.showActivityIndicator();
