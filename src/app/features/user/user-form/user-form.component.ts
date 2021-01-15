@@ -113,7 +113,7 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
       tagKpi: [],
       unit: ['', [Validators.required]],
       department: ['', [Validators.required]]
-    }, { updateOn: 'change' });
+    });
   }
 
   hasErrorInput(controlName: string, errorName: string): boolean {
