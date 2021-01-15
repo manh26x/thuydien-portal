@@ -20,9 +20,7 @@ import {UserAuth} from '../../../auth/model/user-auth';
 
 @Component({
   selector: 'aw-news-data',
-  templateUrl: './news-data.component.html',
-  styles: [],
-  providers: [TagsService]
+  templateUrl: './news-data.component.html'
 })
 export class NewsDataComponent extends BaseComponent implements OnInit {
   // filter

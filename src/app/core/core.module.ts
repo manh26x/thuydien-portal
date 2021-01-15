@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {CustomTranslateLoader, LANGUAGE_FILE_PATH} from './translate.loader';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {ResponseInterceptor} from './response.interceptor';
 import {RequestInterceptor} from './request.interceptor';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
@@ -51,7 +51,7 @@ import {AppTranslateService} from './service/translate.service';
   ],
   exports: [
     HttpClientModule,
-    BrowserAnimationsModule,
+    NoopAnimationsModule,
     ConfirmDialogModule
   ],
 })

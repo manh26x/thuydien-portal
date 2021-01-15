@@ -1,3 +1,9 @@
 <p-panel header="{{'create' | translate}}">
-  <aw-news-form (cancel)="doCancel()" (save)="doSave($event, false)" (draft)="doSave($event, true)"></aw-news-form>
+  <aw-news-form
+    [groupViewState]="groupViewState"
+    [tagList]="tagList"
+    [groupViewList]="groupViewList"
+    (cancel)="doCancel()"
+    (save)="doSave($event, false)"
+    (draft)="doSave($event, true)"></aw-news-form>
 </p-panel>

@@ -14,7 +14,7 @@
         </div>
         <div class="p-col-12 p-field">
           <label for="n-short-content">{{'news.shortContent' | translate}}</label>
-          <input formControlName="shortContent" id="n-short-content" type="text" pInputText />
+          <textarea formControlName="shortContent" id="n-short-content" type="text" pInputTextarea [rows]="3" style="resize: vertical;"></textarea>
           <small *ngIf="hasErrorInput('shortContent', 'maxlength')" class="p-invalid">
             {{ 'invalid.shortContent.maxLength' | translate:{length: 400} }}
           </small>
@@ -43,22 +43,31 @@
         </div>
 
         <div class="p-col-12 p-field">
-          <label for="n-group-customer">{{'news.branch' | translate}} <span class="p-invalid">*</span></label>
+          <label for="n-group-customer">{{'news.groupView' | translate}} <span class="p-invalid">*</span></label>
+          <div class="p-mb-3">
+            <mat-radio-group aria-label="Select group view" (change)="doChangeGroupView($event)" formControlName="groupViewType">
+              <mat-radio-button color="primary" [value]="newsConst.GROUP_VIEW_BRANCH">{{'news.branch' | translate}}</mat-radio-button>
+              <span class="p-mr-4"></span>
+              <mat-radio-button color="primary" [value]="newsConst.GROUP_VIEW_UNIT">{{'news.unit' | translate}}</mat-radio-button>
+              <span class="p-mr-4"></span>
+              <mat-radio-button color="primary" [value]="newsConst.GROUP_VIEW_ROLE">{{'news.role' | translate}}</mat-radio-button>
+            </mat-radio-group>
+          </div>
           <p-multiSelect
             [showToggleAll]="true"
             [filter]="true"
             filterBy="label,value.code"
-            formControlName="branch"
+            formControlName="groupViewValue"
             inputId="n-group-customer"
-            [options]="branchList"
+            [options]="groupViewList"
             optionLabel="name"
             dataKey="id">
-            <ng-template let-branch pTemplate="item">
-              <div>{{branch.value.code}} - {{branch.value.name}}</div>
+            <ng-template let-item pTemplate="item">
+              <div>{{item.value.code}} {{item.value.name}}</div>
             </ng-template>
           </p-multiSelect>
-          <small *ngIf="hasErrorInput('branch', 'required')" class="p-invalid">
-            {{'invalid.branch.required' | translate}}
+          <small *ngIf="hasErrorInput('groupViewValue', 'required')" class="p-invalid">
+            {{'invalid.groupViewValue.required' | translate}}
           </small>
         </div>
 
@@ -114,7 +123,7 @@
             </ng-template>
           </p-fileUpload>
           <div *ngIf="mode == 'update' && !isChangeDoc && formNews.value.docs" class="p-d-flex p-mt-1 p-jc-between">
-            <a target="_blank" [href]="fileDocPreview">{{formNews.value.docs}}</a>
+            <a target="_blank" [href]="fileDocPreview">{{fileDocDisplay}}</a>
             <p-button label="" icon="pi pi-times" styleClass="p-button-sm p-button-danger" (click)="doClearImagePreview()"></p-button>
           </div>
         </div>

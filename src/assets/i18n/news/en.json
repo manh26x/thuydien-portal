@@ -36,9 +36,6 @@
 	"edit": "Edit news ",
 	"filter": "Filter",
 	"invalid": {
-		"branch": {
-			"required": "Value cannot be blank"
-		},
 		"content": {
 			"required": "Value cannot be blank"
 		},
@@ -46,6 +43,9 @@
 			"limit": "The number of files exceeded the allowed limit",
 			"type": "The file is not in PDF format",
 			"zize": "Uploaded file exceeds the allowed size of 5MB"
+		},
+		"groupViewValue": {
+			"required": "Value cannot be blank"
 		},
 		"publishDate": {
 			"mustAfterNow": "The posting time must be greater than the current time"
@@ -89,10 +89,12 @@
 		"level": "Critical level",
 		"name": "News name",
 		"publishDate": "Post time",
+		"role": "Role",
 		"shortContent": "Short content ",
 		"status": "Status",
 		"tags": "Tags",
-		"title": "Title"
+		"title": "Title",
+		"unit": "Unit"
 	},
 	"no": "No.",
 	"noData": "No results match",

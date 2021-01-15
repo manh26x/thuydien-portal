@@ -34,10 +34,29 @@
         </div>
 
         <div class="p-col-12 detail">
-          <label class="title-left">{{'news.branch' | translate}}:</label>
+          <label class="title-left">{{'news.groupView' | translate}}:</label>
           <div class="title-right">
-            <ng-container *ngFor="let item of newsDetail.listBranch">
-              <li>{{item.code}} - {{item.name}}</li>
+            <ng-container [ngSwitch]="newsDetail.newsDto?.userViewType">
+              <ng-container *ngSwitchCase="newsConst.GROUP_VIEW_BRANCH">
+                <h5>{{'news.branch' | translate}}</h5>
+                <ng-container *ngFor="let item of newsDetail.listBranch">
+                  <li>{{item.code}} - {{item.name}}</li>
+                </ng-container>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="newsConst.GROUP_VIEW_ROLE">
+                <h5>{{'news.role' | translate}}</h5>
+                <ng-container *ngFor="let item of newsDetail.listRole">
+                  <li>{{item.name}}</li>
+                </ng-container>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="newsConst.GROUP_VIEW_UNIT">
+                <h5>{{'news.unit' | translate}}</h5>
+                <ng-container *ngFor="let item of newsDetail.listUnit">
+                  <li>{{item.name}}</li>
+                </ng-container>
+              </ng-container>
             </ng-container>
           </div>
         </div>
@@ -61,7 +80,7 @@
         <div class="p-col-12 detail">
           <label class="title-left">{{'news.docs' | translate}}:</label>
           <div class="title-right">
-            <a target="_blank" [href]="trustUrlDoc">{{newsDetail.newsDto?.filePath}}</a>
+            <a target="_blank" [href]="trustUrlDoc">{{newsDetail.newsDto?.fileName}}</a>
           </div>
         </div>
 

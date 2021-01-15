@@ -36,9 +36,6 @@
 	"edit": "Chỉnh sửa bản tin",
 	"filter": "Lọc kết quả",
 	"invalid": {
-		"branch": {
-			"required": "Giá trị không được để trống"
-		},
 		"content": {
 			"required": "Giá trị không được để trống"
 		},
@@ -46,6 +43,9 @@
 			"limit": "Số lượng file vượt quá giới hạn cho phép",
 			"type": "Tệp tin không đúng định dạng PDF",
 			"zize": "Tệp tải lên vượt quá dung lượng cho phép 5MB"
+		},
+		"groupViewValue": {
+			"required": "Giá trị không được để trống"
 		},
 		"publishDate": {
 			"mustAfterNow": "Thời gian đăng bắt buộc phải lớn hơn thời gian hiện tại"
@@ -89,10 +89,12 @@
 		"level": "Mức độ quan trọng",
 		"name": "Tên bản tin",
 		"publishDate": "Thời gian đăng",
+		"role": "Role",
 		"shortContent": "Nội dung tóm tắt",
 		"status": "Trạng thái",
 		"tags": "Tags",
-		"title": "Tiêu đề"
+		"title": "Tiêu đề",
+		"unit": "Đơn vị"
 	},
 	"no": "STT",
 	"noData": "Không có kết quả nào phù hợp",
