@@ -64,7 +64,7 @@
 	"tags": {
 		"assignTo": "Assign to",
 		"code": "Tag code",
-		"id": "Tag ID",
+		"id": "Tag code",
 		"name": "Tag title",
 		"status": "Status",
 		"type": "Tag type"

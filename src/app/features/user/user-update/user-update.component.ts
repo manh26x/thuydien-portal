@@ -116,7 +116,7 @@ export class UserUpdateComponent extends BaseComponent implements OnInit {
     ).subscribe(res => {
       this.messageService.add({
         severity: 'success',
-        detail: this.translate.instant('message.insertSuccess')
+        detail: this.translate.instant('message.updateSuccess')
       });
       this.router.navigate(['user']);
     }, err => {

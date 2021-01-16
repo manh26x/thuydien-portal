@@ -64,7 +64,7 @@
 	"tags": {
 		"assignTo": "Gán cho",
 		"code": "Mã tag",
-		"id": "Tag ID",
+		"id": "Mã Tag",
 		"name": "Tên tag",
 		"status": "Trạng thái",
 		"type": "Loại Tag"
