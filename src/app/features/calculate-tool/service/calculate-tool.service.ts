@@ -19,7 +19,7 @@ export class CalculateToolService extends BaseService{
   }
 
   getToolList(request: SearchToolRequest): Observable<CalculateTool[]> {
-    return this.doPost('/saleskit/tools/list', request).pipe(
+    return this.doPost('/saleskit/tools/portalList', request).pipe(
       map(res => res.data || [])
     );
   }
