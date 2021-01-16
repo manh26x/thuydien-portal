@@ -107,7 +107,7 @@ export class TagsFormComponent extends BaseComponent implements OnInit, OnChange
       type: [null, [Validators.required]],
       assign: [null],
       status: [{value: TagsEnum.STATUS_ACTIVE, disabled: true}]
-    });
+    }, { updateOn: 'blur' });
   }
 
   hasErrorInput(controlName: string, errorName: string): boolean {

@@ -13,6 +13,7 @@ import {ButtonModule} from 'primeng/button';
 import {MenuModule} from 'primeng/menu';
 import {IndicatorModule} from '../shared/indicator/indicator.module';
 import {RoleService} from '../shared/service/role.service';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
 
@@ -27,7 +28,8 @@ import {RoleService} from '../shared/service/role.service';
     RippleModule,
     ButtonModule,
     MenuModule,
-    IndicatorModule
+    IndicatorModule,
+    MatProgressBarModule
   ],
   providers: [
     MenuService,

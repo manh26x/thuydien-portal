@@ -247,7 +247,7 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
       desc: ['', [Validators.required, Validators.maxLength(1000)]],
       isAdminPortal: [false],
       isMobileApp: [false]
-    }, { validators: this.roleService.clientMatcher });
+    }, { validators: this.roleService.clientMatcher, updateOn: 'blur' });
   }
 
   @HostListener('window:beforeunload')
