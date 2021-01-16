@@ -8,9 +8,10 @@ export class AutoUppercaseDirective {
   constructor(private element: ElementRef) { }
 
   @HostListener('input', ['$event']) onInput() {
-    const value = this.element.nativeElement.value;
+    const value: string = this.element.nativeElement.value;
     if (!value) { return ''; }
-    this.element.nativeElement.value = value.toUpperCase();
+    const rmSpace = value.replace(/\s/g, '');
+    this.element.nativeElement.value = rmSpace.toUpperCase();
   }
 
 }

@@ -318,7 +318,7 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
       desc: ['', [Validators.required, Validators.maxLength(1000)]],
       isAdminPortal: [false],
       isMobileApp: [false]
-    });
+    }, { updateOn: 'blur' });
   }
 
   @HostListener('window:beforeunload')
