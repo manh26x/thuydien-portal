@@ -2,7 +2,7 @@
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
       <label for="r-code">{{'role.code' | translate}} <span class="p-invalid">*</span></label>
-      <input awAutoUppercase id="r-code" type="text" pInputText formControlName="code" />
+      <input awAutoUppercase (keydown.space)="$event.preventDefault()" id="r-code" type="text" pInputText formControlName="code" />
       <small *ngIf="hasErrorInput('code', 'required')" class="p-invalid">
         {{'invalid.required' | translate}}
       </small>
