@@ -72,7 +72,7 @@
 		"deleteNotFound": "User không tồn tại hoặc đã bị xóa",
 		"deleteSuccess": "Xóa user thành công",
 		"importSuccess": "Import tài khoản thành công",
-		"insertExisted": "Tên đăng nhập đã được sử dụng",
+		"insertExisted": "Người dùng đã tồn tại. Thêm mới thất bại.",
 		"insertSuccess": "Thêm mới tài khoản thành công",
 		"passwordNotMatch": "Mật khẩu hiện tại không đúng",
 		"updateNotFound": "User không tồn tại hoặc đã bị xóa",

@@ -72,7 +72,7 @@
 		"deleteNotFound": "User does not exist or has been deleted",
 		"deleteSuccess": "Delete user successfully",
 		"importSuccess": "Import user success",
-		"insertExisted": "Username is already taken",
+		"insertExisted": "User already exists. New addition failed.",
 		"insertSuccess": "Add new account successfully",
 		"passwordNotMatch": "The current password is incorrect",
 		"updateNotFound": "User does not exist or has been deleted",
