@@ -99,7 +99,7 @@ export class UserCreateComponent implements OnInit, BeforeLeave {
     ).subscribe(res => {
       this.messageService.add({
         severity: 'success',
-        detail: this.translate.instant('message.updateSuccess')
+        detail: this.translate.instant('message.insertSuccess')
       });
       this.isLeave = true;
       this.router.navigate(['user']);
