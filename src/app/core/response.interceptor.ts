@@ -5,9 +5,9 @@ import {
   HttpEvent,
   HttpInterceptor, HttpResponse, HttpErrorResponse
 } from '@angular/common/http';
-import {Observable, of, throwError} from 'rxjs';
+import {iif, Observable, of, Subject, throwError} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {catchError, finalize, tap} from 'rxjs/operators';
+import {catchError, finalize, switchMap, tap} from 'rxjs/operators';
 import {
   ApiErrorArgsInvalid,
   ApiErrorForbidden,
@@ -16,6 +16,7 @@ import {
   ApiErrorTokenInvalid
 } from './model/error-response';
 import { attempt, isError } from 'lodash-es';
+import {AuthService} from '../auth/auth.service';
 
 @Injectable()
 export class ResponseInterceptor implements HttpInterceptor {
@@ -28,7 +29,8 @@ export class ResponseInterceptor implements HttpInterceptor {
     , '/tags/getInfoTag'
     , '/role/detail'
   ];
-  constructor() {}
+  private refreshSubject: Subject<any> = new Subject<any>();
+  constructor(private auth: AuthService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const started = Date.now();
@@ -41,8 +43,23 @@ export class ResponseInterceptor implements HttpInterceptor {
       }),
       catchError((err: any) => {
         httpStatus = 'FAIL';
-        const error = this.handleError(err, request);
-        return throwError(error);
+        if (err instanceof HttpErrorResponse && err.status === 401) {
+          return iif(
+            () => this.auth.getRefreshToken() !== '',
+            this.ifTokenExpired().pipe(
+              switchMap(() => {
+                return next.handle(this.updateHeader(request));
+              }),
+              catchError(_ => {
+                throw new ApiErrorTokenInvalid('tokenInvalid', 'Token expired or invalid');
+              })
+            ),
+            throwError(new ApiErrorTokenInvalid('tokenInvalid', 'Token expired or invalid'))
+          );
+        } else {
+          const error = this.handleError(err, request);
+          return throwError(error);
+        }
       }),
       finalize(() => {
         if (!environment.production) {
@@ -139,5 +156,30 @@ export class ResponseInterceptor implements HttpInterceptor {
 
   private getMessageTrace(req: HttpRequest<any>, status: string, elapsed: number) {
     return `${req.method} "${req.urlWithParams}" ${status} in ${elapsed} ms.`;
+  }
+
+  private ifTokenExpired() {
+    this.refreshSubject.subscribe({
+      next: res => {
+        this.auth.setToken(res.access_token, res.expires_in);
+        this.auth.setRefreshToken(res.refresh_token);
+      },
+      complete: () => {
+        this.refreshSubject = new Subject<any>();
+      }
+    });
+    if (this.refreshSubject.observers.length === 1) {
+      this.auth.refreshToken().subscribe(this.refreshSubject);
+    }
+    return this.refreshSubject;
+  }
+
+  private updateHeader(req: HttpRequest<any>) {
+    req = req.clone({
+      setHeaders: {
+        Authorization: 'Bearer ' + this.auth.getToken()
+      }
+    });
+    return req;
   }
 }

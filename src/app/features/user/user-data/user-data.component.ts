@@ -77,7 +77,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       concatMap(() => this.translate.get('const').pipe(
         map(res => res)
       )),
-      switchMap(lang => this.roleService.getRoleList('', RoleEnum.STATUS_ACTIVE).pipe(
+      switchMap(lang => this.roleService.getRoleActive().pipe(
         map((roles) => ({ resLang: lang, resRole: roles }))
       ))
     ).subscribe(res => {
