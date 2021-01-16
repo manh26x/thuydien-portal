@@ -104,15 +104,10 @@ export class UserCreateComponent implements OnInit, BeforeLeave {
       this.isLeave = true;
       this.router.navigate(['user']);
     }, err => {
-      if (err instanceof ApiErrorResponse && err.code === '201') {
+      if (err instanceof ApiErrorResponse && err.code === '202') {
         this.messageService.add({
           severity: 'error',
-          detail: this.translate.instant('message.updateNotFound')
-        });
-      } else if (err instanceof ApiErrorResponse && err.code === '205') {
-        this.messageService.add({
-          severity: 'error',
-          detail: this.translate.instant('message.updateNotPermission')
+          detail: this.translate.instant('message.insertExisted')
         });
       } else {
         throw err;
