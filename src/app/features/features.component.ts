@@ -77,9 +77,9 @@ export class FeaturesComponent extends IndicatorComponent implements OnInit, Aft
   }
 
   loadUserInformation(): void {
-    this.toggleActivityIndicatorLoading(true);
     this.menuSubscription = this.appTranslate.languageChanged$.pipe(
       startWith(''),
+      tap(() => this.toggleActivityIndicatorLoading(true)),
       switchMap(() => this.appTranslate.getTranslationAsync('menu').pipe(
         delay(300),
         concatMap((lang) => this.roleService.getUserRole().pipe(

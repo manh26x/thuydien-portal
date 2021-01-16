@@ -64,7 +64,7 @@
       <label class="title-left">{{'user.branch' | translate}}:</label>
       <div class="title-right">
         <ng-container *ngFor="let item of userDetail.userBranchList">
-          <li>{{item.branchName}}</li>
+          <li>{{item.branchId}} - {{item.branchName}}</li>
         </ng-container>
       </div>
     </div>
