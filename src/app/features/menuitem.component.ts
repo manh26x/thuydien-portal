@@ -12,14 +12,14 @@ import {MenuService} from './menu.service';
   template: `
 		<ng-container>
 			<a [attr.href]="item.url" (click)="itemClick($event)" *ngIf="!item.routerLink || item.items"
-			   (mouseenter)="onMouseEnter()" (keydown.enter)="itemClick($event)" [ngClass]="item.class"
+			   (keydown.enter)="itemClick($event)" [ngClass]="item.class"
 			   [attr.target]="item.target" [attr.tabindex]="0" pRipple>
 				<i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
 				<span>{{item.label}}</span>
 				<i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
 				<span class="menuitem-badge" *ngIf="item.badge">{{item.badge}}</span>
 			</a>
-			<a (click)="itemClick($event)" (mouseenter)="onMouseEnter()" *ngIf="item.routerLink && !item.items"
+			<a (click)="itemClick($event)" *ngIf="item.routerLink && !item.items"
 			   [routerLink]="item.routerLink" routerLinkActive="active-menuitem-routerlink" [ngClass]="item.class"
 			   [routerLinkActiveOptions]="{exact: true}" [attr.target]="item.target" [attr.tabindex]="0" pRipple>
 				<i [ngClass]="item.icon" class="layout-menuitem-icon"></i>
@@ -59,8 +59,7 @@ import {MenuService} from './menu.service';
       transition('void => visibleAnimated, visibleAnimated => void',
         animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
     ])
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class MenuitemComponent implements OnInit, OnDestroy {
   @HostBinding('class.active-menuitem') active = false;
@@ -101,7 +100,9 @@ export class MenuitemComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.updateActiveStateFromRoute();
+    if (this.item.routerLink) {
+      this.updateActiveStateFromRoute();
+    }
     this.key = this.parentKey ? this.parentKey + '-' + this.index : String(this.index);
   }
 
@@ -131,10 +132,6 @@ export class MenuitemComponent implements OnInit, OnDestroy {
       // activate item
       this.active = true;
     }
-  }
-
-  onMouseEnter() {
-
   }
 
   ngOnDestroy() {
