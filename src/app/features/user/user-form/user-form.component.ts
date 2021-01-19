@@ -54,7 +54,7 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
     this.appTranslate.languageChanged$.pipe(
       takeUntil(this.nextOnDestroy),
       startWith(''),
-      concatMap(() => this.translate.get('const').pipe(res => res))
+      concatMap(() => this.translate.get('const'))
     ).subscribe(res => {
       this.statusList = [
         {code: UserEnum.ACTIVE, name: res.active},

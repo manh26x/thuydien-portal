@@ -59,9 +59,7 @@ export class TagsDataComponent extends BaseComponent implements OnInit {
     this.appTranslate.languageChanged$.pipe(
       takeUntil(this.nextOnDestroy),
       startWith(''),
-      concatMap(() => this.translate.get('const').pipe(
-        res => res
-      ))
+      concatMap(() => this.translate.get('const'))
     ).subscribe(res => {
       this.tagsType = [
         { name: res.news, code: TagsEnum.NEWS },

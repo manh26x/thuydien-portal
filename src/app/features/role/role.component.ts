@@ -28,9 +28,7 @@ export class RoleComponent extends BaseComponent implements AfterViewInit {
     this.appTranslate.languageChanged$.pipe(
       takeUntil(this.nextOnDestroy),
       startWith(''),
-      concatMap(() => this.translate.get('breadcrumb').pipe(
-        res => res
-      )),
+      concatMap(() => this.translate.get('breadcrumb')),
       switchMap((resLang) => this.roleManageService.currentPage$.pipe(
         delay(100),
         map(resPage => {
