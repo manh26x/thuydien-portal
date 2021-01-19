@@ -68,6 +68,8 @@
 	"menu": {
 		"calculateTool": "Management calculation tool",
 		"home": "Home",
+		"importKpi": "Import KPI",
+		"kpi": "",
 		"news": "Sales news",
 		"qna": "Q&A management",
 		"role": "Role Management",

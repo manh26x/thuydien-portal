@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation} from '@angul
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {filter, finalize, tap} from 'rxjs/operators';
+import {concatMap, filter, finalize, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {UtilService} from '../../core/service/util.service';
 import {Message} from 'primeng/api';
@@ -54,24 +54,30 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.auth.login(this.formLogin.value)
       .pipe(
+        concatMap(auth => this.auth.checkUserPortal(auth.access_token).pipe(
+          map(res => ({ resAuth: auth, resCheckPortal: res }))
+        )),
         finalize(() => this.isLoading = false)
-      )
-      .subscribe(auth => {
-          this.auth.setToken(auth.access_token, auth.expires_in);
-          this.auth.setRefreshToken(auth.refresh_token);
-          this.gotoView();
-        },
-        err => {
+      ).subscribe((auth) => {
+        if (auth.resCheckPortal.message.code === '401') {
           this.msgInvalid = [];
-          if (err instanceof ApiErrorGetUserInfo) {
-            this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('errorGetUserInfo') });
-          } else if (err.status === 400) {
-              this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('invalid.message') });
-          } else {
-            this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('error') });
-          }
+          this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('invalid.message') });
+        } else {
+          this.auth.setToken(auth.resAuth.access_token, auth.resAuth.expires_in);
+          this.auth.setRefreshToken(auth.resAuth.refresh_token);
+          this.gotoView();
         }
-      );
+      }, (err) => {
+        this.msgInvalid = [];
+        if (err instanceof ApiErrorGetUserInfo) {
+          this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('errorGetUserInfo') });
+        } else if (err.status === 400) {
+            this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('invalid.message') });
+        } else {
+          this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('error') });
+        }
+      }
+    );
   }
 
   initForm() {

@@ -39,7 +39,7 @@ const routes: Routes = [
       },
       {
         path: 'kpi',
-        loadChildren: () => import('./tags/tags.module').then(m => m.TagsModule)
+        loadChildren: () => import('./kpi/kpi.module').then(m => m.KpiModule)
       }
     ]
   }
