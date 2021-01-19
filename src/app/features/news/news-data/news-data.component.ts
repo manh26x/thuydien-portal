@@ -66,9 +66,7 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
     this.appTranslate.languageChanged$.pipe(
       takeUntil(this.nextOnDestroy),
       startWith(''),
-      concatMap(() => this.translate.get('const').pipe(
-        res => res
-      ))
+      concatMap(() => this.translate.get('const'))
     ).subscribe(res => {
       this.statusList = [
         { label: res.all, value: -1 },

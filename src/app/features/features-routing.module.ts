@@ -36,6 +36,10 @@ const routes: Routes = [
       {
         path: 'role',
         loadChildren: () => import('./role/role.module').then(m => m.RoleModule)
+      },
+      {
+        path: 'kpi',
+        loadChildren: () => import('./tags/tags.module').then(m => m.TagsModule)
       }
     ]
   }
