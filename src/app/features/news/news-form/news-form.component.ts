@@ -65,7 +65,10 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
     file_picker_callback: (cb, value, meta) => {
       this.callbackEvent = cb;
       this.fileContent.nativeElement.click();
-    }
+    },
+    relative_urls: false,
+    remove_script_host: false,
+    convert_urls: true
   };
   newsConst = NewsEnum;
   isDisableDraft = false;
