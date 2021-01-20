@@ -68,6 +68,8 @@
 	"menu": {
 		"calculateTool": "Quản lý công cụ tính toán",
 		"home": "Trang chủ",
+		"importKpi": "Import KPI",
+		"kpi": "",
 		"news": "Bản tin bán hàng",
 		"qna": "Quản lý Q&A",
 		"role": "Quản lý role",

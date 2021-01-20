@@ -5,6 +5,7 @@ import {Language} from '../core/model/language.enum';
 import {Observable} from 'rxjs';
 import {RoleEnum} from '../shared/model/role';
 import {FeatureGroupByRole, UserAuth, UserRole} from './model/user-auth';
+import {ApiResultResponse} from '../core/model/result-response';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +61,16 @@ export class AuthService {
     return this.http.post(`${environment.baseUrl}${environment.basePath}/uaa/oauth/token`, body, {
       headers: header
     });
+  }
+
+  checkUserPortal(token: string): Observable<ApiResultResponse> {
+    const header = new HttpHeaders().append('Authorization', `Bearer ${token}`);
+    return this.http.get<ApiResultResponse>(`${environment.baseUrl}${environment.basePath}/uaa/user/checkPortalUser`, { headers: header });
+  }
+
+  checkUserActive(token: string): Observable<ApiResultResponse> {
+    const header = new HttpHeaders().append('Authorization', `Bearer ${token}`);
+    return this.http.get<ApiResultResponse>(`${environment.baseUrl}${environment.basePath}/uaa/user/checkActive`, { headers: header });
   }
 
   /**

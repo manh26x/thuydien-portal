@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'aw-kpi-import',
-  templateUrl: './kpi-import.component.html',
+  selector: 'aw-kpi-report',
+  templateUrl: './kpi-report.component.html',
   styles: [
   ]
 })
-export class KpiImportComponent implements OnInit {
+export class KpiReportComponent implements OnInit {
 
   constructor() { }
 
