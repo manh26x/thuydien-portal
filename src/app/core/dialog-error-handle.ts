@@ -63,13 +63,13 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
         break;
       }
       case ApiErrorTokenInvalid: {
-        if (!this.auth.isAuthed()) {
-          this.auth.logOut();
-          this.ngzone.run(() => {
-            // bypass form leave guard with queryParams expired is 1
-            this.router.navigate(['auth', 'login'], { queryParams: { expired: '1' } });
-          });
-        }
+        // if (!this.auth.isAuthed()) {
+        this.auth.logOut();
+        this.ngzone.run(() => {
+          // bypass form leave guard with queryParams expired is 1
+          this.router.navigate(['auth', 'login'], { queryParams: { expired: '1' } });
+        });
+        // }
         break;
       }
       case ApiErrorForbidden: {
