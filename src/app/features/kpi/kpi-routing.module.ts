@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {KpiComponent} from './kpi.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: KpiComponent,
-    children: []
+    redirectTo: 'report'
   },
   {
-    path: 'import-kpi',
+    path: 'report',
+    loadChildren: () => import('./kpi-report/kpi-report.module').then(m => m.KpiReportModule)
+  },
+  {
+    path: 'import',
     loadChildren: () => import('./kpi-import/kpi-import.module').then(m => m.KpiImportModule)
   }
 ];
