@@ -20,6 +20,7 @@ import {RoleService} from '../../../shared/service/role.service';
 import {Role, RoleEnum} from '../../../shared/model/role';
 import {FeatureEnum} from '../../../shared/model/feature.enum';
 import {UtilService} from '../../../core/service/util.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'aw-user-data',
@@ -128,6 +129,26 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   doFilterUser() {
     this.page = 0;
     this.getUserList();
+  }
+
+  doExportUser() {
+    this.indicator.showActivityIndicator();
+    const request: FilterUserRequest = {
+      keyword: this.searchForm.value.keySearch,
+      role: this.searchForm.value.role.id,
+      status: this.searchForm.value.status.code,
+      sortBy: this.sortBy,
+      sortOrder: this.sortOrder,
+      page: this.page,
+      pageSize: this.totalItem
+    };
+    this.userService.exportUser(request).pipe(
+      takeUntil(this.nextOnDestroy),
+      finalize(() => this.indicator.hideActivityIndicator())
+    ).subscribe(res => {
+      const myBlob: Blob = new Blob([res], { type: 'application/ms-excel' });
+      saveAs(myBlob, 'user_list.xlsx');
+    });
   }
 
   lazyLoadUser(evt: LazyLoadEvent) {

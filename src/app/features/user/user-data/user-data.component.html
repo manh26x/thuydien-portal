@@ -20,7 +20,7 @@
     </button>
   </ng-template>
   <form class="p-grid p-fluid p-mb-3" [formGroup]="searchForm">
-    <div class="p-lg-6 p-col-6 p-field">
+    <div class="p-lg-4 p-col-6 p-field">
       <label for="s-value">{{'user.fullName' | translate}}, {{'user.position' | translate}}, {{'user.branch' | translate}}</label>
       <input (keyup.enter)="doFilterUser()" type="text" id="s-value" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
     </div>
@@ -32,8 +32,12 @@
       <label>{{'user.status' | translate}}</label>
       <p-dropdown [options]="statusList" optionLabel="name" dataKey="code" formControlName="status"></p-dropdown>
     </div>
-    <div class="p-md-2 p-col-6 p-field p-d-flex p-align-end">
+    <div class="p-md-2 p-col-3 p-field p-d-flex p-align-end">
       <button (click)="doFilterUser()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
+    </div>
+
+    <div class="p-md-2 p-col-3 p-field p-d-flex p-align-end">
+      <button [disabled]="!isHasExport" (click)="doExportUser()" pButton type="button" label="{{'btn.export' | translate}}" style="height: 46px"></button>
     </div>
   </form>
   <p-table [value]="userList" styleClass="table-responsive"
