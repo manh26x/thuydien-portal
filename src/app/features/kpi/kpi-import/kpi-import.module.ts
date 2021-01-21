@@ -7,6 +7,9 @@ import {CustomFileUploadModule} from '../../../shared/custom-file-upload/custom-
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {TableModule} from 'primeng/table';
+import {KpiService} from '../service/kpi.service';
+import {DropdownModule} from 'primeng/dropdown';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -19,7 +22,10 @@ import {TableModule} from 'primeng/table';
     CustomFileUploadModule,
     ButtonModule,
     InputTextModule,
-    TableModule
-  ]
+    TableModule,
+    DropdownModule,
+    ReactiveFormsModule
+  ],
+  providers: [KpiService]
 })
 export class KpiImportModule { }

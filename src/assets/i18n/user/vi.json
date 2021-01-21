@@ -14,7 +14,8 @@
 		"export": "Xuất báo cáo",
 		"refresh": "Tải lại",
 		"save": "Lưu thay đổi",
-		"save2": "Lưu"
+		"save2": "Lưu",
+		"selectFile": "Chọn file"
 	},
 	"confirm": {
 		"accept": "Có",

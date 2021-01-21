@@ -27,6 +27,7 @@ export class ResponseInterceptor implements HttpInterceptor {
     , '/news/detail'
     , '/tags/getInfoTag'
     , '/role/detail'
+    , '/areaData/detail'
   ];
   constructor() {}
 

@@ -2,25 +2,37 @@
   <div class="p-grid p-fluid">
     <div class="p-col-12 p-md-6 p-field">
       <label>Loại báo cáo</label>
-      <input pInputText/>
-    </div>
-    <div class="p-col-12 p-md-6 p-field">
-      <label>File Import</label>
-      <aw-input-upload selectLabel="Tải lên"></aw-input-upload>
+      <p-dropdown [filter]="true"
+        [formControl]="reportType"
+        [options]="listTagKpi"
+        [autoDisplayFirst]="false" optionLabel="value" dataKey="keyTag">
+      </p-dropdown>
       <span class="p-mt-2 p-d-block"> Tải về tệp tin mẫu
         <a href="assets/resource/User%20TitleSalesApp_v1.xlsx" target="_blank"> Tại đây</a>
       </span>
+    </div>
+    <div class="p-col-12 p-md-6 p-field">
+      <label>File Import</label>
+      <aw-input-upload (changeFile)="doChangeFile($event)" selectLabel="Tải lên"></aw-input-upload>
     </div>
   </div>
 
   <div class="p-grid">
     <div class="p-col-12 p-md-12 p-text-center">
-      <button pButton type="button" label="Kiểm tra dữ liệu" class="p-button-secondary"></button>
+      <button (click)="doCheckFile()" pButton type="button" label="Kiểm tra dữ liệu" class="p-button-secondary"></button>
     </div>
   </div>
 </p-panel>
 <div class="p-my-3"></div>
 <p-panel header="Bảng tính KPI">
+  <div class="p-grid p-fluid p-mb-3">
+    <div class="p-md-9 p-col-8 p-field">
+      <input pInputText type="text" id="s-value"/>
+    </div>
+    <div class="p-md-3 p-col-4 p-field">
+      <button pButton type="button" label="Lọc kết quả" class="p-button-secondary" style="height: 46px"></button>
+    </div>
+  </div>
   <p-table [value]="listKpi">
     <ng-template pTemplate="header">
       <tr>

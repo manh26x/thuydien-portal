@@ -14,7 +14,8 @@
 		"export": "Export Report",
 		"refresh": "Refresh",
 		"save": "Save changes",
-		"save2": "Save"
+		"save2": "Save",
+		"selectFile": "Select file"
 	},
 	"confirm": {
 		"accept": "Yes",
