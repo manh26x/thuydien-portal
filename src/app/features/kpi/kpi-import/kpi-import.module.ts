@@ -6,6 +6,7 @@ import {PanelModule} from 'primeng/panel';
 import {CustomFileUploadModule} from '../../../shared/custom-file-upload/custom-file-upload.module';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
+import {TableModule} from 'primeng/table';
 
 
 
@@ -17,7 +18,8 @@ import {InputTextModule} from 'primeng/inputtext';
     PanelModule,
     CustomFileUploadModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    TableModule
   ]
 })
 export class KpiImportModule { }

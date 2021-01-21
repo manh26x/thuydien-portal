@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class KpiImportComponent implements OnInit {
-
+  listKpi = [{}];
   constructor() { }
 
   ngOnInit(): void {

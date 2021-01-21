@@ -34,6 +34,11 @@ export abstract class BaseService {
     });
   }
 
+  protected postDataBlob(url: string, body: any, header?: HttpHeaders, inputParams?: HttpParams): Observable<any> {
+    const requestUrl = `${this.baseUrl}${this.basePath}${url}`;
+    return this.getHttp().post<any>(requestUrl, body, { headers: header, params: inputParams, responseType: 'blob' as 'json' });
+  }
+
   protected doDelete(url: string, httpParams?: HttpParams, httpHeaders?: HttpHeaders) {
     const requestUrl = `${this.baseUrl}${this.basePath}${url}`;
     return this.getHttp().delete<ApiResultResponse>(requestUrl, { headers: httpHeaders, params: httpParams });

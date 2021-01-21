@@ -13,6 +13,10 @@ export class UserService extends BaseService{
     super();
   }
 
+  exportUser(request: FilterUserRequest): Observable<any> {
+    return this.postDataBlob('/admin/userPortal/exportUserExcel', request);
+  }
+
   batchInsert(data: PreviewUser[]): Observable<ApiResultResponse> {
     return this.doPost('/admin/userPortal/addList', data);
   }
