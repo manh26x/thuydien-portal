@@ -54,19 +54,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.auth.login(this.formLogin.value)
       .pipe(
-        concatMap(auth => this.auth.checkUserActive(auth.access_token).pipe(
-          map(res => ({ resAuth: auth, resCheckPortal: res }))
-        )),
         finalize(() => this.isLoading = false)
       ).subscribe((auth) => {
-        if (auth.resCheckPortal.message.code === '401') {
-          this.msgInvalid = [];
-          this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('invalid.message') });
-        } else {
-          this.auth.setToken(auth.resAuth.access_token, auth.resAuth.expires_in);
-          this.auth.setRefreshToken(auth.resAuth.refresh_token);
-          this.gotoView();
-        }
+        this.auth.setToken(auth.access_token, auth.expires_in);
+        this.auth.setRefreshToken(auth.refresh_token);
+        this.gotoView();
       }, (err) => {
         this.msgInvalid = [];
         if (err instanceof ApiErrorGetUserInfo) {
