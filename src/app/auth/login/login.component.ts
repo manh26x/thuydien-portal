@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.auth.login(this.formLogin.value)
       .pipe(
-        concatMap(auth => this.auth.checkUserPortal(auth.access_token).pipe(
+        concatMap(auth => this.auth.checkUserActive(auth.access_token).pipe(
           map(res => ({ resAuth: auth, resCheckPortal: res }))
         )),
         finalize(() => this.isLoading = false)
