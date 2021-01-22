@@ -4,7 +4,9 @@
       hello
     </p-tabPanel>
     <p-tabPanel header="Danh sách phân vùng dữ liệu" [selected]="true">
-      <aw-area-data [data]="areaList"></aw-area-data>
+      <aw-area-data [data]="areaList" (delete)="doDeleteArea($event)"></aw-area-data>
     </p-tabPanel>
   </p-tabView>
 </p-panel>
+<p-toast key="kpi-msg"></p-toast>
+

@@ -24,6 +24,7 @@
 	"const": {
 		"active": "Active",
 		"all": "All",
+		"delete": "Deleted",
 		"draft": "Draft",
 		"inactive": "Inactive",
 		"levelImportant": "Important",

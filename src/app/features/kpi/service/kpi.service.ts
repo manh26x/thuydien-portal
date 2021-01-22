@@ -28,6 +28,10 @@ export class KpiService extends BaseService {
     return this.doPost('/kpi/areaData/update', area);
   }
 
+  deleteArea(id: number): Observable<ApiResultResponse> {
+    return this.doPost('/kpi/areaData/delete', id);
+  }
+
   checkDataImport(file: FormData): Observable<ApiResultResponse> {
     return this.doPost('/kpi/portal/importKPI', file).pipe(
       map(res => res)
