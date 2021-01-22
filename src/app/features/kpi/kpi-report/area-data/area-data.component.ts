@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {Area} from '../../model/area';
 import {AreaEnum} from '../../model/area.enum';
@@ -10,9 +10,12 @@ import {AreaEnum} from '../../model/area.enum';
   ]
 })
 export class AreaDataComponent implements OnInit {
-  @Input() data: Area[] = [];
   areaConst = AreaEnum;
-  constructor(private router: Router) { }
+  @Input() data: Area[] = [];
+  @Output() delete: EventEmitter<any> = new EventEmitter<any>();
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +26,10 @@ export class AreaDataComponent implements OnInit {
 
   gotoUpdate(area: Area) {
     this.router.navigate(['management-kpi', 'update-area', area.id]);
+  }
+
+  doDelete(area: Area) {
+    this.delete.emit(area);
   }
 
 }
