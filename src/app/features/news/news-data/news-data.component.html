@@ -64,6 +64,9 @@
             <ng-container *ngSwitchCase="newsConst.STATUS_DRAFT">
               <div>{{'const.draft' | translate}}</div>
             </ng-container>
+            <ng-container *ngSwitchCase="newsConst.STATUS_DELETED">
+              <div class="p-invalid">{{'const.delete' | translate}}</div>
+            </ng-container>
             <ng-container *ngSwitchDefault>-</ng-container>
           </ng-container>
         </td>

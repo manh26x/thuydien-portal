@@ -72,7 +72,8 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
         { label: res.all, value: -1 },
         { label: res.publish, value: NewsEnum.STATUS_PUBLISHED },
         { label: res.pending, value: NewsEnum.STATUS_PENDING_PUBLISH },
-        { label: res.draft, value: NewsEnum.STATUS_DRAFT }
+        { label: res.draft, value: NewsEnum.STATUS_DRAFT },
+        { label: res.delete, value: NewsEnum.STATUS_DELETED }
       ];
       this.levelList = [
         { label: res.all, value: '' },
