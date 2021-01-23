@@ -31,6 +31,8 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
   tagKpiList: TagDetail[] = [];
   kpiReportList: KpiReport[] = [];
   totalReportKpi = 0;
+  isImportSuccess = false;
+  stateFilter: any;
   constructor(
     private kpiService: KpiService,
     private indicator: IndicatorService,
@@ -41,14 +43,13 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
     private componentFactoryResolver: ComponentFactoryResolver
   ) {
     super();
+    this.stateFilter = {page: 0, pageSize: 10, createDate: null, modifyDate: null, reportType: '', status: null};
   }
 
   ngOnInit(): void {
     this.indicator.showActivityIndicator();
     const obsTagKpi = this.kpiService.getTagKpi();
-    const obsKpiReport = this.kpiService.filterKpiReport({
-      page: 0, pageSize: 10, createDate: null, modifyDate: null, reportType: '', status: null
-    });
+    const obsKpiReport = this.kpiService.filterKpiReport(this.stateFilter);
     const obsArea =  this.kpiService.getAreaByStatus(AreaEnum.ALL);
     forkJoin([obsTagKpi, obsKpiReport, obsArea]).pipe(
       takeUntil(this.nextOnDestroy),
@@ -66,21 +67,28 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
     viewContainerRef.clear();
     switch (evt.index) {
       case 0: { this.kpiService.kpiReportActiveTab = 0; break; }
-      case 1: { this.kpiService.kpiReportActiveTab = 1; break; }
+      case 1: {
+        this.kpiService.kpiReportActiveTab = 1;
+        if (this.isImportSuccess) {
+          this.doFilterKpiReport(this.stateFilter);
+        }
+        break;
+      }
       case 2: { this.kpiService.kpiReportActiveTab = 2; break; }
     }
   }
 
   doFilterKpiReport(value) {
     this.indicator.showActivityIndicator();
-    this.kpiService.filterKpiReport({
+    this.stateFilter = {
       page: value.page,
       pageSize: value.pageSize,
       createDate: value.createDate,
       modifyDate: value.modifyDate,
       reportType: value.typeReport.keyTag,
       status: value.status
-    }).pipe(
+    };
+    this.kpiService.filterKpiReport(this.stateFilter).pipe(
       takeUntil(this.nextOnDestroy),
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe((res) => {
@@ -147,12 +155,14 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
         this.kpiService.saveKpiImport(res.root).pipe(
           finalize(() => this.indicator.hideActivityIndicator())
         ).subscribe((saveRes) => {
+          this.isImportSuccess = true;
           this.messageService.add({
             key: 'kpi-msg',
             severity: 'success',
             detail: 'Import KPI thành công'
           });
           viewContainerRef.clear();
+          this.kpiImport.clearForm();
         });
       });
     });

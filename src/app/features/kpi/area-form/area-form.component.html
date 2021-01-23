@@ -10,12 +10,12 @@
 
     <div class="p-md-6 p-col-12 p-field">
       <label>Màu sắc<span class="p-invalid">*</span></label>
-      <div class="p-inputgroup">
+      <div class="p-inputgroup" style="position: relative">
         <button (click)="colorPicker.click()" type="button" pButton label="" icon="pi pi-pencil"></button>
         <input #colorPicker
                type="color"
                formControlName="color"
-               style="visibility:hidden;width: 0;border-width:0;padding: 0;"/>
+               style="visibility:hidden;position: absolute;bottom: 0;"/>
         <input [disabled]="true" [value]="colorPicker.value" pInputText type="text"/>
       </div>
       <small *ngIf="hasErrorInput('color', 'required')" class="p-invalid">
