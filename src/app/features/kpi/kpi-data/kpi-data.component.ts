@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {KpiEnum} from '../model/kpi.enum';
 import {TagDetail} from '../../tags/model/tags';
 import {PageChangeEvent} from '../../../shared/model/page-change-event';
+import {Router} from '@angular/router';
+import {KpiReport} from '../model/kpi';
 
 @Component({
   selector: 'aw-kpi-data',
@@ -10,7 +12,7 @@ import {PageChangeEvent} from '../../../shared/model/page-change-event';
   styles: [
   ]
 })
-export class KpiDataComponent implements OnInit, OnChanges {
+export class KpiDataComponent implements OnInit {
   @Input() kpiList = [];
   @Input() tagKpiList: TagDetail[] = [];
   @Input() totalItem = 0;
@@ -24,17 +26,15 @@ export class KpiDataComponent implements OnInit, OnChanges {
   ];
   formFilter: FormGroup;
   kpiConst = KpiEnum;
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.initForm();
   }
 
   ngOnInit(): void {
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.tagKpiList) {
-      
-    }
+  gotoView(kpi: KpiReport) {
+    this.router.navigate(['management-kpi', 'detail', kpi.id]);
   }
 
   doFilter() {

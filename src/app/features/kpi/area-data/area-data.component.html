@@ -1,8 +1,4 @@
-<div class="p-grid">
-  <div class="p-col-12 p-text-right">
-    <p-button (click)="gotoCreate()" label="Thêm mới" icon="pi pi-plus"></p-button>
-  </div>
-</div>
+
 <p-table [value]="data">
   <ng-template pTemplate="header">
     <tr>
@@ -11,7 +7,9 @@
       <th>Màu sắc</th>
       <th>Trạng thái</th>
       <th>Độ ưu tiên</th>
-      <th>Thao tác</th>
+      <th>
+        <button (click)="gotoCreate()" pButton type="button" label="Thêm mới" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
+      </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-area let-i="rowIndex">

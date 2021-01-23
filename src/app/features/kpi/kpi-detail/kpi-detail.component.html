@@ -1,5 +1,38 @@
 <p-panel header="Thông tin báo cáo KPI">
+  <div class="split-horizontal-no-line"></div>
   <div class="p-grid">
-
+    <div class="p-md-4 p-col-12" style="border-right: 1px solid #cccccc;">
+      <h5>Loại báo cáo KPI</h5>
+      <div>RBV</div>
+    </div>
+    <div class="p-md-4 p-col-12 p-pl-md-5" style="border-right: 1px solid #cccccc;">
+      <h5>Ngày tạo</h5>
+      <div>12/09/2020</div>
+    </div>
+    <div class="p-md-4 p-col-12 p-pl-md-5">
+      <h5>Ngày cập nhật</h5>
+      <div>12/09/2020</div>
+    </div>
   </div>
-</p-panel>ad
+
+  <h5 class="p-text-bold">Chi tiết Dashboard KPI</h5>
+
+  <p-table [value]="[]">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Quantity</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>{{product.code}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.category}}</td>
+        <td>{{product.quantity}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-panel>

@@ -4,6 +4,7 @@ import {KpiComponent} from './kpi.component';
 import {KpiReportComponent} from './kpi-report/kpi-report.component';
 import {AreaCreateComponent} from './area-create/area-create.component';
 import {AreaUpdateComponent} from './area-update/area-update.component';
+import {KpiDetailComponent} from './kpi-detail/kpi-detail.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'update-area/:id',
         component: AreaUpdateComponent
+      },
+      {
+        path: 'detail/:id',
+        component: KpiDetailComponent
       }
     ]
   }
