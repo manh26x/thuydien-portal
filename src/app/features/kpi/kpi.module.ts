@@ -28,6 +28,7 @@ import { KpiPreviewComponent } from './kpi-preview/kpi-preview.component';
 import {DialogService} from 'primeng/dynamicdialog';
 import { KpiDirective } from './kpi.directive';
 import {PaginatorModule} from 'primeng/paginator';
+import { KpiDetailComponent } from './kpi-detail/kpi-detail.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {PaginatorModule} from 'primeng/paginator';
     AreaUpdateComponent,
     KpiDataComponent,
     KpiPreviewComponent,
-    KpiDirective
+    KpiDirective,
+    KpiDetailComponent
   ],
   imports: [
     CommonModule,
