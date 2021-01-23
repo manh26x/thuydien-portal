@@ -8,8 +8,7 @@
     </div>
   </div>
 
-  <p-table [value]="kpiList"
-           [autoLayout]="true"
+  <p-table [value]="kpiList" styleClass="table-responsive"
            [paginator]="true"
            [rows]="10"
            [totalRecords]="kpiList.length"
@@ -18,7 +17,7 @@
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 50px;">STT</th>
-        <th *ngFor="let title of titleList">{{title.header}}</th>
+        <th style="width: 200px;" *ngFor="let title of titleList">{{title.header}}</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-kpi let-index="rowIndex">

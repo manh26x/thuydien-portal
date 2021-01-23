@@ -117,7 +117,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
               });
               res.titles.split('||').forEach((titleValue, titleIndex) => {
                 const titleName = titleValue.split('^')[0];
-                if (titleName !== null && titleName !== 'null') {
+                if (titleName && titleName !== 'null') {
                   titleList.push({ field: titleIndex, header: titleName});
                 }
               });
