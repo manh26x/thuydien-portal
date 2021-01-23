@@ -1,10 +1,10 @@
  import { Component, OnInit } from '@angular/core';
- import {KpiService} from '../../service/kpi.service';
+ import {KpiService} from '../service/kpi.service';
  import {ActivatedRoute, Router} from '@angular/router';
  import {concatMap, finalize, map, takeUntil} from 'rxjs/operators';
- import {BaseComponent} from '../../../../core/base.component';
- import {IndicatorService} from '../../../../shared/indicator/indicator.service';
- import {Area} from '../../model/area';
+ import {BaseComponent} from '../../../core/base.component';
+ import {IndicatorService} from '../../../shared/indicator/indicator.service';
+ import {Area} from '../model/area';
  import {MessageService} from 'primeng/api';
 
 @Component({

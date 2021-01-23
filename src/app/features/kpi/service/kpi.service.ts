@@ -6,12 +6,23 @@ import {Observable} from 'rxjs';
 import {ApiResultResponse} from '../../../core/model/result-response';
 import {TagDetail} from '../../tags/model/tags';
 import {Area} from '../model/area';
+import {KpiFilterRequest, KpiFilterResponse, KpiImportData, KpiReport} from '../model/kpi';
 
 @Injectable()
 export class KpiService extends BaseService {
 
   constructor(private http: HttpClient) {
     super();
+  }
+
+  filterKpiReport(request: KpiFilterRequest): Observable<KpiFilterResponse> {
+    return this.doPost('/kpi/portal/filterKPIReport', request).pipe(
+      map(res => res.data ? res.data[0] : {})
+    );
+  }
+
+  saveKpiImport(data: KpiImportData): Observable<ApiResultResponse> {
+    return this.doPost('/kpi/portal/saveKPIReport', data);
   }
 
   getAreaDetail(id: number): Observable<Area> {
@@ -32,9 +43,9 @@ export class KpiService extends BaseService {
     return this.doPost('/kpi/areaData/delete', id);
   }
 
-  checkDataImport(file: FormData): Observable<ApiResultResponse> {
+  checkDataImport(file: FormData): Observable<KpiImportData> {
     return this.doPost('/kpi/portal/importKPI', file).pipe(
-      map(res => res)
+      map(res => res.data ? res.data[0] : {})
     );
   }
 

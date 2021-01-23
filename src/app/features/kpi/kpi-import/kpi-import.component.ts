@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {KpiService} from '../service/kpi.service';
 import {TagDetail} from '../../tags/model/tags';
 import {takeUntil} from 'rxjs/operators';
 import {UtilService} from '../../../core/service/util.service';
-import {FormControl} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 import {BaseComponent} from '../../../core/base.component';
+import {InputUploadComponent} from '../../../shared/custom-file-upload/input-upload/input-upload.component';
 
 @Component({
   selector: 'aw-kpi-import',
@@ -13,39 +14,32 @@ import {BaseComponent} from '../../../core/base.component';
   ]
 })
 export class KpiImportComponent extends BaseComponent implements OnInit {
-  listKpi = [{}];
+  @ViewChild(InputUploadComponent, {static: true}) inputFile: InputUploadComponent;
   fileImport: any[];
-  listTagKpi: TagDetail[] = [];
-  reportType: FormControl = new FormControl('');
-  constructor(
-    private kpiService: KpiService,
-    private util: UtilService
-  ) {
+  reportType: FormControl = new FormControl('', Validators.required);
+  @Input() listTagKpi: TagDetail[] = [];
+  @Output() checkFile: EventEmitter<any> = new EventEmitter<any>();
+  constructor() {
     super();
   }
 
-  ngOnInit(): void {
-    this.kpiService.getTagKpi().pipe(
-      takeUntil(this.nextOnDestroy)
-    ).subscribe(res => {
-      this.listTagKpi = res;
-    });
-  }
+  ngOnInit(): void {}
 
   doChangeFile(files) {
     this.fileImport = files;
   }
 
   doCheckFile() {
-    if (this.fileImport) {
-      const value: TagDetail = this.reportType.value;
-      const fileFormData: FormData = new FormData();
-      fileFormData.append('file', this.fileImport[0], this.fileImport[0].name);
-      fileFormData.append('typeReport', value.keyTag);
-      this.kpiService.checkDataImport(fileFormData).subscribe(res => {
-        console.log(res);
-      });
+    if (this.fileImport && this.reportType.valid) {
+      this.checkFile.emit({ file: this.fileImport, reportType: this.reportType.value });
+    } else {
+      this.reportType.markAsDirty();
     }
+  }
+
+  clearForm(): void {
+    this.reportType = new FormControl('', Validators.required);
+    this.inputFile.clearFile();
   }
 
 }

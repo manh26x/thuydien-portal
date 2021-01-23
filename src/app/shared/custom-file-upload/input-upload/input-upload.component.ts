@@ -8,7 +8,7 @@ import {FormControl} from '@angular/forms';
   ]
 })
 export class InputUploadComponent {
-  fromFile: FormControl = new FormControl({value: '', disabled: true});
+  formFile: FormControl = new FormControl({value: '', disabled: true});
   maxFiles = 1;
   errors: Array<string> = [];
   @ViewChild('inputFile', { static: true }) file: ElementRef;
@@ -25,11 +25,10 @@ export class InputUploadComponent {
     const files = event.target.files;
     this.errors = [];
     if (this.isValidFiles(files)) {
-      this.fromFile.setValue(files[0].name);
+      this.formFile.setValue(files[0].name);
       this.changeFile.emit(files);
     } else {
-      this.fromFile.setValue('');
-      this.file.nativeElement.value = '';
+      this.clearFile();
     }
   }
 
@@ -66,6 +65,11 @@ export class InputUploadComponent {
     if (sizeFile > this.maxSize) {
       this.errors.push(this.fileSizeErrorMsg);
     }
+  }
+
+  clearFile(): void {
+    this.formFile.setValue('');
+    this.file.nativeElement.value = '';
   }
 
 }

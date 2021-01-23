@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
-import {Area} from '../../model/area';
-import {AreaEnum} from '../../model/area.enum';
+import {Area} from '../model/area';
+import {AreaEnum} from '../model/area.enum';
 
 @Component({
   selector: 'aw-area-data',

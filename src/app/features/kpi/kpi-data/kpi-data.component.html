@@ -1,0 +1,61 @@
+<form class="p-grid p-fluid p-mb-3" [formGroup]="formFilter">
+  <div class="p-md-3 p-col-6 p-field">
+    <label for="s-value">Loại báo cáo</label>
+    <input type="text" id="s-value" pInputText formControlName="typeReport" />
+  </div>
+
+  <div class="p-md-3 p-col-6 p-field">
+    <label>Ngày tạo</label>
+    <p-calendar formControlName="createDate"></p-calendar>
+  </div>
+  <div class="p-md-2 p-col-6 p-field">
+    <label>Ngày cập nhật</label>
+    <p-calendar formControlName="modifyDate"></p-calendar>
+  </div>
+  <div class="p-md-2 p-col-6 p-field">
+    <label>Trạng thái</label>
+    <p-dropdown formControlName="status" [options]="statusList"></p-dropdown>
+  </div>
+  <div class="p-md-2 p-col-12 p-field p-d-flex p-align-end">
+    <button pButton type="button" label="Lọc kết quả" class="p-button-secondary" style="height: 46px"></button>
+  </div>
+</form>
+
+<p-table [value]="kpiList">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>STT</th>
+      <th>Loại báo cáo KPI</th>
+      <th>Ngày tạo</th>
+      <th>Ngày cập nhật</th>
+      <th>Trạng thái</th>
+      <th>Thao tác</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-kpi let-i="rowIndex">
+    <tr>
+      <td>{{i + 1}}</td>
+      <td>{{kpi.reportType}}</td>
+      <td>{{kpi.createDate | date: 'dd/MM/yyyy'}}</td>
+      <td>{{kpi.modifyDate | date: 'dd/MM/yyyy'}}</td>
+      <td>{{kpi.status}}</td>
+      <td>
+        <button pButton
+                type="button"
+                icon="pi pi-eye"
+                class="p-button-rounded p-button-text">
+        </button>
+        <button pButton
+                type="button"
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-secondary p-button-text">
+        </button>
+        <button pButton
+                type="button"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-danger p-button-text">
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

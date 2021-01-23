@@ -1,18 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {KpiComponent} from './kpi.component';
+import {KpiReportComponent} from './kpi-report/kpi-report.component';
+import {AreaCreateComponent} from './area-create/area-create.component';
+import {AreaUpdateComponent} from './area-update/area-update.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'report'
-  },
-  {
-    path: 'report',
-    loadChildren: () => import('./kpi-report/kpi-report.module').then(m => m.KpiReportModule)
-  },
-  {
-    path: 'import',
-    loadChildren: () => import('./kpi-import/kpi-import.module').then(m => m.KpiImportModule)
+    component: KpiComponent,
+    children: [
+      {
+        path: 'report',
+        component: KpiReportComponent
+      },
+      {
+        path: 'create-area',
+        component: AreaCreateComponent
+      },
+      {
+        path: 'update-area/:id',
+        component: AreaUpdateComponent
+      }
+    ]
   }
 ];
 

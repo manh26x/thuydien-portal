@@ -1,12 +1,18 @@
 <p-panel header="Quản lý báo cáo KPI">
-  <p-tabView>
+  <p-tabView (onChange)="doChangeTab($event)">
     <p-tabPanel header="Danh sách báo cáo KPI">
-      hello
+      <aw-kpi-data [kpiList]="kpiReportList"></aw-kpi-data>
     </p-tabPanel>
-    <p-tabPanel header="Danh sách phân vùng dữ liệu" [selected]="true">
+    <p-tabPanel header="Danh sách phân vùng dữ liệu">
       <aw-area-data [data]="areaList" (delete)="doDeleteArea($event)"></aw-area-data>
+    </p-tabPanel>
+    <p-tabPanel header="Import KPI">
+      <aw-kpi-import [listTagKpi]="listTagKpi" (checkFile)="doCheckFile($event)"></aw-kpi-import>
     </p-tabPanel>
   </p-tabView>
 </p-panel>
+
+<ng-template awKpi></ng-template>
+
 <p-toast key="kpi-msg"></p-toast>
 

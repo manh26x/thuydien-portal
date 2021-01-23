@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {KpiService} from '../../service/kpi.service';
-import {Area} from '../../model/area';
-import {IndicatorService} from '../../../../shared/indicator/indicator.service';
+import {KpiService} from '../service/kpi.service';
+import {Area} from '../model/area';
+import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {finalize} from 'rxjs/operators';
 import {MessageService} from 'primeng/api';
 import {Router} from '@angular/router';

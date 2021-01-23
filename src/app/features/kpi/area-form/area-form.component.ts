@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {AreaEnum} from '../../model/area.enum';
-import {UtilService} from '../../../../core/service/util.service';
-import {UserDetail} from '../../../user/model/user';
-import {Area} from '../../model/area';
+import {AreaEnum} from '../model/area.enum';
+import {UtilService} from '../../../core/service/util.service';
+import {UserDetail} from '../../user/model/user';
+import {Area} from '../model/area';
 
 @Component({
   selector: 'aw-area-form',
