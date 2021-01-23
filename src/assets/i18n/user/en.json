@@ -86,6 +86,8 @@
 	"paging": "Showing {first} to {last} in {totalRecords} records",
 	"roleList": "Roles list",
 	"search": "Enter first and last name, position and branch",
+	"selectDepartment": "Select the department",
+	"selectUnit": "Select a unit",
 	"selectedList": "List of selected tags",
 	"selectedRoleList": "Selected Roles list",
 	"tagList": "List of tags",

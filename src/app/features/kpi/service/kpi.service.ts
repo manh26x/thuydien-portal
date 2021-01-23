@@ -10,7 +10,7 @@ import {KpiFilterRequest, KpiFilterResponse, KpiImportData, KpiReport} from '../
 
 @Injectable()
 export class KpiService extends BaseService {
-
+  kpiReportActiveTab = 0;
   constructor(private http: HttpClient) {
     super();
   }

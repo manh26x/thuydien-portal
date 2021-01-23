@@ -17,7 +17,7 @@ export class KpiImportComponent extends BaseComponent implements OnInit {
   @ViewChild(InputUploadComponent, {static: true}) inputFile: InputUploadComponent;
   fileImport: any[];
   reportType: FormControl = new FormControl('', Validators.required);
-  @Input() listTagKpi: TagDetail[] = [];
+  @Input() tagKpiList: TagDetail[] = [];
   @Output() checkFile: EventEmitter<any> = new EventEmitter<any>();
   constructor() {
     super();

@@ -1,23 +1,26 @@
 <form class="p-grid p-fluid p-mb-3" [formGroup]="formFilter">
-  <div class="p-md-3 p-col-6 p-field">
-    <label for="s-value">Loại báo cáo</label>
-    <input type="text" id="s-value" pInputText formControlName="typeReport" />
+  <div class="p-lg-3 p-md-6 p-col-6 p-field">
+    <label for="k-value">Loại báo cáo</label>
+    <p-dropdown
+      [options]="tagKpiList"
+      [autoDisplayFirst]="false"
+      [filter]="true"
+      inputId="k-value" optionLabel="value" dataKey="keyTag" formControlName="typeReport"></p-dropdown>
   </div>
-
-  <div class="p-md-3 p-col-6 p-field">
-    <label>Ngày tạo</label>
-    <p-calendar formControlName="createDate"></p-calendar>
+  <div class="p-lg-2 p-md-6 p-col-6 p-field">
+    <label for="k-create">Ngày tạo</label>
+    <p-calendar formControlName="createDate" inputId="k-create" dateFormat="dd/mm/yy" [showButtonBar]="true"></p-calendar>
   </div>
-  <div class="p-md-2 p-col-6 p-field">
-    <label>Ngày cập nhật</label>
-    <p-calendar formControlName="modifyDate"></p-calendar>
+  <div class="p-lg-2 p-md-6 p-col-6 p-field">
+    <label for="k-modify">Ngày cập nhật</label>
+    <p-calendar formControlName="modifyDate" inputId="k-modify" dateFormat="dd/mm/yy" [showButtonBar]="true"></p-calendar>
   </div>
-  <div class="p-md-2 p-col-6 p-field">
-    <label>Trạng thái</label>
-    <p-dropdown formControlName="status" [options]="statusList"></p-dropdown>
+  <div class="p-lg-3 p-md-6 p-col-6 p-field">
+    <label for="k-status">Trạng thái</label>
+    <p-dropdown formControlName="status" [options]="statusList" inputId="k-status"></p-dropdown>
   </div>
-  <div class="p-md-2 p-col-12 p-field p-d-flex p-align-end">
-    <button pButton type="button" label="Lọc kết quả" class="p-button-secondary" style="height: 46px"></button>
+  <div class="p-lg-2 p-md-12 p-col-12 p-field p-d-flex p-align-end">
+    <button (click)="doFilter()" pButton type="button" label="Lọc kết quả" class="p-button-secondary" style="height: 46px"></button>
   </div>
 </form>
 
@@ -38,7 +41,12 @@
       <td>{{kpi.reportType}}</td>
       <td>{{kpi.createDate | date: 'dd/MM/yyyy'}}</td>
       <td>{{kpi.modifyDate | date: 'dd/MM/yyyy'}}</td>
-      <td>{{kpi.status}}</td>
+      <td>
+        <ng-container [ngSwitch]="kpi.status">
+          <ng-container *ngSwitchCase="kpiConst.STATUS_ACTIVE">Hoạt động</ng-container>
+          <ng-container *ngSwitchCase="kpiConst.STATUS_INACTIVE">Không hoạt động</ng-container>
+        </ng-container>
+      </td>
       <td>
         <button pButton
                 type="button"
@@ -59,3 +67,10 @@
     </tr>
   </ng-template>
 </p-table>
+
+<p-paginator [rows]="pageSize"
+             [totalRecords]="totalItem"
+             [rowsPerPageOptions]="[10, 20, 50, 100]"
+             [showCurrentPageReport]="true"
+             (onPageChange)="changePage($event)">
+</p-paginator>

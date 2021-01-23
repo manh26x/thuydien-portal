@@ -8,7 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {MessageService} from 'primeng/api';
 import {BeforeLeave} from '../../../core/model/before-leave';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
-import {finalize} from 'rxjs/operators';
+import {finalize, map} from 'rxjs/operators';
 import {Role, RoleEnum, UserRole} from '../../../shared/model/role';
 import {forkJoin} from 'rxjs';
 import {RoleService} from '../../../shared/service/role.service';
@@ -54,9 +54,11 @@ export class UserCreateComponent implements OnInit, BeforeLeave {
     forkJoin([obsUnit, obsBranch, obsDepartment, obsRole]).pipe(
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe((res) => {
-      this.unitList = res[0];
+      const firstUnitOption: Unit = { id: null, name: this.translate.instant('selectUnit') };
+      this.unitList = [ firstUnitOption , ...res[0] ];
       this.branchList = res[1];
-      this.departmentList = res[2];
+      const firstDepartmentOption = { id: null, name: this.translate.instant('selectDepartment') };
+      this.departmentList = [ firstDepartmentOption, ...res[2] ];
       this.roleList = res[3];
     });
   }

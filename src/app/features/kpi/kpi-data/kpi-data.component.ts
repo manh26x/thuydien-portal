@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {KpiEnum} from '../model/kpi.enum';
+import {TagDetail} from '../../tags/model/tags';
+import {PageChangeEvent} from '../../../shared/model/page-change-event';
 
 @Component({
   selector: 'aw-kpi-data',
@@ -8,19 +10,41 @@ import {KpiEnum} from '../model/kpi.enum';
   styles: [
   ]
 })
-export class KpiDataComponent implements OnInit {
+export class KpiDataComponent implements OnInit, OnChanges {
   @Input() kpiList = [];
+  @Input() tagKpiList: TagDetail[] = [];
+  @Input() totalItem = 0;
+  @Output() filter: EventEmitter<any> = new EventEmitter<any>();
+  pageSize = 10;
+  page = 0;
   statusList = [
     { label: 'Tất cả', value: -1 },
     { label: 'Hoạt động', value: KpiEnum.STATUS_ACTIVE },
     { label: 'Không hoạt động', value: KpiEnum.STATUS_INACTIVE }
   ];
   formFilter: FormGroup;
+  kpiConst = KpiEnum;
   constructor(private fb: FormBuilder) {
     this.initForm();
   }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.tagKpiList) {
+      
+    }
+  }
+
+  doFilter() {
+    this.filter.emit({ page: this.page, pageSize: this.pageSize, ...this.formFilter.value });
+  }
+
+  changePage(evt: PageChangeEvent) {
+    this.page = evt.page;
+    this.pageSize = evt.rows;
+    this.filter.emit({ page: this.page, pageSize: this.pageSize, ...this.formFilter.value });
   }
 
   initForm() {

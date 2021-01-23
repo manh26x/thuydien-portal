@@ -27,6 +27,7 @@ import {CalendarModule} from 'primeng/calendar';
 import { KpiPreviewComponent } from './kpi-preview/kpi-preview.component';
 import {DialogService} from 'primeng/dynamicdialog';
 import { KpiDirective } from './kpi.directive';
+import {PaginatorModule} from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { KpiDirective } from './kpi.directive';
     DropdownModule,
     ToastModule,
     CustomFileUploadModule,
-    CalendarModule
+    CalendarModule,
+    PaginatorModule
   ],
   providers: [
     KpiService,

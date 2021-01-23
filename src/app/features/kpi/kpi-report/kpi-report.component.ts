@@ -12,8 +12,9 @@ import {KpiPreviewComponent} from '../kpi-preview/kpi-preview.component';
 import {UtilService} from '../../../core/service/util.service';
 import {KpiDirective} from '../kpi.directive';
 import {KpiPreviewItem} from '../model/kpi-preview-item';
-import {KpiFilterRequest, KpiReport, KpiTableComponent} from '../model/kpi';
+import {KpiReport, KpiTableComponent} from '../model/kpi';
 import {KpiImportComponent} from '../kpi-import/kpi-import.component';
+import {forkJoin} from 'rxjs';
 
 @Component({
   selector: 'aw-kpi-report',
@@ -24,11 +25,12 @@ import {KpiImportComponent} from '../kpi-import/kpi-import.component';
 export class KpiReportComponent extends BaseComponent implements OnInit {
   @ViewChild(KpiDirective, {static: true}) kpiPreviewHost: KpiDirective;
   @ViewChild(KpiImportComponent, {static: true}) kpiImport: KpiImportComponent;
+  initActiveIndex = this.kpiService.kpiReportActiveTab;
+  // data
   areaList: Area[] = [];
-  listTagKpi: TagDetail[] = [];
+  tagKpiList: TagDetail[] = [];
   kpiReportList: KpiReport[] = [];
-  isLoadedArea = false;
-  isLoadedKpi = false;
+  totalReportKpi = 0;
   constructor(
     private kpiService: KpiService,
     private indicator: IndicatorService,
@@ -42,16 +44,49 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getKpiReport();
+    this.indicator.showActivityIndicator();
+    const obsTagKpi = this.kpiService.getTagKpi();
+    const obsKpiReport = this.kpiService.filterKpiReport({
+      page: 0, pageSize: 10, createDate: null, modifyDate: null, reportType: '', status: null
+    });
+    const obsArea =  this.kpiService.getAreaByStatus(AreaEnum.ALL);
+    forkJoin([obsTagKpi, obsKpiReport, obsArea]).pipe(
+      takeUntil(this.nextOnDestroy),
+      finalize(() => this.indicator.hideActivityIndicator())
+    ).subscribe((res) => {
+      this.tagKpiList = res[0];
+      this.kpiReportList = res[1].listKpi;
+      this.totalReportKpi = res[1].totalRecord;
+      this.areaList = res[2];
+    });
   }
 
   doChangeTab(evt) {
     const viewContainerRef = this.kpiPreviewHost.viewContainerRef;
     viewContainerRef.clear();
     switch (evt.index) {
-      case 1: { if (!this.isLoadedArea) { this.getAllArea(); } break; }
-      case 2: { if (!this.isLoadedKpi) { this.getTagKpi(); } break; }
+      case 0: { this.kpiService.kpiReportActiveTab = 0; break; }
+      case 1: { this.kpiService.kpiReportActiveTab = 1; break; }
+      case 2: { this.kpiService.kpiReportActiveTab = 2; break; }
     }
+  }
+
+  doFilterKpiReport(value) {
+    this.indicator.showActivityIndicator();
+    this.kpiService.filterKpiReport({
+      page: value.page,
+      pageSize: value.pageSize,
+      createDate: value.createDate,
+      modifyDate: value.modifyDate,
+      reportType: value.typeReport.keyTag,
+      status: value.status
+    }).pipe(
+      takeUntil(this.nextOnDestroy),
+      finalize(() => this.indicator.hideActivityIndicator())
+    ).subscribe((res) => {
+      this.kpiReportList = res.listKpi;
+      this.totalReportKpi = res.totalRecord;
+    });
   }
 
   doCheckFile(evt) {
@@ -147,41 +182,12 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
     });
   }
 
-  getKpiReport() {
-    this.indicator.showActivityIndicator();
-    const request: KpiFilterRequest = {
-      page: 0,
-      createDate: null,
-      modifyDate: null,
-      reportType: '',
-      status: null,
-      pageSize: 10
-    };
-    this.kpiService.filterKpiReport(request).pipe(
-      takeUntil(this.nextOnDestroy),
-      finalize(() => this.indicator.hideActivityIndicator())
-    ).subscribe(res => {
-      this.kpiService.logDebug(res);
-      this.kpiReportList = res.listKpi;
-    });
-  }
-
-  getTagKpi() {
-    this.kpiService.getTagKpi().pipe(
-      takeUntil(this.nextOnDestroy)
-    ).subscribe(res => {
-      this.isLoadedKpi = true;
-      this.listTagKpi = res;
-    });
-  }
-
   getAllArea(): void {
     this.indicator.showActivityIndicator();
     this.kpiService.getAreaByStatus(AreaEnum.ALL).pipe(
       takeUntil(this.nextOnDestroy),
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe(res => {
-      this.isLoadedArea = true;
       this.areaList = res;
     });
   }
