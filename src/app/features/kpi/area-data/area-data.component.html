@@ -22,9 +22,9 @@
       </td>
       <td>
         <ng-container [ngSwitch]="area.status">
-          <ng-container *ngSwitchCase="areaConst.STATUS_ACTIVE">Hoạt động</ng-container>
-          <ng-container *ngSwitchCase="areaConst.STATUS_INACTIVE">Không hoạt động</ng-container>
-          <ng-container *ngSwitchDefault>-</ng-container>
+          <div *ngSwitchCase="areaConst.STATUS_ACTIVE">Hoạt động</div>
+          <div *ngSwitchCase="areaConst.STATUS_INACTIVE" class="p-invalid">Không hoạt động</div>
+          <div *ngSwitchDefault>-</div>
         </ng-container>
       </td>
       <td>{{area.priority}}</td>

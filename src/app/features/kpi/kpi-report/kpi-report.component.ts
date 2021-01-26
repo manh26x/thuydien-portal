@@ -43,7 +43,14 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
     private componentFactoryResolver: ComponentFactoryResolver
   ) {
     super();
-    this.stateFilter = {page: 0, pageSize: 10, createDate: null, modifyDate: null, reportType: '', status: null};
+    this.stateFilter = {
+      page: 0,
+      pageSize: 10,
+      createDate: null,
+      modifyDate: null,
+      reportType: '',
+      status: null
+    };
   }
 
   ngOnInit(): void {
@@ -71,6 +78,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
         this.kpiService.kpiReportActiveTab = 1;
         if (this.isImportSuccess) {
           this.doFilterKpiReport(this.stateFilter);
+          this.isImportSuccess = false;
         }
         break;
       }
@@ -85,7 +93,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
       pageSize: value.pageSize,
       createDate: value.createDate,
       modifyDate: value.modifyDate,
-      reportType: value.typeReport.keyTag,
+      reportType: value.reportType ? value.reportType.keyTag : value.reportType,
       status: value.status
     };
     this.kpiService.filterKpiReport(this.stateFilter).pipe(
@@ -168,6 +176,29 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
     });
   }
 
+  doDeleteKpi(kpi: KpiReport) {
+    this.confirmDialog.confirm({
+      key: 'globalDialog',
+      header: 'Xác nhận xóa',
+      message: 'Bạn có chắc chắn xóa KPI',
+      acceptLabel: 'Đồng ý',
+      rejectLabel: 'Hủy',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.indicator.showActivityIndicator();
+        this.kpiService.deleteKpi(kpi.id).subscribe(res => {
+          this.messageService.add({
+            key: 'kpi-msg',
+            severity: 'success',
+            detail: 'Xóa KPI thành công'
+          });
+        });
+        this.doFilterKpiReport(this.stateFilter);
+      },
+      reject: () => {}
+    });
+  }
+
   doDeleteArea(area: Area) {
     this.confirmDialog.confirm({
       key: 'globalDialog',
@@ -178,8 +209,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.indicator.showActivityIndicator();
-        this.kpiService.deleteArea(area.id).pipe(
-        ).subscribe((res) => {
+        this.kpiService.deleteArea(area.id).subscribe((res) => {
           this.messageService.add({
             key: 'kpi-msg',
             severity: 'success',

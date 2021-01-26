@@ -6,13 +6,27 @@ import {Observable} from 'rxjs';
 import {ApiResultResponse} from '../../../core/model/result-response';
 import {TagDetail} from '../../tags/model/tags';
 import {Area} from '../model/area';
-import {KpiFilterRequest, KpiFilterResponse, KpiImportData, KpiReport} from '../model/kpi';
+import {KpiDetail, KpiFilterRequest, KpiFilterResponse, KpiImportData, KpiReport, KpiUpdateRequest} from '../model/kpi';
 
 @Injectable()
 export class KpiService extends BaseService {
   kpiReportActiveTab = 0;
   constructor(private http: HttpClient) {
     super();
+  }
+
+  deleteKpi(id: number): Observable<ApiResultResponse> {
+    return this.doPost('/kpi/portal/deleteKPI', id);
+  }
+
+  updateKpi(request: KpiUpdateRequest): Observable<ApiResultResponse> {
+    return this.doPost('/kpi/portal/updateKpiDashboard', request);
+  }
+
+  getKpiDetail(id: number): Observable<KpiDetail> {
+    return this.doPost('/kpi/portal/kpiDashboard', id).pipe(
+      map(res => res.data ? res.data[0] : {})
+    );
   }
 
   filterKpiReport(request: KpiFilterRequest): Observable<KpiFilterResponse> {

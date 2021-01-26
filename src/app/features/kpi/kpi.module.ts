@@ -29,6 +29,10 @@ import {DialogService} from 'primeng/dynamicdialog';
 import { KpiDirective } from './kpi.directive';
 import {PaginatorModule} from 'primeng/paginator';
 import { KpiDetailComponent } from './kpi-detail/kpi-detail.component';
+import { KpiUpdateComponent } from './kpi-update/kpi-update.component';
+import { KpiInfoComponent } from './kpi-info/kpi-info.component';
+import { KpiFilterComponent } from './kpi-filter/kpi-filter.component';
+import {CheckboxModule} from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -42,24 +46,28 @@ import { KpiDetailComponent } from './kpi-detail/kpi-detail.component';
     KpiDataComponent,
     KpiPreviewComponent,
     KpiDirective,
-    KpiDetailComponent
+    KpiDetailComponent,
+    KpiUpdateComponent,
+    KpiInfoComponent,
+    KpiFilterComponent
   ],
-  imports: [
-    CommonModule,
-    KpiRoutingModule,
-    TabViewModule,
-    PanelModule,
-    TableModule,
-    ButtonModule,
-    ToolbarModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    DropdownModule,
-    ToastModule,
-    CustomFileUploadModule,
-    CalendarModule,
-    PaginatorModule
-  ],
+    imports: [
+        CommonModule,
+        KpiRoutingModule,
+        TabViewModule,
+        PanelModule,
+        TableModule,
+        ButtonModule,
+        ToolbarModule,
+        ReactiveFormsModule,
+        InputTextModule,
+        DropdownModule,
+        ToastModule,
+        CustomFileUploadModule,
+        CalendarModule,
+        PaginatorModule,
+        CheckboxModule
+    ],
   providers: [
     KpiService,
     MessageService,

@@ -84,8 +84,8 @@
         </td>
         <td>
           <ng-container [ngSwitch]="user.user.status">
-            <ng-container *ngSwitchCase="userConst.ACTIVE">{{'const.active' | translate}}</ng-container>
-            <ng-container *ngSwitchCase="userConst.INACTIVE">{{'const.inactive' | translate}}</ng-container>
+            <div *ngSwitchCase="userConst.ACTIVE">{{'const.active' | translate}}</div>
+            <div *ngSwitchCase="userConst.INACTIVE" class="p-invalid">{{'const.inactive' | translate}}</div>
           </ng-container>
          </td>
         <td>

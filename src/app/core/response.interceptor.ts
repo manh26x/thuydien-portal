@@ -28,6 +28,7 @@ export class ResponseInterceptor implements HttpInterceptor {
     , '/tags/getInfoTag'
     , '/role/detail'
     , '/areaData/detail'
+    , '/portal/kpiDashboard'
   ];
   constructor() {}
 

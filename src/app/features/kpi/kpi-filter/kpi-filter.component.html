@@ -1,0 +1,17 @@
+<form class="p-grid p-fluid p-mb-3" [formGroup]="kpiAreaFilter">
+  <div class="p-lg-4 p-md-6 p-col-6 p-field">
+    <label for="ka-index">Chỉ số</label>
+    <input (keyup.enter)="doFilter()" pInputText placeholder="Nhập chỉ số" name="ka-index" formControlName="kpiIndex"/>
+  </div>
+  <div class="p-lg-3 p-md-6 p-col-6 p-field">
+    <label for="ka-area">Phân vùng dữ liệu</label>
+    <p-dropdown formControlName="area" [options]="areaListOption" inputId="ka-area" optionLabel="name" dataKey="id"></p-dropdown>
+  </div>
+  <div class="p-lg-3 p-md-6 p-col-6 p-field">
+    <label for="ka-allow-show">Cho phép hiển thị</label>
+    <p-dropdown formControlName="allowView" [options]="viewAllowOption" inputId="ka-allow-show"></p-dropdown>
+  </div>
+  <div class="p-lg-2 p-md-12 p-col-12 p-field p-d-flex p-align-end">
+    <button (click)="doFilter()" pButton type="button" label="Lọc kết quả" class="p-button-secondary" style="height: 46px"></button>
+  </div>
+</form>

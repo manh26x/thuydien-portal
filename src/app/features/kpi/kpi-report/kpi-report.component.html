@@ -4,7 +4,12 @@
       <aw-kpi-import [tagKpiList]="tagKpiList" (checkFile)="doCheckFile($event)"></aw-kpi-import>
     </p-tabPanel>
     <p-tabPanel header="Danh sách báo cáo KPI">
-      <aw-kpi-data [kpiList]="kpiReportList" [totalItem]="totalReportKpi" [tagKpiList]="tagKpiList" (filter)="doFilterKpiReport($event)"></aw-kpi-data>
+      <aw-kpi-data [kpiList]="kpiReportList"
+                   [totalItem]="totalReportKpi"
+                   [tagKpiList]="tagKpiList"
+                   (delete)="doDeleteKpi($event)"
+                   (filter)="doFilterKpiReport($event)">
+      </aw-kpi-data>
     </p-tabPanel>
     <p-tabPanel header="Danh sách phân vùng dữ liệu">
       <aw-area-data [data]="areaList" (delete)="doDeleteArea($event)"></aw-area-data>

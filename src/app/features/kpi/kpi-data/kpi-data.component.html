@@ -2,10 +2,9 @@
   <div class="p-lg-3 p-md-6 p-col-6 p-field">
     <label for="k-value">Loại báo cáo</label>
     <p-dropdown
-      [options]="tagKpiList"
-      [autoDisplayFirst]="false"
+      [options]="tagKpi"
       [filter]="true"
-      inputId="k-value" optionLabel="value" dataKey="keyTag" formControlName="typeReport"></p-dropdown>
+      inputId="k-value" optionLabel="value" dataKey="keyTag" formControlName="reportType"></p-dropdown>
   </div>
   <div class="p-lg-2 p-md-6 p-col-6 p-field">
     <label for="k-create">Ngày tạo</label>
@@ -43,8 +42,8 @@
       <td>{{kpi.modifyDate | date: 'dd/MM/yyyy'}}</td>
       <td>
         <ng-container [ngSwitch]="kpi.status">
-          <ng-container *ngSwitchCase="kpiConst.STATUS_ACTIVE">Hoạt động</ng-container>
-          <ng-container *ngSwitchCase="kpiConst.STATUS_INACTIVE">Không hoạt động</ng-container>
+          <div *ngSwitchCase="kpiConst.STATUS_ACTIVE">Hoạt động</div>
+          <div *ngSwitchCase="kpiConst.STATUS_INACTIVE" class="p-invalid">Không hoạt động</div>
         </ng-container>
       </td>
       <td>
@@ -58,12 +57,12 @@
                 icon="pi pi-book"
                 class="p-button-rounded p-button-warning p-button-text">
         </button>
-        <button pButton
+        <button (click)="gotoUpdate(kpi)" pButton
                 type="button"
                 icon="pi pi-pencil"
                 class="p-button-rounded p-button-secondary p-button-text">
         </button>
-        <button pButton
+        <button (click)="doDelete(kpi)" pButton
                 type="button"
                 icon="pi pi-trash"
                 class="p-button-rounded p-button-danger p-button-text">

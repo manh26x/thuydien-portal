@@ -1,7 +1,7 @@
  import { Component, OnInit } from '@angular/core';
  import {KpiService} from '../service/kpi.service';
  import {ActivatedRoute, Router} from '@angular/router';
- import {concatMap, finalize, map, takeUntil} from 'rxjs/operators';
+ import {finalize, map, switchMap, takeUntil} from 'rxjs/operators';
  import {BaseComponent} from '../../../core/base.component';
  import {IndicatorService} from '../../../shared/indicator/indicator.service';
  import {Area} from '../model/area';
@@ -30,7 +30,7 @@ export class AreaUpdateComponent extends BaseComponent implements OnInit {
     this.route.paramMap.pipe(
       takeUntil(this.nextOnDestroy),
       map(res => res.get('id')),
-      concatMap((id) => this.kpiService.getAreaDetail(+id).pipe(
+      switchMap((id) => this.kpiService.getAreaDetail(+id).pipe(
         takeUntil(this.nextOnDestroy),
         finalize(() => this.indicator.hideActivityIndicator())
       ))

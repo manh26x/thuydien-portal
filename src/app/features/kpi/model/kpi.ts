@@ -1,4 +1,5 @@
 import {EventEmitter} from '@angular/core';
+import {Area} from './area';
 
 export interface Kpi {
   area?: string;
@@ -36,15 +37,34 @@ export interface KpiFilterRequest {
 }
 
 export interface KpiReport {
-  id: number;
-  reportType: string;
-  recordData: string;
-  createDate: Date;
-  modifyDate: Date;
-  status: number;
+  id?: number;
+  reportType?: string;
+  recordData?: string;
+  createDate?: Date;
+  modifyDate?: Date;
+  status?: number;
 }
 
 export interface KpiFilterResponse {
   listKpi: KpiReport[];
   totalRecord: number;
+}
+
+export interface KpiArea {
+  value: string;
+  areaId: number;
+  areaColor: string;
+  areaName: string;
+  isShow: number;
+  displayOrder: number;
+}
+
+export interface KpiDetail {
+  kpi?: KpiReport;
+  listKPITitle?: KpiArea[];
+}
+
+export interface KpiUpdateRequest {
+  id: number;
+  listKPITitle: KpiArea[];
 }

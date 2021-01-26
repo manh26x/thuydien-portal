@@ -14,13 +14,19 @@ import {KpiReport} from '../model/kpi';
 })
 export class KpiDataComponent implements OnInit {
   @Input() kpiList = [];
-  @Input() tagKpiList: TagDetail[] = [];
+  @Input() set tagKpiList(data: TagDetail[]) {
+    const clone = [...data];
+    clone.unshift({keyTag: '', value: 'Tất cả'});
+    this.tagKpi = clone;
+  }
+  tagKpi: TagDetail[] = [];
   @Input() totalItem = 0;
   @Output() filter: EventEmitter<any> = new EventEmitter<any>();
+  @Output() delete: EventEmitter<any> = new EventEmitter<any>();
   pageSize = 10;
   page = 0;
   statusList = [
-    { label: 'Tất cả', value: -1 },
+    { label: 'Tất cả', value: null },
     { label: 'Hoạt động', value: KpiEnum.STATUS_ACTIVE },
     { label: 'Không hoạt động', value: KpiEnum.STATUS_INACTIVE }
   ];
@@ -33,8 +39,16 @@ export class KpiDataComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  doDelete(kpi: KpiReport) {
+    this.delete.emit(kpi);
+  }
+
   gotoView(kpi: KpiReport) {
     this.router.navigate(['management-kpi', 'detail', kpi.id]);
+  }
+
+  gotoUpdate(kpi: KpiReport) {
+    this.router.navigate(['management-kpi', 'update', kpi.id]);
   }
 
   doFilter() {
@@ -49,7 +63,7 @@ export class KpiDataComponent implements OnInit {
 
   initForm() {
     this.formFilter = this.fb.group({
-      typeReport: [''],
+      reportType: [''],
       createDate: [],
       modifyDate: [],
       status: []
