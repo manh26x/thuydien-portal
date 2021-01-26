@@ -24,6 +24,7 @@
 	"const": {
 		"active": "Hoạt động",
 		"all": "Tất cả",
+		"delete": "Đã xóa",
 		"draft": "Bản nháp",
 		"inactive": "Không hoạt động",
 		"levelImportant": "Quan trọng",

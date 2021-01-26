@@ -5,5 +5,6 @@ export enum FeatureEnum {
   TAG= 'tags',
   TOOL= 'calculateTool',
   ROLE= 'role',
-  SUPER_ADMIN = 'superadmin'
+  SUPER_ADMIN = 'superadmin',
+  KPI= 'kpi'
 }

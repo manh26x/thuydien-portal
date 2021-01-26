@@ -1,0 +1,45 @@
+<form [formGroup]="areaForm">
+  <div class="p-fluid p-grid">
+    <div class="p-md-6 p-col-12 p-field">
+      <label for="a-name">{{'area.name' | translate}}<span class="p-invalid">*</span></label>
+      <input id="a-name" type="text" pInputText formControlName="name"/>
+      <small *ngIf="hasErrorInput('name', 'required')" class="p-invalid">
+        {{'invalid.required' | translate}}
+      </small>
+    </div>
+
+    <div class="p-md-6 p-col-12 p-field">
+      <label>{{'area.color' | translate}}<span class="p-invalid">*</span></label>
+      <div class="p-inputgroup" style="position: relative">
+        <button (click)="colorPicker.click()" type="button" pButton label="" icon="pi pi-pencil"></button>
+        <input #colorPicker
+               type="color"
+               formControlName="color"
+               style="visibility:hidden;position: absolute;bottom: 0;"/>
+        <input [disabled]="true" [value]="colorPicker.value" pInputText type="text"/>
+      </div>
+      <small *ngIf="hasErrorInput('color', 'required')" class="p-invalid">
+        {{'invalid.required' | translate}}
+      </small>
+    </div>
+  </div>
+
+  <div class="p-fluid p-grid">
+    <div class="p-md-6 p-col-12 p-field">
+      <label for="a-priority">{{'area.priotity' | translate}}<span class="p-invalid">*</span></label>
+      <p-dropdown id="a-priority" [options]="priorityList" formControlName="priority"></p-dropdown>
+    </div>
+
+    <div class="p-md-6 p-col-12 p-field">
+      <label for="a-status">{{'area.status' | translate}}</label>
+      <p-dropdown id="a-status" [options]="areaStatus" formControlName="status"></p-dropdown>
+    </div>
+  </div>
+</form>
+
+<div class="split-horizontal"></div>
+<div class="p-text-center">
+  <button (click)="doCancel()" pButton type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
+  <button *ngIf="mode == 'update'" pButton (click)="doSave()" type="button" label="{{'btn.update' | translate}}" class="p-button-raised p-button-secondary"></button>
+  <button *ngIf="mode == 'create'" pButton (click)="doSave()" type="button" label="{{'btn.create' | translate}}" class="p-button-raised p-button-secondary"></button>
+</div>

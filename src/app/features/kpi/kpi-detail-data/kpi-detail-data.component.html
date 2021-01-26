@@ -1,0 +1,6 @@
+<p-panel header="{{'kpi.info' | translate}}">
+  <div class="split-horizontal-no-line"></div>
+  <aw-kpi-info [kpiData]="kpiData"></aw-kpi-info>
+</p-panel>
+
+<aw-kpi-preview [showBtnAction]="false" [kpiList]="kpiResult" [titleList]="kpiResultTitle" (back)="gotoReport()"></aw-kpi-preview>

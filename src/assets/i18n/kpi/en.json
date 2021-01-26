@@ -1,0 +1,80 @@
+{
+	"action": "Action",
+	"area": {
+		"addNew": "Add a new data area",
+		"addNewSuccess": "Successfully added the new data area",
+		"color": "Color",
+		"const": {
+			"active": "Active",
+			"inactive": "Inactive"
+		},
+		"name": "Data area name",
+		"priotity": "Priority",
+		"status": "Status",
+		"updateArea": "Edit the data area",
+		"updateSuccess": "The data partition has been updated successfully"
+	},
+	"breadcrumb": {
+		"area": "Manage area data",
+		"areaCreate": "Add new data",
+		"areaUpdate": "Data edit",
+		"kpi": "Manage KPI reports",
+		"kpiDetail": "Detail KPI Dashboard",
+		"kpiReportDetail": "Detail KPI report",
+		"kpiUpdate": "Edit KPI Dashboard"
+	},
+	"btn": {
+		"back": "Go back",
+		"cancel": "Cancel",
+		"checkData": "Check data",
+		"create": "Add new",
+		"filter": "Filter the results",
+		"save": "Save result",
+		"update": "Update"
+	},
+	"invalid": {
+		"required": "Value cannot be blank"
+	},
+	"kpi": {
+		"allowDisplay": "Allows display",
+		"area": "Data area",
+		"atHere": "At here",
+		"const": {
+			"active": "Active",
+			"all": "All",
+			"inactive": "Inactive",
+			"no": "No",
+			"yes": "Yes"
+		},
+		"createDate": "Date created",
+		"detail": "Detail KPI Dashboard",
+		"enterIndex": "Enter a index",
+		"import": "Import KPI",
+		"index": "Index",
+		"indexList": "Index list",
+		"info": "KPI report information",
+		"list": "KPI List",
+		"listArea": "List of data area",
+		"listReport": "List of KPI reports",
+		"manage": "Manage KPI reports",
+		"modifyDate": "Update day",
+		"orderDisplay": "Display order",
+		"patternFile": "Download the sample file",
+		"selectArea": "Select the data area",
+		"status": "Status",
+		"typeReport": "KPI report type",
+		"update": "Edit KPI Dashboard",
+		"upload": "Upload"
+	},
+	"message": {
+		"accept": "Yes",
+		"confirmDel": "Confirm Delete",
+		"delArea": "Are you sure you delete the record?",
+		"delKpi": "If you delete, the KPI report will change to Expired. Are you sure you want to delete?",
+		"delSuccess": "Successful record deletion",
+		"reject": "No"
+	},
+	"no": "No.",
+	"noData": "No results match",
+	"paging": "Showing {first} to {last} in {totalRecords} records"
+}

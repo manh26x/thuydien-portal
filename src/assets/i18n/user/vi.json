@@ -14,7 +14,8 @@
 		"export": "Xuất báo cáo",
 		"refresh": "Tải lại",
 		"save": "Lưu thay đổi",
-		"save2": "Lưu"
+		"save2": "Lưu",
+		"selectFile": "Chọn file"
 	},
 	"confirm": {
 		"accept": "Có",
@@ -85,6 +86,8 @@
 	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
 	"roleList": "Danh sách Roles",
 	"search": "Nhập họ và tên, chức danh và chi nhánh",
+	"selectDepartment": "Chọn khối",
+	"selectUnit": "Chọn đơn vị",
 	"selectedList": "Danh sách tags đã chọn",
 	"selectedRoleList": "Danh sách Roles đã chọn",
 	"tagList": "Danh sách tags",

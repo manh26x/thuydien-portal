@@ -7,7 +7,7 @@ import {AuthService} from '../auth/auth.service';
 
 interface RouteData {
   feature?: string;
-  role?: string;
+  role?: string | string[];
 }
 
 @Injectable({
@@ -27,7 +27,8 @@ export class FeatureGuard implements CanActivate {
       } else if (routeData.role) {
         const featureList: FeatureGroupByRole = this.auth.getUserRole();
         const roleList: UserRole[] = featureList[routeData.feature];
-        if (roleList && roleList.find(role => role.rightId === routeData.role)) {
+        const userRole: string[] = Array.isArray(routeData.role) ? routeData.role : [routeData.role];
+        if (roleList && roleList.find(role => userRole.indexOf(role.rightId) >= 0)) {
           return true;
         } else {
           this.router.navigate(['public', 'access-denied']);
@@ -42,5 +43,4 @@ export class FeatureGuard implements CanActivate {
       return false;
     }
   }
-
 }

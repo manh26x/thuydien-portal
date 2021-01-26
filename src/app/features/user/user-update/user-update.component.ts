@@ -70,9 +70,11 @@ export class UserUpdateComponent extends BaseComponent implements OnInit {
       }),
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe((res) => {
-      this.unitList = res[0];
+      const firstUnitOption: Unit = { id: null, name: this.translate.instant('selectUnit') };
+      this.unitList = [ firstUnitOption , ...res[0] ];
       this.branchList = res[1];
-      this.departmentList = res[2];
+      const firstDepartmentOption = { id: null, name: this.translate.instant('selectDepartment') };
+      this.departmentList = [ firstDepartmentOption , ...res[2] ];
       this.roleList = res[3];
       this.initValue = res[4];
     });

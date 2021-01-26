@@ -4,10 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {concatMap, finalize, map, takeUntil} from 'rxjs/operators';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {BaseComponent} from '../../../core/base.component';
-import {UserDetail, UserData} from '../model/user';
+import {UserDetail} from '../model/user';
 import {UserEnum} from '../model/user.enum';
-import {UserAuth} from '../../../auth/model/user-auth';
-import {AuthService} from '../../../auth/auth.service';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 
 @Component({
@@ -19,16 +17,13 @@ import {ApiErrorResponse} from '../../../core/model/error-response';
 export class UserViewComponent extends BaseComponent implements OnInit {
   userDetail: UserDetail = {};
   userConst = UserEnum;
-  userLogged: UserAuth;
   constructor(
     private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
-    private indicator: IndicatorService,
-    private auth: AuthService
+    private indicator: IndicatorService
   ) {
     super();
-    this.userLogged = this.auth.getUserInfo();
   }
 
   ngOnInit(): void {
@@ -53,11 +48,7 @@ export class UserViewComponent extends BaseComponent implements OnInit {
   }
 
   doCancel() {
-    if (this.userLogged.isSupperAdmin) {
-      this.router.navigate(['user']);
-    } else {
-      this.router.navigate(['']);
-    }
+    this.router.navigate(['user']);
   }
 
 }

@@ -1,7 +1,7 @@
 <p-panel *ngIf="isHasImport" header="Import User" [toggleable]="true" >
   <div class="p-grid p-fluid">
     <div class="p-col-12 p-md-5">
-      <aw-input-upload (changeFile)="doChangeFile($event)"></aw-input-upload>
+      <aw-input-upload (changeFile)="doChangeFile($event)" selectLabel="{{'btn.selectFile' | translate}}"></aw-input-upload>
       <span class="p-mt-2 p-d-block">{{'downloadPattern' | translate}}
         <a href="assets/resource/User%20TitleSalesApp_v1.xlsx" target="_blank"> {{'atHere' | translate}}</a>
       </span>
@@ -84,8 +84,8 @@
         </td>
         <td>
           <ng-container [ngSwitch]="user.user.status">
-            <ng-container *ngSwitchCase="userConst.ACTIVE">{{'const.active' | translate}}</ng-container>
-            <ng-container *ngSwitchCase="userConst.INACTIVE">{{'const.inactive' | translate}}</ng-container>
+            <div *ngSwitchCase="userConst.ACTIVE">{{'const.active' | translate}}</div>
+            <div *ngSwitchCase="userConst.INACTIVE" class="p-invalid">{{'const.inactive' | translate}}</div>
           </ng-container>
          </td>
         <td>
