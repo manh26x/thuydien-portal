@@ -2,17 +2,29 @@ import { Injectable } from '@angular/core';
 import {BaseService} from '../../../core/service/base.service';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {ApiResultResponse} from '../../../core/model/result-response';
 import {TagDetail} from '../../tags/model/tags';
 import {Area} from '../model/area';
-import {KpiDetail, KpiFilterRequest, KpiFilterResponse, KpiImportData, KpiReport, KpiUpdateRequest} from '../model/kpi';
+import {KpiDetail, KpiFilterRequest, KpiFilterResponse, KpiImportData, KpiReport, KpiReportDetail, KpiUpdateRequest} from '../model/kpi';
+
+export interface KpiBreadcrumb {
+  main: string;
+  page: string;
+}
 
 @Injectable()
 export class KpiService extends BaseService {
   kpiReportActiveTab = 0;
+  currentPage$: BehaviorSubject<KpiBreadcrumb> = new BehaviorSubject<KpiBreadcrumb>({main: '', page: ''});
   constructor(private http: HttpClient) {
     super();
+  }
+
+  getKpiReportDetail(id: number): Observable<KpiReportDetail> {
+    return this.doPost('/kpi/portal/getKPIData', id).pipe(
+      map(res => res.data ? res.data[0] : {})
+    );
   }
 
   deleteKpi(id: number): Observable<ApiResultResponse> {
@@ -81,5 +93,9 @@ export class KpiService extends BaseService {
 
   getServiceName(): string {
     return 'KpiService';
+  }
+
+  setPage(main: '' | 'kpi' | 'area', page: '' | 'kpiDetail' | 'kpiUpdate' | 'kpiReportDetail' | 'areaCreate' | 'areaUpdate') {
+    this.currentPage$.next({main, page});
   }
 }

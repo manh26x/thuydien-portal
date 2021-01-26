@@ -6,6 +6,7 @@
  import {IndicatorService} from '../../../shared/indicator/indicator.service';
  import {Area} from '../model/area';
  import {MessageService} from 'primeng/api';
+ import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'aw-area-update',
@@ -20,12 +21,14 @@ export class AreaUpdateComponent extends BaseComponent implements OnInit {
     private route: ActivatedRoute,
     private indicator: IndicatorService,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {
     super();
   }
 
   ngOnInit(): void {
+    this.kpiService.setPage('area', 'areaUpdate');
     this.indicator.showActivityIndicator();
     this.route.paramMap.pipe(
       takeUntil(this.nextOnDestroy),
@@ -51,10 +54,8 @@ export class AreaUpdateComponent extends BaseComponent implements OnInit {
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe((res) => {
       this.messageService.add({
-        key: 'area-msg',
         severity: 'success',
-        summary: '',
-        detail: 'Cập mhật phân vùng dữ liệu thành công'
+        detail: this.translate.instant('area.updateSuccess')
       });
       this.router.navigate(['management-kpi', 'report']);
     });

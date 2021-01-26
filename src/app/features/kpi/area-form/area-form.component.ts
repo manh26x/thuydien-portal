@@ -5,6 +5,10 @@ import {AreaEnum} from '../model/area.enum';
 import {UtilService} from '../../../core/service/util.service';
 import {UserDetail} from '../../user/model/user';
 import {Area} from '../model/area';
+import {BaseComponent} from '../../../core/base.component';
+import {TranslateService} from '@ngx-translate/core';
+import {AppTranslateService} from '../../../core/service/translate.service';
+import {startWith, switchMap, takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'aw-area-form',
@@ -12,7 +16,7 @@ import {Area} from '../model/area';
   styles: [
   ]
 })
-export class AreaFormComponent implements OnInit, OnChanges {
+export class AreaFormComponent extends BaseComponent implements OnInit, OnChanges {
   areaForm: FormGroup;
   readonly priorityList = [
     { label: '1', value: 1 },
@@ -24,19 +28,33 @@ export class AreaFormComponent implements OnInit, OnChanges {
     { label: '7', value: 7 }
   ];
 
-  readonly areaStatus = [
-    { label: 'Hoạt động', value: AreaEnum.STATUS_ACTIVE },
-    { label: 'Không hoạt động', value: AreaEnum.STATUS_INACTIVE }
-  ];
+  areaStatus = [];
 
   @Input() mode = 'create';
   @Input() valueForm: Area;
   @Output() save: EventEmitter<any> = new EventEmitter<any>();
-  constructor(private fb: FormBuilder, private router: Router, private util: UtilService) {
+  constructor(
+      private fb: FormBuilder,
+      private router: Router,
+      private util: UtilService,
+      private translate: TranslateService,
+      private appTranslate: AppTranslateService
+  ) {
+    super();
     this.initForm();
   }
 
   ngOnInit(): void {
+    this.appTranslate.languageChanged$.pipe(
+        takeUntil(this.nextOnDestroy),
+        startWith(''),
+        switchMap(_ => this.translate.get('area.const'))
+    ).subscribe(res => {
+      this.areaStatus = [
+        { label: res.active, value: AreaEnum.STATUS_ACTIVE },
+        { label: res.inactive, value: AreaEnum.STATUS_INACTIVE }
+      ];
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -60,7 +78,6 @@ export class AreaFormComponent implements OnInit, OnChanges {
     } else {
       this.util.validateAllFields(this.areaForm);
     }
-    console.log(this.areaForm.getRawValue());
   }
 
   doCancel() {

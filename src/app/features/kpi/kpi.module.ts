@@ -33,6 +33,15 @@ import { KpiUpdateComponent } from './kpi-update/kpi-update.component';
 import { KpiInfoComponent } from './kpi-info/kpi-info.component';
 import { KpiFilterComponent } from './kpi-filter/kpi-filter.component';
 import {CheckboxModule} from 'primeng/checkbox';
+import {BaseModule} from '../../core/base-module';
+import {MissingTranslationHandler, TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {Router} from '@angular/router';
+import {CustomMissingTranslationHandler} from '../../core/translate.missing';
+import {AppTranslateService} from '../../core/service/translate.service';
+import {CustomTranslateLoader, LANGUAGE_FILE_PATH} from '../../core/translate.loader';
+import {HttpClient} from '@angular/common/http';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
+import { KpiDetailDataComponent } from './kpi-detail-data/kpi-detail-data.component';
 
 @NgModule({
   declarations: [
@@ -49,29 +58,53 @@ import {CheckboxModule} from 'primeng/checkbox';
     KpiDetailComponent,
     KpiUpdateComponent,
     KpiInfoComponent,
-    KpiFilterComponent
+    KpiFilterComponent,
+    KpiDetailDataComponent
   ],
-    imports: [
-        CommonModule,
-        KpiRoutingModule,
-        TabViewModule,
-        PanelModule,
-        TableModule,
-        ButtonModule,
-        ToolbarModule,
-        ReactiveFormsModule,
-        InputTextModule,
-        DropdownModule,
-        ToastModule,
-        CustomFileUploadModule,
-        CalendarModule,
-        PaginatorModule,
-        CheckboxModule
-    ],
+  imports: [
+    CommonModule,
+    KpiRoutingModule,
+    TabViewModule,
+    PanelModule,
+    TableModule,
+    ButtonModule,
+    ToolbarModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    DropdownModule,
+    ToastModule,
+    CustomFileUploadModule,
+    CalendarModule,
+    PaginatorModule,
+    CheckboxModule,
+    TranslateModule.forChild({
+      missingTranslationHandler: {
+        provide: MissingTranslationHandler,
+        useClass: CustomMissingTranslationHandler,
+        deps: [AppTranslateService]
+      },
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (CustomTranslateLoader),
+        deps: [LANGUAGE_FILE_PATH, HttpClient]
+      },
+      isolate: true,
+      useDefaultLang: false
+    }),
+    BreadcrumbModule,
+  ],
   providers: [
     KpiService,
     MessageService,
-    DialogService
+    DialogService,
+    {
+      provide: LANGUAGE_FILE_PATH,
+      useValue: {path: './assets/i18n/kpi/'}
+    },
   ]
 })
-export class KpiModule { }
+export class KpiModule extends BaseModule {
+  constructor(translateService: TranslateService, router: Router) {
+    super(translateService, router);
+  }
+}

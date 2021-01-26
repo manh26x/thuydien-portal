@@ -5,6 +5,12 @@ import {TagDetail} from '../../tags/model/tags';
 import {PageChangeEvent} from '../../../shared/model/page-change-event';
 import {Router} from '@angular/router';
 import {KpiReport} from '../model/kpi';
+import {BaseComponent} from '../../../core/base.component';
+import {TranslateService} from '@ngx-translate/core';
+import {AppTranslateService} from '../../../core/service/translate.service';
+import {startWith, switchMap, takeUntil} from 'rxjs/operators';
+import {FeatureEnum} from '../../../shared/model/feature.enum';
+import {RoleEnum} from '../../../shared/model/role';
 
 @Component({
   selector: 'aw-kpi-data',
@@ -12,7 +18,7 @@ import {KpiReport} from '../model/kpi';
   styles: [
   ]
 })
-export class KpiDataComponent implements OnInit {
+export class KpiDataComponent extends BaseComponent implements OnInit {
   @Input() kpiList = [];
   @Input() set tagKpiList(data: TagDetail[]) {
     const clone = [...data];
@@ -25,18 +31,37 @@ export class KpiDataComponent implements OnInit {
   @Output() delete: EventEmitter<any> = new EventEmitter<any>();
   pageSize = 10;
   page = 0;
-  statusList = [
-    { label: 'Tất cả', value: null },
-    { label: 'Hoạt động', value: KpiEnum.STATUS_ACTIVE },
-    { label: 'Không hoạt động', value: KpiEnum.STATUS_INACTIVE }
-  ];
+  statusList = [];
   formFilter: FormGroup;
   kpiConst = KpiEnum;
-  constructor(private fb: FormBuilder, private router: Router) {
+  @Input() isHasEdit: boolean;
+  @Input() isHasDel: boolean;
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private translate: TranslateService,
+    private appTranslate: AppTranslateService
+  ) {
+    super();
     this.initForm();
+    this.appTranslate.languageChanged$.pipe(
+      takeUntil(this.nextOnDestroy),
+      startWith(''),
+      switchMap(_ => this.translate.get('kpi.const'))
+    ).subscribe(res => {
+      this.statusList = [
+        { label: res.all, value: null },
+        { label: res.active, value: KpiEnum.STATUS_ACTIVE },
+        { label: res.inactive, value: KpiEnum.STATUS_INACTIVE }
+      ];
+    });
   }
 
   ngOnInit(): void {
+  }
+
+  gotoDetailData(kpi: KpiReport) {
+    this.router.navigate(['management-kpi', 'detail-data', kpi.id]);
   }
 
   doDelete(kpi: KpiReport) {

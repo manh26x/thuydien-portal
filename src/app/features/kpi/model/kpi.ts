@@ -1,5 +1,4 @@
 import {EventEmitter} from '@angular/core';
-import {Area} from './area';
 
 export interface Kpi {
   area?: string;
@@ -12,6 +11,7 @@ export interface Kpi {
   misCodeCBKD?: string;
   misCodeManagement?: string;
   recordData?: string;
+  data?: string;
 }
 
 export interface KpiImportData {
@@ -67,4 +67,9 @@ export interface KpiDetail {
 export interface KpiUpdateRequest {
   id: number;
   listKPITitle: KpiArea[];
+}
+
+export interface KpiReportDetail {
+  infoAndTitle?: KpiReport;
+  data?: Kpi[];
 }

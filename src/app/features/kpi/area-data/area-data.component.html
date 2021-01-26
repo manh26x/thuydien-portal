@@ -2,13 +2,13 @@
 <p-table [value]="data">
   <ng-template pTemplate="header">
     <tr>
-      <th style="width: 50px;">STT</th>
-      <th>Phân vùng dữ liệu</th>
-      <th>Màu sắc</th>
-      <th>Trạng thái</th>
-      <th>Độ ưu tiên</th>
+      <th style="width: 50px;">{{'no' | translate}}</th>
+      <th>{{'area.name' | translate}}</th>
+      <th>{{'area.color' | translate}}</th>
+      <th>{{'area.status' | translate}}</th>
+      <th>{{'area.priotity' | translate}}</th>
       <th>
-        <button (click)="gotoCreate()" pButton type="button" label="Thêm mới" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
+        <button (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
       </th>
     </tr>
   </ng-template>
@@ -22,25 +22,33 @@
       </td>
       <td>
         <ng-container [ngSwitch]="area.status">
-          <div *ngSwitchCase="areaConst.STATUS_ACTIVE">Hoạt động</div>
-          <div *ngSwitchCase="areaConst.STATUS_INACTIVE" class="p-invalid">Không hoạt động</div>
+          <div *ngSwitchCase="areaConst.STATUS_ACTIVE">{{'area.const.active' | translate}}</div>
+          <div *ngSwitchCase="areaConst.STATUS_INACTIVE" class="p-invalid">{{'area.const.inactive' | translate}}</div>
           <div *ngSwitchDefault>-</div>
         </ng-container>
       </td>
       <td>{{area.priority}}</td>
 
       <td>
-        <button (click)="gotoUpdate(area)" pButton
+        <button *ngIf="isHasEdit" (click)="gotoUpdate(area)" pButton
                 type="button"
                 icon="pi pi-pencil"
                 class="p-button-rounded p-button-secondary p-button-text">
         </button>
-        <button (click)="doDelete(area)" pButton
+        <button *ngIf="isHasDel" (click)="doDelete(area)" pButton
                 type="button"
                 icon="pi pi-trash"
                 class="p-button-rounded p-button-danger p-button-text">
 
         </button>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="6">
+        {{'noData' | translate}}
       </td>
     </tr>
   </ng-template>

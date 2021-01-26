@@ -34,8 +34,8 @@ export class KpiDetailComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.kpiService.setPage('kpi', 'kpiDetail');
     this.indicator.showActivityIndicator();
-
     this.route.paramMap.pipe(
       takeUntil(this.nextOnDestroy),
       map(res => res.get('id')),

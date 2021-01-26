@@ -1,10 +1,10 @@
-<p-panel header="Danh sách KPI" styleClass="p-mt-3">
+<p-panel header="{{'kpi.list' | translate}}" styleClass="p-mt-3">
   <div class="p-grid p-fluid">
     <div class="p-md-9 p-col-8 p-field">
       <input pInputText type="text" id="s-value"/>
     </div>
     <div class="p-md-3 p-col-4 p-field">
-      <button pButton type="button" label="Lọc kết quả" class="p-button-secondary" style="height: 46px"></button>
+      <button pButton type="button" label="{{'btn.filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
     </div>
   </div>
 
@@ -13,10 +13,11 @@
            [rows]="10"
            [totalRecords]="kpiList.length"
            [rowsPerPageOptions]="[10, 20, 50, 100]"
-           [showCurrentPageReport]="true">
+           [showCurrentPageReport]="true"
+           currentPageReportTemplate="{{ 'paging' | translate }}">
     <ng-template pTemplate="header">
       <tr>
-        <th style="width: 50px;">STT</th>
+        <th style="width: 50px;">{{'no' | translate}}</th>
         <th style="width: 200px;" *ngFor="let title of titleList">{{title.header}}</th>
       </tr>
     </ng-template>
@@ -28,9 +29,13 @@
     </ng-template>
   </p-table>
 
-  <div class="p-text-center p-mt-3">
+  <div *ngIf="showBtnAction else noAction" class="p-text-center p-mt-3">
     <button (click)="doCancel()" pButton type="button" label="Refresh" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
-    <button (click)="doSave()" pButton type="button"
-      label="Lưu kết quả" class="p-button-raised p-button-secondary"></button>
+    <button (click)="doSave()" pButton type="button" label="{{'btn.save' | translate}}" class="p-button-raised p-button-secondary"></button>
   </div>
+  <ng-template #noAction>
+    <div class="p-text-right p-mt-3">
+      <button (click)="doBack()" pButton type="button" label="{{'btn.back' | translate}}" class="p-button-secondary"></button>
+    </div>
+  </ng-template>
 </p-panel>

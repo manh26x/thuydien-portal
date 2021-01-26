@@ -1,23 +1,20 @@
-<p-panel header="Quản lý báo cáo KPI">
-  <p-tabView (onChange)="doChangeTab($event)" [activeIndex]="initActiveIndex">
-    <p-tabPanel header="Import KPI">
+<p-panel header="{{'kpi.manage' | translate}}">
+  <p-tabView #tabView (onChange)="doChangeTab($event)" [activeIndex]="initActiveIndex">
+    <p-tabPanel header="{{'kpi.import' | translate}}" [disabled]="isNotImport">
       <aw-kpi-import [tagKpiList]="tagKpiList" (checkFile)="doCheckFile($event)"></aw-kpi-import>
     </p-tabPanel>
-    <p-tabPanel header="Danh sách báo cáo KPI">
-      <aw-kpi-data [kpiList]="kpiReportList"
+    <p-tabPanel header="{{'kpi.listReport' | translate}}" [disabled]="isNotView">
+      <aw-kpi-data [isHasEdit]="isHasEdit" [isHasDel]="isHasDel" [kpiList]="kpiReportList"
                    [totalItem]="totalReportKpi"
                    [tagKpiList]="tagKpiList"
                    (delete)="doDeleteKpi($event)"
                    (filter)="doFilterKpiReport($event)">
       </aw-kpi-data>
     </p-tabPanel>
-    <p-tabPanel header="Danh sách phân vùng dữ liệu">
-      <aw-area-data [data]="areaList" (delete)="doDeleteArea($event)"></aw-area-data>
+    <p-tabPanel header="{{'kpi.listArea' | translate}}" [disabled]="isNotView">
+      <aw-area-data [isHasEdit]="isHasEdit" [isHasDel]="isHasDel" [data]="areaList" (delete)="doDeleteArea($event)"></aw-area-data>
     </p-tabPanel>
   </p-tabView>
 </p-panel>
 
 <ng-template awKpi></ng-template>
-
-<p-toast key="kpi-msg"></p-toast>
-

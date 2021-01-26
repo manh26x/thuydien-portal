@@ -5,6 +5,7 @@ import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {finalize} from 'rxjs/operators';
 import {MessageService} from 'primeng/api';
 import {Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'aw-area-create',
@@ -18,10 +19,12 @@ export class AreaCreateComponent implements OnInit {
     private kpiService: KpiService,
     private indicator: IndicatorService,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) { }
 
   ngOnInit(): void {
+    this.kpiService.setPage('area', 'areaCreate');
   }
 
   doSave(value): void {
@@ -35,10 +38,9 @@ export class AreaCreateComponent implements OnInit {
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe((res) => {
       this.messageService.add({
-        key: 'area-msg',
         severity: 'success',
         summary: '',
-        detail: 'Thêm mới phân vùng dữ liệu thành công'
+        detail: this.translate.instant('area.addNewSuccess')
       });
       this.router.navigate(['management-kpi', 'report']);
     });

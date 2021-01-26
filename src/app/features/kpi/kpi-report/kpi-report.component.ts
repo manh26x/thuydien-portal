@@ -1,9 +1,9 @@
-import {Component, ComponentFactoryResolver, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ComponentFactoryResolver, OnInit, ViewChild} from '@angular/core';
 import {KpiService} from '../service/kpi.service';
 import {AreaEnum} from '../model/area.enum';
 import {Area} from '../model/area';
 import {BaseComponent} from '../../../core/base.component';
-import {finalize, map, takeUntil} from 'rxjs/operators';
+import {delay, finalize, map, startWith, takeUntil} from 'rxjs/operators';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {TagDetail} from '../../tags/model/tags';
@@ -15,6 +15,12 @@ import {KpiPreviewItem} from '../model/kpi-preview-item';
 import {KpiReport, KpiTableComponent} from '../model/kpi';
 import {KpiImportComponent} from '../kpi-import/kpi-import.component';
 import {forkJoin} from 'rxjs';
+import {TranslateService} from '@ngx-translate/core';
+import {AppTranslateService} from '../../../core/service/translate.service';
+import {TabView} from 'primeng/tabview';
+import {AuthService} from '../../../auth/auth.service';
+import {FeatureEnum} from '../../../shared/model/feature.enum';
+import {RoleEnum} from '../../../shared/model/role';
 
 @Component({
   selector: 'aw-kpi-report',
@@ -22,10 +28,11 @@ import {forkJoin} from 'rxjs';
   styles: [
   ]
 })
-export class KpiReportComponent extends BaseComponent implements OnInit {
+export class KpiReportComponent extends BaseComponent implements OnInit, AfterViewInit {
   @ViewChild(KpiDirective, {static: true}) kpiPreviewHost: KpiDirective;
   @ViewChild(KpiImportComponent, {static: true}) kpiImport: KpiImportComponent;
-  initActiveIndex = this.kpiService.kpiReportActiveTab;
+  @ViewChild('tabView') tabView: TabView;
+  initActiveIndex: number;
   // data
   areaList: Area[] = [];
   tagKpiList: TagDetail[] = [];
@@ -33,6 +40,10 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
   totalReportKpi = 0;
   isImportSuccess = false;
   stateFilter: any;
+  isNotView: boolean;
+  isNotImport: boolean;
+  isHasEdit: boolean;
+  isHasDel: boolean;
   constructor(
     private kpiService: KpiService,
     private indicator: IndicatorService,
@@ -40,7 +51,10 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
     private messageService: MessageService,
     private dialogService: DialogService,
     private util: UtilService,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private translate: TranslateService,
+    private appTranslate: AppTranslateService,
+    private auth: AuthService
   ) {
     super();
     this.stateFilter = {
@@ -51,9 +65,19 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
       reportType: '',
       status: null
     };
+    this.isNotView = !this.auth.isHasRole(FeatureEnum.KPI, RoleEnum.ACTION_VIEW);
+    this.isNotImport = !this.auth.isHasRole(FeatureEnum.KPI, RoleEnum.ACTION_IMPORT);
+    this.isHasEdit = this.auth.isHasRole(FeatureEnum.KPI, RoleEnum.ACTION_INSERT);
+    this.isHasDel = this.auth.isHasRole(FeatureEnum.KPI, RoleEnum.ACTION_DELETE);
+    if (this.isNotImport && this.kpiService.kpiReportActiveTab === 0) {
+      this.initActiveIndex = 1;
+    } else {
+      this.initActiveIndex = this.kpiService.kpiReportActiveTab;
+    }
   }
 
   ngOnInit(): void {
+    this.kpiService.setPage('', '');
     this.indicator.showActivityIndicator();
     const obsTagKpi = this.kpiService.getTagKpi();
     const obsKpiReport = this.kpiService.filterKpiReport(this.stateFilter);
@@ -66,6 +90,16 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
       this.kpiReportList = res[1].listKpi;
       this.totalReportKpi = res[1].totalRecord;
       this.areaList = res[2];
+    });
+  }
+
+  ngAfterViewInit() {
+    this.appTranslate.languageChanged$.pipe(
+      startWith(''),
+      delay(100),
+      takeUntil(this.nextOnDestroy)
+    ).subscribe(_ => {
+      this.tabView.cd.markForCheck();
     });
   }
 
@@ -165,7 +199,6 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
         ).subscribe((saveRes) => {
           this.isImportSuccess = true;
           this.messageService.add({
-            key: 'kpi-msg',
             severity: 'success',
             detail: 'Import KPI thành công'
           });
@@ -179,18 +212,17 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
   doDeleteKpi(kpi: KpiReport) {
     this.confirmDialog.confirm({
       key: 'globalDialog',
-      header: 'Xác nhận xóa',
-      message: 'Bạn có chắc chắn xóa KPI',
-      acceptLabel: 'Đồng ý',
-      rejectLabel: 'Hủy',
+      header: this.translate.instant('message.confirmDel'),
+      message: this.translate.instant('message.delKpi'),
+      acceptLabel: this.translate.instant('message.accept'),
+      rejectLabel: this.translate.instant('message.reject'),
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.indicator.showActivityIndicator();
         this.kpiService.deleteKpi(kpi.id).subscribe(res => {
           this.messageService.add({
-            key: 'kpi-msg',
             severity: 'success',
-            detail: 'Xóa KPI thành công'
+            detail: this.translate.instant('message.delSuccess')
           });
         });
         this.doFilterKpiReport(this.stateFilter);
@@ -202,18 +234,17 @@ export class KpiReportComponent extends BaseComponent implements OnInit {
   doDeleteArea(area: Area) {
     this.confirmDialog.confirm({
       key: 'globalDialog',
-      header: 'Xác nhận xóa',
-      message: 'Bạn có chắc chắn xóa vùng dữ liệu ' + area.name,
-      acceptLabel: 'Đồng ý',
-      rejectLabel: 'Hủy',
+      header: this.translate.instant('message.confirmDel'),
+      message: this.translate.instant('message.delArea'),
+      acceptLabel: this.translate.instant('message.accept'),
+      rejectLabel: this.translate.instant('message.reject'),
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.indicator.showActivityIndicator();
         this.kpiService.deleteArea(area.id).subscribe((res) => {
           this.messageService.add({
-            key: 'kpi-msg',
             severity: 'success',
-            detail: 'Xóa vùng dữ liệu thành công'
+            detail: this.translate.instant('message.delSuccess')
           });
           this.getAllArea();
         });

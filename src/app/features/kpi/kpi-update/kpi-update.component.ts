@@ -50,8 +50,8 @@ export class KpiUpdateComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.kpiService.setPage('kpi', 'kpiUpdate');
     this.indicator.showActivityIndicator();
-
     this.route.paramMap.pipe(
       takeUntil(this.nextOnDestroy),
       map(res => res.get('id')),
@@ -107,7 +107,6 @@ export class KpiUpdateComponent extends BaseComponent implements OnInit {
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe(_ => {
       this.messageService.add({
-        key: 'kpi-update-msg',
         severity: 'success',
         summary: '',
         detail: 'Cập mhật KPI thành công'

@@ -9,8 +9,10 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class KpiPreviewComponent implements OnInit {
   @Input() kpiList = [];
   @Input() titleList = [];
+  @Input() showBtnAction = true;
   @Output() save: EventEmitter<any> = new EventEmitter<any>();
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
+  @Output() back: EventEmitter<any> = new EventEmitter<any>();
   constructor() { }
 
   ngOnInit(): void {
@@ -22,6 +24,10 @@ export class KpiPreviewComponent implements OnInit {
 
   doCancel() {
     this.cancel.emit();
+  }
+
+  doBack() {
+    this.back.emit();
   }
 
 }

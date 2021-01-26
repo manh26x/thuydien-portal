@@ -13,6 +13,8 @@ export class AreaDataComponent implements OnInit {
   areaConst = AreaEnum;
   @Input() data: Area[] = [];
   @Output() delete: EventEmitter<any> = new EventEmitter<any>();
+  @Input() isHasEdit: boolean;
+  @Input() isHasDel: boolean;
   constructor(
     private router: Router
   ) { }

@@ -6,22 +6,22 @@
       [options]="tagKpiList"
       [autoDisplayFirst]="false" optionLabel="value" dataKey="keyTag">
     </p-dropdown>
-    <span class="p-mt-2 p-d-block"> Tải về tệp tin mẫu
-      <a href="assets/resource/5002_KPIs%20Performance%20Report_202004_PBO_089_Final.xlsx" target="_blank"> Tại đây</a>
+    <span class="p-mt-2 p-d-block"> {{'kpi.patternFile' | translate}}
+      <a href="assets/resource/5002_KPIs%20Performance%20Report_202004_PBO_089_Final.xlsx" target="_blank"> {{'kpi.atHere' | translate}}</a>
     </span>
     <small *ngIf="reportType.invalid && reportType.dirty" class="p-invalid">
-      Giá trị không được để trống
+      {{'invalid.required' | translate}}
     </small>
   </div>
   <div class="p-col-12 p-md-6 p-field">
     <label>File Import</label>
-    <aw-input-upload (changeFile)="doChangeFile($event)" selectLabel="Tải lên"></aw-input-upload>
+    <aw-input-upload (changeFile)="doChangeFile($event)" selectLabel="{{'kpi.upload' | translate}}"></aw-input-upload>
   </div>
 </div>
 
 <div class="p-grid">
   <div class="p-col-12 p-md-12 p-text-center">
-    <button (click)="doCheckFile()" pButton type="button" label="Kiểm tra dữ liệu" class="p-button-secondary"></button>
+    <button (click)="doCheckFile()" pButton type="button" label="{{'btn.checkData' | translate}}" class="p-button-secondary"></button>
   </div>
 </div>
 
