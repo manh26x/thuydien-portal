@@ -133,4 +133,8 @@ export class KpiUpdateComponent extends BaseComponent implements OnInit {
     });
   }
 
+  goBack() {
+    this.router.navigate(['management-kpi', 'report']);
+  }
+
 }
