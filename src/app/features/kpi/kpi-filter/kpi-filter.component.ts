@@ -18,7 +18,7 @@ export class KpiFilterComponent extends BaseComponent implements OnInit {
   viewAllowOption = [];
   @Input() set areaList(data: Area[]) {
     const clone = [...data];
-    clone.unshift({id: null, color: '', name: this.translate.instant('kpi.const.all')});
+    clone.unshift({id: null, color: '', name: this.appTranslate.getTranslate('const.all')});
     this.areaListOption = clone;
   }
   @Output() filter: EventEmitter<any> = new EventEmitter<any>();

@@ -20,7 +20,7 @@ export class KpiDataComponent extends BaseComponent implements OnInit {
   @Input() kpiList = [];
   @Input() set tagKpiList(data: TagDetail[]) {
     const clone = [...data];
-    clone.unshift({keyTag: '', value: this.translate.instant('kpi.const.all')});
+    clone.unshift({keyTag: '', value: this.appTranslate.getTranslate('const.all')});
     this.tagKpi = clone;
   }
   tagKpi: TagDetail[] = [];
