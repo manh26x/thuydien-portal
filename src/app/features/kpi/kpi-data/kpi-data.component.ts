@@ -9,8 +9,6 @@ import {BaseComponent} from '../../../core/base.component';
 import {TranslateService} from '@ngx-translate/core';
 import {AppTranslateService} from '../../../core/service/translate.service';
 import {startWith, switchMap, takeUntil} from 'rxjs/operators';
-import {FeatureEnum} from '../../../shared/model/feature.enum';
-import {RoleEnum} from '../../../shared/model/role';
 
 @Component({
   selector: 'aw-kpi-data',
@@ -22,7 +20,7 @@ export class KpiDataComponent extends BaseComponent implements OnInit {
   @Input() kpiList = [];
   @Input() set tagKpiList(data: TagDetail[]) {
     const clone = [...data];
-    clone.unshift({keyTag: '', value: 'Tất cả'});
+    clone.unshift({keyTag: '', value: this.translate.instant('kpi.const.all')});
     this.tagKpi = clone;
   }
   tagKpi: TagDetail[] = [];
