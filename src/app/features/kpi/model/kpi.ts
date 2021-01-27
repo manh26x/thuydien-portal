@@ -12,6 +12,7 @@ export interface Kpi {
   misCodeManagement?: string;
   recordData?: string;
   data?: string;
+  tbpTPKDNumber?: number;
 }
 
 export interface KpiImportData {
@@ -43,6 +44,7 @@ export interface KpiReport {
   createDate?: Date;
   modifyDate?: Date;
   status?: number;
+  tagName?: string;
 }
 
 export interface KpiFilterResponse {

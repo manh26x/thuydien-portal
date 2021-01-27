@@ -19,7 +19,7 @@ export class KpiImportComponent extends BaseComponent implements OnInit {
   reportType: FormControl = new FormControl('', Validators.required);
   @Input() tagKpiList: TagDetail[] = [];
   @Output() checkFile: EventEmitter<any> = new EventEmitter<any>();
-  constructor() {
+  constructor(private util: UtilService) {
     super();
   }
 
@@ -30,7 +30,7 @@ export class KpiImportComponent extends BaseComponent implements OnInit {
   }
 
   doCheckFile() {
-    if (this.fileImport && this.reportType.valid) {
+    if (this.fileImport && this.reportType.valid && this.fileImport[0]) {
       this.checkFile.emit({ file: this.fileImport, reportType: this.reportType.value });
     } else {
       this.reportType.markAsDirty();

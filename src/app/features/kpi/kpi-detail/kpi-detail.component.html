@@ -36,7 +36,11 @@
         <td>
           <p-checkbox [disabled]="true" name="allowView" [value]="item" [(ngModel)]="kpiAreaSelectedList"></p-checkbox>
         </td>
-        <td>{{item.displayOrder}}</td>
+        <td>
+          <ng-container *ngIf="item.displayOrder > 0">
+            {{item.displayOrder}}
+          </ng-container>
+        </td>
       </tr>
     </ng-template>
 

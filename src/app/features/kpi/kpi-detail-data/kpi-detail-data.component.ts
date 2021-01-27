@@ -49,8 +49,8 @@ export class KpiDetailDataComponent extends BaseComponent implements OnInit {
                     case 'employeePosition': { titleList.push({ field: key, header: 'Chức danh/ Bộ phân' }); break; }
                     case 'fullName': { titleList.push({ field: key, header: 'Họ & tên' }); break; }
                     case 'laborContractStatus': { titleList.push({ field: key, header: 'Trạng thái hợp đồng' }); break; }
-                    case 'misCodeCBKD': { titleList.push({ field: key, header: 'Miscode CBKD' }); break; }
-                    case 'misCodeManagement': { titleList.push({ field: key, header: 'Miscode của trưởng nhóm quản lý' }); break; }
+                    case 'misCodeCBKD': { titleList.push({ field: key, header: 'Username CBKD' }); break; }
+                    case 'misCodeManagement': { titleList.push({ field: key, header: 'Username của trưởng nhóm quản lý' }); break; }
                   }
                 });
                 res.infoAndTitle.recordData.split('||').forEach((titleValue, titleIndex) => {
@@ -60,7 +60,9 @@ export class KpiDetailDataComponent extends BaseComponent implements OnInit {
                   }
                 });
               }
-              const dataMapped: any = {...kpi};
+              // search value
+              const searchValue = `${kpi.employeeNumber} ${kpi.fullName} ${kpi.misCodeCBKD} ${kpi.misCodeManagement} ${kpi.tbpTPKDNumber} ${kpi.laborContractStatus} ${kpi.employeePosition} ${kpi.branchCode} ${kpi.branchName} ${kpi.area}`;
+              const dataMapped: any = {...kpi, searchNg: searchValue};
               kpi.data.split('||').forEach((dataValue, index) => {
                 dataMapped[index] = dataValue;
               });

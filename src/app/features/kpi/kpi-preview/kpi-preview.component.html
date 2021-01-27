@@ -1,19 +1,24 @@
 <p-panel header="{{'kpi.list' | translate}}" styleClass="p-mt-3">
   <div class="p-grid p-fluid">
     <div class="p-md-9 p-col-8 p-field">
-      <input pInputText type="text" id="s-value"/>
+      <input pInputText
+             (keyup.enter)="doFilter()"
+             [formControl]="searchValue"
+             placeholder="Nhập SHNV, Họ & Tên, Username CBKD, Username của Trưởng nhóm quản lý,..."
+             type="text" id="search-value"/>
     </div>
     <div class="p-md-3 p-col-4 p-field">
-      <button pButton type="button" label="{{'btn.filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
+      <button (click)="doFilter()" pButton type="button" label="{{'btn.filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
     </div>
   </div>
 
-  <p-table [value]="kpiList" styleClass="table-responsive"
+  <p-table #tableKpi [value]="kpiList" styleClass="table-responsive"
            [paginator]="true"
            [rows]="10"
            [totalRecords]="kpiList.length"
            [rowsPerPageOptions]="[10, 20, 50, 100]"
            [showCurrentPageReport]="true"
+           [globalFilterFields]="['searchNg']"
            currentPageReportTemplate="{{ 'paging' | translate }}">
     <ng-template pTemplate="header">
       <tr>
@@ -25,6 +30,14 @@
       <tr>
         <td>{{index + 1}}</td>
         <td *ngFor="let title of titleList">{{kpi[title.field]}}</td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="6">
+          {{'noData' | translate}}
+        </td>
       </tr>
     </ng-template>
   </p-table>

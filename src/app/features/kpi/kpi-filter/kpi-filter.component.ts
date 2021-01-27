@@ -5,7 +5,6 @@ import {BaseComponent} from '../../../core/base.component';
 import {TranslateService} from '@ngx-translate/core';
 import {AppTranslateService} from '../../../core/service/translate.service';
 import {startWith, switchMap, takeUntil} from 'rxjs/operators';
-import {KpiEnum} from '../model/kpi.enum';
 
 @Component({
   selector: 'aw-kpi-filter',
