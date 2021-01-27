@@ -51,7 +51,7 @@
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
       <label for="n-unit">{{'user.unit' | translate}} <span class="p-invalid">*</span></label>
-      <p-dropdown [filter]="true" formControlName="unit" inputId="n-unit" [options]="unitList" optionLabel="name" dataKey="id"></p-dropdown>
+      <p-dropdown [autoDisplayFirst]="false" [filter]="true" formControlName="unit" inputId="n-unit" [options]="unitList" optionLabel="name" dataKey="id"></p-dropdown>
       <small *ngIf="hasErrorInput('unit', 'required')" class="p-invalid">
         {{'invalid.unit.required' | translate}}
       </small>
@@ -79,7 +79,7 @@
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
       <label for="n-department">{{'user.department' | translate}} <span class="p-invalid">*</span></label>
-      <p-dropdown [filter]="true" formControlName="department" inputId="n-department" [options]="departmentList" optionLabel="name" dataKey="id"></p-dropdown>
+      <p-dropdown [autoDisplayFirst]="false" [filter]="true" formControlName="department" inputId="n-department" [options]="departmentList" optionLabel="name" dataKey="id"></p-dropdown>
       <small *ngIf="hasErrorInput('department', 'required')" class="p-invalid">
         {{'invalid.department.required' | translate}}
       </small>

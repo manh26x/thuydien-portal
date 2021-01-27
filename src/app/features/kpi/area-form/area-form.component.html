@@ -6,6 +6,9 @@
       <small *ngIf="hasErrorInput('name', 'required')" class="p-invalid">
         {{'invalid.required' | translate}}
       </small>
+      <small *ngIf="hasErrorInput('name', 'maxlength')" class="p-invalid">
+        {{ 'invalid.maxLength' | translate:{length: 300} }}
+      </small>
     </div>
 
     <div class="p-md-6 p-col-12 p-field">

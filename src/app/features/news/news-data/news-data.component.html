@@ -26,7 +26,7 @@
       <button (click)="getListNews()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
     </div>
   </form>
-  <p-table [value]="newsList" styleClass="table-responsive"
+  <p-table [value]="newsList" dataKey="id" styleClass="table-responsive"
            [customSort]="true"
            [autoLayout]="true"
            [lazy]="true"
@@ -91,16 +91,15 @@
         </td>
         <td>
           <button (click)="gotoView(news.id)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
-          <button *ngIf="isHasEdit" (click)="gotoUpdate(news.id)" pButton
+          <button *ngIf="isHasEdit && news.status != newsConst.STATUS_DELETED" (click)="gotoUpdate(news.id)" pButton
                   type="button"
                   icon="pi pi-pencil"
                   class="p-button-rounded p-button-secondary p-button-text">
           </button>
-          <button *ngIf="isHasDel" (click)="doDelete(news)" pButton
+          <button *ngIf="isHasDel && news.status != newsConst.STATUS_DELETED" (click)="doDelete(news)" pButton
                   type="button"
                   icon="pi pi-trash"
                   class="p-button-rounded p-button-danger p-button-text">
-
           </button>
         </td>
       </tr>
