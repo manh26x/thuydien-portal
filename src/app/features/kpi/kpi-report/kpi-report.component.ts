@@ -21,6 +21,7 @@ import {TabView} from 'primeng/tabview';
 import {AuthService} from '../../../auth/auth.service';
 import {FeatureEnum} from '../../../shared/model/feature.enum';
 import {RoleEnum} from '../../../shared/model/role';
+import {KpiDataComponent} from '../kpi-data/kpi-data.component';
 
 @Component({
   selector: 'aw-kpi-report',
@@ -29,9 +30,10 @@ import {RoleEnum} from '../../../shared/model/role';
   ]
 })
 export class KpiReportComponent extends BaseComponent implements OnInit, AfterViewInit {
-  @ViewChild(KpiDirective, {static: true}) kpiPreviewHost: KpiDirective;
-  @ViewChild(KpiImportComponent, {static: true}) kpiImport: KpiImportComponent;
+  @ViewChild(KpiDirective) kpiPreviewHost: KpiDirective;
+  @ViewChild(KpiImportComponent) kpiImport: KpiImportComponent;
   @ViewChild('tabView') tabView: TabView;
+  @ViewChild(KpiDataComponent) kpiData: KpiDataComponent;
   initActiveIndex: number;
   // data
   areaList: Area[] = [];
@@ -57,14 +59,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
     private auth: AuthService
   ) {
     super();
-    this.stateFilter = {
-      page: 0,
-      pageSize: 10,
-      createDate: null,
-      modifyDate: null,
-      reportType: '',
-      status: null
-    };
+    this.stateFilter = {page: 0, pageSize: 10, createDate: null, modifyDate: null, reportType: '', status: null};
     this.isNotView = !this.auth.isHasRole(FeatureEnum.KPI, RoleEnum.ACTION_VIEW);
     this.isNotImport = !this.auth.isHasRole(FeatureEnum.KPI, RoleEnum.ACTION_IMPORT);
     this.isHasEdit = this.auth.isHasRole(FeatureEnum.KPI, RoleEnum.ACTION_INSERT);
@@ -101,6 +96,21 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
     ).subscribe(_ => {
       this.tabView.cd.markForCheck();
     });
+  }
+
+  refreshData() {
+    switch (this.kpiService.kpiReportActiveTab) {
+      case 0: { this.kpiImport.clearForm(); break; }
+      case 1: {
+        this.kpiData.initForm();
+        this.doFilterKpiReport({page: 0, pageSize: 10, createDate: null, modifyDate: null, reportType: '', status: null});
+        break;
+      }
+      case 2: {
+        this.getAllArea();
+        break;
+      }
+    }
   }
 
   doChangeTab(evt) {
