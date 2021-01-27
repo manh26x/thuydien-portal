@@ -44,6 +44,7 @@ export interface KpiReport {
   createDate?: Date;
   modifyDate?: Date;
   status?: number;
+  tagName?: string;
 }
 
 export interface KpiFilterResponse {
