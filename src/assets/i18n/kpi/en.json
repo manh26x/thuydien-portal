@@ -33,6 +33,7 @@
 		"update": "Update"
 	},
 	"invalid": {
+		"maxLength": "The value must not exceed {{length}} characters",
 		"required": "Value cannot be blank"
 	},
 	"kpi": {
@@ -61,6 +62,7 @@
 		"orderDisplay": "Display order",
 		"patternFile": "Download the sample file",
 		"selectArea": "Select the data area",
+		"selectType": "Select the KPI report type",
 		"status": "Status",
 		"typeReport": "KPI report type",
 		"update": "Edit KPI Dashboard",
@@ -69,7 +71,7 @@
 	"message": {
 		"accept": "Yes",
 		"confirmDel": "Confirm Delete",
-		"delArea": "Are you sure you delete the record?",
+		"delArea": "Are you sure you delete the \"{{name}}\"?",
 		"delKpi": "If you delete, the KPI report will change to Expired. Are you sure you want to delete?",
 		"delSuccess": "Successful record deletion",
 		"reject": "No"

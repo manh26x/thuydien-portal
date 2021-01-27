@@ -73,8 +73,12 @@ export class AreaFormComponent extends BaseComponent implements OnInit, OnChange
   }
 
   doSave() {
+    const value = this.areaForm.getRawValue();
+    this.areaForm.patchValue({
+      name: value.name?.trim()
+    });
     if (this.areaForm.valid) {
-      this.save.emit(this.areaForm.getRawValue());
+      this.save.emit(value);
     } else {
       this.util.validateAllFields(this.areaForm);
     }
@@ -87,7 +91,7 @@ export class AreaFormComponent extends BaseComponent implements OnInit, OnChange
   initForm() {
     this.areaForm = this.fb.group({
       id: [],
-      name: ['', [Validators.required]],
+      name: ['', [Validators.required, Validators.maxLength(300)]],
       color: ['#000000', [Validators.required]],
       priority: [1],
       status: [{value: AreaEnum.STATUS_ACTIVE, disabled: true}]

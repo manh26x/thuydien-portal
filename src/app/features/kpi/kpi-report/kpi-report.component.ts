@@ -235,7 +235,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
     this.confirmDialog.confirm({
       key: 'globalDialog',
       header: this.translate.instant('message.confirmDel'),
-      message: this.translate.instant('message.delArea'),
+      message: this.translate.instant('message.delArea', { name: area.name }),
       acceptLabel: this.translate.instant('message.accept'),
       rejectLabel: this.translate.instant('message.reject'),
       icon: 'pi pi-exclamation-triangle',

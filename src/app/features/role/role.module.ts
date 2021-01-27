@@ -40,7 +40,15 @@ import {ExportService} from '../../shared/service/export.service';
 
 
 @NgModule({
-  declarations: [RoleComponent, RoleDataComponent, RoleCreateComponent, RoleFormComponent, TagListComponent, FeatureListComponent, RoleUpdateComponent],
+  declarations: [
+    RoleComponent,
+    RoleDataComponent,
+    RoleCreateComponent,
+    RoleFormComponent,
+    TagListComponent,
+    FeatureListComponent,
+    RoleUpdateComponent
+  ],
   imports: [
     CommonModule,
     RoleRoutingModule,

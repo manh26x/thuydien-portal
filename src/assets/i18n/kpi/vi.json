@@ -33,6 +33,7 @@
 		"update": "Cập nhật"
 	},
 	"invalid": {
+		"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
 		"required": "Giá trị không được để trống"
 	},
 	"kpi": {
@@ -61,6 +62,7 @@
 		"orderDisplay": "Thứ tự hiển thi",
 		"patternFile": "Tải về tệp tin mẫu",
 		"selectArea": "Chọn vùng dữ liệu",
+		"selectType": "Chon loại báo cáo KPI",
 		"status": "Trạng thái",
 		"typeReport": "Loại báo cáo KPI",
 		"update": "Chỉnh sửa Dashboard KPI",
@@ -69,7 +71,7 @@
 	"message": {
 		"accept": "Có",
 		"confirmDel": "Xác nhận xóa",
-		"delArea": "Bạn có chắc chắn xóa bản ghi?",
+		"delArea": "Bạn có chắc chắn xóa vùng dữ liệu \"{{name}}\"?",
 		"delKpi": "Nếu bạn xóa, báo cáo KPI sẽ chuyển thành Hết hiệu lực. Bạn có chắc chắn muốn xóa?",
 		"delSuccess": "Xóa bản ghi thành công",
 		"reject": "Không"

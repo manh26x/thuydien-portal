@@ -54,11 +54,11 @@ export class UserCreateComponent implements OnInit, BeforeLeave {
     forkJoin([obsUnit, obsBranch, obsDepartment, obsRole]).pipe(
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe((res) => {
-      const firstUnitOption: Unit = { id: null, name: this.translate.instant('selectUnit') };
-      this.unitList = [ firstUnitOption , ...res[0] ];
+      // const firstUnitOption: Unit = { id: null, name: this.translate.instant('selectUnit') };
+      this.unitList = res[0];
       this.branchList = res[1];
-      const firstDepartmentOption = { id: null, name: this.translate.instant('selectDepartment') };
-      this.departmentList = [ firstDepartmentOption, ...res[2] ];
+      // const firstDepartmentOption = { id: null, name: this.translate.instant('selectDepartment') };
+      this.departmentList = res[2];
       this.roleList = res[3];
     });
   }
