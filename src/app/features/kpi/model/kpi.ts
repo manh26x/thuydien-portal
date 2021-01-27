@@ -12,6 +12,7 @@ export interface Kpi {
   misCodeManagement?: string;
   recordData?: string;
   data?: string;
+  tbpTPKDNumber?: number;
 }
 
 export interface KpiImportData {

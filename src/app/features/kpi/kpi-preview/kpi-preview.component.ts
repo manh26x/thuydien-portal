@@ -1,4 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Table} from 'primeng/table';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'aw-kpi-preview',
@@ -7,6 +9,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   ]
 })
 export class KpiPreviewComponent implements OnInit {
+  searchValue: FormControl = new FormControl('');
+  @ViewChild('tableKpi', {static: true}) tableKpi: Table;
   @Input() kpiList = [];
   @Input() titleList = [];
   @Input() showBtnAction = true;
@@ -16,6 +20,10 @@ export class KpiPreviewComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  doFilter() {
+    this.tableKpi.filterGlobal(this.searchValue.value, 'contains');
   }
 
   doSave() {
