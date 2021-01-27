@@ -5,6 +5,9 @@
 		"update": "Chỉnh sửa thông tin Tag",
 		"view": "Chi tiết thông tin Tag"
 	},
+	"const": {
+		"all": "Tất cả"
+	},
 	"err": {
 		"api": {
 			"103": "Có lỗi xảy ra. Chúng tôi rất tiếc về sự cố này và sẽ xử lý trong thời gian sớm nhất.",

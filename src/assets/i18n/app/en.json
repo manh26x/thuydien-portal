@@ -5,6 +5,9 @@
 		"update": "Edit tag information",
 		"view": "Tag detail"
 	},
+	"const": {
+		"all": "All"
+	},
 	"err": {
 		"api": {
 			"103": "An error occurred. We are sorry about this issue and will take care of it as soon as possible.",
