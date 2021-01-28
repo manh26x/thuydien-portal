@@ -8,8 +8,8 @@ export interface Kpi {
   employeePosition?: string;
   fullName?: string;
   laborContractStatus?: string;
-  misCodeCBKD?: string;
-  misCodeManagement?: string;
+  miscodeCBKD?: string;
+  miscodeManagement?: string;
   recordData?: string;
   data?: string;
   tbpTPKDNumber?: number;
