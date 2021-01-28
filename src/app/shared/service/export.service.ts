@@ -9,9 +9,9 @@ export class ExportService {
 
   constructor() { }
 
-  exportAsExcelFile(jsonHeader: any[], json: any[], excelFileName: string): void {
+  exportAsExcelFile(json: any[], excelFileName: string): void {
     import('xlsx').then(xlsx => {
-      const worksheet: any = xlsx.utils.json_to_sheet([...jsonHeader, ...json], {skipHeader: true});
+      const worksheet: any = xlsx.utils.json_to_sheet(json, {skipHeader: true});
       const wb: any = { Sheets: { data: worksheet }, SheetNames: ['data'] };
       if (!wb.Workbook) { wb.Workbook = {}; }
       if (!wb.Workbook.Views) { wb.Workbook.Views = []; }

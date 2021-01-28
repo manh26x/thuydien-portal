@@ -86,19 +86,23 @@ export class KpiDetailDataComponent extends BaseComponent implements OnInit {
   doExport(data: any) {
     if (this.util.canForEach(data.kpiList)) {
       this.indicator.showActivityIndicator();
-      const titleExport = {};
-      const dataExportList = [];
+      const titleExport = {stt: 'STT'};
+      const dataExportList = [
+        {}, {}, {}, {}, {}, {}, {}, {}, {}
+      ];
       data.titleList.forEach((title) => {
         titleExport[title.field] = title.header;
       });
-      data.kpiList.forEach(kpi => {
+      dataExportList.push(titleExport);
+      data.kpiList.forEach((kpi, index) => {
         const dataExport = {};
         Object.keys(titleExport).forEach((key: string) => {
           dataExport[key] = kpi[key];
         });
+        dataExport['stt'] = index + 1;
         dataExportList.push(dataExport);
       });
-      this.exportService.exportAsExcelFile([titleExport], dataExportList, 'kpi_data');
+      this.exportService.exportAsExcelFile(dataExportList, 'kpi_data');
       this.indicator.hideActivityIndicator();
     }
   }
