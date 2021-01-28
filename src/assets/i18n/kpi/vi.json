@@ -28,6 +28,7 @@
 		"cancel": "Hủy",
 		"checkData": "Kiểm tra dữ liệu",
 		"create": "Thêm mới",
+		"export": "Xuất báo cáo",
 		"filter": "Lọc kết quả",
 		"refresh": "Tải lại",
 		"save": "Lưu kết quả",
@@ -75,6 +76,7 @@
 		"delArea": "Bạn có chắc chắn xóa vùng dữ liệu \"{{name}}\"?",
 		"delKpi": "Nếu bạn xóa, báo cáo KPI sẽ chuyển thành Hết hiệu lực. Bạn có chắc chắn muốn xóa?",
 		"delSuccess": "Xóa bản ghi thành công",
+		"importInvalid": "Tệp tin import không hợp lệ",
 		"reject": "Không"
 	},
 	"no": "STT",

@@ -22,6 +22,7 @@ import {AuthService} from '../../../auth/auth.service';
 import {FeatureEnum} from '../../../shared/model/feature.enum';
 import {RoleEnum} from '../../../shared/model/role';
 import {KpiDataComponent} from '../kpi-data/kpi-data.component';
+import {ApiErrorResponse} from '../../../core/model/error-response';
 
 @Component({
   selector: 'aw-kpi-report',
@@ -114,8 +115,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
   }
 
   doChangeTab(evt) {
-    const viewContainerRef = this.kpiPreviewHost.viewContainerRef;
-    viewContainerRef.clear();
+    this.kpiPreviewHost.viewContainerRef.clear();
     switch (evt.index) {
       case 0: { this.kpiService.kpiReportActiveTab = 0; break; }
       case 1: {
@@ -178,7 +178,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
               res.titles.split('||').forEach((titleValue, titleIndex) => {
                 const titleName = titleValue.split('^')[0];
                 if (titleName && titleName !== 'null') {
-                  titleList.push({ field: titleIndex, header: titleName});
+                  titleList.push({ field: `z${titleIndex}`, header: titleName});
                 }
               });
             }
@@ -186,7 +186,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
             const searchValue = `${kpi.employeeNumber} ${kpi.fullName} ${kpi.misCodeCBKD} ${kpi.misCodeManagement} ${kpi.tbpTPKDNumber} ${kpi.laborContractStatus} ${kpi.employeePosition} ${kpi.branchCode} ${kpi.branchName} ${kpi.area}`;
             const dataMapped: any = {...kpi, searchNg: searchValue};
             kpi.recordData.split('||').forEach((dataValue, index) => {
-              dataMapped[index] = dataValue;
+              dataMapped[`z${index}`] = dataValue;
             });
             dataMappedList.push(dataMapped);
           });
@@ -208,7 +208,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
         this.indicator.showActivityIndicator();
         this.kpiService.saveKpiImport(res.root).pipe(
           finalize(() => this.indicator.hideActivityIndicator())
-        ).subscribe((saveRes) => {
+        ).subscribe((__) => {
           this.isImportSuccess = true;
           this.messageService.add({
             severity: 'success',
@@ -218,6 +218,15 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
           this.kpiImport.clearForm();
         });
       });
+    }, err => {
+      if (err instanceof ApiErrorResponse && err.code === '300') {
+        this.messageService.add({
+          severity: 'error',
+          detail: this.translate.instant('message.importInvalid')
+        });
+      } else {
+        throw err;
+      }
     });
   }
 
@@ -231,7 +240,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.indicator.showActivityIndicator();
-        this.kpiService.deleteKpi(kpi.id).subscribe(res => {
+        this.kpiService.deleteKpi(kpi.id).subscribe(_ => {
           this.messageService.add({
             severity: 'success',
             detail: this.translate.instant('message.delSuccess')
@@ -253,7 +262,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.indicator.showActivityIndicator();
-        this.kpiService.deleteArea(area.id).subscribe((res) => {
+        this.kpiService.deleteArea(area.id).subscribe((_) => {
           this.messageService.add({
             severity: 'success',
             detail: this.translate.instant('message.delSuccess')

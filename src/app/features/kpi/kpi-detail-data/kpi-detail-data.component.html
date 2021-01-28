@@ -3,4 +3,4 @@
   <aw-kpi-info [kpiData]="kpiData"></aw-kpi-info>
 </p-panel>
 
-<aw-kpi-preview [showBtnAction]="false" [kpiList]="kpiResult" [titleList]="kpiResultTitle" (back)="gotoReport()"></aw-kpi-preview>
+<aw-kpi-preview [showBtnAction]="false" [kpiList]="kpiResult" [titleList]="kpiResultTitle" (export)="doExport($event)" (back)="gotoReport()"></aw-kpi-preview>

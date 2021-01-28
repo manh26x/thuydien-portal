@@ -17,9 +17,15 @@ export class KpiPreviewComponent implements OnInit {
   @Output() save: EventEmitter<any> = new EventEmitter<any>();
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
   @Output() back: EventEmitter<any> = new EventEmitter<any>();
-  constructor() { }
+  @Output() export: EventEmitter<any> = new EventEmitter<any>();
+  constructor(
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  doExport() {
+    this.export.emit({titleList: this.titleList, kpiList: this.kpiList});
   }
 
   doFilter() {

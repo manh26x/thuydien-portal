@@ -1,13 +1,13 @@
 <p-panel header="{{'kpi.list' | translate}}" styleClass="p-mt-3">
   <div class="p-grid p-fluid">
-    <div class="p-md-9 p-col-8 p-field">
+    <div class="p-md-9 p-col-12 p-field">
       <input pInputText
              (keyup.enter)="doFilter()"
              [formControl]="searchValue"
              placeholder="Nhập SHNV, Họ & Tên, Username CBKD, Username của Trưởng nhóm quản lý,..."
              type="text" id="search-value"/>
     </div>
-    <div class="p-md-3 p-col-4 p-field">
+    <div class="p-md-3 p-col-12 p-field">
       <button (click)="doFilter()" pButton type="button" label="{{'btn.filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
     </div>
   </div>
@@ -48,7 +48,8 @@
   </div>
   <ng-template #noAction>
     <div class="p-text-right p-mt-3">
-      <button (click)="doBack()" pButton type="button" label="{{'btn.back' | translate}}" class="p-button-secondary"></button>
+      <button (click)="doBack()" pButton type="button" label="{{'btn.back' | translate}}" class="p-button-secondary p-mr-3"></button>
+      <button (click)="doExport()" pButton type="button" label="{{'btn.export' | translate}}"></button>
     </div>
   </ng-template>
 </p-panel>
