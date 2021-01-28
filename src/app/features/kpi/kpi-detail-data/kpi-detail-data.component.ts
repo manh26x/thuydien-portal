@@ -6,12 +6,14 @@ import {BaseComponent} from '../../../core/base.component';
 import {finalize, map, switchMap, takeUntil} from 'rxjs/operators';
 import {UtilService} from '../../../core/service/util.service';
 import {KpiReport} from '../model/kpi';
+import {ExportService} from '../../../shared/service/export.service';
 
 @Component({
   selector: 'aw-kpi-detail-data',
   templateUrl: './kpi-detail-data.component.html',
   styles: [
-  ]
+  ],
+  providers: [ExportService]
 })
 export class KpiDetailDataComponent extends BaseComponent implements OnInit {
   kpiData: KpiReport = {};
@@ -22,7 +24,8 @@ export class KpiDetailDataComponent extends BaseComponent implements OnInit {
     private indicator: IndicatorService,
     private route: ActivatedRoute,
     private util: UtilService,
-    private router: Router
+    private router: Router,
+    private exportService: ExportService
   ) {
     super();
   }
@@ -56,7 +59,7 @@ export class KpiDetailDataComponent extends BaseComponent implements OnInit {
                 res.infoAndTitle.recordData.split('||').forEach((titleValue, titleIndex) => {
                   const titleName = titleValue.split('^')[0];
                   if (titleName && titleName !== 'null') {
-                    titleList.push({ field: titleIndex, header: titleName});
+                    titleList.push({ field: `z${titleIndex}`, header: titleName});
                   }
                 });
               }
@@ -64,7 +67,7 @@ export class KpiDetailDataComponent extends BaseComponent implements OnInit {
               const searchValue = `${kpi.employeeNumber} ${kpi.fullName} ${kpi.misCodeCBKD} ${kpi.misCodeManagement} ${kpi.tbpTPKDNumber} ${kpi.laborContractStatus} ${kpi.employeePosition} ${kpi.branchCode} ${kpi.branchName} ${kpi.area}`;
               const dataMapped: any = {...kpi, searchNg: searchValue};
               kpi.data.split('||').forEach((dataValue, index) => {
-                dataMapped[index] = dataValue;
+                dataMapped[`z${index}`] = dataValue;
               });
               dataMappedList.push(dataMapped);
             });
@@ -78,6 +81,26 @@ export class KpiDetailDataComponent extends BaseComponent implements OnInit {
       this.kpiResultTitle = res.resultTitle;
       this.kpiResult = res.result;
     });
+  }
+
+  doExport(data: any) {
+    if (this.util.canForEach(data.kpiList)) {
+      this.indicator.showActivityIndicator();
+      const titleExport = {};
+      const dataExportList = [];
+      data.titleList.forEach((title) => {
+        titleExport[title.field] = title.header;
+      });
+      data.kpiList.forEach(kpi => {
+        const dataExport = {};
+        Object.keys(titleExport).forEach((key: string) => {
+          dataExport[key] = kpi[key];
+        });
+        dataExportList.push(dataExport);
+      });
+      this.exportService.exportAsExcelFile([titleExport], dataExportList, 'kpi_data');
+      this.indicator.hideActivityIndicator();
+    }
   }
 
   gotoReport(): void {
