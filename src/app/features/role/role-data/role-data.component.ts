@@ -119,7 +119,7 @@ export class RoleDataComponent extends BaseComponent implements OnInit {
           detail: this.translate.instant('message.noDataExport')
         });
       } else {
-        this.exportService.exportAsExcelFile(header, dataExport, 'role-export');
+        this.exportService.exportAsExcelFile([...header, ...dataExport], 'role-export');
       }
       this.indicator.hideActivityIndicator();
     }
