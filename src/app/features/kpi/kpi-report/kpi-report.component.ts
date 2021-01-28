@@ -178,15 +178,15 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
               res.titles.split('||').forEach((titleValue, titleIndex) => {
                 const titleName = titleValue.split('^')[0];
                 if (titleName && titleName !== 'null') {
-                  titleList.push({ field: `z${titleIndex}`, header: titleName});
+                  titleList.push({ field: titleIndex, header: titleName});
                 }
               });
             }
             // search value
-            const searchValue = `${kpi.employeeNumber} ${kpi.fullName} ${kpi.misCodeCBKD} ${kpi.misCodeManagement} ${kpi.tbpTPKDNumber} ${kpi.laborContractStatus} ${kpi.employeePosition} ${kpi.branchCode} ${kpi.branchName} ${kpi.area}`;
+            const searchValue = `${kpi.employeeNumber} ${kpi.fullName} ${kpi.miscodeCBKD} ${kpi.miscodeManagement} ${kpi.tbpTPKDNumber} ${kpi.laborContractStatus} ${kpi.employeePosition} ${kpi.branchCode} ${kpi.branchName} ${kpi.area}`;
             const dataMapped: any = {...kpi, searchNg: searchValue};
             kpi.recordData.split('||').forEach((dataValue, index) => {
-              dataMapped[`z${index}`] = dataValue;
+              dataMapped[index] = dataValue;
             });
             dataMappedList.push(dataMapped);
           });
