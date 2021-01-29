@@ -1,6 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ConfirmationService, PrimeNGConfig} from 'primeng/api';
-import {MenuService} from './menu.service';
 import {NavigationCancel, NavigationEnd, NavigationStart, Router} from '@angular/router';
 import {IndicatorService} from '../shared/indicator/indicator.service';
 import {IdleService} from '../core/service/idle.service';
@@ -33,7 +32,6 @@ export class FeaturesComponent extends IndicatorComponent implements OnInit, Aft
   routingTimeout = null;
 
   constructor(
-    private menuService: MenuService,
     private primengConfig: PrimeNGConfig,
     private router: Router,
     private indicator: IndicatorService,

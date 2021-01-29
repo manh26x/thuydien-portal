@@ -1,9 +1,7 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostBinding, Input, OnDestroy, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
-import {MenuService} from './menu.service';
 
 @Component({
   /* tslint:disable:component-selector */
@@ -30,7 +28,7 @@ import {MenuService} from './menu.service';
 			<ul *ngIf="item.items && active"
 				[@children]="(active ? 'visibleAnimated' : 'hiddenAnimated')">
 				<ng-template ngFor let-child let-i="index" [ngForOf]="item.items">
-					<li aw-menuitem [item]="child" [index]="i" [parentKey]="key"></li>
+					<li aw-menuitem [item]="child" [index]="i"></li>
 				</ng-template>
 			</ul>
 		</ng-container>
@@ -69,26 +67,7 @@ export class MenuitemComponent implements OnInit, OnDestroy {
 
   @Input() root: boolean;
 
-  @Input() parentKey: string;
-
-  menuSourceSubscription: Subscription;
-
-  menuResetSubscription: Subscription;
-
-  key: string;
-
-  constructor(public router: Router, private cd: ChangeDetectorRef, private menuService: MenuService) {
-    this.menuSourceSubscription = this.menuService.menuSource$.subscribe(key => {
-      // deactivate current active menu
-      if (this.active && this.key !== key && key.indexOf(this.key) !== 0) {
-        this.active = false;
-      }
-    });
-
-    this.menuResetSubscription = this.menuService.resetSource$.subscribe(() => {
-      this.active = false;
-    });
-
+  constructor(public router: Router) {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(_ => {
         if (this.item.routerLink) {
@@ -103,11 +82,10 @@ export class MenuitemComponent implements OnInit, OnDestroy {
     if (this.item.routerLink) {
       this.updateActiveStateFromRoute();
     }
-    this.key = this.parentKey ? this.parentKey + '-' + this.index : String(this.index);
   }
 
   updateActiveStateFromRoute() {
-    this.active = this.router.isActive(this.item.routerLink[0], this.item.items ? false : true);
+    this.active = this.router.isActive(this.item.routerLink[0], !this.item.items);
   }
 
   itemClick(event: Event) {
@@ -116,9 +94,6 @@ export class MenuitemComponent implements OnInit, OnDestroy {
       event.preventDefault();
       return true;
     }
-
-    // notify other items
-    this.menuService.onMenuStateChange(this.key);
 
     // execute command
     if (this.item.command) {
@@ -134,13 +109,5 @@ export class MenuitemComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    if (this.menuSourceSubscription) {
-      this.menuSourceSubscription.unsubscribe();
-    }
-
-    if (this.menuResetSubscription) {
-      this.menuResetSubscription.unsubscribe();
-    }
-  }
+  ngOnDestroy() {}
 }
