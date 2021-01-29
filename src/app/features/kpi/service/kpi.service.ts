@@ -6,7 +6,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {ApiResultResponse} from '../../../core/model/result-response';
 import {TagDetail} from '../../tags/model/tags';
 import {Area} from '../model/area';
-import {KpiDetail, KpiFilterRequest, KpiFilterResponse, KpiImportData, KpiReport, KpiReportDetail, KpiUpdateRequest} from '../model/kpi';
+import {KpiDetail, KpiFilterRequest, KpiFilterResponse, KpiImportData, KpiReportDetail, KpiUpdateRequest} from '../model/kpi';
 
 export interface KpiBreadcrumb {
   main: string;
@@ -15,10 +15,12 @@ export interface KpiBreadcrumb {
 
 @Injectable()
 export class KpiService extends BaseService {
+  private currentPage: BehaviorSubject<KpiBreadcrumb> = new BehaviorSubject<KpiBreadcrumb>({main: '', page: ''});
+  currentPage$: Observable<KpiBreadcrumb>;
   kpiReportActiveTab = 0;
-  currentPage$: BehaviorSubject<KpiBreadcrumb> = new BehaviorSubject<KpiBreadcrumb>({main: '', page: ''});
   constructor(private http: HttpClient) {
     super();
+    this.currentPage$ = this.currentPage.asObservable();
   }
 
   getKpiReportDetail(id: number): Observable<KpiReportDetail> {
@@ -96,6 +98,6 @@ export class KpiService extends BaseService {
   }
 
   setPage(main: '' | 'kpi' | 'area', page: '' | 'kpiDetail' | 'kpiUpdate' | 'kpiReportDetail' | 'areaCreate' | 'areaUpdate') {
-    this.currentPage$.next({main, page});
+    this.currentPage.next({main, page});
   }
 }

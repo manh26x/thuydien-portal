@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {KpiEnum} from '../model/kpi.enum';
 import {TagDetail} from '../../tags/model/tags';
@@ -8,7 +8,7 @@ import {KpiReport} from '../model/kpi';
 import {BaseComponent} from '../../../core/base.component';
 import {TranslateService} from '@ngx-translate/core';
 import {AppTranslateService} from '../../../core/service/translate.service';
-import {startWith, switchMap, takeUntil} from 'rxjs/operators';
+import {map, startWith, switchMap, takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'aw-kpi-data',
@@ -34,6 +34,7 @@ export class KpiDataComponent extends BaseComponent implements OnInit {
   kpiConst = KpiEnum;
   @Input() isHasEdit: boolean;
   @Input() isHasDel: boolean;
+  readonly yearSelect = `${new Date().getFullYear() - 10}:${new Date().getFullYear()}`;
   constructor(
     private fb: FormBuilder,
     private router: Router,
@@ -45,12 +46,20 @@ export class KpiDataComponent extends BaseComponent implements OnInit {
     this.appTranslate.languageChanged$.pipe(
       takeUntil(this.nextOnDestroy),
       startWith(''),
-      switchMap(_ => this.translate.get('kpi.const'))
-    ).subscribe(res => {
+      switchMap(lang => this.translate.get('kpi.const').pipe(
+        map(resConst => ({ lang, resConst }))
+      ))
+    ).subscribe(({lang, resConst}) => {
+      if (lang) {
+        const clone = [...this.tagKpi];
+        clone.shift();
+        clone.unshift({ keyTag: '', value: resConst.all });
+        this.tagKpi = clone;
+      }
       this.statusList = [
-        { label: res.all, value: null },
-        { label: res.active, value: KpiEnum.STATUS_ACTIVE },
-        { label: res.inactive, value: KpiEnum.STATUS_INACTIVE }
+        { label: resConst.all, value: null },
+        { label: resConst.active, value: KpiEnum.STATUS_ACTIVE },
+        { label: resConst.inactive, value: KpiEnum.STATUS_INACTIVE }
       ];
     });
   }

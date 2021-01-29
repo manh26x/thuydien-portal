@@ -12,7 +12,6 @@ import {RippleModule} from 'primeng/ripple';
 import {ButtonModule} from 'primeng/button';
 import {MenuModule} from 'primeng/menu';
 import {IndicatorModule} from '../shared/indicator/indicator.module';
-import {RoleService} from '../shared/service/role.service';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
@@ -32,8 +31,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatProgressBarModule
   ],
   providers: [
-    MenuService,
-    RoleService
+    MenuService
   ]
 })
 export class FeaturesModule { }

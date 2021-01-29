@@ -7,13 +7,13 @@ import {IdleService} from '../core/service/idle.service';
 import {environment} from '../../environments/environment';
 import {AuthService} from '../auth/auth.service';
 import {TranslateService} from '@ngx-translate/core';
-import {Subscription} from 'rxjs';
+import {iif, merge, of, Subscription} from 'rxjs';
 import {concatMap, delay, map, startWith, switchMap, tap} from 'rxjs/operators';
 import {FeatureEnum} from '../shared/model/feature.enum';
 import {AppTranslateService} from '../core/service/translate.service';
 import {RoleService} from '../shared/service/role.service';
 import {groupBy} from 'lodash-es';
-import {UserAuthInfo} from '../auth/model/user-auth';
+import {UserAuthDetail, UserAuthInfo} from '../auth/model/user-auth';
 import {IndicatorComponent} from '../core/indicator.component';
 
 @Component({
@@ -77,13 +77,18 @@ export class FeaturesComponent extends IndicatorComponent implements OnInit, Aft
   }
 
   loadUserInformation(): void {
-    this.menuSubscription = this.appTranslate.languageChanged$.pipe(
+    this.menuSubscription = merge(this.appTranslate.languageChanged$, this.roleService.userRoleChange$).pipe(
       startWith(''),
       tap(() => this.toggleActivityIndicatorLoading(true)),
-      switchMap(() => this.appTranslate.getTranslationAsync('menu').pipe(
+      switchMap((data) => this.appTranslate.getTranslationAsync('menu').pipe(
         delay(300),
-        concatMap((lang) => this.roleService.getUserRole().pipe(
-          map((authDetail) => ({
+        concatMap((lang) => iif(
+          // @ts-ignore
+          () => !!data.listRole,
+          of(data),
+          this.roleService.getUserRole()
+        ).pipe(
+          map((authDetail: UserAuthDetail) => ({
             resLang: lang,
             resUser: authDetail.user,
             resRole: authDetail.listRole
