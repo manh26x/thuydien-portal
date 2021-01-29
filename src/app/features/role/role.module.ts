@@ -6,7 +6,6 @@ import {RoleComponent} from './role.component';
 import { RoleDataComponent } from './role-data/role-data.component';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {ToastModule} from 'primeng/toast';
-import {RoleService} from '../../shared/service/role.service';
 import {MessageService} from 'primeng/api';
 import {MissingTranslationHandler, TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {CustomMissingTranslationHandler} from '../../core/translate.missing';
@@ -89,7 +88,6 @@ import {ExportService} from '../../shared/service/export.service';
       provide: LANGUAGE_FILE_PATH,
       useValue: { path: './assets/i18n/role/' }
     },
-    RoleService,
     MessageService,
     TagsService,
     FeatureService,

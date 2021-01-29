@@ -162,8 +162,12 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
         roleInfo: roleData,
         tagList: tagData
       }).pipe(
+        concatMap(() => this.roleService.getUserRole()),
         finalize(() => this.indicator.hideActivityIndicator())
-      ).subscribe(_ => {
+      ).subscribe((userRole) => {
+        if (userRole.listRole.find(role => role.roleId === value.code)) {
+          this.roleService.changeRoleOfUser(userRole);
+        }
         this.isLeave = true;
         this.messageService.add({
           severity: 'success',

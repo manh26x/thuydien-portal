@@ -8,11 +8,23 @@
   </div>
   <div class="p-lg-2 p-md-6 p-col-6 p-field">
     <label for="k-create">{{'kpi.createDate' | translate}}</label>
-    <p-calendar formControlName="createDate" inputId="k-create" dateFormat="dd/mm/yy" [showButtonBar]="true"></p-calendar>
+    <p-calendar formControlName="createDate"
+                inputId="k-create"
+                dateFormat="dd/mm/yy" [showButtonBar]="true"
+                [monthNavigator]="true"
+                [yearNavigator]="true"
+                [yearRange]="yearSelect">
+    </p-calendar>
   </div>
   <div class="p-lg-2 p-md-6 p-col-6 p-field">
     <label for="k-modify">{{'kpi.modifyDate' | translate}}</label>
-    <p-calendar formControlName="modifyDate" inputId="k-modify" dateFormat="dd/mm/yy" [showButtonBar]="true"></p-calendar>
+    <p-calendar formControlName="modifyDate"
+                inputId="k-modify"
+                dateFormat="dd/mm/yy" [showButtonBar]="true"
+                [monthNavigator]="true"
+                [yearNavigator]="true"
+                [yearRange]="yearSelect">
+    </p-calendar>
   </div>
   <div class="p-lg-3 p-md-6 p-col-6 p-field">
     <label for="k-status">{{'kpi.status' | translate}}</label>
