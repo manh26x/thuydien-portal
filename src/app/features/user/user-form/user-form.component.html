@@ -64,7 +64,7 @@
         filterBy="label,value.code"
         formControlName="branch"
         inputId="n-branch" [options]="branchList"
-        optionLabel="name"
+        optionLabel="code"
         dataKey="code">
         <ng-template let-branch pTemplate="item">
           <div>{{branch.value.code}} - {{branch.value.name}}</div>

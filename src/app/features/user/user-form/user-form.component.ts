@@ -5,7 +5,7 @@ import {concatMap, startWith, takeUntil} from 'rxjs/operators';
 import {UserEnum} from '../model/user.enum';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {UtilService} from '../../../core/service/util.service';
-import {UserDetail, UserData} from '../model/user';
+import {UserDetail} from '../model/user';
 import {BaseComponent} from '../../../core/base.component';
 import {Role} from '../../../shared/model/role';
 import {Unit} from '../../../shared/model/unit';
@@ -49,7 +49,7 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
   ngOnInit(): void {
     if (this.mode === 'update') {
       this.formUser.get('userId').disable();
-      this.formUser.get('status').disable();
+      this.formUser.get('status').enable();
     }
     this.appTranslate.languageChanged$.pipe(
       takeUntil(this.nextOnDestroy),
