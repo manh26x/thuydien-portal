@@ -40,6 +40,7 @@ export class TagsFormComponent extends BaseComponent implements OnInit, OnChange
   ngOnInit(): void {
     if (this.mode === 'update') {
       this.formTags.get('code').disable();
+      this.formTags.get('status').enable();
     }
     this.appTranslate.languageChanged$.pipe(
       takeUntil(this.nextOnDestroy),
