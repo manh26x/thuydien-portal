@@ -43,6 +43,7 @@ import {HttpClient} from '@angular/common/http';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import { KpiDetailDataComponent } from './kpi-detail-data/kpi-detail-data.component';
 import {TooltipModule} from 'primeng/tooltip';
+import {BiggerZeroDirective} from './directive/bigger-zero.directive';
 
 @NgModule({
   declarations: [
@@ -60,40 +61,41 @@ import {TooltipModule} from 'primeng/tooltip';
     KpiUpdateComponent,
     KpiInfoComponent,
     KpiFilterComponent,
-    KpiDetailDataComponent
+    KpiDetailDataComponent,
+    BiggerZeroDirective
   ],
     imports: [
-        CommonModule,
-        KpiRoutingModule,
-        TabViewModule,
-        PanelModule,
-        TableModule,
-        ButtonModule,
-        ToolbarModule,
-        ReactiveFormsModule,
-        InputTextModule,
-        DropdownModule,
-        ToastModule,
-        CustomFileUploadModule,
-        CalendarModule,
-        PaginatorModule,
-        CheckboxModule,
-        TranslateModule.forChild({
-            missingTranslationHandler: {
-                provide: MissingTranslationHandler,
-                useClass: CustomMissingTranslationHandler,
-                deps: [AppTranslateService]
-            },
-            loader: {
-                provide: TranslateLoader,
-                useFactory: (CustomTranslateLoader),
-                deps: [LANGUAGE_FILE_PATH, HttpClient]
-            },
-            isolate: true,
-            useDefaultLang: false
-        }),
-        BreadcrumbModule,
-        TooltipModule,
+      CommonModule,
+      KpiRoutingModule,
+      TabViewModule,
+      PanelModule,
+      TableModule,
+      ButtonModule,
+      ToolbarModule,
+      ReactiveFormsModule,
+      InputTextModule,
+      DropdownModule,
+      ToastModule,
+      CustomFileUploadModule,
+      CalendarModule,
+      PaginatorModule,
+      CheckboxModule,
+      TranslateModule.forChild({
+          missingTranslationHandler: {
+              provide: MissingTranslationHandler,
+              useClass: CustomMissingTranslationHandler,
+              deps: [AppTranslateService]
+          },
+          loader: {
+              provide: TranslateLoader,
+              useFactory: (CustomTranslateLoader),
+              deps: [LANGUAGE_FILE_PATH, HttpClient]
+          },
+          isolate: true,
+          useDefaultLang: false
+      }),
+      BreadcrumbModule,
+      TooltipModule
     ],
   providers: [
     KpiService,
