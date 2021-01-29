@@ -74,7 +74,7 @@
         <td pEditableColumn>
           <p-cellEditor>
             <ng-template pTemplate="input">
-              <input style="width: 100%;" pInputText type="number" [(ngModel)]="item.displayOrder">
+              <input style="width: 100%;" awBiggerZero pInputText type="number" min="0" [(ngModel)]="item.displayOrder">
             </ng-template>
             <ng-template pTemplate="output">
               <ng-container *ngIf="item.displayOrder > 0">
