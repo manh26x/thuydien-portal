@@ -7,7 +7,6 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {FormsModule} from '@angular/forms';
 import {MenuitemComponent} from './menuitem.component';
-import {MenuService} from './menu.service';
 import {RippleModule} from 'primeng/ripple';
 import {ButtonModule} from 'primeng/button';
 import {MenuModule} from 'primeng/menu';
@@ -30,8 +29,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     IndicatorModule,
     MatProgressBarModule
   ],
-  providers: [
-    MenuService
-  ]
+  providers: []
 })
 export class FeaturesModule { }
