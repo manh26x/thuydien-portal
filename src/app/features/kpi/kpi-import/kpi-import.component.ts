@@ -1,10 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {KpiService} from '../service/kpi.service';
 import {TagDetail} from '../../tags/model/tags';
-import {takeUntil} from 'rxjs/operators';
-import {UtilService} from '../../../core/service/util.service';
 import {FormControl, Validators} from '@angular/forms';
-import {BaseComponent} from '../../../core/base.component';
 import {InputUploadComponent} from '../../../shared/custom-file-upload/input-upload/input-upload.component';
 
 @Component({
@@ -13,14 +9,13 @@ import {InputUploadComponent} from '../../../shared/custom-file-upload/input-upl
   styles: [
   ]
 })
-export class KpiImportComponent extends BaseComponent implements OnInit {
+export class KpiImportComponent implements OnInit {
   @ViewChild(InputUploadComponent, {static: true}) inputFile: InputUploadComponent;
   fileImport: any[];
   reportType: FormControl = new FormControl('', Validators.required);
   @Input() tagKpiList: TagDetail[] = [];
   @Output() checkFile: EventEmitter<any> = new EventEmitter<any>();
-  constructor(private util: UtilService) {
-    super();
+  constructor() {
   }
 
   ngOnInit(): void {}

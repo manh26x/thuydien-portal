@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {BaseComponent} from '../../../core/base.component';
 import {UserService} from '../service/user.service';
-import {UserDetail, FilterUserRequest, FilterUserResponse, UserBranch} from '../model/user';
+import {UserDetail, FilterUserRequest, UserBranch} from '../model/user';
 import {Router} from '@angular/router';
 import {UserEnum} from '../model/user.enum';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -11,7 +11,6 @@ import {concatMap, delay, filter, finalize, map, startWith, switchMap, takeUntil
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
 import {ApiErrorResponse} from '../../../core/model/error-response';
-import {UserAuth} from '../../../auth/model/user-auth';
 import {AuthService} from '../../../auth/auth.service';
 import {DialogService} from 'primeng/dynamicdialog';
 import {DialogPreviewComponent} from '../dialog-preview/dialog-preview.component';
