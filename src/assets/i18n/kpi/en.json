@@ -76,7 +76,7 @@
 		"delArea": "Are you sure you delete the \"{{name}}\"?",
 		"delKpi": "If you delete, the KPI report will change to Expired. Are you sure you want to delete?",
 		"delSuccess": "Successful record deletion",
-		"importInvalid": "Import file is not in the correct format",
+		"importInvalid": "Data file cannot be read. Please check that the import file has the correct release form",
 		"reject": "No"
 	},
 	"no": "No.",
