@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AreaEnum} from '../model/area.enum';
 import {UtilService} from '../../../core/service/util.service';
-import {UserDetail} from '../../user/model/user';
 import {Area} from '../model/area';
 import {BaseComponent} from '../../../core/base.component';
 import {TranslateService} from '@ngx-translate/core';

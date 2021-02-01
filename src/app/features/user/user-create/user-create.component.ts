@@ -8,7 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {MessageService} from 'primeng/api';
 import {BeforeLeave} from '../../../core/model/before-leave';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
-import {finalize, map} from 'rxjs/operators';
+import {finalize} from 'rxjs/operators';
 import {Role, RoleEnum, UserRole} from '../../../shared/model/role';
 import {forkJoin} from 'rxjs';
 import {RoleService} from '../../../shared/service/role.service';
