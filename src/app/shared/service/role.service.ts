@@ -23,6 +23,10 @@ export class RoleService extends BaseService{
     this.currentPage$ = this.currentPage.asObservable();
   }
 
+  exportRole(): Observable<any> {
+    return this.postDataBlob('/admin/role/exportRoleExcel', null);
+  }
+
   changeRoleOfUser(data: UserAuthDetail): void {
     this.userRoleChange.next(data);
   }
