@@ -48,7 +48,7 @@
   </ng-template>
   <ng-template pTemplate="body" let-kpi let-i="rowIndex">
     <tr>
-      <td>{{i + 1}}</td>
+      <td style="width: 50px;">{{i + 1}}</td>
       <td>{{kpi.tagName}}</td>
       <td>{{kpi.createDate | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
       <td>{{kpi.modifyDate | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
