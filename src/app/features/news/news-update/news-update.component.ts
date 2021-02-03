@@ -65,17 +65,17 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
             const unitMap: MultiSelectItem[] = [];
             if (this.util.canForEach(res[1])) {
               res[1].forEach((branch) => {
-                branchMap.push({id: branch.code, code: branch.code, name: branch.name});
+                branchMap.push({id: branch.code, code: branch.code, name: branch.name, display: `${branch.code} - ${branch.name}`});
               });
             }
             if (this.util.canForEach(res[2])) {
               res[2].forEach((role) => {
-                roleMap.push({id: role.id, code: '', name: role.name});
+                roleMap.push({id: role.id, code: '', name: role.name, display: role.name});
               });
             }
             if (this.util.canForEach(res[3])) {
               res[3].forEach((unit) => {
-                unitMap.push({id: unit.id.toString(), code: '', name: unit.name});
+                unitMap.push({id: unit.id.toString(), code: '', name: unit.name, display: unit.name});
               });
             }
             // get group view
@@ -85,7 +85,10 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
               case NewsEnum.GROUP_VIEW_BRANCH:
                 if (this.util.canForEach(resNews.listBranch)) {
                   resNews.listBranch.forEach(branch => {
-                    groupViewOfNews.push({id: branch.code, code: branch.code, name: branch.name});
+                    groupViewOfNews.push({
+                      id: branch.code, code: branch.code,
+                      name: branch.name, display: `${branch.code} - ${branch.name}`
+                    });
                   });
                 }
                 groupViewCurrent = branchMap;
@@ -93,7 +96,7 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
               case NewsEnum.GROUP_VIEW_ROLE:
                 if (this.util.canForEach(resNews.listRole)) {
                   resNews.listRole.forEach(role => {
-                    groupViewOfNews.push({id: role.id, code: '', name: role.name});
+                    groupViewOfNews.push({id: role.id, code: '', name: role.name, display: role.name});
                   });
                 }
                 groupViewCurrent = roleMap;
@@ -101,7 +104,7 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
               case NewsEnum.GROUP_VIEW_UNIT:
                 if (this.util.canForEach(resNews.listUnit)) {
                   resNews.listUnit.forEach(unit => {
-                    groupViewOfNews.push({id: unit.id.toString(), code: '', name: unit.name});
+                    groupViewOfNews.push({id: unit.id.toString(), code: '', name: unit.name, display: unit.name});
                   });
                 }
                 groupViewCurrent = unitMap;

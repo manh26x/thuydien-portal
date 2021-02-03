@@ -79,6 +79,7 @@ export interface MultiSelectItem {
   id: string;
   code: string;
   name: string;
+  display: string;
 }
 
 export interface GroupViewState {

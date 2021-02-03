@@ -21,7 +21,7 @@
   </ng-template>
   <form class="p-grid p-fluid p-mb-3" [formGroup]="searchForm">
     <div class="p-lg-4 p-col-6 p-field">
-      <label for="s-value">{{'user.fullName' | translate}}, {{'user.position' | translate}}, {{'user.branch' | translate}}</label>
+      <label for="s-value">{{'search' | translate}}</label>
       <input (keyup.enter)="doFilterUser()" type="text" id="s-value" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
     </div>
     <div class="p-lg-2 p-col-6 p-field">
