@@ -55,17 +55,17 @@ export class NewsCreateComponent extends BaseComponent implements OnInit, Before
         const unitMap: MultiSelectItem[] = [];
         if (this.util.canForEach(res[1])) {
           res[1].forEach((branch) => {
-            branchMap.push({id: branch.code, code: branch.code, name: branch.name});
+            branchMap.push({id: branch.code, code: branch.code, name: branch.name, display: `${branch.code} - ${branch.name}`});
           });
         }
         if (this.util.canForEach(res[2])) {
           res[2].forEach((role) => {
-            roleMap.push({id: role.id, code: '', name: role.name});
+            roleMap.push({id: role.id, code: '', name: role.name, display: role.name});
           });
         }
         if (this.util.canForEach(res[3])) {
           res[3].forEach((unit) => {
-            unitMap.push({id: unit.id.toString(), code: '', name: unit.name});
+            unitMap.push({id: unit.id.toString(), code: '', name: unit.name, display: unit.name});
           });
         }
         return { resTag: res[0], resBranch: branchMap, resRole: roleMap, resUnit: unitMap };

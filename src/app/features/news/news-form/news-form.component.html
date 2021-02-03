@@ -63,7 +63,7 @@
             optionLabel="name"
             dataKey="id">
             <ng-template let-item pTemplate="item">
-              <div>{{item.value.code}} {{item.value.name}}</div>
+              <div>{{item.value.display}}</div>
             </ng-template>
           </p-multiSelect>
           <small *ngIf="hasErrorInput('groupViewValue', 'required')" class="p-invalid">
