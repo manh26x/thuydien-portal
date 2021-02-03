@@ -15,7 +15,7 @@ export const environment = {
   basePath: '',
   logServer: false,
   logClient: false,
-  version: '2.0.1',
+  version: '2.3.0',
   mediaUrl: 'https://10.1.28.56/upload/',
   clientTimeout: 10000,
   idleTimeout: 1800
