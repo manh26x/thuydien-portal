@@ -85,7 +85,7 @@
 	"noData": "Không có kết quả nào phù hợp",
 	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
 	"roleList": "Danh sách Roles",
-	"search": "Nhập họ và tên, chức danh và chi nhánh",
+	"search": "Họ và tên, tên đăng nhập, chức danh, chi nhánh",
 	"selectDepartment": "Chọn khối",
 	"selectUnit": "Chọn đơn vị",
 	"selectedList": "Danh sách tags đã chọn",
