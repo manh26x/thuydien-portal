@@ -120,6 +120,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
             severity: 'success',
             detail: this.translate.instant('message.importSuccess')
           });
+          this.getUserList();
         });
       });
     }

@@ -22,13 +22,15 @@ export class InputUploadComponent {
   constructor() { }
 
   onFileChange(event) {
-    const files = event.target.files;
-    this.errors = [];
-    if (this.isValidFiles(files)) {
-      this.formFile.setValue(files[0].name);
-      this.changeFile.emit(files);
-    } else {
-      this.clearFile();
+    if (event.target.files && event.target.files.length > 0) {
+      const files = event.target.files;
+      this.errors = [];
+      if (this.isValidFiles(files)) {
+        this.formFile.setValue(files[0].name);
+        this.changeFile.emit(files);
+      } else {
+        this.clearFile();
+      }
     }
   }
 

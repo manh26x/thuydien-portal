@@ -12,6 +12,7 @@ export class TagsService extends BaseService {
   currentPage$: Observable<string>;
   constructor(private http: HttpClient) {
     super();
+    this.currentPage$ = this.currentPage.asObservable();
   }
 
   /**
