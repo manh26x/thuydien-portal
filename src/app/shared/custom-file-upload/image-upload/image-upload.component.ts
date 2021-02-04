@@ -70,13 +70,15 @@ export class ImageUploadComponent implements OnInit {
   }
 
   onFileChange(event) {
-    const files = event.target.files;
-    this.errors = [];
-    if (this.isValidFiles(files)) {
-      this.previewFile(files);
-      return;
-    } else {
-      this.file.nativeElement.value = '';
+    if (event.target.files && event.target.files.length > 0) {
+      const files = event.target.files;
+      this.errors = [];
+      if (this.isValidFiles(files)) {
+        this.previewFile(files);
+        return;
+      } else {
+        this.file.nativeElement.value = '';
+      }
     }
   }
 
