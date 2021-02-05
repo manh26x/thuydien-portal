@@ -11,6 +11,7 @@ import {forkJoin, Observable} from 'rxjs';
 import {UtilService} from '../../../core/service/util.service';
 import {Table} from 'primeng/table';
 import {MessageService} from 'primeng/api';
+import {TranslateService} from '@ngx-translate/core';
 
 interface KpiAreaMap {
   value: string;
@@ -44,7 +45,8 @@ export class KpiUpdateComponent extends BaseComponent implements OnInit {
     private indicator: IndicatorService,
     private util: UtilService,
     private messageService: MessageService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {
     super();
   }
@@ -109,7 +111,7 @@ export class KpiUpdateComponent extends BaseComponent implements OnInit {
       this.messageService.add({
         severity: 'success',
         summary: '',
-        detail: 'Cập mhật KPI thành công'
+        detail: this.translate.instant('message.updateSuccess')
       });
       this.router.navigate(['management-kpi', 'report']);
     });

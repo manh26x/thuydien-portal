@@ -77,7 +77,9 @@
 		"delKpi": "If you delete, the KPI report will change to Expired. Are you sure you want to delete?",
 		"delSuccess": "Successful record deletion",
 		"importInvalid": "Data file cannot be read. Please check that the import file has the correct release form",
-		"reject": "No"
+		"importSuccess": "Successfully imported KPIs",
+		"reject": "No",
+		"updateSuccess": "Successful KPI updates"
 	},
 	"no": "No.",
 	"noData": "No results match",
