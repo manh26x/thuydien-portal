@@ -9,7 +9,7 @@
 			"inactive": "Không hoạt động"
 		},
 		"name": "Tên phân vùng dữ liệu",
-		"priotity": "Độ ưu tiên",
+		"priority": "Độ ưu tiên",
 		"status": "Trạng thái",
 		"updateArea": "Chỉnh sửa vùng dữ liệu",
 		"updateSuccess": "Cập mhật phân vùng dữ liệu thành công"

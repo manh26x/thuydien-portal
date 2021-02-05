@@ -9,7 +9,7 @@
 			"inactive": "Inactive"
 		},
 		"name": "Data area name",
-		"priotity": "Priority",
+		"priority": "Priority",
 		"status": "Status",
 		"updateArea": "Edit the data area",
 		"updateSuccess": "The data partition has been updated successfully"
