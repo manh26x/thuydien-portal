@@ -212,7 +212,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
           this.isImportSuccess = true;
           this.messageService.add({
             severity: 'success',
-            detail: 'Import KPI thành công'
+            detail: this.translate.instant('message.importSuccess')
           });
           viewContainerRef.clear();
           this.kpiImport.clearForm();

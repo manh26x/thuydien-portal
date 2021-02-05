@@ -77,7 +77,9 @@
 		"delKpi": "Nếu bạn xóa, báo cáo KPI sẽ chuyển thành Hết hiệu lực. Bạn có chắc chắn muốn xóa?",
 		"delSuccess": "Xóa bản ghi thành công",
 		"importInvalid": "Không đọc được file dữ liệu. Vui lòng kiểm tra file import có đúng mẫu phát hành không",
-		"reject": "Không"
+		"importSuccess": "Import KPI thành công",
+		"reject": "Không",
+		"updateSuccess": "Cập mhật KPI thành công"
 	},
 	"no": "STT",
 	"noData": "Không có kết quả nào phù hợp",
