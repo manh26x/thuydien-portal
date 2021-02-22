@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from '../../../core/base.component';
 import {UserService} from '../service/user.service';
 import {UserDetail, FilterUserRequest, UserBranch} from '../model/user';
@@ -20,6 +20,7 @@ import {Role, RoleEnum} from '../../../shared/model/role';
 import {FeatureEnum} from '../../../shared/model/feature.enum';
 import {UtilService} from '../../../core/service/util.service';
 import { saveAs } from 'file-saver';
+import {Paginator} from 'primeng/paginator';
 
 @Component({
   selector: 'aw-user-data',
@@ -28,7 +29,8 @@ import { saveAs } from 'file-saver';
   providers: [DialogService, RoleService]
 })
 export class UserDataComponent extends BaseComponent implements OnInit {
-  public userConst = UserEnum;
+  @ViewChild('userPaging') paging: Paginator
+  userConst = UserEnum;
   userList: UserDetail[] = [];
   searchForm: FormGroup;
   roleList: Role[] = [];
@@ -127,8 +129,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   }
 
   doFilterUser() {
-    this.page = 0;
-    this.getUserList();
+    this.paging.changePage(0);
   }
 
   doExportUser() {

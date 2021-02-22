@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {NewsService} from '../service/news.service';
 import {FilterNewsRequest, News} from '../model/news';
@@ -18,12 +18,14 @@ import {PageChangeEvent} from '../../../shared/model/page-change-event';
 import {AuthService} from '../../../auth/auth.service';
 import {FeatureEnum} from '../../../shared/model/feature.enum';
 import {RoleEnum} from '../../../shared/model/role';
+import {Paginator} from 'primeng/paginator';
 
 @Component({
   selector: 'aw-news-data',
   templateUrl: './news-data.component.html'
 })
 export class NewsDataComponent extends BaseComponent implements OnInit {
+  @ViewChild('newPaging') paging: Paginator;
   // filter
   statusList: SelectItem[] = [];
   tagsList: TagsUser[] = [];
@@ -86,7 +88,6 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
     this.tagService.getAllTagNews().subscribe(res => {
       this.tagsList = res;
     });
-//    this.getListNews();
   }
 
   gotoView(id) {
@@ -140,6 +141,10 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
       this.sortBy = evt.sortField;
       this.sortOrder = evt.sortOrder === 1 ? 'ASC' : 'DESC';
       this.getListNews();
+  }
+
+  doFilter() {
+    this.paging.changePage(0);
   }
 
   getListNews() {
