@@ -93,6 +93,7 @@ export class KpiDetailDataComponent extends BaseComponent implements OnInit {
                     }
                     case 'tbpTPKDNumber': {
                       this.kpiTitleExport[key] = 'SHNV GĐ mảng, TBP, TPKD quản lý';
+                      titleList.push({ field: key, header: 'SHNV GĐ mảng, TBP, TPKD quản lý' });
                       break;
                     }
                   }
