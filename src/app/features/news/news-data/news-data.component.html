@@ -7,7 +7,7 @@
   <form class="p-grid p-fluid p-mb-3" [formGroup]="formFilter">
     <div class="p-md-3 p-col-6 p-field">
       <label for="s-value">{{'news.name' | translate}}</label>
-      <input type="text" id="s-value" (keyup.enter)="getListNews()" pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
+      <input type="text" id="s-value" (keyup.enter)="doFilter()" pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
     </div>
 
     <div class="p-md-3 p-col-6 p-field">
@@ -23,7 +23,7 @@
       <p-dropdown formControlName="level" [options]="levelList"></p-dropdown>
     </div>
     <div class="p-md-2 p-col-12 p-field p-d-flex p-align-end">
-      <button (click)="getListNews()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
+      <button (click)="doFilter()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
     </div>
   </form>
   <p-table [value]="newsList" dataKey="id" styleClass="table-responsive"
@@ -112,7 +112,7 @@
       </tr>
     </ng-template>
   </p-table>
-  <p-paginator [rows]="pageSize"
+  <p-paginator #newPaging [rows]="pageSize"
                [totalRecords]="totalItem"
                [rowsPerPageOptions]="[10, 20, 50, 100]"
                [showCurrentPageReport]="true"
