@@ -184,7 +184,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
               });
             }
             // search value
-            const searchValue = `${kpi.employeeNumber} ${kpi.fullName} ${kpi.miscodeCBKD} ${kpi.miscodeManagement} ${kpi.tbpTPKDNumber} ${kpi.laborContractStatus} ${kpi.employeePosition} ${kpi.branchCode} ${kpi.branchName} ${kpi.area}`;
+            const searchValue = `${kpi.employeeNumber} ${kpi.fullName} ${kpi.misCodeCBKD} ${kpi.misCodeManagement} ${kpi.tbpTPKDNumber} ${kpi.laborContractStatus} ${kpi.employeePosition} ${kpi.branchCode} ${kpi.branchName} ${kpi.area}`;
             const dataMapped: any = {...kpi, searchNg: searchValue};
             kpi.recordData.split('||').forEach((dataValue, index) => {
               dataMapped[index] = dataValue;
@@ -224,6 +224,11 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
         this.messageService.add({
           severity: 'error',
           detail: this.translate.instant('message.importInvalid')
+        });
+      } else if (err instanceof ApiErrorResponse && err.code === '301') {
+        this.messageService.add({
+          severity: 'error',
+          detail: this.translate.instant('message.importExceed')
         });
       } else {
         throw err;

@@ -107,7 +107,7 @@ export class KpiDetailDataComponent extends BaseComponent implements OnInit {
                 });
               }
               // search value
-              const searchValue = `${kpi.employeeNumber} ${kpi.fullName} ${kpi.miscodeCBKD} ${kpi.miscodeManagement} ${kpi.tbpTPKDNumber} ${kpi.laborContractStatus} ${kpi.employeePosition} ${kpi.branchCode} ${kpi.branchName} ${kpi.area}`;
+              const searchValue = `${kpi.employeeNumber} ${kpi.fullName} ${kpi.misCodeCBKD} ${kpi.misCodeManagement} ${kpi.tbpTPKDNumber} ${kpi.laborContractStatus} ${kpi.employeePosition} ${kpi.branchCode} ${kpi.branchName} ${kpi.area}`;
               const dataMapped: any = {...kpi, searchNg: searchValue};
               kpi.data.split('||').forEach((dataValue, index) => {
                 dataMapped[`z${index}`] = dataValue;
