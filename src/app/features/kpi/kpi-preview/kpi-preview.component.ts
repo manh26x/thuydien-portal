@@ -29,6 +29,7 @@ export class KpiPreviewComponent implements OnInit {
   }
 
   doFilter() {
+    console.log(this.kpiList);
     this.tableKpi.filterGlobal(this.searchValue.value, 'contains');
   }
 

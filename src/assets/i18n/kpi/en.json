@@ -76,6 +76,7 @@
 		"delArea": "Are you sure you delete the \"{{name}}\"?",
 		"delKpi": "If you delete, the KPI report will change to Expired. Are you sure you want to delete?",
 		"delSuccess": "Successful record deletion",
+		"importExceed": "You can only upload data files up to 2000 records",
 		"importInvalid": "Data file cannot be read. Please check that the import file has the correct release form",
 		"importSuccess": "Successfully imported KPIs",
 		"reject": "No",
