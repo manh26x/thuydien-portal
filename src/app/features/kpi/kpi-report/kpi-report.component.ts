@@ -173,6 +173,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
                   case 'laborContractStatus': { titleList.push({ field: key, header: 'Trạng thái hợp đồng' }); break; }
                   case 'misCodeCBKD': { titleList.push({ field: key, header: 'Username CBKD' }); break; }
                   case 'misCodeManagement': { titleList.push({ field: key, header: 'Username của trưởng nhóm quản lý' }); break; }
+                  case 'tbpTPKDNumber': { titleList.push({ field: key, header: 'SHNV GĐ mảng, TBP, TPKD quản lý' }); break; }
                 }
               });
               res.titles.split('||').forEach((titleValue, titleIndex) => {
