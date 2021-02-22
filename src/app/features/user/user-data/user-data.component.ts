@@ -106,7 +106,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       fileFormData.append('file', this.fileImport[0], this.fileImport[0].name);
       this.userService.readImportFile(fileFormData).pipe(
         takeUntil(this.nextOnDestroy),
-        // finalize(() => this.indicator.hideActivityIndicator())
+        finalize(() => this.indicator.hideActivityIndicator())
       ).subscribe(res => {
         this.userService.logDebug(res);
         const ref = this.dialogService.open(DialogPreviewComponent, {
@@ -123,9 +123,6 @@ export class UserDataComponent extends BaseComponent implements OnInit {
             detail: this.translate.instant('message.importSuccess')
           });
           this.getUserList();
-        }, err => {
-          this.indicator.hideActivityIndicator();
-          throw err;
         });
       });
     }
