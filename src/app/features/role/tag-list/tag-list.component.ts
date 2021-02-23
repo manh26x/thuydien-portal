@@ -1,10 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {TagDetail, TagsUser} from '../../tags/model/tags';
-import {TagsService} from '../../tags/service/tags.service';
-import {IndicatorService} from '../../../shared/indicator/indicator.service';
-import {TagsEnum} from '../../tags/model/tags.enum';
-import {forkJoin} from 'rxjs';
-import {finalize} from 'rxjs/operators';
+import {TagDetail} from '../../tags/model/tags';
 
 @Component({
   selector: 'aw-tag-list',

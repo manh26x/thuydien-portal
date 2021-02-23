@@ -1,0 +1,101 @@
+<form class="p-grid p-fluid p-mb-3" [formGroup]="formFilter">
+  <div class="p-lg-3 p-md-6 p-col-6 p-field">
+    <label for="k-value">{{'kpi.typeReport' | translate}}</label>
+    <p-dropdown
+      [options]="tagKpi"
+      [filter]="true"
+      inputId="k-value" optionLabel="value" dataKey="keyTag" formControlName="reportType"></p-dropdown>
+  </div>
+  <div class="p-lg-2 p-md-6 p-col-6 p-field">
+    <label for="k-create">{{'kpi.createDate' | translate}}</label>
+    <p-calendar formControlName="createDate"
+                inputId="k-create"
+                dateFormat="dd/mm/yy" [showButtonBar]="true"
+                [monthNavigator]="true"
+                [yearNavigator]="true"
+                [yearRange]="yearSelect">
+    </p-calendar>
+  </div>
+  <div class="p-lg-2 p-md-6 p-col-6 p-field">
+    <label for="k-modify">{{'kpi.modifyDate' | translate}}</label>
+    <p-calendar formControlName="modifyDate"
+                inputId="k-modify"
+                dateFormat="dd/mm/yy" [showButtonBar]="true"
+                [monthNavigator]="true"
+                [yearNavigator]="true"
+                [yearRange]="yearSelect">
+    </p-calendar>
+  </div>
+  <div class="p-lg-3 p-md-6 p-col-6 p-field">
+    <label for="k-status">{{'kpi.status' | translate}}</label>
+    <p-dropdown formControlName="status" [options]="statusList" inputId="k-status"></p-dropdown>
+  </div>
+  <div class="p-lg-2 p-md-12 p-col-12 p-field p-d-flex p-align-end">
+    <button (click)="doFilter()" pButton type="button" label="{{'btn.filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
+  </div>
+</form>
+
+<p-table [value]="kpiList">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 50px;">{{'no' | translate}}</th>
+      <th>{{'kpi.typeReport' | translate}}</th>
+      <th>{{'kpi.createDate' | translate}}</th>
+      <th>{{'kpi.modifyDate' | translate}}</th>
+      <th>{{'kpi.status' | translate}}</th>
+      <th>{{'action' | translate}}</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-kpi let-i="rowIndex">
+    <tr>
+      <td>{{i + 1}}</td>
+      <td>{{kpi.tagName}}</td>
+      <td>{{kpi.createDate | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+      <td>{{kpi.modifyDate | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+      <td>
+        <ng-container [ngSwitch]="kpi.status">
+          <div *ngSwitchCase="kpiConst.STATUS_ACTIVE">{{'kpi.const.active' | translate}}</div>
+          <div *ngSwitchCase="kpiConst.STATUS_INACTIVE" class="p-invalid">{{'kpi.const.inactive' | translate}}</div>
+        </ng-container>
+      </td>
+      <td>
+        <button (click)="gotoView(kpi)" pButton
+                type="button"
+                icon="pi pi-eye"
+                class="p-button-rounded p-button-text">
+        </button>
+        <button (click)="gotoDetailData(kpi)" pButton
+                type="button"
+                icon="pi pi-book"
+                class="p-button-rounded p-button-warning p-button-text">
+        </button>
+        <button *ngIf="isHasEdit" (click)="gotoUpdate(kpi)" pButton
+                type="button"
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-secondary p-button-text">
+        </button>
+        <button *ngIf="isHasDel && kpi.status == kpiConst.STATUS_ACTIVE" (click)="doDelete(kpi)" pButton
+                type="button"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-danger p-button-text">
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="6">
+        {{'noData' | translate}}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-paginator [rows]="pageSize"
+             [totalRecords]="totalItem"
+             [rowsPerPageOptions]="[10, 20, 50, 100]"
+             [showCurrentPageReport]="true"
+             (onPageChange)="changePage($event)"
+             currentPageReportTemplate="{{ 'paging' | translate }}">
+</p-paginator>

@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../service/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {finalize, map, takeUntil} from 'rxjs/operators';
+import {finalize, map} from 'rxjs/operators';
 import {BaseComponent} from '../../../core/base.component';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {BranchUser, UserDetail, UserData, UserInfo} from '../model/user';
-import {TagDetail, TagsUser} from '../../tags/model/tags';
 import {UtilService} from '../../../core/service/util.service';
 import {TranslateService} from '@ngx-translate/core';
 import {MessageService} from 'primeng/api';
 import {ApiErrorResponse} from '../../../core/model/error-response';
-import {TagsService} from '../../tags/service/tags.service';
 import {BranchService} from '../../../shared/service/branch.service';
 import {Role, RoleEnum, UserRole} from '../../../shared/model/role';
 import {Unit} from '../../../shared/model/unit';
@@ -70,8 +68,10 @@ export class UserUpdateComponent extends BaseComponent implements OnInit {
       }),
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe((res) => {
+      // const firstUnitOption: Unit = { id: null, name: this.translate.instant('selectUnit') };
       this.unitList = res[0];
       this.branchList = res[1];
+      // const firstDepartmentOption = { id: null, name: this.translate.instant('selectDepartment') };
       this.departmentList = res[2];
       this.roleList = res[3];
       this.initValue = res[4];

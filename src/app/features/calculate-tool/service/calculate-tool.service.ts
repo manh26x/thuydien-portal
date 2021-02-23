@@ -8,9 +8,11 @@ import {ApiResultResponse} from '../../../core/model/result-response';
 
 @Injectable()
 export class CalculateToolService extends BaseService{
-  currentPage$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private currentPage: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  currentPage$: Observable<string>;
   constructor(private http: HttpClient) {
     super();
+    this.currentPage$ = this.currentPage.asObservable();
   }
 
   changeStatus(idTool: number, statusTool: number): Observable<ApiResultResponse> {
@@ -25,7 +27,7 @@ export class CalculateToolService extends BaseService{
   }
 
   setPage(page: '') {
-    this.currentPage$.next(page);
+    this.currentPage.next(page);
   }
 
   getHttp(): HttpClient {

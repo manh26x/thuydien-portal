@@ -14,4 +14,8 @@ export class FeatureListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  doChangFeature(evt) {
+    console.log(evt);
+  }
+
 }

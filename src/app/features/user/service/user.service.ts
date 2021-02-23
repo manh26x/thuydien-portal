@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from '../../../core/service/base.service';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {FilterUserRequest, UserData, UserInfo, PreviewUser, FilterUserResponse, UserDetail} from '../model/user';
 import {map} from 'rxjs/operators';
@@ -8,9 +8,11 @@ import {ApiResultResponse} from '../../../core/model/result-response';
 
 @Injectable()
 export class UserService extends BaseService{
-  currentPage$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private currentPage: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  currentPage$: Observable<string>;
   constructor(private http: HttpClient) {
     super();
+    this.currentPage$ = this.currentPage.asObservable();
   }
 
   exportUser(request: FilterUserRequest): Observable<any> {
@@ -73,7 +75,7 @@ export class UserService extends BaseService{
   }
 
   setPage(page: '' | 'create' | 'update' | 'view') {
-    this.currentPage$.next(page);
+    this.currentPage.next(page);
   }
 
   getHttp(): HttpClient {

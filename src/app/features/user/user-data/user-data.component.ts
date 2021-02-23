@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from '../../../core/base.component';
 import {UserService} from '../service/user.service';
-import {UserDetail, FilterUserRequest, FilterUserResponse, UserBranch} from '../model/user';
+import {UserDetail, FilterUserRequest, UserBranch} from '../model/user';
 import {Router} from '@angular/router';
 import {UserEnum} from '../model/user.enum';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -11,7 +11,6 @@ import {concatMap, delay, filter, finalize, map, startWith, switchMap, takeUntil
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
 import {ApiErrorResponse} from '../../../core/model/error-response';
-import {UserAuth} from '../../../auth/model/user-auth';
 import {AuthService} from '../../../auth/auth.service';
 import {DialogService} from 'primeng/dynamicdialog';
 import {DialogPreviewComponent} from '../dialog-preview/dialog-preview.component';
@@ -21,6 +20,7 @@ import {Role, RoleEnum} from '../../../shared/model/role';
 import {FeatureEnum} from '../../../shared/model/feature.enum';
 import {UtilService} from '../../../core/service/util.service';
 import { saveAs } from 'file-saver';
+import {Paginator} from 'primeng/paginator';
 
 @Component({
   selector: 'aw-user-data',
@@ -29,7 +29,8 @@ import { saveAs } from 'file-saver';
   providers: [DialogService, RoleService]
 })
 export class UserDataComponent extends BaseComponent implements OnInit {
-  public userConst = UserEnum;
+  @ViewChild('userPaging') paging: Paginator
+  userConst = UserEnum;
   userList: UserDetail[] = [];
   searchForm: FormGroup;
   roleList: Role[] = [];
@@ -121,14 +122,14 @@ export class UserDataComponent extends BaseComponent implements OnInit {
             severity: 'success',
             detail: this.translate.instant('message.importSuccess')
           });
+          this.getUserList();
         });
       });
     }
   }
 
   doFilterUser() {
-    this.page = 0;
-    this.getUserList();
+    this.paging.changePage(0);
   }
 
   doExportUser() {

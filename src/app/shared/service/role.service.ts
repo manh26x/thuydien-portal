@@ -1,20 +1,34 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from '../../core/service/base.service';
-import {HttpClient, HttpParams} from '@angular/common/http';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {InsertRoleRequest, Role, RoleDetail} from '../model/role';
 import {map} from 'rxjs/operators';
 import {ApiResultResponse} from '../../core/model/result-response';
 import {AbstractControl} from '@angular/forms';
 import {UserAuthDetail} from '../../auth/model/user-auth';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class RoleService extends BaseService{
-  currentPage$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private currentPage: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  private userRoleChange: Subject<UserAuthDetail> = new Subject<UserAuthDetail>();
+  currentPage$: Observable<string>;
+  // event on role of user logged in updated
+  userRoleChange$: Observable<UserAuthDetail>;
   constructor(
     private http: HttpClient
   ) {
     super();
+    this.userRoleChange$ = this.userRoleChange.asObservable();
+    this.currentPage$ = this.currentPage.asObservable();
+  }
+
+  exportRole(): Observable<any> {
+    return this.postDataBlob('/admin/role/exportRoleExcel', null);
+  }
+
+  changeRoleOfUser(data: UserAuthDetail): void {
+    this.userRoleChange.next(data);
   }
 
   insertRole(role: InsertRoleRequest): Observable<ApiResultResponse> {
@@ -83,7 +97,7 @@ export class RoleService extends BaseService{
   }
 
   setPage(page: '' | 'create' | 'update' | 'view') {
-    this.currentPage$.next(page);
+    this.currentPage.next(page);
   }
 
   getHttp(): HttpClient {

@@ -51,4 +51,8 @@ export class AppTranslateService {
   getTranslationAsync(key: string, interpolateParams?: any): Observable<string | any> {
     return this.translate.get(key, interpolateParams);
   }
+
+  getTranslate(key: string): any {
+    return this.translate.instant(key);
+  }
 }

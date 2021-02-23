@@ -1,0 +1,25 @@
+<p-panel header="{{'kpi.manage' | translate}}">
+  <ng-template pTemplate="icons">
+    <button class="p-panel-header-icon p-link" (click)="refreshData()" pTooltip="{{'btn.refresh' | translate}}" tooltipPosition="bottom">
+      <i class="pi pi-refresh"></i>
+    </button>
+  </ng-template>
+  <p-tabView #tabView (onChange)="doChangeTab($event)" [activeIndex]="initActiveIndex">
+    <p-tabPanel header="{{'kpi.import' | translate}}" [disabled]="isNotImport">
+      <aw-kpi-import [tagKpiList]="tagKpiList" (checkFile)="doCheckFile($event)"></aw-kpi-import>
+    </p-tabPanel>
+    <p-tabPanel header="{{'kpi.listReport' | translate}}" [disabled]="isNotView">
+      <aw-kpi-data [isHasEdit]="isHasEdit" [isHasDel]="isHasDel" [kpiList]="kpiReportList"
+                   [totalItem]="totalReportKpi"
+                   [tagKpiList]="tagKpiList"
+                   (delete)="doDeleteKpi($event)"
+                   (filter)="doFilterKpiReport($event)">
+      </aw-kpi-data>
+    </p-tabPanel>
+    <p-tabPanel header="{{'kpi.listArea' | translate}}" [disabled]="isNotView">
+      <aw-area-data [isHasEdit]="isHasEdit" [isHasDel]="isHasDel" [data]="areaList" (delete)="doDeleteArea($event)"></aw-area-data>
+    </p-tabPanel>
+  </p-tabView>
+</p-panel>
+
+<ng-template awKpi></ng-template>

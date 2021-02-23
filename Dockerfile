@@ -16,7 +16,7 @@ RUN npx ngcc --properties es2015 --create-ivy-entry-points
 COPY . .
 
 # Build the project and copy the files
-RUN npm run ng build -- --configuration=live
+RUN npm run ng build -- --configuration=docker
 
 # Stage 2
 FROM nginx:alpine

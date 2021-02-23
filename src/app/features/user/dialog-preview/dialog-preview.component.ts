@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {PreviewUser} from '../model/user';
 import {UserService} from '../service/user.service';
-import {finalize} from 'rxjs/operators';
 
 @Component({
   templateUrl: './dialog-preview.component.html'

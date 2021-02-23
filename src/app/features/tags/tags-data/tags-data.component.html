@@ -51,15 +51,15 @@
         </td>
         <td>
           <ng-container [ngSwitch]="tags.status">
-            <ng-container *ngSwitchCase="tagType.STATUS_ACTIVE">{{'const.active' | translate}}</ng-container>
-            <ng-container *ngSwitchCase="tagType.STATUS_INACTIVE">{{'const.inactive' | translate}}</ng-container>
-            <ng-container *ngSwitchDefault>-</ng-container>
+            <div *ngSwitchCase="tagType.STATUS_ACTIVE">{{'const.active' | translate}}</div>
+            <div *ngSwitchCase="tagType.STATUS_INACTIVE" class="p-invalid">{{'const.inactive' | translate}}</div>
+            <div *ngSwitchDefault>-</div>
           </ng-container>
         </td>
         <td>
           <button (click)="gotoView(tags.id)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
           <button *ngIf="isHasEdit" (click)="gotoUpdate(tags.id)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-secondary p-button-text"></button>
-          <button *ngIf="isHasDel" (click)="doDelete(tags)" pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
+          <button *ngIf="isHasDel && tags.status == tagType.STATUS_ACTIVE" (click)="doDelete(tags)" pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
         </td>
       </tr>
     </ng-template>

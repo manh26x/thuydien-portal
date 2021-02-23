@@ -3,16 +3,12 @@ import { CommonModule } from '@angular/common';
 import {FeaturesComponent} from './features.component';
 import {FeaturesRoutingModule} from './features-routing.module';
 import {TopBarComponent} from './topbar.component';
-import {RadioButtonModule} from 'primeng/radiobutton';
-import {InputSwitchModule} from 'primeng/inputswitch';
 import {FormsModule} from '@angular/forms';
 import {MenuitemComponent} from './menuitem.component';
-import {MenuService} from './menu.service';
 import {RippleModule} from 'primeng/ripple';
 import {ButtonModule} from 'primeng/button';
 import {MenuModule} from 'primeng/menu';
 import {IndicatorModule} from '../shared/indicator/indicator.module';
-import {RoleService} from '../shared/service/role.service';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 
@@ -22,8 +18,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
   imports: [
     CommonModule,
     FeaturesRoutingModule,
-    RadioButtonModule,
-    InputSwitchModule,
     FormsModule,
     RippleModule,
     ButtonModule,
@@ -31,9 +25,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     IndicatorModule,
     MatProgressBarModule
   ],
-  providers: [
-    MenuService,
-    RoleService
-  ]
+  providers: []
 })
 export class FeaturesModule { }

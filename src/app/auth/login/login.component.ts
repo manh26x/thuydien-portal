@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, Renderer2, ViewEncapsulation} from '@angul
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {concatMap, filter, finalize, map, tap} from 'rxjs/operators';
+import {filter, finalize, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {UtilService} from '../../core/service/util.service';
 import {Message} from 'primeng/api';

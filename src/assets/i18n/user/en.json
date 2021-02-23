@@ -14,7 +14,8 @@
 		"export": "Export Report",
 		"refresh": "Refresh",
 		"save": "Save changes",
-		"save2": "Save"
+		"save2": "Save",
+		"selectFile": "Select file"
 	},
 	"confirm": {
 		"accept": "Yes",
@@ -84,7 +85,9 @@
 	"noData": "No results match",
 	"paging": "Showing {first} to {last} in {totalRecords} records",
 	"roleList": "Roles list",
-	"search": "Enter first and last name, position and branch",
+	"search": "Full name, username, position, branch",
+	"selectDepartment": "Select the department",
+	"selectUnit": "Select a unit",
 	"selectedList": "List of selected tags",
 	"selectedRoleList": "Selected Roles list",
 	"tagList": "List of tags",

@@ -1,6 +1,6 @@
 <input type="file" #inputFile style="display:none;" [accept]="fileExt" [multiple]="(maxFiles > 1)" (change)="onFileChange($event)">
 <div class="p-inputgroup">
-  <input type="text" pInputText placeholder="" [formControl]="fromFile">
+  <input type="text" pInputText placeholder="" [formControl]="formFile">
   <button type="button" pButton [label]="selectLabel" (click)="inputFile.click()"></button>
 </div>
 <div class="ui-g-12" *ngIf="errors.length > 0">

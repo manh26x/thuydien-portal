@@ -1,0 +1,88 @@
+{
+	"action": "Thao tác",
+	"area": {
+		"addNew": "Thêm mới vùng dữ liệu",
+		"addNewSuccess": "Thêm mới vùng dữ liệu thành công",
+		"color": "Màu sắc",
+		"const": {
+			"active": "Hoạt động",
+			"inactive": "Không hoạt động"
+		},
+		"name": "Tên phân vùng dữ liệu",
+		"priority": "Độ ưu tiên",
+		"status": "Trạng thái",
+		"updateArea": "Chỉnh sửa vùng dữ liệu",
+		"updateSuccess": "Cập mhật phân vùng dữ liệu thành công"
+	},
+	"breadcrumb": {
+		"area": "Quản lý phân vùng dữ liệu",
+		"areaCreate": "Thêm mới dữ liệu",
+		"areaUpdate": "Chỉnh sửa dữ liệu",
+		"kpi": "Quản lý báo cáo KPI",
+		"kpiDetail": "Chi tiết Dashboard KPI",
+		"kpiReportDetail": "Chi tiết báo cáo KPI",
+		"kpiUpdate": "Chỉnh sửa Dashboard KPI"
+	},
+	"btn": {
+		"back": "Quay lại",
+		"cancel": "Hủy",
+		"checkData": "Kiểm tra dữ liệu",
+		"create": "Thêm mới",
+		"export": "Xuất báo cáo",
+		"filter": "Lọc kết quả",
+		"refresh": "Tải lại",
+		"save": "Lưu kết quả",
+		"update": "Cập nhật"
+	},
+	"invalid": {
+		"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+		"required": "Giá trị không được để trống"
+	},
+	"kpi": {
+		"allowDisplay": "Cho phép hiển thị",
+		"area": "Phân vùng dữ liệu",
+		"atHere": "Tại đây",
+		"const": {
+			"active": "Hoạt động",
+			"all": "Tất cả",
+			"inactive": "Không hoạt động",
+			"no": "Không",
+			"yes": "Có"
+		},
+		"createDate": "Ngày tạo",
+		"detail": "Chi tiết Dashboard KPI",
+		"enterIndex": "Nhập chỉ số",
+		"import": "Import KPI",
+		"index": "Chỉ số",
+		"indexList": "Các chỉ số",
+		"info": "Thông tin báo cáo KPI",
+		"list": "Danh sách KPI",
+		"listArea": "Danh sách phân vùng dữ liệu",
+		"listReport": "Danh sách báo cáo KPI",
+		"manage": "Quản lý báo cáo KPI",
+		"modifyDate": "Ngày cập nhật",
+		"orderDisplay": "Thứ tự hiển thi",
+		"patternFile": "Tải về tệp tin mẫu",
+		"selectArea": "Chọn vùng dữ liệu",
+		"selectType": "Chon loại báo cáo KPI",
+		"status": "Trạng thái",
+		"typeReport": "Loại báo cáo KPI",
+		"update": "Chỉnh sửa Dashboard KPI",
+		"upload": "Tải lên"
+	},
+	"message": {
+		"accept": "Có",
+		"confirmDel": "Xác nhận xóa",
+		"delArea": "Bạn có chắc chắn xóa vùng dữ liệu \"{{name}}\"?",
+		"delKpi": "Nếu bạn xóa, báo cáo KPI sẽ chuyển thành Hết hiệu lực. Bạn có chắc chắn muốn xóa?",
+		"delSuccess": "Xóa bản ghi thành công",
+		"importExceed": "Bạn chỉ được tải lên file dữ liệu tối đa 2000 bản ghi",
+		"importInvalid": "Không đọc được file dữ liệu. Vui lòng kiểm tra file import có đúng mẫu phát hành không",
+		"importSuccess": "Import KPI thành công",
+		"reject": "Không",
+		"updateSuccess": "Cập mhật KPI thành công"
+	},
+	"no": "STT",
+	"noData": "Không có kết quả nào phù hợp",
+	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi"
+}

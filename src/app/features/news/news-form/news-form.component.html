@@ -1,6 +1,6 @@
 <form [formGroup]="formNews">
   <div class="p-grid">
-    <div class="p-col-8">
+    <div class="p-md-8 p-col-12">
       <div class="p-fluid">
         <div class="p-col-12 p-field">
           <label for="n-title">{{'news.title' | translate}} <span class="p-invalid">*</span></label>
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <div class="p-col-4">
+    <div class="p-md-4 p-col-12">
       <div class="p-fluid">
         <div class="p-col-12 p-field">
           <label for="n-tags">{{'news.tags' | translate}} <span class="p-invalid">*</span></label>
@@ -60,10 +60,10 @@
             formControlName="groupViewValue"
             inputId="n-group-customer"
             [options]="groupViewList"
-            optionLabel="name"
+            optionLabel="display"
             dataKey="id">
             <ng-template let-item pTemplate="item">
-              <div>{{item.value.code}} {{item.value.name}}</div>
+              <div>{{item.value.display}}</div>
             </ng-template>
           </p-multiSelect>
           <small *ngIf="hasErrorInput('groupViewValue', 'required')" class="p-invalid">

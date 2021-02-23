@@ -1,9 +1,9 @@
 <p-panel *ngIf="isHasImport" header="Import User" [toggleable]="true" >
   <div class="p-grid p-fluid">
     <div class="p-col-12 p-md-5">
-      <aw-input-upload (changeFile)="doChangeFile($event)"></aw-input-upload>
+      <aw-input-upload (changeFile)="doChangeFile($event)" selectLabel="{{'btn.selectFile' | translate}}"></aw-input-upload>
       <span class="p-mt-2 p-d-block">{{'downloadPattern' | translate}}
-        <a href="assets/resource/User%20TitleSalesApp_v1.xlsx" target="_blank"> {{'atHere' | translate}}</a>
+        <a href="assets/resource/User_Import_Sample.xlsx" target="_blank"> {{'atHere' | translate}}</a>
       </span>
     </div>
 
@@ -21,7 +21,7 @@
   </ng-template>
   <form class="p-grid p-fluid p-mb-3" [formGroup]="searchForm">
     <div class="p-lg-4 p-col-6 p-field">
-      <label for="s-value">{{'user.fullName' | translate}}, {{'user.position' | translate}}, {{'user.branch' | translate}}</label>
+      <label for="s-value">{{'search' | translate}}</label>
       <input (keyup.enter)="doFilterUser()" type="text" id="s-value" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
     </div>
     <div class="p-lg-2 p-col-6 p-field">
@@ -84,14 +84,14 @@
         </td>
         <td>
           <ng-container [ngSwitch]="user.user.status">
-            <ng-container *ngSwitchCase="userConst.ACTIVE">{{'const.active' | translate}}</ng-container>
-            <ng-container *ngSwitchCase="userConst.INACTIVE">{{'const.inactive' | translate}}</ng-container>
+            <div *ngSwitchCase="userConst.ACTIVE">{{'const.active' | translate}}</div>
+            <div *ngSwitchCase="userConst.INACTIVE" class="p-invalid">{{'const.inactive' | translate}}</div>
           </ng-container>
          </td>
         <td>
           <button (click)="gotoView(user.user.userName)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
           <button *ngIf="isHasEdit" (click)="gotoUpdate(user.user.userName)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-secondary p-button-text"></button>
-          <button *ngIf="isHasDel" (click)="doDelete(user)" pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
+          <button *ngIf="isHasDel && user.user.status == userConst.ACTIVE" (click)="doDelete(user)" pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
         </td>
       </tr>
     </ng-template>
@@ -103,7 +103,7 @@
       </tr>
     </ng-template>
   </p-table>
-  <p-paginator [rows]="pageSize"
+  <p-paginator #userPaging [rows]="pageSize"
                [totalRecords]="totalItem"
                [rowsPerPageOptions]="[10, 20, 50, 100]"
                [showCurrentPageReport]="true"
