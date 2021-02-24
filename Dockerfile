@@ -1,5 +1,5 @@
 # stage 1 as builder
-FROM node:12-alpine as builder
+FROM ebit-registry.tpb.vn/node:12-alpine as builder
 
 RUN mkdir /sale-web-portal
 
