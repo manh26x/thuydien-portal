@@ -1,6 +1,8 @@
 # stage 1 as builder
 FROM ebit-registry.tpb.vn/node:12-alpine as builder
 
+ARG TPB_PROXY
+
 RUN mkdir /sale-web-portal
 
 WORKDIR /sale-web-portal
