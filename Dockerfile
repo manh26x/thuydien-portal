@@ -8,6 +8,10 @@ WORKDIR /sale-web-portal
 # copy the package.json to install dependencies
 COPY package.json package-lock.json ./
 
+RUN npm config set proxy ${TPB_PROXY}
+RUN npm set strict-ssl false
+
+
 # Install the dependencies and make the folder
 RUN npm install
 
@@ -19,7 +23,9 @@ COPY . .
 RUN npm run ng build -- --configuration=docker
 
 # Stage 2
-FROM nginx:alpine
+FROM ebit-registry.tpb.vn/rhel8-nginx118:latest
+
+USER 0
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
@@ -29,6 +35,10 @@ RUN rm -rf /var/www/sale-web-portal/*
 # Copy from the stage 1
 COPY --from=builder /sale-web-portal/dist/sale-web-portal /var/www/sale-web-portal
 
-EXPOSE 80
+RUN chown -R 1001:0 /var/www/sale-web-portal
+
+USER 1001
+
+EXPOSE 8080
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
