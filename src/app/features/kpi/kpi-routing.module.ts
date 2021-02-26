@@ -6,7 +6,7 @@ import {AreaCreateComponent} from './area-create/area-create.component';
 import {AreaUpdateComponent} from './area-update/area-update.component';
 import {KpiDetailComponent} from './kpi-detail/kpi-detail.component';
 import {KpiUpdateComponent} from './kpi-update/kpi-update.component';
-import {KpiDetailDataComponent} from './kpi-detail-data/kpi-detail-data.component';
+// import {KpiDetailDataComponent} from './kpi-detail-data/kpi-detail-data.component';
 import {FeatureEnum} from '../../shared/model/feature.enum';
 import {RoleEnum} from '../../shared/model/role';
 import {AuthGuard} from '../../auth/auth.guard';
@@ -51,12 +51,12 @@ const routes: Routes = [
         data: {feature: FeatureEnum.KPI, role: RoleEnum.ACTION_EDIT},
         canActivate: [AuthGuard, FeatureGuard]
       },
-      {
-        path: 'detail-data/:id',
-        component: KpiDetailDataComponent,
-        data: {feature: FeatureEnum.KPI, role: RoleEnum.ACTION_VIEW},
-        canActivate: [AuthGuard, FeatureGuard]
-      }
+//      {
+//        path: 'detail-data/:id',
+//        component: KpiDetailDataComponent,
+//        data: {feature: FeatureEnum.KPI, role: RoleEnum.ACTION_VIEW},
+//        canActivate: [AuthGuard, FeatureGuard]
+//      }
     ]
   }
 ];
