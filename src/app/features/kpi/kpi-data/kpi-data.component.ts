@@ -67,9 +67,9 @@ export class KpiDataComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  gotoDetailData(kpi: KpiReport) {
-    this.router.navigate(['management-kpi', 'detail-data', kpi.id]);
-  }
+//  gotoDetailData(kpi: KpiReport) {
+//    this.router.navigate(['management-kpi', 'detail-data', kpi.id]);
+//  }
 
   doDelete(kpi: KpiReport) {
     this.delete.emit(kpi);
