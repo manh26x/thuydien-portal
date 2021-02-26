@@ -17,14 +17,14 @@
 	"breadcrumb": {
 		"area": "Manage area data",
 		"areaCreate": "Add new data",
-		"areaUpdate": "Data edit",
+		"areaUpdate": "Edit data",
 		"kpi": "Manage KPI reports",
 		"kpiDetail": "Detail KPI Dashboard",
-		"kpiReportDetail": "Detail KPI report",
+		"kpiReportDetail": "KPI report Detail",
 		"kpiUpdate": "Edit KPI Dashboard"
 	},
 	"btn": {
-		"back": "Go back",
+		"back": "Back",
 		"cancel": "Cancel",
 		"checkData": "Check data",
 		"create": "Add new",
@@ -39,7 +39,7 @@
 		"required": "Value cannot be blank"
 	},
 	"kpi": {
-		"allowDisplay": "Allows display",
+		"allowDisplay": "Display allowance",
 		"area": "Data area",
 		"atHere": "At here",
 		"const": {
@@ -49,9 +49,9 @@
 			"no": "No",
 			"yes": "Yes"
 		},
-		"createDate": "Date created",
+		"createDate": "Created date",
 		"detail": "Detail KPI Dashboard",
-		"enterIndex": "Enter a index",
+		"enterIndex": "Enter an index",
 		"import": "Import KPI",
 		"index": "Index",
 		"indexList": "Index list",
@@ -60,7 +60,7 @@
 		"listArea": "List of data area",
 		"listReport": "List of KPI reports",
 		"manage": "Manage KPI reports",
-		"modifyDate": "Update day",
+		"modifyDate": "Updated date",
 		"orderDisplay": "Display order",
 		"patternFile": "Download the sample file",
 		"selectArea": "Select the data area",
@@ -72,17 +72,17 @@
 	},
 	"message": {
 		"accept": "Yes",
-		"confirmDel": "Confirm Delete",
-		"delArea": "Are you sure you delete the \"{{name}}\"?",
-		"delKpi": "If you delete, the KPI report will change to Expired. Are you sure you want to delete?",
-		"delSuccess": "Successful record deletion",
+		"confirmDel": "Deletion Confirmation",
+		"delArea": "Are you sure you want to delete the \"{{name}}\"?",
+		"delKpi": "If you delete, the KPI report will be updated to Expired. Are you sure you want to delete?",
+		"delSuccess": "Successfully delete the record",
 		"importExceed": "You can only upload data files up to 2000 records",
-		"importInvalid": "Data file cannot be read. Please check that the import file has the correct release form",
-		"importSuccess": "Successfully imported KPIs",
+		"importInvalid": "Data file cannot be read. Please check if the import file is with the correct release form",
+		"importSuccess": "Successfully import KPIs",
 		"reject": "No",
-		"updateSuccess": "Successful KPI updates"
+		"updateSuccess": "Successfully update the KPI "
 	},
 	"no": "No.",
-	"noData": "No results match",
+	"noData": "No matching results",
 	"paging": "Showing {first} to {last} in {totalRecords} records"
 }

@@ -251,8 +251,11 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
             severity: 'success',
             detail: this.translate.instant('message.delSuccess')
           });
+          this.doFilterKpiReport(this.stateFilter);
+        }, err => {
+          this.indicator.hideActivityIndicator();
+          throw err;
         });
-        this.doFilterKpiReport(this.stateFilter);
       },
       reject: () => {}
     });
