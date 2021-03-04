@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {BaseService} from '../../../core/service/base.service';
 import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import {map, timeout} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {ApiResultResponse} from '../../../core/model/result-response';
 import {TagDetail} from '../../tags/model/tags';
 import {Area} from '../model/area';
 import {KpiDetail, KpiFilterRequest, KpiFilterResponse, KpiImportData, KpiReportDetail, KpiUpdateRequest} from '../model/kpi';
+import {environment} from '../../../../environments/environment';
 
 export interface KpiBreadcrumb {
   main: string;
@@ -73,6 +74,7 @@ export class KpiService extends BaseService {
 
   checkDataImport(file: FormData): Observable<KpiImportData> {
     return this.doPost('/kpi/portal/importKPI', file).pipe(
+      timeout(environment.importExportTimeout),
       map(res => res.data ? res.data[0] : {})
     );
   }

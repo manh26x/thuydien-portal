@@ -3,10 +3,11 @@ import {BaseService} from '../../core/service/base.service';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {InsertRoleRequest, Role, RoleDetail} from '../model/role';
-import {map} from 'rxjs/operators';
+import {map, timeout} from 'rxjs/operators';
 import {ApiResultResponse} from '../../core/model/result-response';
 import {AbstractControl} from '@angular/forms';
 import {UserAuthDetail} from '../../auth/model/user-auth';
+import {environment} from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class RoleService extends BaseService{
@@ -24,7 +25,9 @@ export class RoleService extends BaseService{
   }
 
   exportRole(): Observable<any> {
-    return this.postDataBlob('/admin/role/exportRoleExcel', null);
+    return this.postDataBlob('/admin/role/exportRoleExcel', null).pipe(
+      timeout(environment.importExportTimeout)
+    );
   }
 
   changeRoleOfUser(data: UserAuthDetail): void {

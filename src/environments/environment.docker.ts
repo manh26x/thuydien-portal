@@ -3,6 +3,9 @@
 /**
  * baseUrl: Api Host
  * basePath: Api Gateway context path
+ * mediaUrl: Folder files on server
+ * clientTimeout: client waiting api response time
+ * importExportTimeout: client waiting api response time (Import, export feature)
  * logServer: Not Support now
  * logClient: Log console
  */
@@ -15,8 +18,9 @@ export const environment = {
   basePath: '',
   logServer: false,
   logClient: false,
-  version: '2.3.0',
+  version: '2.3.1',
   mediaUrl: 'https://10.1.28.56/upload/',
-  clientTimeout: 10000,
+  clientTimeout: 10000, // 10s
+  importExportTimeout: 300000, // 5m
   idleTimeout: 1800
 };

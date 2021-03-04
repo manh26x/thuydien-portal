@@ -3,8 +3,9 @@ import {BaseService} from '../../../core/service/base.service';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {FilterUserRequest, UserData, UserInfo, PreviewUser, FilterUserResponse, UserDetail} from '../model/user';
-import {map} from 'rxjs/operators';
+import {map, timeout} from 'rxjs/operators';
 import {ApiResultResponse} from '../../../core/model/result-response';
+import {environment} from '../../../../environments/environment';
 
 @Injectable()
 export class UserService extends BaseService{
@@ -16,7 +17,9 @@ export class UserService extends BaseService{
   }
 
   exportUser(request: FilterUserRequest): Observable<any> {
-    return this.postDataBlob('/admin/userPortal/exportUserExcel', request);
+    return this.postDataBlob('/admin/userPortal/exportUserExcel', request).pipe(
+      timeout(environment.importExportTimeout)
+    );
   }
 
   batchInsert(data: PreviewUser[]): Observable<ApiResultResponse> {
@@ -25,6 +28,7 @@ export class UserService extends BaseService{
 
   readImportFile(file: FormData): Observable<PreviewUser[]> {
     return this.doPost('/admin/userPortal/readUserWithExcel', file).pipe(
+      timeout(environment.importExportTimeout),
       map(res => res.data || [])
     );
   }
