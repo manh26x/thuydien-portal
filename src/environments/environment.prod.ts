@@ -9,6 +9,7 @@ export const environment = {
   logClient: false,
   version: '1.0.0',
   mediaUrl: 'https://10.1.28.56/upload/',
-  clientTimeout: 10000,
+  clientTimeout: 10000, // 10s
+  importExportTimeout: 300000, // 5m
   idleTimeout: 1800
 };

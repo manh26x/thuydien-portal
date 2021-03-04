@@ -3,7 +3,6 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/c
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import {AuthService} from '../auth/auth.service';
-import {timeout} from 'rxjs/operators';
 
 @Injectable()
 export class RequestInterceptor implements HttpInterceptor {
@@ -17,7 +16,7 @@ export class RequestInterceptor implements HttpInterceptor {
         req = this.updateHeader(req);
       }
     }
-    return next.handle(req).pipe(timeout(environment.clientTimeout));
+    return next.handle(req);
   }
 
   private updateHeader(req: HttpRequest<any>) {
