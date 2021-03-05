@@ -28,6 +28,7 @@ export interface NewsInfoRequest {
   listAnyId?: string[];
   isDraft?: number;
   userViewType?: string;
+  isPublished?: number;
 }
 
 export interface News {

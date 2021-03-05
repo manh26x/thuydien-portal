@@ -59,7 +59,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
       'searchreplace visualblocks code fullscreen',
       'insertdatetime media table paste code wordcount'
     ],
-    toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | fullscreen',
+    toolbar: 'formatselect | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | fullscreen',
     file_picker_types: 'image',
     automatic_uploads: false,
     file_picker_callback: (cb, value, meta) => {
@@ -72,6 +72,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
   };
   newsConst = NewsEnum;
   isNotPublished = false;
+  isShowPublishDate = false;
   @ViewChild(ImageUploadComponent, {static: true}) imgUploadComponent: ImageUploadComponent;
   @Input() mode = 'create';
   @Input() valueForm: NewsDetail;
@@ -114,6 +115,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
       if (!changes.valueForm.firstChange) {
         const news: NewsDetail = changes.valueForm.currentValue;
         if (this.mode === 'update') {
+          this.isShowPublishDate = true;
           if (news.newsDto.status === NewsEnum.STATUS_PUBLISHED) {
             this.formNews.get('publishDate').disable();
           } else {
@@ -128,7 +130,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
           }
         }
 
-        this.formNews.setValue({
+        this.formNews.patchValue({
           id: news.newsDto.id,
           title: news.newsDto.title,
           shortContent: news.newsDto.shortContent,
@@ -164,6 +166,17 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
         break;
       default:
         break;
+    }
+  }
+
+  doChangePublishType(event: MatRadioChange) {
+    if (event.value === NewsEnum.PUBLISH_NOW) {
+      this.isShowPublishDate = false;
+    } else {
+      this.isShowPublishDate = true;
+      this.formNews.patchValue({
+        publishDate: this.getValidPublishDate()
+      });
     }
   }
 
@@ -251,23 +264,29 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
   }
 
   initForm() {
-    const now = new Date();
-    now.setHours(now.getHours() + 1);
-    now.setMinutes(0, 0);
+
     this.formNews = this.fb.group({
       id: [],
       title: ['', [Validators.required, Validators.maxLength(500)] ],
       shortContent: ['', [Validators.maxLength(400)]],
       content: ['', [Validators.required]],
       tags: [null, [Validators.required]],
-      publishDate: [now],
+      publishDate: [this.getValidPublishDate()],
       level: [NewsEnum.LEVEL_NORMAL, [Validators.required]],
       docs: [''],
       image: [''],
       isSendNotification: [false],
       groupViewType: [NewsEnum.GROUP_VIEW_BRANCH],
-      groupViewValue: ['', Validators.required]
+      groupViewValue: ['', Validators.required],
+      publishType: [NewsEnum.PUBLISH_NOW]
     }, { validators: this.publishDateMatcher });
+  }
+
+  getValidPublishDate(): Date {
+    const now = new Date();
+    now.setHours(now.getHours() + 1);
+    now.setMinutes(0, 0);
+    return now;
   }
 
   toDayClick(evt: Date) {
