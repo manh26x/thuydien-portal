@@ -72,8 +72,16 @@
         </div>
 
         <div class="p-col-12 p-field">
-          <label for="n-date-publish">{{'news.publishDate' | translate}}</label>
-          <p-calendar
+          <label for="n-group-publish">{{'news.publish' | translate}}</label>
+          <div *ngIf="mode == 'create'">
+            <mat-radio-group aria-label="Select publish type" (change)="doChangePublishType($event)" formControlName="publishType">
+              <mat-radio-button color="primary" [value]="newsConst.PUBLISH_NOW">{{'news.publishNow' | translate}}</mat-radio-button>
+              <span class="p-mr-4"></span>
+              <mat-radio-button color="primary" [value]="newsConst.PUBLISH_SCHEDULE">{{'news.publishSchedule' | translate}}</mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <p-calendar *ngIf="isShowPublishDate"
             formControlName="publishDate"
             dateFormat="dd/mm/yy"
             [showTime]="true"
@@ -86,12 +94,17 @@
             [yearRange]="yearSelect"
             [minDate]="min"
             (onSelect)="toDayClick($event)"
-            styleClass="hour-only">
+            styleClass="hour-only p-mt-3">
           </p-calendar>
           <small *ngIf="hasErrorInput('publishDate', 'mustAfterNow')" class="p-invalid">
             {{'invalid.publishDate.mustAfterNow' | translate}}
           </small>
         </div>
+
+<!--        <div class="p-col-12 p-field">-->
+<!--          <label for="n-date-publish">{{'news.publishDate' | translate}}</label>-->
+<!--          -->
+<!--        </div>-->
 
         <div class="p-col-12 p-field">
           <label for="n-order">{{'news.level' | translate}} <span class="p-invalid">*</span></label>
