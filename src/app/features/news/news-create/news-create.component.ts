@@ -125,7 +125,8 @@ export class NewsCreateComponent extends BaseComponent implements OnInit, Before
       publishTime: value.publishDate,
       sendNotification: value.isSendNotification ? 1 : 0,
       isDraft: draft ? 1 : 0,
-      userViewType: value.groupViewType
+      userViewType: value.groupViewType,
+      isPublished: value.publishType
     };
     this.indicator.showActivityIndicator();
     forkJoin(listObs).pipe(
