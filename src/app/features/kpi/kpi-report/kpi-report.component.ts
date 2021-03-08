@@ -12,7 +12,7 @@ import {KpiPreviewComponent} from '../kpi-preview/kpi-preview.component';
 import {UtilService} from '../../../core/service/util.service';
 import {KpiDirective} from '../kpi.directive';
 import {KpiPreviewItem} from '../model/kpi-preview-item';
-import {KpiReport, KpiTableComponent} from '../model/kpi';
+import {KpiReport, KpiTableComponent, KpiTitle} from '../model/kpi';
 import {KpiImportComponent} from '../kpi-import/kpi-import.component';
 import {forkJoin} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
@@ -157,7 +157,8 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
     fileFormData.append('typeReport', value.keyTag);
     this.kpiService.checkDataImport(fileFormData).pipe(
       map((res) => {
-        const titleList = [];
+        const titleList: KpiTitle[] = [];
+        let lastTitleKey: string | number = 0;
         const dataMappedList: any[] = [];
         if (this.util.canForEach(res.data)) {
           res.data.forEach((kpi, kpiIndex) => {
@@ -182,6 +183,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
                   titleList.push({ field: titleIndex, header: titleName});
                 }
               });
+              lastTitleKey = titleList[titleList.length - 1].field;
             }
             // search value
             const searchValue = `${kpi.employeeNumber} ${kpi.fullName} ${kpi.misCodeCBKD} ${kpi.misCodeManagement} ${kpi.tbpTPKDNumber} ${kpi.laborContractStatus} ${kpi.employeePosition} ${kpi.branchCode} ${kpi.branchName} ${kpi.area}`;
@@ -189,6 +191,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
             kpi.recordData.split('||').forEach((dataValue, index) => {
               dataMapped[index] = dataValue;
             });
+            dataMapped[lastTitleKey] = this.stringToNumber(dataMapped[lastTitleKey]) * 100;
             dataMappedList.push(dataMapped);
           });
         }
@@ -291,6 +294,10 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
     ).subscribe(res => {
       this.areaList = res;
     });
+  }
+
+  stringToNumber(value: string): number {
+    return +value || 0;
   }
 
 }

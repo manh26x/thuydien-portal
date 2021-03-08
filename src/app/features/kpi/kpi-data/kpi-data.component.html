@@ -69,12 +69,12 @@
 <!--                icon="pi pi-book"-->
 <!--                class="p-button-rounded p-button-warning p-button-text">-->
 <!--        </button>-->
-        <button *ngIf="isHasEdit" (click)="gotoUpdate(kpi)" pButton
-                type="button"
-                icon="pi pi-book"
-                class="p-button-rounded p-button-warning p-button-text">
-        </button>
-        <button pButton
+<!--        <button *ngIf="isHasEdit" (click)="gotoUpdate(kpi)" pButton-->
+<!--                type="button"-->
+<!--                icon="pi pi-book"-->
+<!--                class="p-button-rounded p-button-warning p-button-text">-->
+<!--        </button>-->
+        <button pButton *ngIf="isHasEdit" (click)="gotoUpdate(kpi)"
                 type="button"
                 icon="pi pi-pencil"
                 class="p-button-rounded p-button-secondary p-button-text">

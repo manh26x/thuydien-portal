@@ -75,3 +75,8 @@ export interface KpiReportDetail {
   infoAndTitle?: KpiReport;
   data?: Kpi[];
 }
+
+export interface KpiTitle {
+  field: string | number;
+  header: string;
+}
