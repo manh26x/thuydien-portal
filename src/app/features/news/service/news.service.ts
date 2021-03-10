@@ -48,7 +48,7 @@ export class NewsService extends BaseService{
   }
 
   uploadFile(file: FormData): Observable<string> {
-    return this.doPost('/saleskit/news/uploadFile', file).pipe(
+    return this.doPost('/uploads/file', file).pipe(
       map(res => res.data[0] || '')
     );
   }
