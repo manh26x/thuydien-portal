@@ -5,7 +5,7 @@ import {Language} from '../core/model/language.enum';
 import {Observable} from 'rxjs';
 import {RoleEnum} from '../shared/model/role';
 import {FeatureGroupByRole, UserAuth, UserRole} from './model/user-auth';
-import {ApiResultResponse} from '../core/model/result-response';
+// import {ApiResultResponse} from '../core/model/result-response';
 
 @Injectable({
   providedIn: 'root'
@@ -40,18 +40,20 @@ export class AuthService {
     });
   }
 
-  logOut() {
+  logOut(): void {
     const currentLang = localStorage.getItem(Language.LOCAL_KEY);
     this.deleteCookie(this.TOKEN_KEY);
     this.deleteCookie(this.REFRESH_TOKEN_KEY);
     localStorage.clear();
     localStorage.setItem(Language.LOCAL_KEY, currentLang);
+    const header = new HttpHeaders().append('Authorization', `Bearer ${this.getToken()}`);
+    this.http.get(`${environment.baseUrl}${environment.basePath}/uaa/user/logOut`, { headers: header }).subscribe();
   }
 
   /**
    * refresh token
    */
-  refreshToken() {
+  refreshToken(): Observable<any> {
     const body = new HttpParams()
       .append('refresh_token', this.getCookie(this.REFRESH_TOKEN_KEY))
       .append('grant_type', 'refresh_token');
@@ -63,7 +65,7 @@ export class AuthService {
     });
   }
 
-  checkUserPortal(token: string): Observable<ApiResultResponse> {
+  /* checkUserPortal(token: string): Observable<ApiResultResponse> {
     const header = new HttpHeaders().append('Authorization', `Bearer ${token}`);
     return this.http.get<ApiResultResponse>(`${environment.baseUrl}${environment.basePath}/uaa/user/checkPortalUser`, { headers: header });
   }
@@ -71,20 +73,20 @@ export class AuthService {
   checkUserActive(token: string): Observable<ApiResultResponse> {
     const header = new HttpHeaders().append('Authorization', `Bearer ${token}`);
     return this.http.get<ApiResultResponse>(`${environment.baseUrl}${environment.basePath}/uaa/user/checkActive`, { headers: header });
-  }
+  } */
 
   /**
    * check user logged in
    */
-  isAuthed() {
+  isAuthed(): boolean {
     return this.getCookie(this.TOKEN_KEY) !== '' || this.getCookie(this.REFRESH_TOKEN_KEY) !== '';
   }
 
-  getToken() {
+  getToken(): string {
     return this.getCookie(this.TOKEN_KEY);
   }
 
-  getRefreshToken() {
+  getRefreshToken(): string {
     return this.getCookie(this.REFRESH_TOKEN_KEY);
   }
 
@@ -97,8 +99,9 @@ export class AuthService {
   /**
    * set token to auth with api
    * @param token token value
+   * @param expireIn time expire token: seconds
    */
-  setToken(token, expireIn) {
+  setToken(token, expireIn): void {
     this.deleteCookie(this.TOKEN_KEY);
     this.setCookie(this.TOKEN_KEY, token, expireIn);
   }
@@ -107,23 +110,22 @@ export class AuthService {
    * set refresh token to auth api
    * @param token refresh token value
    */
-  setRefreshToken(token) {
+  setRefreshToken(token): void {
     this.deleteCookie(this.REFRESH_TOKEN_KEY);
     this.setCookie(this.REFRESH_TOKEN_KEY, token, environment.refreshTokenEx);
   }
 
-  setUserInfo(user) {
+  setUserInfo(user): void {
     localStorage.setItem(this.USER_INFO_KEY, JSON.stringify(user));
   }
 
-  setUserRole(roleList) {
+  setUserRole(roleList): void {
     localStorage.setItem(this.USER_ROLE_KEY, JSON.stringify(roleList));
   }
 
   getUserRole(): FeatureGroupByRole {
     const data = localStorage.getItem(this.USER_ROLE_KEY);
-    const jsonData = JSON.parse(data);
-    return jsonData;
+    return JSON.parse(data);
   }
 
   isHasRole(feature: string, role: string): boolean {
@@ -133,14 +135,14 @@ export class AuthService {
   }
 
   // cookie utils docs https://www.w3schools.com/js/js_cookies.asp
-  private setCookie(cname, cvalue, seconds) {
+  private setCookie(cname, cvalue, seconds): void {
     const d = new Date();
     d.setTime(d.getTime() + (seconds * 1000));
     const expires = 'expires=' + d.toUTCString();
     document.cookie = cname + '=' + cvalue + ';' + expires + ';path=/';
   }
 
-  private getCookie(cname) {
+  private getCookie(cname): string {
     const name = cname + '=';
     const ca = document.cookie.split(';');
     for (let c of ca) {
@@ -154,7 +156,7 @@ export class AuthService {
     return '';
   }
 
-  private deleteCookie(cname) {
+  private deleteCookie(cname): void {
     const cvalue = this.getCookie(cname);
     if (cvalue !== '') {
       document.cookie = cname + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
