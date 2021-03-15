@@ -41,13 +41,13 @@ export class AuthService {
   }
 
   logOut(): void {
+    const header = new HttpHeaders().append('Authorization', `Bearer ${this.getToken()}`);
+    this.http.get(`${environment.baseUrl}${environment.basePath}/uaa/user/logOut`, { headers: header }).subscribe();
     const currentLang = localStorage.getItem(Language.LOCAL_KEY);
     this.deleteCookie(this.TOKEN_KEY);
     this.deleteCookie(this.REFRESH_TOKEN_KEY);
     localStorage.clear();
     localStorage.setItem(Language.LOCAL_KEY, currentLang);
-    const header = new HttpHeaders().append('Authorization', `Bearer ${this.getToken()}`);
-    this.http.get(`${environment.baseUrl}${environment.basePath}/uaa/user/logOut`, { headers: header }).subscribe();
   }
 
   /**
