@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: portal
-          image: ebit-registry.tpb.vn/salesapp/salesapp_portal:$VER
+          image: ebit-registry.tpb.vn/salesapp/portal:$VER
           ports:
             - containerPort: 8080
