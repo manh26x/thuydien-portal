@@ -38,3 +38,15 @@ build:docker:
     - docker build -t $REGISTRY_HOST/$REGISTRY_NAMESPACE/$MODULE:$CI_PIPELINE_ID -f Dockerfile_runner /salesapp/portal/
     - docker push $REGISTRY_HOST/$REGISTRY_NAMESPACE/$MODULE:$CI_PIPELINE_ID
 
+deploy:sit:
+  stage: deploy
+  only:
+    - tpb-sit
+  variables:
+    KUBECONFIG: "/etc/gitlab-runner/k8s.sit"
+    K8S_NAMESPACE: "salesapp2"
+  tags:
+    - linux
+    - deploy
+  script:
+    - /etc/gitlab-runner/helm --set salesapp.version=$CI_PIPELINE_ID --set salesapp.registryfolder=$REGISTRY_NAMESPACE --set stage=sit template helm-portal/ | /etc/gitlab-runner/kubectl apply -f -
