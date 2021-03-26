@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.salesapp.name }}-deployment
+  labels:
+    module: {{ .Values.salesapp.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      module: {{ .Values.salesapp.name }}
+  template:
+    metadata:
+      labels:
+        module: {{ .Values.salesapp.name }}
+    spec:
+      {{- if has $.Values.stage $.Values.credrequired }}
+      imagePullSecrets:
+        - name: regcred
+      {{- end }}
+      containers:
+        - name: {{ .Values.salesapp.name }}
+          image: {{ $.Values.salesapp.registrydomain }}/{{ $.Values.salesapp.registryfolder }}/{{ .Values.salesapp.name }}:{{ .version | default $.Values.salesapp.version }}
+          ports:
+              - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.salesapp.name }}-service
+  labels:
+    module: {{ .Values.salesapp.name }}-service
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+  selector:
+    module: {{ .Values.salesapp.name }}

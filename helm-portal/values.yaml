@@ -1,0 +1,12 @@
+salesapp:
+  version: 1
+  registrydomain: ebit-registry.tpb.vn
+  registryfolder: salesapp
+  stage: sit
+  name: portal
+
+replicaCount: 1
+
+credrequired:
+  - sit
+  - uat
