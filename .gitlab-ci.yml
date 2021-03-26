@@ -17,7 +17,9 @@ build:nodejs:
     - npm install
     - npx ngcc --properties es2015 --create-ivy-entry-points
     - npm run ng build -- --configuration=docker
-    - rsync -avzh ./dist/sale-web-portal /salesapp/portal/
+    - rm -rf /salesapp/portal/
+    - mkdir -p /salesapp/portal
+    - cp -R ./dist/sale-web-portal /salesapp/portal/sale-web-portal
     - cp nginx.conf /salesapp/portal/
 
 build:docker:
