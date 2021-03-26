@@ -1,0 +1,19 @@
+variables:
+  REGISTRY_NAMESPACE: "salesappv4"
+
+image: ebit-registry.tpb.vn/node:12-alpine
+
+build:nodejs:
+  stage: build
+  only:
+    - tpb-sit
+  tags:
+    - linux
+    - builder
+  before_script:
+    - npm config set proxy http://$PROXY_USER:$PROXY_PASS@$PROXY_HOST:$PROXY_PORT
+    - npm set strict-ssl false
+  script:
+    - npm install
+    - npx ngcc --properties es2015 --create-ivy-entry-points
+    - npm run ng build -- --configuration=docker
