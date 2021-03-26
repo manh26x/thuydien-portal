@@ -17,7 +17,20 @@ build:nodejs:
     - npm install
     - npx ngcc --properties es2015 --create-ivy-entry-points
     - npm run ng build -- --configuration=docker
-  artifacts:
-    expire_in: 10 mins
-    paths:
-      - ./dist/sale-web-portal
+    - rsync -avzh ./dist/sale-web-portal /salesapp/portal/
+    - cp nginx.conf /salesapp/portal/
+
+build:docker:
+  stage: build
+  image: ebit.tpb.vn/docker:19.03.12
+  before_script:
+    - echo $REGISTRY_PASS | docker login $REGISTRY_HOST --username $REGISTRY_USER --password-stdin
+  only:
+    - tpb-sit
+  tags:
+    - linux
+    - builder
+    - docker
+  script:
+    - docker build -f Dockerfile_runner /salesapp/portal/
+
