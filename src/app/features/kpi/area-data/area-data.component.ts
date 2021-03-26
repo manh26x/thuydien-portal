@@ -15,6 +15,7 @@ export class AreaDataComponent implements OnInit {
   @Output() delete: EventEmitter<any> = new EventEmitter<any>();
   @Input() isHasEdit: boolean;
   @Input() isHasDel: boolean;
+  @Input() isHasInsert: boolean;
   constructor(
     private router: Router
   ) { }

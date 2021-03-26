@@ -80,7 +80,7 @@
 		"importInvalid": "Không đọc được file dữ liệu. Vui lòng kiểm tra file import có đúng mẫu phát hành không",
 		"importSuccess": "Import KPI thành công",
 		"reject": "Không",
-		"updateSuccess": "Cập mhật KPI thành công"
+		"updateSuccess": "Cập nhật KPI thành công"
 	},
 	"no": "STT",
 	"noData": "Không có kết quả nào phù hợp",

@@ -8,7 +8,7 @@
       <th>{{'area.status' | translate}}</th>
       <th>{{'area.priority' | translate}}</th>
       <th>
-        <button (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
+        <button *ngIf="isHasInsert" (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
       </th>
     </tr>
   </ng-template>

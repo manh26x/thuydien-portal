@@ -47,6 +47,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
   isNotImport: boolean;
   isHasEdit: boolean;
   isHasDel: boolean;
+  isHasInsert: boolean;
   constructor(
     private kpiService: KpiService,
     private indicator: IndicatorService,
@@ -63,8 +64,9 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
     this.stateFilter = {page: 0, pageSize: 10, createDate: null, modifyDate: null, reportType: '', status: null};
     this.isNotView = !this.auth.isHasRole(FeatureEnum.KPI, RoleEnum.ACTION_VIEW);
     this.isNotImport = !this.auth.isHasRole(FeatureEnum.KPI, RoleEnum.ACTION_IMPORT);
-    this.isHasEdit = this.auth.isHasRole(FeatureEnum.KPI, RoleEnum.ACTION_INSERT);
+    this.isHasEdit = this.auth.isHasRole(FeatureEnum.KPI, RoleEnum.ACTION_EDIT);
     this.isHasDel = this.auth.isHasRole(FeatureEnum.KPI, RoleEnum.ACTION_DELETE);
+    this.isHasInsert = this.auth.isHasRole(FeatureEnum.KPI, RoleEnum.ACTION_INSERT);
     if (this.isNotImport && this.kpiService.kpiReportActiveTab === 0) {
       this.initActiveIndex = 1;
     } else {
