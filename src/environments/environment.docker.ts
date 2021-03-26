@@ -4,8 +4,8 @@
  * baseUrl: Api Host
  * basePath: Api Gateway context path
  * mediaUrl: Folder files on server
- * clientTimeout: client waiting api response time
- * importExportTimeout: client waiting api response time (Import, export feature)
+ * clientTimeout: client waiting api response time - Removed at commit 19e66d48
+ * importExportTimeout: client waiting api response time (Import, export feature) - Removed at commit 19e66d48
  * logServer: Not Support now
  * logClient: Log console
  */
@@ -18,7 +18,7 @@ export const environment = {
   basePath: '',
   logServer: false,
   logClient: false,
-  version: '2.3.1',
+  version: '2.4.0',
   mediaUrl: 'https://10.1.28.56/upload/',
   clientTimeout: 180000, // 3m
   importExportTimeout: 300000, // 5m

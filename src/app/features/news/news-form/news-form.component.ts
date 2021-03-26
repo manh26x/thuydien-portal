@@ -14,10 +14,10 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/form
 import {TagsService} from '../../tags/service/tags.service';
 import {TagDetail} from '../../tags/model/tags';
 import {UtilService} from '../../../core/service/util.service';
-import {ConfirmationService, SelectItem} from 'primeng/api';
+import {ConfirmationService, MessageService, SelectItem} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
 import {AppTranslateService} from '../../../core/service/translate.service';
-import {concatMap, startWith, takeUntil} from 'rxjs/operators';
+import {concatMap, finalize, startWith, takeUntil} from 'rxjs/operators';
 import {NewsEnum} from '../model/news.enum';
 import {GroupViewState, MultiSelectItem, NewsDetail} from '../model/news';
 import {environment} from '../../../../environments/environment';
@@ -27,6 +27,7 @@ import {BranchService} from '../../../shared/service/branch.service';
 import {BaseComponent} from '../../../core/base.component';
 import {NewsService} from '../service/news.service';
 import {MatRadioChange} from '@angular/material/radio';
+import {IndicatorService} from '../../../shared/indicator/indicator.service';
 
 
 @Component({
@@ -90,7 +91,9 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
     private sanitizer: DomSanitizer,
     private dialog: ConfirmationService,
     private branchService: BranchService,
-    private newsService: NewsService
+    private newsService: NewsService,
+    private indicator: IndicatorService,
+    private messageService: MessageService
   ) {
     super();
     this.initForm();
@@ -319,12 +322,47 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
 
   fileContentChange(event) {
     const files = event.target.files;
-    const fileFormData: FormData = new FormData();
-    fileFormData.append('file', files[0], files[0].name);
-    this.newsService.uploadFile(fileFormData).subscribe(res => {
+    if (this.isInvalidFileExtension(files[0])) {
       this.fileContent.nativeElement.value = '';
-      this.callbackEvent(`${environment.mediaUrl}${res}`);
-    });
+      this.messageService.add({
+        severity: 'error',
+        detail: this.translate.instant('uploadFile.invalid.ext', {ext: 'jpg, gif, png'})
+      });
+    } else if (this.isInvalidFileSize(files[0])) {
+      this.fileContent.nativeElement.value = '';
+      this.messageService.add({
+        severity: 'error',
+        detail: this.translate.instant('uploadFile.invalid.size', {size: '5MB'})
+      });
+    } else {
+      this.indicator.showActivityIndicator();
+      const fileFormData: FormData = new FormData();
+      fileFormData.append('file', files[0], files[0].name);
+      this.newsService.uploadFile(fileFormData).pipe(
+        finalize(() => this.indicator.hideActivityIndicator())
+      ).subscribe(res => {
+        this.fileContent.nativeElement.value = '';
+        this.callbackEvent(`${environment.mediaUrl}${res}`);
+      });
+    }
+  }
+
+  private isInvalidFileExtension(file): boolean {
+    // Check extensions
+    const extensions = ('.jpg, .gif, .png'.split(','))
+      // tslint:disable-next-line:only-arrow-functions
+      .map(function(x) { return x.toLocaleUpperCase().trim(); });
+    // tslint:disable-next-line:prefer-for-of
+    const ext = file.name.toUpperCase().split('.').pop() || file.name;
+    const exists = extensions.indexOf('.' + ext);
+    return exists === -1;
+  }
+
+  private isInvalidFileSize(file): boolean {
+    // Check size
+    const fileSizeinMB = file.size / (1024 * 1000);
+    const sizeFile = Math.round(fileSizeinMB * 100) / 100;
+    return sizeFile > 5;
   }
 
 }
