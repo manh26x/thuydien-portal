@@ -14,6 +14,8 @@ spec:
       labels:
         module: portal
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: portal
           image: ebit-registry.tpb.vn/salesapp/portal:$VER
