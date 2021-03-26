@@ -17,3 +17,7 @@ build:nodejs:
     - npm install
     - npx ngcc --properties es2015 --create-ivy-entry-points
     - npm run ng build -- --configuration=docker
+  artifacts:
+    expire_in: 10 mins
+    paths:
+      - ./dist/sale-web-portal
