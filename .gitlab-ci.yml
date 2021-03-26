@@ -1,7 +1,7 @@
 variables:
   REGISTRY_NAMESPACE: "salesappv4"
 
-image: ebit-registry.tpb.vn/node:12-alpine
+image: ebit.tpb.vn/node:12-alpine
 
 build:nodejs:
   stage: build
