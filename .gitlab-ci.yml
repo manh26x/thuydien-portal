@@ -34,5 +34,7 @@ build:docker:
     - builder
     - docker
   script:
-    - docker build -f Dockerfile_runner /salesapp/portal/
+    - export MODULE=portal
+    - docker build -t $REGISTRY_HOST/$REGISTRY_NAMESPACE/$MODULE:$CI_PIPELINE_ID -f Dockerfile_runner /salesapp/portal/
+    - docker push $REGISTRY_HOST/$REGISTRY_NAMESPACE/$MODULE:$CI_PIPELINE_ID
 
