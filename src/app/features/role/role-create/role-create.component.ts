@@ -90,39 +90,42 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
       }
 
       const featureData: RoleFeature[] = [];
-      this.featureList.forEach(item => {
-        if (item.isDelAble) {
-          featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_DELETE });
-        }
 
-        if (item.isAddAble) {
-          featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_INSERT });
-        }
+      if (value.isAdminPortal) {
+        this.featureList.forEach(item => {
+          if (item.isDelAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_DELETE });
+          }
 
-        if (item.isEditAble) {
-          featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_EDIT });
-        }
+          if (item.isAddAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_INSERT });
+          }
 
-        if (item.isOnOffAble) {
-          featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_ON_OFF });
-        }
+          if (item.isEditAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_EDIT });
+          }
 
-        if (item.isViewAble) {
-          featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_VIEW });
-        }
+          if (item.isOnOffAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_ON_OFF });
+          }
 
-        if (item.isImportAble) {
-          featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_IMPORT });
-        }
+          if (item.isViewAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_VIEW });
+          }
 
-        if (item.isExportAble) {
-          featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_EXPORT });
-        }
-      });
+          if (item.isImportAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_IMPORT });
+          }
 
-      if (featureData.length === 0) {
-        this.messageService.add({ key: 'add-role', severity: 'error', detail: this.translate.instant('invalid.requiredFeature') });
-        return;
+          if (item.isExportAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_EXPORT });
+          }
+        });
+
+        if (featureData.length === 0) {
+          this.messageService.add({ key: 'add-role', severity: 'error', detail: this.translate.instant('invalid.requiredFeature') });
+          return;
+        }
       }
 
       this.indicator.showActivityIndicator();
