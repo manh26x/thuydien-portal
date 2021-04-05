@@ -67,6 +67,10 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
     if (changes.valueForm) {
       if (!changes.valueForm.firstChange) {
         const userInfo: UserDetail = changes.valueForm.currentValue;
+        if (this.mode === 'update') {
+          this.formUser.get('fullName').disable();
+          this.formUser.get('email').disable();
+        }
         this.formUser.patchValue({
           userId: userInfo.user ? userInfo.user.userName : null,
           status: userInfo.user ? {code: userInfo.user.status} : null,

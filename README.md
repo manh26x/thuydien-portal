@@ -3,33 +3,18 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
 
 ## Triển khai ứng dụng lên Docker
-1. Cài đặt biến môi trường cho ứng dụng trên Docker tại: [environment.docker](http://222.252.25.241:50000/truongnh/sale-web-portal/-/blob/dev/src/environments/environment.docker.ts).
+1. Cài đặt biến môi trường cho ứng dụng trên Docker tại: [environment.docker](src/environments/environment.docker.ts).
 1. Chạy `docker build -t sale-web-portal .` để tạo Docker image
 1. Chạy ứng dụng
 - Run command `docker run --name sale-web-portal -d -p 80:80 sale-web-portal`
 - Use docker-compose `docker-compose up -d`
 
 
-## Development server
+## Chạy ứng dụng trên môi trường nhà phát triển
+1. Cài đặt proxy cho môi trường phát triển tại: [proxy.conf.json](proxy.conf.json)
+1. Chạy `npm start`. 
+1. Mở trình duyệt theo đường dẫn `http://localhost:4200/`.
 
-Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-- Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-- Run `docker build -t sale-web-portal .` to build docker image
-## Running
-
-- Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-- Run `docker run --name sale-web-portal -d -p 80:80 sale-web-portal` to start on docker container
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Tài liệu
+- [Angular Docs](https://angular.io/docs)
+- [Angular CLI Overview and Command Reference](https://angular.io/cli).
