@@ -53,6 +53,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.util.validateAllFields(this.formLogin);
       return;
     }
+    this.msgInvalid = [];
+    if (!navigator.onLine) {
+      this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('noInternet') });
+      return;
+    }
     this.isLoading = true;
     this.auth.login(this.formLogin.value)
       .pipe(
@@ -62,7 +67,6 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.auth.setRefreshToken(auth.refresh_token);
         this.gotoView();
       }, (err) => {
-        this.msgInvalid = [];
         if (err instanceof ApiErrorGetUserInfo) {
           this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('errorGetUserInfo') });
         } else if (err.status === 400 || err.status === 401) {

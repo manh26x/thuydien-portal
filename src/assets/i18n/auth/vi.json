@@ -5,6 +5,7 @@
 	"invalid.password": "Vui lòng nhập mật khẩu.",
 	"invalid.username": "Vui lòng nhập tên tài khoản.",
 	"login": "Đăng nhập",
+	"noInternet": "Kết nối mạng không ổn định. Vui lòng thử lại sau",
 	"password": "Mật khẩu",
 	"username": "Tên tài khoản",
 	"welcome": "Đăng nhập hệ thống Sales App"
