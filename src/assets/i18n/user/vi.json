@@ -57,6 +57,9 @@
 			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
 			"pattern": "Giá trị phải là số"
 		},
+		"position": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự"
+		},
 		"role": {
 			"required": "Giá trị không được để trống"
 		},

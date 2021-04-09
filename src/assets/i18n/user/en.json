@@ -57,6 +57,9 @@
 			"maxLength": "The value must not exceed {{length}} characters",
 			"pattern": "Value must be a number"
 		},
+		"position": {
+			"maxLength": "The value must not exceed {{length}} characters"
+		},
 		"role": {
 			"required": "Value cannot be blank"
 		},

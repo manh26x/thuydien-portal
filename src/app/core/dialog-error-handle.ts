@@ -14,6 +14,7 @@ import {
   ApiErrorTokenInvalid
 } from './model/error-response';
 import {Router} from '@angular/router';
+import {IdleService} from './service/idle.service';
 
 /**
  * @author TruongNH
@@ -28,7 +29,8 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
     private translate: TranslateService,
     private auth: AuthService,
     private util: UtilService,
-    private router: Router
+    private router: Router,
+    private idle: IdleService
   ) {
     super();
   }
@@ -64,6 +66,7 @@ export class DialogErrorHandle extends BaseErrorHandle implements ErrorHandler {
       }
       case ApiErrorTokenInvalid: {
         // if (!this.auth.isAuthed()) {
+        this.idle.stopTimer();
         this.auth.logOut();
         this.ngzone.run(() => {
           // bypass form leave guard with queryParams expired is 1
