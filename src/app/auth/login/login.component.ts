@@ -42,7 +42,9 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.formLogin.get('username').setValue(this.activeRoute.snapshot.queryParams['uid']);
       }),
       filter(() => this.auth.isAuthed()),
-      tap(() => this.auth.logOut())
+      tap(() => {
+        this.auth.logOut();
+      })
     ).subscribe();
   }
 
@@ -63,7 +65,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.msgInvalid = [];
         if (err instanceof ApiErrorGetUserInfo) {
           this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('errorGetUserInfo') });
-        } else if (err.status === 400) {
+        } else if (err.status === 400 || err.status === 401) {
             this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('invalid.message') });
         } else {
           this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('error') });

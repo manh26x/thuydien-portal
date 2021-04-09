@@ -44,6 +44,9 @@
     <div class="p-md-6 p-col-12 p-field">
       <label for="n-location">{{'user.position' | translate}}</label>
       <input id="n-location" type="text" pInputText formControlName="position" />
+      <small *ngIf="hasErrorInput('position', 'maxlength')" class="p-invalid">
+        {{'invalid.position.maxLength' | translate: {length: 100} }}
+      </small>
     </div>
 
   </div>
