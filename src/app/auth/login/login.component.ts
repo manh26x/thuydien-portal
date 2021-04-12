@@ -53,6 +53,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.util.validateAllFields(this.formLogin);
       return;
     }
+    this.msgInvalid = [];
+    if (!navigator.onLine) {
+      this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('noInternet') });
+      return;
+    }
     this.isLoading = true;
     this.auth.login(this.formLogin.value)
       .pipe(
@@ -62,11 +67,16 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.auth.setRefreshToken(auth.refresh_token);
         this.gotoView();
       }, (err) => {
-        this.msgInvalid = [];
         if (err instanceof ApiErrorGetUserInfo) {
           this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('errorGetUserInfo') });
-        } else if (err.status === 400 || err.status === 401) {
+        } else if (err.status === 400) {
             this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('invalid.message') });
+        } else if (err.status === 401) {
+          if (err.error.error === '205') {
+            this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('invalid.permission') });
+          } else {
+            this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('invalid.message') });
+          }
         } else {
           this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('error') });
         }
