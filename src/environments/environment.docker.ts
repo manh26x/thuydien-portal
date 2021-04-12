@@ -18,7 +18,7 @@ export const environment = {
   basePath: '',
   logServer: false,
   logClient: false,
-  version: '2.5.0',
+  version: '2.5.1',
   mediaUrl: 'https://10.1.28.56/upload/',
   clientTimeout: 180000, // 3m
   importExportTimeout: 300000, // 5m
