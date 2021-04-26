@@ -67,6 +67,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.auth.setRefreshToken(auth.refresh_token);
         this.gotoView();
       }, (err) => {
+        this.msgInvalid = [];
         if (err instanceof ApiErrorGetUserInfo) {
           this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('errorGetUserInfo') });
         } else if (err.status === 400) {
