@@ -7,6 +7,7 @@ build:nodejs:
   stage: build
   only:
     - tpb-sit
+    - master
   tags:
     - linux
     - builder
@@ -29,6 +30,7 @@ build:docker:
     - echo $REGISTRY_PASS | docker login $REGISTRY_HOST --username $REGISTRY_USER --password-stdin
   only:
     - tpb-sit
+    - master
   tags:
     - linux
     - builder
