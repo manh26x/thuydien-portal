@@ -112,55 +112,51 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
         tagData = this.roleInfo.tagList;
       }
       // check validate
-      if (tagData.length === 0) {
-        this.messageService.add({ key: 'update-role', severity: 'error', detail: this.translate.instant('invalid.requiredTag') });
-        return;
-      }
+//      if (tagData.length === 0) {
+//        this.messageService.add({ key: 'update-role', severity: 'error', detail: this.translate.instant('invalid.requiredTag') });
+//        return;
+//      }
 
       let featureData: RoleFeature[] = [];
 
-      if (value.isAdminPortal) {
-        if (this.isLoadedFeature) {
-          this.featureList.forEach(item => {
-            if (item.isDelAble) {
-              featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_DELETE });
-            }
 
-            if (item.isAddAble) {
-              featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_INSERT });
-            }
+      if (this.isLoadedFeature) {
+        this.featureList.forEach(item => {
+          if (item.isDelAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_DELETE });
+          }
 
-            if (item.isEditAble) {
-              featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_EDIT });
-            }
+          if (item.isAddAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_INSERT });
+          }
 
-            if (item.isOnOffAble) {
-              featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_ON_OFF });
-            }
+          if (item.isEditAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_EDIT });
+          }
 
-            if (item.isViewAble) {
-              featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_VIEW });
-            }
+          if (item.isOnOffAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_ON_OFF });
+          }
 
-            if (item.isImportAble) {
-              featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_IMPORT });
-            }
+          if (item.isViewAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_VIEW });
+          }
 
-            if (item.isExportAble) {
-              featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_EXPORT });
-            }
-          });
-        } else {
-          featureData = this.roleInfo.menuRightList;
-        }
+          if (item.isImportAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_IMPORT });
+          }
 
-        // check validate
-        if (featureData.length === 0) {
-          this.messageService.add({ key: 'update-role', severity: 'error', detail: this.translate.instant('invalid.requiredFeature') });
-          return;
-        }
+          if (item.isExportAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_EXPORT });
+          }
+        });
       } else {
-        featureData = [];
+        featureData = this.roleInfo.menuRightList;
+      }
+
+      if (value.isAdminPortal && featureData.length === 0) {
+        this.messageService.add({ key: 'update-role', severity: 'error', detail: this.translate.instant('invalid.requiredFeature') });
+        return;
       }
 
       this.indicator.showActivityIndicator();
