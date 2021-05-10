@@ -26,10 +26,6 @@ build:nodejs:
 build:sit:docker:
   stage: build
   image: ebit.tpb.vn/docker:19.03.12
-  variables:
-    REGISTRY_PASS: "Tpb@123"
-    REGISTRY_HOST: "10.1.28.51:24007"
-    REGISTRY_USER: "ebit"
   before_script:
     - echo $EBIT_REGISTRY_PASS | docker login $EBIT_REGISTRY_HOST --username $EBIT_REGISTRY_USER --password-stdin
     - echo $REGISTRY_PASS_SIT | docker login $REGISTRY_HOST_SIT --username $REGISTRY_USER_SIT --password-stdin
@@ -40,8 +36,9 @@ build:sit:docker:
     - docker02
   script:
     - export MODULE=portal
-    - docker build -t $REGISTRY_HOST_SIT/$REGISTRY_NAMESPACE/$MODULE:$CI_PIPELINE_ID -f Dockerfile_runner $EBIT_PROJECT_LOCAL_DIR
+    - docker build -t $REGISTRY_HOST_SIT/$REGISTRY_NAMESPACE/$MODULE:$CI_PIPELINE_ID -t $EBIT_REGISTRY_HOST/$REGISTRY_NAMESPACE/$MODULE:$CI_PIPELINE_ID -f Dockerfile_runner $EBIT_PROJECT_LOCAL_DIR
     - docker push $REGISTRY_HOST_SIT/$REGISTRY_NAMESPACE/$MODULE:$CI_PIPELINE_ID
+    - docker push $EBIT_REGISTRY_HOST/$REGISTRY_NAMESPACE/$MODULE:$CI_PIPELINE_ID
 
 deploy:sit:
   stage: deploy
