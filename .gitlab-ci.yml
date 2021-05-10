@@ -41,7 +41,9 @@ build:sit:docker:
     - docker push $EBIT_REGISTRY_HOST/$REGISTRY_NAMESPACE/$MODULE:$CI_PIPELINE_ID
 
 deploy:sit:
-  image: ebit.tpb.vn/tpb/kubectl_sit:2
+  image:
+    name: ebit.tpb.vn/tpb/kubectl_sit:2
+    entrypoint: [ "" ]
   stage: deploy
   only:
     - tpb-sit
