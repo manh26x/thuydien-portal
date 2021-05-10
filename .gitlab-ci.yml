@@ -1,5 +1,6 @@
 variables:
   REGISTRY_NAMESPACE: "salesappv4"
+  EBIT_PROJECT_LOCAL_DIR: /ebit/workspace/salesapp/portal
 
 image: ebit.tpb.vn/node:12-alpine
 
@@ -9,8 +10,7 @@ build:nodejs:
     - tpb-sit
     - master
   tags:
-    - linux
-    - builder
+    - docker2
   before_script:
     - npm config set proxy http://$PROXY_USER:$PROXY_PASS@$PROXY_HOST:$PROXY_PORT
     - npm set strict-ssl false
@@ -18,10 +18,10 @@ build:nodejs:
     - npm install
     - npx ngcc --properties es2015 --create-ivy-entry-points
     - npm run ng build -- --configuration=docker
-    - rm -rf /salesapp/portal/
-    - mkdir -p /salesapp/portal
-    - cp -R ./dist/sale-web-portal /salesapp/portal/sale-web-portal
-    - cp nginx.conf /salesapp/portal/
+    - rm -rf $EBIT_PROJECT_LOCAL_DIR/
+    - mkdir -p $EBIT_PROJECT_LOCAL_DIR
+    - cp -R ./dist/sale-web-portal $EBIT_PROJECT_LOCAL_DIR/sale-web-portal
+    - cp nginx.conf $EBIT_PROJECT_LOCAL_DIR/
 
 build:docker:
   stage: build
@@ -36,9 +36,7 @@ build:docker:
     - tpb-sit
     - master
   tags:
-    - linux
-    - builder
-    - docker
+    - docker02
   script:
     - export MODULE=portal
     - docker build -t $REGISTRY_HOST/$REGISTRY_NAMESPACE/$MODULE:$CI_PIPELINE_ID -f Dockerfile_runner /salesapp/portal/
