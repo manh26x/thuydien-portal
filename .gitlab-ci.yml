@@ -27,11 +27,11 @@ build:docker:
   stage: build
   image: ebit.tpb.vn/docker:19.03.12
   variables:
-    REGISTRY_PASS: "$REGISTRY_PASS_SIT"
-    REGISTRY_HOST: "$REGISTRY_HOST_SIT"
-    REGISTRY_USER: "$REGISTRY_USER_SIT"
+    REGISTRY_PASS: "Tpb@123"
+    REGISTRY_HOST: "10.1.28.51:24007"
+    REGISTRY_USER: "ebit"
   before_script:
-    - echo $REGISTRY_PASS | docker login $REGISTRY_HOST --username $REGISTRY_USER --password-stdin
+    - echo $REGISTRY_PASS_SIT | docker login $REGISTRY_HOST --username $REGISTRY_USER --password-stdin
   only:
     - tpb-sit
     - master
@@ -51,7 +51,7 @@ deploy:sit:
   variables:
     KUBECONFIG: "/etc/gitlab-runner/k8s.sit"
     K8S_NAMESPACE: "salesapp2"
-    REGISTRY_HOST: $REGISTRY_HOST_SIT
+    REGISTRY_HOST: "10.1.28.51:24007"
   tags:
     - linux
     - deploy
