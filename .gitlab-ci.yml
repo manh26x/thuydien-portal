@@ -41,11 +41,11 @@ build:sit:docker:
     - docker push $EBIT_REGISTRY_HOST/$REGISTRY_NAMESPACE/$MODULE:$CI_PIPELINE_ID
 
 deploy:sit:
+  image: ebit.tpb.vn/tpb/kubectl_sit:2
   stage: deploy
   only:
     - tpb-sit
   variables:
-    KUBECONFIG: "/etc/gitlab-runner/k8s.sit"
     K8S_NAMESPACE: "salesapp2"
     REGISTRY_HOST: "10.1.28.51:24007"
   tags:
