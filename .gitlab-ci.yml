@@ -12,6 +12,7 @@ build:nodejs:
   tags:
     - docker02
   before_script:
+    - echo $EBIT_REGISTRY_PASS | docker login $EBIT_REGISTRY_HOST --username $EBIT_REGISTRY_USER --password-stdin
     - npm config set proxy http://$PROXY_USER:$PROXY_PASS@$PROXY_HOST:$PROXY_PORT
     - npm set strict-ssl false
   script:
