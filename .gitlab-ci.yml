@@ -49,7 +49,6 @@ deploy:sit:
     K8S_NAMESPACE: "salesapp2"
     REGISTRY_HOST: "10.1.28.51:24007"
   tags:
-    - linux
-    - deploy
+    - docker02
   script:
     - /etc/gitlab-runner/helm --set salesapp.registrydomain=$REGISTRY_HOST --set salesapp.version=$CI_PIPELINE_ID --set salesapp.registryfolder=$REGISTRY_NAMESPACE --set stage=sit template helm-portal/ | /etc/gitlab-runner/kubectl apply -n=$K8S_NAMESPACE -f -
