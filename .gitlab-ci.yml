@@ -32,6 +32,7 @@ build:docker:
     REGISTRY_USER: "ebit"
   before_script:
     - echo $REGISTRY_PASS | docker login $REGISTRY_HOST --username $REGISTRY_USER --password-stdin
+    - echo "ducthoai12340" | docker login ebit.tpb.vn --username thoaindd --password-stdin
   only:
     - tpb-sit
     - master
