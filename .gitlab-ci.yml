@@ -10,7 +10,7 @@ build:nodejs:
     - tpb-sit
     - master
   tags:
-    - docker2
+    - docker02
   before_script:
     - npm config set proxy http://$PROXY_USER:$PROXY_PASS@$PROXY_HOST:$PROXY_PORT
     - npm set strict-ssl false
@@ -39,7 +39,7 @@ build:docker:
     - docker02
   script:
     - export MODULE=portal
-    - docker build -t $REGISTRY_HOST/$REGISTRY_NAMESPACE/$MODULE:$CI_PIPELINE_ID -f Dockerfile_runner /salesapp/portal/
+    - docker build -t $REGISTRY_HOST/$REGISTRY_NAMESPACE/$MODULE:$CI_PIPELINE_ID -f Dockerfile_runner $EBIT_PROJECT_LOCAL_DIR
     - docker push $REGISTRY_HOST/$REGISTRY_NAMESPACE/$MODULE:$CI_PIPELINE_ID
 
 deploy:sit:
