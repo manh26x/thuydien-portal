@@ -28,10 +28,10 @@ build:docker:
   image: ebit.tpb.vn/docker:19.03.12
   variables:
     REGISTRY_PASS: "Tpb@123"
-    REGISTRY_HOST: "10.1.28.51:24007"
-    REGISTRY_USER: "ebit"
+    REGISTRY_HOST: "$REGISTRY_HOST_SIT"
+    REGISTRY_USER: "$REGISTRY_USER_SIT"
   before_script:
-    - echo $REGISTRY_PASS_SIT | docker login $REGISTRY_HOST --username $REGISTRY_USER --password-stdin
+    - echo $REGISTRY_PASS | docker login $REGISTRY_HOST --username $REGISTRY_USER --password-stdin
   only:
     - tpb-sit
     - master
