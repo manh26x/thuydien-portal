@@ -27,9 +27,9 @@ build:docker:
   stage: build
   image: ebit.tpb.vn/docker:19.03.12
   variables:
-    REGISTRY_PASS: $REGISTRY_PASS_SIT
-    REGISTRY_HOST: $REGISTRY_HOST_SIT
-    REGISTRY_USER: $REGISTRY_USER_SIT
+    REGISTRY_PASS: "$REGISTRY_PASS_SIT"
+    REGISTRY_HOST: "$REGISTRY_HOST_SIT"
+    REGISTRY_USER: "$REGISTRY_USER_SIT"
   before_script:
     - echo $REGISTRY_PASS | docker login $REGISTRY_HOST --username $REGISTRY_USER --password-stdin
   only:
