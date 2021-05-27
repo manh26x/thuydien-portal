@@ -14,12 +14,12 @@ export const environment = {
   tokenEx: 43199,
   refreshTokenEx: 43199,
   clientId: 'YnJvd3NlcjoxMjM0',
-  baseUrl: 'https://10.1.28.56:443',
+  baseUrl: 'https://apisalesappsit.tpb.vn',
   basePath: '',
   logServer: false,
   logClient: false,
   version: '2.5.1',
-  mediaUrl: 'https://10.1.28.56/upload/',
+  mediaUrl: 'https://apisalesappsit.tpb.vn/upload/',
   clientTimeout: 180000, // 3m
   importExportTimeout: 300000, // 5m
   idleTimeout: 1800
