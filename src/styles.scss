@@ -1,0 +1,205 @@
+//@font-face {
+//  font-family: 'Material Icons';
+//  font-style: normal;
+//  font-weight: 400;
+//  src: url('./assets/fonts/MaterialIcons-Regular.eot');
+//  src: local('Material Icons'),
+//  local('MaterialIcons-Regular'),
+//  url('./assets/fonts/MaterialIcons-Regular.woff2') format('woff2'),
+//  url('./assets/fonts/MaterialIcons-Regular.woff') format('woff'),
+//  url('./assets/fonts/MaterialIcons-Regular.ttf') format('truetype');
+//}
+//.material-icons {
+//  font-family: 'Material Icons';
+//  font-weight: normal;
+//  font-style: normal;
+//  font-size: 24px;
+//  display: inline-block;
+//  line-height: 1;
+//  text-transform: none;
+//  letter-spacing: normal;
+//  word-wrap: normal;
+//  white-space: nowrap;
+//  direction: ltr;
+//  -webkit-font-smoothing: antialiased;
+//  text-rendering: optimizeLegibility;
+//  -moz-osx-font-smoothing: grayscale;
+//  font-feature-settings: 'liga';
+//}
+//.material-icons.md-18 { font-size: 18px; }
+//.material-icons.md-24 { font-size: 24px; }
+//.material-icons.md-36 { font-size: 36px; }
+//.material-icons.md-48 { font-size: 48px; }
+//.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+//.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+//.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+//.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+.input-wrapper{
+  position: relative;
+  small {
+    position: absolute;
+    left: 5px;
+    bottom: -1.2rem;
+  }
+}
+
+.normal-dialog {
+  width: 50vw;
+  .p-dialog-header {
+    justify-content: center;
+  }
+  .p-dialog-header-icons {
+    display: none !important;
+  }
+  .p-dialog-content {
+    align-items: initial !important;
+  }
+  .p-dialog-footer {
+    display: flex;
+    justify-content: space-between;
+    .p-button {
+      flex: 1;
+    }
+    .p-button-icon-left {
+      display: none;
+    }
+  }
+  .p-confirm-dialog-accept {
+    order: 2;
+    background-color: #FEAC3E;
+    border: 1px solid #FEAC3E;;
+    &:focus, &:hover {
+      background-color: #FEAC3E;
+    }
+  }
+  .p-confirm-dialog-reject {
+    order: 1;
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    color: black;
+    &:focus, &:hover {
+      color: black;
+      border: 1px solid #E0E0E0;
+      background-color: #FFFFFF;
+    }
+  }
+}
+
+.large-dialog {
+  .p-dialog-header-icons {
+    display: none !important;
+  }
+}
+
+.p-menuitem-text {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 40em) {
+  .normal-dialog {
+    width: 85vw;
+  }
+}
+
+.hour-only .p-minute-picker button, .hour-only .p-second-picker button {
+  visibility: hidden;
+}
+
+.split-horizontal {height: 1px;background: #e0e0e0;margin: 15px 0;width: 100%;}
+.split-horizontal-no-line {height: 1px;margin: 15px 0;width: 100%;}
+.split-header-panel {height: 1px;background: #e0e0e0;margin-bottom: 20px;width: 100%;}
+
+.indicator {
+  background-color: rgba(#ffffff, 0.8);
+  z-index: 3000;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &.load-failed{
+    height: 100%;
+  }
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.p-field > label {
+  font-weight: 700;
+}
+
+.text-primary {
+  color: #582E91;
+  &.in-active {
+    opacity: 0.7;
+  }
+}
+
+.detail {
+  font-size: 1.1rem;
+  .title-left {
+    font-weight: bold;
+  }
+  .title-right {
+    list-style: none;
+    border: 1px solid #c5c5c5;
+    padding: 1rem;
+    opacity: 1;
+    max-height: 600px;
+    overflow: auto;
+    border-radius: 4px;
+    margin-top: 5px;
+    min-height: 48px;
+    background-color: #F7F7F7;
+    li:not(:first-child) {
+      margin-top: 0.5rem;
+    }
+  }
+}
+
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  > table {
+    border-collapse: collapse;
+    max-width: 100%;
+    margin-bottom: 0.5rem;
+    background-color: transparent;
+  }
+}
+
+.exception-body {
+  background-image: url("./assets/images/bg-logo-full.png") !important;
+}
+
+.layout-topbar-menu-wrapper .fix-label .p-button-label {
+  display: none;
+}
+
+.indicator-routing {
+  position: absolute;
+  top: 65px;
+  left: 0;
+  right: 0;
+}
+
+.p-toast-message-text {
+  width: min-content;
+}
+
+.global-indicator {
+  position: fixed;
+  width: calc(100% - 270px);
+}
+
+.layout-static-inactive .global-indicator {
+  width: 100%;
+}

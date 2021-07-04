@@ -1,0 +1,102 @@
+<p-panel header="{{'view' | translate}}">
+  <div class="split-header-panel"></div>
+  <div class="p-grid">
+    <div class="p-md-8 p-col-12">
+      <div class="p-fluid">
+        <div class="p-col-12 detail">
+          <label class="title-left">{{'news.title' | translate}}:</label>
+          <div class="title-right">{{newsDetail.newsDto?.title}}</div>
+        </div>
+
+        <div class="p-col-12 detail">
+          <label class="title-left">{{'news.shortContent' | translate}}:</label>
+          <div class="title-right">{{newsDetail.newsDto?.shortContent}}</div>
+        </div>
+
+        <div class="p-col-12 detail">
+          <label class="title-left">{{'news.content' | translate}}:</label>
+          <div class="title-right" [innerHTML]="trustHtmlContent"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="p-md-4 p-col-12">
+      <div class="p-fluid">
+
+        <div class="p-col-12 detail">
+          <label class="title-left">{{'news.tags' | translate}}:</label>
+          <div class="title-right">
+            <ng-container *ngFor="let item of newsDetail.tagOfNews">
+              <li>{{item.valueTag}}</li>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="p-col-12 detail">
+          <label class="title-left">{{'news.groupView' | translate}}:</label>
+          <div class="title-right">
+            <ng-container [ngSwitch]="newsDetail.newsDto?.userViewType">
+              <ng-container *ngSwitchCase="newsConst.GROUP_VIEW_BRANCH">
+                <h5>{{'news.branch' | translate}}</h5>
+                <ng-container *ngFor="let item of newsDetail.listBranch">
+                  <li>{{item.code}} - {{item.name}}</li>
+                </ng-container>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="newsConst.GROUP_VIEW_ROLE">
+                <h5>{{'news.role' | translate}}</h5>
+                <ng-container *ngFor="let item of newsDetail.listRole">
+                  <li>{{item.name}}</li>
+                </ng-container>
+              </ng-container>
+
+              <ng-container *ngSwitchCase="newsConst.GROUP_VIEW_UNIT">
+                <h5>{{'news.unit' | translate}}</h5>
+                <ng-container *ngFor="let item of newsDetail.listUnit">
+                  <li>{{item.name}}</li>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="p-col-12 detail">
+          <label class="title-left">{{'news.publishDate' | translate}}:</label>
+          <div class="title-right">{{newsDetail.newsDto?.publishTime | date: 'dd/MM/yyyy HH:mm:ss' }}</div>
+        </div>
+
+        <div class="p-col-12 detail">
+          <label class="title-left">{{'news.level' | translate}}:</label>
+          <div class="title-right">
+            <ng-container [ngSwitch]="newsDetail.newsDto?.priority">
+              <ng-container *ngSwitchCase="newsConst.LEVEL_NORMAL">{{'const.levelNormal' | translate}}</ng-container>
+              <ng-container *ngSwitchCase="newsConst.LEVEL_IMPORTANT">{{'const.levelImportant' | translate}}</ng-container>
+              <ng-container *ngSwitchCase="newsConst.LEVEL_VERY_IMPORTANT">{{'const.levelVeryImportant' | translate}}</ng-container>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="p-col-12 detail">
+          <label class="title-left">{{'news.docs' | translate}}:</label>
+          <div class="title-right">
+            <a target="_blank" [href]="trustUrlDoc">{{newsDetail.newsDto?.fileName}}</a>
+          </div>
+        </div>
+
+        <div class="p-col-12 detail">
+          <label class="title-left">{{'news.image' | translate}}:</label>
+          <div class="title-right">
+            <img style="width: 100%;" [src]="trustUrlImg">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="split-horizontal"></div>
+  <div class="p-text-center">
+    <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
+  </div>
+</p-panel>

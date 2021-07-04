@@ -1,0 +1,120 @@
+{
+	"breadcrumb": {
+		"create": "Compose news",
+		"home": "List of sales news",
+		"update": "Edit news ",
+		"view": "News detail"
+	},
+	"btn": {
+		"cancel": "Cancel",
+		"delete": "Delete",
+		"draft": "Save the draft",
+		"insert": "Add new",
+		"refresh": "Refresh",
+		"save": "Save changes",
+		"saveAndPublish": "Save changes and publish"
+	},
+	"confirm": {
+		"accept": "Yes",
+		"delete": "Delete Confirmation",
+		"deleteImage": "Are you sure to delete the photo from the newsletter?",
+		"deleteMessage": "Are you sure you want to remove news \"{{name}}\"",
+		"reject": "No"
+	},
+	"const": {
+		"active": "Active",
+		"all": "All",
+		"delete": "Deleted",
+		"draft": "Draft",
+		"inactive": "Inactive",
+		"levelImportant": "Important",
+		"levelNormal": "Normal",
+		"levelVeryImportant": "Very important",
+		"pending": "Wait for publishing",
+		"publish": "Published"
+	},
+	"create": "News compilation",
+	"edit": "Edit news ",
+	"filter": "Filter",
+	"invalid": {
+		"content": {
+			"required": "Value cannot be blank"
+		},
+		"docs": {
+			"limit": "The number of files exceeded the allowed limit",
+			"type": "The file is not in PDF format",
+			"zize": "Uploaded file exceeds the allowed size of 5MB"
+		},
+		"groupViewValue": {
+			"required": "Value cannot be blank"
+		},
+		"publishDate": {
+			"mustAfterNow": "The posting time must be greater than the current time"
+		},
+		"shortContent": {
+			"maxLength": "The value must not exceed {{length}} characters"
+		},
+		"tags": {
+			"required": "Value cannot be blank"
+		},
+		"title": {
+			"maxLength": "The value must not exceed {{length}} characters",
+			"required": "Value cannot be blank"
+		}
+	},
+	"level": "Critical level",
+	"levelList": {
+		"important": "Important",
+		"normal": "Normal",
+		"veryImportant": "Very important"
+	},
+	"list": "List of sales news",
+	"message": {
+		"deleteNotFound": "The news does not exist or has been deleted",
+		"deleteSuccess": "Deleted news successfully",
+		"draftSuccess": "Saved the draft successfully",
+		"insertSuccess": "New news is added successfully",
+		"updateNotFound": "The news does not exist or has been deleted",
+		"updateSuccess": "Update news successfully"
+	},
+	"news": {
+		"author": "Author",
+		"branch": "Branch",
+		"content": "Content",
+		"docs": "Attachment PDF",
+		"groupView": "Audience group viewing news",
+		"id": "ID",
+		"image": "Photo attached",
+		"isSendNotification": "Send notifications to users",
+		"lessThan": "less than 5MB",
+		"level": "Critical level",
+		"name": "News name",
+		"publish": "Publish",
+		"publishDate": "Post time",
+		"publishNow": "Publish now",
+		"publishSchedule": "Publish schedule",
+		"role": "Role",
+		"shortContent": "Short content ",
+		"status": "Status",
+		"tags": "Tags",
+		"title": "Title",
+		"unit": "Unit"
+	},
+	"no": "No.",
+	"noData": "No results match",
+	"paging": "Showing {first} to {last} in {totalRecords} records",
+	"search": "Enter a news name",
+	"uploadFile": {
+		"clear": "Delete",
+		"docs": "Upload the file",
+		"image": "Upload photo",
+		"invalid": {
+			"ext": "File is incorrectly formatted {{ext}}",
+			"max": "The number of files exceeded the allowed limit {{max}}",
+			"size": "The file uploaded is exceeding the allowed size {{size}}"
+		}
+	},
+	"view": "News detail",
+	"viewLess": "[View less]",
+	"viewMore": "[View more]"
+}

@@ -1,0 +1,38 @@
+{
+	"breadcrumb": {
+		"home": "Danh sách công cụ tính toán"
+	},
+	"btn": {
+		"refresh": "Tải lại"
+	},
+	"const": {
+		"active": "Hiệu lực",
+		"all": "Tất cả",
+		"inactive": "Hết hiệu lực",
+		"levelImportant": "Quan trọng",
+		"levelNormal": "Bình thường",
+		"levelVeryImportant": "Rất quan trọng"
+	},
+	"filter": "Lọc kết quả",
+	"list": "Danh sách công cụ tính toán",
+	"message": {
+		"accept": "Có",
+		"confirmOff": "Nếu tắt công cụ tính toán này, chuyên viên bán hàng sẽ không nhìn thấy chức năng. Bạn có chắc chắn muốn tắt?",
+		"confirmOn": "Bạn có chắc chắn bật công cụ tính toán này?",
+		"notification": "Thông báo",
+		"reject": "Không",
+		"updateError": "Cập nhật thất bại. Vui lòng thử lại sau",
+		"updateSuccess": "Cập nhật công cụ tính toán thành công"
+	},
+	"no": "STT",
+	"noData": "Không có kết quả nào phù hợp",
+	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
+	"search": "Nhập tên công cụ",
+	"tool": {
+		"action": "Thao tác",
+		"customerType": "Loại khách hàng",
+		"level": "Mức độ ưu tiên",
+		"name": "Tên công cụ",
+		"status": "Trạng thái"
+	}
+}

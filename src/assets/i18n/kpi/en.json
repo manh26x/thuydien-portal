@@ -1,0 +1,88 @@
+{
+	"action": "Action",
+	"area": {
+		"addNew": "Add a new data area",
+		"addNewSuccess": "Successfully added the new data area",
+		"color": "Color",
+		"const": {
+			"active": "Active",
+			"inactive": "Inactive"
+		},
+		"name": "Data area name",
+		"priority": "Priority",
+		"status": "Status",
+		"updateArea": "Edit the data area",
+		"updateSuccess": "The data partition has been updated successfully"
+	},
+	"breadcrumb": {
+		"area": "Manage area data",
+		"areaCreate": "Add new data",
+		"areaUpdate": "Edit data",
+		"kpi": "Manage KPI reports",
+		"kpiDetail": "Detail KPI Dashboard",
+		"kpiReportDetail": "KPI report Detail",
+		"kpiUpdate": "Edit KPI Dashboard"
+	},
+	"btn": {
+		"back": "Back",
+		"cancel": "Cancel",
+		"checkData": "Check data",
+		"create": "Add new",
+		"export": "Export Report",
+		"filter": "Filter the results",
+		"refresh": "Refresh",
+		"save": "Save result",
+		"update": "Update"
+	},
+	"invalid": {
+		"maxLength": "The value must not exceed {{length}} characters",
+		"required": "Value cannot be blank"
+	},
+	"kpi": {
+		"allowDisplay": "Display allowance",
+		"area": "Data area",
+		"atHere": "At here",
+		"const": {
+			"active": "Active",
+			"all": "All",
+			"inactive": "Inactive",
+			"no": "No",
+			"yes": "Yes"
+		},
+		"createDate": "Created date",
+		"detail": "Detail KPI Dashboard",
+		"enterIndex": "Enter an index",
+		"import": "Import KPI",
+		"index": "Index",
+		"indexList": "Index list",
+		"info": "KPI report information",
+		"list": "KPI List",
+		"listArea": "List of data area",
+		"listReport": "List of KPI reports",
+		"manage": "Manage KPI reports",
+		"modifyDate": "Updated date",
+		"orderDisplay": "Display order",
+		"patternFile": "Download the sample file",
+		"selectArea": "Select the data area",
+		"selectType": "Select the KPI report type",
+		"status": "Status",
+		"typeReport": "KPI report type",
+		"update": "Edit KPI Dashboard",
+		"upload": "Upload"
+	},
+	"message": {
+		"accept": "Yes",
+		"confirmDel": "Deletion Confirmation",
+		"delArea": "Are you sure you want to delete the \"{{name}}\"?",
+		"delKpi": "If you delete, the KPI report will be updated to Expired. Are you sure you want to delete?",
+		"delSuccess": "Successfully delete the record",
+		"importExceed": "You can only upload data files up to 2000 records",
+		"importInvalid": "Data file cannot be read. Please check if the import file is with the correct release form",
+		"importSuccess": "Successfully import KPIs",
+		"reject": "No",
+		"updateSuccess": "Successfully update the KPI "
+	},
+	"no": "No.",
+	"noData": "No matching results",
+	"paging": "Showing {first} to {last} in {totalRecords} records"
+}

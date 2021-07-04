@@ -1,0 +1,13 @@
+{
+	"error": "An error occurred, please try again later",
+	"errorGetUserInfo": "An error occurred while retrieving account information",
+	"invalid.message": "Login information is incorrect.",
+	"invalid.password": "Please enter a password.",
+	"invalid.permission": "You do not have access to the system. Please contact admin for more details.",
+	"invalid.username": "Please enter your username.",
+	"login": "Login",
+	"noInternet": "Network connection is not stable. Please try again later",
+	"password": "Password",
+	"username": "Username",
+	"welcome": "Login to Sales App System"
+}

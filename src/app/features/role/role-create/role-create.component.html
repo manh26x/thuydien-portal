@@ -1,0 +1,24 @@
+<p-card header="{{'addNewRole' | translate}}">
+  <p-messages key="add-role" [value]="msg"></p-messages>
+  <p-tabView #tabView (onChange)="doChangeTab($event)">
+    <p-tabPanel header="{{'addNewRole' | translate}}">
+      <aw-role-form [roleForm]="roleForm"></aw-role-form>
+    </p-tabPanel>
+    <p-tabPanel header="{{'assignTagToRole' | translate}}">
+      <aw-tag-list
+        [tagNewsList]="tagNewsList"
+        [tagKpiList]="tagKpiList"
+        [tagNewsSelectedList]="tagNewsSelectedList"
+        [tagKpiSelectedList]="tagKpiSelectedList">
+      </aw-tag-list>
+    </p-tabPanel>
+    <p-tabPanel header="{{'assignFeatureToRole' | translate}}">
+      <aw-feature-list [featureList]="featureList"></aw-feature-list>
+    </p-tabPanel>
+  </p-tabView>
+  <div class="split-horizontal-no-line"></div>
+  <div class="p-text-center">
+    <button (click)="doCancel()" pButton type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
+    <button (click)="doSave()" pButton type="button" label="{{'btn.save' | translate}}" class="p-button-raised p-button-secondary p-mr-3"></button>
+  </div>
+</p-card>

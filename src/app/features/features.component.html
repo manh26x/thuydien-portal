@@ -1,0 +1,33 @@
+<div class="layout-wrapper layout-static layout-light" [ngClass]="{'layout-mobile-active': staticMenuMobileActive,
+                                        'layout-static-inactive': staticMenuDesktopInactive}" (click)="onLayoutClick()">
+
+
+  <div class="layout-main">
+    <aw-topbar (topBarLogout)="topBarLogoutClick()" (toggleMenu)="onMenuButtonClick($event)" [userInfo]="userInfo"></aw-topbar>
+
+    <div class="layout-content">
+      <aw-global-indicator></aw-global-indicator>
+      <div *ngIf="isRouting" class="indicator-routing">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+      <router-outlet></router-outlet>
+    </div>
+
+    <div class="layout-main-mask"></div>
+  </div>
+
+  <div class="layout-sidebar" (click)="onMenuClick($event)">
+    <div class="layout-sidebar-logo">
+      <a href="/">
+        <img src="assets/images/logo.png" alt="sale-app-layout" />
+      </a>
+    </div>
+
+    <div class="layout-menu-container">
+      <aw-section-indicator (tryAgain)="tryAgain()" [isFailed]="isLoadFailed" [isLoading]="isLoading"></aw-section-indicator>
+      <ul class="layout-menu">
+        <li aw-menuitem *ngFor="let item of model; let i = index;" [item]="item" [index]="i" [root]="true"></li>
+      </ul>
+    </div>
+  </div>
+</div>

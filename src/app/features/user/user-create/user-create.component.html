@@ -1,0 +1,10 @@
+<p-panel header="{{'addNew' | translate}}">
+  <aw-user-form
+    [departmentList]="departmentList"
+    [roleList]="roleList"
+    [branchList]="branchList"
+    [unitList]="unitList"
+    (save)="doSave($event)"
+    (cancel)="doCancel()">
+  </aw-user-form>
+</p-panel>

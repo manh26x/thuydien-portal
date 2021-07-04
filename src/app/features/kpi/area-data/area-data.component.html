@@ -1,0 +1,55 @@
+
+<p-table [value]="data">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 50px;">{{'no' | translate}}</th>
+      <th>{{'area.name' | translate}}</th>
+      <th>{{'area.color' | translate}}</th>
+      <th>{{'area.status' | translate}}</th>
+      <th>{{'area.priority' | translate}}</th>
+      <th>
+        <button *ngIf="isHasInsert" (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-area let-i="rowIndex">
+    <tr>
+      <td>{{i + 1}}</td>
+      <td>{{area.name}}</td>
+      <td>
+        <i class="pi pi-circle-on" [ngStyle]="{'color': area.color}"></i>&nbsp;
+        {{area.color}}
+      </td>
+      <td>
+        <ng-container [ngSwitch]="area.status">
+          <div *ngSwitchCase="areaConst.STATUS_ACTIVE">{{'area.const.active' | translate}}</div>
+          <div *ngSwitchCase="areaConst.STATUS_INACTIVE" class="p-invalid">{{'area.const.inactive' | translate}}</div>
+          <div *ngSwitchDefault>-</div>
+        </ng-container>
+      </td>
+      <td>{{area.priority}}</td>
+
+      <td>
+        <button *ngIf="isHasEdit" (click)="gotoUpdate(area)" pButton
+                type="button"
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-secondary p-button-text">
+        </button>
+        <button *ngIf="isHasDel && area.status == areaConst.STATUS_ACTIVE" (click)="doDelete(area)" pButton
+                type="button"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-danger p-button-text">
+
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="6">
+        {{'noData' | translate}}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

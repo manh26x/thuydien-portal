@@ -1,0 +1,66 @@
+<form [formGroup]="roleForm">
+  <div class="p-fluid p-grid">
+    <div class="p-md-6 p-col-12 p-field">
+      <label for="r-code">{{'role.code' | translate}} <span class="p-invalid">*</span></label>
+      <input awAutoUppercase (keydown.space)="$event.preventDefault()" id="r-code" type="text" pInputText formControlName="code" />
+      <small *ngIf="hasErrorInput('code', 'required')" class="p-invalid">
+        {{'invalid.required' | translate}}
+      </small>
+      <small *ngIf="hasErrorInput('code', 'maxlength')" class="p-invalid">
+        {{ 'invalid.maxLength' | translate:{length: 100} }}
+      </small>
+      <small *ngIf="hasErrorInput('code', 'pattern')" class="p-invalid">
+        {{'invalid.pattern' | translate}}
+      </small>
+    </div>
+
+    <div class="p-md-6 p-col-12 p-field">
+      <label for="r-status">{{'role.status' | translate}} <span class="p-invalid">*</span></label>
+      <p-dropdown inputId="r-status" formControlName="status" [options]="statusList"></p-dropdown>
+    </div>
+  </div>
+
+  <div class="p-fluid p-grid">
+    <div class="p-md-6 p-col-12 p-field">
+      <label for="r-name">{{'role.name' | translate}} <span class="p-invalid">*</span></label>
+      <input id="r-name" type="text" pInputText formControlName="name" />
+      <small *ngIf="hasErrorInput('name', 'required')" class="p-invalid">
+        {{'invalid.required' | translate}}
+      </small>
+      <small *ngIf="hasErrorInput('name', 'maxlength')" class="p-invalid">
+        {{ 'invalid.maxLength' | translate:{length: 500} }}
+      </small>
+    </div>
+  </div>
+
+  <div class="p-fluid p-grid">
+    <div class="p-md-12 p-col-12 p-field">
+      <label for="r-desc">{{'role.desc' | translate}} <span class="p-invalid">*</span></label>
+      <textarea style="resize: vertical;" row id="r-desc" type="text" pInputTextarea formControlName="desc"></textarea>
+      <small *ngIf="hasErrorInput('desc', 'required')" class="p-invalid">
+        {{'invalid.required' | translate}}
+      </small>
+      <small *ngIf="hasErrorInput('desc', 'maxlength')" class="p-invalid">
+        {{ 'invalid.maxLength' | translate:{length: 1000} }}
+      </small>
+    </div>
+  </div>
+
+  <div class="p-fluid p-grid">
+    <div class="p-md-12 p-col-12 p-field">
+      <label for="r-desc">{{'client.title' | translate}} <span class="p-invalid">*</span></label>
+      <div class="p-field-checkbox">
+        <p-checkbox name="client" binary="true" formControlName="isAdminPortal" inputId="admin-portal"></p-checkbox>
+        <label for="admin-portal">{{'client.portal' | translate}}</label>
+      </div>
+      <div class="p-field-checkbox">
+        <p-checkbox name="client" binary="true" formControlName="isMobileApp" inputId="mobile-app"></p-checkbox>
+        <label for="mobile-app">{{'client.mobile' | translate}}</label>
+      </div>
+      <small *ngIf="hasErrorInput('isMobileApp', 'clientRequired')" class="p-invalid">
+        {{'invalid.required' | translate}}
+      </small>
+    </div>
+  </div>
+</form>
+

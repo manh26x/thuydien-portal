@@ -1,0 +1,86 @@
+<p-panel header="{{'detail' | translate}}">
+  <div class="split-header-panel"></div>
+  <div class="p-fluid p-grid">
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'user.userName' | translate}}:</label>
+      <div class="title-right">{{userDetail.user?.userName}}</div>
+    </div>
+
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'user.status' | translate}}:</label>
+      <div class="title-right">
+        <ng-container [ngSwitch]="userDetail.user?.status">
+          <ng-container *ngSwitchCase="userConst.ACTIVE">
+            {{'const.active' | translate}}
+          </ng-container>
+          <ng-container *ngSwitchCase="userConst.INACTIVE">
+            {{'const.inactive' | translate}}
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-fluid p-grid p-mt-2">
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'user.fullName' | translate}}:</label>
+      <div class="title-right">{{userDetail.user?.fullName}}</div>
+    </div>
+
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'user.phone' | translate}}:</label>
+      <div class="title-right">{{userDetail.user?.phone}}</div>
+    </div>
+
+  </div>
+
+  <div class="p-fluid p-grid p-mt-2">
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'user.email' | translate}}:</label>
+      <div class="title-right">{{userDetail.user?.email}}</div>
+    </div>
+
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'user.position' | translate}}:</label>
+      <div class="title-right">{{userDetail.user?.position}}</div>
+    </div>
+
+  </div>
+
+  <div class="p-fluid p-grid p-mt-2">
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'user.unit' | translate}}:</label>
+      <div class="title-right">{{userDetail.user?.unitName}}</div>
+    </div>
+
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'user.department' | translate}}:</label>
+      <div class="title-right">{{userDetail.user?.departmentName}}</div>
+    </div>
+  </div>
+
+  <div class="p-fluid p-grid p-mt-2">
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'user.branch' | translate}}:</label>
+      <div class="title-right">
+        <ng-container *ngFor="let item of userDetail.userBranchList">
+          <li>{{item.branchId}} - {{item.branchName}}</li>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'user.role' | translate}}:</label>
+      <div class="title-right">
+        <ng-container *ngFor="let item of userDetail.userRoleList">
+          <li>{{item.name}}</li>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="split-horizontal"></div>
+  <div class="p-text-center">
+    <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
+  </div>
+</p-panel>

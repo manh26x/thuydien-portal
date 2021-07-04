@@ -1,0 +1,120 @@
+{
+	"breadcrumb": {
+		"create": "Soạn bản tin",
+		"home": "Danh sách bản tin bán hàng",
+		"update": "Chỉnh sửa bản tin",
+		"view": "Chi tiết bản tin"
+	},
+	"btn": {
+		"cancel": "Hủy",
+		"delete": "Xóa",
+		"draft": "Lưu bản nháp",
+		"insert": "Thêm mới",
+		"refresh": "Tải lại",
+		"save": "Lưu thay đổi",
+		"saveAndPublish": "Lưu thay đổi và xuất bản"
+	},
+	"confirm": {
+		"accept": "Có",
+		"delete": "Xác nhận xóa",
+		"deleteImage": "Bạn có chắc chắn xóa ảnh từ bản tin?",
+		"deleteMessage": "Bạn có chắc chắn muốn xóa bản tin \"{{name}}\"",
+		"reject": "Không"
+	},
+	"const": {
+		"active": "Hoạt động",
+		"all": "Tất cả",
+		"delete": "Đã xóa",
+		"draft": "Bản nháp",
+		"inactive": "Không hoạt động",
+		"levelImportant": "Quan trọng",
+		"levelNormal": "Bình thường",
+		"levelVeryImportant": "Rất quan trọng",
+		"pending": "Chờ xuất bản",
+		"publish": "Đã xuất bản"
+	},
+	"create": "Biên soạn bản tin",
+	"edit": "Chỉnh sửa bản tin",
+	"filter": "Lọc kết quả",
+	"invalid": {
+		"content": {
+			"required": "Giá trị không được để trống"
+		},
+		"docs": {
+			"limit": "Số lượng file vượt quá giới hạn cho phép",
+			"type": "Tệp tin không đúng định dạng PDF",
+			"zize": "Tệp tải lên vượt quá dung lượng cho phép 5MB"
+		},
+		"groupViewValue": {
+			"required": "Giá trị không được để trống"
+		},
+		"publishDate": {
+			"mustAfterNow": "Thời gian đăng bắt buộc phải lớn hơn thời gian hiện tại"
+		},
+		"shortContent": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự"
+		},
+		"tags": {
+			"required": "Giá trị không được để trống"
+		},
+		"title": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+			"required": "Giá trị không được để trống"
+		}
+	},
+	"level": "Mức độ quan trọng",
+	"levelList": {
+		"important": "Quan trọng",
+		"normal": "Bình thường",
+		"veryImportant": "Rất quan trọng"
+	},
+	"list": "Danh sách bản tin bán hàng",
+	"message": {
+		"deleteNotFound": "Bản tin không tồn tại hoặc đã bị xóa",
+		"deleteSuccess": "Xóa bản tin thành công",
+		"draftSuccess": "Lưu bản nháp thành công",
+		"insertSuccess": "Thêm mới bản tin thành công",
+		"updateNotFound": "Bản tin không tồn tại hoặc đã bị xóa",
+		"updateSuccess": "Cập nhật bản tin thành công"
+	},
+	"news": {
+		"author": "Tác giả",
+		"branch": "Chi nhánh",
+		"content": "Nội dung",
+		"docs": "Tài liệu đính kèm PDF",
+		"groupView": "Nhóm đối tượng xem bản tin",
+		"id": "ID",
+		"image": "Ảnh đính kèm",
+		"isSendNotification": "Gửi thông báo cho người dùng",
+		"lessThan": "dưới 5MB",
+		"level": "Mức độ quan trọng",
+		"name": "Tên bản tin",
+		"publish": "Xuất bản",
+		"publishDate": "Thời gian đăng",
+		"publishNow": "Xuất bản ngay",
+		"publishSchedule": "Đặt lịch xuất bản",
+		"role": "Role",
+		"shortContent": "Nội dung tóm tắt",
+		"status": "Trạng thái",
+		"tags": "Tags",
+		"title": "Tiêu đề",
+		"unit": "Đơn vị"
+	},
+	"no": "STT",
+	"noData": "Không có kết quả nào phù hợp",
+	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
+	"search": "Nhập tên bản tin",
+	"uploadFile": {
+		"clear": "Xóa",
+		"docs": "Tải tệp lên",
+		"image": "Tải ảnh lên",
+		"invalid": {
+			"ext": "Tệp tin không đúng định dạng {{ext}}",
+			"max": "Số lượng file vượt quá giới hạn cho phép {{max}}",
+			"size": "Tệp tải lên vượt quá dung lượng cho phép {{size}}"
+		}
+	},
+	"view": "Chi tiết bản tin",
+	"viewLess": "[Ẩn bớt]",
+	"viewMore": "[Xem thêm]"
+}

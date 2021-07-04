@@ -1,0 +1,74 @@
+{
+	"addNew": "Thêm mới Tag",
+	"breadcrumb": {
+		"create": "Thêm mới Tag",
+		"home": "Danh sách Tags",
+		"update": "Chỉnh sửa thông tin Tag",
+		"view": "Thông tin chi tiết Tag"
+	},
+	"btn": {
+		"cancel": "Hủy",
+		"create": "Thêm mới",
+		"refresh": "Tải lại",
+		"save": "Lưu thay đổi"
+	},
+	"confirm": {
+		"accept": "Có",
+		"delete": "Xác nhận xóa",
+		"deleteMessage": "Bạn có chắc chắn muốn xóa Tag \"{{name}}\"",
+		"reject": "Không"
+	},
+	"const": {
+		"active": "Hoạt động",
+		"all": "Tất cả",
+		"inactive": "Không hoạt động",
+		"kpi": "Tags cho KPI",
+		"news": "Tags cho bản tin bán hàng",
+		"qna": "Tags cho  Q&A",
+		"select": "Chọn loại tag",
+		"tool": "Tags cho công cụ tính toán"
+	},
+	"detail": "Thông tin chi tiết Tag",
+	"edit": "Chỉnh sửa thông tin Tags",
+	"filter": "Lọc",
+	"invalid": {
+		"assign": {
+			"required": "Giá trị không được để trống"
+		},
+		"code": {
+			"maxLength": "Tên tag không được vượt quá {{length}} ký tự",
+			"pattern": "Giá trị nhập không hơpj lệ",
+			"required": "Giá trị không được để trống"
+		},
+		"name": {
+			"maxLength": "Tên tag không được vượt quá {{length}} ký tự",
+			"required": "Giá trị không được để trống"
+		},
+		"type": {
+			"required": "Giá trị không được để trống"
+		}
+	},
+	"list": "Danh sách Tags",
+	"message": {
+		"deleteNotFound": "Tag không tồn tại hoặc đã bị xóa",
+		"deleteSuccess": "Xóa tag thành công",
+		"deleteUsed": "Tag {{name}} đã được sử dụng, bạn không thể xóa tag này",
+		"insertExisted": "Tag đã tồn tại",
+		"insertSuccess": "Thêm mới tag thành công",
+		"updateSuccess": "Cập nhật tag thành công"
+	},
+	"no": "STT",
+	"noData": "Không có kết quả nào phù hợp",
+	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
+	"search": "Nhập tên tag",
+	"tags": {
+		"assignTo": "Gán cho",
+		"code": "Mã tag",
+		"id": "Mã Tag",
+		"name": "Tên tag",
+		"status": "Trạng thái",
+		"type": "Loại Tag"
+	},
+	"viewLess": "[Ẩn bớt]",
+	"viewMore": "[Xem thêm]"
+}

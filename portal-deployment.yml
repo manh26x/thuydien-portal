@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portal-deployment
+  labels:
+    module: portal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      module: portal
+  template:
+    metadata:
+      labels:
+        module: portal
+    spec:
+      containers:
+        - name: portal
+          image: ebit-registry.tpb.vn/salesapp/salesapp_portal:$VER
+          ports:
+            - containerPort: 8080

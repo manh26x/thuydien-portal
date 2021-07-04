@@ -1,0 +1,12 @@
+<p-panel header="{{'edit' | translate}}">
+  <aw-news-form
+    mode="update"
+    [groupViewList]="groupViewList"
+    [tagList]="tagList"
+    [groupViewState]="groupViewState"
+    [valueForm]="initValue"
+    (cancel)="doCancel()"
+    (save)="doSave($event, false)"
+    (draft)="doSave($event, true)">
+  </aw-news-form>
+</p-panel>

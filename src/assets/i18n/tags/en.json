@@ -1,0 +1,74 @@
+{
+	"addNew": "Add new Tag",
+	"breadcrumb": {
+		"create": "Add new Tag",
+		"home": "List of tags",
+		"update": "Edit Tag information",
+		"view": "Tag Detail  "
+	},
+	"btn": {
+		"cancel": "Cancel",
+		"create": "Create",
+		"refresh": "Refresh",
+		"save": "Save changes"
+	},
+	"confirm": {
+		"accept": "Yes",
+		"delete": "Confirmation of deletion",
+		"deleteMessage": "Are you sure you want to remove Tag \"{{name}}\"",
+		"reject": "No"
+	},
+	"const": {
+		"active": "Active",
+		"all": "All",
+		"inactive": "Inactive",
+		"kpi": "Tags for KPIs",
+		"news": "Tags for sales news",
+		"qna": "Tags for Q&A",
+		"select": "Select a tag type",
+		"tool": "Tags for calculation engine"
+	},
+	"detail": "View Tag detail ",
+	"edit": "Edit Tag information",
+	"filter": "Filter",
+	"invalid": {
+		"assign": {
+			"required": "Value cannot be blank"
+		},
+		"code": {
+			"maxLength": "The tag name must not exceed {{length}} characters",
+			"pattern": "The entered value is not valid",
+			"required": "Value cannot be blank"
+		},
+		"name": {
+			"maxLength": "The tag name must not exceed {{length}} characters",
+			"required": "Value cannot be blank"
+		},
+		"type": {
+			"required": "Value cannot be blank"
+		}
+	},
+	"list": "List of tags",
+	"message": {
+		"deleteNotFound": "Tag does not exist or has been removed",
+		"deleteSuccess": "Successfully delete tag",
+		"deleteUsed": "The {{name}} tag is already in use, you cannot delete this tag",
+		"insertExisted": "Tag already exists",
+		"insertSuccess": "Add new tag successfully",
+		"updateSuccess": "Update tag successfully"
+	},
+	"no": "No.",
+	"noData": "No results found",
+	"paging": "Showing {first} to {last} in {totalRecords} records",
+	"search": "Enter a tag name",
+	"tags": {
+		"assignTo": "Assign to",
+		"code": "Tag code",
+		"id": "Tag code",
+		"name": "Tag title",
+		"status": "Status",
+		"type": "Tag type"
+	},
+	"viewLess": "[View less]",
+	"viewMore": "[View more]"
+}

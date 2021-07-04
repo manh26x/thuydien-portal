@@ -1,0 +1,120 @@
+{
+	"addNew": "Thêm mới người dùng",
+	"atHere": "Tại đây",
+	"breadcrumb": {
+		"create": "Thêm mới người dùng",
+		"home": "Danh sách người dùng",
+		"update": "Chỉnh sửa thông tin người dùng",
+		"view": "Chi tiết thông tin người dùng"
+	},
+	"btn": {
+		"cancel": "Hủy",
+		"checkData": "Kiểm tra dữ liệu",
+		"create": "Thêm mới",
+		"export": "Xuất báo cáo",
+		"refresh": "Tải lại",
+		"save": "Lưu thay đổi",
+		"save2": "Lưu",
+		"selectFile": "Chọn file"
+	},
+	"confirm": {
+		"accept": "Có",
+		"delete": "Xác nhận khóa",
+		"deleteMessage": "Bạn có chắc chắn muốn khóa người dùng \"{{name}}\"",
+		"reject": "Không"
+	},
+	"const": {
+		"active": "Hoạt động",
+		"all": "Tất cả",
+		"inactive": "Dừng hoạt động",
+		"roleAdmin": "Admin",
+		"supperAdmin": "SupperAdmin"
+	},
+	"detail": "Chi tiết thông tin người dùng",
+	"downloadPattern": "Tải file mẫu",
+	"filter": "Lọc kết quả",
+	"invalid": {
+		"branch": {
+			"required": "Giá trị không được để trống"
+		},
+		"department": {
+			"required": "Giá trị không được để trống"
+		},
+		"email": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+			"pattern": "Email không đúng định dạng"
+		},
+		"fullName": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+			"required": "Giá trị không được để trống"
+		},
+		"oneTagRequired": "Vui lòng chọn 1 trong các loại Tags trên",
+		"password": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+			"required": "Giá trị không được để trống"
+		},
+		"phone": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+			"pattern": "Giá trị phải là số"
+		},
+		"position": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự"
+		},
+		"role": {
+			"required": "Giá trị không được để trống"
+		},
+		"unit": {
+			"required": "Giá trị không được để trống"
+		},
+		"userId": {
+			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+			"pattern": "Giá trị nhập không hợp lệ: A-Z 0-9 \".\"",
+			"required": "Giá trị không được để trống"
+		}
+	},
+	"list": "Danh sách người dùng",
+	"message": {
+		"deleteNotFound": "User không tồn tại hoặc đã bị xóa",
+		"deleteSuccess": "Xóa user thành công",
+		"importSuccess": "Import tài khoản thành công",
+		"insertExisted": "Người dùng đã tồn tại. Thêm mới thất bại.",
+		"insertSuccess": "Thêm mới tài khoản thành công",
+		"passwordNotMatch": "Mật khẩu hiện tại không đúng",
+		"updateNotFound": "User không tồn tại hoặc đã bị xóa",
+		"updateNotPermission": "Bạn không có quyền cập nhật tài khoản",
+		"updateSuccess": "Cập nhật thông tin tài khoản thành công"
+	},
+	"no": "STT",
+	"noData": "Không có kết quả nào phù hợp",
+	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
+	"roleList": "Danh sách Roles",
+	"search": "Họ và tên, tên đăng nhập, chức danh, chi nhánh",
+	"selectDepartment": "Chọn khối",
+	"selectUnit": "Chọn đơn vị",
+	"selectedList": "Danh sách tags đã chọn",
+	"selectedRoleList": "Danh sách Roles đã chọn",
+	"tagList": "Danh sách tags",
+	"update": "Chỉnh sửa thông tin người dùng",
+	"user": {
+		"branch": "Chi nhánh",
+		"currentPass": "Mật khẩu hiện tại",
+		"department": "Khối",
+		"email": "Email",
+		"fullName": "Họ và tên",
+		"newPass": "Mật khẩu mới",
+		"password": "Mật khẩu",
+		"phone": "Số điện thoại",
+		"position": "Chức danh",
+		"resetPass": "Đặt lại mật khẩu",
+		"role": "Role",
+		"status": "Trạng thái",
+		"tagKpi": "Tags cho KPI",
+		"tagNews": "Tags cho bản tin",
+		"tagQna": "Tags cho Q&A",
+		"tagTool": "Tags cho công cụ tính toán",
+		"unit": "Đơn vị",
+		"userName": "Tên đăng nhập"
+	},
+	"viewLess": "[Ẩn bớt]",
+	"viewMore": "[Xem thêm]"
+}

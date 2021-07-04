@@ -1,0 +1,26 @@
+<div class="ui-g">
+  <div [ngStyle]="{'display': isSelect ? 'block':'none' }" draggable="true" class="{{zoneFileClass}} ui-g-12">
+    <div class="p-text-center">
+      <a href="javascript:void('select file');" (click)="file.click()">
+        <i class="pi pi-upload"></i> {{uploadTitle}}
+      </a>
+      <input type="file" #file [accept]="fileExt" [multiple]="(maxFiles > 1)" (change)="onFileChange($event)" style="display:none" />
+    </div>
+  </div>
+  <div class="image-preview" [ngStyle]="{'display': isSelect ? 'none':'block' }">
+    <img alt="IMG" [src]="previewUrl">
+    <div class="img-action">
+      <button class="btn-action" (click)="file.click()">
+        <i class="pi pi-refresh"></i>
+      </button>&nbsp;
+      <button class="btn-action" (click)="clearImage()">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+  </div>
+  <div class="ui-g-12" *ngIf="errors.length > 0">
+    <ul class="p-pl-1 p-my-1" style="list-style: none">
+      <li class="p-invalid" *ngFor="let err of errors">{{err}}</li>
+    </ul>
+  </div>
+</div>

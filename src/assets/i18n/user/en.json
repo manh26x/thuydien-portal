@@ -1,0 +1,120 @@
+{
+	"addNew": "Add a new user",
+	"atHere": "Here",
+	"breadcrumb": {
+		"create": "Add a new user",
+		"home": "User List",
+		"update": "Edit user information",
+		"view": "User detail"
+	},
+	"btn": {
+		"cancel": "Cancel",
+		"checkData": "Check data",
+		"create": "Create",
+		"export": "Export Report",
+		"refresh": "Refresh",
+		"save": "Save changes",
+		"save2": "Save",
+		"selectFile": "Select file"
+	},
+	"confirm": {
+		"accept": "Yes",
+		"delete": "Confirm block user",
+		"deleteMessage": "Are you sure you want to block the user \"{{name}}\"",
+		"reject": "No"
+	},
+	"const": {
+		"active": "Active",
+		"all": "All",
+		"inactive": "Inactive",
+		"roleAdmin": "Admin",
+		"supperAdmin": "SupperAdmin"
+	},
+	"detail": "View user detail",
+	"downloadPattern": "Download the pattern file",
+	"filter": "Filter the results",
+	"invalid": {
+		"branch": {
+			"required": "Value cannot be blank"
+		},
+		"department": {
+			"required": "Value cannot be blank"
+		},
+		"email": {
+			"maxLength": "The value must not exceed {{length}} characters",
+			"pattern": "Email format is incorrrect"
+		},
+		"fullName": {
+			"maxLength": "The value must not exceed {{length}} characters",
+			"required": "Value cannot be blank"
+		},
+		"oneTagRequired": "Please select at least one of the Tag types above",
+		"password": {
+			"maxLength": "The value must not exceed {{length}} characters",
+			"required": "Value cannot be blank"
+		},
+		"phone": {
+			"maxLength": "The value must not exceed {{length}} characters",
+			"pattern": "Value must be a number"
+		},
+		"position": {
+			"maxLength": "The value must not exceed {{length}} characters"
+		},
+		"role": {
+			"required": "Value cannot be blank"
+		},
+		"unit": {
+			"required": "Value cannot be blank"
+		},
+		"userId": {
+			"maxLength": "The value must not exceed {{length}} characters",
+			"pattern": "Invalid input value: A-Z 0-9 \".\"",
+			"required": "Value cannot be blank"
+		}
+	},
+	"list": "User List",
+	"message": {
+		"deleteNotFound": "User does not exist or has been deleted",
+		"deleteSuccess": "Delete user successfully",
+		"importSuccess": "Import user success",
+		"insertExisted": "User already exists. New addition failed.",
+		"insertSuccess": "Add new account successfully",
+		"passwordNotMatch": "The current password is incorrect",
+		"updateNotFound": "User does not exist or has been deleted",
+		"updateNotPermission": "You do not have permission to update your account",
+		"updateSuccess": "Successful account information update"
+	},
+	"no": "No.",
+	"noData": "No results match",
+	"paging": "Showing {first} to {last} in {totalRecords} records",
+	"roleList": "Roles list",
+	"search": "Full name, username, position, branch",
+	"selectDepartment": "Select the department",
+	"selectUnit": "Select a unit",
+	"selectedList": "List of selected tags",
+	"selectedRoleList": "Selected Roles list",
+	"tagList": "List of tags",
+	"update": "Edit User Information",
+	"user": {
+		"branch": "Branch",
+		"currentPass": "Current password",
+		"department": "Department",
+		"email": "Email",
+		"fullName": "First and Last Name",
+		"newPass": "A new password",
+		"password": "Password",
+		"phone": "Phone Number",
+		"position": "Position",
+		"resetPass": "Reset Password",
+		"role": "Role",
+		"status": "Status",
+		"tagKpi": "Tags for KPIs",
+		"tagNews": "Tags for news",
+		"tagQna": "Tags for Q&A",
+		"tagTool": "Tags for calculation tool",
+		"unit": "Unit",
+		"userName": "Username"
+	},
+	"viewLess": "[View less]",
+	"viewMore": "[View more]"
+}

@@ -1,0 +1,90 @@
+<p-panel header="{{'roleList' | translate}}">
+  <ng-template pTemplate="icons">
+    <button (click)="doRefresh()" class="p-panel-header-icon p-link" pTooltip="{{'btn.refresh' | translate}}" tooltipPosition="bottom">
+      <i class="pi pi-refresh"></i>
+    </button>
+  </ng-template>
+
+  <form class="p-grid p-fluid p-mb-3" [formGroup]="formFilter">
+    <div class="p-md-5 p-col-6 p-field">
+      <label for="s-value">{{'role.name' | translate}}</label>
+      <input (keyup.enter)="searchRole()" type="text" id="s-value" pInputText placeholder="{{'search' | translate}}" formControlName="name" />
+    </div>
+
+    <div class="p-md-3 p-col-6 p-field">
+      <label>{{'role.status' | translate}}</label>
+      <p-dropdown formControlName="status" [options]="statusList"></p-dropdown>
+    </div>
+    <div class="p-md-2 p-col-6 p-field p-d-flex p-align-end">
+      <button (click)="searchRole()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
+    </div>
+    <div class="p-md-2 p-col-6 p-field p-d-flex p-align-end">
+      <button [disabled]="!isHasExport" (click)="doExportExcel()" pButton type="button" label="{{'btn.export' | translate}}" style="height: 46px"></button>
+    </div>
+  </form>
+
+  <p-table [value]="roleList" styleClass="table-responsive"
+           [autoLayout]="true"
+           [paginator]="true"
+           [rows]="10"
+           [totalRecords]="roleList.length"
+           [rowsPerPageOptions]="[10, 20, 50, 100]"
+           [showCurrentPageReport]="true"
+           [(first)]="page"
+           sortField="name"
+           [sortOrder]="1"
+           currentPageReportTemplate="{{ 'paging' | translate }}">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 50px;">{{'no' | translate}}</th>
+        <th pSortableColumn="id">{{'role.code' | translate}}<p-sortIcon field="id"></p-sortIcon></th>
+        <th pSortableColumn="name">{{'role.name' | translate}}<p-sortIcon field="name"></p-sortIcon></th>
+        <th pSortableColumn="description">{{'role.desc' | translate}}<p-sortIcon field="description"></p-sortIcon></th>
+        <th pSortableColumn="status" style="width: 150px;">{{'role.status' | translate}}<p-sortIcon field="status"></p-sortIcon></th>
+        <th style="width: 150px;">
+          <button *ngIf="isHasInsert" (click)="gotoCreate()" pButton type="button" label="{{'btn.insert' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-role let-index="rowIndex">
+      <tr>
+        <td>{{index + 1}}</td>
+        <td [title]="role.id">{{role.id | awEllipsis: 10}}</td>
+        <td>{{role.name}}</td>
+        <td>{{role.description}}</td>
+        <td>
+          <ng-container [ngSwitch]="role.status">
+            <ng-container *ngSwitchCase="roleConst.STATUS_ACTIVE">
+              <div>{{'const.active' | translate}}</div>
+            </ng-container>
+            <ng-container *ngSwitchCase="roleConst.STATUS_INACTIVE">
+              <div class="p-invalid">{{'const.inactive' | translate}}</div>
+            </ng-container>
+            <ng-container *ngSwitchDefault>-</ng-container>
+          </ng-container>
+        </td>
+        <td>
+          <button *ngIf="isHasEdit" pButton (click)="gotoUpdate(role)"
+                  type="button"
+                  icon="pi pi-pencil"
+                  class="p-button-rounded p-button-secondary p-button-text">
+          </button>
+          <button *ngIf="isHasDel && role.status == roleConst.STATUS_ACTIVE" pButton (click)="doDelete(role)"
+                  type="button"
+                  icon="pi pi-trash"
+                  class="p-button-rounded p-button-danger p-button-text">
+          </button>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage" let-columns>
+      <tr>
+        <td [attr.colspan]="6">
+          {{'noData' | translate}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</p-panel>

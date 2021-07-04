@@ -1,0 +1,38 @@
+{
+	"breadcrumb": {
+		"home": "List of calculation tools"
+	},
+	"btn": {
+		"refresh": "Refresh"
+	},
+	"const": {
+		"active": "Effective",
+		"all": "All",
+		"inactive": "Expire",
+		"levelImportant": "Important",
+		"levelNormal": "Normal",
+		"levelVeryImportant": "Very important"
+	},
+	"filter": "Filter the results",
+	"list": "List of calculation tools",
+	"message": {
+		"accept": "Yes",
+		"confirmOff": "If this calculation is turned off, the sales specialist will not see the function. Are you sure you want to turn it off?",
+		"confirmOn": "Are you sure you turn on this calculator?",
+		"notification": "Notification",
+		"reject": "No",
+		"updateError": "Fail to update. Please try again later",
+		"updateSuccess": "Update calculation tool successfully"
+	},
+	"no": "No.",
+	"noData": "No results match",
+	"paging": "Showing {first} to {last} in {totalRecords} records",
+	"search": "Enter a tool name",
+	"tool": {
+		"action": "Action",
+		"customerType": "Customer type",
+		"level": "Priority Level",
+		"name": "Tool name",
+		"status": "Status"
+	}
+}
