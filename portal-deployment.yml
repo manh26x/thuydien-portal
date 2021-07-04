@@ -14,10 +14,8 @@ spec:
       labels:
         module: portal
     spec:
-      imagePullSecrets:
-        - name: regcred
       containers:
         - name: portal
-          image: ebit-registry.tpb.vn/salesapp/portal:$VER
+          image: ebit-registry.tpb.vn/salesapp/salesapp_portal:$VER
           ports:
             - containerPort: 8080

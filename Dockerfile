@@ -1,8 +1,6 @@
 # stage 1 as builder
 FROM ebit-registry.tpb.vn/node:12-alpine as builder
 
-ARG BUILD_ENV=docker
-
 ARG TPB_PROXY
 
 RUN mkdir /sale-web-portal
@@ -24,7 +22,7 @@ RUN npx ngcc --properties es2015 --create-ivy-entry-points
 COPY . .
 
 # Build the project and copy the files
-RUN npm run ng build -- --configuration=$BUILD_ENV
+RUN npm run ng build -- --configuration=docker
 
 # Stage 2
 FROM ebit-registry.tpb.vn/rhel8-nginx118:latest

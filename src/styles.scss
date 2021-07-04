@@ -194,3 +194,12 @@
 .p-toast-message-text {
   width: min-content;
 }
+
+.global-indicator {
+  position: fixed;
+  width: calc(100% - 270px);
+}
+
+.layout-static-inactive .global-indicator {
+  width: 100%;
+}

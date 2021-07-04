@@ -12,7 +12,7 @@ import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {AuthService} from '../../../auth/auth.service';
-import {DialogService} from 'primeng/dynamicdialog';
+import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {DialogPreviewComponent} from '../dialog-preview/dialog-preview.component';
 import {PageChangeEvent} from '../../../shared/model/page-change-event';
 import {RoleService} from '../../../shared/service/role.service';
@@ -29,7 +29,7 @@ import {Paginator} from 'primeng/paginator';
   providers: [DialogService, RoleService]
 })
 export class UserDataComponent extends BaseComponent implements OnInit {
-  @ViewChild('userPaging') paging: Paginator
+  @ViewChild('userPaging') paging: Paginator;
   userConst = UserEnum;
   userList: UserDetail[] = [];
   searchForm: FormGroup;
@@ -47,6 +47,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   isHasEdit = false;
   isHasDel = false;
   maxShowBranchInit = 3;
+  dialogRef: DynamicDialogRef = null;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -109,13 +110,13 @@ export class UserDataComponent extends BaseComponent implements OnInit {
         finalize(() => this.indicator.hideActivityIndicator())
       ).subscribe(res => {
         this.userService.logDebug(res);
-        const ref = this.dialogService.open(DialogPreviewComponent, {
+        this.dialogRef = this.dialogService.open(DialogPreviewComponent, {
           data: res,
           header: this.translate.instant('list'),
           width: '90%',
-          styleClass: 'large-dialog'
+          styleClass: 'large-dialog',
         });
-        ref.onClose.pipe(
+        this.dialogRef.onClose.pipe(
           filter((result: boolean) => result)
         ).subscribe(_ => {
           this.messageService.add({
@@ -248,6 +249,14 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       role: [{code: ''}],
       status: [{code: UserEnum.STATUS_ALL}]
     });
+  }
+
+  destroy() {
+    super.destroy();
+    // clear dynamic dialog
+    if (this.dialogRef) {
+      this.dialogRef.close(false);
+    }
   }
 
 }
