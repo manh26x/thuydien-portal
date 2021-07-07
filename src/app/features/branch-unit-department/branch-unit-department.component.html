@@ -1,0 +1,13 @@
+<p-breadcrumb [model]="items" [home]="home" styleClass="p-mb-3"></p-breadcrumb>
+<p-tabView #tabView>
+  <p-tabPanel header="{{'branch.title' | translate }}">
+    <aw-branch></aw-branch>
+  </p-tabPanel>
+  <p-tabPanel header="{{'department.title' | translate}}">
+    <aw-department></aw-department>
+  </p-tabPanel>
+  <p-tabPanel header="{{'unit.title' | translate}}">
+    <aw-unit></aw-unit>
+  </p-tabPanel>
+</p-tabView>
+<p-toast></p-toast>

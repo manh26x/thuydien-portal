@@ -1,0 +1,126 @@
+<p-panel>
+
+    <form class="p-grid p-fluid p-mb-6" [formGroup]="formFilter">
+        <div class="p-md-6 p-col-6 p-field">
+            <input type="text" id="s-value"  pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
+        </div>
+
+        <div class="p-md-2 p-col-12 p-field p-d-flex p-align-end">
+            <button (click)="doFilter()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
+        </div>
+        <div class="p-md-2 p-col-12 p-field p-d-flex p-align-end">
+            <button  pButton type="button" label="{{'btn.insert' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined" (click)="gotoCreate()" style="height: 46px"></button>
+        </div>
+    </form>
+    <p-table [value]="unitList" dataKey="id" styleClass="table-responsive"
+             [customSort]="true"
+             [autoLayout]="true"
+             [lazy]="true"
+             sortField="createDate"
+             [sortOrder]="-1"
+             (onLazyLoad)="lazyLoadUnit($event)">
+        <ng-template pTemplate="header">
+            <tr>
+                <th id="noId" style="width: 50px;">{{'unit.no' | translate}}</th>
+
+                <th id="unitId" pSortableColumn="name">{{'unit.unit' | translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th id="createDateId" pSortableColumn="createDate">{{'unit.createDate' | translate}} <p-sortIcon field="createDate"></p-sortIcon></th>
+                <th id="modifyDateId" pSortableColumn="modifyDate">{{'unit.modifyDate' | translate}} <p-sortIcon field="modifyDate"></p-sortIcon></th>
+                <th id="statusId" >{{'unit.status' | translate}}</th>
+                <th id="notesId" >{{'unit.notes' | translate}}</th>
+                <th id="actionId">{{'unit.action' | translate}}
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-units let-index="rowIndex">
+            <tr>
+                <td>{{(page * pageSize) + 1 + index}}</td>
+                <td>{{units.name}}</td>
+                <td>{{units.createdDate | date: 'dd/MM/yyyy HH:mm'}}</td>
+                <td>{{units.modifiedDate | date: 'dd/MM/yyyy HH:mm'}}</td>
+                <td>
+                    <ng-container [ngSwitch]="units.status">
+                        <ng-container *ngSwitchCase="1">{{'const.active' | translate}}</ng-container>
+                        <ng-container *ngSwitchCase="0" ><span style="color: red">{{'const.inActive' | translate}}</span></ng-container>
+                    </ng-container>
+                </td>
+                <td>{{units.description}}</td>
+                <td>
+                    <button  pButton
+                             type="button"
+                             icon="pi pi-pencil"
+                             class="p-button-rounded p-button-secondary p-button-text"
+                             (click)="gotoUpdate(units)"
+                    >
+                    </button>
+                    <button  pButton
+                             type="button"
+                             icon="pi pi-trash"
+                             class="p-button-rounded p-button-danger p-button-text"
+                             (click)="deleteUnit(units)"
+                    >
+                    </button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td [attr.colspan]="9">
+                    {{'noData' | translate}}
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <p-paginator #unitPaging [rows]="10"
+                 [totalRecords]="totalItems"
+                 [rowsPerPageOptions]="[10, 20, 50, 100]"
+                 [showCurrentPageReport]="true"
+                 (onPageChange)="changePage($event)"
+                 currentPageReportTemplate="{{ 'paging' | translate }}">
+    </p-paginator>
+</p-panel>
+<form  [formGroup]="unitForm" (ngSubmit)="submitUnitForm()">
+    <p-dialog [visible]="display" [closable]="false" modal="true" blockScroll="false">
+
+        <ng-template pTemplate="header">
+            <h4 style="margin-top: 10px" *ngIf="isCreated"><strong>{{'unit.titleAdd'|translate}}</strong></h4>
+            <h4 style="margin-top: 10px" *ngIf="isUpdated"><strong>{{'unit.titleUpdate'|translate}}</strong></h4>
+        </ng-template>
+        <ng-template pTemplate="body" style="width: 465px;">
+            <div class="p-grid p-fluid p-mb-6" style="width: 465px;">
+                <div class="p-md-12 p-col-6 p-field">
+                    <label for="s-unitName">{{'unit.unitName'|translate}} <span class="p-invalid">*</span></label>
+                    <input type="text" pInputText id="s-unitName" formControlName="name" />
+                    <p *ngIf="hasErrorInput('name', 'required')" class="p-invalid">
+                        {{'unit.invalid.required' | translate}}
+                    </p>
+                    <p *ngIf="hasErrorInput('name', 'maxlength')" class="p-invalid">
+                        {{ 'unit.invalid.maxLength' | translate:{length: 100} }}
+                    </p>
+                </div>
+                <div class="p-md-12 p-col-6 p-field">
+                    <label for="s-status">{{'unit.status'|translate}} <span class="p-invalid">*</span></label>
+                    <p-dropdown id="s-status" formControlName="status" [options]="statusList"></p-dropdown>
+                    <p *ngIf="hasErrorInput('status', 'required')" class="p-invalid">
+                        {{'unit.invalid.required' | translate}}
+                    </p>
+                </div>
+                <div class="p-md-12 p-col-6 p-field">
+                    <label for="s-description">{{'unit.notes'|translate}}</label>
+                    <input type="text" pInputText id="s-description" formControlName="description" />
+                    <p *ngIf="hasErrorInput('description', 'maxlength')" class="p-invalid">
+                        {{ 'unit.invalid.maxLength' | translate:{length: 100} }}
+                    </p>
+                </div>
+            </div>
+
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="p-grid p-fluid" style="display: flex; justify-content: center; align-items: center; margin: 20px 0">
+                <button type="button" pButton (click)="display = false" class="p-button-primary p-button-outlined p-md-6 p-col-6" style="width: 45%; height: 45px" label="{{'btn.cancel' | translate}}"></button>
+                <button type="submit" pButton class="p-button-secondary p-md-6 p-col-6" style="width: 45%; height: 45px" label="{{'btn.save' | translate}}"></button>
+            </div>
+        </ng-template>
+
+    </p-dialog>
+</form>

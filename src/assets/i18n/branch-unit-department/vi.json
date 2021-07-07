@@ -1,0 +1,113 @@
+{
+  "breadcrumb": {
+    "home": "Quản lý khối"
+  },
+  "search": "Tìm kiếm",
+  "filter": "Tìm kiếm",
+  "btn": {
+    "insert": "Thêm mới",
+    "cancel" : "Hủy",
+    "save": "Lưu"
+  },
+  "branch": {
+    "title": "DANH SÁCH CHI NHÁNH",
+    "titleAdd": "Thêm mới chi nhánh",
+    "titleUpdate": "Cập nhật chi nhánh",
+    "no": "STT",
+    "branchId": "Mã chi nhánh",
+    "branch": "Chi nhánh",
+    "createDate" : "Ngày tạo",
+    "modifyDate": "Ngày cập nhật",
+    "status": "Trạng thái",
+    "notes": "Ghi chú",
+    "action": "Hành động",
+    "branchName":  "Tên chi nhánh",
+    "invalid": {
+      "required": "Giá trị không được để trống",
+      "maxLength": "Giá trị không được vượt quá {{length}} ký tự"
+
+    },
+    "message": {
+      "deleteNotFound": "Chi nhánh không tồn tại hoặc đã bị xóa",
+      "deleteSuccess": "Xóa chi nhánh thành công",
+      "insertSuccess": "Thêm mới chi nhánh thành công",
+      "updateNotFound": "Chi nhánh không tồn tại hoặc đã bị xóa",
+      "updateSuccess": "Cập nhật chi nhánh thành công"
+    },
+    "confirm": {
+      "accept": "Có",
+      "delete": "Xác nhận xóa",
+      "deleteMessage": "Bạn có chắc chắn muốn xóa chi nhánh \"{{name}}\"",
+      "reject": "Không"
+    }
+  },
+
+  "noData": "Không có kết quả nào phù hợp",
+  "const": {
+    "active": "Hoạt động",
+    "inActive": "Ngưng hoạt động"
+  },
+  "unit": {
+    "title": "DANH SÁCH ĐƠN VỊ",
+    "titleAdd": "Thêm mới đơn vị",
+    "titleUpdate": "Cập nhật đơn vị",
+    "no": "STT",
+    "unit": "Đơn vị",
+    "createDate" : "Ngày tạo",
+    "modifyDate": "Ngày cập nhật",
+    "status": "Trạng thái",
+    "notes": "Ghi chú",
+    "action": "Hành động",
+    "unitName":  "Tên đơn vị",
+    "invalid": {
+      "required": "Giá trị không được để trống",
+      "maxLength": "Giá trị không được vượt quá {{length}} ký tự"
+
+    },
+    "message": {
+      "deleteNotFound": "Đơn vị không tồn tại hoặc đã bị xóa",
+      "deleteSuccess": "Xóa đơn vị thành công",
+      "insertSuccess": "Thêm mới đơn vị thành công",
+      "updateNotFound": "Đơn vị không tồn tại hoặc đã bị xóa",
+      "updateSuccess": "Cập nhật đơn vị thành công"
+    },
+    "confirm": {
+      "accept": "Có",
+      "delete": "Xác nhận xóa",
+      "deleteMessage": "Bạn có chắc chắn muốn xóa đơn vị \"{{name}}\"",
+      "reject": "Không"
+    }
+  },
+  "department": {
+    "title": "DANH SÁCH KHỐI",
+    "titleAdd": "Thêm mới khối",
+    "titleUpdate": "Cập nhật khối",
+    "no": "STT",
+    "department": "Khối",
+    "createDate" : "Ngày tạo",
+    "modifyDate": "Ngày cập nhật",
+    "status": "Trạng thái",
+    "notes": "Ghi chú",
+    "action": "Hành động",
+    "departmentName":  "Tên khối",
+    "invalid": {
+      "required": "Giá trị không được để trống",
+      "maxLength": "Giá trị không được vượt quá {{length}} ký tự"
+
+    },
+    "message": {
+      "deleteNotFound": "Khối không tồn tại hoặc đã bị xóa",
+      "deleteSuccess": "Xóa khối thành công",
+      "insertSuccess": "Thêm mới khối thành công",
+      "updateNotFound": "Khối không tồn tại hoặc đã bị xóa",
+      "updateSuccess": "Cập nhật khối thành công"
+    },
+    "confirm": {
+      "accept": "Có",
+      "delete": "Xác nhận xóa",
+      "deleteMessage": "Bạn có chắc chắn muốn xóa khối \"{{name}}\"",
+      "reject": "Không"
+    }
+  },
+  "paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi"
+}
