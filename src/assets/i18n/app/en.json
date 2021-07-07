@@ -69,7 +69,7 @@
 	},
 	"logout": "Log Out",
 	"menu": {
-		"branch-unit-department": "Block management",
+		"branch-unit-department": "Category Management",
 		"calculateTool": "Management calculation tool",
 		"home": "Home",
 		"importKpi": "Import KPI",
