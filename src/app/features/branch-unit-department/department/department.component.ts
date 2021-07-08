@@ -7,7 +7,7 @@ import {AppTranslateService} from '../../../core/service/translate.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
 import {DepartmentFilterRequest, DepartmentFilterResponse} from './model/department';
-import {concatMap, finalize, startWith, takeUntil} from 'rxjs/operators';
+import {concatMap, finalize, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {DepartmentEnum} from './model/department.enum';
 import {BaseComponent} from '../../../core/base.component';
@@ -107,12 +107,12 @@ export class DepartmentComponent extends BaseComponent implements OnInit, AfterV
       accept: () => {
         this.indicator.showActivityIndicator();
         this.departmentService.deleteDepartment(department.id).pipe(
+          switchMap(async () => this.getListDepartment())
         ).subscribe(() => {
           this.messageService.add({
             severity: 'success',
             detail: this.translate.instant('department.message.deleteSuccess')
           });
-          this.getListDepartment();
         }, err => {
           this.indicator.hideActivityIndicator();
           if (err instanceof ApiErrorResponse && err.code === '201') {

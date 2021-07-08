@@ -8,7 +8,7 @@ import {AppTranslateService} from '../../../core/service/translate.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
 import {UnitFilterRequest, UnitFilterResponse} from './model/unit';
-import {concatMap, finalize, startWith, takeUntil} from 'rxjs/operators';
+import {concatMap, finalize, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {UnitEnum} from './model/unit.enum';
 
@@ -90,7 +90,6 @@ export class UnitComponent extends BaseComponent implements OnInit, AfterViewIni
     this.unitService.filterUnit(this.unitRequestSearch).pipe(
         finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe(res => {
-
       this.unitList = res.content;
       this.totalItems = res.totalElements;
     });
@@ -107,12 +106,12 @@ export class UnitComponent extends BaseComponent implements OnInit, AfterViewIni
       accept: () => {
         this.indicator.showActivityIndicator();
         this.unitService.deleteUnit(unit.id).pipe(
+          switchMap(async () => this.getListUnit())
         ).subscribe(() => {
           this.messageService.add({
             severity: 'success',
             detail: this.translate.instant('unit.message.deleteSuccess')
           });
-          this.getListUnit();
         }, err => {
           this.indicator.hideActivityIndicator();
           if (err instanceof ApiErrorResponse && err.code === '201') {
@@ -207,7 +206,7 @@ export class UnitComponent extends BaseComponent implements OnInit, AfterViewIni
   }
 
 
-  gotoUpdate(units: any) {
+  gotoUpdate(units: UnitFilterResponse) {
     this.unitForm = this.fb.group({
       id: [units.id],
       name: [units.name, [Validators.required, Validators.maxLength(100)]],

@@ -84,31 +84,31 @@
             <h4 style="margin-top: 10px" *ngIf="isCreated"><strong>{{'department.titleAdd'|translate}}</strong></h4>
             <h4 style="margin-top: 10px" *ngIf="isUpdated"><strong>{{'department.titleUpdate'|translate}}</strong></h4>
         </ng-template>
-        <ng-template pTemplate="body" style="width: 465px;">
-            <div class="p-grid p-fluid p-mb-6" style="width: 465px;">
-                <div class="-pmd-12 p-col-6 p-field">
+        <ng-template pTemplate="body" style="width: 465px; height: 350px">
+            <div class="p-grid p-fluid p-mb-6" style="width: 465px; height: 350px">
+                <div class="p-md-12 p-col-6 p-field">
                     <label for="s-departmentName">{{'department.departmentName'|translate}} <span class="p-invalid">*</span></label>
                     <input type="text" pInputText id="s-departmentName" formControlName="name" />
-                    <p *ngIf="hasErrorInput('name', 'required')" class="p-invalid">
+                    <small *ngIf="hasErrorInput('name', 'required')" class="p-invalid">
                         {{'department.invalid.required' | translate}}
-                    </p>
-                    <p *ngIf="hasErrorInput('name', 'maxlength')" class="p-invalid">
+                    </small>
+                    <small *ngIf="hasErrorInput('name', 'maxlength')" class="p-invalid">
                         {{ 'department.invalid.maxLength' | translate:{length: 100} }}
-                    </p>
+                    </small>
                 </div>
                 <div class="p-md-12 p-col-6 p-field">
                     <label for="s-status">{{'department.status'|translate}} <span class="p-invalid">*</span></label>
                     <p-dropdown id="s-status" formControlName="status" [options]="statusList"></p-dropdown>
-                    <p *ngIf="hasErrorInput('status', 'required')" class="p-invalid">
+                    <small *ngIf="hasErrorInput('status', 'required')" class="p-invalid">
                         {{'department.invalid.required' | translate}}
-                    </p>
+                    </small>
                 </div>
                 <div class="p-md-12 p-col-6 p-field">
                     <label for="s-description">{{'department.notes'|translate}}</label>
                     <input type="text" pInputText id="s-description" formControlName="description" />
-                    <p *ngIf="hasErrorInput('description', 'maxlength')" class="p-invalid">
+                    <small *ngIf="hasErrorInput('description', 'maxlength')" class="p-invalid">
                         {{ 'department.invalid.maxLength' | translate:{length: 100} }}
-                    </p>
+                    </small>
                 </div>
             </div>
         </ng-template>
