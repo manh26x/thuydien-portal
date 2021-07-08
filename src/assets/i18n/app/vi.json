@@ -69,6 +69,7 @@
 	},
 	"logout": "Đăng xuất",
 	"menu": {
+		"branch-unit-department": "Quản lý danh mục",
 		"calculateTool": "Quản lý công cụ tính toán",
 		"home": "Trang chủ",
 		"importKpi": "Import KPI",
