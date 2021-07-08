@@ -86,41 +86,41 @@
     <h4 style="margin-top: 10px" *ngIf="isCreated"><strong>{{'branch.titleAdd'|translate}}</strong></h4>
     <h4 style="margin-top: 10px" *ngIf="isUpdated"><strong>{{'branch.titleUpdate'|translate}}</strong></h4>
   </ng-template>
-  <ng-template pTemplate="body" style="width: 465px;">
-   <div class="p-grid p-fluid p-mb-6" style="width: 465px;">
+  <ng-template pTemplate="body" style="width: 465px; height: 400px">
+   <div class="p-grid p-fluid p-mb-6" style="width: 465px; height: 400px">
       <div class="p-md-12 p-col-6 p-field">
         <label for="s-branchId">{{'branch.branchId'|translate}} <span class="p-invalid">*</span></label>
         <input type="text" id="s-branchId" pInputText formControlName="code" />
-        <p *ngIf="hasErrorInput('code', 'required')" class="p-invalid">
+        <small *ngIf="hasErrorInput('code', 'required')" class="p-invalid">
           {{'branch.invalid.required' | translate}}
-        </p>
-        <p *ngIf="hasErrorInput('code', 'maxlength')" class="p-invalid">
+        </small>
+        <small *ngIf="hasErrorInput('code', 'maxlength')" class="p-invalid">
           {{ 'branch.invalid.maxLength' | translate:{length: 9} }}
-        </p>
+        </small>
       </div>
       <div class="p-md-12 p-col-6 p-field">
         <label for="s-branchName">{{'branch.branchName'|translate}} <span class="p-invalid">*</span></label>
         <input type="text" pInputText id="s-branchName" formControlName="name" />
-        <p *ngIf="hasErrorInput('name', 'required')" class="p-invalid">
+        <small *ngIf="hasErrorInput('name', 'required')" class="p-invalid">
           {{'branch.invalid.required' | translate}}
-        </p>
-        <p *ngIf="hasErrorInput('name', 'maxlength')" class="p-invalid">
+        </small>
+        <small *ngIf="hasErrorInput('name', 'maxlength')" class="p-invalid">
           {{ 'branch.invalid.maxLength' | translate:{length: 100} }}
-        </p>
+        </small>
       </div>
       <div class="p-md-12 p-col-6 p-field">
         <label for="s-status">{{'branch.status'|translate}} <span class="p-invalid">*</span></label>
         <p-dropdown id="s-status" formControlName="status" [options]="statusList"></p-dropdown>
-        <p *ngIf="hasErrorInput('status', 'required')" class="p-invalid">
+        <small *ngIf="hasErrorInput('status', 'required')" class="p-invalid">
           {{'branch.invalid.required' | translate}}
-        </p>
+        </small>
       </div>
       <div class="p-md-12 p-col-6 p-field">
         <label for="s-address">{{'branch.address'|translate}}</label>
         <input type="text" pInputText id="s-address" formControlName="address" />
-        <p *ngIf="hasErrorInput('address', 'maxlength')" class="p-invalid">
+        <small *ngIf="hasErrorInput('address', 'maxlength')" class="p-invalid">
           {{ 'branch.invalid.maxLength' | translate:{length: 100} }}
-        </p>
+        </small>
       </div>
    </div>
   </ng-template>

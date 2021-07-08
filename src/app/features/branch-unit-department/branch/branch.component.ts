@@ -2,7 +2,7 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BranchService} from './branch.service';
 import {BranchFilterRequest, BranchFilterResponse} from './model/branch';
-import {concatMap, finalize,  startWith, takeUntil} from 'rxjs/operators';
+import {concatMap, finalize, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import {Paginator} from 'primeng/paginator';
 import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
@@ -106,12 +106,12 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
       accept: () => {
         this.indicator.showActivityIndicator();
         this.branchService.deleteBranch(branch.id).pipe(
+          switchMap(async () => this.getListBranch())
         ).subscribe(() => {
           this.messageService.add({
             severity: 'success',
             detail: this.translate.instant('branch.message.deleteSuccess')
           });
-          this.getListBranch();
         }, err => {
           this.indicator.hideActivityIndicator();
           if (err instanceof ApiErrorResponse && err.code === '201') {
