@@ -10,7 +10,6 @@ import {BaseComponent} from '../../../core/base.component';
 import {Role} from '../../../shared/model/role';
 import {Unit} from '../../../shared/model/unit';
 import {Department} from '../../../shared/model/department';
-
 @Component({
   selector: 'aw-user-form',
   templateUrl: './user-form.component.html',
@@ -116,7 +115,9 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
       tagNews: [],
       tagKpi: [],
       unit: ['', [Validators.required]],
-      department: ['', [Validators.required]]
+      department: ['', [Validators.required]],
+      isCB: [true],
+      isRB:[false]
     }, { updateOn: 'blur' });
   }
 
@@ -127,5 +128,6 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
     }
     return (control.dirty || control.touched) && control.hasError(errorName);
   }
+  
 
 }

@@ -113,8 +113,13 @@
 		"tagQna": "Tags cho Q&A",
 		"tagTool": "Tags cho công cụ tính toán",
 		"unit": "Đơn vị",
-		"userName": "Tên đăng nhập"
+		"userName": "Tên đăng nhập",
+		"userType": "Kiểu người dùng"
 	},
 	"viewLess": "[Ẩn bớt]",
-	"viewMore": "[Xem thêm]"
+	"viewMore": "[Xem thêm]",
+	"userTypeTitle":{
+		"CbEmployment":"Nhân viên khách hàng doanh nghiệp (CB)",
+		"RbEmployment":"Nhân viên khách hàng cá nhân (RB)"
+	}
 }
