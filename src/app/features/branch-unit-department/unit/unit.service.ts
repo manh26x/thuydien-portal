@@ -29,20 +29,20 @@ export class UnitService extends BaseService {
   }
 
   createUnit(body: any): Observable<ApiResultResponse> {
-    return this.doPost('/admin/unit/create', body)
+    return this.doPost('/admin/unit/create', body);
   }
 
   updateUnit(body: any): Observable<ApiResultResponse> {
-    return this.doPost('/admin/unit/update', body)
+    return this.doPost('/admin/unit/update', body);
   }
 
   filterUnit(brandRequestSearch: UnitFilterRequest) {
     return this.doPost('admin/unit/filter', brandRequestSearch).pipe(
         map(res => res.data[0])
-    )
+    );
   }
 
   deleteUnit(id): Observable<ApiResultResponse> {
-    return this.doPost('/admin/unit/delete', id)
+    return this.doPost('/admin/unit/delete', id);
   }
 }

@@ -28,20 +28,20 @@ export class DepartmentService extends BaseService {
   }
 
   createDepartment(body: any): Observable<ApiResultResponse> {
-    return this.doPost('/admin/department/create', body)
+    return this.doPost('/admin/department/create', body);
   }
 
   updateDepartment(body: any): Observable<ApiResultResponse> {
-    return this.doPost('/admin/department/update', body)
+    return this.doPost('/admin/department/update', body);
   }
 
   filterDepartment(brandRequestSearch: DepartmentFilterRequest) {
     return this.doPost('admin/department/filter', brandRequestSearch).pipe(
         map(res => res.data[0])
-    )
+    );
   }
 
   deleteDepartment(id): Observable<ApiResultResponse> {
-    return this.doPost('/admin/department/delete', id)
+    return this.doPost('/admin/department/delete', id);
   }
 }

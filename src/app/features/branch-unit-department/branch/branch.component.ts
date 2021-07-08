@@ -39,23 +39,20 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
   branchForm: FormGroup;
 
   branchList: any;
-  isHasInsert: any;
-
-  levelList: any;
   display = false;
-  brandRequestSearch: BranchFilterRequest
+  brandRequestSearch: BranchFilterRequest;
 
-  page: number = 0
-  pageSize: number = 10
+  page = 0;
+  pageSize = 10;
   totalItems: any;
 
   /* Search Form Feature */
   ngOnInit(): void {
-    this.initFormFilter()
+    this.initFormFilter();
   }
   ngAfterViewInit(): void {
-    this.doFilter()
-    this.initStatusList()
+    this.doFilter();
+    this.initStatusList();
   }
   initFormFilter() {
     this.formFilter = this.fb.group({
@@ -63,10 +60,10 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
     });
   }
   changePage(eve: any) {
-    if(this.page !== eve.page || this.pageSize !== eve.rows) {
+    if (this.page !== eve.page || this.pageSize !== eve.rows) {
       this.page = eve.page;
       this.pageSize = eve.rows;
-      this.getListBranch()
+      this.getListBranch();
     }
   }
 
@@ -77,14 +74,14 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
   }
 
   doFilter() {
-    this.paging.changePage(0)
-    this.getListBranch()
+    this.paging.changePage(0);
+    this.getListBranch();
   }
 
   getListBranch() {
     this.indicator.showActivityIndicator();
-    this.branchList = []
-    this.totalItems = 0
+    this.branchList = [];
+    this.totalItems = 0;
     // @ts-ignore
     this.brandRequestSearch  =  {
       keyword: this.formFilter.get('searchValue').value,
@@ -92,14 +89,14 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
       pageSize: this.pageSize,
       sortBy: this.sortBy,
       sortOrder: this.sortOrder
-    }
+    };
     this.branchService.filterBranch(this.brandRequestSearch).pipe(
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe(res => {
 
-      this.branchList = res.content
-      this.totalItems = res.totalElements
-    })
+      this.branchList = res.content;
+      this.totalItems = res.totalElements;
+    });
 
   }
   deleteBranch(branch) {
@@ -131,7 +128,6 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
           }
         });
       },
-      reject: () => {}
     });
   }
 
@@ -151,17 +147,17 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
   }
 
   gotoCreate() {
-    this.initFormBranch()
-    this.showDialog()
-    this.isCreated=true
-    this.isUpdated=false
+    this.initFormBranch();
+    this.showDialog();
+    this.isCreated = true;
+    this.isUpdated = false;
   }
   initFormBranch() {
     this.branchForm = this.fb.group({
       code: ['', [Validators.required, Validators.maxLength(9)]],
       name: ['', [Validators.required, Validators.maxLength(100)]],
       status: ['1', [Validators.required]],
-      notes: ['',[Validators.maxLength(100)]],
+      notes: ['', [Validators.maxLength(100)]],
     });
   }
 
@@ -178,34 +174,34 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
   }
 
   submitBranchForm() {
-    if(!this.branchForm.invalid) {
-      var body = this.branchForm.value
-      body.address = body.notes
+    if (!this.branchForm.invalid) {
+      const body = this.branchForm.value;
+      body.address = body.notes;
 
-      if(this.isCreated) {
-        this.indicator.showActivityIndicator()
+      if (this.isCreated) {
+        this.indicator.showActivityIndicator();
         this.branchService.createBranch(body).pipe().subscribe(() => {
           this.messageService.add({
             severity: 'success',
             detail:  this.translate.instant('branch.message.insertSuccess')
           });
           this.indicator.hideActivityIndicator();
-          this.display=false
-          this.getListBranch()
+          this.display = false;
+          this.getListBranch();
         }, err => {
           this.indicator.hideActivityIndicator();
           throw err;
         });
-      } else if(this.isUpdated) {
-        this.indicator.showActivityIndicator()
+      } else if (this.isUpdated) {
+        this.indicator.showActivityIndicator();
         this.branchService.updateBranch(body).pipe().subscribe(() => {
           this.messageService.add({
             severity: 'success',
             detail:  this.translate.instant('branch.message.updateSuccess')
           });
-          this.display=false
+          this.display = false;
           this.indicator.hideActivityIndicator();
-          this.getListBranch()
+          this.getListBranch();
         }, err => {
           this.indicator.hideActivityIndicator();
           throw err;
@@ -222,10 +218,10 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
       code: [branches.code, [Validators.required, Validators.maxLength(9)]],
       name: [branches.name, [Validators.required, Validators.maxLength(100)]],
       status: [branches.status, [Validators.required]],
-      notes: [branches.address,[Validators.maxLength(100)]],
+      notes: [branches.address, [Validators.maxLength(100)]],
     });
-    this.showDialog()
-    this.isCreated=false
-    this.isUpdated=true
+    this.showDialog();
+    this.isCreated = false;
+    this.isUpdated = true;
   }
 }
