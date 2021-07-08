@@ -6,7 +6,7 @@ import {DepartmentService} from './department.service';
 import {AppTranslateService} from '../../../core/service/translate.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
-import {DepartmentFilterRequest} from './model/department';
+import {DepartmentFilterRequest, DepartmentFilterResponse} from './model/department';
 import {concatMap, finalize, startWith, takeUntil} from 'rxjs/operators';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {DepartmentEnum} from './model/department.enum';
@@ -39,7 +39,7 @@ export class DepartmentComponent extends BaseComponent implements OnInit, AfterV
   statusList: any;
   departmentForm: FormGroup;
 
-  departmentList: any;
+  departmentList: Array<DepartmentFilterResponse> = [];
 
   display = false;
   departmentRequestSearch: DepartmentFilterRequest;

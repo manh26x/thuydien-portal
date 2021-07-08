@@ -7,7 +7,7 @@ import {UnitService} from './unit.service';
 import {AppTranslateService} from '../../../core/service/translate.service';
 import {TranslateService} from '@ngx-translate/core';
 import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
-import {UnitFilterRequest} from './model/unit';
+import {UnitFilterRequest, UnitFilterResponse} from './model/unit';
 import {concatMap, finalize, startWith, takeUntil} from 'rxjs/operators';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {UnitEnum} from './model/unit.enum';
@@ -39,7 +39,7 @@ export class UnitComponent extends BaseComponent implements OnInit, AfterViewIni
   statusList: any;
   unitForm: FormGroup;
 
-  unitList: any;
+  unitList: Array<UnitFilterResponse> = [];
   display = false;
   unitRequestSearch: UnitFilterRequest;
 

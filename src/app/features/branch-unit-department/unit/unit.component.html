@@ -2,7 +2,7 @@
 
     <form class="p-grid p-fluid p-mb-6" [formGroup]="formFilter">
         <div class="p-md-6 p-col-6 p-field">
-            <input type="text" id="s-value"  pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
+            <input type="text" id="s-valueUnit"  pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
         </div>
 
         <div class="p-md-2 p-col-12 p-field p-d-flex p-align-end">
@@ -79,7 +79,7 @@
                  currentPageReportTemplate="{{ 'paging' | translate }}">
     </p-paginator>
 </p-panel>
-<form  [formGroup]="unitForm" (ngSubmit)="submitUnitForm()">
+<form  [formGroup]="unitForm" (ngSubmit)="submitUnitForm()" *ngIf="display">
     <p-dialog [visible]="display" [closable]="false" modal="true" blockScroll="false">
 
         <ng-template pTemplate="header">

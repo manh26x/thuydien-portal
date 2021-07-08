@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {BranchService} from './branch.service';
-import {BranchFilterRequest} from './model/branch';
+import {BranchFilterRequest, BranchFilterResponse} from './model/branch';
 import {concatMap, finalize,  startWith, takeUntil} from 'rxjs/operators';
 import {Paginator} from 'primeng/paginator';
 import {ConfirmationService, LazyLoadEvent, MessageService} from 'primeng/api';
@@ -38,7 +38,7 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
   statusList: any;
   branchForm: FormGroup;
 
-  branchList: any;
+  branchList: Array<BranchFilterResponse> = [];
   display = false;
   brandRequestSearch: BranchFilterRequest;
 
