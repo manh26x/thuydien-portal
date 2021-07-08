@@ -1,10 +1,8 @@
 <p-panel>
-
     <form class="p-grid p-fluid p-mb-6" [formGroup]="formFilter">
         <div class="p-md-6 p-col-6 p-field">
             <input type="text" id="s-valueUnit"  pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
         </div>
-
         <div class="p-md-2 p-col-12 p-field p-d-flex p-align-end">
             <button (click)="doFilter()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
         </div>
@@ -40,8 +38,8 @@
                 <td>{{units.modifiedDate | date: 'dd/MM/yyyy HH:mm'}}</td>
                 <td>
                     <ng-container [ngSwitch]="units.status">
-                        <ng-container *ngSwitchCase="1">{{'const.active' | translate}}</ng-container>
-                        <ng-container *ngSwitchCase="0" ><span style="color: red">{{'const.inActive' | translate}}</span></ng-container>
+                        <ng-container *ngSwitchCase="unitEnum.STATUS_ACTIVE">{{'const.active' | translate}}</ng-container>
+                        <ng-container *ngSwitchCase="unitEnum.STATUS_INACTIVE" ><span style="color: red">{{'const.inActive' | translate}}</span></ng-container>
                     </ng-container>
                 </td>
                 <td>{{units.description}}</td>
@@ -58,6 +56,7 @@
                              icon="pi pi-trash"
                              class="p-button-rounded p-button-danger p-button-text"
                              (click)="deleteUnit(units)"
+                             *ngIf="unitEnum.STATUS_ACTIVE == units.status"
                     >
                     </button>
                 </td>
@@ -121,6 +120,5 @@
                 <button type="submit" pButton class="p-button-secondary p-md-6 p-col-6" style="width: 45%; height: 45px" label="{{'btn.save' | translate}}"></button>
             </div>
         </ng-template>
-
     </p-dialog>
 </form>

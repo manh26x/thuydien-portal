@@ -19,7 +19,7 @@
     "createDate" : "Creation Date",
     "modifyDate": "Modify Date",
     "status": "Status",
-    "notes": "Notes",
+    "address": "Address",
     "action": "Action",
     "paging": "Showing {first} to {last} in {totalRecords} records",
     "branchName":  "Branch Name",

@@ -25,7 +25,7 @@ export class BranchService extends BaseService{
 
   filterBranch(request: BranchFilterRequest) {
     return this.doPost('/admin/branch/filter', request).pipe(
-      map(res => res.data[0])
+      map(res => res.data ? res.data[0] : [])
     );
   }
 

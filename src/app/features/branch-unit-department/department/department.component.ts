@@ -23,8 +23,18 @@ export class DepartmentComponent extends BaseComponent implements OnInit, AfterV
   formFilter: FormGroup;
   sortBy: string;
   sortOrder: string;
+  page = 0;
+  pageSize = 10;
+  totalItems = 0;
+  statusList = [];
+  departmentRequestSearch: DepartmentFilterRequest;
+  departmentList: Array<DepartmentFilterResponse> = [];
+
+  departmentForm: FormGroup;
+  display = false;
   isCreated: boolean;
   isUpdated: boolean;
+  departmentEnum = DepartmentEnum;
   constructor(
       private fb: FormBuilder,
       private indicator: IndicatorService,
@@ -36,24 +46,12 @@ export class DepartmentComponent extends BaseComponent implements OnInit, AfterV
   ) {
     super();
   }
-  statusList: any;
-  departmentForm: FormGroup;
-
-  departmentList: Array<DepartmentFilterResponse> = [];
-
-  display = false;
-  departmentRequestSearch: DepartmentFilterRequest;
-
-  page = 0;
-  pageSize = 10;
-  totalItems: any;
 
   /* Search Form Feature */
   ngOnInit(): void {
     this.initFormFilter();
   }
   ngAfterViewInit(): void {
-    this.doFilter();
     this.initStatusList();
   }
   initFormFilter() {
@@ -61,12 +59,10 @@ export class DepartmentComponent extends BaseComponent implements OnInit, AfterV
       searchValue: ['']
     });
   }
-  changePage(eve: any) {
-    if (this.page !== eve.page || this.pageSize !== eve.rows) {
-      this.page = eve.page;
-      this.pageSize = eve.rows;
-      this.getListDepartment();
-    }
+  changePage(eve) {
+    this.page = eve.page;
+    this.pageSize = eve.rows;
+    this.getListDepartment();
   }
 
   lazyLoadDepartment( evt: LazyLoadEvent) {
@@ -77,7 +73,6 @@ export class DepartmentComponent extends BaseComponent implements OnInit, AfterV
 
   doFilter() {
     this.paging.changePage(0);
-    this.getListDepartment();
   }
 
   getListDepartment() {
@@ -157,7 +152,7 @@ export class DepartmentComponent extends BaseComponent implements OnInit, AfterV
   initFormDepartment() {
     this.departmentForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(100)]],
-      status: ['1', [Validators.required]],
+      status: [DepartmentEnum.STATUS_ACTIVE, [Validators.required]],
       description: ['', [Validators.maxLength(100)]],
     });
   }

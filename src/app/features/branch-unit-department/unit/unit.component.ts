@@ -23,8 +23,18 @@ export class UnitComponent extends BaseComponent implements OnInit, AfterViewIni
   formFilter: FormGroup;
   sortBy: string;
   sortOrder: string;
+  statusList = [];
+  unitForm: FormGroup;
+  unitRequestSearch: UnitFilterRequest;
+  unitList: Array<UnitFilterResponse> = [];
+
   isCreated: boolean;
   isUpdated: boolean;
+  display = false;
+  page = 0;
+  pageSize = 10;
+  totalItems = 0;
+  unitEnum = UnitEnum;
   constructor(
       private fb: FormBuilder,
       private indicator: IndicatorService,
@@ -36,23 +46,12 @@ export class UnitComponent extends BaseComponent implements OnInit, AfterViewIni
   ) {
     super();
   }
-  statusList: any;
-  unitForm: FormGroup;
-
-  unitList: Array<UnitFilterResponse> = [];
-  display = false;
-  unitRequestSearch: UnitFilterRequest;
-
-  page = 0;
-  pageSize = 10;
-  totalItems: any;
 
   /* Search Form Feature */
   ngOnInit(): void {
     this.initFormFilter();
   }
   ngAfterViewInit(): void {
-    this.doFilter();
     this.initStatusList();
   }
   initFormFilter() {
@@ -61,11 +60,9 @@ export class UnitComponent extends BaseComponent implements OnInit, AfterViewIni
     });
   }
   changePage(eve: any) {
-    if (this.page !== eve.page || this.pageSize !== eve.rows) {
-      this.page = eve.page;
-      this.pageSize = eve.rows;
-      this.getListUnit();
-    }
+    this.page = eve.page;
+    this.pageSize = eve.rows;
+    this.getListUnit();
   }
 
   lazyLoadUnit( evt: LazyLoadEvent) {
@@ -76,7 +73,6 @@ export class UnitComponent extends BaseComponent implements OnInit, AfterViewIni
 
   doFilter() {
     this.paging.changePage(0);
-    this.getListUnit();
   }
 
   getListUnit() {

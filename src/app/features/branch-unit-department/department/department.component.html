@@ -1,10 +1,8 @@
 <p-panel>
-
     <form class="p-grid p-fluid p-mb-6" [formGroup]="formFilter">
         <div class="p-md-6 p-col-6 p-field">
             <input type="text" id="s-valueDepartment"  pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
         </div>
-
         <div class="p-md-2 p-col-12 p-field p-d-flex p-align-end">
             <button (click)="doFilter()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
         </div>
@@ -40,8 +38,8 @@
                 <td>{{departments.modifiedDate | date: 'dd/MM/yyyy HH:mm'}}</td>
                 <td>
                     <ng-container [ngSwitch]="departments.status">
-                        <ng-container *ngSwitchCase="1">{{'const.active' | translate}}</ng-container>
-                        <ng-container *ngSwitchCase="0" ><span style="color: red">{{'const.inActive' | translate}}</span></ng-container>
+                        <ng-container *ngSwitchCase="departmentEnum.STATUS_ACTIVE">{{'const.active' | translate}}</ng-container>
+                        <ng-container *ngSwitchCase="departmentEnum.STATUS_INACTIVE" ><span style="color: red">{{'const.inActive' | translate}}</span></ng-container>
                     </ng-container>
                 </td>
                 <td>{{departments.description}}</td>
@@ -58,6 +56,7 @@
                              icon="pi pi-trash"
                              class="p-button-rounded p-button-danger p-button-text"
                              (click)="deleteDepartment(departments)"
+                             *ngIf="departmentEnum.STATUS_ACTIVE  == departments.status"
                     >
                     </button>
                 </td>
@@ -81,14 +80,13 @@
 </p-panel>
 <form  [formGroup]="departmentForm" (ngSubmit)="submitDepartmentForm()" *ngIf="display">
     <p-dialog [visible]="display" [closable]="false" modal="true" blockScroll="false">
-
         <ng-template pTemplate="header">
             <h4 style="margin-top: 10px" *ngIf="isCreated"><strong>{{'department.titleAdd'|translate}}</strong></h4>
             <h4 style="margin-top: 10px" *ngIf="isUpdated"><strong>{{'department.titleUpdate'|translate}}</strong></h4>
         </ng-template>
         <ng-template pTemplate="body" style="width: 465px;">
             <div class="p-grid p-fluid p-mb-6" style="width: 465px;">
-                <div class="p-md-12 p-col-6 p-field">
+                <div class="-pmd-12 p-col-6 p-field">
                     <label for="s-departmentName">{{'department.departmentName'|translate}} <span class="p-invalid">*</span></label>
                     <input type="text" pInputText id="s-departmentName" formControlName="name" />
                     <p *ngIf="hasErrorInput('name', 'required')" class="p-invalid">
@@ -113,7 +111,6 @@
                     </p>
                 </div>
             </div>
-
         </ng-template>
         <ng-template pTemplate="footer">
             <div class="p-grid p-fluid" style="display: flex; justify-content: center; align-items: center; margin: 20px 0">
@@ -121,6 +118,5 @@
                 <button type="submit" pButton class="p-button-secondary p-md-6 p-col-6" style="width: 45%; height: 45px" label="{{'btn.save' | translate}}"></button>
             </div>
         </ng-template>
-
     </p-dialog>
 </form>
