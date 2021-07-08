@@ -22,8 +22,18 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
   formFilter: FormGroup;
   sortBy: string;
   sortOrder: string;
+  statusList = [];
+  branchList: Array<BranchFilterResponse> = [];
+  display = false;
+  brandRequestSearch: BranchFilterRequest;
+  page = 0;
+  pageSize = 10;
+  totalItems = 0;
+  branchEnum = BranchEnum;
+
   isCreated: boolean;
   isUpdated: boolean;
+  branchForm: FormGroup;
   constructor(
     private fb: FormBuilder,
     private indicator: IndicatorService,
@@ -35,23 +45,12 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
               ) {
     super();
   }
-  statusList: any;
-  branchForm: FormGroup;
-
-  branchList: Array<BranchFilterResponse> = [];
-  display = false;
-  brandRequestSearch: BranchFilterRequest;
-
-  page = 0;
-  pageSize = 10;
-  totalItems: any;
 
   /* Search Form Feature */
   ngOnInit(): void {
     this.initFormFilter();
   }
   ngAfterViewInit(): void {
-    this.doFilter();
     this.initStatusList();
   }
   initFormFilter() {
@@ -60,22 +59,19 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
     });
   }
   changePage(eve: any) {
-    if (this.page !== eve.page || this.pageSize !== eve.rows) {
-      this.page = eve.page;
-      this.pageSize = eve.rows;
-      this.getListBranch();
-    }
+    this.page = eve.page;
+    this.pageSize = eve.rows;
+    this.getListBranch();
   }
 
   lazyLoadBranch( evt: LazyLoadEvent) {
-  this.sortBy = evt.sortField;
-  this.sortOrder = evt.sortOrder === 1 ? 'ASC' : 'DESC';
-  this.getListBranch();
+    this.sortBy = evt.sortField;
+    this.sortOrder = evt.sortOrder === 1 ? 'ASC' : 'DESC';
+    this.getListBranch();
   }
 
   doFilter() {
     this.paging.changePage(0);
-    this.getListBranch();
   }
 
   getListBranch() {
@@ -156,8 +152,8 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
     this.branchForm = this.fb.group({
       code: ['', [Validators.required, Validators.maxLength(9)]],
       name: ['', [Validators.required, Validators.maxLength(100)]],
-      status: ['1', [Validators.required]],
-      notes: ['', [Validators.maxLength(100)]],
+      status: [BranchEnum.STATUS_ACTIVE, [Validators.required]],
+      address: ['', [Validators.maxLength(100)]],
     });
   }
 
@@ -176,7 +172,6 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
   submitBranchForm() {
     if (!this.branchForm.invalid) {
       const body = this.branchForm.value;
-      body.address = body.notes;
 
       if (this.isCreated) {
         this.indicator.showActivityIndicator();
@@ -218,7 +213,7 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
       code: [branches.code, [Validators.required, Validators.maxLength(9)]],
       name: [branches.name, [Validators.required, Validators.maxLength(100)]],
       status: [branches.status, [Validators.required]],
-      notes: [branches.address, [Validators.maxLength(100)]],
+      address: [branches.address, [Validators.maxLength(100)]],
     });
     this.showDialog();
     this.isCreated = false;

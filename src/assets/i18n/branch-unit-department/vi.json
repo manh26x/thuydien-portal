@@ -19,7 +19,7 @@
     "createDate" : "Ngày tạo",
     "modifyDate": "Ngày cập nhật",
     "status": "Trạng thái",
-    "notes": "Ghi chú",
+    "address": "Địa chỉ",
     "action": "Hành động",
     "branchName":  "Tên chi nhánh",
     "invalid": {

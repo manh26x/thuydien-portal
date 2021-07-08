@@ -37,7 +37,7 @@ export class DepartmentService extends BaseService {
 
   filterDepartment(brandRequestSearch: DepartmentFilterRequest) {
     return this.doPost('admin/department/filter', brandRequestSearch).pipe(
-        map(res => res.data[0])
+        map(res => res.data ? res.data[0] : [])
     );
   }
 
