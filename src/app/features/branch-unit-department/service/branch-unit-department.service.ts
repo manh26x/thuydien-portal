@@ -21,4 +21,5 @@ export class BranchUnitDepartmentService extends BaseService{
   getServiceName(): string {
     return 'BranchUnitDepartmentService';
   }
+
 }

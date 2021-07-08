@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from '../../../core/base.component';
 import {Paginator} from 'primeng/paginator';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -18,7 +18,7 @@ import {UnitEnum} from './model/unit.enum';
   styles: [
   ]
 })
-export class UnitComponent extends BaseComponent implements OnInit {
+export class UnitComponent extends BaseComponent implements OnInit, AfterViewInit {
   @ViewChild('unitPaging') paging: Paginator;
   formFilter: FormGroup;
   sortBy: string;
@@ -40,23 +40,20 @@ export class UnitComponent extends BaseComponent implements OnInit {
   unitForm: FormGroup;
 
   unitList: any;
-  isHasInsert: any;
-
-  levelList: any;
   display = false;
-  unitRequestSearch: UnitFilterRequest
+  unitRequestSearch: UnitFilterRequest;
 
-  page: number = 0
-  pageSize: number = 10
+  page = 0;
+  pageSize = 10;
   totalItems: any;
 
   /* Search Form Feature */
   ngOnInit(): void {
-    this.initFormFilter()
+    this.initFormFilter();
   }
   ngAfterViewInit(): void {
-    this.doFilter()
-    this.initStatusList()
+    this.doFilter();
+    this.initStatusList();
   }
   initFormFilter() {
     this.formFilter = this.fb.group({
@@ -64,10 +61,10 @@ export class UnitComponent extends BaseComponent implements OnInit {
     });
   }
   changePage(eve: any) {
-    if(this.page !== eve.page || this.pageSize !== eve.rows) {
+    if (this.page !== eve.page || this.pageSize !== eve.rows) {
       this.page = eve.page;
       this.pageSize = eve.rows;
-      this.getListUnit()
+      this.getListUnit();
     }
   }
 
@@ -78,14 +75,14 @@ export class UnitComponent extends BaseComponent implements OnInit {
   }
 
   doFilter() {
-    this.paging.changePage(0)
-    this.getListUnit()
+    this.paging.changePage(0);
+    this.getListUnit();
   }
 
   getListUnit() {
     this.indicator.showActivityIndicator();
-    this.unitList = []
-    this.totalItems = 0
+    this.unitList = [];
+    this.totalItems = 0;
     // @ts-ignore
     this.unitRequestSearch  =  {
       keyword: this.formFilter.get('searchValue').value,
@@ -93,14 +90,14 @@ export class UnitComponent extends BaseComponent implements OnInit {
       pageSize: this.pageSize,
       sortBy: this.sortBy,
       sortOrder: this.sortOrder
-    }
+    };
     this.unitService.filterUnit(this.unitRequestSearch).pipe(
         finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe(res => {
 
-      this.unitList = res.content
-      this.totalItems = res.totalElements
-    })
+      this.unitList = res.content;
+      this.totalItems = res.totalElements;
+    });
 
   }
   deleteUnit(unit) {
@@ -132,7 +129,6 @@ export class UnitComponent extends BaseComponent implements OnInit {
           }
         });
       },
-      reject: () => {}
     });
   }
 
@@ -152,16 +148,16 @@ export class UnitComponent extends BaseComponent implements OnInit {
   }
 
   gotoCreate() {
-    this.initFormUnit()
-    this.showDialog()
-    this.isCreated=true
-    this.isUpdated=false
+    this.initFormUnit();
+    this.showDialog();
+    this.isCreated = true;
+    this.isUpdated = false;
   }
   initFormUnit() {
     this.unitForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(100)]],
-      status: ['1', [Validators.required]],
-      description: ['',[Validators.maxLength(100)]],
+      status: [UnitEnum.STATUS_ACTIVE, [Validators.required]],
+      description: ['', [Validators.maxLength(100)]],
     });
   }
 
@@ -178,33 +174,33 @@ export class UnitComponent extends BaseComponent implements OnInit {
   }
 
   submitUnitForm() {
-    if(!this.unitForm.invalid) {
-      var body = this.unitForm.value
+    if (!this.unitForm.invalid) {
+      const body = this.unitForm.value;
 
-      if(this.isCreated) {
-        this.indicator.showActivityIndicator()
+      if (this.isCreated) {
+        this.indicator.showActivityIndicator();
         this.unitService.createUnit(body).pipe().subscribe(() => {
           this.messageService.add({
             severity: 'success',
             detail:  this.translate.instant('unit.message.insertSuccess')
           });
           this.indicator.hideActivityIndicator();
-          this.display=false
-          this.getListUnit()
+          this.display = false;
+          this.getListUnit();
         }, err => {
           this.indicator.hideActivityIndicator();
           throw err;
         });
-      } else if(this.isUpdated) {
-        this.indicator.showActivityIndicator()
+      } else if (this.isUpdated) {
+        this.indicator.showActivityIndicator();
         this.unitService.updateUnit(body).pipe().subscribe(() => {
           this.messageService.add({
             severity: 'success',
             detail:  this.translate.instant('unit.message.updateSuccess')
           });
-          this.display=false
+          this.display = false;
           this.indicator.hideActivityIndicator();
-          this.getListUnit()
+          this.getListUnit();
         }, err => {
           this.indicator.hideActivityIndicator();
           throw err;
@@ -220,11 +216,11 @@ export class UnitComponent extends BaseComponent implements OnInit {
       id: [units.id],
       name: [units.name, [Validators.required, Validators.maxLength(100)]],
       status: [units.status, [Validators.required]],
-      description: [units.description,[Validators.maxLength(100)]],
+      description: [units.description, [Validators.maxLength(100)]],
     });
-    this.showDialog()
-    this.isCreated=false
-    this.isUpdated=true
+    this.showDialog();
+    this.isCreated = false;
+    this.isUpdated = true;
   }
 
 }

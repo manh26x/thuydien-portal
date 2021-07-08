@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Paginator} from 'primeng/paginator';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
@@ -18,7 +18,7 @@ import {BaseComponent} from '../../../core/base.component';
   styles: [
   ]
 })
-export class DepartmentComponent extends BaseComponent implements OnInit {
+export class DepartmentComponent extends BaseComponent implements OnInit, AfterViewInit {
   @ViewChild('departmentPaging') paging: Paginator;
   formFilter: FormGroup;
   sortBy: string;
@@ -40,23 +40,21 @@ export class DepartmentComponent extends BaseComponent implements OnInit {
   departmentForm: FormGroup;
 
   departmentList: any;
-  isHasInsert: any;
 
-  levelList: any;
   display = false;
-  departmentRequestSearch: DepartmentFilterRequest
+  departmentRequestSearch: DepartmentFilterRequest;
 
-  page: number = 0
-  pageSize: number = 10
+  page = 0;
+  pageSize = 10;
   totalItems: any;
 
   /* Search Form Feature */
   ngOnInit(): void {
-    this.initFormFilter()
+    this.initFormFilter();
   }
   ngAfterViewInit(): void {
-    this.doFilter()
-    this.initStatusList()
+    this.doFilter();
+    this.initStatusList();
   }
   initFormFilter() {
     this.formFilter = this.fb.group({
@@ -64,10 +62,10 @@ export class DepartmentComponent extends BaseComponent implements OnInit {
     });
   }
   changePage(eve: any) {
-    if(this.page !== eve.page || this.pageSize !== eve.rows) {
+    if (this.page !== eve.page || this.pageSize !== eve.rows) {
       this.page = eve.page;
       this.pageSize = eve.rows;
-      this.getListDepartment()
+      this.getListDepartment();
     }
   }
 
@@ -78,14 +76,14 @@ export class DepartmentComponent extends BaseComponent implements OnInit {
   }
 
   doFilter() {
-    this.paging.changePage(0)
-    this.getListDepartment()
+    this.paging.changePage(0);
+    this.getListDepartment();
   }
 
   getListDepartment() {
     this.indicator.showActivityIndicator();
-    this.departmentList = []
-    this.totalItems = 0
+    this.departmentList = [];
+    this.totalItems = 0;
     // @ts-ignore
     this.departmentRequestSearch  =  {
       keyword: this.formFilter.get('searchValue').value,
@@ -93,14 +91,14 @@ export class DepartmentComponent extends BaseComponent implements OnInit {
       pageSize: this.pageSize,
       sortBy: this.sortBy,
       sortOrder: this.sortOrder
-    }
+    };
     this.departmentService.filterDepartment(this.departmentRequestSearch).pipe(
         finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe(res => {
 
-      this.departmentList = res.content
-      this.totalItems = res.totalElements
-    })
+      this.departmentList = res.content;
+      this.totalItems = res.totalElements;
+    });
 
   }
   deleteDepartment(department) {
@@ -132,7 +130,6 @@ export class DepartmentComponent extends BaseComponent implements OnInit {
           }
         });
       },
-      reject: () => {}
     });
   }
 
@@ -152,16 +149,16 @@ export class DepartmentComponent extends BaseComponent implements OnInit {
   }
 
   gotoCreate() {
-    this.initFormDepartment()
-    this.showDialog()
-    this.isCreated=true
-    this.isUpdated=false
+    this.initFormDepartment();
+    this.showDialog();
+    this.isCreated = true;
+    this.isUpdated = false;
   }
   initFormDepartment() {
     this.departmentForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(100)]],
       status: ['1', [Validators.required]],
-      description: ['',[Validators.maxLength(100)]],
+      description: ['', [Validators.maxLength(100)]],
     });
   }
 
@@ -178,33 +175,33 @@ export class DepartmentComponent extends BaseComponent implements OnInit {
   }
 
   submitDepartmentForm() {
-    if(!this.departmentForm.invalid) {
-      var body = this.departmentForm.value
+    if (!this.departmentForm.invalid) {
+      const body = this.departmentForm.value;
 
-      if(this.isCreated) {
-        this.indicator.showActivityIndicator()
+      if (this.isCreated) {
+        this.indicator.showActivityIndicator();
         this.departmentService.createDepartment(body).pipe().subscribe(() => {
           this.messageService.add({
             severity: 'success',
             detail:  this.translate.instant('department.message.insertSuccess')
           });
           this.indicator.hideActivityIndicator();
-          this.display=false
-          this.getListDepartment()
+          this.display = false;
+          this.getListDepartment();
         }, err => {
           this.indicator.hideActivityIndicator();
           throw err;
         });
-      } else if(this.isUpdated) {
-        this.indicator.showActivityIndicator()
+      } else if (this.isUpdated) {
+        this.indicator.showActivityIndicator();
         this.departmentService.updateDepartment(body).pipe().subscribe(() => {
           this.messageService.add({
             severity: 'success',
             detail:  this.translate.instant('department.message.updateSuccess')
           });
-          this.display=false
+          this.display = false;
           this.indicator.hideActivityIndicator();
-          this.getListDepartment()
+          this.getListDepartment();
         }, err => {
           this.indicator.hideActivityIndicator();
           throw err;
@@ -220,11 +217,11 @@ export class DepartmentComponent extends BaseComponent implements OnInit {
       id: [departments.id],
       name: [departments.name, [Validators.required, Validators.maxLength(100)]],
       status: [departments.status, [Validators.required]],
-      description: [departments.description,[Validators.maxLength(100)]],
+      description: [departments.description, [Validators.maxLength(100)]],
     });
-    this.showDialog()
-    this.isCreated=false
-    this.isUpdated=true
+    this.showDialog();
+    this.isCreated = false;
+    this.isUpdated = true;
   }
 
 }
