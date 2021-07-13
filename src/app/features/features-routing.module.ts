@@ -40,6 +40,10 @@ const routes: Routes = [
       {
         path: 'management-kpi',
         loadChildren: () => import('./kpi/kpi.module').then(m => m.KpiModule)
+      },
+      {
+        path: 'branch-unit-department',
+        loadChildren: () => import('./branch-unit-department/branch-unit-department.module').then(m => m.BranchUnitDepartmentModule)
       }
     ]
   }

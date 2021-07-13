@@ -1,0 +1,112 @@
+{
+  "breadcrumb": {
+    "home": "Home"
+  },
+  "search": "Search",
+  "filter": "Search",
+  "btn": {
+    "insert": "Insert",
+    "cancel" : "Cancel",
+    "save": "Save"
+  },
+  "branch": {
+    "title": "BRANCH LIST",
+    "titleAdd": "Add New Branch",
+    "titleUpdate": "Update Branch",
+    "no": "NO.",
+    "branchId": "Branch Code",
+    "branch": "Branch",
+    "createDate" : "Creation Date",
+    "modifyDate": "Modify Date",
+    "status": "Status",
+    "address": "Address",
+    "action": "Action",
+    "paging": "Showing {first} to {last} in {totalRecords} records",
+    "branchName":  "Branch Name",
+    "invalid": {
+        "required": "Value cannot be blank",
+        "maxLength": "The value must not exceed {{length}} characters"
+    },
+    "message": {
+      "deleteNotFound": "The branch does not exist or has been deleted",
+      "deleteSuccess": "Deleted branch successfully",
+      "insertSuccess": "New branch is added successfully",
+      "updateNotFound": "The branch does not exist or has been deleted",
+      "updateSuccess": "Update branch successfully"
+    },
+    "confirm": {
+      "accept": "Yes",
+      "delete": "Delete Confirmation",
+      "deleteMessage": "Are you sure you want to remove branch \"{{name}}\"",
+      "reject": "No"
+    }
+  },
+  "noData": "No data",
+  "const": {
+    "active": "Active",
+    "inActive": "Inactive"
+  },
+
+  "unit": {
+    "title": "UNIT LIST",
+    "titleAdd": "Add New Unit",
+    "titleUpdate": "Update Unit",
+    "no": "NO.",
+    "unit": "Unit",
+    "createDate" : "Creation Date",
+    "modifyDate": "Modify Date",
+    "status": "Status",
+    "notes": "Notes",
+    "action": "Action",
+    "paging": "Showing {first} to {last} in {totalRecords} records",
+    "unitName":  "Unit Name",
+    "invalid": {
+      "required": "Value cannot be blank",
+      "maxLength": "The value must not exceed {{length}} characters"
+    },
+    "message": {
+      "deleteNotFound": "The unit does not exist or has been deleted",
+      "deleteSuccess": "Deleted unit successfully",
+      "insertSuccess": "New unit is added successfully",
+      "updateNotFound": "The unit does not exist or has been deleted",
+      "updateSuccess": "Update unit successfully"
+    },
+    "confirm": {
+      "accept": "Yes",
+      "delete": "Delete Confirmation",
+      "deleteMessage": "Are you sure you want to remove unit \"{{name}}\"",
+      "reject": "No"
+    }
+  },
+  "department": {
+    "title": "DEPARTMENT LIST",
+    "titleAdd": "Add New Department",
+    "titleUpdate": "Update Department",
+    "no": "NO.",
+    "department": "Department",
+    "createDate" : "Creation Date",
+    "modifyDate": "Modify Date",
+    "status": "Status",
+    "notes": "Notes",
+    "action": "Action",
+    "paging": "Showing {first} to {last} in {totalRecords} records",
+    "departmentName":  "Department Name",
+    "invalid": {
+      "required": "Value cannot be blank",
+      "maxLength": "The value must not exceed {{length}} characters"
+    },
+    "message": {
+      "deleteNotFound": "The department does not exist or has been deleted",
+      "deleteSuccess": "Deleted department successfully",
+      "insertSuccess": "New department is added successfully",
+      "updateNotFound": "The department does not exist or has been deleted",
+      "updateSuccess": "Update department successfully"
+    },
+    "confirm": {
+      "accept": "Yes",
+      "delete": "Delete Confirmation",
+      "deleteMessage": "Are you sure you want to remove department \"{{name}}\"",
+      "reject": "No"
+    }
+  }
+}
