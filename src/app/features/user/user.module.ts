@@ -34,6 +34,7 @@ import {CustomFileUploadModule} from '../../shared/custom-file-upload/custom-fil
 import { DialogPreviewComponent } from './dialog-preview/dialog-preview.component';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {SharedModule} from '../../shared/shared.module';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import {SharedModule} from '../../shared/shared.module';
         PickListModule,
         CustomFileUploadModule,
         DynamicDialogModule,
-        SharedModule
+        SharedModule,
+        MatRadioModule
     ],
   providers: [
     UserService,

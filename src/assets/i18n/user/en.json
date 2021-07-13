@@ -120,6 +120,7 @@
 	"viewMore": "[View more]",
 	"userTypeTitle":{
 		"CbEmployment":"Corporate customer staff (CB)",
-		"RbEmployment":"Personal customer staff (RB)"
+		"RbEmployment":"Personal customer staff (RB)",
+		"Other":"Other"
 	}
 }

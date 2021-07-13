@@ -92,13 +92,16 @@
     
     <div class="p-md-6 p-col-12 p-field">
       <label for="n-usertype">{{'user.userType' | translate}}</label>
-      <div class="p-field-checkbox">
-        <p-checkbox name="client" binary="true" formControlName="isCB" inputId="userType"></p-checkbox>
-        <label for="usertype">{{'userTypeTitle.CbEmployment' | translate}}</label>
-      </div>
-      <div class="p-field-checkbox">
-        <p-checkbox name="client" binary="true" formControlName="isRB" inputId="userType"></p-checkbox>
-        <label for="usertype">{{'userTypeTitle.RbEmployment' | translate}}</label>
+      <div class="p-grid">
+        <div class="p-mb-3">
+          <mat-radio-group aria-label="Select group view" formControlName="typeUser">
+            <mat-radio-button color="primary" value="CB" selected>{{'userTypeTitle.CbEmployment' | translate}}</mat-radio-button>
+            <span class="p-mr-4"></span>
+            <mat-radio-button color="primary"  value="SB">{{'userTypeTitle.RbEmployment' | translate}}</mat-radio-button>
+            <span class="p-mr-4"></span>
+            <mat-radio-button color="primary" value="OB">{{'userTypeTitle.Other' | translate}}</mat-radio-button>
+          </mat-radio-group>  
+        </div>
       </div>
       <small *ngIf="hasErrorInput('branch', 'required')" class="p-invalid">
         {{'invalid.branch.required' | translate}}
@@ -141,4 +144,4 @@
   <button *ngIf="mode == 'update'" pButton (click)="doSave()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised p-button-secondary"></button>
   <button *ngIf="mode == 'create'" pButton (click)="doSave()" type="button" label="{{'btn.create' | translate}}" class="p-button-raised p-button-secondary"></button>
 </div>
-<!-- {{formUser.value | json}} -->
+{{formUser.value | json}} 

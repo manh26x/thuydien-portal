@@ -120,6 +120,7 @@
 	"viewMore": "[Xem thêm]",
 	"userTypeTitle":{
 		"CbEmployment":"Nhân viên khách hàng doanh nghiệp (CB)",
-		"RbEmployment":"Nhân viên khách hàng cá nhân (RB)"
+		"RbEmployment":"Nhân viên khách hàng cá nhân (RB)",
+		"Other":"Khác"
 	}
 }

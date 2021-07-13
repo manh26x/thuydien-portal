@@ -1,15 +1,15 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
-import {AppTranslateService} from '../../../core/service/translate.service';
-import {concatMap, startWith, takeUntil} from 'rxjs/operators';
-import {UserEnum} from '../model/user.enum';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {UtilService} from '../../../core/service/util.service';
-import {UserDetail} from '../model/user';
-import {BaseComponent} from '../../../core/base.component';
-import {Role} from '../../../shared/model/role';
-import {Unit} from '../../../shared/model/unit';
-import {Department} from '../../../shared/model/department';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { AppTranslateService } from '../../../core/service/translate.service';
+import { concatMap, startWith, takeUntil } from 'rxjs/operators';
+import { UserEnum } from '../model/user.enum';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UtilService } from '../../../core/service/util.service';
+import { UserDetail } from '../model/user';
+import { BaseComponent } from '../../../core/base.component';
+import { Role } from '../../../shared/model/role';
+import { Unit } from '../../../shared/model/unit';
+import { Department } from '../../../shared/model/department';
 @Component({
   selector: 'aw-user-form',
   templateUrl: './user-form.component.html',
@@ -27,6 +27,8 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
   statusList = [];
   formUser: FormGroup;
   roleSelectedList: Role[] = [];
+  user: string ='user'
+  admin: string = 'admin'
   @Input() unitList: Unit[] = [];
   @Input() departmentList: Department[] = [];
   @Input() roleList: Role[] = [];
@@ -56,8 +58,8 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
       concatMap(() => this.translate.get('const'))
     ).subscribe(res => {
       this.statusList = [
-        {code: UserEnum.ACTIVE, name: res.active},
-        {code: UserEnum.INACTIVE, name: res.inactive}
+        { code: UserEnum.ACTIVE, name: res.active },
+        { code: UserEnum.INACTIVE, name: res.inactive }
       ];
     });
   }
@@ -72,14 +74,14 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
         }
         this.formUser.patchValue({
           userId: userInfo.user ? userInfo.user.userName : null,
-          status: userInfo.user ? {code: userInfo.user.status} : null,
+          status: userInfo.user ? { code: userInfo.user.status } : null,
           fullName: userInfo.user.fullName,
           phone: userInfo.user.phone,
           email: userInfo.user.email,
           branch: userInfo.userBranchList ? userInfo.userBranchList.map(item => ({ code: item.branchId })) : null,
           position: userInfo.user.position,
-          unit: {id: userInfo.user.unitId, name: userInfo.user.unitName},
-          department: {id: userInfo.user.departmentId, name: userInfo.user.departmentName}
+          unit: { id: userInfo.user.unitId, name: userInfo.user.unitName },
+          department: { id: userInfo.user.departmentId, name: userInfo.user.departmentName }
         });
         this.roleSelectedList = userInfo.userRoleList;
       }
@@ -101,12 +103,12 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
     this.cancel.emit();
   }
 
-
+  city: string;
   initForm() {
     this.formUser = this.fb.group({
       fullName: ['', Validators.required],
       role: ['', [Validators.required]],
-      status: [{ value: {code: UserEnum.ACTIVE}, disabled: true }, [Validators.required]],
+      status: [{ value: { code: UserEnum.ACTIVE }, disabled: true }, [Validators.required]],
       userId: ['', [Validators.required, Validators.pattern(/^((\w)|(\.))*$/), Validators.maxLength(100)]],
       email: [''],
       phone: [''],
@@ -116,8 +118,7 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
       tagKpi: [],
       unit: ['', [Validators.required]],
       department: ['', [Validators.required]],
-      isCB: [true],
-      isRB:[false]
+      typeUser:[''],
     }, { updateOn: 'blur' });
   }
 
@@ -128,6 +129,5 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
     }
     return (control.dirty || control.touched) && control.hasError(errorName);
   }
-  
 
 }
