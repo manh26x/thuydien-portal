@@ -104,6 +104,9 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
         if (item.isEditAble) {
           featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_EDIT });
         }
+        if (item.isApproveAble) {
+          featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_APPROVE });
+        }
 
         if (item.isOnOffAble) {
           featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_ON_OFF });
@@ -209,6 +212,7 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
                   canEdit: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_EDIT),
                   canOnOff: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_ON_OFF),
                   canView: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_VIEW),
+                  canApprove: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_APPROVE),
                   canImport: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_IMPORT),
                   canExport: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_EXPORT),
                   isViewAble: false,

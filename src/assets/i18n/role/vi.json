@@ -7,7 +7,8 @@
 		"import": "Import",
 		"onOff": "Bật/Tắt",
 		"title": "Tên chức năng",
-		"view": "Xem"
+		"view": "Xem",
+    "approve": "Duyệt"
 	},
 	"addNewRole": "Thêm mới role",
 	"assignFeatureToRole": "Gán tính năng cho role",
