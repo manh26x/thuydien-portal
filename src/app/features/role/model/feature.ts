@@ -10,6 +10,7 @@ export interface FeatureMenu {
   canEdit?: boolean;
   canAdd?: boolean;
   canDel?: boolean;
+  canApprove?: boolean;
   canOnOff?: boolean;
   canImport?: boolean;
   canExport?: boolean;
@@ -17,6 +18,7 @@ export interface FeatureMenu {
   isEditAble?: boolean;
   isAddAble?: boolean;
   isDelAble?: boolean;
+  isApproveAble?: boolean;
   isOnOffAble?: boolean;
   isImportAble?: boolean;
   isExportAble?: boolean;

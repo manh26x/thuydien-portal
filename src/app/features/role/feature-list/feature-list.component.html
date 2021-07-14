@@ -3,14 +3,15 @@
   [value]="featureList">
   <ng-template pTemplate="header">
     <tr>
-      <th>{{'action.title' | translate}}</th>
-      <th>{{'action.view' | translate}}</th>
-      <th>{{'action.add' | translate}}</th>
-      <th>{{'action.edit' | translate}}</th>
-      <th>{{'action.delete' | translate}}</th>
-      <th>{{'action.onOff' | translate}}</th>
-      <th>{{'action.import' | translate}}</th>
-      <th>{{'action.export' | translate}}</th>
+      <th id="titleTh">{{'action.title' | translate}}</th>
+      <th id="viewTh">{{'action.view' | translate}}</th>
+      <th id="addTh">{{'action.add' | translate}}</th>
+      <th id="editTh">{{'action.edit' | translate}}</th>
+      <th id="deleteTh">{{'action.delete' | translate}}</th>
+      <th id="browseTh">{{'action.approve' | translate}}</th>
+      <th id="onOffTh">{{'action.onOff' | translate}}</th>
+      <th id="importTh">{{'action.import' | translate}}</th>
+      <th id="exportTh">{{'action.export' | translate}}</th>
     </tr>
   </ng-template>
 
@@ -28,6 +29,9 @@
       </td>
       <td>
         <p-checkbox [disabled]="!feature.canDel" binary="true" [(ngModel)]="feature.isDelAble" inputId="binary-del"></p-checkbox>
+      </td>
+      <td>
+        <p-checkbox [disabled]="!feature.canApprove" binary="true" [(ngModel)]="feature.isApproveAble" inputId="binary-del"></p-checkbox>
       </td>
       <td>
         <p-checkbox [disabled]="!feature.canOnOff" binary="true" [(ngModel)]="feature.isOnOffAble" inputId="binary-on-off"></p-checkbox>

@@ -133,6 +133,9 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
           if (item.isEditAble) {
             featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_EDIT });
           }
+          if (item.isApproveAble) {
+            featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_APPROVE });
+          }
 
           if (item.isOnOffAble) {
             featureData.push({ menuId: item.menuId, rightId: RoleEnum.ACTION_ON_OFF });
@@ -283,6 +286,7 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
                   canOnOff: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_ON_OFF),
                   canView: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_VIEW),
                   canImport: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_IMPORT),
+                  canApprove: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_APPROVE),
                   canExport: !!item.listRight.find(action => action.rightId === RoleEnum.ACTION_EXPORT),
                   isViewAble: this.isRoleActive(item.menuId, RoleEnum.ACTION_VIEW),
                   isOnOffAble: this.isRoleActive(item.menuId, RoleEnum.ACTION_ON_OFF),
@@ -291,6 +295,7 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
                   isDelAble: this.isRoleActive(item.menuId, RoleEnum.ACTION_DELETE),
                   isImportAble: this.isRoleActive(item.menuId, RoleEnum.ACTION_IMPORT),
                   isExportAble: this.isRoleActive(item.menuId, RoleEnum.ACTION_EXPORT),
+                  isApproveAble: this.isRoleActive(item.menuId, RoleEnum.ACTION_APPROVE),
                 });
               });
             }
