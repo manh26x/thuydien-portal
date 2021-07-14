@@ -25,6 +25,7 @@ export enum RoleEnum {
   ACTION_ON_OFF = '5',
   ACTION_IMPORT = '6',
   ACTION_EXPORT = '7',
+  ACTION_APPROVE = '8',
   STATUS_ACTIVE= '1',
   STATUS_INACTIVE = '0'
 }
