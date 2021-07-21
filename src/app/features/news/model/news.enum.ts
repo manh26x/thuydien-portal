@@ -12,3 +12,8 @@ export enum NewsEnum {
   PUBLISH_NOW = 1,
   PUBLISH_SCHEDULE = 0
 }
+
+export enum CommentEnum {
+  CMT = 'CMT',
+  REP = 'REP'
+}

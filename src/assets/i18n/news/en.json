@@ -12,7 +12,9 @@
 		"insert": "Add new",
 		"refresh": "Refresh",
 		"save": "Save changes",
-		"saveAndPublish": "Save changes and publish"
+		"saveAndPublish": "Save changes and publish",
+    "send": "Send",
+    "export": "Export"
 	},
 	"confirm": {
 		"accept": "Yes",
@@ -98,7 +100,8 @@
 		"status": "Status",
 		"tags": "Tags",
 		"title": "Title",
-		"unit": "Unit"
+		"unit": "Unit",
+    "comment": "Comment"
 	},
 	"no": "No.",
 	"noData": "No results match",
@@ -114,6 +117,16 @@
 			"size": "The file uploaded is exceeding the allowed size {{size}}"
 		}
 	},
+  "comment": {
+    "user": "User",
+    "content": "Content",
+    "createdTime": "Created Time",
+    "type": {
+      "cmt" : "Comment",
+      "rep": "Reply"
+    },
+    "reply": "Reply"
+  },
 	"view": "News detail",
 	"viewLess": "[View less]",
 	"viewMore": "[View more]"
