@@ -12,7 +12,9 @@
 		"insert": "Thêm mới",
 		"refresh": "Tải lại",
 		"save": "Lưu thay đổi",
-		"saveAndPublish": "Lưu thay đổi và xuất bản"
+		"saveAndPublish": "Lưu thay đổi và xuất bản",
+    "send": "Gửi",
+    "export": "Export"
 	},
 	"confirm": {
 		"accept": "Có",
@@ -98,7 +100,8 @@
 		"status": "Trạng thái",
 		"tags": "Tags",
 		"title": "Tiêu đề",
-		"unit": "Đơn vị"
+		"unit": "Đơn vị",
+    "comment": "Bình luận"
 	},
 	"no": "STT",
 	"noData": "Không có kết quả nào phù hợp",
@@ -114,6 +117,16 @@
 			"size": "Tệp tải lên vượt quá dung lượng cho phép {{size}}"
 		}
 	},
+  "comment": {
+    "user": "User",
+    "content": "Nội dung bình luận",
+    "createdTime": "Thời gian đăng",
+    "type": {
+      "cmt" : "Bình luận",
+      "rep": "Phản hồi"
+    },
+    "reply": "Phản hồi"
+  },
 	"view": "Chi tiết bản tin",
 	"viewLess": "[Ẩn bớt]",
 	"viewMore": "[Xem thêm]"

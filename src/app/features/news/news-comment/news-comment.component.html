@@ -1,0 +1,47 @@
+<div class="p-grid">
+  <div class="p-mb-6 p-col-5">
+    <input id="n-comment" [(ngModel)]="commentForm.value.content"  (keyup.enter)="onEnter()" type="text" pInputText >
+  </div>
+  <div class="p-mb-2 p-col-3">
+    <p-button  style="height: 45px" class="p-button-raised p-mr-3"  (onClick)="submit()" label="{{'btn.send' | translate}}"></p-button>
+  </div>
+  <div class="p-mb-2 p-col-1"></div>
+  <div class="p-mb-2 p-col-3">
+    <button  style="height: 45px" class="p-button-raised p-mr-3" (click)="onExport()" pButton label="{{'btn.export' | translate}}" ></button>
+  </div>
+</div>
+<p-paginator #commentPaging [rows]="pageSize"
+             [totalRecords]="totalItems"
+             (onPageChange)="changePage($event)"
+             [rowsPerPageOptions]="[10, 20, 50, 100]"
+             [showCurrentPageReport]="true"
+             currentPageReportTemplate="{{ 'paging' | translate }}">
+</p-paginator>
+<p-treeTable #pTreeTable [value]="testEmitter$ | async"  dataKey="data.id">
+  <ng-template pTemplate="header">
+    <tr>
+      <th id="typeCol"></th>
+      <th id="userCol">{{'comment.user' | translate}}</th>
+      <th id="contentCol">{{'comment.content' | translate}}</th>
+      <th id="timeCol">{{'comment.createdTime' | translate}}</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body"  let-rowNode let-rowData="rowData">
+    <tr *ngIf="rowData.id">
+      <td><p-treeTableToggler [rowNode]="rowNode" style="opacity: 0; pointer-events: none;" ></p-treeTableToggler>
+        <span *ngIf="rowData.type === commentEnum.CMT">{{'comment.type.cmt' | translate}}</span>
+        <span *ngIf="rowData.type === commentEnum.REP">{{'comment.type.rep' | translate}}</span>
+      </td>
+      <td>{{rowData['fullName'] }}</td>
+      <td><span *ngIf="rowData['content']">{{rowData['content']}}</span>
+        <input *ngIf="commentForm?.value?.idParent && rowData['status'] === 0"
+               #contentIn  [(ngModel)]="contentValue"
+               pInputText (keyup.enter)="onEnter()">
+        <button *ngIf="rowData.type === commentEnum.CMT" label="{{'comment.reply' | translate}}"
+                style="text-align: left; padding-left: 0" class="text-primary p-button-link"
+                pButton (click)="replyClicked(rowData, contentIn)" ></button>
+      </td>
+      <td>{{rowData['createDate'] | date : 'HH:mm dd/MM/yyyy'}}</td>
+    </tr>
+  </ng-template>
+</p-treeTable>

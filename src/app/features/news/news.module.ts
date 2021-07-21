@@ -40,7 +40,9 @@ import {TagsService} from '../tags/service/tags.service';
 import {BranchService} from '../../shared/service/branch.service';
 import {RoleService} from '../../shared/service/role.service';
 import {UnitService} from '../../shared/service/unit.service';
-
+import { NewsCommentComponent } from './news-comment/news-comment.component';
+import {TreeTableModule} from 'primeng/treetable';
+import {CommentService} from './service/comment.service';
 
 @NgModule({
     declarations: [
@@ -49,7 +51,8 @@ import {UnitService} from '../../shared/service/unit.service';
         NewsCreateComponent,
         NewsDataComponent,
         NewsViewComponent,
-        NewsUpdateComponent
+        NewsUpdateComponent,
+        NewsCommentComponent
     ],
     imports: [
         CommonModule,
@@ -58,6 +61,7 @@ import {UnitService} from '../../shared/service/unit.service';
         TableModule,
         PaginatorModule,
         InputTextModule,
+        TreeTableModule,
         InputTextareaModule,
         DropdownModule,
         ButtonModule,
@@ -94,6 +98,7 @@ import {UnitService} from '../../shared/service/unit.service';
           provide: LANGUAGE_FILE_PATH,
           useValue: {path: './assets/i18n/news/'}
       },
+      CommentService,
       NewsService,
       MessageService,
       TagsService,
