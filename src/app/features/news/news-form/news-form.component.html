@@ -29,6 +29,11 @@
             {{'invalid.content.required' | translate}}
           </small>
         </div>
+
+        <div class="p-col-12 p-field" *ngIf="mode === 'update'">
+          <label>{{'news.comment' | translate}}</label>
+          <aw-news-comment></aw-news-comment>
+        </div>
       </div>
     </div>
 
