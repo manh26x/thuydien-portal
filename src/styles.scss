@@ -206,3 +206,10 @@
 .layout-static-inactive .global-indicator {
   width: 100%;
 }
+
+.border-none-custom {
+  border: none!important;
+}
+.p-treetable .p-treetable-tbody>tr>td {
+  border-width: 1px 0 1px 0!important;
+}

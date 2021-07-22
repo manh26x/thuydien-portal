@@ -3,7 +3,7 @@
     <input id="n-comment" [(ngModel)]="commentForm.value.content"  (keyup.enter)="onEnter()" type="text" pInputText >
   </div>
   <div class="p-mb-2 p-col-3">
-    <p-button  style="height: 45px" class="p-button-raised p-mr-3"  (onClick)="submit()" label="{{'btn.send' | translate}}"></p-button>
+    <p-button  class="p-button-raised p-mr-3"  (onClick)="submit()" label="{{'btn.send' | translate}}"></p-button>
   </div>
   <div class="p-mb-2 p-col-1"></div>
   <div class="p-mb-2 p-col-3">
@@ -27,21 +27,22 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body"  let-rowNode let-rowData="rowData">
-    <tr *ngIf="rowData.id">
-      <td><p-treeTableToggler [rowNode]="rowNode" style="opacity: 0; pointer-events: none;" ></p-treeTableToggler>
+    <tr *ngIf="rowData.id" >
+      <td [ngClass]="{'border-none-custom' : rowData.type === commentEnum.REP}">
+        <p-treeTableToggler [rowNode]="rowNode" style="opacity: 0; pointer-events: none;" ></p-treeTableToggler>
         <span *ngIf="rowData.type === commentEnum.CMT">{{'comment.type.cmt' | translate}}</span>
-        <span *ngIf="rowData.type === commentEnum.REP">{{'comment.type.rep' | translate}}</span>
+        <span *ngIf="rowData.type === commentEnum.REP && rowData.isFirst">{{'comment.type.rep' | translate}}</span>
       </td>
-      <td>{{rowData['fullName'] }}</td>
-      <td><span *ngIf="rowData['content']">{{rowData['content']}}</span>
+      <td [ngClass]="{'border-none-custom' : rowData.type === commentEnum.REP}">{{rowData['fullName'] }}</td>
+      <td [ngClass]="{'border-none-custom' : rowData.type === commentEnum.REP}"><span *ngIf="rowData['content']">{{rowData['content']}}</span>
         <input *ngIf="commentForm?.value?.idParent && rowData['status'] === 0"
                #contentIn  [(ngModel)]="contentValue"
                pInputText (keyup.enter)="onEnter()">
         <button *ngIf="rowData.type === commentEnum.CMT" label="{{'comment.reply' | translate}}"
                 style="text-align: left; padding-left: 0" class="text-primary p-button-link"
-                pButton (click)="replyClicked(rowData, contentIn)" ></button>
+                pButton (click)="replyClicked(rowData)" ></button>
       </td>
-      <td>{{rowData['createDate'] | date : 'HH:mm dd/MM/yyyy'}}</td>
+      <td [ngClass]="{'border-none-custom' : rowData.type === commentEnum.REP}">{{rowData['createDate'] | date : 'HH:mm dd/MM/yyyy'}}</td>
     </tr>
   </ng-template>
 </p-treeTable>
