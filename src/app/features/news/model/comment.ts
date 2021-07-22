@@ -19,6 +19,7 @@ export interface CommentDto {
   status: number;
   createDate: Date;
   createdBy: string;
+  isFirst: boolean;
 }
 export interface CommentResponse {
   commentDetail: CommentDto;

@@ -77,7 +77,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
   }
 
 
-  replyClicked(row, contentIn) {
+  replyClicked(row) {
     this.commentTree.forEach(cmt => {
       if (cmt.data.id === row.id) {
         cmt.expanded = true;
@@ -112,8 +112,11 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
             idNews: this.idNews,
             status: 0,
             username: '',
-            idParent: cmt.commentDetail.id, type: CommentEnum.REP});
-
+            idParent: cmt.commentDetail.id,
+            type: CommentEnum.REP,
+            isFirst: false
+          });
+          cmt.replyList[0].isFirst = true;
           return {
             data: cmt.commentDetail,
             children: cmt.replyList.map(rep => {
