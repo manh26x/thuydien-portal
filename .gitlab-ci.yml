@@ -5,7 +5,7 @@ include:
   - 'https://ebit.tpb.vn/gitlab/salesapp/oops/-/raw/master/v2/deploy-image.yml'
   - 'https://ebit.tpb.vn/gitlab/salesapp/oops/-/raw/master/v2/deploy-container.yml'
 
-build:nodejs:
+build:code:
   image: ebit.tpb.vn/node:12-alpine
   stage: build-code
   tags:
