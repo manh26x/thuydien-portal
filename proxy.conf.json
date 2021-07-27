@@ -1,30 +1,30 @@
 {
   "/admin": {
-    "target": "http://192.168.1.99:8080",
+    "target": "https://cloudgw-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com",
     "secure": false,
     "changeOrigin": false,
     "logLevel": "debug"
   },
   "/saleskit": {
-    "target": "http://192.168.1.99:8080",
+    "target": "https://cloudgw-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com",
     "secure": false,
     "changeOrigin": false,
     "logLevel": "debug"
   },
   "/uaa": {
-    "target": "http://192.168.1.99:8080",
+    "target": "https://cloudgw-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com",
     "secure": false,
     "changeOrigin": false,
     "logLevel": "debug"
   },
   "/kpi": {
-    "target": "http://192.168.1.99:8080",
+    "target": "https://cloudgw-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com",
     "secure": false,
     "changeOrigin": false,
     "logLevel": "debug"
   },
   "/uploads": {
-    "target": "http://192.168.1.99:8080",
+    "target": "https://cloudgw-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com",
     "secure": false,
     "changeOrigin": false,
     "logLevel": "debug"
