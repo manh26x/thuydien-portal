@@ -21,6 +21,7 @@ build:code:
     - mkdir portal
     - cp -R ./dist/sale-web-portal ./portal/
     - cp nginx.conf ./portal/
+    - cp Dockerfile_runner ./portal/
   rules:
     - if: '$CI_COMMIT_BRANCH == "dev"'
       variables:
@@ -58,5 +59,6 @@ build:container:
   variables:
     GIT_STRATEGY: none
   script:
-    - docker build -f ./Dockerfile_runner -t $IMG_SRC ./portal
+    - cd portal
+    - docker build -f ./Dockerfile_runner -t $IMG_SRC .
     - docker push $IMG_SRC
