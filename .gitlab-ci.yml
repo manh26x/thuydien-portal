@@ -9,7 +9,8 @@ build:code:
   image: ebit.tpb.vn/node:12-alpine
   stage: build-code
   tags:
-    - k8s
+    - dockerv2
+    - docker03
   before_script:
     - npm config set proxy http://$PROXY_USER:$PROXY_PASS@$PROXY_HOST:$PROXY_PORT
     - npm set strict-ssl false
