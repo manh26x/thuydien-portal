@@ -1,0 +1,8 @@
+<p-tabView #tabView [(activeIndex)]="index">
+  <p-tabPanel header="{{'tabHeader.userList' | translate | uppercase }}">
+    <aw-user-data [isApprove]="false" ></aw-user-data>
+  </p-tabPanel>
+  <p-tabPanel header="{{'tabHeader.userApprove'  | translate | uppercase}}">
+    <aw-user-data [isApprove]="true"></aw-user-data>
+  </p-tabPanel>
+</p-tabView>
