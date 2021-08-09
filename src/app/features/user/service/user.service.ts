@@ -37,9 +37,13 @@ export class UserService extends BaseService{
     );
   }
 
-  filterUser(request: FilterUserRequest): Observable<FilterUserResponse> {
+  filterUser(request: FilterUserRequest, isApprove: boolean): Observable<FilterUserResponse> {
     request.userType = '';
-    return this.doPost('/admin/userPortal/filter', request).pipe(
+    let url = '/admin/userPortal/filter';
+    if(isApprove) {
+      url = '/admin/userPortal/filterUserApprove'
+    }
+    return this.doPost(url, request).pipe(
       map(res => res.data ? res.data[0] : { listUser: [], totalRecord: 0 })
     );
   }
@@ -84,5 +88,15 @@ export class UserService extends BaseService{
 
   getServiceName(): string {
     return 'UserService';
+  }
+
+  approved(userName: string, status: string) {
+    let body = {
+      username: userName,
+      status: status
+    }
+    return this.doPost('/admin/userPortal/approveUser', body).pipe(
+      map(res => res)
+    );
   }
 }

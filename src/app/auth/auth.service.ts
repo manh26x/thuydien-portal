@@ -133,6 +133,11 @@ export class AuthService {
     const roleList: UserRole[] = featureList[feature];
     return roleList && !!roleList.find(x => x.rightId === role);
   }
+  isHasApproved(feature: string,  role: string) {
+    const featureList: FeatureGroupByRole = this.getUserRole();
+    const roleList: UserRole[] = featureList[feature];
+    return roleList && !!roleList.find(x => x.rightId === role);
+  }
 
   // cookie utils docs https://www.w3schools.com/js/js_cookies.asp
   private setCookie(cname, cvalue, seconds): void {
@@ -162,4 +167,6 @@ export class AuthService {
       document.cookie = cname + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     }
   }
+
+
 }

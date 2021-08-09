@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from '../../../core/base.component';
 import {UserService} from '../service/user.service';
 import {UserDetail, FilterUserRequest, UserBranch} from '../model/user';
@@ -30,6 +30,8 @@ import {Paginator} from 'primeng/paginator';
 })
 export class UserDataComponent extends BaseComponent implements OnInit {
   @ViewChild('userPaging') paging: Paginator;
+  @Input('isApprove') isApprove: boolean;
+
   userConst = UserEnum;
   userList: UserDetail[] = [];
   searchForm: FormGroup;
@@ -48,6 +50,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   isHasDel = false;
   maxShowBranchInit = 3;
   dialogRef: DynamicDialogRef = null;
+  isHasApprove: boolean = true;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -67,6 +70,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     this.isHasImport = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_IMPORT);
     this.isHasExport = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_EXPORT);
     this.isHasEdit = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_EDIT);
+    this.isHasApprove = this.auth.isHasApproved(FeatureEnum.USER, RoleEnum.ACTION_APPROVE);
     this.isHasDel = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_DELETE);
     this.initSearchForm();
   }
@@ -84,11 +88,21 @@ export class UserDataComponent extends BaseComponent implements OnInit {
         map((roles) => ({ resLang: lang, resRole: roles }))
       ))
     ).subscribe(res => {
-      this.statusList = [
-        {code: null, name: res.resLang.all},
-        {code: UserEnum.ACTIVE, name: res.resLang.active},
-        {code: UserEnum.INACTIVE, name: res.resLang.inactive}
-      ];
+      if(this.isApprove) {
+        this.statusList = [
+          {code: null, name: res.resLang.all},
+          {code: UserEnum.ACTIVE, name: res.resLang.approved},
+          {code: UserEnum.WAIT_APPROVE, name: res.resLang.waitApprove},
+          {code: UserEnum.CANCEL, name: res.resLang.cancel}
+        ];
+      } else {
+        this.statusList = [
+          {code: null, name: res.resLang.all},
+          {code: UserEnum.ACTIVE, name: res.resLang.active},
+          {code: UserEnum.INACTIVE, name: res.resLang.inactive}
+        ];
+      }
+
       this.roleList = res.resRole;
       this.roleList.unshift({
         id: null, name: res.resLang.all
@@ -176,7 +190,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       page: this.page,
       pageSize: this.pageSize
     };
-    this.userService.filterUser(request).pipe(
+    this.userService.filterUser(request, this.isApprove).pipe(
       delay(300),
       takeUntil(this.nextOnDestroy),
       map(res => {
@@ -195,7 +209,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   }
 
   gotoView(userId: string) {
-    this.router.navigate(['user', 'view', userId]);
+    this.router.navigate(['user', 'view', userId],  { queryParams: {isApprove: this.isApprove}});
   }
 
   gotoUpdate(userId: string) {
@@ -259,4 +273,44 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     }
   }
 
+  gotoApprove(userName: string, status: string) {
+    let msgResult='';
+    let confirmMsg = '';
+    if(status === this.userConst.ACTIVE) {
+      msgResult = this.translate.instant('message.approveSuccess');
+      confirmMsg = this.translate.instant('confirm.approvedMessage', { name: userName })
+    } else if(status === this.userConst.CANCEL) {
+      msgResult = this.translate.instant('message.cancelSuccess');
+      confirmMsg = this.translate.instant('confirm.cancelMessage', { name: userName })
+    }
+    this.confirmationService.confirm({
+      key: 'globalDialog',
+      header: this.translate.instant('confirm.delete'),
+      message: confirmMsg,
+      acceptLabel: this.translate.instant('confirm.accept'),
+      rejectLabel: this.translate.instant('confirm.reject'),
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.indicator.showActivityIndicator();
+        this.userService.approved(userName, status).subscribe(() => {
+          this.messageService.add({
+            severity: 'success',
+            detail: msgResult
+          });
+          this.getUserList();
+        }, err => {
+          this.indicator.hideActivityIndicator();
+          if (err instanceof ApiErrorResponse && err.code === '201') {
+            this.messageService.add({
+              severity: 'error',
+              detail: this.translate.instant('message.deleteNotFound')
+            });
+          } else {
+            throw err;
+          }
+        });
+      },
+      reject: () => {}
+    });
+  }
 }

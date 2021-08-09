@@ -7,6 +7,10 @@
 		"update": "Chỉnh sửa thông tin người dùng",
 		"view": "Chi tiết thông tin người dùng"
 	},
+  "tabHeader": {
+    "userList": "Danh sách người dùng",
+    "userApprove": "Duyệt người dùng mới"
+  },
 	"btn": {
 		"cancel": "Hủy",
 		"checkData": "Kiểm tra dữ liệu",
@@ -21,14 +25,20 @@
 		"accept": "Có",
 		"delete": "Xác nhận khóa",
 		"deleteMessage": "Bạn có chắc chắn muốn khóa người dùng \"{{name}}\"",
-		"reject": "Không"
+		"reject": "Không",
+    "approvedMessage" : "Bạn có chắc chắn muốn phê duyệt người dùng \"{{name}}\"",
+    "cancelMessage" : "Bạn có chắc chắn muốn từ chối phê duyệt người dùngr \"{{name}}\""
 	},
 	"const": {
 		"active": "Hoạt động",
 		"all": "Tất cả",
 		"inactive": "Dừng hoạt động",
 		"roleAdmin": "Admin",
-		"supperAdmin": "SupperAdmin"
+		"supperAdmin": "SupperAdmin",
+    "waitApprove": "Chờ duyệt",
+    "cancel": "Hủy",
+    "approved": "Đã duyệt",
+    "undefined": "Chưa xác định"
 	},
 	"detail": "Chi tiết thông tin người dùng",
 	"downloadPattern": "Tải file mẫu",
@@ -82,7 +92,9 @@
 		"passwordNotMatch": "Mật khẩu hiện tại không đúng",
 		"updateNotFound": "User không tồn tại hoặc đã bị xóa",
 		"updateNotPermission": "Bạn không có quyền cập nhật tài khoản",
-		"updateSuccess": "Cập nhật thông tin tài khoản thành công"
+		"updateSuccess": "Cập nhật thông tin tài khoản thành công",
+    "approveSuccess": "Phê duyệt tài khoản người dùng thành công",
+    "cancelSuccess": "Từ chối phê duyệt tài khoản người dùng thành công"
 	},
 	"no": "STT",
 	"noData": "Không có kết quả nào phù hợp",
@@ -104,7 +116,7 @@
 		"newPass": "Mật khẩu mới",
 		"password": "Mật khẩu",
 		"phone": "Số điện thoại",
-		"position": "Chức danh",
+		"position": "Vị trí",
 		"resetPass": "Đặt lại mật khẩu",
 		"role": "Role",
 		"status": "Trạng thái",
@@ -113,7 +125,12 @@
 		"tagQna": "Tags cho Q&A",
 		"tagTool": "Tags cho công cụ tính toán",
 		"unit": "Đơn vị",
-		"userName": "Tên đăng nhập"
+		"userName": "Tên đăng nhập",
+    "approveUser": "Người duyệt",
+    "approveBy": "Người duyệt",
+    "typeUser": "Kiểu người dùng",
+    "createBy": "Người thêm",
+    "statusApprove": "Trạng thái duyệt"
 	},
 	"viewLess": "[Ẩn bớt]",
 	"viewMore": "[Xem thêm]"

@@ -3,5 +3,7 @@ export enum UserEnum {
   INACTIVE = '0',
   STATUS_ALL = '',
   ADMIN = 'Admin',
-  SUPPER_ADMIN = 'SuperAdmin'
+  SUPPER_ADMIN = 'SuperAdmin',
+  WAIT_APPROVE = '2',
+  CANCEL = '3'
 }

@@ -34,6 +34,8 @@ import {CustomFileUploadModule} from '../../shared/custom-file-upload/custom-fil
 import { DialogPreviewComponent } from './dialog-preview/dialog-preview.component';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {SharedModule} from '../../shared/shared.module';
+import {TabViewModule} from "primeng/tabview";
+import { UserTabComponent } from './user-tab/user-tab/user-tab.component';
 
 
 @NgModule({
@@ -44,7 +46,8 @@ import {SharedModule} from '../../shared/shared.module';
     UserFormComponent,
     UserViewComponent,
     UserUpdateComponent,
-    DialogPreviewComponent
+    DialogPreviewComponent,
+    UserTabComponent
   ],
     imports: [
         CommonModule,
@@ -79,7 +82,8 @@ import {SharedModule} from '../../shared/shared.module';
         PickListModule,
         CustomFileUploadModule,
         DynamicDialogModule,
-        SharedModule
+        SharedModule,
+        TabViewModule
     ],
   providers: [
     UserService,

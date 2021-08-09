@@ -7,6 +7,8 @@ import {BaseComponent} from '../../../core/base.component';
 import {UserDetail} from '../model/user';
 import {UserEnum} from '../model/user.enum';
 import {ApiErrorResponse} from '../../../core/model/error-response';
+import {BehaviorSubject} from "rxjs";
+import {TabView} from "primeng/tabview";
 
 @Component({
   selector: 'aw-user-view',
@@ -17,6 +19,9 @@ import {ApiErrorResponse} from '../../../core/model/error-response';
 export class UserViewComponent extends BaseComponent implements OnInit {
   userDetail: UserDetail = {};
   userConst = UserEnum;
+  isApprove: boolean = false;
+  approveEmitter$: BehaviorSubject<boolean> = new BehaviorSubject(this.isApprove);
+
   constructor(
     private userService: UserService,
     private router: Router,
@@ -24,9 +29,14 @@ export class UserViewComponent extends BaseComponent implements OnInit {
     private indicator: IndicatorService
   ) {
     super();
+    this.route.queryParams.subscribe(params => {
+      this.isApprove = params['isApprove'] === 'true';
+      this.approveEmitter$.next(this.isApprove);
+    });
   }
 
   ngOnInit(): void {
+
     this.userService.setPage('view');
     this.indicator.showActivityIndicator();
     this.route.paramMap.pipe(

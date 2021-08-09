@@ -7,6 +7,10 @@
 		"update": "Edit user information",
 		"view": "User detail"
 	},
+  "tabHeader": {
+    "userList": "User List",
+    "userApprove": "User Approvement"
+  },
 	"btn": {
 		"cancel": "Cancel",
 		"checkData": "Check data",
@@ -21,14 +25,20 @@
 		"accept": "Yes",
 		"delete": "Confirm block user",
 		"deleteMessage": "Are you sure you want to block the user \"{{name}}\"",
-		"reject": "No"
-	},
+		"reject": "No",
+    "approvedMessage" : "Are you sure you want to approve the user \"{{name}}\"",
+    "cancelMessage" : "Are you sure you want to disapprove the user \"{{name}}\""
+  },
 	"const": {
 		"active": "Active",
 		"all": "All",
 		"inactive": "Inactive",
 		"roleAdmin": "Admin",
-		"supperAdmin": "SupperAdmin"
+		"supperAdmin": "SupperAdmin",
+    "waitApprove": "Waiting for approve",
+    "cancel": "Cancel",
+    "approved": "Approved",
+    "undefined": "Undefined"
 	},
 	"detail": "View user detail",
 	"downloadPattern": "Download the pattern file",
@@ -82,7 +92,9 @@
 		"passwordNotMatch": "The current password is incorrect",
 		"updateNotFound": "User does not exist or has been deleted",
 		"updateNotPermission": "You do not have permission to update your account",
-		"updateSuccess": "Successful account information update"
+		"updateSuccess": "Successful account information update",
+    "approveSuccess": "Approve user successfully",
+    "cancelSuccess": "Cancel user successfully"
 	},
 	"no": "No.",
 	"noData": "No results match",
@@ -113,7 +125,12 @@
 		"tagQna": "Tags for Q&A",
 		"tagTool": "Tags for calculation tool",
 		"unit": "Unit",
-		"userName": "Username"
+		"userName": "Username",
+    "approveUser": "User Approve",
+    "approveBy": "Approved By",
+    "typeUser": "User Type",
+    "createBy": "Created By",
+    "statusApprove": "Approved Status"
 	},
 	"viewLess": "[View less]",
 	"viewMore": "[View more]"
