@@ -1,52 +1,38 @@
 {
   "/admin": {
-<<<<<<< HEAD
-    "target": "http://192.168.1.99:8080",
-=======
+    "target": "https://cloudgw-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com",
     "target": "https://gateway-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com",
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
     "secure": false,
     "changeOrigin": false,
     "logLevel": "debug"
   },
   "/saleskit": {
-<<<<<<< HEAD
-    "target": "http://192.168.1.99:8080",
-=======
+    "target": "https://cloudgw-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com",
     "target": "https://gateway-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com",
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
     "secure": false,
     "changeOrigin": false,
     "logLevel": "debug"
   },
   "/uaa": {
-<<<<<<< HEAD
-    "target": "http://192.168.1.99:8080",
-=======
+    "target": "https://cloudgw-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com",
     "target": "https://gateway-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com",
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
     "secure": false,
     "changeOrigin": false,
     "logLevel": "debug"
   },
   "/kpi": {
-<<<<<<< HEAD
-    "target": "http://192.168.1.99:8080",
-=======
+    "target": "https://cloudgw-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com",
     "target": "https://gateway-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com",
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
     "secure": false,
     "changeOrigin": false,
     "logLevel": "debug"
   },
   "/uploads": {
-<<<<<<< HEAD
-    "target": "http://192.168.1.99:8080",
-=======
+    "target": "https://cloudgw-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com",
     "target": "https://gateway-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com",
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
     "secure": false,
     "changeOrigin": false,
     "logLevel": "debug"
   }
 }
+
