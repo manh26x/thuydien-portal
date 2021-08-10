@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AppTranslateService } from '../../../core/service/translate.service';
@@ -10,6 +11,21 @@ import { BaseComponent } from '../../../core/base.component';
 import { Role } from '../../../shared/model/role';
 import { Unit } from '../../../shared/model/unit';
 import { Department } from '../../../shared/model/department';
+=======
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
+import {AppTranslateService} from '../../../core/service/translate.service';
+import {concatMap, startWith, takeUntil} from 'rxjs/operators';
+import {UserEnum} from '../model/user.enum';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UtilService} from '../../../core/service/util.service';
+import {UserDetail} from '../model/user';
+import {BaseComponent} from '../../../core/base.component';
+import {Role} from '../../../shared/model/role';
+import {Unit} from '../../../shared/model/unit';
+import {Department} from '../../../shared/model/department';
+
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 @Component({
   selector: 'aw-user-form',
   templateUrl: './user-form.component.html',
@@ -27,8 +43,11 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
   statusList = [];
   formUser: FormGroup;
   roleSelectedList: Role[] = [];
+<<<<<<< HEAD
   user: string ='user'
   admin: string = 'admin'
+=======
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   @Input() unitList: Unit[] = [];
   @Input() departmentList: Department[] = [];
   @Input() roleList: Role[] = [];
@@ -58,8 +77,13 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
       concatMap(() => this.translate.get('const'))
     ).subscribe(res => {
       this.statusList = [
+<<<<<<< HEAD
         { code: UserEnum.ACTIVE, name: res.active },
         { code: UserEnum.INACTIVE, name: res.inactive }
+=======
+        {code: UserEnum.ACTIVE, name: res.active},
+        {code: UserEnum.INACTIVE, name: res.inactive}
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
       ];
     });
   }
@@ -74,14 +98,23 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
         }
         this.formUser.patchValue({
           userId: userInfo.user ? userInfo.user.userName : null,
+<<<<<<< HEAD
           status: userInfo.user ? { code: userInfo.user.status } : null,
+=======
+          status: userInfo.user ? {code: userInfo.user.status} : null,
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
           fullName: userInfo.user.fullName,
           phone: userInfo.user.phone,
           email: userInfo.user.email,
           branch: userInfo.userBranchList ? userInfo.userBranchList.map(item => ({ code: item.branchId })) : null,
           position: userInfo.user.position,
+<<<<<<< HEAD
           unit: { id: userInfo.user.unitId, name: userInfo.user.unitName },
           department: { id: userInfo.user.departmentId, name: userInfo.user.departmentName }
+=======
+          unit: {id: userInfo.user.unitId, name: userInfo.user.unitName},
+          department: {id: userInfo.user.departmentId, name: userInfo.user.departmentName}
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
         });
         this.roleSelectedList = userInfo.userRoleList;
       }
@@ -103,12 +136,20 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
     this.cancel.emit();
   }
 
+<<<<<<< HEAD
   city: string;
+=======
+
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   initForm() {
     this.formUser = this.fb.group({
       fullName: ['', Validators.required],
       role: ['', [Validators.required]],
+<<<<<<< HEAD
       status: [{ value: { code: UserEnum.ACTIVE }, disabled: true }, [Validators.required]],
+=======
+      status: [{ value: {code: UserEnum.ACTIVE}, disabled: true }, [Validators.required]],
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
       userId: ['', [Validators.required, Validators.pattern(/^((\w)|(\.))*$/), Validators.maxLength(100)]],
       email: [''],
       phone: [''],
@@ -117,8 +158,12 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
       tagNews: [],
       tagKpi: [],
       unit: ['', [Validators.required]],
+<<<<<<< HEAD
       department: ['', [Validators.required]],
       typeUser:[''],
+=======
+      department: ['', [Validators.required]]
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
     }, { updateOn: 'blur' });
   }
 

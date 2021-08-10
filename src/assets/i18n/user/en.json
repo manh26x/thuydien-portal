@@ -7,6 +7,13 @@
 		"update": "Edit user information",
 		"view": "User detail"
 	},
+<<<<<<< HEAD
+=======
+  "tabHeader": {
+    "userList": "User List",
+    "userApprove": "User Approvement"
+  },
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 	"btn": {
 		"cancel": "Cancel",
 		"checkData": "Check data",
@@ -21,14 +28,29 @@
 		"accept": "Yes",
 		"delete": "Confirm block user",
 		"deleteMessage": "Are you sure you want to block the user \"{{name}}\"",
+<<<<<<< HEAD
 		"reject": "No"
 	},
+=======
+		"reject": "No",
+    "approvedMessage" : "Are you sure you want to approve the user \"{{name}}\"",
+    "cancelMessage" : "Are you sure you want to disapprove the user \"{{name}}\""
+  },
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 	"const": {
 		"active": "Active",
 		"all": "All",
 		"inactive": "Inactive",
 		"roleAdmin": "Admin",
+<<<<<<< HEAD
 		"supperAdmin": "SupperAdmin"
+=======
+		"supperAdmin": "SupperAdmin",
+    "waitApprove": "Waiting for approve",
+    "cancel": "Cancel",
+    "approved": "Approved",
+    "undefined": "Undefined"
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 	},
 	"detail": "View user detail",
 	"downloadPattern": "Download the pattern file",
@@ -82,7 +104,13 @@
 		"passwordNotMatch": "The current password is incorrect",
 		"updateNotFound": "User does not exist or has been deleted",
 		"updateNotPermission": "You do not have permission to update your account",
+<<<<<<< HEAD
 		"updateSuccess": "Successful account information update"
+=======
+		"updateSuccess": "Successful account information update",
+    "approveSuccess": "Approve user successfully",
+    "cancelSuccess": "Cancel user successfully"
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 	},
 	"no": "No.",
 	"noData": "No results match",
@@ -114,6 +142,7 @@
 		"tagTool": "Tags for calculation tool",
 		"unit": "Unit",
 		"userName": "Username",
+<<<<<<< HEAD
 		"userType": "Usertype"
 	},
 	"viewLess": "[View less]",
@@ -123,4 +152,14 @@
 		"RbEmployment":"Personal customer staff (RB)",
 		"Other":"Other"
 	}
+=======
+    "approveUser": "User Approve",
+    "approveBy": "Approved By",
+    "typeUser": "User Type",
+    "createBy": "Created By",
+    "statusApprove": "Approved Status"
+	},
+	"viewLess": "[View less]",
+	"viewMore": "[View more]"
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 }

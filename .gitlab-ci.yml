@@ -1,0 +1,63 @@
+include:
+  - 'https://ebit.tpb.vn/gitlab/salesapp/oops/-/raw/master/v2/cicd-common.yml'
+#  - 'https://ebit.tpb.vn/gitlab/salesapp/oops/-/raw/master/v2/build-java.yml'
+#  - 'https://ebit.tpb.vn/gitlab/salesapp/oops/-/raw/master/v2/build-container.yml'
+  - 'https://ebit.tpb.vn/gitlab/salesapp/oops/-/raw/master/v2/deploy-image.yml'
+  - 'https://ebit.tpb.vn/gitlab/salesapp/oops/-/raw/master/v2/deploy-container.yml'
+
+build:code:
+  image: ebit.tpb.vn/node:12-alpine
+  stage: build-code
+  tags:
+    - k8s
+  before_script:
+    - npm config set proxy http://$PROXY_HOST:$PROXY_PORT
+    - npm set strict-ssl false
+  script:
+    - npm install
+    - npx ngcc --properties es2015 --create-ivy-entry-points
+    - npm run ng build -- --configuration=$PROFILE
+    - mkdir portal
+    - cp -R ./dist/sale-web-portal ./portal/
+    - cp nginx.conf ./portal/
+    - cp Dockerfile_runner ./portal/
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "dev"'
+      variables:
+        PROFILE: "dev"
+    - if: '$CI_COMMIT_BRANCH == "sit"'
+      variables:
+        PROFILE: "sit"
+    - if: '$CI_COMMIT_BRANCH == "uat"'
+      variables:
+        PROFILE: "uat"
+  artifacts:
+    expire_in: 10 mins
+    paths:
+      - ./portal
+
+build:container:
+  stage: build-container
+  image: ebit.tpb.vn/docker:19.03.12
+  tags:
+    - k8s
+  dependencies:
+    - "build:code"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "dev"'
+      variables:
+        IMG_SRC: $REGISTRY_SRC_HOST/$K8S_NS_DEV/$MODULE:$CI_PIPELINE_IID
+    - if: '$CI_COMMIT_BRANCH == "sit"'
+      variables:
+        IMG_SRC: $REGISTRY_SRC_HOST/$K8S_NS_SIT/$MODULE:$CI_PIPELINE_IID
+    - if: '$CI_COMMIT_BRANCH == "uat"'
+      variables:
+        IMG_SRC: $REGISTRY_SRC_HOST/$K8S_NS_UAT/$MODULE:$CI_PIPELINE_IID
+  before_script:
+    - echo $REGISTRY_SRC_PASS | docker login $REGISTRY_SRC_HOST --username $REGISTRY_SRC_USER --password-stdin
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - cd portal
+    - docker build -f ./Dockerfile_runner -t $IMG_SRC .
+    - docker push $IMG_SRC

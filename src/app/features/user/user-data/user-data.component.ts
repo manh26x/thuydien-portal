@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import {Component, OnInit, ViewChild} from '@angular/core';
+=======
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 import {BaseComponent} from '../../../core/base.component';
 import {UserService} from '../service/user.service';
 import {UserDetail, FilterUserRequest, UserBranch} from '../model/user';
@@ -30,6 +34,11 @@ import {Paginator} from 'primeng/paginator';
 })
 export class UserDataComponent extends BaseComponent implements OnInit {
   @ViewChild('userPaging') paging: Paginator;
+<<<<<<< HEAD
+=======
+  @Input('isApprove') isApprove: boolean;
+
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   userConst = UserEnum;
   userList: UserDetail[] = [];
   searchForm: FormGroup;
@@ -48,6 +57,10 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   isHasDel = false;
   maxShowBranchInit = 3;
   dialogRef: DynamicDialogRef = null;
+<<<<<<< HEAD
+=======
+  isHasApprove: boolean = true;
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   constructor(
     private userService: UserService,
     private router: Router,
@@ -67,6 +80,10 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     this.isHasImport = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_IMPORT);
     this.isHasExport = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_EXPORT);
     this.isHasEdit = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_EDIT);
+<<<<<<< HEAD
+=======
+    this.isHasApprove = this.auth.isHasApproved(FeatureEnum.USER, RoleEnum.ACTION_APPROVE);
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
     this.isHasDel = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_DELETE);
     this.initSearchForm();
   }
@@ -84,11 +101,29 @@ export class UserDataComponent extends BaseComponent implements OnInit {
         map((roles) => ({ resLang: lang, resRole: roles }))
       ))
     ).subscribe(res => {
+<<<<<<< HEAD
       this.statusList = [
         {code: null, name: res.resLang.all},
         {code: UserEnum.ACTIVE, name: res.resLang.active},
         {code: UserEnum.INACTIVE, name: res.resLang.inactive}
       ];
+=======
+      if(this.isApprove) {
+        this.statusList = [
+          {code: null, name: res.resLang.all},
+          {code: UserEnum.ACTIVE, name: res.resLang.approved},
+          {code: UserEnum.WAIT_APPROVE, name: res.resLang.waitApprove},
+          {code: UserEnum.CANCEL, name: res.resLang.cancel}
+        ];
+      } else {
+        this.statusList = [
+          {code: null, name: res.resLang.all},
+          {code: UserEnum.ACTIVE, name: res.resLang.active},
+          {code: UserEnum.INACTIVE, name: res.resLang.inactive}
+        ];
+      }
+
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
       this.roleList = res.resRole;
       this.roleList.unshift({
         id: null, name: res.resLang.all
@@ -176,7 +211,11 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       page: this.page,
       pageSize: this.pageSize
     };
+<<<<<<< HEAD
     this.userService.filterUser(request).pipe(
+=======
+    this.userService.filterUser(request, this.isApprove).pipe(
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
       delay(300),
       takeUntil(this.nextOnDestroy),
       map(res => {
@@ -195,7 +234,11 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   }
 
   gotoView(userId: string) {
+<<<<<<< HEAD
     this.router.navigate(['user', 'view', userId]);
+=======
+    this.router.navigate(['user', 'view', userId],  { queryParams: {isApprove: this.isApprove}});
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   }
 
   gotoUpdate(userId: string) {
@@ -250,7 +293,11 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       status: [{code: UserEnum.STATUS_ALL}]
     });
   }
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   destroy() {
     super.destroy();
     // clear dynamic dialog
@@ -259,4 +306,47 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     }
   }
 
+<<<<<<< HEAD
+=======
+  gotoApprove(userName: string, status: string) {
+    let msgResult='';
+    let confirmMsg = '';
+    if(status === this.userConst.ACTIVE) {
+      msgResult = this.translate.instant('message.approveSuccess');
+      confirmMsg = this.translate.instant('confirm.approvedMessage', { name: userName })
+    } else if(status === this.userConst.CANCEL) {
+      msgResult = this.translate.instant('message.cancelSuccess');
+      confirmMsg = this.translate.instant('confirm.cancelMessage', { name: userName })
+    }
+    this.confirmationService.confirm({
+      key: 'globalDialog',
+      header: this.translate.instant('confirm.delete'),
+      message: confirmMsg,
+      acceptLabel: this.translate.instant('confirm.accept'),
+      rejectLabel: this.translate.instant('confirm.reject'),
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.indicator.showActivityIndicator();
+        this.userService.approved(userName, status).subscribe(() => {
+          this.messageService.add({
+            severity: 'success',
+            detail: msgResult
+          });
+          this.getUserList();
+        }, err => {
+          this.indicator.hideActivityIndicator();
+          if (err instanceof ApiErrorResponse && err.code === '201') {
+            this.messageService.add({
+              severity: 'error',
+              detail: this.translate.instant('message.deleteNotFound')
+            });
+          } else {
+            throw err;
+          }
+        });
+      },
+      reject: () => {}
+    });
+  }
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 }

@@ -10,6 +10,10 @@ import {FormLeaveGuard} from '../../core/form-leave.guard';
 import {FeatureGuard} from '../feature.guard';
 import {RoleEnum} from '../../shared/model/role';
 import {FeatureEnum} from '../../shared/model/feature.enum';
+<<<<<<< HEAD
+=======
+import {UserTabComponent} from "./user-tab/user-tab/user-tab.component";
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 
 const routes: Routes = [
   {
@@ -18,7 +22,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
+<<<<<<< HEAD
         component: UserDataComponent,
+=======
+        component: UserTabComponent,
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
         canActivate: [AuthGuard, FeatureGuard],
         data: {feature: FeatureEnum.USER, role: RoleEnum.ACTION_VIEW}
       },

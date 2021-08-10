@@ -16,6 +16,12 @@
           <ng-container *ngSwitchCase="userConst.INACTIVE">
             {{'const.inactive' | translate}}
           </ng-container>
+<<<<<<< HEAD
+=======
+          <ng-container *ngSwitchDefault>
+            {{'const.undefined' | translate}}
+          </ng-container>
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
         </ng-container>
       </div>
     </div>
@@ -79,6 +85,42 @@
     </div>
   </div>
 
+<<<<<<< HEAD
+=======
+  <div class="p-fluid p-grid p-mt-2">
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'user.typeUser' | translate}}:</label>
+      <div class="title-right">{{userDetail.user.userType}}
+      </div>
+    </div>
+  </div>
+
+  <div class="p-fluid p-grid p-mt-2"  *ngIf="isApprove === true">
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'user.statusApprove' | translate}}:</label>
+      <div class="title-right">
+        <ng-container [ngSwitch]="userDetail.user.status">
+          <span *ngSwitchCase="userConst.ACTIVE">{{'const.active' | translate}}</span>
+          <span *ngSwitchCase="userConst.WAIT_APPROVE">{{'const.waitApprove' | translate}}</span>
+          <span *ngSwitchCase="userConst.CANCEL">{{'const.cancel' | translate}}</span>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'user.createBy' | translate}}:</label>
+      <div class="title-right">{{userDetail.user.createdBy}}</div>
+    </div>
+  </div>
+
+  <div class="p-fluid p-grid p-mt-2" *ngIf="isApprove === true">
+    <div class="p-md-6 p-col-12 detail">
+      <label class="title-left">{{'user.approveBy' | translate}}:</label>
+      <div class="title-right">{{userDetail.user.userApprove}}
+      </div>
+    </div>
+  </div>
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   <div class="split-horizontal"></div>
   <div class="p-text-center">
     <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>

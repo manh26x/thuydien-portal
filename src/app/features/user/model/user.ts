@@ -15,6 +15,10 @@ export interface UserInfo {
   statusCode?: string;
   userName?: string;
   userType?: string;
+<<<<<<< HEAD
+=======
+  userApprove?: string;
+>>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   status?: string;
   departmentId?: number;
   departmentName?: string;

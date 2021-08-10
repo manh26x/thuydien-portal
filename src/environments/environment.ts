@@ -1,19 +1,17 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+// This file can be replaced during build by using the `configuration=docker`.
 
 export const environment = {
-  production: false,
+  production: true,
   tokenEx: 43199,
   refreshTokenEx: 43199,
   clientId: 'YnJvd3NlcjoxMjM0',
-  baseUrl: '',
+  baseUrl: 'https://gateway-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com',
   basePath: '',
   logServer: false,
-  logClient: true,
-  version: '1.0.0',
-  mediaUrl: 'http://192.168.1.44:10023/upload/',
-  clientTimeout: 10000, // 10s
+  logClient: false,
+  version: '2.5.1',
+  mediaUrl: 'https://gateway-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com/upload',
+  clientTimeout: 180000, // 3m
   importExportTimeout: 300000, // 5m
   idleTimeout: 1800
 };
