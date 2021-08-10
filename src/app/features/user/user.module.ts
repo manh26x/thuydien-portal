@@ -34,12 +34,9 @@ import {CustomFileUploadModule} from '../../shared/custom-file-upload/custom-fil
 import { DialogPreviewComponent } from './dialog-preview/dialog-preview.component';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {SharedModule} from '../../shared/shared.module';
-<<<<<<< HEAD
 import { MatRadioModule } from '@angular/material/radio';
-=======
 import {TabViewModule} from "primeng/tabview";
 import { UserTabComponent } from './user-tab/user-tab/user-tab.component';
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 
 
 @NgModule({
@@ -50,12 +47,8 @@ import { UserTabComponent } from './user-tab/user-tab/user-tab.component';
     UserFormComponent,
     UserViewComponent,
     UserUpdateComponent,
-<<<<<<< HEAD
-    DialogPreviewComponent
-=======
     DialogPreviewComponent,
     UserTabComponent
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   ],
     imports: [
         CommonModule,
@@ -91,11 +84,8 @@ import { UserTabComponent } from './user-tab/user-tab/user-tab.component';
         CustomFileUploadModule,
         DynamicDialogModule,
         SharedModule,
-<<<<<<< HEAD
-        MatRadioModule
-=======
+        MatRadioModule,
         TabViewModule
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
     ],
   providers: [
     UserService,

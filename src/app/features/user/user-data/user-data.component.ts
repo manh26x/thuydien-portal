@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import {Component, OnInit, ViewChild} from '@angular/core';
-=======
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 import {BaseComponent} from '../../../core/base.component';
 import {UserService} from '../service/user.service';
 import {UserDetail, FilterUserRequest, UserBranch} from '../model/user';
@@ -34,11 +30,8 @@ import {Paginator} from 'primeng/paginator';
 })
 export class UserDataComponent extends BaseComponent implements OnInit {
   @ViewChild('userPaging') paging: Paginator;
-<<<<<<< HEAD
-=======
   @Input('isApprove') isApprove: boolean;
 
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   userConst = UserEnum;
   userList: UserDetail[] = [];
   searchForm: FormGroup;
@@ -57,10 +50,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   isHasDel = false;
   maxShowBranchInit = 3;
   dialogRef: DynamicDialogRef = null;
-<<<<<<< HEAD
-=======
   isHasApprove: boolean = true;
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   constructor(
     private userService: UserService,
     private router: Router,
@@ -80,10 +70,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     this.isHasImport = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_IMPORT);
     this.isHasExport = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_EXPORT);
     this.isHasEdit = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_EDIT);
-<<<<<<< HEAD
-=======
     this.isHasApprove = this.auth.isHasApproved(FeatureEnum.USER, RoleEnum.ACTION_APPROVE);
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
     this.isHasDel = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_DELETE);
     this.initSearchForm();
   }
@@ -101,13 +88,11 @@ export class UserDataComponent extends BaseComponent implements OnInit {
         map((roles) => ({ resLang: lang, resRole: roles }))
       ))
     ).subscribe(res => {
-<<<<<<< HEAD
       this.statusList = [
         {code: null, name: res.resLang.all},
         {code: UserEnum.ACTIVE, name: res.resLang.active},
         {code: UserEnum.INACTIVE, name: res.resLang.inactive}
       ];
-=======
       if(this.isApprove) {
         this.statusList = [
           {code: null, name: res.resLang.all},
@@ -123,7 +108,6 @@ export class UserDataComponent extends BaseComponent implements OnInit {
         ];
       }
 
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
       this.roleList = res.resRole;
       this.roleList.unshift({
         id: null, name: res.resLang.all
@@ -211,11 +195,8 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       page: this.page,
       pageSize: this.pageSize
     };
-<<<<<<< HEAD
-    this.userService.filterUser(request).pipe(
-=======
+
     this.userService.filterUser(request, this.isApprove).pipe(
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
       delay(300),
       takeUntil(this.nextOnDestroy),
       map(res => {
@@ -234,11 +215,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   }
 
   gotoView(userId: string) {
-<<<<<<< HEAD
-    this.router.navigate(['user', 'view', userId]);
-=======
     this.router.navigate(['user', 'view', userId],  { queryParams: {isApprove: this.isApprove}});
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   }
 
   gotoUpdate(userId: string) {
@@ -293,11 +270,6 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       status: [{code: UserEnum.STATUS_ALL}]
     });
   }
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   destroy() {
     super.destroy();
     // clear dynamic dialog
@@ -306,8 +278,6 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     }
   }
 
-<<<<<<< HEAD
-=======
   gotoApprove(userName: string, status: string) {
     let msgResult='';
     let confirmMsg = '';
@@ -348,5 +318,4 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       reject: () => {}
     });
   }
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 }
