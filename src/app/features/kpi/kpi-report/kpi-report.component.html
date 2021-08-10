@@ -6,7 +6,9 @@
   </ng-template>
   <p-tabView #tabView (onChange)="doChangeTab($event)" [activeIndex]="initActiveIndex">
     <p-tabPanel header="{{'kpi.import' | translate}}" [disabled]="isNotImport">
-      <aw-kpi-import [tagKpiList]="tagKpiList" (checkFile)="doCheckFile($event)"></aw-kpi-import>
+      <aw-kpi-import [tagKpiList]="tagKpiList" (checkFile)="doCheckFile($event)"
+                     [termKpiList]="termKpiList"
+      ></aw-kpi-import>
     </p-tabPanel>
     <p-tabPanel header="{{'kpi.listReport' | translate}}" [disabled]="isNotView">
       <aw-kpi-data [isHasEdit]="isHasEdit" [isHasDel]="isHasDel" [kpiList]="kpiReportList"

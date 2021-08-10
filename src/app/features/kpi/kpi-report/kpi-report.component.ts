@@ -3,7 +3,7 @@ import {KpiService} from '../service/kpi.service';
 import {AreaEnum} from '../model/area.enum';
 import {Area} from '../model/area';
 import {BaseComponent} from '../../../core/base.component';
-import {delay, finalize, map, startWith, takeUntil} from 'rxjs/operators';
+import {concatMap, delay, finalize, map, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {TagDetail} from '../../tags/model/tags';
@@ -11,7 +11,7 @@ import {KpiPreviewComponent} from '../kpi-preview/kpi-preview.component';
 import {UtilService} from '../../../core/service/util.service';
 import {KpiDirective} from '../kpi.directive';
 import {KpiPreviewItem} from '../model/kpi-preview-item';
-import {KpiReport, KpiTableComponent, KpiTitle} from '../model/kpi';
+import {KpiReport, KpiTableComponent, KpiTerm, KpiTitle} from '../model/kpi';
 import {KpiImportComponent} from '../kpi-import/kpi-import.component';
 import {forkJoin} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
@@ -22,6 +22,7 @@ import {FeatureEnum} from '../../../shared/model/feature.enum';
 import {RoleEnum} from '../../../shared/model/role';
 import {KpiDataComponent} from '../kpi-data/kpi-data.component';
 import {ApiErrorResponse} from '../../../core/model/error-response';
+import {KPI_TERM} from "../model/kpi.enum";
 
 @Component({
   selector: 'aw-kpi-report',
@@ -38,6 +39,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
   // data
   areaList: Area[] = [];
   tagKpiList: TagDetail[] = [];
+  termKpiList: KpiTerm[] = [];
   kpiReportList: KpiReport[] = [];
   totalReportKpi = 0;
   isImportSuccess = false;
@@ -91,11 +93,23 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
 
   ngAfterViewInit() {
     this.appTranslate.languageChanged$.pipe(
+      takeUntil(this.nextOnDestroy),
       startWith(''),
-      delay(100),
-      takeUntil(this.nextOnDestroy)
-    ).subscribe(_ => {
+      concatMap(() => this.translate.get('termConst').pipe(
+        map(res => res)
+      ))
+    ).subscribe(res => {
       this.tabView.cd.markForCheck();
+      this.termKpiList = [
+        {
+          value: KPI_TERM.PREVIOUS,
+          label: res.resLang.previous
+        },
+        {
+          value: KPI_TERM.CURRENT,
+          label: res.resLang.current
+        },
+      ];
     });
   }
 

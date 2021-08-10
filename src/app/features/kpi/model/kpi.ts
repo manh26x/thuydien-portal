@@ -80,3 +80,8 @@ export interface KpiTitle {
   field: string | number;
   header: string;
 }
+
+export interface KpiTerm {
+  value: string
+  label: string;
+}

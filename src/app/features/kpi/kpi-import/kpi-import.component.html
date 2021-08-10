@@ -1,5 +1,5 @@
 <div class="p-grid p-fluid">
-  <div class="p-col-12 p-md-6 p-field">
+  <div class="p-col-12 p-md-4 p-field">
     <label>{{'kpi.typeReport' | translate}}</label>
     <p-dropdown [filter]="true"
       [formControl]="reportType"
@@ -13,7 +13,19 @@
       <a href="assets/resource/5002_KPIs%20Performance%20Report_202004_PBO_089_Final.xlsx" target="_blank"> {{'kpi.atHere' | translate}}</a>
     </span>
   </div>
-  <div class="p-col-12 p-md-6 p-field">
+  <div class="p-col-12 p-md-4 p-field">
+    <label>{{'kpi.term' | translate}}</label>
+    <p-dropdown
+                [formControl]="term"
+                [options]="termKpiList"
+                [autoDisplayFirst]="false" optionLabel="label" dataKey="value" placeholder="{{'kpi.selectTerm' | translate}}">
+    </p-dropdown>
+    <small *ngIf="reportType.invalid && reportType.dirty" class="p-invalid">
+      {{'invalid.required' | translate}}
+    </small>
+
+  </div>
+  <div class="p-col-12 p-md-4 p-field">
     <label>File Import</label>
     <aw-input-upload (changeFile)="doChangeFile($event)" selectLabel="{{'kpi.upload' | translate}}"></aw-input-upload>
   </div>

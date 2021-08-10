@@ -42,6 +42,8 @@
 		"allowDisplay": "Display allowance",
 		"area": "Data area",
 		"atHere": "At here",
+    "term": "KPI before/current",
+    "selectTerm": "Select term",
 		"const": {
 			"active": "Active",
 			"all": "All",
@@ -84,5 +86,9 @@
 	},
 	"no": "No.",
 	"noData": "No matching results",
-	"paging": "Showing {first} to {last} in {totalRecords} records"
+	"paging": "Showing {first} to {last} in {totalRecords} records",
+  "termConst": {
+    "previous": "Previous",
+    "current": "Current"
+  }
 }
