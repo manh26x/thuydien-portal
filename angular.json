@@ -1,4 +1,5 @@
 {
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -192,9 +193,5 @@
       }
     }
   },
-  "defaultProject": "sale-web-portal",
-  "cli": {
-    "analytics": "a24847dc-c060-4f86-a15a-933e7e22c1ce"
-  }
+  "defaultProject": "sale-web-portal"
 }
-

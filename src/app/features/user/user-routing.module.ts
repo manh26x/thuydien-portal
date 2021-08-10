@@ -10,7 +10,7 @@ import {FormLeaveGuard} from '../../core/form-leave.guard';
 import {FeatureGuard} from '../feature.guard';
 import {RoleEnum} from '../../shared/model/role';
 import {FeatureEnum} from '../../shared/model/feature.enum';
-import {UserTabComponent} from "./user-tab/user-tab/user-tab.component";
+import {UserTabComponent} from "./user-tab/user-tab.component";
 
 const routes: Routes = [
   {

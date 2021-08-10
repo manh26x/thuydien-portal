@@ -36,7 +36,7 @@ import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {SharedModule} from '../../shared/shared.module';
 import { MatRadioModule } from '@angular/material/radio';
 import {TabViewModule} from "primeng/tabview";
-import { UserTabComponent } from './user-tab/user-tab/user-tab.component';
+import { UserTabComponent } from './user-tab/user-tab.component';
 
 
 @NgModule({

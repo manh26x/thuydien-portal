@@ -1,8 +1,8 @@
 import {AfterViewInit, Component,  ViewChild} from '@angular/core';
 import {TabView} from "primeng/tabview";
 import {BehaviorSubject} from "rxjs";
-import {BaseComponent} from "../../../../core/base.component";
-import {AppTranslateService} from "../../../../core/service/translate.service";
+import {BaseComponent} from "../../../core/base.component";
+import {AppTranslateService} from "../../../core/service/translate.service";
 
 @Component({
   selector: 'aw-user-tab',
