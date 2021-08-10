@@ -104,7 +104,7 @@ export class UserCreateComponent implements OnInit, BeforeLeave {
         detail: this.translate.instant('message.insertSuccess')
       });
       this.isLeave = true;
-      this.router.navigate(['user']);
+      this.router.navigate(['user'], { queryParams: {index: 1}});
     }, err => {
       if (err instanceof ApiErrorResponse && err.code === '202') {
         this.messageService.add({

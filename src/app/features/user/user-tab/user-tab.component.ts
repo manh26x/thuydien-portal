@@ -3,6 +3,7 @@ import {TabView} from "primeng/tabview";
 import {BehaviorSubject} from "rxjs";
 import {BaseComponent} from "../../../core/base.component";
 import {AppTranslateService} from "../../../core/service/translate.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'aw-user-tab',
@@ -11,23 +12,34 @@ import {AppTranslateService} from "../../../core/service/translate.service";
   ]
 })
 export class UserTabComponent extends BaseComponent  implements AfterViewInit {
-  @ViewChild('tabView') tabView: TabView;
+  @ViewChild('tabView',  {static: false}) tabView: TabView;
 
   tabEmitter$: BehaviorSubject<TabView>;
-  index: number = 1;
+  index: number = 0;
   constructor(
-    private appTranslate: AppTranslateService,
+    private route: ActivatedRoute,
   ) {
     super();
   }
 
   ngAfterViewInit(): void {
+    this.route.queryParams.subscribe(params => {
+      let index = params['index'];
+      this.index = parseInt(index? index: 0);
+      setTimeout(() => {
+        this.changeTab();
+      }, 500)
+    });
+  }
+
+  changeTab() {
+    this.tabView.cd.markForCheck();
+    this.tabView._activeIndex = this.index;
+    this.tabView.activeIndexChange.emit(this.index);
     setTimeout(() => {
-      this.tabEmitter$ = new BehaviorSubject<TabView>(this.tabView);
-      this.tabView.cd.markForCheck();
-      this.tabView._activeIndex = this.index;
-      this.tabEmitter$.next(this.tabView);
-    }, 500);
+      this.tabView.updateInkBar();
+    }, 500)
+    this.tabEmitter$ = new BehaviorSubject<TabView>(this.tabView);
 
   }
 
