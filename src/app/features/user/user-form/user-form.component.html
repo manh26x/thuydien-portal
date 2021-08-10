@@ -18,6 +18,7 @@
       <label for="n-status">{{'user.status' | translate}} <span class="p-invalid">*</span></label>
       <p-dropdown formControlName="status" inputId="n-status" [options]="statusList" optionLabel="name" dataKey="code"></p-dropdown>
     </div>
+    
   </div>
 
   <div class="p-fluid p-grid">
@@ -79,12 +80,31 @@
     </div>
   </div>
 
+  
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
       <label for="n-department">{{'user.department' | translate}} <span class="p-invalid">*</span></label>
       <p-dropdown [autoDisplayFirst]="false" [filter]="true" formControlName="department" inputId="n-department" [options]="departmentList" optionLabel="name" dataKey="id"></p-dropdown>
       <small *ngIf="hasErrorInput('department', 'required')" class="p-invalid">
         {{'invalid.department.required' | translate}}
+      </small>
+    </div>
+    
+    <div class="p-md-6 p-col-12 p-field">
+      <label for="n-usertype">{{'user.userType' | translate}}</label>
+      <div class="p-grid">
+        <div class="p-mb-3">
+          <mat-radio-group aria-label="Select group view" formControlName="typeUser">
+            <mat-radio-button color="primary" value="CB" selected>{{'userTypeTitle.CbEmployment' | translate}}</mat-radio-button>
+            <span class="p-mr-4"></span>
+            <mat-radio-button color="primary"  value="SB">{{'userTypeTitle.RbEmployment' | translate}}</mat-radio-button>
+            <span class="p-mr-4"></span>
+            <mat-radio-button color="primary" value="OB">{{'userTypeTitle.Other' | translate}}</mat-radio-button>
+          </mat-radio-group>  
+        </div>
+      </div>
+      <small *ngIf="hasErrorInput('branch', 'required')" class="p-invalid">
+        {{'invalid.branch.required' | translate}}
       </small>
     </div>
   </div>
@@ -124,3 +144,4 @@
   <button *ngIf="mode == 'update'" pButton (click)="doSave()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised p-button-secondary"></button>
   <button *ngIf="mode == 'create'" pButton (click)="doSave()" type="button" label="{{'btn.create' | translate}}" class="p-button-raised p-button-secondary"></button>
 </div>
+{{formUser.value | json}} 

@@ -113,8 +113,14 @@
 		"tagQna": "Tags for Q&A",
 		"tagTool": "Tags for calculation tool",
 		"unit": "Unit",
-		"userName": "Username"
+		"userName": "Username",
+		"userType": "Usertype"
 	},
 	"viewLess": "[View less]",
-	"viewMore": "[View more]"
+	"viewMore": "[View more]",
+	"userTypeTitle":{
+		"CbEmployment":"Corporate customer staff (CB)",
+		"RbEmployment":"Personal customer staff (RB)",
+		"Other":"Other"
+	}
 }
