@@ -18,10 +18,6 @@
       <label for="n-status">{{'user.status' | translate}} <span class="p-invalid">*</span></label>
       <p-dropdown formControlName="status" inputId="n-status" [options]="statusList" optionLabel="name" dataKey="code"></p-dropdown>
     </div>
-<<<<<<< HEAD
-    
-=======
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   </div>
 
   <div class="p-fluid p-grid">
@@ -83,10 +79,6 @@
     </div>
   </div>
 
-<<<<<<< HEAD
-  
-=======
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   <div class="p-fluid p-grid">
     <div class="p-md-6 p-col-12 p-field">
       <label for="n-department">{{'user.department' | translate}} <span class="p-invalid">*</span></label>
@@ -95,27 +87,23 @@
         {{'invalid.department.required' | translate}}
       </small>
     </div>
-<<<<<<< HEAD
-    
     <div class="p-md-6 p-col-12 p-field">
       <label for="n-usertype">{{'user.userType' | translate}}</label>
-      <div class="p-grid">
-        <div class="p-mb-3">
+      <div class="p-grid  p-col-12 p-field" id="n-usertype" style="margin-top: 5px">
+        <div class="p-mb-3  p-col-12 p-field">
           <mat-radio-group aria-label="Select group view" formControlName="typeUser">
             <mat-radio-button color="primary" value="CB" selected>{{'userTypeTitle.CbEmployment' | translate}}</mat-radio-button>
             <span class="p-mr-4"></span>
             <mat-radio-button color="primary"  value="SB">{{'userTypeTitle.RbEmployment' | translate}}</mat-radio-button>
             <span class="p-mr-4"></span>
             <mat-radio-button color="primary" value="OB">{{'userTypeTitle.Other' | translate}}</mat-radio-button>
-          </mat-radio-group>  
+          </mat-radio-group>
         </div>
       </div>
       <small *ngIf="hasErrorInput('branch', 'required')" class="p-invalid">
         {{'invalid.branch.required' | translate}}
       </small>
     </div>
-=======
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   </div>
 
   <div class="split-horizontal"></div>
@@ -153,7 +141,4 @@
   <button *ngIf="mode == 'update'" pButton (click)="doSave()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised p-button-secondary"></button>
   <button *ngIf="mode == 'create'" pButton (click)="doSave()" type="button" label="{{'btn.create' | translate}}" class="p-button-raised p-button-secondary"></button>
 </div>
-<<<<<<< HEAD
-{{formUser.value | json}} 
-=======
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
+

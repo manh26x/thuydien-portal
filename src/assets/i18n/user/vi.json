@@ -7,13 +7,10 @@
 		"update": "Chỉnh sửa thông tin người dùng",
 		"view": "Chi tiết thông tin người dùng"
 	},
-<<<<<<< HEAD
-=======
   "tabHeader": {
     "userList": "Danh sách người dùng",
     "userApprove": "Duyệt người dùng mới"
   },
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 	"btn": {
 		"cancel": "Hủy",
 		"checkData": "Kiểm tra dữ liệu",
@@ -28,28 +25,22 @@
 		"accept": "Có",
 		"delete": "Xác nhận khóa",
 		"deleteMessage": "Bạn có chắc chắn muốn khóa người dùng \"{{name}}\"",
-<<<<<<< HEAD
-		"reject": "Không"
-=======
+
 		"reject": "Không",
     "approvedMessage" : "Bạn có chắc chắn muốn phê duyệt người dùng \"{{name}}\"",
     "cancelMessage" : "Bạn có chắc chắn muốn từ chối phê duyệt người dùngr \"{{name}}\""
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 	},
 	"const": {
 		"active": "Hoạt động",
 		"all": "Tất cả",
 		"inactive": "Dừng hoạt động",
 		"roleAdmin": "Admin",
-<<<<<<< HEAD
-		"supperAdmin": "SupperAdmin"
-=======
+
 		"supperAdmin": "SupperAdmin",
     "waitApprove": "Chờ duyệt",
     "cancel": "Hủy",
     "approved": "Đã duyệt",
     "undefined": "Chưa xác định"
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 	},
 	"detail": "Chi tiết thông tin người dùng",
 	"downloadPattern": "Tải file mẫu",
@@ -103,13 +94,10 @@
 		"passwordNotMatch": "Mật khẩu hiện tại không đúng",
 		"updateNotFound": "User không tồn tại hoặc đã bị xóa",
 		"updateNotPermission": "Bạn không có quyền cập nhật tài khoản",
-<<<<<<< HEAD
-		"updateSuccess": "Cập nhật thông tin tài khoản thành công"
-=======
+
 		"updateSuccess": "Cập nhật thông tin tài khoản thành công",
     "approveSuccess": "Phê duyệt tài khoản người dùng thành công",
     "cancelSuccess": "Từ chối phê duyệt tài khoản người dùng thành công"
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 	},
 	"no": "STT",
 	"noData": "Không có kết quả nào phù hợp",
@@ -131,11 +119,7 @@
 		"newPass": "Mật khẩu mới",
 		"password": "Mật khẩu",
 		"phone": "Số điện thoại",
-<<<<<<< HEAD
-		"position": "Chức danh",
-=======
 		"position": "Vị trí",
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
 		"resetPass": "Đặt lại mật khẩu",
 		"role": "Role",
 		"status": "Trạng thái",
@@ -145,8 +129,12 @@
 		"tagTool": "Tags cho công cụ tính toán",
 		"unit": "Đơn vị",
 		"userName": "Tên đăng nhập",
-<<<<<<< HEAD
-		"userType": "Kiểu người dùng"
+		"userType": "Kiểu người dùng",
+    "approveUser": "Người duyệt",
+    "approveBy": "Người duyệt",
+    "typeUser": "Kiểu người dùng",
+    "createBy": "Người thêm",
+    "statusApprove": "Trạng thái duyệt"
 	},
 	"viewLess": "[Ẩn bớt]",
 	"viewMore": "[Xem thêm]",
@@ -155,14 +143,5 @@
 		"RbEmployment":"Nhân viên khách hàng cá nhân (RB)",
 		"Other":"Khác"
 	}
-=======
-    "approveUser": "Người duyệt",
-    "approveBy": "Người duyệt",
-    "typeUser": "Kiểu người dùng",
-    "createBy": "Người thêm",
-    "statusApprove": "Trạng thái duyệt"
-	},
-	"viewLess": "[Ẩn bớt]",
-	"viewMore": "[Xem thêm]"
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
+
 }

@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-<p-panel *ngIf="isHasImport" header="Import User" [toggleable]="true" >
-=======
+
 <p-panel *ngIf="isHasImport && !isApprove" header="Import User" [toggleable]="true" >
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
   <div class="p-grid p-fluid">
     <div class="p-col-12 p-md-5">
       <aw-input-upload (changeFile)="doChangeFile($event)" selectLabel="{{'btn.selectFile' | translate}}"></aw-input-upload>
@@ -25,11 +22,7 @@
   </ng-template>
   <form class="p-grid p-fluid p-mb-3" [formGroup]="searchForm">
     <div class="p-lg-4 p-col-6 p-field">
-<<<<<<< HEAD
-      <label for="s-value">{{'search' | translate}}</label>
-=======
       <label>{{'search' | translate}}</label>
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
       <input (keyup.enter)="doFilterUser()" type="text" id="s-value" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
     </div>
     <div class="p-lg-2 p-col-6 p-field">
@@ -43,12 +36,7 @@
     <div class="p-md-2 p-col-3 p-field p-d-flex p-align-end">
       <button (click)="doFilterUser()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
     </div>
-
-<<<<<<< HEAD
-    <div class="p-md-2 p-col-3 p-field p-d-flex p-align-end">
-=======
     <div class="p-md-2 p-col-3 p-field p-d-flex p-align-end" *ngIf="!isApprove">
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
       <button [disabled]="!isHasExport" (click)="doExportUser()" pButton type="button" label="{{'btn.export' | translate}}" style="height: 46px"></button>
     </div>
   </form>
@@ -61,17 +49,6 @@
            (onLazyLoad)="lazyLoadUser($event)">
     <ng-template pTemplate="header">
       <tr>
-<<<<<<< HEAD
-        <th style="width: 50px;">{{'no' | translate}}</th>
-        <th pSortableColumn="fullName">{{'user.fullName' | translate}}<p-sortIcon field="fullName"></p-sortIcon></th>
-        <th>{{'user.userName' | translate}}</th>
-        <th style="width: 250px;">{{'user.role' | translate}}</th>
-        <th>{{'user.position' | translate}}</th>
-        <th>{{'user.branch' | translate}}</th>
-        <th>{{'user.status' | translate}}</th>
-        <th>
-          <button *ngIf="isHasInsert" (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
-=======
         <th id="noId" style="width: 50px;">{{'no' | translate}}</th>
         <th id="fullNameId" pSortableColumn="fullName">{{'user.fullName' | translate}}<p-sortIcon field="fullName"></p-sortIcon></th>
         <th id="userNameId">{{'user.userName' | translate}}</th>
@@ -82,7 +59,6 @@
         <th>{{'user.status' | translate}}</th>
         <th>
           <button *ngIf="isHasInsert && !isApprove" (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
         </th>
       </tr>
     </ng-template>
@@ -107,18 +83,6 @@
             <ng-template #showLessAss><a (click)="user.maxShowBranch = maxShowBranchInit" href="javascript:void('view less');">{{'viewLess' | translate}}</a></ng-template>
           </div>
         </td>
-<<<<<<< HEAD
-        <td>
-          <ng-container [ngSwitch]="user.user.status">
-            <div *ngSwitchCase="userConst.ACTIVE">{{'const.active' | translate}}</div>
-            <div *ngSwitchCase="userConst.INACTIVE" class="p-invalid">{{'const.inactive' | translate}}</div>
-          </ng-container>
-         </td>
-        <td>
-          <button (click)="gotoView(user.user.userName)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
-          <button *ngIf="isHasEdit" (click)="gotoUpdate(user.user.userName)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-secondary p-button-text"></button>
-          <button *ngIf="isHasDel && user.user.status == userConst.ACTIVE" (click)="doDelete(user)" pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
-=======
         <td  *ngIf="isApprove">{{user.user.userApprove}}</td>
         <td>
           <ng-container [ngSwitch]="user.user.status" *ngIf="!isApprove">
@@ -142,7 +106,6 @@
             <button *ngIf="isHasApprove" (click)="gotoApprove(user.user.userName, userConst.ACTIVE)"  pButton type="button" icon="pi pi-check-circle" class="p-button-rounded p-button-success p-button-text"></button>
             <button *ngIf="isHasApprove" (click)="gotoApprove(user.user.userName, userConst.CANCEL)" pButton type="button" icon="pi pi-times-circle" class="p-button-rounded p-button-danger p-button-text"></button>
           </div>
->>>>>>> 74e9aadc5c648ed2a84ace0183a7ecb14c49a597
         </td>
       </tr>
     </ng-template>
