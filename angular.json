@@ -193,5 +193,8 @@
       }
     }
   },
-  "defaultProject": "sale-web-portal"
+  "defaultProject": "sale-web-portal",
+  "cli": {
+    "analytics": "a0d915a2-d279-4c3e-85c2-69a86eec85bb"
+  }
 }
