@@ -17,10 +17,9 @@
     <label>{{'kpi.term' | translate}}</label>
     <p-dropdown
                 [formControl]="term"
-                [options]="termKpiList"
-                [autoDisplayFirst]="false" optionLabel="label" dataKey="value" placeholder="{{'kpi.selectTerm' | translate}}">
+                [options]="termKpiList" optionLabel="label" dataKey="value" placeholder="{{'kpi.selectTerm' | translate}}">
     </p-dropdown>
-    <small *ngIf="reportType.invalid && reportType.dirty" class="p-invalid">
+    <small *ngIf="term.invalid && term.dirty" class="p-invalid">
       {{'invalid.required' | translate}}
     </small>
 

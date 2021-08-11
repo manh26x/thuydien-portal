@@ -16,30 +16,53 @@
         <th style="width: 50px;">{{'no' | translate}}</th>
         <th>{{'kpi.indexList' | translate}}</th>
         <th>{{'kpi.area' | translate}}</th>
+        <th>{{'kpi.isTargetGroup' | translate}}</th>
+        <th>{{'kpi.chooseTargetGroup' | translate}}</th>
         <th>{{'kpi.allowDisplay' | translate}}</th>
-        <th>{{'kpi.orderDisplay' | translate}}</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-item let-i="rowIndex">
-      <tr>
+      <tr >
         <td>{{i + 1}}</td>
-        <td>{{item.value}}</td>
-        <td>
-          <ng-container *ngIf="item.areaId; else noArea">
-            <i class="pi pi-circle-on" [ngStyle]="{'color': item.areaColor}"></i>
-            {{item.areaName}}
-          </ng-container>
-          <ng-template #noArea>
-            -
-          </ng-template>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input style="width: 100%;" pInputText type="text" [(ngModel)]="item.value">
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{item.value}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td pEditableColumn>
+          <p-cellEditor>
+            <ng-template pTemplate="output">
+              <ng-container *ngIf="item.area.id else notArea">
+                <i class="pi pi-circle-on" [ngStyle]="{'color': item.area?.color}"></i>
+                {{item.area?.name}}
+              </ng-container>
+              <ng-template #notArea>
+                -
+              </ng-template>
+            </ng-template>
+          </p-cellEditor>
         </td>
         <td>
-          <p-checkbox [disabled]="true" name="allowView" [value]="item" [(ngModel)]="kpiAreaSelectedList"></p-checkbox>
+          <p-checkbox [(ngModel)]="item.isMainIndex" [binary]="true"
+                      [readonly]="true"></p-checkbox>
+        </td>
+        <td pEditableColumn>
+          <p-cellEditor *ngIf="!item.isMainIndex">
+            <ng-template pTemplate="output">
+              <ng-container  *ngIf="item.targetGroup else notTarget">
+                {{item.targetGroup}}
+              </ng-container>
+              <ng-template #notTarget>-</ng-template>
+            </ng-template>
+          </p-cellEditor>
         </td>
         <td>
-          <ng-container *ngIf="item.displayOrder > 0">
-            {{item.displayOrder}}
-          </ng-container>
+          <p-checkbox [(ngModel)]="item.isShow" [binary]="true" [readonly]="true"></p-checkbox>
         </td>
       </tr>
     </ng-template>

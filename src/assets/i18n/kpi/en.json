@@ -44,6 +44,9 @@
 		"atHere": "At here",
     "term": "KPI before/current",
     "selectTerm": "Select term",
+    "isTargetGroup": "Is target group",
+    "chooseTargetGroup": "Choose target group",
+    "selectTarget": "Select target group",
 		"const": {
 			"active": "Active",
 			"all": "All",

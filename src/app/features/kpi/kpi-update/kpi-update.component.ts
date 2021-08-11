@@ -3,29 +3,15 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {KpiService} from '../service/kpi.service';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {finalize, map, switchMap, takeUntil} from 'rxjs/operators';
-import {KpiArea, KpiReport} from '../model/kpi';
+import {DropdownObj, KpiArea, KpiAreaMap, KpiDetailMap, KpiReport} from '../model/kpi';
 import {BaseComponent} from '../../../core/base.component';
 import {Area} from '../model/area';
 import {AreaEnum} from '../model/area.enum';
-import {forkJoin, Observable} from 'rxjs';
+import {BehaviorSubject, forkJoin, Observable} from 'rxjs';
 import {UtilService} from '../../../core/service/util.service';
 import {Table} from 'primeng/table';
 import {MessageService} from 'primeng/api';
 import {TranslateService} from '@ngx-translate/core';
-
-interface KpiAreaMap {
-  value: string;
-  area: Area;
-  isShow: number;
-  displayOrder: number;
-  id: number;
-}
-
-interface KpiDetailMap {
-  kpi?: KpiReport;
-  kpiAreaList?: KpiAreaMap[];
-  kpiAreaSelectedList?: KpiAreaMap[];
-}
 
 @Component({
   selector: 'aw-kpi-update',
@@ -37,6 +23,7 @@ export class KpiUpdateComponent extends BaseComponent implements OnInit {
   kpiAreaList: KpiAreaMap[] = [];
   kpiAreaSelectedList: KpiAreaMap[] = [];
   areaList: Area[] = [];
+  targetSelection: DropdownObj[] = [];
   isSelectedAll = false;
   @ViewChild('tableKpi') tableKpi: Table;
   constructor(
@@ -59,21 +46,26 @@ export class KpiUpdateComponent extends BaseComponent implements OnInit {
       map(res => res.get('id')),
       switchMap((id) => {
         const obsKpiDetail: Observable<KpiDetailMap> = this.kpiService.getKpiDetail(+id).pipe(
-          map(({kpi, listKPITitle}) => {
+          map(({kpi, listKPITitle, targetGroups}) => {
             const kpiArea: KpiAreaMap[] = [];
             const kpiAreaSelected: KpiAreaMap[] = [];
             if (this.util.canForEach(listKPITitle)) {
               listKPITitle.forEach((item, index) => {
                 const itemMap = {
-                  value: item.value, displayOrder: item.displayOrder, isShow: item.isShow,
+                  value: item.value, displayOrder: item.displayOrder,
                   area: { id: item.areaId, color: item.areaColor, name: item.areaName},
-                  id: index
+                  id: index,
+                  targetGroup: item.targetGroup,
+                  isMainIndex: item.isMainIndex === 1,
+                  disabledCheckMain: false,
+                  isShow: item.isShow === 1
                 };
                 kpiArea.push(itemMap);
-                if (item.isShow === 1) { kpiAreaSelected.push(itemMap); }
+                if (item.isShow) { kpiAreaSelected.push(itemMap); }
               });
             }
-            return {kpi, kpiAreaList: kpiArea, kpiAreaSelectedList: kpiAreaSelected};
+            this.targetSelection = targetGroups.map(value => {return {value: value, label:value}});
+            return {kpi, kpiAreaList: kpiArea, kpiAreaSelectedList: kpiAreaSelected, groupTargetMap: targetGroups};
           })
         );
         const obsArea = this.kpiService.getAreaByStatus(AreaEnum.STATUS_ACTIVE);
@@ -87,7 +79,18 @@ export class KpiUpdateComponent extends BaseComponent implements OnInit {
       this.kpiAreaList = res[0].kpiAreaList;
       this.kpiAreaSelectedList = res[0].kpiAreaSelectedList;
       this.areaList = res[1];
+      this.loadMainIndex(null);
     });
+  }
+
+  loadMainIndex(item: any) {
+    this.kpiAreaList.forEach(kpi => kpi.disabledCheckMain = this.checkMainIndex(kpi));
+    if(item  && item.isMainIndex) {
+      item.targetGroup= item.value;
+      this.targetSelection.push({value: item.targetGroup, label:item.targetGroup});
+    } else if(item && !item.isMainIndex) {
+      this.targetSelection = this.targetSelection.filter(e => e.value !== item.targetGroup);
+    }
   }
 
   doSave() {
@@ -97,11 +100,13 @@ export class KpiUpdateComponent extends BaseComponent implements OnInit {
       this.kpiAreaList.forEach(item => {
         kpiAreaUnMap.push({
           value: item.value,
-          isShow:  this.kpiAreaSelectedList.find(x => x.id === item.id) ? 1 : 0,
+          isShow:  item.isShow ? 1 : 0,
           areaName: item.area.name,
           areaColor: item.area.color,
           areaId: item.area.id,
-          displayOrder: item.displayOrder
+          displayOrder: item.displayOrder,
+          targetGroup: item.targetGroup,
+          isMainIndex: item.isMainIndex ? 1: 0
         });
       });
     }
@@ -124,18 +129,31 @@ export class KpiUpdateComponent extends BaseComponent implements OnInit {
     this.tableKpi.filter(evt.area.id, 'area.id', 'equals');
   }
 
-  cboChange(evt: KpiReport[]) {
-    this.kpiAreaList.forEach(item => {
-      if (evt.find(x => x.id === item.id)) {
-        item.isShow = 1;
-      } else {
-        item.isShow = 0;
-      }
-    });
-  }
-
   goBack() {
     this.router.navigate(['management-kpi', 'report']);
   }
 
+  checkMainIndex(item) {
+    return (item.isMainIndex && this.kpiAreaList
+      .filter(e => e.targetGroup === item.targetGroup
+        && !e.isMainIndex).length > 0 );
+  }
+
+  cboChange(evt: KpiReport[]) {
+    this.kpiAreaList.forEach(item => {
+      if (evt.find(x => x.id === item.id)) {
+        item.isShow = true;
+      } else {
+        item.isShow = false;
+      }
+    });
+  }
+
+  clickCheckBoxShow(item: KpiArea) {
+    if(item.isMainIndex && item.isShow) {
+      this.kpiAreaList.filter(kpi => kpi.targetGroup === item.targetGroup).forEach(kpi => kpi.isShow = true);
+    } else if(item.isMainIndex){
+      this.kpiAreaList.filter(kpi => kpi.targetGroup === item.targetGroup).forEach(kpi => kpi.isShow = false);
+    }
+  }
 }

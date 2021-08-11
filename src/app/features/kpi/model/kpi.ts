@@ -1,4 +1,6 @@
 import {EventEmitter} from '@angular/core';
+import {map} from "lodash-es";
+import {Area} from "./area";
 
 export interface Kpi {
   area?: string;
@@ -19,6 +21,7 @@ export interface KpiImportData {
   data?: Kpi[];
   titles?: string;
   typeReport?: string;
+  term?: string;
 }
 
 export interface KpiTableComponent {
@@ -59,11 +62,14 @@ export interface KpiArea {
   areaName: string;
   isShow: number;
   displayOrder: number;
+  targetGroup: string;
+  isMainIndex: number;
 }
 
 export interface KpiDetail {
   kpi?: KpiReport;
   listKPITitle?: KpiArea[];
+  targetGroups?: string[];
 }
 
 export interface KpiUpdateRequest {
@@ -81,7 +87,23 @@ export interface KpiTitle {
   header: string;
 }
 
-export interface KpiTerm {
-  value: string
+export interface DropdownObj {
+  value: string;
   label: string;
+}
+export interface KpiAreaMap {
+  value: string;
+  area: Area;
+  isShow: boolean;
+  displayOrder: number;
+  isMainIndex: boolean;
+  id: number;
+  targetGroup: string;
+  disabledCheckMain: boolean;
+}
+
+export interface KpiDetailMap {
+  kpi?: KpiReport;
+  kpiAreaList?: KpiAreaMap[];
+  kpiAreaSelectedList?: KpiAreaMap[];
 }

@@ -11,7 +11,7 @@ import {KpiPreviewComponent} from '../kpi-preview/kpi-preview.component';
 import {UtilService} from '../../../core/service/util.service';
 import {KpiDirective} from '../kpi.directive';
 import {KpiPreviewItem} from '../model/kpi-preview-item';
-import {KpiReport, KpiTableComponent, KpiTerm, KpiTitle} from '../model/kpi';
+import {KpiReport, KpiTableComponent, DropdownObj, KpiTitle} from '../model/kpi';
 import {KpiImportComponent} from '../kpi-import/kpi-import.component';
 import {forkJoin} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
@@ -39,7 +39,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
   // data
   areaList: Area[] = [];
   tagKpiList: TagDetail[] = [];
-  termKpiList: KpiTerm[] = [];
+  termKpiList: DropdownObj[] = [];
   kpiReportList: KpiReport[] = [];
   totalReportKpi = 0;
   isImportSuccess = false;
@@ -103,11 +103,11 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
       this.termKpiList = [
         {
           value: KPI_TERM.PREVIOUS,
-          label: res.resLang.previous
+          label: res.previous
         },
         {
           value: KPI_TERM.CURRENT,
-          label: res.resLang.current
+          label: res.current
         },
       ];
     });
@@ -166,6 +166,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
   doCheckFile(evt) {
     this.indicator.showActivityIndicator();
     const value: TagDetail = evt.reportType;
+
     const fileFormData: FormData = new FormData();
     fileFormData.append('file', evt.file[0], evt.file[0].name);
     fileFormData.append('typeReport', value.keyTag);
@@ -209,6 +210,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
             dataMappedList.push(dataMapped);
           });
         }
+        res.term = evt.term.value;
         return {root: res, resultTitle: titleList, result: dataMappedList};
       }),
       finalize(() => this.indicator.hideActivityIndicator())
@@ -224,6 +226,7 @@ export class KpiReportComponent extends BaseComponent implements OnInit, AfterVi
       componentRef.instance.cancel.subscribe(_ => { viewContainerRef.clear(); this.kpiImport.clearForm(); });
       componentRef.instance.save.subscribe(_ => {
         this.indicator.showActivityIndicator();
+        debugger
         this.kpiService.saveKpiImport(res.root).pipe(
           finalize(() => this.indicator.hideActivityIndicator())
         ).subscribe((__) => {

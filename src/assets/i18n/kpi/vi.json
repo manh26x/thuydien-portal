@@ -43,7 +43,10 @@
 		"area": "Phân vùng dữ liệu",
 		"atHere": "Tại đây",
     "term": "KPI Kỳ trước/hiện tại",
-    "selectTerm": "Chọn ...",
+    "selectTerm": "Chọn kỳ",
+    "isTargetGroup": "Là nhóm chỉ tiêu",
+    "chooseTargetGroup": "Chọn nhóm chỉ tiêu",
+    "selectTarget": "Chọn nhóm chỉ tiêu",
     "const": {
 			"active": "Hoạt động",
 			"all": "Tất cả",
