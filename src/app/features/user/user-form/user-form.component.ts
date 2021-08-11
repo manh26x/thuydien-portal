@@ -82,7 +82,8 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
           branch: userInfo.userBranchList ? userInfo.userBranchList.map(item => ({ code: item.branchId })) : null,
           position: userInfo.user.position,
           unit: {id: userInfo.user.unitId, name: userInfo.user.unitName},
-          department: {id: userInfo.user.departmentId, name: userInfo.user.departmentName}
+          department: {id: userInfo.user.departmentId, name: userInfo.user.departmentName},
+          typeUser: userInfo.user.userType
         });
         this.roleSelectedList = userInfo.userRoleList;
       }
@@ -90,6 +91,7 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
   }
 
   doSave() {
+    debugger
     this.formUser.patchValue({
       role: this.roleSelectedList
     });

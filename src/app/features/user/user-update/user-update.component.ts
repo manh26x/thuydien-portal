@@ -90,7 +90,8 @@ export class UserUpdateComponent extends BaseComponent implements OnInit {
       status: value.status.code,
       departmentId: value.department.id,
       unitId: value.unit.id,
-      role: 'Admin'
+      role: 'Admin',
+      userType: value.typeUser
     };
     const userBranch: BranchUser[] = [];
     if (this.util.canForEach(value.branch)) {
