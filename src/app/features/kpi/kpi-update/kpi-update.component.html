@@ -96,7 +96,8 @@
                 {{item.targetGroup}}
               </ng-container>
               <ng-template #notTarget>
-                {{'kpi.selectTarget' | translate}}
+                <span style="color: #7f8087">{{'kpi.selectTarget' | translate}}
+                  <i class="pi pi-fw pi-angle-down" style="color: #582E91"></i></span>
               </ng-template>
             </ng-template>
           </p-cellEditor>
