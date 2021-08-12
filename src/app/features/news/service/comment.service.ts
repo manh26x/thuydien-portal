@@ -28,17 +28,17 @@ export class CommentService extends BaseService{
   }
 
   getAllComment(request: CommentRequest): Observable<CommentResponsePage> {
-    return this.doPost('/saleskit/comment/get', request).pipe(
+    return this.doPost('/comment/get', request).pipe(
       map(res => res.data[0])
     );
   }
 
   postComment(comment: CommentDto): Observable<ApiResultResponse> {
-    return this.doPost('/saleskit/comment/insert', comment);
+    return this.doPost('/comment/insert', comment);
   }
 
   exportCommentFile(idNews: number): Observable<string> {
-    return this.doPost('/saleskit/comment/export', idNews).pipe(map(res => res.data[0]));
+    return this.doPost('/comment/export', idNews).pipe(map(res => res.data[0]));
   }
   downloadFile(url: string): Observable<any>{
     return this.http.get(url, {responseType: 'blob'});
