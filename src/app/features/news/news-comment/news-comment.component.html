@@ -1,6 +1,7 @@
 <div class="p-grid">
   <div class="p-mb-6 p-col-5">
-    <input pInputText id="n-comment" style="height: 38px;" [(ngModel)]="commentForm.value.content" (keyup.enter)="onEnter()" type="text"/>
+    <input pInputText id="n-comment" style="height: 38px;"
+           [(ngModel)]="commentForm.value.content" (keyup.enter)="onEnter()" type="text"/>
   </div>
   <div class="p-mb-2 p-col-3">
     <p-button  class="p-button-raised p-mr-3"  (onClick)="submit()" label="{{'btn.send' | translate}}"></p-button>
@@ -37,10 +38,10 @@
       <td [ngClass]="{'border-none-custom' : rowData.type === commentEnum.REP}"><span *ngIf="rowData['content']">{{rowData['content']}}</span>
         <input *ngIf="commentForm?.value?.idParent && rowData['status'] === 0"
                #contentIn  [(ngModel)]="contentValue" style="height: 38px;"
-               pInputText (keyup.enter)="onEnter()">
+               pInputText (keydown.enter)="onEnter()">
         <button *ngIf="rowData.type === commentEnum.CMT" label="{{'comment.reply' | translate}}"
-                style="text-align: left; padding-left: 0" class="text-primary p-button-link"
-                pButton (click)="replyClicked(rowData)" ></button>
+                style="text-align: left; padding-left: 0;" class="text-primary p-button-link"
+                pButton (click)="replyClicked(rowData, $event)" ></button>
       </td>
       <td [ngClass]="{'border-none-custom' : rowData.type === commentEnum.REP}">{{rowData['createDate'] | date : 'HH:mm dd/MM/yyyy'}}</td>
     </tr>
