@@ -30,13 +30,13 @@ export class BranchService extends BaseService{
   }
 
   createBranch(body: any): Observable<ApiResultResponse> {
-    return this.doPost('admin/branch/create', body);
+    return this.doPost('/admin/branch/create', body);
   }
 
   updateBranch(body: any): Observable<ApiResultResponse>  {
-    return this.doPost('admin/branch/update', body);
+    return this.doPost('/admin/branch/update', body);
   }
   deleteBranch(body: any): Observable<ApiResultResponse> {
-    return this.doPost('admin/branch/delete', body);
+    return this.doPost('/admin/branch/delete', body);
   }
 }

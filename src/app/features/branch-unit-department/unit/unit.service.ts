@@ -37,7 +37,7 @@ export class UnitService extends BaseService {
   }
 
   filterUnit(brandRequestSearch: UnitFilterRequest) {
-    return this.doPost('admin/unit/filter', brandRequestSearch).pipe(
+    return this.doPost('/admin/unit/filter', brandRequestSearch).pipe(
         map(res => res.data ? res.data[0] : [])
     );
   }
