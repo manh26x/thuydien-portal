@@ -14,7 +14,7 @@ export const environment = {
   tokenEx: 43199,
   refreshTokenEx: 43199,
   clientId: 'YnJvd3NlcjoxMjM0',
-  baseUrl: '/api',
+  baseUrl: '/api-v2',
   basePath: '',
   logServer: false,
   logClient: false,
