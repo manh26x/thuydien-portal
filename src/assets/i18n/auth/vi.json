@@ -5,6 +5,7 @@
 	"invalid.password": "Vui lòng nhập mật khẩu.",
 	"invalid.permission": "Bạn không có quyền truy cập hệ thống. Vui lòng liên hệ admin để biết thêm chi tiết.",
 	"invalid.username": "Vui lòng nhập tên tài khoản.",
+  "invalid.lock": "Tài khoản của bạn đã bị khóa!",
 	"login": "Đăng nhập",
 	"noInternet": "Kết nối mạng không ổn định. Vui lòng thử lại sau",
 	"password": "Mật khẩu",

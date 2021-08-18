@@ -5,6 +5,7 @@
 	"invalid.password": "Please enter a password.",
 	"invalid.permission": "You do not have access to the system. Please contact admin for more details.",
 	"invalid.username": "Please enter your username.",
+  "invalid.lock": "Your account has been locked!",
 	"login": "Login",
 	"noInternet": "Network connection is not stable. Please try again later",
 	"password": "Password",

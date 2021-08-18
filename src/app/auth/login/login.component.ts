@@ -75,6 +75,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         } else if (err.status === 401) {
           if (err.error.error === '205') {
             this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('invalid.permission') });
+          } else if (err.error.error === '209') {
+            this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('invalid.lock') });
           } else {
             this.msgInvalid.push({ severity: 'error', summary: '', detail: this.translate.instant('invalid.message') });
           }
