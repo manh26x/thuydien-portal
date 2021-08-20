@@ -170,6 +170,9 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
   }
 
   submitBranchForm() {
+    this.branchForm.value.code = this.branchForm.value.code.trim();
+    this.branchForm.value.address = this.branchForm.value.address.trim();
+    this.branchForm.value.name = this.branchForm.value.name.trim();
     if (!this.branchForm.invalid) {
       const body = this.branchForm.value;
 

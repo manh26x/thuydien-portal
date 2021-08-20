@@ -21,7 +21,6 @@
     "status": "Status",
     "address": "Address",
     "action": "Action",
-    "paging": "Showing {first} to {last} in {totalRecords} records",
     "branchName":  "Branch Name",
     "invalid": {
         "required": "Value cannot be blank",
@@ -58,7 +57,6 @@
     "status": "Status",
     "notes": "Notes",
     "action": "Action",
-    "paging": "Showing {first} to {last} in {totalRecords} records",
     "unitName":  "Unit Name",
     "invalid": {
       "required": "Value cannot be blank",
@@ -89,7 +87,7 @@
     "status": "Status",
     "notes": "Notes",
     "action": "Action",
-    "paging": "Showing {first} to {last} in {totalRecords} records",
+
     "departmentName":  "Department Name",
     "invalid": {
       "required": "Value cannot be blank",
@@ -108,5 +106,6 @@
       "deleteMessage": "Are you sure you want to remove department \"{{name}}\"",
       "reject": "No"
     }
-  }
+  },
+  "paging": "Showing {first} to {last} in {totalRecords} records"
 }

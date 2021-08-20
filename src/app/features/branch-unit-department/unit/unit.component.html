@@ -4,7 +4,7 @@
             <input type="text" id="s-valueUnit"  pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
         </div>
         <div class="p-md-2 p-col-12 p-field p-d-flex p-align-end">
-            <button (click)="doFilter()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
+            <button (click)="doFilter()" (keyup.enter)="doFilter()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
         </div>
         <div class="p-md-2 p-col-12 p-field p-d-flex p-align-end">
             <button  pButton type="button" label="{{'btn.insert' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined" (click)="gotoCreate()" style="height: 46px"></button>
@@ -71,6 +71,7 @@
         </ng-template>
     </p-table>
     <p-paginator #unitPaging [rows]="10"
+                 *ngIf="totalItems > 0"
                  [totalRecords]="totalItems"
                  [rowsPerPageOptions]="[10, 20, 50, 100]"
                  [showCurrentPageReport]="true"

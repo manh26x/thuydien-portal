@@ -169,6 +169,8 @@ export class UnitComponent extends BaseComponent implements OnInit, AfterViewIni
   }
 
   submitUnitForm() {
+    this.unitForm.value.name = this.unitForm.value.name.trim();
+    this.unitForm.value.description = this.unitForm.value.description.trim();
     if (!this.unitForm.invalid) {
       const body = this.unitForm.value;
 

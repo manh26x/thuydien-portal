@@ -170,6 +170,8 @@ export class DepartmentComponent extends BaseComponent implements OnInit, AfterV
   }
 
   submitDepartmentForm() {
+    this.departmentForm.value.name = this.departmentForm.value.name.trim();
+    this.departmentForm.value.description = this.departmentForm.value.description.trim();
     if (!this.departmentForm.invalid) {
       const body = this.departmentForm.value;
 

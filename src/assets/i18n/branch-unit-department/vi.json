@@ -1,6 +1,6 @@
 {
   "breadcrumb": {
-    "home": "Quản lý khối"
+    "home": "Quản lý danh mục"
   },
   "search": "Tìm kiếm",
   "filter": "Tìm kiếm",
@@ -20,7 +20,7 @@
     "modifyDate": "Ngày cập nhật",
     "status": "Trạng thái",
     "address": "Địa chỉ",
-    "action": "Hành động",
+    "action": "Thao tác",
     "branchName":  "Tên chi nhánh",
     "invalid": {
       "required": "Giá trị không được để trống",
