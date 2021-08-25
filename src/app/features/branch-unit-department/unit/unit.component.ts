@@ -91,7 +91,7 @@ export class UnitComponent extends BaseComponent implements OnInit, AfterViewIni
         finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe(res => {
       this.unitList = res.content;
-      this.totalItems = res.totalElements;
+      this.totalItems = res.totalElements ? res.totalElements : 0;
     });
 
   }
@@ -169,8 +169,10 @@ export class UnitComponent extends BaseComponent implements OnInit, AfterViewIni
   }
 
   submitUnitForm() {
-    this.unitForm.value.name = this.unitForm.value.name.trim();
-    this.unitForm.value.description = this.unitForm.value.description.trim();
+    this.unitForm.get('name').setValue(this.unitForm.get('name').value.trim());
+    if (this.unitForm.get('description').value !== null) {
+      this.unitForm.get('description').setValue(this.unitForm.get('description').value.trim());
+    }
     if (!this.unitForm.invalid) {
       const body = this.unitForm.value;
 

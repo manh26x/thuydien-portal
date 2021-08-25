@@ -92,7 +92,7 @@ export class DepartmentComponent extends BaseComponent implements OnInit, AfterV
     ).subscribe(res => {
 
       this.departmentList = res.content;
-      this.totalItems = res.totalElements;
+      this.totalItems = res.totalElements ? res.totalElements : 0;
     });
 
   }
@@ -170,8 +170,10 @@ export class DepartmentComponent extends BaseComponent implements OnInit, AfterV
   }
 
   submitDepartmentForm() {
-    this.departmentForm.value.name = this.departmentForm.value.name.trim();
-    this.departmentForm.value.description = this.departmentForm.value.description.trim();
+    this.departmentForm.get('name').setValue(this.departmentForm.get('name').value.trim());
+    if (this.departmentForm.get('description').value !== null) {
+      this.departmentForm.get('description').setValue(this.departmentForm.get('description').value.trim());
+    }
     if (!this.departmentForm.invalid) {
       const body = this.departmentForm.value;
 

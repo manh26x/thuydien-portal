@@ -31,7 +31,10 @@
       "deleteSuccess": "Deleted branch successfully",
       "insertSuccess": "New branch is added successfully",
       "updateNotFound": "The branch does not exist or has been deleted",
-      "updateSuccess": "Update branch successfully"
+      "updateSuccess": "Update branch successfully",
+      "branchExisted": "Branch code existed",
+      "departmentExisted": "Department existed",
+      "unitExisted": "Unit existed"
     },
     "confirm": {
       "accept": "Yes",

@@ -89,9 +89,8 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
     this.branchService.filterBranch(this.brandRequestSearch).pipe(
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe(res => {
-
       this.branchList = res.content;
-      this.totalItems = res.totalElements;
+      this.totalItems = res.totalElements ? res.totalElements : 0;
     });
 
   }
@@ -162,6 +161,7 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
     if (control == null) {
       return false;
     }
+
     return (control.dirty || control.touched) && control.hasError(errorName);
   }
 
@@ -170,9 +170,11 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
   }
 
   submitBranchForm() {
-    this.branchForm.value.code = this.branchForm.value.code.trim();
-    this.branchForm.value.address = this.branchForm.value.address.trim();
-    this.branchForm.value.name = this.branchForm.value.name.trim();
+    this.branchForm.get('code').setValue(this.branchForm.get('code').value.trim());
+    this.branchForm.get('name').setValue(this.branchForm.get('name').value.trim());
+    if (this.branchForm.get('address').value !== null) {
+      this.branchForm.get('address').setValue(this.branchForm.get('address').value.trim());
+    }
     if (!this.branchForm.invalid) {
       const body = this.branchForm.value;
 
@@ -202,7 +204,14 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
           this.getListBranch();
         }, err => {
           this.indicator.hideActivityIndicator();
-          throw err;
+          if (err instanceof ApiErrorResponse && err.code === '202') {
+            this.messageService.add({
+              severity: 'error',
+              detail: this.translate.instant('message.branchExisted')
+            });
+          } else {
+            throw err;
+          }
         });
       }
 

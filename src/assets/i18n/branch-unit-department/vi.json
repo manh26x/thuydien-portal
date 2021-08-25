@@ -32,7 +32,10 @@
       "deleteSuccess": "Xóa chi nhánh thành công",
       "insertSuccess": "Thêm mới chi nhánh thành công",
       "updateNotFound": "Chi nhánh không tồn tại hoặc đã bị xóa",
-      "updateSuccess": "Cập nhật chi nhánh thành công"
+      "updateSuccess": "Cập nhật chi nhánh thành công",
+      "branchExisted": "Mã chi nhánh đã tồn tại",
+      "departmentExisted": "Khối đã tồn tại",
+      "unitExisted": "Đơn vị đã tồn tại"
     },
     "confirm": {
       "accept": "Có",

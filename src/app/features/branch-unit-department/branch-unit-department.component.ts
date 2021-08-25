@@ -8,6 +8,7 @@ import {UtilService} from '../../core/service/util.service';
 import {BranchComponent} from './branch/branch.component';
 import {TabView} from 'primeng/tabview';
 import {BranchUnitDepartmentService} from './service/branch-unit-department.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'aw-branch-unit-department',
@@ -18,7 +19,7 @@ import {BranchUnitDepartmentService} from './service/branch-unit-department.serv
 export class BranchUnitDepartmentComponent extends BaseComponent implements AfterViewInit {
   @ViewChild(BranchComponent) branchComponent: BranchComponent;
   @ViewChild('tabView') tabView: TabView;
-
+  tabEmitter$: BehaviorSubject<TabView>;
   items: MenuItem[];
   home: MenuItem = {icon: 'pi pi-home', routerLink: '/'};
   constructor(    private appTranslate: AppTranslateService,
@@ -56,5 +57,10 @@ export class BranchUnitDepartmentComponent extends BaseComponent implements Afte
     ).subscribe(_ => {
       this.tabView.cd.markForCheck();
     });
+    setTimeout(() => {
+      this.tabView.updateInkBar();
+    }, 500);
+    this.tabEmitter$ = new BehaviorSubject<TabView>(this.tabView);
   }
+
 }
