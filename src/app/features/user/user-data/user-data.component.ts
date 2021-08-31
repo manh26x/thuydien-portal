@@ -50,7 +50,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   isHasDel = false;
   maxShowBranchInit = 3;
   dialogRef: DynamicDialogRef = null;
-  isHasApprove: boolean = true;
+  isHasApprove = true;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -93,7 +93,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
         {code: UserEnum.ACTIVE, name: res.resLang.active},
         {code: UserEnum.INACTIVE, name: res.resLang.inactive}
       ];
-      if(this.isApprove) {
+      if (this.isApprove) {
         this.statusList = [
           {code: null, name: res.resLang.all},
           {code: UserEnum.ACTIVE, name: res.resLang.approved},
@@ -279,14 +279,14 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   }
 
   gotoApprove(userName: string, status: string) {
-    let msgResult='';
+    let msgResult = '';
     let confirmMsg = '';
-    if(status === this.userConst.ACTIVE) {
+    if (status === this.userConst.ACTIVE) {
       msgResult = this.translate.instant('message.approveSuccess');
-      confirmMsg = this.translate.instant('confirm.approvedMessage', { name: userName })
-    } else if(status === this.userConst.CANCEL) {
+      confirmMsg = this.translate.instant('confirm.approvedMessage', { name: userName });
+    } else if (status === this.userConst.CANCEL) {
       msgResult = this.translate.instant('message.cancelSuccess');
-      confirmMsg = this.translate.instant('confirm.cancelMessage', { name: userName })
+      confirmMsg = this.translate.instant('confirm.cancelMessage', { name: userName });
     }
     this.confirmationService.confirm({
       key: 'globalDialog',

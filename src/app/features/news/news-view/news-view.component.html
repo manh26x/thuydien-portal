@@ -17,7 +17,10 @@
           <label class="title-left">{{'news.content' | translate}}:</label>
           <div class="title-right" [innerHTML]="trustHtmlContent"></div>
         </div>
-
+        <div class="p-col-12 p-field" >
+          <label>{{'news.comment' | translate}}</label>
+          <aw-news-comment></aw-news-comment>
+        </div>
       </div>
     </div>
 

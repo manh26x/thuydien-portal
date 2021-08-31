@@ -14,7 +14,6 @@ export class CommentService extends BaseService{
     super();
     this.currentPage$ = this.currentPage.asObservable();
   }
-AZ
   getHttp(): HttpClient {
     return this.http;
   }
@@ -37,11 +36,8 @@ AZ
     return this.doPost('/comment/insert', comment);
   }
 
-  exportCommentFile(idNews: number): Observable<string> {
-    return this.doPost('/comment/export', idNews).pipe(map(res => res.data[0]));
-  }
-  downloadFile(url: string): Observable<any>{
-    return this.http.get(url, {responseType: 'blob'});
+  exportCommentFile(idNews: number): Observable<any> {
+    return this.postDataBlob('/comment/export', idNews);
   }
 
 

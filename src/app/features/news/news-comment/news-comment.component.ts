@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from '../../../core/base.component';
 import {CommentService} from '../service/comment.service';
 import {ActivatedRoute} from '@angular/router';
@@ -10,9 +10,9 @@ import {CommentEnum} from '../model/news.enum';
 import {Paginator} from 'primeng/paginator';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {BehaviorSubject} from 'rxjs';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {TreeTable} from 'primeng/treetable';
-
+import { saveAs } from 'file-saver';
 @Component({
   selector: 'aw-news-comment',
   templateUrl: './news-comment.component.html',
@@ -78,7 +78,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
 
 
   replyClicked(row, evt) {
-    if(evt.pointerType !== 'mouse') {
+    if (evt.pointerType !== 'mouse') {
       return;
     }
     this.commentTree.forEach(cmt => {
@@ -160,8 +160,13 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
   }
 
   onExport() {
-    this.commentService.exportCommentFile(this.idNews).subscribe(url => {
-      window.open('http://' + url, '_blank');
+    this.indicator.showActivityIndicator();
+    this.commentService.exportCommentFile(this.idNews).pipe(
+      takeUntil(this.nextOnDestroy),
+      finalize(() => this.indicator.hideActivityIndicator())
+    ).subscribe(res => {
+      const myBlob: Blob = new Blob([res], { type: 'application/ms-excel' });
+      saveAs(myBlob, 'comment_list.xlsx');
     });
   }
 
