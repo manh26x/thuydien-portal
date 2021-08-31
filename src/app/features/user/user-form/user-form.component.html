@@ -94,9 +94,9 @@
           <mat-radio-group aria-label="Select group view" formControlName="typeUser">
             <mat-radio-button color="primary" value="CB" selected>{{'userTypeTitle.CbEmployment' | translate}}</mat-radio-button>
             <span class="p-mr-4"></span>
-            <mat-radio-button color="primary"  value="SB">{{'userTypeTitle.RbEmployment' | translate}}</mat-radio-button>
+            <mat-radio-button color="primary"  value="RB">{{'userTypeTitle.RbEmployment' | translate}}</mat-radio-button>
             <span class="p-mr-4"></span>
-            <mat-radio-button color="primary" value="OB">{{'userTypeTitle.Other' | translate}}</mat-radio-button>
+            <mat-radio-button color="primary" [value]="null">{{'userTypeTitle.Other' | translate}}</mat-radio-button>
           </mat-radio-group>
         </div>
       </div>

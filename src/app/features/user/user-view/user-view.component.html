@@ -86,9 +86,9 @@
     <div class="p-md-6 p-col-12 detail">
       <label class="title-left">{{'user.typeUser' | translate}}:</label>
       <div class="title-right" [ngSwitch]="userDetail.user.userType">
-        <span *ngSwitchCase="'SB'">{{'userTypeTitle.CbEmployment' | translate}}</span>
+        <span *ngSwitchCase="'CB'">{{'userTypeTitle.CbEmployment' | translate}}</span>
         <span *ngSwitchCase="'RB'">{{'userTypeTitle.RbEmployment' | translate}}</span>
-        <span *ngSwitchCase="'OB'">{{'userTypeTitle.Other' | translate}}</span>
+        <span *ngSwitchCase="null">{{'userTypeTitle.Other' | translate}}</span>
       </div>
     </div>
   </div>

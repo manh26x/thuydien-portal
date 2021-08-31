@@ -91,7 +91,6 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
   }
 
   doSave() {
-    debugger
     this.formUser.patchValue({
       role: this.roleSelectedList
     });
