@@ -23,12 +23,12 @@
 	},
 	"confirm": {
 		"accept": "Có",
-		"delete": "Xác nhận khóa",
+		"delete": "Xác nhận",
 		"deleteMessage": "Bạn có chắc chắn muốn khóa người dùng \"{{name}}\"",
 
 		"reject": "Không",
     "approvedMessage" : "Bạn có chắc chắn muốn phê duyệt người dùng \"{{name}}\"",
-    "cancelMessage" : "Bạn có chắc chắn muốn từ chối phê duyệt người dùngr \"{{name}}\""
+    "cancelMessage" : "Bạn có chắc chắn muốn từ chối phê duyệt người dùng \"{{name}}\""
 	},
 	"const": {
 		"active": "Hoạt động",
