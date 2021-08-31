@@ -78,6 +78,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
 
 
   replyClicked(row, evt) {
+    debugger;
     if (evt.pointerType !== 'mouse') {
       return;
     }
