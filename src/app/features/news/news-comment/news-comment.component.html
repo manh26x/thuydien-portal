@@ -1,8 +1,8 @@
 <div class="p-grid">
-  <div class="p-mb-6 p-col-5">
+  <form class="p-mb-6 p-col-5" [formGroup]="commentForm">
     <input pInputText id="n-comment" style="height: 38px;"
-           [(ngModel)]="commentForm.value.content" (keyup.enter)="onEnter()" type="text"/>
-  </div>
+           formControlName="content" (keyup.enter)="submit()" type="text"/>
+  </form>
   <div class="p-mb-2 p-col-3">
     <p-button  class="p-button-raised p-mr-3"  (onClick)="submit()" label="{{'btn.send' | translate}}"></p-button>
   </div>

@@ -34,7 +34,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
   request: CommentRequest = null;
   commentEnum = CommentEnum;
   commentForm: FormGroup;
-  contentValue: any;
+  contentValue = '';
   constructor(
     private commentService: CommentService,
     private route: ActivatedRoute,
@@ -82,8 +82,8 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
       if (cmt.data.id === row.id) {
         cmt.expanded = true;
         cmt.children[cmt.children.length - 1].data.id = 1;
-        this.commentForm.value.idParent = row.id;
-        this.commentForm.value.type = CommentEnum.CMT;
+        this.commentForm.get('idParent').setValue(row.id);
+        this.commentForm.get('type').setValue(CommentEnum.REP);
       } else {
         cmt.children[cmt.children.length - 1].data.id = null;
 
@@ -140,20 +140,22 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
   }
 
   onEnter() {
-    if (this.contentValue !== ''){
-      this.commentForm.value.content = this.contentValue;
+    const body = this.commentForm.value;
+    if (this.contentValue !== '' ){
+      body.content = this.contentValue.trim();
     } else {
-      this.commentForm.value.idParent = null;
+      body.idParent = null;
     }
-    if (this.commentForm.valid) {
-      this.commentService.postComment(this.commentForm.value).subscribe(res => {
-        console.log(res);
-        this.contentValue = '';
-        this.commentForm.value.content = '';
-        this.contentValue = '';
-        this.paging.changePage(this.page);
-      });
+    if (body.content.trim() === '') {
+      return;
     }
+    this.commentService.postComment(body).subscribe(res => {
+      this.contentValue = '';
+      this.commentForm.get('content').setValue('');
+      this.contentValue = '';
+      this.paging.changePage(this.page);
+    });
+
   }
 
   onExport() {
