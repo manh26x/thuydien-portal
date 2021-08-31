@@ -78,10 +78,6 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
 
 
   replyClicked(row, evt) {
-    debugger;
-    if (evt.pointerType !== 'mouse') {
-      return;
-    }
     this.commentTree.forEach(cmt => {
       if (cmt.data.id === row.id) {
         cmt.expanded = true;
