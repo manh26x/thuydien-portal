@@ -33,9 +33,7 @@
       "insertSuccess": "Thêm mới chi nhánh thành công",
       "updateNotFound": "Chi nhánh không tồn tại hoặc đã bị xóa",
       "updateSuccess": "Cập nhật chi nhánh thành công",
-      "branchExisted": "Mã chi nhánh đã tồn tại",
-      "departmentExisted": "Khối đã tồn tại",
-      "unitExisted": "Đơn vị đã tồn tại"
+      "branchExisted": "Mã chi nhánh đã tồn tại"
     },
     "confirm": {
       "accept": "Có",
@@ -72,7 +70,8 @@
       "deleteSuccess": "Xóa đơn vị thành công",
       "insertSuccess": "Thêm mới đơn vị thành công",
       "updateNotFound": "Đơn vị không tồn tại hoặc đã bị xóa",
-      "updateSuccess": "Cập nhật đơn vị thành công"
+      "updateSuccess": "Cập nhật đơn vị thành công",
+      "unitExisted": "Đơn vị đã tồn tại"
     },
     "confirm": {
       "accept": "Có",
@@ -103,7 +102,8 @@
       "deleteSuccess": "Xóa khối thành công",
       "insertSuccess": "Thêm mới khối thành công",
       "updateNotFound": "Khối không tồn tại hoặc đã bị xóa",
-      "updateSuccess": "Cập nhật khối thành công"
+      "updateSuccess": "Cập nhật khối thành công",
+      "departmentExisted": "Khối đã tồn tại"
     },
     "confirm": {
       "accept": "Có",

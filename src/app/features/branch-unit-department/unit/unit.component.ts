@@ -188,7 +188,14 @@ export class UnitComponent extends BaseComponent implements OnInit, AfterViewIni
           this.getListUnit();
         }, err => {
           this.indicator.hideActivityIndicator();
-          throw err;
+          if (err instanceof ApiErrorResponse && err.code === '202') {
+            this.messageService.add({
+              severity: 'error',
+              detail: this.translate.instant('unit.message.unitExisted')
+            });
+          } else {
+            throw err;
+          }
         });
       } else if (this.isUpdated) {
         this.indicator.showActivityIndicator();
@@ -202,7 +209,14 @@ export class UnitComponent extends BaseComponent implements OnInit, AfterViewIni
           this.getListUnit();
         }, err => {
           this.indicator.hideActivityIndicator();
-          throw err;
+          if (err instanceof ApiErrorResponse && err.code === '202') {
+            this.messageService.add({
+              severity: 'error',
+              detail: this.translate.instant('unit.message.unitExisted')
+            });
+          } else {
+            throw err;
+          }
         });
       }
 

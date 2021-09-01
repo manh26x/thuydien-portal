@@ -189,7 +189,14 @@ export class DepartmentComponent extends BaseComponent implements OnInit, AfterV
           this.getListDepartment();
         }, err => {
           this.indicator.hideActivityIndicator();
-          throw err;
+          if (err instanceof ApiErrorResponse && err.code === '202') {
+            this.messageService.add({
+              severity: 'error',
+              detail: this.translate.instant('department.message.departmentExisted')
+            });
+          } else {
+            throw err;
+          }
         });
       } else if (this.isUpdated) {
         this.indicator.showActivityIndicator();
@@ -203,7 +210,14 @@ export class DepartmentComponent extends BaseComponent implements OnInit, AfterV
           this.getListDepartment();
         }, err => {
           this.indicator.hideActivityIndicator();
-          throw err;
+          if (err instanceof ApiErrorResponse && err.code === '202') {
+            this.messageService.add({
+              severity: 'error',
+              detail: this.translate.instant('department.message.departmentExisted')
+            });
+          } else {
+            throw err;
+          }
         });
       }
 

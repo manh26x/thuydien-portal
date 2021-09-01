@@ -207,7 +207,7 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
           if (err instanceof ApiErrorResponse && err.code === '202') {
             this.messageService.add({
               severity: 'error',
-              detail: this.translate.instant('message.branchExisted')
+              detail: this.translate.instant('branch.message.branchExisted')
             });
           } else {
             throw err;
