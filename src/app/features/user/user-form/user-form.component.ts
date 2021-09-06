@@ -121,7 +121,7 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
       tagKpi: [],
       unit: ['', [Validators.required]],
       department: ['', [Validators.required]],
-      typeUser:[''],
+      typeUser:[null],
     }, { updateOn: 'blur' });
   }
 
