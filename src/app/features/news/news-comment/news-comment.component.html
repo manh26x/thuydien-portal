@@ -28,9 +28,9 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body"  let-rowNode let-rowData="rowData">
-    <tr *ngIf="rowData.id" >
+    <tr *ngIf="rowData.id" style="align-content: flex-start;">
       <td [ngClass]="{'border-none-custom' : rowData.type === commentEnum.REP}">
-        <p-treeTableToggler [rowNode]="rowNode" style="opacity: 0; pointer-events: none;" ></p-treeTableToggler>
+        <p-treeTableToggler [rowNode]="rowNode" style="display: none; pointer-events: none; " ></p-treeTableToggler>
         <span *ngIf="rowData.type === commentEnum.CMT">{{'comment.type.cmt' | translate}}</span>
         <span *ngIf="rowData.type === commentEnum.REP && rowData.isFirst">{{'comment.type.rep' | translate}}</span>
       </td>
