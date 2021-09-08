@@ -230,5 +230,6 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
     this.showDialog();
     this.isCreated = false;
     this.isUpdated = true;
+    this.branchForm.get('code').disable();
   }
 }

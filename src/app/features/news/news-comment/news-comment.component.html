@@ -1,14 +1,15 @@
-<div class="p-grid">
-  <form class="p-mb-6 p-col-5" [formGroup]="commentForm">
-    <input pInputText id="n-comment" style="height: 38px;"
-           formControlName="content" (keyup.enter)="submit()" type="text"/>
+<div class="p-grid" [ngClass]="isView ? 'detail' : ''">
+  <form class="p-mb-6 p-col-5" [formGroup]="commentForm" >
+    <input *ngIf="!isView" pInputText id="n-comment" style="height: 38px;"
+           formControlName="content" (keyup.enter)="submit()" type="text" />
+    <div class="title-right" *ngIf="isView" style="min-height: 38px; transform: translateY(-5px)"></div>
   </form>
   <div class="p-mb-2 p-col-3">
-    <p-button  class="p-button-raised p-mr-3"  (onClick)="submit()" label="{{'btn.send' | translate}}"></p-button>
+    <p-button  class="p-button-raised p-mr-3" [disabled]="isView ? 'disabled' : false" (onClick)="submit()" label="{{'btn.send' | translate}}"></p-button>
   </div>
   <div class="p-mb-2 p-col-1"></div>
   <div class="p-mb-2 p-col-3">
-    <p-button  class="p-button-raised p-mr-3" (click)="onExport()" label="{{'btn.export' | translate}}" ></p-button>
+    <p-button  class="p-button-raised p-mr-3" [disabled]="isView ? 'disabled' : false" (click)="onExport()" label="{{'btn.export' | translate}}" ></p-button>
   </div>
 </div>
 <p-paginator #commentPaging [rows]="pageSize"
@@ -39,7 +40,7 @@
         <input *ngIf="commentForm?.value?.idParent && rowData['status'] === 0"
                #contentIn  [(ngModel)]="contentValue" style="height: 38px;"
                pInputText (keydown.enter)="onEnter()">
-        <button *ngIf="rowData.type === commentEnum.CMT" label="{{'comment.reply' | translate}}"
+        <button *ngIf="rowData.type === commentEnum.CMT && !isView" label="{{'comment.reply' | translate}}"
                 style="text-align: left; padding-left: 0;" class="text-primary p-button-link"
                 pButton (click)="replyClicked(rowData, $event)" ></button>
       </td>

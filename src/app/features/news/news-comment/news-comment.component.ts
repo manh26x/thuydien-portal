@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from '../../../core/base.component';
 import {CommentService} from '../service/comment.service';
 import {ActivatedRoute} from '@angular/router';
@@ -23,6 +23,8 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
   @ViewChild('commentPaging') paging: Paginator;
   @ViewChild('pTreeTable') pTreeTable: TreeTable;
   @ViewChild('contentIn') contentIn: any;
+
+  @Input() isView: boolean;
 
   commentTree: TreeNode[] = [];
   testEmitter$ = new BehaviorSubject<TreeNode[]>(this.commentTree);
@@ -62,6 +64,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
       idNews: [this.idNews],
       type: [CommentEnum.CMT]
     });
+
   }
 
   changePage(evt) {
@@ -149,6 +152,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
     if (body.content.trim() === '') {
       return;
     }
+    this.indicator.showActivityIndicator();
     this.commentService.postComment(body).subscribe(res => {
       this.contentValue = '';
       this.commentForm.get('content').setValue('');
@@ -159,6 +163,9 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
   }
 
   onExport() {
+    if (this.isView) {
+      return;
+    }
     this.indicator.showActivityIndicator();
     this.commentService.exportCommentFile(this.idNews).pipe(
       takeUntil(this.nextOnDestroy),
