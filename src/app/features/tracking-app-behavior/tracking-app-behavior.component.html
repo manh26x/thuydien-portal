@@ -1,0 +1,87 @@
+<p-breadcrumb [model]="items" [home]="home" styleClass="p-mb-3"></p-breadcrumb>
+<h2 style="text-transform: uppercase; color: #462574; font-weight: bold; font-family: Roboto;">{{'title' | translate}}</h2>
+<form class="p-fluid p-grid p-formgrid p-md-10" [formGroup]="filterForm"  style="width: 102.3333%">
+  <div class="p-field p-col p-md-3" >
+    <p-calendar formControlName="rangesDate" selectionMode="range" [readonlyInput]="true" inputId="range"
+                [placeholder]="'form-search.time.placeholder' | translate"
+                [rangeSeparator]="'form-search.time.separator' | translate"
+                dateFormat="dd/mm/yy"
+                icon="pi pi-chevron-down"
+                [showIcon]="true"
+                (onClickOutside)="filterTracking()"
+    ></p-calendar>
+  </div>
+  <div class="p-field p-col p-md-3">
+    <p-dropdown [options]="branchList"  optionLabel="name"  optionValue="code" [filter]="true" filterBy="name" [showClear]="true"
+                [placeholder]="'form-search.branch.placeholder' | translate"
+                formControlName="branch" (onChange)="changeBranch()"
+    >
+    </p-dropdown>
+  </div>
+</form>
+<div class="p-fluid p-grid p-formgrid p-md-10" style="width: 102.3333%">
+  <p-card class="p-field p-col p-md-3"
+          [header]="'login.title' | translate">
+
+    <div style="margin-top: 10px">
+    {{'login.count' | translate}}
+    <h1 style="padding: 0; margin: 0">{{otherTracking.totalLoginCount}}</h1>
+    </div>
+  </p-card>
+  <p-card class="p-field p-col p-md-4"
+          [header]="'register.service' | translate">
+    <div class="p-grid" style="width: 100%;margin-top: 10px">
+        <div class="p-col">
+          {{'register.insurance' | translate}}
+          <h1 style="padding: 0; margin: 0">{{otherTracking.totalInsuranceCount}}</h1>
+        </div>
+        <div class="p-col" >
+          {{ 'register.asset-valuation' | translate}}
+          <h1 style="padding: 0; margin: 0">{{otherTracking.totalAssetValuationCount}}</h1>
+        </div>
+        <div class="p-col" >
+          {{'register.cic-review' | translate}}
+          <h1 style="padding: 0; margin: 0">{{otherTracking.totalCICReviewCount}}</h1>
+        </div>
+    </div>
+  </p-card>
+  <p-card class="p-field p-col p-md-5"
+          [header]="'news.title' | translate">
+
+    <div style="margin-top: 10px">
+      {{'news.total-count-title' | translate}}
+      <h1 style="padding: 0; margin: 0">{{otherTracking.totalLoginCount}}</h1>
+    </div>
+  <p-table [value]="newsList" dataKey="id" styleClass="table-responsive"
+           [autoLayout]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 50px;">{{'no' | translate}}</th>
+        <th >{{'news.name' | translate}}</th>
+        <th >{{'news.count' | translate}}</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-news let-index="rowIndex">
+      <tr>
+        <td>{{(page * pageSize) + 1 + index}}</td>
+        <td>{{news.title}}</td>
+        <td>{{news.publisher}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="9">
+          {{'noData' | translate}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-paginator #newPaging [rows]="pageSize"
+               [totalRecords]="totalItem"
+               [rowsPerPageOptions]="[10, 20, 50, 100]"
+               [showCurrentPageReport]="true"
+               (onPageChange)="changePage($event)"
+               currentPageReportTemplate="{{ 'paging' | translate }}">
+  </p-paginator>
+  </p-card>
+</div>

@@ -44,6 +44,10 @@ const routes: Routes = [
       {
         path: 'branch-unit-department',
         loadChildren: () => import('./branch-unit-department/branch-unit-department.module').then(m => m.BranchUnitDepartmentModule)
+      },
+      {
+        path: 'action-management',
+        loadChildren: () => import('./tracking-app-behavior/tracking-app-behavior.module').then(m => m.TrackingAppBehaviorModule)
       }
     ]
   }

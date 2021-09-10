@@ -1,0 +1,33 @@
+{
+  "breadcrumb": {
+    "home": "Quản lý hành vi sử dụng app"
+  },
+  "title": "Thống kê hành vi sử dụng App",
+  "no": "STT",
+  "news": {
+    "name": "Bản tin bán hàng",
+    "count": "Số lần xem chi tiết bản tin bán hàng",
+    "title": "Bản tin bán hàng",
+    "total-count-title": "Tổng số lần xem chi tiết bản tin bán hàng"
+  },
+  "login": {
+    "count": "Số lần đăng nhập vào app"
+  },
+  "register": {
+    "service": "Đăng ký dịch vụ",
+    "insurance": "Bảo hiểm",
+    "asset-valuation": "Định giá tài sản",
+    "cic-review": "Đánh giá CIC"
+  },
+  "form-search": {
+    "time": {
+      "placeholder": "Chọn thời gian thống kê",
+      "separator": "Đến"
+    },
+    "branch": {
+      "placeholder": "Chọn chi nhánh"
+    }
+  },
+  "paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
+  "noData": "Không có dữ liệu"
+}

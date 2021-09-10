@@ -78,7 +78,8 @@
 		"qna": "Q&A management",
 		"role": "Role Management",
 		"tags": "Tag Management",
-		"user": "User management"
+		"user": "User management",
+    "action-management": "Tracking Sale App Management"
 	},
 	"message": {
 		"accept": "Yes",

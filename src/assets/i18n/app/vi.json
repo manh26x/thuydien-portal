@@ -78,7 +78,8 @@
 		"qna": "Quản lý Q&A",
 		"role": "Quản lý role",
 		"tags": "Quản lý Tags",
-		"user": "Quản lý người dùng"
+		"user": "Quản lý người dùng",
+    "action-management": "Thống kê hành vi sử dụng app"
 	},
 	"message": {
 		"accept": "Có",

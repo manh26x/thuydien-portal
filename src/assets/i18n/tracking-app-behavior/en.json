@@ -1,0 +1,33 @@
+{
+  "breadcrumb": {
+    "home": "Home"
+  },
+  "no": "No.",
+  "news": {
+    "name": "News Title",
+    "count": "Total news views",
+    "title": "News",
+    "total-count-title": "Total times view news detail"
+  },
+  "login": {
+    "count": "Total login"
+  },
+  "register": {
+    "service": "Register Service",
+    "insurance": "Insurance",
+    "asset-valuation": "Asset Valuation",
+    "cic-review": "CIC Review"
+  },
+  "title": "Tracking Sale App Behavior Management",
+  "form-search": {
+    "time": {
+      "placeholder": "Choose Time",
+      "separator": "To"
+    },
+    "branch": {
+      "placeholder": "Choose Branch"
+    }
+  },
+  "paging": "Showing {first} to {last} in {totalRecords} records",
+  "noData": "No data"
+}
