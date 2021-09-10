@@ -26,7 +26,7 @@ export class TrackingAppBehaviorService extends BaseService{
   }
 
   getOtherBehavior(body: any): Observable<TrackingOtherResponse> {
-    return this.doPost('/tracking-behavior/otherBehavior', body).pipe(
+    return this.doPost('/tracking-behavior/behaviorIndex', body).pipe(
       map(res => res.data[0] || null)
     );
   }
