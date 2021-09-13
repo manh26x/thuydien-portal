@@ -11,6 +11,7 @@
     "total-count-title": "Tổng số lần xem chi tiết bản tin bán hàng"
   },
   "login": {
+    "title": "Đăng nhập",
     "count": "Số lần đăng nhập vào app"
   },
   "register": {

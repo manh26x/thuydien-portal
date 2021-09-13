@@ -213,3 +213,12 @@
 .p-treetable .p-treetable-tbody>tr>td {
   border-width: 1px 0 1px 0!important;
 }
+
+#pageTrackingNews .p-paginator {
+  flex-wrap: wrap-reverse;
+  justify-content: flex-start;
+  .p-paginator-current {
+    min-width: 100% !important;
+    justify-content: flex-start;
+  }
+}

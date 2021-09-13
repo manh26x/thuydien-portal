@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from '../../core/base.component';
 import {MenuItem} from 'primeng/api';
 import {concatMap, delay, map, startWith, switchMap, takeUntil} from 'rxjs/operators';
@@ -11,6 +11,9 @@ import {Branch} from '../../shared/model/branch';
 import {IndicatorService} from '../../shared/indicator/indicator.service';
 import {FormBuilder} from '@angular/forms';
 import {TrackingOtherResponse} from './model/tracking-app-behavior';
+import {PageChangeEvent} from '../../shared/model/page-change-event';
+import {Paginator} from 'primeng/paginator';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'aw-tracking-app-behavior',
@@ -25,10 +28,12 @@ export class TrackingAppBehaviorComponent extends BaseComponent implements OnIni
   filterForm: any;
   otherTracking: TrackingOtherResponse;
   fb: FormBuilder  = new FormBuilder();
-  pageSize: any;
+  pageSize = 10;
   totalItem: any;
   newsList: any;
-  page: any;
+  page = 0;
+  pipe = new DatePipe('en-US');
+  @ViewChild('newPaging') paging: Paginator;
 
   constructor(private appTranslate: AppTranslateService,
               private translate: TranslateService,
@@ -74,9 +79,6 @@ export class TrackingAppBehaviorComponent extends BaseComponent implements OnIni
       pageSize: [10],
     });
 
-    this.filterForm.get('toDate').setValue(now);
-    this.filterForm.get('fromDate').setValue(date);
-
     this.branchService.getBranchList().subscribe(res => {
       this.branchList = res;
       const branchSelected = {code: null, name: 'Tất cả'};
@@ -91,14 +93,18 @@ export class TrackingAppBehaviorComponent extends BaseComponent implements OnIni
 
   changeBranch() {
     this.filterTracking();
-
+    this.filterNews();
   }
   filterNews() {
     this.indicator.showActivityIndicator();
     const branchSelected = this.filterForm.get('branch').value.code;
+    const rangeDate = this.filterForm.get('rangesDate').value;
     this.filterForm.get('branchCode').setValue(branchSelected);
+    this.filterForm.get('fromDate').setValue(this.pipe.transform(rangeDate[0], 'dd/MM/yyyy'));
+    this.filterForm.get('toDate').setValue(this.pipe.transform(rangeDate[1], 'dd/MM/yyyy'));
     this.trackingAppBehaviorService.getNewsBehavior(this.filterForm.value).subscribe(res => {
-      console.log(res);
+      this.newsList = res.listNews;
+      this.totalItem = res.totalRecords;
       this.indicator.hideActivityIndicator();
     }, error => {
       this.indicator.hideActivityIndicator();
@@ -108,6 +114,9 @@ export class TrackingAppBehaviorComponent extends BaseComponent implements OnIni
   filterTracking() {
     this.indicator.showActivityIndicator();
     const branchSelected = this.filterForm.get('branch').value.code;
+    const rangeDate = this.filterForm.get('rangesDate').value;
+    this.filterForm.get('fromDate').setValue(this.pipe.transform(rangeDate[0], 'dd/MM/yyyy'));
+    this.filterForm.get('toDate').setValue(this.pipe.transform(rangeDate[1], 'dd/MM/yyyy'));
     this.filterForm.get('branchCode').setValue(branchSelected);
     this.trackingAppBehaviorService.getOtherBehavior(this.filterForm.value).subscribe(res => {
       this.otherTracking = res;
@@ -117,11 +126,9 @@ export class TrackingAppBehaviorComponent extends BaseComponent implements OnIni
     });
   }
 
-  changePage($event: any) {
-
-  }
-
-  lazyLoadNews($event: any) {
-
+  changePage(evt: PageChangeEvent) {
+    this.page = evt.page;
+    this.pageSize = evt.rows;
+    this.filterNews();
   }
 }

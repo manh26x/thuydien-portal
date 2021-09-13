@@ -33,7 +33,7 @@ export class TrackingAppBehaviorService extends BaseService{
 
   getNewsBehavior(body: any): Observable<any> {
     return this.doPost('/tracking-behavior/newsBehavior', body).pipe(
-      map(res => res.data || [])
+      map(res => res.data[0] || null)
     );
   }
 

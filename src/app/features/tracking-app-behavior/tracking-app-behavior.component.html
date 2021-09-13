@@ -8,7 +8,7 @@
                 dateFormat="dd/mm/yy"
                 icon="pi pi-chevron-down"
                 [showIcon]="true"
-                (onClickOutside)="filterTracking()"
+                (onClickOutside)="filterTracking(); filterNews()"
     ></p-calendar>
   </div>
   <div class="p-field p-col p-md-3">
@@ -50,7 +50,7 @@
 
     <div style="margin-top: 10px">
       {{'news.total-count-title' | translate}}
-      <h1 style="padding: 0; margin: 0">{{otherTracking.totalLoginCount}}</h1>
+      <h1 style="padding: 0; margin: 0">{{otherTracking.totalNewsViewCount}}</h1>
     </div>
   <p-table [value]="newsList" dataKey="id" styleClass="table-responsive"
            [autoLayout]="true">
@@ -64,8 +64,8 @@
     <ng-template pTemplate="body" let-news let-index="rowIndex">
       <tr>
         <td>{{(page * pageSize) + 1 + index}}</td>
-        <td>{{news.title}}</td>
-        <td>{{news.publisher}}</td>
+        <td>{{news.newsTitle}}</td>
+        <td>{{news.newsTotalViews}}</td>
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage">
@@ -81,7 +81,7 @@
                [rowsPerPageOptions]="[10, 20, 50, 100]"
                [showCurrentPageReport]="true"
                (onPageChange)="changePage($event)"
-               currentPageReportTemplate="{{ 'paging' | translate }}">
+               currentPageReportTemplate="{{ 'paging' | translate }}" id="pageTrackingNews">
   </p-paginator>
   </p-card>
 </div>

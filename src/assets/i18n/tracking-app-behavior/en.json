@@ -10,6 +10,7 @@
     "total-count-title": "Total times view news detail"
   },
   "login": {
+    "title": "Login",
     "count": "Total login"
   },
   "register": {
