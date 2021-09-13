@@ -121,6 +121,7 @@
     "user": "User",
     "content": "Nội dung bình luận",
     "createdTime": "Thời gian đăng",
+    "delete": "Xóa",
     "type": {
       "cmt" : "Bình luận",
       "rep": "Trả lời"

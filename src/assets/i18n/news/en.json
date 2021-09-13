@@ -121,6 +121,7 @@
     "user": "User",
     "content": "Content",
     "createdTime": "Created Time",
+    "delete": "Delete",
     "type": {
       "cmt" : "Comment",
       "rep": "Reply"

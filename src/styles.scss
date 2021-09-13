@@ -222,3 +222,52 @@
     justify-content: flex-start;
   }
 }
+#customCommentInput, #customRepInput  {
+
+  flex-wrap: wrap;
+
+  .p-inputgroup-addon{
+    height: 38px;
+    border-left: none;
+    color: #582E91;
+  }
+  input {
+    border-right: none;
+    &:focus, &:hover {
+      box-shadow: none;
+      border-color: rgba(0,0,0,0.38);
+    }
+  }
+}
+
+#imgCmtPreview, .docs-preview, #imgRepPreview {
+  width: 100%;
+  border: 1px solid #bbb;
+  background-color: #fff;
+  border-radius: 4px;
+  position: relative;
+
+  img {
+    width: 100%;
+    border-radius: 4px
+  }
+
+  .img-action {
+    position: absolute !important;
+    right: 5px;
+    bottom: 5px;
+
+  }
+  .btn-action {
+    border: 1px solid rgb(242, 242, 242);
+    color: #ffffff;
+    background: rgb(165 165 165);
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    opacity: 0.8;
+  }
+}
+
