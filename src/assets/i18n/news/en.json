@@ -21,6 +21,7 @@
 		"delete": "Delete Confirmation",
 		"deleteImage": "Are you sure to delete the photo from the newsletter?",
 		"deleteMessage": "Are you sure you want to remove news \"{{name}}\"",
+    "deleteCmtMessage": "Are you sure you want to remove comment \"{{name}}\"",
 		"reject": "No"
 	},
 	"const": {
@@ -77,7 +78,9 @@
 		"draftSuccess": "Saved the draft successfully",
 		"insertSuccess": "New news is added successfully",
 		"updateNotFound": "The news does not exist or has been deleted",
-		"updateSuccess": "Update news successfully"
+		"updateSuccess": "Update news successfully",
+    "deleteCmtSuccess": "Deleted comment successfully",
+    "deleteCmtNotFound": "The comment does not exist or has been deleted"
 	},
 	"news": {
 		"author": "Author",

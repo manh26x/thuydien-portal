@@ -5,7 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {concatMap, finalize, map, takeUntil} from 'rxjs/operators';
 import {CommentRequest} from '../model/comment';
 import {TranslateService} from '@ngx-translate/core';
-import { TreeNode } from 'primeng/api';
+import {ConfirmationService, MessageService, TreeNode} from 'primeng/api';
 import {CommentEnum} from '../model/news.enum';
 import {Paginator} from 'primeng/paginator';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
@@ -16,6 +16,7 @@ import { saveAs } from 'file-saver';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {NewsService} from '../service/news.service';
 import {environment} from '../../../../environments/environment';
+import {ApiErrorResponse} from '../../../core/model/error-response';
 @Component({
   selector: 'aw-news-comment',
   templateUrl: './news-comment.component.html',
@@ -55,7 +56,9 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
     private indicator: IndicatorService,
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
-    private newsService: NewsService
+    private newsService: NewsService,
+    private dialog: ConfirmationService,
+    private messageService: MessageService,
   ) {
     super();
     this.baseUrl = environment.baseUrl;
@@ -276,6 +279,35 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
   }
 
   deleteClicked(rowData: any, $event: MouseEvent) {
-
+    this.dialog.confirm({
+      key: 'globalDialog',
+      header: this.translate.instant('confirm.delete'),
+      message: this.translate.instant('confirm.deleteCmtMessage', { name: rowData.content }),
+      acceptLabel: this.translate.instant('confirm.accept'),
+      rejectLabel: this.translate.instant('confirm.reject'),
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.indicator.showActivityIndicator();
+        this.commentService.deleteCmt(rowData.id.toString()).pipe(
+        ).subscribe(() => {
+          this.messageService.add({
+            severity: 'success',
+            detail: this.translate.instant('message.deleteCmtSuccess')
+          });
+          this.getComment();
+        }, err => {
+          this.indicator.hideActivityIndicator();
+          if (err instanceof ApiErrorResponse && err.code === '201') {
+            this.messageService.add({
+              severity: 'error',
+              detail: this.translate.instant('message.deleteCmtNotFound')
+            });
+          } else {
+            throw err;
+          }
+        });
+      },
+      reject: () => {}
+    });
   }
 }

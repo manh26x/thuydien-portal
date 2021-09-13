@@ -21,6 +21,7 @@
 		"delete": "Xác nhận xóa",
 		"deleteImage": "Bạn có chắc chắn xóa ảnh từ bản tin?",
 		"deleteMessage": "Bạn có chắc chắn muốn xóa bản tin \"{{name}}\"",
+    "deleteCmtMessage": "Bạn có chắc chắn muốn xóa bình luận \"{{name}}\"",
 		"reject": "Không"
 	},
 	"const": {
@@ -77,8 +78,10 @@
 		"draftSuccess": "Lưu bản nháp thành công",
 		"insertSuccess": "Thêm mới bản tin thành công",
 		"updateNotFound": "Bản tin không tồn tại hoặc đã bị xóa",
-		"updateSuccess": "Cập nhật bản tin thành công"
-	},
+		"updateSuccess": "Cập nhật bản tin thành công",
+    "deleteCmtSuccess": "Xóa bình luận thành công",
+    "deleteCmtNotFound": "Bình luận không tồn tại hoặc đã bị xóa"
+  },
 	"news": {
 		"author": "Tác giả",
 		"branch": "Chi nhánh",

@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {BaseService} from '../../../core/service/base.service';
 import {map} from 'rxjs/operators';
 import {CommentDto, CommentRequest, CommentResponsePage} from '../model/comment';
-import {ApiResultResponse} from '../../../core/model/result-response';
+import {ApiResult, ApiResultResponse} from '../../../core/model/result-response';
 
 @Injectable()
 export class CommentService extends BaseService{
@@ -39,6 +39,10 @@ export class CommentService extends BaseService{
   exportCommentFile(idNews: number): Observable<any> {
     return this.postDataBlob('/comment/export', idNews);
   }
-
+  deleteCmt(id: string): Observable<ApiResultResponse> {
+    // const param = new HttpParams().append('newsId', id);
+    const body = +id;
+    return this.doPost('/comment/delete', body);
+  }
 
 }
