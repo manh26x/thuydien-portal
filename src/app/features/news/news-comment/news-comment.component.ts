@@ -61,7 +61,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
     private messageService: MessageService,
   ) {
     super();
-    this.baseUrl = environment.baseUrl;
+    this.baseUrl = environment.mediaUrl;
   }
 
   ngAfterViewInit(): void {
