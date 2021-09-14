@@ -10,7 +10,7 @@ export const environment = {
   logServer: false,
   logClient: false,
   version: '2.5.1',
-  mediaUrl: 'https://portal-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com/api-v2/upload/',
+  mediaUrl: 'https://gateway-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com/upload/',
   clientTimeout: 180000, // 3m
   importExportTimeout: 300000, // 5m
   idleTimeout: 18000
