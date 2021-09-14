@@ -177,7 +177,7 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
     }
     if (!this.branchForm.invalid) {
       const body = this.branchForm.value;
-
+      body.code = this.branchForm.get('code').value.trim();
       if (this.isCreated) {
         this.indicator.showActivityIndicator();
         this.branchService.createBranch(body).pipe().subscribe(() => {
