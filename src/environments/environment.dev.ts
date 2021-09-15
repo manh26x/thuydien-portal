@@ -14,7 +14,7 @@ export const environment = {
   tokenEx: 43199,
   refreshTokenEx: 43199,
   clientId: 'YnJvd3NlcjoxMjM0',
-  baseUrl: 'https://gateway-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com',
+  baseUrl: 'https://ebit.tpb.vn/gitlab/salesapp/cloudgw-service',
   basePath: '',
   logServer: false,
   logClient: false,
