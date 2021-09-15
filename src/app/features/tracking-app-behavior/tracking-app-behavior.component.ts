@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from '../../core/base.component';
-import {MenuItem} from 'primeng/api';
+import {LazyLoadEvent, MenuItem} from 'primeng/api';
 import {concatMap, delay, map, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import {AppTranslateService} from '../../core/service/translate.service';
 import {TranslateService} from '@ngx-translate/core';
@@ -34,6 +34,8 @@ export class TrackingAppBehaviorComponent extends BaseComponent implements OnIni
   page = 0;
   pipe = new DatePipe('en-US');
   @ViewChild('newPaging') paging: Paginator;
+  sortBy = 'countIndex';
+  private sortOrder: string;
 
   constructor(private appTranslate: AppTranslateService,
               private translate: TranslateService,
@@ -77,6 +79,8 @@ export class TrackingAppBehaviorComponent extends BaseComponent implements OnIni
       branch: [null],
       page: [0],
       pageSize: [10],
+      sortBy: ['countIndex'],
+      sortOrder: [null]
     });
 
     this.branchService.getBranchList().subscribe(res => {
@@ -102,6 +106,8 @@ export class TrackingAppBehaviorComponent extends BaseComponent implements OnIni
     this.filterForm.get('branchCode').setValue(branchSelected);
     this.filterForm.get('fromDate').setValue(this.pipe.transform(rangeDate[0], 'dd/MM/yyyy'));
     this.filterForm.get('toDate').setValue(this.pipe.transform(rangeDate[1], 'dd/MM/yyyy'));
+    this.filterForm.get('sortBy').setValue(this.sortBy);
+    this.filterForm.get('sortOrder').setValue(this.sortOrder);
     this.trackingAppBehaviorService.getNewsBehavior(this.filterForm.value).subscribe(res => {
       this.newsList = res.listNews;
       this.totalItem = res.totalRecords;
@@ -125,7 +131,11 @@ export class TrackingAppBehaviorComponent extends BaseComponent implements OnIni
       this.indicator.hideActivityIndicator();
     });
   }
-
+  lazyLoadBranch( evt: LazyLoadEvent) {
+    this.sortBy = 'countIndex';
+    this.sortOrder = evt.sortOrder === 1 ? 'ASC' : 'DESC';
+    this.filterNews();
+  }
   changePage(evt: PageChangeEvent) {
     this.page = evt.page;
     this.pageSize = evt.rows;
