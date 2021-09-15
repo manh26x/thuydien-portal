@@ -119,8 +119,15 @@ export class TrackingAppBehaviorComponent extends BaseComponent implements OnIni
 
   filterTracking() {
     this.indicator.showActivityIndicator();
-    const branchSelected = this.filterForm.get('branch').value.code;
-    const rangeDate = this.filterForm.get('rangesDate').value;
+    let branchSelected = null;
+    let rangeDate = null;
+    try {
+      rangeDate = this.filterForm.get('rangesDate').value;
+      branchSelected = this.filterForm.get('branch').value.code;
+    } catch (e) {
+      this.filterForm.get('branch').setValue({code: null, name: 'Tất cả'});
+    }
+
     this.filterForm.get('fromDate').setValue(this.pipe.transform(rangeDate[0], 'dd/MM/yyyy'));
     this.filterForm.get('toDate').setValue(this.pipe.transform(rangeDate[1], 'dd/MM/yyyy'));
     this.filterForm.get('branchCode').setValue(branchSelected);
