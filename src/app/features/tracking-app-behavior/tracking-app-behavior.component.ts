@@ -108,6 +108,8 @@ export class TrackingAppBehaviorComponent extends BaseComponent implements OnIni
     this.filterForm.get('toDate').setValue(this.pipe.transform(rangeDate[1], 'dd/MM/yyyy'));
     this.filterForm.get('sortBy').setValue(this.sortBy);
     this.filterForm.get('sortOrder').setValue(this.sortOrder);
+    this.filterForm.get('page').setValue(this.page);
+    this.filterForm.get('pageSize').setValue(this.pageSize);
     this.trackingAppBehaviorService.getNewsBehavior(this.filterForm.value).subscribe(res => {
       this.newsList = res.listNews;
       this.totalItem = res.totalRecords;
