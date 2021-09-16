@@ -20,7 +20,8 @@ import { attempt, isError } from 'lodash-es';
 @Injectable()
 export class ResponseInterceptor implements HttpInterceptor {
   private readonly BASE_URL = environment.basePath;
-  private readonly IGNORE_URLS = ['/assets/i18n', '/userPortal/exportUserExcel', '/role/exportRoleExcel', '/comment/export'];
+  private readonly IGNORE_URLS = ['/assets/i18n', '/userPortal/exportUserExcel', '/role/exportRoleExcel',
+    '/comment/export', '/admin/unit/exportExcel', '/admin/department/exportExcel', '/admin/branch/exportExcel'];
   private readonly CLIENT_LOG_API = '/common/log';
   private readonly NOT_FOUND_WILL_THROW = [
     '/userPortal/detail'

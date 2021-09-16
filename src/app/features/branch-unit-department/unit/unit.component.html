@@ -3,12 +3,21 @@
         <div class="p-md-6 p-col-6 p-field">
             <input type="text" id="s-valueUnit"  pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
         </div>
-        <div class="p-md-2 p-col-12 p-field p-d-flex p-align-end">
-            <button (click)="doFilter()"  pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
+      <div class="p-md-1 p-col-12  p-d-flex p-align-end">
+        <div class="p-field">
+          <button (click)="doFilter()"  pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
         </div>
-        <div class="p-md-2 p-col-12 p-field p-d-flex p-align-end">
-            <button  pButton type="button" label="{{'btn.insert' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined" (click)="gotoCreate()" style="height: 46px"></button>
+      </div>
+      <div class="p-md-2 p-col-12  p-d-flex p-align-end">
+        <div class="p-field">
+          <button  pButton type="button" label="{{'btn.insert' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined" (click)="gotoCreate()" style="height: 46px"></button>
         </div>
+      </div>
+      <div class="p-md-3 p-col-12  p-d-flex p-justify-end ">
+        <div class="p-field">
+          <button  pButton type="button" label="{{'btn.export' | translate}}" class="p-button-primary" (click)="export()" style="height: 46px"></button>
+        </div>
+      </div>
     </form>
     <p-table [value]="unitList" dataKey="id" styleClass="table-responsive"
              [customSort]="true"

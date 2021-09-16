@@ -45,4 +45,7 @@ export class UnitService extends BaseService {
   deleteUnit(id): Observable<ApiResultResponse> {
     return this.doPost('/admin/unit/delete', id);
   }
+  export(): Observable<any> {
+    return this.postDataBlob('/admin/unit/exportExcel', null);
+  }
 }

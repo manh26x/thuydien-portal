@@ -44,4 +44,8 @@ export class DepartmentService extends BaseService {
   deleteDepartment(id): Observable<ApiResultResponse> {
     return this.doPost('/admin/department/delete', id);
   }
+
+  export(): Observable<any> {
+    return this.postDataBlob('/admin/department/exportExcel', null);
+  }
 }

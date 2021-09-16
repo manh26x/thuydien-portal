@@ -11,6 +11,7 @@ import {concatMap, finalize, startWith, switchMap, takeUntil} from 'rxjs/operato
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {DepartmentEnum} from './model/department.enum';
 import {BaseComponent} from '../../../core/base.component';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'aw-department',
@@ -237,4 +238,18 @@ export class DepartmentComponent extends BaseComponent implements OnInit, AfterV
     this.isUpdated = true;
   }
 
+
+  export() {
+    this.indicator.showActivityIndicator();
+    this.departmentService.export().pipe(
+      takeUntil(this.nextOnDestroy),
+      finalize(() => this.indicator.hideActivityIndicator())
+    ).subscribe(res => {
+      const myBlob: Blob = new Blob([res], { type: 'application/ms-excel' });
+      saveAs(myBlob, 'khoi.xlsx');
+    }, error => {
+      this.indicator.hideActivityIndicator();
+
+    });
+  }
 }

@@ -11,6 +11,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {BaseComponent} from '../../../core/base.component';
 import {BranchEnum} from './model/branch.enum';
 import {ApiErrorResponse} from '../../../core/model/error-response';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'aw-branch',
@@ -231,5 +232,19 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
     this.isCreated = false;
     this.isUpdated = true;
     this.branchForm.get('code').disable();
+  }
+
+  export() {
+    this.indicator.showActivityIndicator();
+    this.branchService.export().pipe(
+      takeUntil(this.nextOnDestroy),
+      finalize(() => this.indicator.hideActivityIndicator())
+    ).subscribe(res => {
+      const myBlob: Blob = new Blob([res], { type: 'application/ms-excel' });
+      saveAs(myBlob, 'chi_nhanh.xlsx');
+    }, error => {
+      this.indicator.hideActivityIndicator();
+
+    });
   }
 }

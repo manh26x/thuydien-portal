@@ -7,7 +7,8 @@
   "btn": {
     "insert": "Thêm mới",
     "cancel" : "Hủy",
-    "save": "Lưu"
+    "save": "Lưu",
+    "export": "Xuất báo cáo"
   },
   "branch": {
     "title": "DANH SÁCH CHI NHÁNH",

@@ -39,4 +39,8 @@ export class BranchService extends BaseService{
   deleteBranch(body: any): Observable<ApiResultResponse> {
     return this.doPost('/admin/branch/delete', body);
   }
+
+  export(): Observable<any> {
+    return this.postDataBlob('/admin/branch/exportExcel', null);
+  }
 }
