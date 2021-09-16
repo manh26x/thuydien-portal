@@ -60,11 +60,11 @@ export class TrackingAppBehaviorComponent extends BaseComponent implements OnIni
     ).subscribe(res => {
       if (!this.util.isNullOrEmpty(res.page)) {
         this.items = [
-          { label: res.lang.home, routerLink: '/tracking-app-behavior' },
+          { label: res.lang.home, routerLink: '/action-management' },
           { label: res.lang[res.page] }
         ];
       } else {
-        this.items = [{ label: res.lang.home, routerLink: '/tracking-app-behavior' }];
+        this.items = [{ label: res.lang.home, routerLink: '/action-management' }];
       }
     });
 

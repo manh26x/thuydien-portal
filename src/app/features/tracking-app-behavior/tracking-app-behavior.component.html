@@ -12,7 +12,7 @@
     ></p-calendar>
   </div>
   <div class="p-field p-col p-md-3">
-    <p-dropdown [options]="branchList"  optionLabel="name"  optionValue="code" [filter]="true" filterBy="name" [showClear]="true"
+    <p-dropdown [options]="branchList"  optionLabel="name"  optionValue="code" [filter]="true" [showClear]="true"
                 [placeholder]="'form-search.branch.placeholder' | translate"
                 formControlName="branch" (onChange)="changeBranch()"
     >
