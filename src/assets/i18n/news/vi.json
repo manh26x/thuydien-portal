@@ -125,6 +125,7 @@
     "content": "Nội dung bình luận",
     "createdTime": "Thời gian đăng",
     "delete": "Xóa",
+    "update": "Sửa",
     "type": {
       "cmt" : "Bình luận",
       "rep": "Trả lời"

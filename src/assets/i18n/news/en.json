@@ -125,6 +125,7 @@
     "content": "Content",
     "createdTime": "Created Time",
     "delete": "Delete",
+    "update": "Edit",
     "type": {
       "cmt" : "Comment",
       "rep": "Reply"

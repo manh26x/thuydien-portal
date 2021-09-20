@@ -49,6 +49,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
   fileName: any;
   filesDoc = [];
   isChangeDoc = true;
+  username = 'manhth1.pn';
   constructor(
     private commentService: CommentService,
     private route: ActivatedRoute,
@@ -81,7 +82,8 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
       idNews: [this.idNews],
       type: [CommentEnum.CMT],
       imgPath: null,
-      filePath: null
+      filePath: null,
+      isUpdate: false,
     });
 
   }
@@ -138,7 +140,8 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
             username: '',
             idParent: cmt.commentDetail.id,
             type: CommentEnum.REP,
-            isFirst: false
+            isFirst: false,
+            isUpdate: false
           });
           cmt.replyList[0].isFirst = true;
           return {
@@ -163,10 +166,10 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
       });
   }
 
-  onEnter() {
-    const body = this.commentForm.value;
-    if (this.contentValue !== '' ){
-      body.content = this.contentValue.trim();
+  onEnter(rep) {
+    let body = this.commentForm.value;
+    if (rep !== '' ){
+      body = rep;
     } else {
       body.idParent = null;
     }
@@ -174,7 +177,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
       return;
     }
     const listObs: Observable<string>[] = [];
-    if (this.filesImage.length > 0) {
+    if (this.filesImage?.length > 0) {
       const listFormData: FormData = new FormData();
       listFormData.append('file', this.filesImage[0]);
       listObs.push(this.newsService.uploadFile(listFormData));
@@ -203,7 +206,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
         this.clearImage();
         this.doClearDoc();
         this.paging.changePage(this.page);
-    });
+    }, err => this.indicator.hideActivityIndicator());
 
 
   }
@@ -269,8 +272,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
     });
   }
   submit() {
-    this.contentValue = '';
-    this.onEnter();
+    this.onEnter('');
   }
 
   clearImage() {
@@ -308,6 +310,22 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
         });
       },
       reject: () => {}
+    });
+  }
+
+  updateClicked(rowData: any, $event: MouseEvent) {
+    this.clearImage();
+    this.doClearDoc();
+    rowData.isUpdate = true;
+    this.contentValue = rowData.content;
+    this.commentForm = this.commentForm = this.fb.group({
+      idParent: [rowData['idParent']],
+      content: [rowData['content']],
+      idNews: [this.idNews],
+      type: [rowData['type']],
+      imgPath: null,
+      filePath: null,
+      isUpdate: true,
     });
   }
 }

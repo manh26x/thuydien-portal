@@ -64,12 +64,12 @@
     <tr *ngIf="rowData.id" style="align-content: flex-start;">
       <td [ngClass]="{'border-none-custom' : rowData.type === commentEnum.REP}">
         <p-treeTableToggler [rowNode]="rowNode" style="display: none; pointer-events: none; "></p-treeTableToggler>
-        <span *ngIf="rowData.type === commentEnum.CMT">{{'comment.type.cmt' | translate}}</span>
-        <span *ngIf="rowData.type === commentEnum.REP && rowData.isFirst">{{'comment.type.rep' | translate}}</span>
+        <span *ngIf="rowData.type === commentEnum.CMT ">{{'comment.type.cmt' | translate}}</span>
+        <span *ngIf="rowData.type === commentEnum.REP && rowData.isFirst ">{{'comment.type.rep' | translate}}</span>
       </td>
       <td [ngClass]="{'border-none-custom' : rowData.type === commentEnum.REP}">{{rowData['fullName'] }}</td>
       <td [ngClass]="{'border-none-custom' : rowData.type === commentEnum.REP}" [colSpan]="commentForm?.value?.idParent && rowData['status'] === 0 ? 2 : 1"><span
-        *ngIf="rowData['content']">{{rowData['content']}}</span>
+        *ngIf="rowData['content'] && !rowData['isUpdate']">{{rowData['content']}}</span>
         <br *ngIf="rowData['imgPath']">
         <img
           width="100%"
@@ -80,10 +80,10 @@
           File đính kèm
         </a>
         <br>
-        <div class="p-inputgroup" id="customRepInput" *ngIf="commentForm?.value?.idParent && rowData['status'] === 0">
+        <div class="p-inputgroup" id="customRepInput" *ngIf="commentForm?.value?.idParent && rowData['status'] === 0 || rowData['isUpdate']">
           <input
-                 #contentIn [(ngModel)]="contentValue" style="height: 38px;"
-                 pInputText (keydown.enter)="onEnter()">
+                 #contentIn [(ngModel)]="rowData['content']" style="height: 38px;"
+                 pInputText (keydown.enter)="onEnter(rowData)">
           <div id="iconImgRep"  class="p-inputgroup-addon" style="padding-right: 0">
             <a href="javascript:void('select file');" (click)="img.click()">
               <em class="pi pi-fw pi-image" style="font-size: large"></em>
@@ -97,7 +97,7 @@
             <input type="file" #file accept="jpg, png, gif" [multiple]="true" (change)="onFileChange($event, 'file')" style="display:none" />
           </div>
         </div>
-        <div *ngIf="commentForm?.value?.idParent && rowData['status'] === 0" class="image-preview" [ngStyle]="{'display': isSelect ? 'none':'block' }" id="imgRepPreview">
+        <div *ngIf="commentForm?.value?.idParent && rowData['status'] === 0 || rowData['isUpdate']" class="image-preview" [ngStyle]="{'display': isSelect ? 'none':'block' }" id="imgRepPreview">
           <img alt="IMG" [src]="previewUrl">
           <div class="img-action">
             <button class="btn-action" (click)="clearImage()" >
@@ -105,7 +105,7 @@
             </button>
           </div>
         </div>
-        <p *ngIf="commentForm?.value?.idParent && rowData['status'] === 0" class="docs-preview" style="padding: 0.5em; " [ngStyle]="{'display': isChangeDoc ? 'none':'block' }" >
+        <p *ngIf="commentForm?.value?.idParent && rowData['status'] === 0 || rowData['isUpdate']" class="docs-preview" style="padding: 0.5em; " [ngStyle]="{'display': isChangeDoc ? 'none':'block' }" >
           {{fileName}}
           <button class="btn-action" (click)="doClearDoc()" >
             <i class="pi pi-times"></i>
@@ -114,7 +114,10 @@
         <button *ngIf="rowData.type === commentEnum.CMT && !isView" label="{{'comment.reply' | translate}}"
                 style="text-align: left; padding-left: 0;width: auto" class="text-primary p-button-link"
                 pButton (click)="replyClicked(rowData, $event)"></button>
-        <button *ngIf="rowData.type === commentEnum.CMT && !isView" label="{{'comment.delete' | translate}}"
+        <button *ngIf="!isView && rowData['username'] === username" label="{{'comment.update' | translate}}"
+                style="text-align: left; padding-left: 0;width: auto" class="text-primary p-button-link"
+                pButton (click)="updateClicked(rowData, $event)"></button>
+        <button *ngIf="!isView" label="{{'comment.delete' | translate}}"
                 style="text-align: left; padding-left: 0; width: auto" class="text-primary p-button-link"
                 pButton (click)="deleteClicked(rowData, $event)"></button>
       </td>
