@@ -17,6 +17,7 @@ import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
 import {NewsService} from '../service/news.service';
 import {environment} from '../../../../environments/environment';
 import {ApiErrorResponse} from '../../../core/model/error-response';
+import {AuthService} from '../../../auth/auth.service';
 @Component({
   selector: 'aw-news-comment',
   templateUrl: './news-comment.component.html',
@@ -49,7 +50,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
   fileName: any;
   filesDoc = [];
   isChangeDoc = true;
-  username = 'manhth1.pn';
+  username: any;
   constructor(
     private commentService: CommentService,
     private route: ActivatedRoute,
@@ -60,6 +61,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
     private newsService: NewsService,
     private dialog: ConfirmationService,
     private messageService: MessageService,
+    private authService: AuthService
   ) {
     super();
     this.baseUrl = environment.mediaUrl;
@@ -84,6 +86,9 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
       // tslint:disable-next-line:radix
         this.idNews = Number.parseInt(id);
     });
+
+    const user = this.authService.getUserInfo();
+    this.username = user.userName;
     this.commentForm = this.fb.group({
       idParent: [null],
       content: [''],
