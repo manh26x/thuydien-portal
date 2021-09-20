@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {BaseComponent} from '../../../core/base.component';
 import {CommentService} from '../service/comment.service';
 import {ActivatedRoute} from '@angular/router';
@@ -32,7 +32,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
   isChangeImage = false;
   filesImage: any[];
   commentTree: TreeNode[] = [];
-  testEmitter$ = new BehaviorSubject<TreeNode[]>(this.commentTree);
+  treeEmitter$ = new BehaviorSubject<TreeNode[]>(this.commentTree);
 
 
   baseUrl = '';
@@ -65,8 +65,16 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
     this.baseUrl = environment.mediaUrl;
   }
 
+  @HostListener('document:mousedown', ['$event'])
+  onGlobalClick(event): void {
+    if (!this.pTreeTable.el.nativeElement.contains(event.target)) {
+      // clicked outside => clear comment form
+      this.clearCmtForm();
+    }
+  }
   ngAfterViewInit(): void {
     this.paging.changePage(this.page);
+
   }
 
   ngOnInit(): void {
@@ -115,7 +123,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
 
       }
     });
-    this.testEmitter$.next(this.commentTree);
+    this.treeEmitter$.next(this.commentTree);
 
     setTimeout(() => {
       this.contentIn.nativeElement.focus();
@@ -128,6 +136,18 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
       map(res => {
         res.data = res.content.map(cmt => {
           cmt.replyList = [...cmt.replyList].reverse();
+          cmt.commentDetail.previewUrl = undefined;
+          cmt.commentDetail.isSelect = true;
+          cmt.commentDetail.fileName = '';
+          cmt.commentDetail.filesDoc = [] ;
+          cmt.commentDetail.isChangeDoc = true;
+          cmt.replyList.forEach(rep => {
+            rep.previewUrl = undefined;
+            rep.isSelect = true;
+            rep.fileName = '';
+            rep.filesDoc = [] ;
+            rep.isChangeDoc = true;
+          });
           cmt.replyList.push({
             avatar: null,
             content: null,
@@ -141,7 +161,14 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
             idParent: cmt.commentDetail.id,
             type: CommentEnum.REP,
             isFirst: false,
-            isUpdate: false
+            isUpdate: false,
+            previewUrl: undefined,
+            isSelect: true,
+            fileName: '',
+            filesDoc: [],
+            isChangeDoc: true,
+            image: '',
+            filePath: ''
           });
           cmt.replyList[0].isFirst = true;
           return {
@@ -161,37 +188,55 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
       },
       (error) => console.log('error', error),
       () => {
-        this.testEmitter$.next(this.commentTree);
+        this.treeEmitter$.next(this.commentTree);
 
       });
   }
 
-  onEnter(rep) {
+  onEnter(cmt) {
     let body = this.commentForm.value;
-    if (rep !== '' ){
-      body = rep;
+    const listObs: Observable<string>[] = [];
+
+    if (cmt !== '' ){
+      body = cmt;
+      if (cmt.filesImage?.length > 0) {
+        const listFormData: FormData = new FormData();
+        listFormData.append('file', cmt.filesImage[0]);
+        listObs.push(this.newsService.uploadFile(listFormData));
+      } else {
+        listObs.push(of(null));
+      }
+
+      if (cmt.filesDoc.length > 0) {
+        const listFormData: FormData = new FormData();
+        listFormData.append('file', cmt.filesDoc[0]);
+        listObs.push(this.newsService.uploadFile(listFormData));
+      } else {
+        listObs.push(of(null));
+      }
+
     } else {
       body.idParent = null;
+      if (this.filesImage?.length > 0) {
+        const listFormData: FormData = new FormData();
+        listFormData.append('file', this.filesImage[0]);
+        listObs.push(this.newsService.uploadFile(listFormData));
+      } else {
+        listObs.push(of(null));
+      }
+
+      if (this.filesDoc.length > 0) {
+        const listFormData: FormData = new FormData();
+        listFormData.append('file', this.filesDoc[0]);
+        listObs.push(this.newsService.uploadFile(listFormData));
+      } else {
+        listObs.push(of(null));
+      }
     }
     if (body.content.trim() === '') {
       return;
     }
-    const listObs: Observable<string>[] = [];
-    if (this.filesImage?.length > 0) {
-      const listFormData: FormData = new FormData();
-      listFormData.append('file', this.filesImage[0]);
-      listObs.push(this.newsService.uploadFile(listFormData));
-    } else {
-      listObs.push(of(null));
-    }
 
-    if (this.filesDoc.length > 0) {
-      const listFormData: FormData = new FormData();
-      listFormData.append('file', this.filesDoc[0]);
-      listObs.push(this.newsService.uploadFile(listFormData));
-    } else {
-      listObs.push(of(null));
-    }
     this.indicator.showActivityIndicator();
     forkJoin(listObs).pipe(
       concatMap(fileInfo => {
@@ -250,12 +295,38 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
 
     }
   }
+
+  onCmtFileChange(event , type: string, rowData: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      const files = event.target.files;
+      this.clearCmtImage(rowData);
+      if (type === 'img') {
+        rowData.isChangeImage = true;
+        rowData.filesImage = files;
+        const objUrl = window.URL.createObjectURL(files[0]);
+        rowData.previewUrl = this.sanitizer.bypassSecurityTrustUrl(objUrl);
+        rowData.isSelect = false;
+        rowData.image = files;
+      } else {
+        rowData.fileName = files[0].name;
+        rowData.isChangeDoc = false;
+        rowData.filesDoc = files;
+      }
+
+    }
+  }
+
   doClearDoc() {
     this.isChangeDoc = true;
     this.filesDoc = [];
     this.commentForm.patchValue({
       filePath: ''
     });
+  }
+  doCmtClearDoc(rowData) {
+    rowData.isChangeDoc = true;
+    rowData.filesDoc = [];
+    rowData.filePath = '';
   }
 
   previewFile(files) {
@@ -278,6 +349,11 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
   clearImage() {
     this.isSelect = true;
     this.doClearImage();
+  }
+  clearCmtImage(rowData) {
+    rowData.isChangeImage = true;
+    rowData.filesImage = [];
+    rowData.image = '';
   }
 
   deleteClicked(rowData: any, $event: MouseEvent) {
@@ -314,18 +390,18 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
   }
 
   updateClicked(rowData: any, $event: MouseEvent) {
-    this.clearImage();
-    this.doClearDoc();
+    this.clearCmtImage(rowData);
+    this.doCmtClearDoc(rowData);
     rowData.isUpdate = true;
-    this.contentValue = rowData.content;
-    this.commentForm = this.commentForm = this.fb.group({
-      idParent: [rowData['idParent']],
-      content: [rowData['content']],
-      idNews: [this.idNews],
-      type: [rowData['type']],
-      imgPath: null,
-      filePath: null,
-      isUpdate: true,
-    });
   }
+
+  clearCmtForm() {
+    this.commentTree.forEach(e => {
+      e.data.isUpdate = false;
+      e.children.forEach(child => child.data.isUpdate = false);
+    });
+    this.treeEmitter$.next(this.commentTree);
+  }
+
+
 }

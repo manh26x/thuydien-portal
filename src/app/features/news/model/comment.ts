@@ -1,4 +1,5 @@
 import {TreeNode} from 'primeng/api';
+import {SafeUrl} from '@angular/platform-browser';
 
 export interface CommentRequest {
   idNews: number;
@@ -21,6 +22,14 @@ export interface CommentDto {
   createdBy: string;
   isFirst: boolean;
   isUpdate: boolean;
+  previewUrl: SafeUrl;
+  isSelect: boolean;
+  fileName: any;
+  filesDoc: Array<any>;
+  isChangeDoc: boolean;
+  image: any;
+  filePath: any;
+
 }
 export interface CommentResponse {
   commentDetail: CommentDto;

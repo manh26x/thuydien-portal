@@ -51,7 +51,7 @@
              [showCurrentPageReport]="true"
              currentPageReportTemplate="{{ 'paging' | translate }}">
 </p-paginator>
-<p-treeTable #pTreeTable [value]="testEmitter$ | async" dataKey="data.id">
+<p-treeTable #pTreeTable [value]="treeEmitter$ | async" dataKey="data.id"  >
   <ng-template pTemplate="header">
     <tr>
       <th id="typeCol"></th>
@@ -82,32 +82,32 @@
         <br>
         <div class="p-inputgroup" id="customRepInput" *ngIf="commentForm?.value?.idParent && rowData['status'] === 0 || rowData['isUpdate']">
           <input
-                 #contentIn [(ngModel)]="rowData['content']" style="height: 38px;"
+                  [(ngModel)]="rowData['content']" style="height: 38px;"
                  pInputText (keydown.enter)="onEnter(rowData)">
           <div id="iconImgRep"  class="p-inputgroup-addon" style="padding-right: 0">
             <a href="javascript:void('select file');" (click)="img.click()">
               <em class="pi pi-fw pi-image" style="font-size: large"></em>
             </a>
-            <input type="file" #img accept=".jpg, .png, .gif" [multiple]="true" (change)="onFileChange($event,'img')" style="display:none" />
+            <input type="file" #img accept=".jpg, .png, .gif" [multiple]="true" (change)="onCmtFileChange($event,'img',rowData)" style="display:none" />
           </div>
           <div id="iconLinkRep" class="p-inputgroup-addon" style="padding-left: 0.5em">
             <a href="javascript:void('select file');" (click)="file.click()">
               <em class="pi pi-fw pi-link" style="font-size: large"></em>
             </a>
-            <input type="file" #file accept="jpg, png, gif" [multiple]="true" (change)="onFileChange($event, 'file')" style="display:none" />
+            <input type="file" #file accept="jpg, png, gif" [multiple]="true" (change)="onCmtFileChange($event, 'file',rowData)" style="display:none" />
           </div>
         </div>
-        <div *ngIf="commentForm?.value?.idParent && rowData['status'] === 0 || rowData['isUpdate']" class="image-preview" [ngStyle]="{'display': isSelect ? 'none':'block' }" id="imgRepPreview">
-          <img alt="IMG" [src]="previewUrl">
+        <div *ngIf="rowData.idParent && rowData['status'] === 0 || rowData['isUpdate']" class="image-preview" [ngStyle]="{'display': rowData['isSelect'] ? 'none':'block' }" id="imgRepPreview">
+          <img alt="IMG" [src]="rowData['previewUrl']">
           <div class="img-action">
-            <button class="btn-action" (click)="clearImage()" >
+            <button class="btn-action" (click)="clearCmtImage(rowData)" >
               <i class="pi pi-times"></i>
             </button>
           </div>
         </div>
-        <p *ngIf="commentForm?.value?.idParent && rowData['status'] === 0 || rowData['isUpdate']" class="docs-preview" style="padding: 0.5em; " [ngStyle]="{'display': isChangeDoc ? 'none':'block' }" >
-          {{fileName}}
-          <button class="btn-action" (click)="doClearDoc()" >
+        <p *ngIf="rowData['idParent'] && rowData['status'] === 0 || rowData['isUpdate']" class="docs-preview" style="padding: 0.5em; " [ngStyle]="{'display': rowData['isChangeDoc'] ? 'none':'block' }" >
+          {{rowData['fileName']}}
+          <button class="btn-action" (click)="doCmtClearDoc(rowData)" >
             <i class="pi pi-times"></i>
           </button>
         </p>
@@ -115,7 +115,7 @@
                 style="text-align: left; padding-left: 0;width: auto" class="text-primary p-button-link"
                 pButton (click)="replyClicked(rowData, $event)"></button>
         <button *ngIf="!isView && rowData['username'] === username" label="{{'comment.update' | translate}}"
-                style="text-align: left; padding-left: 0;width: auto" class="text-primary p-button-link"
+                style="text-align: left; padding-left: 0;width: auto" class="text-primary p-button-link show-cmt"
                 pButton (click)="updateClicked(rowData, $event)"></button>
         <button *ngIf="!isView" label="{{'comment.delete' | translate}}"
                 style="text-align: left; padding-left: 0; width: auto" class="text-primary p-button-link"
