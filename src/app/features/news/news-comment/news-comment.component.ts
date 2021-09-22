@@ -333,7 +333,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
   doCmtClearDoc(rowData) {
     rowData.isChangeDoc = true;
     rowData.filesDoc = [];
-    rowData.filePath = '';
+    rowData.filePath = ''
   }
 
   previewFile(files) {
@@ -398,7 +398,9 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
 
   updateClicked(rowData: any, $event: MouseEvent) {
     this.clearCmtImage(rowData);
-    this.doCmtClearDoc(rowData);
+    if (rowData.filePath !== '') {
+      rowData['isChangeDoc'] = false;
+    }
     rowData.isUpdate = true;
   }
 

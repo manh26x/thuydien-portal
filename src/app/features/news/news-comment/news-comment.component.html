@@ -75,7 +75,7 @@
           width="100%"
           *ngIf="rowData['imgPath']" alt="IMG" [src]="baseUrl+rowData['imgPath']">
         <br *ngIf="rowData['filePath']">
-        <a target="_blank" *ngIf="rowData['filePath']" [href]="baseUrl+rowData['filePath']" download>
+        <a target="_blank" *ngIf="rowData['filePath']" [href]="baseUrl+rowData['filePath']"  download>
           <em class="pi pi-fw pi-link"></em>
           File đính kèm
         </a>
@@ -106,7 +106,8 @@
           </div>
         </div>
         <p *ngIf="rowData['idParent'] && rowData['status'] === 0 || rowData['isUpdate']" class="docs-preview" style="padding: 0.5em; " [ngStyle]="{'display': rowData['isChangeDoc'] ? 'none':'block' }" >
-          {{rowData['fileName']}}
+          <em class="pi pi-fw pi-link"></em>
+          File đính kèm
           <button class="btn-action" (click)="doCmtClearDoc(rowData)" >
             <i class="pi pi-times"></i>
           </button>
