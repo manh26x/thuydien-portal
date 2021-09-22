@@ -247,8 +247,8 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
     this.indicator.showActivityIndicator();
     forkJoin(listObs).pipe(
       concatMap(fileInfo => {
-        body.imgPath = fileInfo[0];
-        body.filePath = fileInfo[1];
+        body.imgPath = fileInfo[0] === null ? body.imgPath : fileInfo[0];
+        body.filePath = fileInfo[1] === null ? body.filePath : fileInfo[1];
         return this.commentService.postComment(body);
       })).subscribe(res => {
         this.contentValue = '';
