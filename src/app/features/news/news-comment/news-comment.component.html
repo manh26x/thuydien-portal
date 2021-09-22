@@ -51,7 +51,7 @@
              [showCurrentPageReport]="true"
              currentPageReportTemplate="{{ 'paging' | translate }}">
 </p-paginator>
-<p-treeTable #pTreeTable [value]="treeEmitter$ | async" dataKey="data.id"  >
+<p-treeTable #pTreeTable [value]="treeEmitter$ | async"   >
   <ng-template pTemplate="header">
     <tr>
       <th id="typeCol"></th>
@@ -68,8 +68,8 @@
         <span *ngIf="rowData.type === commentEnum.REP && rowData.isFirst ">{{'comment.type.rep' | translate}}</span>
       </td>
       <td [ngClass]="{'border-none-custom' : rowData.type === commentEnum.REP}">{{rowData['fullName'] }}</td>
-      <td [ngClass]="{'border-none-custom' : rowData.type === commentEnum.REP}" [colSpan]="commentForm?.value?.idParent && rowData['status'] === 0 ? 2 : 1"><span
-        *ngIf="rowData['content'] && !rowData['isUpdate']">{{rowData['content']}}</span>
+      <td [ngClass]="{'border-none-custom' : rowData.type === commentEnum.REP}" [colSpan]="rowData['isUpdate'] || rowData['status'] === 0 ? 2 : 1"><span
+        *ngIf="rowData['content'] && !rowData['isUpdate'] && rowData['id'] !== -1">{{rowData['content']}}</span>
         <br *ngIf="rowData['imgPath']">
         <img
           width="100%"
@@ -121,7 +121,7 @@
                 style="text-align: left; padding-left: 0; width: auto" class="text-primary p-button-link"
                 pButton (click)="deleteClicked(rowData, $event)"></button>
       </td>
-      <td
+      <td *ngIf="!rowData['isUpdate']"
         [ngClass]="{'border-none-custom' : rowData.type === commentEnum.REP}">{{rowData['createDate'] | date : 'HH:mm dd/MM/yyyy'}}</td>
     </tr>
   </ng-template>

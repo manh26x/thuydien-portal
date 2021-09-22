@@ -120,7 +120,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
     this.commentTree.forEach(cmt => {
       if (cmt.data.id === row.id) {
         cmt.expanded = true;
-        cmt.children[cmt.children.length - 1].data.id = 1;
+        cmt.children[cmt.children.length - 1].data.id = -1;
         this.commentForm.get('idParent').setValue(row.id);
         this.commentForm.get('type').setValue(CommentEnum.REP);
       } else {
@@ -159,7 +159,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
             createDate: undefined,
             createdBy: '',
             fullName: '',
-            id: null,
+            id: undefined,
             idNews: this.idNews,
             status: 0,
             username: '',
@@ -241,6 +241,8 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
     if (body.content.trim() === '') {
       return;
     }
+
+    body.id = body.id === -1 ? undefined : body.id;
 
     this.indicator.showActivityIndicator();
     forkJoin(listObs).pipe(
