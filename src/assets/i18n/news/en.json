@@ -63,7 +63,10 @@
 		"title": {
 			"maxLength": "The value must not exceed {{length}} characters",
 			"required": "Value cannot be blank"
-		}
+		},
+    "content": {
+      "maxLength": "The value must not exceed {{length}} characters"
+    }
 	},
 	"level": "Critical level",
 	"levelList": {

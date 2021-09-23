@@ -63,7 +63,10 @@
 		"title": {
 			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
 			"required": "Giá trị không được để trống"
-		}
+		},
+    "content": {
+      "maxLength": "Giá trị không được vượt quá {{length}} ký tự"
+    }
 	},
 	"level": "Mức độ quan trọng",
 	"levelList": {

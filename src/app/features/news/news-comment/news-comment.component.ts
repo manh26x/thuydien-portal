@@ -10,7 +10,7 @@ import {CommentEnum} from '../model/news.enum';
 import {Paginator} from 'primeng/paginator';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {BehaviorSubject, forkJoin, Observable, of} from 'rxjs';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TreeTable} from 'primeng/treetable';
 import { saveAs } from 'file-saver';
 import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
@@ -91,7 +91,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
     this.username = user.userName;
     this.commentForm = this.fb.group({
       idParent: [null],
-      content: [''],
+      content: ['', [Validators.maxLength(1000)]],
       idNews: [this.idNews],
       type: [CommentEnum.CMT],
       imgPath: null,
@@ -100,7 +100,13 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
     });
 
   }
-
+  hasErrorInput(controlName: string, errorName: string): boolean {
+    const control = this.commentForm.get(controlName);
+    if (control == null) {
+      return false;
+    }
+    return control.hasError(errorName);
+  }
   changePage(evt) {
     this.page = evt.page;
     this.pageSize = evt.rows;
@@ -121,6 +127,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
       if (cmt.data.id === row.id) {
         cmt.expanded = true;
         cmt.children[cmt.children.length - 1].data.id = -1;
+        cmt.children[cmt.children.length - 1].data.status = 0;
         this.commentForm.get('idParent').setValue(row.id);
         this.commentForm.get('type').setValue(CommentEnum.REP);
       } else {
@@ -140,7 +147,6 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
     this.commentService.getAllComment(this.request).pipe(
       map(res => {
         res.data = res.content.map(cmt => {
-          cmt.replyList = [...cmt.replyList].reverse();
           cmt.commentDetail.previewUrl = undefined;
           cmt.commentDetail.isSelect = true;
           cmt.commentDetail.fileName = '';
@@ -239,6 +245,9 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
       }
     }
     if (body.content.trim() === '') {
+      return;
+    }
+    if (body.content.length >= 1000) {
       return;
     }
 
@@ -407,10 +416,17 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
   clearCmtForm() {
     this.commentTree.forEach(e => {
       e.data.isUpdate = false;
-      e.children.forEach(child => child.data.isUpdate = false);
+      e.children[e.children.length - 1].data.status = 1;
+      e.children[e.children.length - 1].data.id = undefined;
+      e.children.forEach(child => {
+        child.data.isUpdate = false;
+      });
     });
     this.treeEmitter$.next(this.commentTree);
   }
 
 
+  hasError(content) {
+    return content !== null && content.length >= 1000;
+  }
 }

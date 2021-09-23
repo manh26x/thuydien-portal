@@ -51,6 +51,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   maxShowBranchInit = 3;
   dialogRef: DynamicDialogRef = null;
   isHasApprove = true;
+  selectedUser: UserDetail[];
   constructor(
     private userService: UserService,
     private router: Router,

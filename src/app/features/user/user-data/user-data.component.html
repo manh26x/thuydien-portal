@@ -40,15 +40,21 @@
       <button [disabled]="!isHasExport" (click)="doExportUser()" pButton type="button" label="{{'btn.export' | translate}}" style="height: 46px"></button>
     </div>
   </form>
+  <div class="p-d-flex p-justify-start p-align-start" style="background-color: #000; height: 100px">
+  </div>
   <p-table [value]="userList" styleClass="table-responsive"
            [customSort]="true"
            [autoLayout]="true"
            [lazy]="true"
            sortField="fullName"
            [sortOrder]="-1"
+           [(selection)]="selectedUser"
            (onLazyLoad)="lazyLoadUser($event)">
     <ng-template pTemplate="header">
       <tr>
+        <th style="width: 3rem" *ngIf="isApprove">
+          <p-tableHeaderCheckbox ></p-tableHeaderCheckbox>
+        </th>
         <th id="noId" style="width: 50px;">{{'no' | translate}}</th>
         <th id="fullNameId" pSortableColumn="fullName">{{'user.fullName' | translate}}<p-sortIcon field="fullName"></p-sortIcon></th>
         <th id="userNameId">{{'user.userName' | translate}}</th>
@@ -65,6 +71,9 @@
 
     <ng-template pTemplate="body" let-user let-index="rowIndex">
       <tr>
+        <td *ngIf="isApprove">
+          <p-tableCheckbox [value]="user"></p-tableCheckbox>
+        </td>
         <td>{{index + 1}}</td>
         <td>{{user.user.fullName}}</td>
         <td>{{user.user.userName}}</td>

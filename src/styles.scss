@@ -222,7 +222,7 @@
     justify-content: flex-start;
   }
 }
-#customCommentInput, #customRepInput  {
+#customRepInput {
 
   flex-wrap: wrap;
 
@@ -233,6 +233,29 @@
   }
   input {
     border-right: none;
+    border-color: rgba(0,0,0,0.38) ;
+    box-shadow: none;
+    outline: none;
+    border-width: 1px;
+    &:focus, &:hover {
+      box-shadow: none;
+      border-width: 1px;
+      border-color: rgba(0,0,0,0.38);
+    }
+  }
+}
+#customCommentInput  {
+
+  flex-wrap: wrap;
+
+  .p-inputgroup-addon{
+    height: 38px;
+    border-left: none;
+    color: #582E91;
+  }
+  input {
+    border-right: none;
+    border-color: rgba(0,0,0,0.38) !important;
     &:focus, &:hover {
       box-shadow: none;
       border-color: rgba(0,0,0,0.38);

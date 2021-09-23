@@ -3,19 +3,23 @@
     <div class="p-inputgroup" *ngIf="!isView" id="customCommentInput">
       <input pInputText id="n-comment" style="height: 38px; border-right: none"
              formControlName="content" (keyup.enter)="submit()" type="text"/>
-      <div id="iconImgCmt"  class="p-inputgroup-addon" style="padding-right: 0">
+
+      <div id="iconImgCmt"  class="p-inputgroup-addon" style="padding-right: 0" >
         <a href="javascript:void('select file');" (click)="img.click()">
           <em class="pi pi-fw pi-image" style="font-size: large"></em>
         </a>
         <input type="file" #img accept=".jpg, .png, .gif" [multiple]="true" (change)="onFileChange($event,'img')" style="display:none" />
       </div>
-      <div id="iconLinkCmt" class="p-inputgroup-addon" style="padding-left: 0.5em">
+      <div id="iconLinkCmt" class="p-inputgroup-addon" style="padding-left: 0.5em" >
         <a href="javascript:void('select file');" (click)="file.click()">
           <em class="pi pi-fw pi-link" style="font-size: large"></em>
         </a>
         <input type="file" #file accept="jpg, png, gif" [multiple]="true" (change)="onFileChange($event, 'file')" style="display:none" />
       </div>
     </div>
+    <small *ngIf="hasErrorInput('content', 'maxlength')" class="p-invalid">
+      {{ 'invalid.content.maxLength' | translate:{length: 1000} }}
+    </small>
     <div class="image-preview" *ngIf="commentForm?.value?.idParent === null" [ngStyle]="{'display': isSelect ? 'none':'block' }" id="imgCmtPreview">
       <img alt="IMG" [src]="previewUrl">
       <div class="img-action">
@@ -80,7 +84,7 @@
           File đính kèm
         </a>
         <br>
-        <div class="p-inputgroup" id="customRepInput" *ngIf="commentForm?.value?.idParent && rowData['status'] === 0 || rowData['isUpdate']">
+        <div class="p-inputgroup" id="customRepInput" *ngIf="(commentForm?.value?.idParent && rowData['status'] === 0) || rowData['isUpdate']">
           <input
                   [(ngModel)]="rowData['content']" style="height: 38px;"
                  pInputText (keydown.enter)="onEnter(rowData)">
@@ -96,7 +100,11 @@
             </a>
             <input type="file" #file accept="jpg, png, gif" [multiple]="true" (change)="onCmtFileChange($event, 'file',rowData)" style="display:none" />
           </div>
+
         </div>
+        <small *ngIf="(commentForm?.value?.idParent && rowData['status'] === 0 || rowData['isUpdate']) && hasError(rowData['content'])" class="p-invalid">
+          {{ 'invalid.content.maxLength' | translate:{length: 1000} }}
+        </small>
         <div *ngIf="rowData.idParent && rowData['status'] === 0 || rowData['isUpdate']" class="image-preview" [ngStyle]="{'display': rowData['isSelect'] ? 'none':'block' }" id="imgRepPreview">
           <img alt="IMG" [src]="rowData['previewUrl']">
           <div class="img-action">
