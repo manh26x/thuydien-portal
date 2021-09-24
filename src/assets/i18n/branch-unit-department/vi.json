@@ -25,8 +25,8 @@
     "branchName":  "Tên chi nhánh",
     "invalid": {
       "required": "Giá trị không được để trống",
-      "maxLength": "Giá trị không được vượt quá {{length}} ký tự"
-
+      "maxLength": "Giá trị không được vượt quá {{length}} ký tự",
+      "digit": "Mã chi nhánh phải là một số"
     },
     "message": {
       "deleteNotFound": "Chi nhánh không tồn tại hoặc đã bị xóa",
@@ -96,7 +96,6 @@
     "invalid": {
       "required": "Giá trị không được để trống",
       "maxLength": "Giá trị không được vượt quá {{length}} ký tự"
-
     },
     "message": {
       "deleteNotFound": "Khối không tồn tại hoặc đã bị xóa",

@@ -150,7 +150,7 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
   }
   initFormBranch() {
     this.branchForm = this.fb.group({
-      code: ['', [Validators.required, Validators.maxLength(9)]],
+      code: ['', [Validators.required, Validators.maxLength(9), Validators.pattern('0-9')]],
       name: ['', [Validators.required, Validators.maxLength(100)]],
       status: [BranchEnum.STATUS_ACTIVE, [Validators.required]],
       address: ['', [Validators.maxLength(100)]],

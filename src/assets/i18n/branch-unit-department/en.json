@@ -25,7 +25,8 @@
     "branchName":  "Branch Name",
     "invalid": {
         "required": "Value cannot be blank",
-        "maxLength": "The value must not exceed {{length}} characters"
+        "maxLength": "The value must not exceed {{length}} characters",
+        "digit": "Code must be digit"
     },
     "message": {
       "deleteNotFound": "The branch does not exist or has been deleted",

@@ -107,6 +107,9 @@
         <small *ngIf="hasErrorInput('code', 'maxlength')" class="p-invalid">
           {{ 'branch.invalid.maxLength' | translate:{length: 9} }}
         </small>
+        <small *ngIf="hasErrorInput('code', 'pattern')" class="p-invalid">
+          {{ 'branch.invalid.digit' | translate }}
+        </small>
       </div>
       <div class="p-md-12 p-col-6 p-field">
         <label for="s-branchName">{{'branch.branchName'|translate}} <span class="p-invalid">*</span></label>
