@@ -23,6 +23,9 @@
     "address": "Address",
     "action": "Action",
     "branchName":  "Branch Name",
+    "search": {
+      "pattern": "Cannot have special character"
+    },
     "invalid": {
         "required": "Value cannot be blank",
         "maxLength": "The value must not exceed {{length}} characters",
@@ -61,6 +64,7 @@
     "notes": "Notes",
     "action": "Action",
     "unitName":  "Unit Name",
+
     "invalid": {
       "required": "Value cannot be blank",
       "maxLength": "The value must not exceed {{length}} characters"

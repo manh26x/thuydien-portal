@@ -56,7 +56,7 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
   }
   initFormFilter() {
     this.formFilter = this.fb.group({
-      searchValue: ['']
+      searchValue: ['', [Validators.pattern('^[\\w-_.]*$')]]
     });
   }
   changePage(eve: any) {
@@ -159,6 +159,14 @@ export class BranchComponent extends BaseComponent implements OnInit, AfterViewI
 
   hasErrorInput(controlName: string, errorName: string): boolean {
     const control = this.branchForm.get(controlName);
+    if (control == null) {
+      return false;
+    }
+
+    return (control.dirty || control.touched) && control.hasError(errorName);
+  }
+  hasErrorFilter(controlName: string, errorName: string): boolean {
+    const control = this.formFilter.get(controlName);
     if (control == null) {
       return false;
     }

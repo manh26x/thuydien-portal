@@ -23,6 +23,9 @@
     "address": "Địa chỉ",
     "action": "Thao tác",
     "branchName":  "Tên chi nhánh",
+    "search": {
+      "pattern": "Không được phép chứa ký tự đặc biệt"
+    },
     "invalid": {
       "required": "Giá trị không được để trống",
       "maxLength": "Giá trị không được vượt quá {{length}} ký tự",

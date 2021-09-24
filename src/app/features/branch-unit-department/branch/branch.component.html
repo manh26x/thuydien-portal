@@ -2,7 +2,11 @@
   <form class="p-grid p-fluid p-mb-6" [formGroup]="formFilter" (keyup.enter)="doFilter()">
     <div class="p-md-6 p-col-6 p-field">
       <input type="text" id="s-valueBranch"  pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
+      <small *ngIf="hasErrorFilter('searchValue', 'pattern')" class="p-invalid">
+        {{'branch.search.pattern' | translate}}
+      </small>
     </div>
+
     <div class="p-md-1 p-col-12  p-d-flex p-align-end">
       <div class="p-field">
         <button (click)="doFilter()"  pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
