@@ -91,12 +91,8 @@ export class UserService extends BaseService{
     return 'UserService';
   }
 
-  approved(userName: string, status: string) {
-    let body = {
-      username: userName,
-      status: status
-    }
-    return this.doPost('/admin/userPortal/approveUser', body).pipe(
+  approved(userAprrove: any) {
+    return this.doPost('/admin/userPortal/approveUser', userAprrove).pipe(
       map(res => res)
     );
   }

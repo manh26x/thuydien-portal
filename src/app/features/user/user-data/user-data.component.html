@@ -40,7 +40,13 @@
       <button [disabled]="!isHasExport" (click)="doExportUser()" pButton type="button" label="{{'btn.export' | translate}}" style="height: 46px"></button>
     </div>
   </form>
-  <div class="p-d-flex p-justify-start p-align-start" style="background-color: #000; height: 100px">
+  <div class="p-d-flex p-justify-start p-align-start" *ngIf="isApprove" style="height: 70px; border-top: 1px solid #E6E6E6; border-bottom: 1px solid #E6E6E6; display: flex; align-items: center">
+    <div class="p-field-checkbox" id="userCheckBoxCustom">
+      <p-checkbox [(ngModel)]="choosen" binary="true" inputId="binary" (click)="checkAllRows()"></p-checkbox>
+      <label for="binary">{{choosen ? 'Chọn' : 'Hủy'}}</label>
+    </div>
+    <button pButton icon="pi pi-check-circle" label="Duyệt" (click)="gotoApprove('1')" class="p-button-outlined" style="margin-left: 70px"></button>
+    <button pButton icon="pi pi-times-circle" label="Hủy" (click)="gotoApprove('3')" class="p-button-outlined" style="margin-left: 70px" ></button>
   </div>
   <p-table [value]="userList" styleClass="table-responsive"
            [customSort]="true"
@@ -53,7 +59,7 @@
     <ng-template pTemplate="header">
       <tr>
         <th style="width: 3rem" *ngIf="isApprove">
-          <p-tableHeaderCheckbox ></p-tableHeaderCheckbox>
+          <p-tableHeaderCheckbox #checkAll [hidden]="true"></p-tableHeaderCheckbox>
         </th>
         <th id="noId" style="width: 50px;">{{'no' | translate}}</th>
         <th id="fullNameId" pSortableColumn="fullName">{{'user.fullName' | translate}}<p-sortIcon field="fullName"></p-sortIcon></th>
@@ -64,7 +70,7 @@
         <th id="approveUserId" *ngIf="isApprove">{{'user.approveUser' | translate}}</th>
         <th>{{'user.status' | translate}}</th>
         <th>
-          <button *ngIf="isHasInsert && !isApprove" (click)="gotoCreate()" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
+          <button *ngIf="isHasInsert && !isApprove" (click)="gotoCreate();" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
         </th>
       </tr>
     </ng-template>
@@ -72,7 +78,7 @@
     <ng-template pTemplate="body" let-user let-index="rowIndex">
       <tr>
         <td *ngIf="isApprove">
-          <p-tableCheckbox [value]="user"></p-tableCheckbox>
+          <p-tableCheckbox [value]="user" ></p-tableCheckbox>
         </td>
         <td>{{index + 1}}</td>
         <td>{{user.user.fullName}}</td>

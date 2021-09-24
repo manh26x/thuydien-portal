@@ -31,6 +31,7 @@ import {Paginator} from 'primeng/paginator';
 export class UserDataComponent extends BaseComponent implements OnInit {
   @ViewChild('userPaging') paging: Paginator;
   @Input('isApprove') isApprove: boolean;
+  @ViewChild('checkAll')checkAll: any;
 
   userConst = UserEnum;
   userList: UserDetail[] = [];
@@ -52,6 +53,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   dialogRef: DynamicDialogRef = null;
   isHasApprove = true;
   selectedUser: UserDetail[];
+  choosen = false;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -279,7 +281,27 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     }
   }
 
-  gotoApprove(userName: string, status: string) {
+  checkAllRows() {
+    if (this.checkAll.checked) {
+      this.selectedUser = [];
+
+    } else {
+      this.selectedUser = this.userList;
+    }
+
+  }
+
+
+  gotoApprove(status: string) {
+    if (this.selectedUser.length === 0) {
+      return;
+    }
+    const userApprove = [];
+    const userName = [];
+    this.selectedUser.forEach(e => {
+      userApprove.push({username: e.user.userName, status});
+      userName.push(e.user.userName);
+    });
     let msgResult = '';
     let confirmMsg = '';
     if (status === this.userConst.ACTIVE) {
@@ -298,7 +320,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.indicator.showActivityIndicator();
-        this.userService.approved(userName, status).subscribe(() => {
+        this.userService.approved(userApprove).subscribe(() => {
           this.messageService.add({
             severity: 'success',
             detail: msgResult
