@@ -1,4 +1,8 @@
 {
+  "chosen": {
+    "choose" : "Chọn",
+    "cancel" : "Hủy"
+  },
 	"addNew": "Thêm mới người dùng",
 	"atHere": "Tại đây",
 	"breadcrumb": {
@@ -19,8 +23,9 @@
 		"refresh": "Tải lại",
 		"save": "Lưu thay đổi",
 		"save2": "Lưu",
-		"selectFile": "Chọn file"
-	},
+		"selectFile": "Chọn file",
+    "choose" : "Chọn"
+  },
 	"confirm": {
 		"accept": "Có",
 		"delete": "Xác nhận",

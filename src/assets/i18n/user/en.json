@@ -19,7 +19,8 @@
     "refresh": "Refresh",
     "save": "Save changes",
     "save2": "Save",
-    "selectFile": "Select file"
+    "selectFile": "Select file",
+    "choose" : "Choose"
   },
   "confirm": {
     "accept": "Yes",

@@ -43,7 +43,7 @@
   <div class="p-d-flex p-justify-start p-align-start" *ngIf="isApprove" style="height: 70px; border-top: 1px solid #E6E6E6; border-bottom: 1px solid #E6E6E6; display: flex; align-items: center">
     <div class="p-field-checkbox" id="userCheckBoxCustom">
       <p-checkbox [(ngModel)]="choosen" binary="true" inputId="binary" (click)="checkAllRows()"></p-checkbox>
-      <label for="binary">{{choosen ? 'Chọn' : 'Hủy'}}</label>
+      <label for="binary">{{ 'btn.choose' | translate}}</label>
     </div>
     <button pButton icon="pi pi-check-circle" label="Duyệt" (click)="gotoApprove('1')" class="p-button-outlined" style="margin-left: 70px"></button>
     <button pButton icon="pi pi-times-circle" label="Hủy" (click)="gotoApprove('3')" class="p-button-outlined" style="margin-left: 70px" ></button>
