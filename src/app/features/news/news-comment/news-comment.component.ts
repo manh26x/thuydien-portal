@@ -51,6 +51,23 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
   filesDoc = [];
   isChangeDoc = true;
   username: any;
+  images: any[];
+  displayCustom: boolean;
+  activeIndex = 0;
+  responsiveOptions = [
+    {
+      breakpoint: '1024px',
+      numVisible: 5
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 3
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1
+    }
+  ];
   constructor(
     private commentService: CommentService,
     private route: ActivatedRoute,
@@ -203,7 +220,6 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
 
       });
   }
-
   onEnter(cmt) {
     let body = this.commentForm.value;
     const listObs: Observable<string>[] = [];
@@ -429,5 +445,9 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
 
   hasError(content) {
     return content !== null && content.length >= 1000;
+  }
+  imageClick(rowData) {
+    this.images = [rowData];
+    this.displayCustom = true;
   }
 }

@@ -43,6 +43,7 @@ import {UnitService} from '../../shared/service/unit.service';
 import { NewsCommentComponent } from './news-comment/news-comment.component';
 import {TreeTableModule} from 'primeng/treetable';
 import {CommentService} from './service/comment.service';
+import {GalleriaModule} from "primeng/galleria";
 
 @NgModule({
     declarations: [
@@ -63,6 +64,7 @@ import {CommentService} from './service/comment.service';
         InputTextModule,
         TreeTableModule,
         InputTextareaModule,
+        GalleriaModule,
         DropdownModule,
         ButtonModule,
         DialogModule,
