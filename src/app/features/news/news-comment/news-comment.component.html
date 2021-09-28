@@ -76,8 +76,11 @@
         *ngIf="rowData['content'] && !rowData['isUpdate'] && rowData['id'] !== -1">{{rowData['content']}}</span>
         <br *ngIf="rowData['imgPath']">
         <img
-          width="100%"
-          *ngIf="rowData['imgPath']" alt="IMG" [src]="baseUrl+rowData['imgPath']"  style="cursor: pointer" (click)="imageClick(rowData)">
+
+
+          *ngIf="rowData['imgPath']" alt="IMG" [src]="baseUrl+rowData['imgPath']"
+          style="cursor: pointer; max-height: 200px; max-width: 200px"
+          (click)="imageClick(rowData)">
         <br *ngIf="rowData['filePath']">
         <a target="_blank" *ngIf="rowData['filePath']" [href]="baseUrl+rowData['filePath']"  download>
           <em class="pi pi-fw pi-link"></em>
