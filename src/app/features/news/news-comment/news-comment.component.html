@@ -58,10 +58,10 @@
 <p-treeTable #pTreeTable [value]="treeEmitter$ | async"   >
   <ng-template pTemplate="header">
     <tr>
-      <th id="typeCol"></th>
-      <th id="userCol">{{'comment.user' | translate}}</th>
+      <th id="typeCol" style="width: 100px"></th>
+      <th id="userCol"  style="width: 175px">{{'comment.user' | translate}}</th>
       <th id="contentCol">{{'comment.content' | translate}}</th>
-      <th id="timeCol">{{'comment.createdTime' | translate}}</th>
+      <th id="timeCol" style="width: 150px">{{'comment.createdTime' | translate}}</th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
