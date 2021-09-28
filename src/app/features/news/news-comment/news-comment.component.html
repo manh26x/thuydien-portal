@@ -5,13 +5,13 @@
              formControlName="content" (keyup.enter)="submit()" type="text"/>
 
       <div id="iconImgCmt"  class="p-inputgroup-addon" style="padding-right: 0" >
-        <a href="javascript:void('select file');" (click)="img.click()">
+        <a href="javascript:void('select file');" (click)="isSelect ? img.click() : null">
           <em class="pi pi-fw pi-image" style="font-size: large"></em>
         </a>
         <input type="file" #img accept=".jpg, .png, .gif" [multiple]="true" (change)="onFileChange($event,'img')" style="display:none" />
       </div>
       <div id="iconLinkCmt" class="p-inputgroup-addon" style="padding-left: 0.5em" >
-        <a href="javascript:void('select file');" (click)="file.click()">
+        <a href="javascript:void('select file');" (click)="isChangeDoc ? file.click() : null">
           <em class="pi pi-fw pi-link" style="font-size: large"></em>
         </a>
         <input type="file" #file accept="jpg, png, gif" [multiple]="true" (change)="onFileChange($event, 'file')" style="display:none" />
@@ -23,14 +23,14 @@
     <div class="image-preview" *ngIf="commentForm?.value?.idParent === null" [ngStyle]="{'display': isSelect ? 'none':'block' }" id="imgCmtPreview">
       <img alt="IMG" [src]="previewUrl">
       <div class="img-action">
-        <button class="btn-action" (click)="clearImage()" >
+        <button class="btn-action" (click)="clearImage();doClearDoc();" >
           <i class="pi pi-times"></i>
         </button>
       </div>
     </div>
     <p class="docs-preview"  *ngIf="commentForm?.value?.idParent === null"  style="padding: 0.5em; " [ngStyle]="{'display': isChangeDoc ? 'none':'block' }" >
       {{fileName}}
-      <button class="btn-action" (click)="doClearDoc()" >
+      <button class="btn-action" (click)="doClearDoc();clearImage()" >
         <i class="pi pi-times"></i>
       </button>
     </p>
@@ -89,16 +89,16 @@
                   [(ngModel)]="rowData['content']" style="height: 38px;"
                  pInputText (keydown.enter)="onEnter(rowData)">
           <div id="iconImgRep"  class="p-inputgroup-addon" style="padding-right: 0">
-            <a href="javascript:void('select file');" (click)="img.click()">
+            <a href="javascript:void('select file');" (click)="rowData['isSelect'] ? img.click(): null">
               <em class="pi pi-fw pi-image" style="font-size: large"></em>
             </a>
-            <input type="file" #img accept=".jpg, .png, .gif" [multiple]="true" (change)="onCmtFileChange($event,'img',rowData)" style="display:none" />
+            <input type="file" #img accept=".jpg, .png, .gif" [multiple]="true" (change)="onCmtFileChange($event,'img',rowData) " style="display:none" />
           </div>
           <div id="iconLinkRep" class="p-inputgroup-addon" style="padding-left: 0.5em">
-            <a href="javascript:void('select file');" (click)="file.click()">
+            <a href="javascript:void('select file');" (click)=" rowData['isChangeDoc'] ? file.click() : null">
               <em class="pi pi-fw pi-link" style="font-size: large"></em>
             </a>
-            <input type="file" #file accept="jpg, png, gif" [multiple]="true" (change)="onCmtFileChange($event, 'file',rowData)" style="display:none" />
+            <input type="file" #file accept="jpg, png, gif" [multiple]="true" (change)=" onCmtFileChange($event, 'file',rowData)" style="display:none" />
           </div>
 
         </div>

@@ -370,6 +370,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
     rowData.isChangeImage = true;
     rowData.filesImage = [];
     rowData.image = '';
+    rowData['isSelect'] = true;
   }
 
   deleteClicked(rowData: any, $event: MouseEvent) {
