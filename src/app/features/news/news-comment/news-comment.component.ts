@@ -407,7 +407,7 @@ export class NewsCommentComponent extends BaseComponent implements OnInit, After
 
   updateClicked(rowData: any, $event: MouseEvent) {
     this.clearCmtImage(rowData);
-    if (rowData.filePath !== '') {
+    if (rowData.filePath !== null) {
       rowData['isChangeDoc'] = false;
     }
     rowData.isUpdate = true;

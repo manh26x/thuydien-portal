@@ -79,7 +79,7 @@
           width="100%"
           *ngIf="rowData['imgPath']" alt="IMG" [src]="baseUrl+rowData['imgPath']">
         <br *ngIf="rowData['filePath']">
-        <a target="_blank" *ngIf="rowData['filePath'] !== ''" [href]="baseUrl+rowData['filePath']"  download>
+        <a target="_blank" *ngIf="rowData['filePath']" [href]="baseUrl+rowData['filePath']"  download>
           <em class="pi pi-fw pi-link"></em>
           File đính kèm
         </a>
