@@ -21,6 +21,7 @@ import {FeatureEnum} from '../../../shared/model/feature.enum';
 import {UtilService} from '../../../core/service/util.service';
 import { saveAs } from 'file-saver';
 import {Paginator} from 'primeng/paginator';
+import {BranchService} from "../../../shared/service/branch.service";
 
 @Component({
   selector: 'aw-user-data',
@@ -38,6 +39,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   searchForm: FormGroup;
   roleList: Role[] = [];
   statusList = [];
+  branchList = [];
   fileImport: any[];
   sortBy = 'pubDate';
   sortOrder = 'DESC';
@@ -56,6 +58,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   choosen = false;
   constructor(
     private userService: UserService,
+    private branchService: BranchService,
     private router: Router,
     private fb: FormBuilder,
     private translate: TranslateService,
@@ -116,6 +119,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
         id: null, name: res.resLang.all
       });
     });
+    this.branchService.getBranchList().subscribe(res => this.branchList = res)
   }
 
   doChangeFile(files) {
