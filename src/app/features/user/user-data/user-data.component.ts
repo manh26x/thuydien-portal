@@ -21,13 +21,13 @@ import {FeatureEnum} from '../../../shared/model/feature.enum';
 import {UtilService} from '../../../core/service/util.service';
 import { saveAs } from 'file-saver';
 import {Paginator} from 'primeng/paginator';
-import {BranchService} from "../../../shared/service/branch.service";
+import {BranchService} from '../../../shared/service/branch.service';
 
 @Component({
   selector: 'aw-user-data',
   templateUrl: './user-data.component.html',
   styles: [],
-  providers: [DialogService, RoleService]
+  providers: [DialogService, RoleService, BranchService]
 })
 export class UserDataComponent extends BaseComponent implements OnInit {
   @ViewChild('userPaging') paging: Paginator;
@@ -39,7 +39,6 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   searchForm: FormGroup;
   roleList: Role[] = [];
   statusList = [];
-  branchList = [];
   fileImport: any[];
   sortBy = 'pubDate';
   sortOrder = 'DESC';
@@ -56,9 +55,9 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   isHasApprove = true;
   selectedUser: UserDetail[];
   choosen = false;
+  branchList = [];
   constructor(
     private userService: UserService,
-    private branchService: BranchService,
     private router: Router,
     private fb: FormBuilder,
     private translate: TranslateService,
@@ -69,7 +68,8 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     private auth: AuthService,
     private dialogService: DialogService,
     private roleService: RoleService,
-    private util: UtilService
+    private util: UtilService,
+    private branchService: BranchService
   ) {
     super();
     this.isHasInsert = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_INSERT);
@@ -113,13 +113,18 @@ export class UserDataComponent extends BaseComponent implements OnInit {
           {code: UserEnum.INACTIVE, name: res.resLang.inactive}
         ];
       }
+      this.branchService.postBranchListOfUser().subscribe(branches => {
+        this.branchList = branches;
+        this.branchList.unshift({code: '', name: res.resLang.all});
+      });
+
 
       this.roleList = res.resRole;
       this.roleList.unshift({
         id: null, name: res.resLang.all
       });
     });
-    this.branchService.getBranchList().subscribe(res => this.branchList = res)
+
   }
 
   doChangeFile(files) {
@@ -200,7 +205,8 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       sortBy: this.sortBy,
       sortOrder: this.sortOrder,
       page: this.page,
-      pageSize: this.pageSize
+      pageSize: this.pageSize,
+      branchId: this.searchForm.value.branch.code
     };
 
     this.userService.filterUser(request, this.isApprove).pipe(
@@ -274,8 +280,10 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     this.searchForm = this.fb.group({
       keySearch: [''], // username and fullName
       role: [{code: ''}],
-      status: [{code: UserEnum.STATUS_ALL}]
+      status: [{code: UserEnum.STATUS_ALL}],
+      branch: [{code: UserEnum.STATUS_ALL}]
     });
+
   }
   destroy() {
     super.destroy();

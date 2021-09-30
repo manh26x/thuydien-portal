@@ -44,6 +44,7 @@ export interface FilterUserRequest {
   pageSize: number;
   sortBy: string;
   sortOrder: string;
+  branchId?: string;
 }
 
 export interface UserDetail {

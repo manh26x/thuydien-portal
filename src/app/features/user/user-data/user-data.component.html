@@ -35,7 +35,7 @@
     </div>
     <div class="p-lg-2 p-col-6 p-field" *ngIf="isApprove">
       <label>{{'user.branch' | translate}}</label>
-      <p-dropdown [options]="branchList" optionLabel="name" dataKey="code" formControlName="status"></p-dropdown>
+      <p-dropdown [options]="branchList" optionLabel="name" dataKey="code" formControlName="branch"></p-dropdown>
     </div>
     <div class="p-md-2 p-col-3 p-field p-d-flex p-align-end">
       <button (click)="doFilterUser()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>

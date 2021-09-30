@@ -18,6 +18,12 @@ export class BranchService extends BaseService {
     );
   }
 
+  postBranchListOfUser(): Observable<Branch[]> {
+    return this.doPost('/admin/branch/getListBranchOfUser', {}).pipe(
+      map(res => res.data || [])
+    );
+  }
+
   getHttp(): HttpClient {
     return this.http;
   }
