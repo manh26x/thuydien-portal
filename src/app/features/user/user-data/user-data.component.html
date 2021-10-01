@@ -104,7 +104,7 @@
         <td *ngIf="!isApprove">
           <ng-container [ngSwitch]="user.user.status" *ngIf="!isApprove">
             <div *ngSwitchCase="userConst.ACTIVE">{{'const.active' | translate}}</div>
-            <div *ngSwitchCase="userConst.INACTIVE" class="p-invalid">{{'const.inactive' | translate}}</div>\
+            <div *ngSwitchCase="userConst.INACTIVE" class="p-invalid">{{'const.inactive' | translate}}</div>
             <div *ngSwitchCase="userConst.LOCK" class="p-invalid">{{'const.locked' | translate}}</div>
           </ng-container>
          </td>
