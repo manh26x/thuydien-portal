@@ -79,8 +79,9 @@
 		"role": "Quản lý role",
 		"tags": "Quản lý Tags",
 		"user": "Quản lý người dùng",
-    "action-management": "Thống kê hành vi sử dụng app"
-	},
+    "action-management": "Thống kê hành vi sử dụng app",
+    "QA": "Quản lý bản tin Q&A"
+  },
 	"message": {
 		"accept": "Có",
 		"beforeLeave": "Bạn có chắc chắn thoát ra khỏi màn hình không?",

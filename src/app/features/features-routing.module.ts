@@ -26,10 +26,6 @@ const routes: Routes = [
         loadChildren: () => import('./user/user.module').then(m => m.UserModule)
       },
       {
-        path: 'qna',
-        loadChildren: () => import('./qna/qna.module').then(m => m.QnaModule)
-      },
-      {
         path: 'calculate-tool',
         loadChildren: () => import('./calculate-tool/calculate-tool.module').then(m => m.CalculateToolModule)
       },
@@ -48,7 +44,12 @@ const routes: Routes = [
       {
         path: 'action-management',
         loadChildren: () => import('./tracking-app-behavior/tracking-app-behavior.module').then(m => m.TrackingAppBehaviorModule)
+      },
+      {
+        path: 'qa',
+        loadChildren: () => import('./qa/qa.module').then(m => m.QaModule)
       }
+
     ]
   }
 ];

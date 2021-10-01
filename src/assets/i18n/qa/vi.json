@@ -1,0 +1,17 @@
+{
+  "breadcrumb": {
+    "home": "Danh sách bản tin Q&A"
+  },
+  "qa": {
+    "patternFile": "Tải file mẫu",
+    "atHere": "tại đây",
+    "upload": "Chọn file",
+    "qa-import": {
+      "title": "Import Q&A"
+    }
+  },
+
+  "btn": {
+    "checkData": "Kiểm tra dữ liệu"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "breadcrumb": {
+    "home": "List of Q&A"
+  },
+  "qa": {
+    "patternFile": "Download the sample file",
+    "atHere": "at here",
+    "upload": "Upload",
+    "qa-import": {
+      "title": "Import Q&A"
+    }
+  },
+  "btn": {
+    "checkData": "Check Data"
+  }
+}

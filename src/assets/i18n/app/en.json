@@ -79,7 +79,8 @@
 		"role": "Role Management",
 		"tags": "Tag Management",
 		"user": "User management",
-    "action-management": "Tracking Sale App Management"
+    "action-management": "Tracking Sale App Management",
+    "QA": "Q&A management"
 	},
 	"message": {
 		"accept": "Yes",
