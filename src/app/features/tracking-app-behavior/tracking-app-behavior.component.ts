@@ -90,7 +90,6 @@ export class TrackingAppBehaviorComponent extends BaseComponent implements OnIni
       this.branchList = this.branchList.reverse();
       this.filterForm.get('branch').setValue(branchSelected);
       this.filterTracking();
-      this.filterNews();
     });
   }
 
