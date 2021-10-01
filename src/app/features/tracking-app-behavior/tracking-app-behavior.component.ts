@@ -47,6 +47,7 @@ export class TrackingAppBehaviorComponent extends BaseComponent implements OnIni
   }
 
   ngOnInit(): void {
+    this.indicator.showActivityIndicator();
     this.appTranslate.languageChanged$.pipe(
       takeUntil(this.nextOnDestroy),
       startWith(''),
