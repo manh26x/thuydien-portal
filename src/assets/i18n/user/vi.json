@@ -45,7 +45,8 @@
     "waitApprove": "Chờ duyệt",
     "cancel": "Hủy",
     "approved": "Đã duyệt",
-    "undefined": "Chưa xác định"
+    "undefined": "Chưa xác định",
+    "locked": "Khóa"
 	},
 	"detail": "Chi tiết thông tin người dùng",
 	"downloadPattern": "Tải file mẫu",

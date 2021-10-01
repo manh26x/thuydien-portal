@@ -39,7 +39,8 @@
     "waitApprove": "Waiting for approve",
     "cancel": "Cancel",
     "approved": "Approved",
-    "undefined": "Undefined"
+    "undefined": "Undefined",
+    "locked": "Locked"
   },
   "detail": "View user detail",
   "downloadPattern": "Download the pattern file",
