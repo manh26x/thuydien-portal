@@ -11,6 +11,8 @@
     }
   },
   "btn": {
-    "checkData": "Check Data"
+    "checkData": "Check Data",
+    "cancel": "Cancel",
+    "save": "Save"
   }
 }

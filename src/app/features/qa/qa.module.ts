@@ -18,6 +18,8 @@ import {DropdownModule} from "primeng/dropdown";
 import {CustomFileUploadModule} from "../../shared/custom-file-upload/custom-file-upload.module";
 import {ButtonModule} from "primeng/button";
 import {CardModule} from "primeng/card";
+import {DialogModule} from "primeng/dialog";
+import {TableModule} from "primeng/table";
 
 const routes: Routes = [
   {
@@ -53,6 +55,8 @@ const routes: Routes = [
     CustomFileUploadModule,
     ButtonModule,
     CardModule,
+    DialogModule,
+    TableModule,
   ],
   providers: [
     {

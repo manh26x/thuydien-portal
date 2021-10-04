@@ -12,6 +12,8 @@
   },
 
   "btn": {
-    "checkData": "Kiểm tra dữ liệu"
+    "checkData": "Kiểm tra dữ liệu",
+    "cancel": "Hủy",
+    "save": "Lưu"
   }
 }
