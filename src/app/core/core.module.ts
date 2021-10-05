@@ -10,6 +10,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import {DialogErrorHandle} from './dialog-error-handle';
 import {AppTranslateService} from './service/translate.service';
+import {MessagingFirebaseService} from './service/messaging-firebase.service';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import {AppTranslateService} from './service/translate.service';
       useValue: { path: './assets/i18n/app/' }
     },
     ConfirmationService,
-    AppTranslateService
+    AppTranslateService,
+    MessagingFirebaseService
   ],
   exports: [
     HttpClientModule,

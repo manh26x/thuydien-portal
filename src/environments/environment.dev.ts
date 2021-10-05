@@ -22,5 +22,14 @@ export const environment = {
   mediaUrl: 'https://gateway-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com/upload/',
   clientTimeout: 180000, // 3m
   importExportTimeout: 300000, // 5m
-  idleTimeout: 18000
+  idleTimeout: 18000,
+  FirebaseConfig: {
+    apiKey: 'AIzaSyDvOvMjAvaCnpNwu1T1bYS2O9TtrqFMBfA',
+    authDomain: 'tpbank-salesapp.firebaseapp.com',
+    projectId: 'tpbank-salesapp',
+    storageBucket: 'tpbank-salesapp.appspot.com',
+    messagingSenderId: '1079028932329',
+    appId: '1:1079028932329:web:4d4154fa6b659ba976da78',
+    measurementId: 'G-R8CWSMMC6S'
+  }
 };

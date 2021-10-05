@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "tpb-notification-testing-b261b": {
+      "hosting": {
+        "sale-web-portal": [
+          "tpb-notification-testing-b261b"
+        ]
+      }
+    }
+  }
+}

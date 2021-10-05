@@ -46,6 +46,8 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/firebase-messaging-sw.js",
+              "src/manifest.json",
               {
                 "glob": "**/*",
                 "input": "node_modules/tinymce",
@@ -60,7 +62,8 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/tinymce/tinymce.min.js"
+              "node_modules/tinymce/tinymce.min.js",
+              "src/firebase-messaging-sw.js"
             ],
             "allowedCommonJsDependencies": [
               "file-saver",
@@ -245,6 +248,10 @@
               "devServerTarget": "sale-web-portal:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }

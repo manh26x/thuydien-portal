@@ -14,6 +14,7 @@ import {RoleService} from '../shared/service/role.service';
 import {groupBy} from 'lodash-es';
 import {UserAuthDetail, UserAuthInfo} from '../auth/model/user-auth';
 import {IndicatorComponent} from '../core/indicator.component';
+import {MessagingFirebaseService} from "../core/service/messaging-firebase.service";
 
 @Component({
   selector: 'aw-features',
@@ -40,7 +41,9 @@ export class FeaturesComponent extends IndicatorComponent implements OnInit, Aft
     private confirm: ConfirmationService,
     private translate: TranslateService,
     private appTranslate: AppTranslateService,
-    private roleService: RoleService
+    private roleService: RoleService,
+    private messagingService: MessagingFirebaseService
+
   ) {
     super();
     this.model = [];
@@ -55,6 +58,8 @@ export class FeaturesComponent extends IndicatorComponent implements OnInit, Aft
       }
     });
     this.loadUserInformation();
+    this.messagingService.requestPermission();
+    this.messagingService.receiveMessage();
   }
 
   ngAfterViewInit() {
