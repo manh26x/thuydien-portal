@@ -18,9 +18,9 @@
   </div>
 </div>
 <form  *ngIf="display">
-  <p-dialog [visible]="display" [closable]="false" modal="true" blockScroll="false" [showHeader]="false"  [style]="{width: '50vw'}">
+  <p-dialog id="qnaModalTable" [visible]="display" [closable]="false" modal="true" [showHeader]="false"  [style]="{width: '50vw'}" >
     <ng-template pTemplate="body">
-    <p-table [value]="qnaList"  [paginator]="true" [rows]="10" [showCurrentPageReport]="true" paginatorPosition="top"
+    <p-table [value]="qnaList" #qnaTable (onLazyLoad)="tableEmit$.next(qnaTable)"  [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[10,20,50,100]">
       <ng-template pTemplate="header">
         <tr>

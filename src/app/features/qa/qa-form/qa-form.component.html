@@ -1,0 +1,27 @@
+<form class="p-grid p-fluid p-mb-6" >
+
+  <div class=" p-col-6 p-field">
+    <label>{{'qa.question' | translate}}</label>
+    <input type="text" id="s-question"  pInputText />
+
+  </div>
+  <div class="p-col-6 p-field">
+    <label>{{'qa.status' | translate}}</label>
+    <input type="text" id="s-status"  pInputText />
+
+  </div>
+    <div class="p-col-12 p-field">
+      <label>{{'qa.answer' | translate}}</label>
+      <textarea id="s-answer"  pInputTextarea [rows]="15"></textarea>
+    </div>
+  <div class="split-horizontal" ></div>
+  <div class="p-text-center p-flex-row p-justify-center p-align-center" style="display: flex; width: 100%">
+    <div class="p-col-2">
+      <button pButton type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
+    </div>
+    <div class="p-col-2">
+      <button pButton type="button" label="{{'btn.save' | translate}}" class="p-button-raised p-button-secondary"></button>
+
+    </div>
+  </div>
+</form>

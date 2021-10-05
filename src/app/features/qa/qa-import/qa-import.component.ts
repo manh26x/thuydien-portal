@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Table} from 'primeng/table';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'aw-qa-import',
@@ -6,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class QaImportComponent implements OnInit {
+export class QaImportComponent implements AfterViewInit {
   private fileImport: any;
   display = false;
+  @ViewChild('qnaTable') qnaTable: Table;
+  tableEmit$: BehaviorSubject<Table>;
   qnaList = [
     {question: 'Câu hỏi 1', answer: ' Câu trả lời'},
     {question: 'Câu hỏi 2', answer: ' Câu trả lời'},
@@ -28,7 +32,8 @@ export class QaImportComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    this.tableEmit$.next(this.qnaTable);
   }
 
   doChangeFile(files) {

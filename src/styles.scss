@@ -321,3 +321,13 @@
   text-transform: uppercase;
   color: #462574; font-weight: bold;
 }
+
+#qnaModalTable {
+  .p-dialog-mask {
+    overflow-y: auto;
+  }
+
+  .p-dialog-content {
+    overflow-y: visible;
+  }
+}
