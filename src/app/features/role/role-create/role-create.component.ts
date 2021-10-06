@@ -84,10 +84,10 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
 
       const tagData: RoleTag[] = [...this.tagKpiSelectedList, ...this.tagNewsSelectedList].map(item => ({ tagId: item.id }));
 
-//      if (tagData.length === 0) {
-//        this.messageService.add({ key: 'add-role', severity: 'error', detail: this.translate.instant('invalid.requiredTag') });
-//        return;
-//      }
+      if(tagData.length === 0 && roleData.portalActive === 1) {
+       this.messageService.add({ key: 'add-role', severity: 'error', detail: this.translate.instant('invalid.requiredTag') });
+       return;
+     }
 
       const featureData: RoleFeature[] = [];
 

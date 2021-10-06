@@ -112,10 +112,10 @@ export class RoleUpdateComponent extends BaseComponent implements OnInit, AfterV
         tagData = this.roleInfo.tagList;
       }
       // check validate
-//      if (tagData.length === 0) {
-//        this.messageService.add({ key: 'update-role', severity: 'error', detail: this.translate.instant('invalid.requiredTag') });
-//        return;
-//      }
+      if (tagData.length === 0 && roleData.portalActive === 1) {
+       this.messageService.add({ key: 'update-role', severity: 'error', detail: this.translate.instant('invalid.requiredTag') });
+       return;
+     }
 
       let featureData: RoleFeature[] = [];
 
