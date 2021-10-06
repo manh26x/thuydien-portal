@@ -67,7 +67,7 @@ import {EditorModule} from "@tinymce/tinymce-angular";
     PaginatorModule,
     InputTextModule,
     MultiSelectModule,
-    EditorModule,
+    EditorModule
   ],
   providers: [
     NotificationService,

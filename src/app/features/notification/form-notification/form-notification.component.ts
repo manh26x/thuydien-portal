@@ -15,27 +15,7 @@ import {TagsService} from "../../tags/service/tags.service";
 export class FormNotificationComponent extends BaseComponent implements OnInit {
   tagList = [];
   statusList = [];
-  readonly tinyMceInit = {
-    base_url: '/tinymce',
-    suffix: '.min',
-    height: 500,
-    menubar: true,
-    plugins: [
-      'autolink lists link image charmap print preview anchor',
-      'searchreplace visualblocks code fullscreen',
-      'insertdatetime media table paste code wordcount'
-    ],
-    toolbar: 'formatselect | bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | fullscreen',
-    file_picker_types: 'image',
-    automatic_uploads: false,
-    file_picker_callback: (cb, value, meta) => {
-      this.callbackEvent = cb;
-      this.fileContent.nativeElement.click();
-    },
-    relative_urls: false,
-    remove_script_host: false,
-    convert_urls: true
-  };
+
   private callbackEvent: any;
   @ViewChild('fileContent', {static: true}) fileContent: ElementRef;
   @Input() mode = 'create';

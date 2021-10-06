@@ -15,9 +15,18 @@
     </div>
     <div class="p-col-12 p-field">
       <label>{{'notification.content' | translate}} <span class="p-invalid">*</span></label>
-      <editor
-        formControlName="content"
-        [init]="tinyMceInit">
+      <editor  [init]="{
+     height: 500,
+     menubar: false,
+     plugins: [
+       'advlist autolink lists link image charmap print preview anchor',
+       'searchreplace visualblocks code fullscreen',
+       'insertdatetime media table paste code help wordcount'
+     ],
+     toolbar:
+       'undo redo | formatselect | bold italic backcolor |    alignleft aligncenter alignright alignjustify |     bullist numlist outdent indent | removeformat | help'
+   }"
+        formControlName="content">
       </editor>
       <small *ngIf="hasErrorInput('content', 'required')" class="p-invalid">
         {{'invalid.content.required' | translate}}
