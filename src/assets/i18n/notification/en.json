@@ -1,0 +1,31 @@
+{
+  "breadcrumb": {
+    "home": "List of Notification",
+    "create": "Create Notification",
+    "update": "Update Notification",
+    "view": "View Notification"
+  },
+  "notification": {
+    "notification-data": {
+      "title": "List of Notification"
+    },
+    "search": "Title of notification",
+    "status": "Status",
+    "tags": "Tags",
+    "title": "Title",
+    "time": "Time"
+  },
+  "no": "No.",
+  "search": "Search",
+  "paging": "Showing {first} to {last} in {totalRecords} records",
+  "filter": "Search",
+  "btn": {
+    "create": "Create"
+  },
+  "const": {
+    "all": "All",
+    "sent": "Sent",
+    "nosend": "Wait to send",
+    "inactive": "Inactive"
+  }
+}

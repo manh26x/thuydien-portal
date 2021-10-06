@@ -1,0 +1,76 @@
+<p-card>
+  <h2 class="custom-title">{{'notification.notification-data.title' | translate}}</h2>
+  <form class="p-grid p-fluid p-mb-6" [formGroup]="formFilter" (keyup.enter)="doFilter()">
+    <div class="p-md-4 p-col-5 p-field">
+      <label>{{'notification.search' | translate}}</label>
+      <input type="text" id="s-valueBranch"  pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
+      <small *ngIf="hasErrorFilter('searchValue', 'pattern')" class="p-invalid">
+        {{'notification.search.pattern' | translate}}
+      </small>
+    </div>
+    <div class="p-lg-2 p-col-3 p-field p-ml-5" >
+      <label>{{'notification.status' | translate}}</label>
+      <p-dropdown [options]="statusList" optionLabel="label" dataKey="code" formControlName="status"></p-dropdown>
+    </div>
+    <div class="p-lg-2 p-col-2 p-field p-ml-5" >
+      <label>{{'notification.tags' | translate}}</label>
+      <p-dropdown [options]="tagsList" optionLabel="value" dataKey="id" formControlName="tags"></p-dropdown>
+    </div>
+    <div class="p-col-2  p-d-flex  p-pl-5 p-lg-2 p-field p-pt-5">
+      <button (click)="doFilter()"   pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
+    </div>
+
+  </form>
+
+  <p-table [value]="notificationList" styleClass="table-responsive"
+           [customSort]="true"
+           [autoLayout]="true"
+           [lazy]="true"
+           sortField="fullName"
+           [sortOrder]="-1"
+           (onLazyLoad)="lazyLoadUser($event)">
+    <ng-template pTemplate="header">
+      <tr>
+        <th id="noId" style="width: 50px;">{{'no' | translate}}</th>
+        <th id="titleId">{{'notification.title' | translate}}</th>
+        <th>{{'notification.status' | translate}}</th>
+        <th style="width: 250px;">{{'notification.time' | translate}}</th>
+        <th>{{'notification.tags' | translate}}</th>
+        <th>
+          <button (click)="gotoCreate();" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-notification let-index="rowIndex">
+      <tr>
+        <td>{{index + 1}}</td>
+        <td>{{notification.title}}</td>
+        <td >
+          <ng-container [ngSwitch]="notification.status" >
+            <div *ngSwitchCase="notificationConst.SENT" style="color: dodgerblue">{{'const.sent' | translate}}</div>
+            <div *ngSwitchCase="notificationConst.WAIT_SEND" style="color: dodgerblue">{{'const.nosend' | translate}}</div>
+            <div *ngSwitchCase="notificationConst.INACTIVE" class="p-invalid">{{'const.inactive' | translate}}</div>
+          </ng-container>
+        </td>
+        <td>{{notification.time}}</td>
+        <td>{{notification.tags}}</td>
+        <td style="min-width: 175px">
+          <div>
+            <button (click)="gotoView(notification.id)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
+            <button *ngIf="isHasEdit" (click)="gotoUpdate(notification.id)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-secondary p-button-text"></button>
+            <button *ngIf="isHasDel && notification.status == notificationConst.WAIT_SEND" (click)="doDelete(notification)" pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text"></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-paginator #userPaging [rows]="pageSize"
+               [totalRecords]="totalItem"
+               [rowsPerPageOptions]="[10, 20, 50, 100]"
+               [showCurrentPageReport]="true"
+               (onPageChange)="changePage($event)"
+               currentPageReportTemplate="{{ 'paging' | translate }}">
+  </p-paginator>
+
+</p-card>

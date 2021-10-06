@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {QaConst} from "../model/qa";
 import {Router} from "@angular/router";
 import {BaseComponent} from "../../../core/base.component";
+import {FeatureEnum} from "../../../shared/model/feature.enum";
+import {RoleEnum} from "../../../shared/model/role";
+import {AuthService} from "../../../auth/auth.service";
 
 @Component({
   selector: 'aw-qa-data',
@@ -31,9 +34,13 @@ export class QaDataComponent extends BaseComponent implements OnInit {
   totalItem = 14;
 
   constructor(
+    private auth: AuthService,
     private router: Router
+
   ) {
     super();
+    this.isHasEdit = this.auth.isHasRole(FeatureEnum.QA, RoleEnum.ACTION_EDIT);
+    this.isHasDel = this.auth.isHasRole(FeatureEnum.QA, RoleEnum.ACTION_DELETE);
   }
 
   ngOnInit(): void {

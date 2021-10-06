@@ -1,0 +1,31 @@
+{
+  "breadcrumb": {
+    "home": "Danh sách thông báo",
+    "create": "Thêm mới thông báo",
+    "update": "Cập nhật thông báp",
+    "view": "Xem chi tiết thông báo"
+  },
+  "notification": {
+    "notification-data": {
+      "title": "Danh sách thông báo"
+    },
+    "search": "Tiêu đề thông báo",
+    "status": "Trạng thái",
+    "tags": "Tags",
+    "title": "Tiêu đề",
+    "time": "Thời gian"
+  },
+  "no": "STT",
+  "search": "Nhập thông tin để tìm kiếm",
+  "paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
+  "filter": "Tìm kiếm",
+  "btn": {
+    "create": "Thêm mới"
+  },
+  "const": {
+    "all": "Tất cả",
+    "sent": "Đã gửi",
+    "nosend": "Chờ gửi",
+    "inactive": "Ngưng hoạt động"
+  }
+}

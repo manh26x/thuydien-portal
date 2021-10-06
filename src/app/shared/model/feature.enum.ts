@@ -6,5 +6,7 @@ export enum FeatureEnum {
   TOOL= 'calculateTool',
   ROLE= 'role',
   SUPER_ADMIN = 'superadmin',
-  KPI= 'kpi'
+  KPI= 'kpi',
+  QA= 'qa',
+  NOTIFICATION= 'notification'
 }
