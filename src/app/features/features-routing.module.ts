@@ -48,6 +48,10 @@ const routes: Routes = [
       {
         path: 'qa',
         loadChildren: () => import('./qa/qa.module').then(m => m.QaModule)
+      },
+      {
+        path: 'notification',
+        loadChildren: () => import('./notification/notification.module').then(m => m.NotificationModule)
       }
 
     ]

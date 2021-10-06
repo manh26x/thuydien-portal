@@ -80,7 +80,8 @@
 		"tags": "Quản lý Tags",
 		"user": "Quản lý người dùng",
     "action-management": "Thống kê hành vi sử dụng app",
-    "QA": "Quản lý bản tin Q&A"
+    "QA": "Quản lý bản tin Q&A",
+    "notification": "Quản lý thông báo"
   },
 	"message": {
 		"accept": "Có",

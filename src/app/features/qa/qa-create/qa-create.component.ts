@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {BaseComponent} from "../../../core/base.component";
+import {QaService} from "../service/qa.service";
 
 @Component({
   selector: 'aw-qa-create',
@@ -6,11 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class QaCreateComponent implements OnInit {
+export class QaCreateComponent extends BaseComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private qaService: QaService
+) {
+    super();
+  }
 
   ngOnInit(): void {
+    this.qaService.setPage('create');
   }
 
 }

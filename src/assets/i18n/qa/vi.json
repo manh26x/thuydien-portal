@@ -1,6 +1,9 @@
 {
   "breadcrumb": {
-    "home": "Danh sách bản tin Q&A"
+    "home": "Danh sách bản tin Q&A",
+    "create": "Thêm mới Q&A",
+    "update": "Cập nhật Q&A",
+    "view": "Xem chi tiết Q&A"
   },
   "qa": {
     "patternFile": "Tải file mẫu",

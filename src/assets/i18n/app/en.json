@@ -80,7 +80,8 @@
 		"tags": "Tag Management",
 		"user": "User management",
     "action-management": "Tracking Sale App Management",
-    "QA": "Q&A management"
+    "QA": "Q&A management",
+    "notification": "Notification management"
 	},
 	"message": {
 		"accept": "Yes",

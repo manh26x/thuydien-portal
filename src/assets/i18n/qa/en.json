@@ -1,6 +1,9 @@
 {
   "breadcrumb": {
-    "home": "List of Q&A"
+    "home": "List of Q&A",
+    "create": "Create Q&A",
+    "update": "Update Q&A",
+    "view": "View Q&A"
   },
   "qa": {
     "patternFile": "Download the sample file",
