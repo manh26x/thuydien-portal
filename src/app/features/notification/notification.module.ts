@@ -28,6 +28,8 @@ import {TagsService} from "../tags/service/tags.service";
 import {BranchService} from "../../shared/service/branch.service";
 import {RoleService} from "../../shared/service/role.service";
 import {UnitService} from "../../shared/service/unit.service";
+import {MultiSelectModule} from "primeng/multiselect";
+import {EditorModule} from "@tinymce/tinymce-angular";
 
 
 
@@ -64,6 +66,8 @@ import {UnitService} from "../../shared/service/unit.service";
     TableModule,
     PaginatorModule,
     InputTextModule,
+    MultiSelectModule,
+    EditorModule,
   ],
   providers: [
     NotificationService,

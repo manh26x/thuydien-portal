@@ -1,1 +1,62 @@
-<p>form-notification works!</p>
+<p-card>
+<form class="p-grid">
+  <div class="p-md-8 p-col-8">
+    <div class="p-fluid">
+      <div class="p-col-12 p-field">
+        <label for="n-title">{{'notification.title' | translate}} <span class="p-invalid">*</span></label>
+        <input formControlName="title" id="n-title" type="text" pInputText />
+        <small *ngIf="hasErrorInput('title', 'required')" class="p-invalid">
+          {{'invalid.title.required' | translate}}
+        </small>
+        <small *ngIf="hasErrorInput('title', 'maxlength')" class="p-invalid">
+          {{ 'invalid.title.maxLength' | translate:{length: 500} }}
+        </small>
+      </div>
+    </div>
+    <div class="p-col-12 p-field">
+      <label>{{'notification.content' | translate}} <span class="p-invalid">*</span></label>
+      <editor
+        formControlName="content"
+        [init]="tinyMceInit">
+      </editor>
+      <small *ngIf="hasErrorInput('content', 'required')" class="p-invalid">
+        {{'invalid.content.required' | translate}}
+      </small>
+    </div>
+  </div>
+  <div class="p-md-4 p-col-4">
+    <div class="p-fluid">
+      <div class="p-col-12 p-field">
+        <label for="n-status">{{'notification.status' | translate}} <span class="p-invalid">*</span></label>
+        <p-dropdown formControlName="status" id="n-status" [options]="statusList" dataKey="code" optionLabel="label"></p-dropdown>
+        <small *ngIf="hasErrorInput('tags', 'required')" class="p-invalid">
+          {{'invalid.tags.required' | translate}}
+        </small>
+      </div>
+    </div>
+    <div class="p-fluid">
+        <div class="p-col-12 p-field">
+          <label for="n-tags">{{'notification.tags' | translate}} <span class="p-invalid">*</span></label>
+          <p-multiSelect formControlName="tags" id="n-tags" [options]="tagList" dataKey="id" optionLabel="value"></p-multiSelect>
+          <small *ngIf="hasErrorInput('tags', 'required')" class="p-invalid">
+            {{'invalid.tags.required' | translate}}
+          </small>
+        </div>
+      </div>
+  </div>
+  <div class="split-horizontal"></div>
+  <div class="p-text-center p-flex-row p-justify-center p-align-center" style="display: flex; width: 100%">
+    <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
+    <ng-container *ngIf="mode == 'create'">
+      <button pButton (click)="doSaveDraft()" type="button" label="{{'btn.draft' | translate}}" class="p-button-raised p-button-secondary p-mr-3"></button>
+      <button pButton (click)="doSave()" type="button" label="{{'btn.insert' | translate}}" class="p-button-raised p-mr-3"></button>
+    </ng-container>
+    <ng-container *ngIf="mode == 'update' && isNotPublished">
+      <button pButton (click)="doSaveDraft()" type="button" label="{{'btn.draft' | translate}}" class="p-button-raised p-button-secondary p-mr-3"></button>
+      <button pButton (click)="doUpdate()" type="button" label="{{'btn.saveAndPublish' | translate}}" class="p-button-raised"></button>
+    </ng-container>
+  </div>
+</form>
+</p-card>
+
+<input #fileContent type="file" [multiple]="false" accept="image/*" style="display: none" (change)="fileContentChange($event)" >

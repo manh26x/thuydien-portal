@@ -20,12 +20,16 @@
   "paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
   "filter": "Tìm kiếm",
   "btn": {
-    "create": "Thêm mới"
+    "create": "Thêm mới",
+      "insert": "Thêm mới",
+      "cancel": "Hủy",
+      "draft": "Lưu nháp"
   },
   "const": {
     "all": "Tất cả",
     "sent": "Đã gửi",
     "nosend": "Chờ gửi",
-    "inactive": "Ngưng hoạt động"
+    "inactive": "Ngưng hoạt động",
+    "draft": "Soạn nháp"
   }
 }

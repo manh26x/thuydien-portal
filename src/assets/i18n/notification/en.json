@@ -19,13 +19,19 @@
   "search": "Search",
   "paging": "Showing {first} to {last} in {totalRecords} records",
   "filter": "Search",
+  "content": "Nội dung",
   "btn": {
-    "create": "Create"
+    "create": "Create",
+    "insert": "Insert",
+    "cancel": "Cancel",
+    "draft": "Save draft"
   },
   "const": {
     "all": "All",
     "sent": "Sent",
     "nosend": "Wait to send",
-    "inactive": "Inactive"
+    "inactive": "Inactive",
+    "draft": "draft"
   }
+
 }
