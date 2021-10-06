@@ -84,7 +84,7 @@ export class TrackingAppBehaviorComponent extends BaseComponent implements OnIni
       sortOrder: [null]
     });
 
-    this.branchService.getBranchList().subscribe(res => {
+    this.branchService.postBranchListOfUser().subscribe(res => {
       this.branchList = res;
       const branchSelected = {code: null, name: 'Tất cả'};
       this.branchList.push(branchSelected);
