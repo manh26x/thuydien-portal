@@ -61,7 +61,7 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
       this.statusList = [
         {code: UserEnum.ACTIVE, name: res.active},
         {code: UserEnum.INACTIVE, name: res.inactive},
-        {code: UserEnum.LOCK, name: res.lock}
+        {code: UserEnum.LOCK, name: res.locked}
       ];
     });
   }
