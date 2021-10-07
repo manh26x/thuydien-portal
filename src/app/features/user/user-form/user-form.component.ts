@@ -60,7 +60,8 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
     ).subscribe(res => {
       this.statusList = [
         {code: UserEnum.ACTIVE, name: res.active},
-        {code: UserEnum.INACTIVE, name: res.inactive}
+        {code: UserEnum.INACTIVE, name: res.inactive},
+        {code: UserEnum.LOCK, name: res.lock}
       ];
     });
   }

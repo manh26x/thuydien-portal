@@ -16,6 +16,9 @@
           <ng-container *ngSwitchCase="userConst.INACTIVE">
             {{'const.inactive' | translate}}
           </ng-container>
+          <ng-container *ngSwitchCase="userConst.LOCK">
+            {{'const.lock' | translate}}
+          </ng-container>
           <ng-container *ngSwitchDefault>
             {{'const.undefined' | translate}}
           </ng-container>
