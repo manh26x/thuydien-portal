@@ -23,7 +23,7 @@ import {NewsService} from './service/news.service';
 import { NewsFormComponent } from './news-form/news-form.component';
 import { NewsCreateComponent } from './news-create/news-create.component';
 import { NewsDataComponent } from './news-data/news-data.component';
-import { EditorModule } from '@tinymce/tinymce-angular';
+import {EditorModule, TINYMCE_SCRIPT_SRC} from '@tinymce/tinymce-angular';
 import {CheckboxModule} from 'primeng/checkbox';
 import {CalendarModule} from 'primeng/calendar';
 import {MultiSelectModule} from 'primeng/multiselect';
@@ -106,7 +106,8 @@ import {GalleriaModule} from "primeng/galleria";
       TagsService,
       BranchService,
       RoleService,
-      UnitService
+      UnitService,
+      { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
     ],
     exports: [
         NewsFormComponent
