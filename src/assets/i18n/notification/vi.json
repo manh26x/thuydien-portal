@@ -13,7 +13,20 @@
     "status": "Trạng thái",
     "tags": "Tags",
     "title": "Tiêu đề",
-    "time": "Thời gian"
+    "time": "Thời gian",
+    "content": "Nội dung",
+    "groupObject": {
+      "title": "Nhóm đối tượng nhận thông báo",
+      "personal": "Cá nhân",
+      "role" : "Vai trò",
+      "unit": "Đơn vị",
+      "branch": "Chi nhánh"
+    },
+    "upload": "Chọn file",
+    "patternFile": "Tải file mẫu",
+    "atHere": "tại đây",
+    "send": "Gửi thông báo",
+    "image": "Ảnh"
   },
   "no": "STT",
   "search": "Nhập thông tin để tìm kiếm",
@@ -21,9 +34,12 @@
   "filter": "Tìm kiếm",
   "btn": {
     "create": "Thêm mới",
-      "insert": "Thêm mới",
-      "cancel": "Hủy",
-      "draft": "Lưu nháp"
+    "insert": "Thêm mới",
+    "cancel": "Hủy",
+    "draft": "Lưu nháp",
+    "checkData": "Kiểm tra dữ liệu",
+    "no": "Không",
+    "yes": "Có"
   },
   "const": {
     "all": "Tất cả",
@@ -31,5 +47,25 @@
     "nosend": "Chờ gửi",
     "inactive": "Ngưng hoạt động",
     "draft": "Soạn nháp"
+  },
+  "uploadFile": {
+    "image": "Tải ảnh lên",
+    "invalid": {
+      "ext": "Tệp tin không đúng định dạng {{ext}}",
+      "max": "Số lượng file vượt quá giới hạn cho phép {{max}}",
+      "size": "Tệp tải lên vượt quá dung lượng cho phép {{size}}"
+    }
+  },
+  "confirm": {
+    "listUser": {
+      "title": "Thông báo",
+      "pattern": "Các user đã xác định: {{userSuccess}} <br />Các dữ liệu chưa xác định: {{userFail}}"
+    },
+    "accept": "Có",
+    "delete": "Xác nhận xóa",
+    "deleteImage": "Bạn có chắc chắn xóa ảnh từ bản tin?",
+    "deleteMessage": "Bạn có chắc chắn muốn xóa bản tin \"{{name}}\"",
+    "deleteCmtMessage": "Bạn có chắc chắn muốn xóa bình luận \"{{name}}\"",
+    "reject": "Không"
   }
 }

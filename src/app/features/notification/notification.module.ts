@@ -14,22 +14,27 @@ import { UpdateNotificationComponent } from './update-notification/update-notifi
 import { ViewNotificationComponent } from './view-notification/view-notification.component';
 import { FormNotificationComponent } from './form-notification/form-notification.component';
 import { NotificationDataComponent } from './notification-data/notification-data.component';
-import {NotificationService} from "./service/notification.service";
-import {BreadcrumbModule} from "primeng/breadcrumb";
-import {ReactiveFormsModule} from "@angular/forms";
-import {CardModule} from "primeng/card";
-import {DropdownModule} from "primeng/dropdown";
-import {ButtonModule} from "primeng/button";
-import {TableModule} from "primeng/table";
-import {PaginatorModule} from "primeng/paginator";
-import {InputTextModule} from "primeng/inputtext";
-import {MessageService} from "primeng/api";
-import {TagsService} from "../tags/service/tags.service";
-import {BranchService} from "../../shared/service/branch.service";
-import {RoleService} from "../../shared/service/role.service";
-import {UnitService} from "../../shared/service/unit.service";
-import {MultiSelectModule} from "primeng/multiselect";
-
+import {NotificationService} from './service/notification.service';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
+import {ReactiveFormsModule} from '@angular/forms';
+import {CardModule} from 'primeng/card';
+import {DropdownModule} from 'primeng/dropdown';
+import {ButtonModule} from 'primeng/button';
+import {TableModule} from 'primeng/table';
+import {PaginatorModule} from 'primeng/paginator';
+import {InputTextModule} from 'primeng/inputtext';
+import {ConfirmationService, MessageService} from 'primeng/api';
+import {TagsService} from '../tags/service/tags.service';
+import {BranchService} from '../../shared/service/branch.service';
+import {RoleService} from '../../shared/service/role.service';
+import {UnitService} from '../../shared/service/unit.service';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {CustomFileUploadModule} from '../../shared/custom-file-upload/custom-file-upload.module';
+import {CalendarModule} from 'primeng/calendar';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {DialogModule} from "primeng/dialog";
 
 
 @NgModule({
@@ -66,6 +71,12 @@ import {MultiSelectModule} from "primeng/multiselect";
     PaginatorModule,
     InputTextModule,
     MultiSelectModule,
+    InputTextareaModule,
+    ConfirmDialogModule,
+    RadioButtonModule,
+    CustomFileUploadModule,
+    CalendarModule,
+    DialogModule,
   ],
   providers: [
     NotificationService,
@@ -77,7 +88,11 @@ import {MultiSelectModule} from "primeng/multiselect";
     TagsService,
     BranchService,
     RoleService,
+    ConfirmationService,
     UnitService
+  ],
+  exports: [
+    FormNotificationComponent
   ]
 })
 export class NotificationModule extends BaseModule {

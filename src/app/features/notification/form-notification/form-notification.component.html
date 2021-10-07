@@ -1,5 +1,5 @@
-<p-card>
-<form class="p-grid">
+<p-card xmlns="http://www.w3.org/1999/html">
+<form class="p-grid" [formGroup]="formNoti">
   <div class="p-md-8 p-col-8">
     <div class="p-fluid">
       <div class="p-col-12 p-field">
@@ -13,7 +13,18 @@
         </small>
       </div>
     </div>
-
+    <div class="p-fluid">
+      <div class="p-col-12 p-field">
+        <label for="n-content">{{'notification.content' | translate}} <span class="p-invalid">*</span></label>
+        <textarea formControlName="content" [rows]="36" id="n-content" pInputTextarea ></textarea>
+        <small *ngIf="hasErrorInput('title', 'required')" class="p-invalid">
+          {{'invalid.title.required' | translate}}
+        </small>
+        <small *ngIf="hasErrorInput('title', 'maxlength')" class="p-invalid">
+          {{ 'invalid.title.maxLength' | translate:{length: 500} }}
+        </small>
+      </div>
+    </div>
   </div>
   <div class="p-md-4 p-col-4">
     <div class="p-fluid">
@@ -26,14 +37,91 @@
       </div>
     </div>
     <div class="p-fluid">
-        <div class="p-col-12 p-field">
-          <label for="n-tags">{{'notification.tags' | translate}} <span class="p-invalid">*</span></label>
-          <p-multiSelect formControlName="tags" id="n-tags" [options]="tagList" dataKey="id" optionLabel="value"></p-multiSelect>
-          <small *ngIf="hasErrorInput('tags', 'required')" class="p-invalid">
+      <div class="p-col-12 p-field">
+        <label for="n-tags">{{'notification.tags' | translate}}</label>
+        <p-multiSelect formControlName="tags" id="n-tags" [options]="tagList" dataKey="id" optionLabel="value"></p-multiSelect>
+        <small *ngIf="hasErrorInput('tags', 'required')" class="p-invalid">
             {{'invalid.tags.required' | translate}}
-          </small>
+        </small>
+      </div>
+    </div>
+    <div class="p-fluid">
+      <div class="p-col-12 p-field">
+        <label for="n-group">{{'notification.groupObject.title' | translate}} <span class="p-invalid">*</span></label>
+        <div class="p-grid" id="n-group">
+          <div class="p-field-radiobutton p-md-6">
+            <p-radioButton name="groupObject" value="personal" [(ngModel)]="groupObject"  formControlName="groupObject"></p-radioButton>
+            <label>{{'notification.groupObject.personal' | translate}}</label>
+          </div>
+          <div class="p-field-radiobutton p-md-6">
+            <p-radioButton name="groupObject" value="role" [(ngModel)]="groupObject" formControlName="groupObject"></p-radioButton>
+            <label>{{'notification.groupObject.role' | translate}}</label>
+          </div>
+          <div class="p-field-radiobutton p-md-6">
+            <p-radioButton name="groupObject" value="unit" [(ngModel)]="groupObject"  formControlName="groupObject"></p-radioButton>
+            <label>{{'notification.groupObject.unit' | translate}}</label>
+          </div>
+          <div class="p-field-radiobutton p-md-6">
+            <p-radioButton name="groupObject" value="branch" [(ngModel)]="groupObject"  formControlName="groupObject"></p-radioButton>
+            <label>{{'notification.groupObject.branch' | translate}}</label>
+          </div>
+        </div>
+
+        <small *ngIf="hasErrorInput('tags', 'required')" class="p-invalid">
+          {{'invalid.tags.required' | translate}}
+        </small>
+      </div>
+    </div>
+    <div class="p-fluid p-grid">
+      <div class="p-col-12 p-md-12 p-field">
+        <label>File Import</label>
+        <aw-input-upload (changeFile)="doChangeFile($event)" selectLabel="{{'notification.upload' | translate}}"></aw-input-upload>
+        <span class="p-mt-2 p-d-block"> {{'notification.patternFile' | translate}}
+          <a href="assets/resource/5002_KPIs%20Performance%20Report_202004_PBO_089_Final.xlsx" target="_blank"> {{'notification.atHere' | translate}}</a>
+    </span>
+      </div>
+
+      <div class="p-field">
+        <div class="p-md-12 p-text-center p-inputgroup">
+          <button (click)="doCheckFile()" pButton type="button" label="{{'btn.checkData' | translate}}"
+                  style="padding: 1rem 5rem;"
+                  class="p-button-secondary"></button>
         </div>
       </div>
+    </div>
+    <div class="p-col-12  p-fluid p-field">
+      <label for="n-send">{{'notification.send' | translate}}</label>
+      <p-calendar id="n-send"
+                  formControlName="publishDate"
+                  dateFormat="dd/mm/yy"
+                  [showTime]="true"
+                  inputId="n-date-publish"
+                  [readonlyInput]="true"
+                  [showSeconds]="true"
+                  [showIcon]="true"
+                  [monthNavigator]="true"
+                  [yearNavigator]="true"
+                  [yearRange]="yearSelect"
+                  [minDate]="min"
+                  (onSelect)="toDayClick($event)"
+                  styleClass="hour-only p-mt-3">
+      </p-calendar>
+      <small *ngIf="hasErrorInput('publishDate', 'mustAfterNow')" class="p-invalid">
+        {{'invalid.publishDate.mustAfterNow' | translate}}
+      </small>
+    </div>
+    <div class="p-col-12 p-field">
+      <label for="n-image">{{'notification.image' | translate}}</label>
+      <aw-image-upload
+        id="n-image"
+        (changeFile)="doChangeImage($event)"
+        (clearFile)="doClearImage()"
+        fileExtErrorMsg="{{'uploadFile.invalid.ext' | translate: {ext: 'jpg, png, gif'} }}"
+        fileSizeErrorMsg="{{'uploadFile.invalid.size' | translate: {size: '5MB'} }}"
+        maxFileErrorMsg="{{'uploadFile.invalid.max' | translate: {max: 1} }}"
+        uploadTitle="{{'uploadFile.image' | translate}}">
+      </aw-image-upload>
+    </div>
   </div>
   <div class="split-horizontal"></div>
   <div class="p-text-center p-flex-row p-justify-center p-align-center" style="display: flex; width: 100%">
@@ -49,5 +137,13 @@
   </div>
 </form>
 </p-card>
-
-<input #fileContent type="file" [multiple]="false" accept="image/*" style="display: none" (change)="fileContentChange($event)" >
+<p-dialog [visible]="display" [closable]="false" modal="true"   [style]="{width: '50vw'}">
+  <ng-template pTemplate="header"><h2>{{'confirm.listUser.title' | translate}}</h2></ng-template>
+  <ng-template pTemplate="body">{{'confirm.listUser.pattern' | translate}}</ng-template>
+<ng-template pTemplate="footer">
+  <div class="p-grid p-fluid" style="display: flex; justify-content: center; align-items: center; margin: 20px 0">
+    <button type="button" pButton (click)="display = false" class="p-button-primary p-button-outlined p-md-6 p-col-6" style="width: 45%; height: 45px" label="{{'btn.no' | translate}}"></button>
+    <button type="submit" pButton class="p-button-secondary p-md-6 p-col-6" style="width: 45%; height: 45px" label="{{'btn.yes' | translate}}"></button>
+  </div>
+</ng-template>
+</p-dialog>

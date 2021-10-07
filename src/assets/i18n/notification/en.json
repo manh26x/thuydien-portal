@@ -13,7 +13,20 @@
     "status": "Status",
     "tags": "Tags",
     "title": "Title",
-    "time": "Time"
+    "time": "Time",
+    "content": "Content",
+    "groupObject": {
+      "title": "Target group to receive notification",
+      "personal": "Personal",
+      "role" : "Role",
+      "unit": "Unit",
+      "branch": "Branch"
+    },
+    "upload": "Upload",
+    "patternFile": "Download the pattern file",
+    "atHere": "at here",
+    "send": "Send notification",
+    "image": "Image"
   },
   "no": "No.",
   "search": "Search",
@@ -24,7 +37,10 @@
     "create": "Create",
     "insert": "Insert",
     "cancel": "Cancel",
-    "draft": "Save draft"
+    "draft": "Save draft",
+    "checkData": "Check data",
+    "no": "No",
+    "yes": "Yes"
   },
   "const": {
     "all": "All",
@@ -32,6 +48,25 @@
     "nosend": "Wait to send",
     "inactive": "Inactive",
     "draft": "draft"
+  },
+  "uploadFile": {
+    "image": "Choose Image",
+    "invalid": {
+      "ext": "File is incorrectly formatted {{ext}}",
+      "max": "The number of files exceeded the allowed limit {{max}}",
+      "size": "The file uploaded is exceeding the allowed size {{size}}"
+    }
+  },
+  "confirm": {
+    "listUser": {
+      "title": "Notice",
+      "pattern": "Users identify: {{userSuccess}} <br />Data not identity: {{userFail}}"
+    },
+    "accept": "Yes",
+    "delete": "Delete Confirmation",
+    "deleteImage": "Are you sure to delete the photo from the newsletter?",
+    "deleteMessage": "Are you sure you want to remove news \"{{name}}\"",
+    "deleteCmtMessage": "Are you sure you want to remove comment \"{{name}}\"",
+    "reject": "No"
   }
-
 }

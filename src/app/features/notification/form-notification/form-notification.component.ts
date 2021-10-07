@@ -5,6 +5,9 @@ import {TranslateService} from "@ngx-translate/core";
 import {AppTranslateService} from "../../../core/service/translate.service";
 import {BaseComponent} from "../../../core/base.component";
 import {TagsService} from "../../tags/service/tags.service";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {FormBuilder, Validators} from "@angular/forms";
+import {ApiErrorResponse} from "../../../core/model/error-response";
 
 @Component({
   selector: 'aw-form-notification',
@@ -15,19 +18,33 @@ import {TagsService} from "../../tags/service/tags.service";
 export class FormNotificationComponent extends BaseComponent implements OnInit {
   tagList = [];
   statusList = [];
-
-  private callbackEvent: any;
+  private fileImport: any;
+  display = false;
   @ViewChild('fileContent', {static: true}) fileContent: ElementRef;
   @Input() mode = 'create';
   @Input() isNotPublished = true;
-
+  yearSelect: any;
+  readonly min = new Date();
+  private isChangeImage = false;
+  private filesImage = [];
+  formNoti: any;
+  selectionGroup = null;
   constructor(private translate: TranslateService,
               private tagService: TagsService,
+              private fb: FormBuilder,
+              private dialog: ConfirmationService,
               private appTranslate: AppTranslateService) {
     super();
   }
-
+  groupObject: any = null;
   ngOnInit(): void {
+    this.formNoti = this.fb.group({
+      groupObject: [null, [Validators.required]],
+      title: ['', [Validators.required]],
+      content: ['', [Validators.required]],
+      status: ['', [Validators.required]],
+      tags: ['', [Validators.required]],
+    });
     this.appTranslate.languageChanged$.pipe(
       takeUntil(this.nextOnDestroy),
       startWith(''),
@@ -69,4 +86,46 @@ export class FormNotificationComponent extends BaseComponent implements OnInit {
   doUpdate() {
 
   }
+
+  doChangeFile(files) {
+    this.fileImport = files;
+
+  }
+
+  doCheckFile() {
+    this.display = true;
+  }
+
+  toDayClick(evt: Date) {
+    evt.setMinutes(0, 0);
+    return evt;
+  }
+
+  doChangeImage(files) {
+    this.isChangeImage = true;
+    this.filesImage = files;
+  }
+
+  doClearImage() {
+    this.isChangeImage = true;
+    this.filesImage = [];
+    this.formNoti.patchValue({
+      image: ''
+    });
+  }
+  doClearImagePreview() {
+    this.dialog.confirm({
+      key: 'globalDialog',
+      header: this.translate.instant('confirm.delete'),
+      message: this.translate.instant('confirm.deleteImage'),
+      rejectLabel: this.translate.instant('confirm.reject'),
+      acceptLabel: this.translate.instant('confirm.accept'),
+      accept: () => {
+        this.isChangeImage = true;
+        this.formNoti.get('image').setValue('');
+      },
+      reject: () => {}
+    });
+  }
+
 }
