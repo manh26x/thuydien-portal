@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {Table} from 'primeng/table';
 import {BehaviorSubject} from 'rxjs';
 import {QaService} from "../service/qa.service";
@@ -22,6 +22,7 @@ export class QaImportComponent extends BaseComponent implements AfterViewInit {
   @ViewChild('qnaTable') qnaTable: Table;
   tableEmit$: BehaviorSubject<Table>;
   qnaList = [];
+  @Output() doFilter: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private confirmDialog: ConfirmationService,
@@ -62,6 +63,7 @@ export class QaImportComponent extends BaseComponent implements AfterViewInit {
         severity: 'success',
         detail: this.translate.instant('qa.message.insertSuccess')
       });
+      this.doFilter.emit();
     }, err => {
       this.indicator.hideActivityIndicator();
       if (err instanceof ApiErrorResponse && err.code === '201') {

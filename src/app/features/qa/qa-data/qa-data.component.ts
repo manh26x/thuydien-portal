@@ -78,7 +78,7 @@ export class QaDataComponent extends BaseComponent implements OnInit {
   }
 
   getListQa() {
-
+    this.indicator.showActivityIndicator();
     const filterObj = {
       keyword: this.formFilter.get('keyword').value,
       status: this.formFilter.get('status').value.value,
@@ -88,7 +88,7 @@ export class QaDataComponent extends BaseComponent implements OnInit {
     this.qaService.filterQa(filterObj).subscribe(res => {
       this.qnaList = res.listQnA;
       this.totalItem = res.totalRecord;
-    });
+    }, () => {}, () => this.indicator.hideActivityIndicator() );
   }
 
   hasErrorFilter(searchValue: string, pattern: string) {
