@@ -15,6 +15,7 @@ import {KpiEnum} from "../../kpi/model/kpi.enum";
 import {QaEnum} from "../qa";
 import {FormBuilder, Validators} from "@angular/forms";
 import {Paginator} from "primeng/paginator";
+import {ApiErrorResponse} from "../../../core/model/error-response";
 
 @Component({
   selector: 'aw-qa-data',
@@ -103,7 +104,35 @@ export class QaDataComponent extends BaseComponent implements OnInit {
   }
 
   doDelete(qa: any) {
-
+    this.confirmDialog.confirm({
+      key: 'globalDialog',
+      header: this.translate.instant('qa.confirm.delete'),
+      message: this.translate.instant('qa.confirm.deleteMessage', { question: qa.question }),
+      acceptLabel: this.translate.instant('qa.confirm.accept'),
+      rejectLabel: this.translate.instant('qa.confirm.reject'),
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.indicator.showActivityIndicator();
+        this.qaService.delete(qa.id).pipe(
+          switchMap(async () => this.getListQa())
+        ).subscribe(() => {
+          this.messageService.add({
+            severity: 'success',
+            detail: this.translate.instant('qa.message.deleteSuccess')
+          });
+        }, err => {
+          this.indicator.hideActivityIndicator();
+          if (err instanceof ApiErrorResponse && err.code === '201') {
+            this.messageService.add({
+              severity: 'error',
+              detail: this.translate.instant('qa.message.deleteNotFound')
+            });
+          } else {
+            throw err;
+          }
+        }, () => this.indicator.hideActivityIndicator());
+      },
+    });
   }
 
   gotoUpdate(id) {

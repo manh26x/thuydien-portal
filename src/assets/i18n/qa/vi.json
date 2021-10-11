@@ -16,11 +16,19 @@
     "qa-import": {
       "title": "Import Q&A"
     },
+    "confirm": {
+      "accept": "Có",
+      "delete": "Xác nhận xóa",
+      "deleteMessage": "Bạn có chắc chắn muốn xóa QA \"{{question}}\"",
+      "reject": "Không"
+    },
     "message": {
       "insertSuccess": "Thêm mới Q&A thành công",
       "insertError": "Thêm mới thất bại",
       "updateSuccess": "Cập nhật Q&A thành công",
-      "updateError": "Cập nhật Q&A thất bại"
+      "updateError": "Cập nhật Q&A thất bại",
+      "deleteSuccess": "Xóa Q&A thành công",
+      "deleteFail": "Xóa Q&A thất bại"
     },
     "question": "Câu hỏi",
     "createDate": "Ngày thêm mới",

@@ -12,6 +12,12 @@
     "qa-data": {
       "title": "Q&A List"
     },
+    "confirm": {
+      "accept": "Yes",
+      "delete": "Delete Confirmation",
+      "deleteMessage": "Are you sure you want to remove QA \"{{question}}\"",
+      "reject": "No"
+    },
     "qa-import": {
       "title": "Import Q&A"
     },
@@ -19,7 +25,9 @@
       "insertSuccess": "Add new Q&A Successfully",
       "insertError": "Add new Q&A Failed",
       "updateSuccess": "Update Q&A Successfully",
-      "updateError": "Update Q&A Failed"
+      "updateError": "Update Q&A Failed",
+      "deleteSuccess": "Delete QA Successfully",
+      "deleteFail": "Delete QA failed"
     },
     "answer": "Answer",
     "search": "Q&A",

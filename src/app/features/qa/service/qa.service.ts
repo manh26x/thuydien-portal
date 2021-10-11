@@ -60,4 +60,7 @@ export class QaService extends BaseService{
     return this.doPost('/qna/update', body);
   }
 
+  delete(id) {
+    return this.doPost('/qna/delete', id);
+  }
 }
