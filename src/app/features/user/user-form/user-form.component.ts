@@ -122,7 +122,7 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
       status: [{ value: { code: UserEnum.ACTIVE }, disabled: true }, [Validators.required]],
       userId: ['', [Validators.required, Validators.pattern(/^((\w)|(\.))*$/), Validators.maxLength(100)]],
       email: [''],
-      phone: [''],
+      phone: ['', [Validators.maxLength(1000)]],
       position: ['', [Validators.maxLength(100)]],
       branch: ['', [Validators.required]],
       tagNews: [],

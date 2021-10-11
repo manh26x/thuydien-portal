@@ -25,7 +25,7 @@
       <label>{{'search' | translate}}</label>
       <input (keyup.enter)="doFilterUser()" type="text" formControlName="keySearch" pInputText placeholder="{{'search' | translate}}" />
     </div>
-    <div class="p-lg-2 p-col-6 p-field">
+    <div class="p-lg-2 p-col-6 p-field" *ngIf="!isApprove">
       <label>{{'user.role' | translate}}</label>
       <p-dropdown [filter]="true" [options]="roleList" optionLabel="name" dataKey="id" formControlName="role"></p-dropdown>
     </div>
@@ -34,8 +34,12 @@
       <p-dropdown [options]="statusList" optionLabel="name" dataKey="code" formControlName="status"></p-dropdown>
     </div>
     <div class="p-lg-2 p-col-6 p-field" *ngIf="isApprove">
+      <label>{{'user.typeUser' | translate}}</label>
+      <p-dropdown [options]="typeUserList" optionLabel="name" dataKey="code" formControlName="userType"></p-dropdown>
+    </div>
+    <div class="p-lg-2 p-col-6 p-field" *ngIf="isApprove">
       <label>{{'user.branch' | translate}}</label>
-      <p-dropdown [options]="branchList" optionLabel="name" dataKey="code" formControlName="branch"></p-dropdown>
+      <p-dropdown [options]="branchList" optionLabel="name" dataKey="code" formControlName="typeUser"></p-dropdown>
     </div>
     <div class="p-md-2 p-col-3 p-field p-d-flex p-align-end">
       <button (click)="doFilterUser()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>

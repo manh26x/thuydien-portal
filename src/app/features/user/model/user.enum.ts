@@ -6,6 +6,8 @@ export enum UserEnum {
   SUPPER_ADMIN = 'SuperAdmin',
   WAIT_APPROVE = '2',
   CANCEL = '3',
-  LOCK = '4'
+  LOCK = '4',
+  CB = 'CB',
+  RB = 'RB'
 
 }

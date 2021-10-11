@@ -46,7 +46,10 @@
     "cancel": "Hủy",
     "approved": "Đã duyệt",
     "undefined": "Chưa xác định",
-    "locked": "Khóa"
+    "locked": "Khóa",
+    "other": "Khác",
+    "cb": "Nhân viên khách hàng doanh nghiệp",
+    "rb": "Nhân viên khách hàng cá nhân"
 	},
 	"detail": "Chi tiết thông tin người dùng",
 	"downloadPattern": "Tải file mẫu",

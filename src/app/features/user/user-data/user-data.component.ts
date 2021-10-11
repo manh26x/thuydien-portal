@@ -56,6 +56,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   selectedUser: UserDetail[];
   choosen = false;
   branchList = [];
+  typeUserList = [];
   constructor(
     private userService: UserService,
     private router: Router,
@@ -104,7 +105,12 @@ export class UserDataComponent extends BaseComponent implements OnInit {
           {code: null, name: res.resLang.all},
           {code: UserEnum.ACTIVE, name: res.resLang.approved},
           {code: UserEnum.WAIT_APPROVE, name: res.resLang.waitApprove},
-          {code: UserEnum.CANCEL, name: res.resLang.cancel}
+          {code: UserEnum.CANCEL, name: res.resLang.cancel},
+          this.typeUserList = [
+            {code: null, name: res.resLang.other},
+            {code: UserEnum.CB, name: res.resLang.cb},
+            {code: UserEnum.RB, name: res.resLang.rb},
+          ]
         ];
       } else {
         this.statusList = [
@@ -112,13 +118,12 @@ export class UserDataComponent extends BaseComponent implements OnInit {
           {code: UserEnum.ACTIVE, name: res.resLang.active},
           {code: UserEnum.INACTIVE, name: res.resLang.inactive}
         ];
+
       }
       this.branchService.postBranchListOfUser().subscribe(branches => {
         this.branchList = branches;
         this.branchList.unshift({code: '', name: res.resLang.all});
       });
-
-
       this.roleList = res.resRole;
       this.roleList.unshift({
         id: null, name: res.resLang.all
@@ -173,7 +178,8 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       sortBy: this.sortBy,
       sortOrder: this.sortOrder,
       page: this.page,
-      pageSize: this.totalItem
+      pageSize: this.totalItem,
+      userType: this.searchForm.value.userType.code
     };
     this.userService.exportUser(request).pipe(
       takeUntil(this.nextOnDestroy),
@@ -281,7 +287,8 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       keySearch: [''], // username and fullName
       role: [{code: ''}],
       status: [{code: UserEnum.STATUS_ALL}],
-      branch: [{code: UserEnum.STATUS_ALL}]
+      branch: [{code: UserEnum.STATUS_ALL}],
+      userType: [{code: UserEnum.STATUS_ALL}]
     });
 
   }

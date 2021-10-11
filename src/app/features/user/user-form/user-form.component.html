@@ -32,6 +32,9 @@
     <div class="p-md-6 p-col-12 p-field">
       <label for="n-phone">{{'user.phone' | translate}}</label>
       <input id="n-phone" type="text" pInputText formControlName="phone" />
+      <small *ngIf="hasErrorInput('phone', 'maxlength')" class="p-invalid">
+        {{'invalid.position.maxLength' | translate: {length: 1000} }}
+      </small>
     </div>
   </div>
 

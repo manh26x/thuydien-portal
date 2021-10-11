@@ -40,7 +40,10 @@
     "cancel": "Cancel",
     "approved": "Approved",
     "undefined": "Undefined",
-    "locked": "Locked"
+    "locked": "Locked",
+    "other": "Other",
+    "cb": "CB",
+    "rb": "RB"
   },
   "detail": "View user detail",
   "downloadPattern": "Download the pattern file",
