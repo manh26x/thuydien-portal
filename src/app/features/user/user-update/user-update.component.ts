@@ -119,7 +119,10 @@ export class UserUpdateComponent extends BaseComponent implements OnInit {
         severity: 'success',
         detail: this.translate.instant('message.updateSuccess')
       });
-      this.router.navigate(['user']);
+      this.route.queryParams.subscribe(params => {
+        const index = params['isApprove'] === 'true' ? 1 : 0;
+        this.router.navigate(['user'], {queryParams: {index}});
+      });
     }, err => {
       if (err instanceof ApiErrorResponse && err.code === '201') {
         this.messageService.add({
@@ -138,7 +141,11 @@ export class UserUpdateComponent extends BaseComponent implements OnInit {
   }
 
   doCancel() {
-    this.router.navigate(['user']);
+    this.route.queryParams.subscribe(params => {
+      const index = params['isApprove'] === 'true' ? 1 : 0;
+      this.router.navigate(['user'], {queryParams: {index}});
+    });
+
   }
 
 

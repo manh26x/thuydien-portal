@@ -232,7 +232,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   }
 
   gotoUpdate(userId: string) {
-    this.router.navigate(['user', 'update', userId]);
+    this.router.navigate(['user', 'update', userId],{ queryParams: {isApprove: this.isApprove}});
   }
 
   doDelete(user: UserBranch) {
