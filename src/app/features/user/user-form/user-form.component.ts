@@ -10,6 +10,7 @@ import {BaseComponent} from '../../../core/base.component';
 import {Role} from '../../../shared/model/role';
 import {Unit} from '../../../shared/model/unit';
 import {Department} from '../../../shared/model/department';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'aw-user-form',
@@ -38,17 +39,23 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
   @Input() valueForm: UserDetail;
   @Output() save: EventEmitter<any> = new EventEmitter<any>();
   @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
+  isApprove = false;
   constructor(
     private translate: TranslateService,
     private appTranslate: AppTranslateService,
     private fb: FormBuilder,
-    private util: UtilService
+    private util: UtilService,
+    private route: ActivatedRoute,
+
   ) {
     super();
     this.initForm();
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      this.isApprove = params['isApprove'] === 'true' ? true : false;
+    });
     if (this.mode === 'update') {
       this.formUser.get('userId').disable();
       this.formUser.get('status').enable();

@@ -14,7 +14,7 @@
       </small>
     </div>
 
-    <div class="p-md-6 p-col-12 p-field">
+    <div class="p-md-6 p-col-12 p-field" *ngIf="!isApprove">
       <label for="n-status">{{'user.status' | translate}} <span class="p-invalid">*</span></label>
       <p-dropdown formControlName="status" inputId="n-status" [options]="statusList" optionLabel="name" dataKey="code"></p-dropdown>
     </div>

@@ -6,7 +6,7 @@
       <div class="title-right">{{userDetail.user?.userName}}</div>
     </div>
 
-    <div class="p-md-6 p-col-12 detail">
+    <div class="p-md-6 p-col-12 detail" *ngIf="!isApprove">
       <label class="title-left">{{'user.status' | translate}}:</label>
       <div class="title-right">
         <ng-container [ngSwitch]="userDetail.user?.status">

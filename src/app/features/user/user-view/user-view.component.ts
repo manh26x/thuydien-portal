@@ -19,7 +19,7 @@ import {BehaviorSubject} from "rxjs";
 export class UserViewComponent extends BaseComponent implements OnInit {
   userDetail: UserDetail = {};
   userConst = UserEnum;
-  isApprove: boolean = false;
+  isApprove = false;
   approveEmitter$: BehaviorSubject<boolean> = new BehaviorSubject(this.isApprove);
 
   constructor(
