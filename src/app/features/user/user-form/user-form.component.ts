@@ -80,6 +80,7 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
         if (this.mode === 'update') {
           this.formUser.get('fullName').disable();
           this.formUser.get('email').disable();
+          this.formUser.get('createdBy').disable();
         }
         this.formUser.patchValue({
           userId: userInfo.user ? userInfo.user.userName : null,
@@ -91,7 +92,8 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
           position: userInfo.user.position,
           unit: {id: userInfo.user.unitId, name: userInfo.user.unitName},
           department: {id: userInfo.user.departmentId, name: userInfo.user.departmentName},
-          typeUser: userInfo.user.userType
+          typeUser: userInfo.user.userType,
+          createdBy: userInfo.user.createdBy
         });
         this.roleSelectedList = userInfo.userRoleList;
       }
@@ -130,6 +132,7 @@ export class UserFormComponent extends BaseComponent implements OnInit, OnChange
       unit: ['', [Validators.required]],
       department: ['', [Validators.required]],
       typeUser:[null],
+      createdBy: [null]
     }, { updateOn: 'blur' });
   }
 

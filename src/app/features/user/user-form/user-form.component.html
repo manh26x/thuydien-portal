@@ -18,6 +18,11 @@
       <label for="n-status">{{'user.status' | translate}} <span class="p-invalid">*</span></label>
       <p-dropdown formControlName="status" inputId="n-status" [options]="statusList" optionLabel="name" dataKey="code"></p-dropdown>
     </div>
+
+    <div class="p-md-6 p-col-12 p-field"  *ngIf="isApprove">
+      <label for="n-createdBy">{{'user.createBy' | translate}}</label>
+      <input id="n-createdBy" type="text" pInputText formControlName="createdBy" />
+    </div>
   </div>
 
   <div class="p-fluid p-grid">
@@ -90,7 +95,7 @@
         {{'invalid.department.required' | translate}}
       </small>
     </div>
-    <div class="p-md-6 p-col-12 p-field">
+    <div class="p-md-6 p-col-12 p-field" style="margin-bottom: 0">
       <label for="n-usertype">{{'user.userType' | translate}}</label>
       <div class="p-grid  p-col-12 p-field" id="n-usertype" style="margin-top: 5px">
         <div class="p-mb-3  p-col-12 p-field">
