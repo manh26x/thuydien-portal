@@ -9,13 +9,46 @@
     "patternFile": "Download the sample file",
     "atHere": "at here",
     "upload": "Upload",
+    "qa-data": {
+      "title": "Q&A List"
+    },
     "qa-import": {
       "title": "Import Q&A"
-    }
+    },
+    "message": {
+      "insertSuccess": "Add new Q&A Successfully",
+      "insertError": "Add new Q&A Failed",
+      "updateSuccess": "Update Q&A Successfully",
+      "updateError": "Update Q&A Failed"
+    },
+    "answer": "Answer",
+    "search": "Q&A",
+    "status": "Status",
+    "question": "Question",
+    "createDate": "Create on date"
   },
   "btn": {
     "checkData": "Check Data",
     "cancel": "Cancel",
     "save": "Save"
+  },
+  "no": "NO. ",
+  "const": {
+    "inactive": "Inactive",
+    "active": "Active",
+    "all": "All"
+  },
+  "filter": "Filter",
+  "search": "Search",
+  "paging": "Showing {first} to {last} in {totalRecords} records",
+  "invalid": {
+    "question": {
+      "required": "Value cannot be blank",
+      "maxLength": "The value must not exceed {{length}} characters"
+    },
+    "answer": {
+      "required": "Value cannot be blank",
+      "maxLength": "The value must not exceed {{length}} characters"
+    }
   }
 }

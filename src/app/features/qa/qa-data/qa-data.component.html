@@ -7,14 +7,14 @@
   <form class="p-grid p-fluid p-mb-6" [formGroup]="formFilter" (keyup.enter)="doFilter()">
     <div class="p-md-6 p-col-8 p-field">
       <label>{{'qa.search' | translate}}</label>
-      <input type="text" id="s-valueBranch"  pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
+      <input type="text" id="s-valueBranch"  pInputText placeholder="{{'search' | translate}}" formControlName="keyword" />
       <small *ngIf="hasErrorFilter('searchValue', 'pattern')" class="p-invalid">
         {{'qa.search.pattern' | translate}}
       </small>
     </div>
     <div class="p-lg-2 p-col-4 p-field p-ml-5" >
       <label>{{'qa.status' | translate}}</label>
-      <p-dropdown [options]="statusList" optionLabel="name" dataKey="code" formControlName="status"></p-dropdown>
+      <p-dropdown [options]="statusList" optionLabel="label" dataKey="value" formControlName="status"></p-dropdown>
     </div>
     <div class="p-col-4  p-d-flex  p-pl-5 p-lg-2 p-field p-pt-5">
       <button (click)="doFilter()"   pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
@@ -36,7 +36,7 @@
         <th id="roleId" style="width: 250px;">{{'qa.createDate' | translate}}</th>
         <th>{{'qa.status' | translate}}</th>
         <th>
-          <button (click)="gotoCreate();" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
+          <button *ngIf="isHasInsert" (click)="gotoCreate();" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
         </th>
       </tr>
     </ng-template>
@@ -62,7 +62,7 @@
       </tr>
     </ng-template>
   </p-table>
-  <p-paginator #userPaging [rows]="pageSize"
+  <p-paginator #qaPaging [rows]="pageSize"
                [totalRecords]="totalItem"
                [rowsPerPageOptions]="[10, 20, 50, 100]"
                [showCurrentPageReport]="true"

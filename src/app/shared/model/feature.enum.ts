@@ -7,6 +7,6 @@ export enum FeatureEnum {
   ROLE= 'role',
   SUPER_ADMIN = 'superadmin',
   KPI= 'kpi',
-  QA= 'qa',
+  QA= 'QA',
   NOTIFICATION= 'notification'
 }

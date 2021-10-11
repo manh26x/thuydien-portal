@@ -4,19 +4,55 @@
     "create": "Thêm mới Q&A",
     "update": "Cập nhật Q&A",
     "view": "Xem chi tiết Q&A"
+
   },
   "qa": {
     "patternFile": "Tải file mẫu",
     "atHere": "tại đây",
     "upload": "Chọn file",
+    "qa-data": {
+      "title": "Danh sách Q&A"
+    },
     "qa-import": {
       "title": "Import Q&A"
-    }
+    },
+    "message": {
+      "insertSuccess": "Thêm mới Q&A thành công",
+      "insertError": "Thêm mới thất bại",
+      "updateSuccess": "Cập nhật Q&A thành công",
+      "updateError": "Cập nhật Q&A thất bại"
+    },
+    "question": "Câu hỏi",
+    "createDate": "Ngày thêm mới",
+    "status": "Trạng thái",
+    "search": "Q&A",
+    "answer": "Trả lời"
   },
 
   "btn": {
     "checkData": "Kiểm tra dữ liệu",
     "cancel": "Hủy",
-    "save": "Lưu"
+    "save": "Lưu",
+    "create": "Thêm mới"
+
+  },
+  "no":"STT",
+  "const": {
+    "inactive": "Không hoạt động",
+    "active": "Hoạt động",
+    "all": "Tất cả"
+  },
+  "filter": "Lọc kết quả",
+  "search": "Nhập từ khóa",
+  "paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
+  "invalid": {
+    "question": {
+      "required": "Giá trị không được để trống",
+      "maxLength": "Giá trị không được vượt quá {{length}} ký tự"
+    },
+    "answer": {
+      "required": "Giá trị không được để trống",
+      "maxLength": "Giá trị không được vượt quá {{length}} ký tự"
+    }
   }
 }

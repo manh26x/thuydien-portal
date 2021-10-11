@@ -4,7 +4,7 @@
     <label>File Import</label>
     <aw-input-upload (changeFile)="doChangeFile($event)" selectLabel="{{'qa.upload' | translate}}"></aw-input-upload>
     <span class="p-mt-2 p-d-block"> {{'qa.patternFile' | translate}}
-      <a href="assets/resource/5002_KPIs%20Performance%20Report_202004_PBO_089_Final.xlsx" target="_blank"> {{'qa.atHere' | translate}}</a>
+      <a href="assets/resource/Sample_QnA.xlsx" target="_blank"> {{'qa.atHere' | translate}}</a>
     </span>
   </div>
 
@@ -17,7 +17,7 @@
     </div>
   </div>
 </div>
-<form  *ngIf="display">
+<form  *ngIf="display" (ngSubmit)="doSave()">
   <p-dialog id="qnaModalTable" [visible]="display" [closable]="false" modal="true" [showHeader]="false"  [style]="{width: '50vw'}" >
     <ng-template pTemplate="body">
     <p-table [value]="qnaList" #qnaTable (onLazyLoad)="tableEmit$.next(qnaTable)"  [paginator]="true" [rows]="10" [showCurrentPageReport]="true"

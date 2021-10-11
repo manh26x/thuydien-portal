@@ -41,7 +41,8 @@
 	"filter": "Lọc kết quả",
 	"invalid": {
 		"content": {
-			"required": "Giá trị không được để trống"
+			"required": "Giá trị không được để trống",
+      "maxLength": "Giá trị không được vượt quá {{length}} ký tự"
 		},
 		"docs": {
 			"limit": "Số lượng file vượt quá giới hạn cho phép",
@@ -63,10 +64,7 @@
 		"title": {
 			"maxLength": "Giá trị không được vượt quá {{length}} ký tự",
 			"required": "Giá trị không được để trống"
-		},
-    "content": {
-      "maxLength": "Giá trị không được vượt quá {{length}} ký tự"
-    }
+		}
 	},
 	"level": "Mức độ quan trọng",
 	"levelList": {

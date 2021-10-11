@@ -1,10 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {QaConst} from "../model/qa";
 import {Router} from "@angular/router";
 import {BaseComponent} from "../../../core/base.component";
 import {FeatureEnum} from "../../../shared/model/feature.enum";
 import {RoleEnum} from "../../../shared/model/role";
 import {AuthService} from "../../../auth/auth.service";
+import {QaService} from "../service/qa.service";
+import {TranslateService} from "@ngx-translate/core";
+import {AppTranslateService} from "../../../core/service/translate.service";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {IndicatorService} from "../../../shared/indicator/indicator.service";
+import {map, startWith, switchMap, takeUntil} from "rxjs/operators";
+import {KpiEnum} from "../../kpi/model/kpi.enum";
+import {QaEnum} from "../qa";
+import {FormBuilder, Validators} from "@angular/forms";
+import {Paginator} from "primeng/paginator";
 
 @Component({
   selector: 'aw-qa-data',
@@ -13,41 +23,71 @@ import {AuthService} from "../../../auth/auth.service";
   ]
 })
 export class QaDataComponent extends BaseComponent implements OnInit {
+  @ViewChild('qaPaging') paging: Paginator;
   formFilter: any;
   statusList = [];
-  qnaList = [
-    {question: 'Câu hỏi 1', answer: ' Câu trả lời', createDate: new Date(), id: 1, status: '1'},
-    {question: 'Câu hỏi 2', answer: ' Câu trả lời', createDate: new Date(), id: 1, status: '1'},
-    {question: 'Câu hỏi 3', answer: ' Câu trả lời', createDate: new Date(), id: 1, status: '0'},
-    {question: 'Câu hỏi 4', answer: ' Câu trả lời', createDate: new Date(), id: 1, status: '1'},
-    {question: 'Câu hỏi 5', answer: ' Câu trả lời', createDate: new Date(), id: 1, status: '1'},
-    {question: 'Câu hỏi 6', answer: ' Câu trả lời', createDate: new Date(), id: 1, status: '0'},
-    {question: 'Câu hỏi 7', answer: ' Câu trả lời', createDate: new Date(), id: 1, status: '1'},
-    {question: 'Câu hỏi 9', answer: ' Câu trả lời', createDate: new Date(), id: 1, status: '1'},
-    {question: 'Câu hỏi 10', answer: ' Câu trả lời', createDate: new Date(), id: 1, status: '1'},
-    {question: 'Câu hỏi 11', answer: ' Câu trả lời', createDate: new Date(), id: 1, status: '1'},
-  ];
+  qnaList = [];
   qaConst = QaConst;
-  isHasDel = true;
-  isHasEdit = true;
+  isHasDel = false;
+  isHasEdit = false;
+  isHasInsert = false;
   pageSize = 10;
+  page = 0;
   totalItem = 14;
 
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private qaService: QaService,
+    private translate: TranslateService,
+    private appTranslate: AppTranslateService,
+    private confirmDialog: ConfirmationService,
+    private messageService: MessageService,
+    private indicator: IndicatorService,
+    private fb: FormBuilder
 
   ) {
     super();
+    this.initForm();
+    this.isHasInsert = this.auth.isHasRole(FeatureEnum.QA, RoleEnum.ACTION_INSERT);
     this.isHasEdit = this.auth.isHasRole(FeatureEnum.QA, RoleEnum.ACTION_EDIT);
     this.isHasDel = this.auth.isHasRole(FeatureEnum.QA, RoleEnum.ACTION_DELETE);
+    this.isHasDel = this.auth.isHasRole(FeatureEnum.QA, RoleEnum.ACTION_DELETE);
+    this.appTranslate.languageChanged$.pipe(
+      takeUntil(this.nextOnDestroy),
+      startWith(''),
+      switchMap(lang => this.translate.get('const').pipe(
+        map(resConst => ({ lang, resConst }))
+      ))
+    ).subscribe(({lang, resConst}) => {
+
+      this.statusList = [
+        { label: resConst.all, value: null },
+        { label: resConst.active, value: QaEnum.ACTIVE },
+        { label: resConst.inactive, value: QaEnum.INACTIVE }
+      ];
+    });
   }
 
   ngOnInit(): void {
+    this.getListQa();
+  }
+  doFilter() {
+    this.paging.changePage(0);
   }
 
-  doFilter() {
+  getListQa() {
 
+    const filterObj = {
+      keyword: this.formFilter.get('keyword').value,
+      status: this.formFilter.get('status').value.value,
+      page: this.page,
+      pageSize: this.pageSize
+    };
+    this.qaService.filterQa(filterObj).subscribe(res => {
+      this.qnaList = res.listQnA;
+      this.totalItem = res.totalRecord;
+    });
   }
 
   hasErrorFilter(searchValue: string, pattern: string) {
@@ -74,7 +114,16 @@ export class QaDataComponent extends BaseComponent implements OnInit {
     this.router.navigate(['qa', 'view', id]);
   }
 
-  changePage($event: any) {
+  changePage(evt) {
+    this.page = evt.page;
+    this.pageSize = evt.rows;
+    this.getListQa();
+  }
 
+  private initForm() {
+    this.formFilter = this.fb.group({
+      keyword: [''],
+      status: [{value:null}]
+    });
   }
 }

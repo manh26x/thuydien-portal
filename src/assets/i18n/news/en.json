@@ -41,8 +41,9 @@
 	"filter": "Filter",
 	"invalid": {
 		"content": {
-			"required": "Value cannot be blank"
-		},
+			"required": "Value cannot be blank",
+      "maxLength": "The value must not exceed {{length}} characters"
+    },
 		"docs": {
 			"limit": "The number of files exceeded the allowed limit",
 			"type": "The file is not in PDF format",
@@ -63,10 +64,7 @@
 		"title": {
 			"maxLength": "The value must not exceed {{length}} characters",
 			"required": "Value cannot be blank"
-		},
-    "content": {
-      "maxLength": "The value must not exceed {{length}} characters"
-    }
+		}
 	},
 	"level": "Critical level",
 	"levelList": {

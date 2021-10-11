@@ -33,7 +33,6 @@ export class CommentService extends BaseService{
   }
 
   postComment(comment: CommentDto): Observable<ApiResultResponse> {
-    debugger
     if(comment.isUpdate) {
       return this.doPost('/comment/update', comment);
     }
