@@ -136,7 +136,8 @@
     "approveBy": "Approved By",
     "typeUser": "User Type",
     "createBy": "Created By",
-    "statusApprove": "Approved Status"
+    "statusApprove": "Approved Status",
+    "createDate": "Created date"
   },
   "viewLess": "[View less]",
   "viewMore": "[View more]",
