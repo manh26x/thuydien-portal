@@ -3,7 +3,7 @@ import {Role, UserRole} from '../../../shared/model/role';
 export interface UserInfo {
   avatar?: string;
   createdBy?: string;
-  createdDate?: Date;
+  createDate?: Date;
   email?: string;
   fullName?: string;
   id?: string;

@@ -76,6 +76,7 @@
         <th id="positionId" >{{'user.position' | translate}}</th>
         <th id="branchId" >{{'user.branch' | translate}}</th>
         <th *ngIf="!isApprove">{{'user.status' | translate}}</th>
+        <th *ngIf="isApprove" pSortableColumn="createDate">{{'user.createDate' | translate}}<p-sortIcon field="createDate"></p-sortIcon></th>
         <th>
           <button *ngIf="isHasInsert && !isApprove" (click)="gotoCreate();" pButton type="button" label="{{'btn.create' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined"></button>
         </th>
@@ -112,6 +113,7 @@
             <div *ngSwitchCase="userConst.LOCK" class="p-invalid">{{'const.locked' | translate}}</div>
           </ng-container>
          </td>
+        <td>{{user.user.createDate | date : 'dd/MM/yyyy HH:mm'}}</td>
         <td style="min-width: 175px">
           <div>
             <button (click)="gotoView(user.user.userName)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
