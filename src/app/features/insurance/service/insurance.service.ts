@@ -23,7 +23,7 @@ export class InsuranceService extends BaseService {
     return 'InsuranceService';
   }
 
-  setPage(page: '' | 'viewInsurance' | 'updateInsurance' | 'view') {
+  setPage(page: '' | 'viewInsurance' | 'updateInsurance' | 'createCarBrand' | 'updateCarBrand' | 'createCarModal' | 'updateCarModal') {
     this.currentPage.next(page);
   }
 }

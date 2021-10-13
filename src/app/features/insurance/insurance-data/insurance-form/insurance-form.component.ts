@@ -11,6 +11,7 @@ import {InsuranceService} from "../../service/insurance.service";
 export class InsuranceFormComponent extends BaseComponent implements OnInit {
 
   @Input() isEdit: boolean;
+  insuranceForm: any;
 
   constructor(
     private insuranceService: InsuranceService
@@ -22,4 +23,15 @@ export class InsuranceFormComponent extends BaseComponent implements OnInit {
 
   }
 
+  hasErrorFilter(searchValue: string, pattern: string) {
+
+  }
+
+  doCancel() {
+
+  }
+
+  doUpdate() {
+
+  }
 }

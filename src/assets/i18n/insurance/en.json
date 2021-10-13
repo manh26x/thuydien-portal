@@ -2,7 +2,11 @@
   "breadcrumb": {
     "home": "Insurance Management",
     "updateInsurance": "Update Insurance",
-    "viewInsurance": "View Insurance"
+    "viewInsurance": "View Insurance",
+    "createCarBrand": "Create Car Brand",
+    "updateCarBrand": "Update Car Brand",
+    "createCarModal": "Create Car Modal",
+    "updateCarModal": "Update Car Modal"
   },
   "insurance": {
     "title": "Insurance Management",

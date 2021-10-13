@@ -1,0 +1,27 @@
+<p-card>
+  <form class="p-grid p-fluid p-mb-6" [formGroup]="carModalForm">
+    <div class="p-lg-6 p-col-6 p-field" >
+      <label>{{'car-modal.brand' | translate}}</label>
+      <p-dropdown [options]="brandList" optionLabel="label" dataKey="code" formControlName="status"></p-dropdown>
+    </div><div class="p-lg-6 p-col-6 p-field" >
+    <label>{{'insurance.status' | translate}}</label>
+    <p-dropdown [options]="statusList" optionLabel="label" dataKey="code" formControlName="status"></p-dropdown>
+  </div>
+    <div class="p-md-6 p-col-6 p-field">
+      <label>{{'car-modal.name' | translate}}  <span class="p-invalid">*</span></label>
+      <input type="text" id="s-valueInsurance"  pInputText placeholder="{{'car-modal.placeholder' | translate}}" formControlName="searchValue" />
+      <small *ngIf="hasErrorFilter('searchValue', 'pattern')" class="p-invalid">
+        {{'insurance.search.pattern' | translate}}
+      </small>
+    </div>
+
+
+  </form>
+  <div class="split-horizontal"></div>
+  <div class="p-text-center">
+    <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
+    <button *ngIf="isEdit" pButton (click)="save()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised p-button-secondary"></button>
+    <button *ngIf="!isEdit" pButton (click)="save()" type="button" label="{{'btn.add' | translate}}" class="p-button-raised p-button-secondary"></button>
+  </div>
+</p-card>
+

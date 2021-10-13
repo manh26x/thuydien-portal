@@ -2,7 +2,11 @@
   "breadcrumb": {
     "home": "Quản lý đơn đăng ký bảo hiểm",
     "updateInsurance": "Cập nhật đơn bảo hiểm",
-    "viewInsurance": "Chi tiết đơn bảo hiểm"
+    "viewInsurance": "Chi tiết đơn bảo hiểm",
+    "createCarBrand": "Thêm mới hãng xe",
+    "updateCarBrand": "Cập nhật hãng xe",
+    "createCarModal": "Thêm mới hiệu xe",
+    "updateCarModal": "Cập nhật hiệu xe"
   },
   "insurance": {
     "title": "Danh sách đơn bảo hiểm",

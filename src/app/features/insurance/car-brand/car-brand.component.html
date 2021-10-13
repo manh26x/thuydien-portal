@@ -1,1 +1,83 @@
-<p>car-brand works!</p>
+<form class="p-grid p-fluid p-mb-6" [formGroup]="formFilter" (keyup.enter)="doFilter()">
+  <div class="p-md-7 p-col-7 p-field">
+    <label>{{'car-brand.search' | translate}}</label>
+    <input type="text" id="s-valueInsurance"  pInputText placeholder="{{'car-brand.placeholder' | translate}}" formControlName="searchValue" />
+    <small *ngIf="hasErrorFilter('searchValue', 'pattern')" class="p-invalid">
+      {{'insurance.search.pattern' | translate}}
+    </small>
+  </div>
+  <div class="p-lg-2 p-col-2 p-field p-ml-3" >
+    <label>{{'insurance.status' | translate}}</label>
+    <p-dropdown [options]="statusList" optionLabel="label" dataKey="code" formControlName="status"></p-dropdown>
+  </div>
+  <div class="p-col-2  p-d-flex  p-mt-1 p-pl-3 p-lg-2 p-field p-pt-5">
+    <button (click)="doFilter()"   pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
+  </div>
+</form>
+
+<p-table [value]="carBrandList" dataKey="id" styleClass="table-responsive"
+         [customSort]="true"
+         [autoLayout]="true"
+         [lazy]="true"
+         sortField="createdDate"
+         [sortOrder]="-1"
+         (onLazyLoad)="lazyLoadCarBrand($event)">
+  <ng-template pTemplate="header">
+    <tr>
+      <th id="noId" style="width: 50px;">{{'car-brand.no' | translate}}</th>
+
+      <th pSortableColumn="name">{{'car-brand.name' | translate}} <p-sortIcon field="name"></p-sortIcon></th>
+      <th id="createdDate" >{{'car-brand.createdDate' | translate}}</th>
+      <th id="modifiedDate" >{{'car-brand.modifiedDate' | translate}}</th>
+      <th id="statusId" pSortableColumn="status">{{'car-brand.status' | translate}} <p-sortIcon field="status"></p-sortIcon></th>
+      <th>
+        <button *ngIf="isHasInsert" pButton type="button" label="{{'btn.insert' | translate}}" icon="pi pi-plus" class="p-button-secondary p-button-outlined" (click)="gotoCreate()"></button>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-carBrand let-index="rowIndex">
+    <tr>
+      <td>{{(page * pageSize) + 1 + index}}</td>
+      <td>{{carBrand.name}}</td>
+      <td>{{carBrand.createdDate | date : 'dd/MM/yyyy HH:mm'}}</td>
+      <td>{{carBrand.modifiedDate | date : 'dd/MM/yyyy HH:mm'}}</td>
+      <td>
+        <ng-container [ngSwitch]="carBrand.status">
+
+        </ng-container>
+      </td>
+      <td>
+        <button  pButton
+                 type="button"
+                 icon="pi pi-pencil"
+                 class="p-button-rounded p-button-secondary p-button-text"
+                 (click)="gotoUpdate(carBrand.id)"
+        >
+        </button>
+        <button  pButton
+                 type="button"
+                 icon="pi pi-trash"
+                 class="p-button-rounded p-button-danger p-button-text"
+                 (click)="deleteCarBrand(carBrand)"
+
+        >
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="9">
+        {{'noData' | translate}}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-paginator #insurancePaging [rows]="10"
+             [hidden]="totalItems <= 0"
+             [totalRecords]="totalItems"
+             [rowsPerPageOptions]="[10, 20, 50, 100]"
+             [showCurrentPageReport]="true"
+             (onPageChange)="changePage($event)"
+             currentPageReportTemplate="{{ 'paging' | translate }}">
+</p-paginator>
