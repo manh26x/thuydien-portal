@@ -15,7 +15,7 @@ build:code:
 #    - npm config set proxy http://$PROXY_HOST:$PROXY_PORT
   script:
     - npm config set registry "https://ebit.tpb.vn/nexus/repository/npm-proxy01/"
-    - npm config set _auth "c2FsZXNhcHA6dEx3ZmNmR2Vyczd4UFR5Vgo="
+    - npm config set _auth "c2FsZXNhcHA6dEx3ZmNmR2Vyczd4UFR5Vg=="
     #- npm config set _auth "YWRtaW46UnQ2R01namJDNVN0TVBnYg=="
     - npm set strict-ssl false
     - npm config list
