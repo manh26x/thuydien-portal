@@ -11,7 +11,9 @@ build:code:
   tags:
     - k8s
   before_script:
-    - npm config set proxy http://$PROXY_HOST:$PROXY_PORT
+#    - npm config set proxy http://$PROXY_HOST:$PROXY_PORT
+    - npm config set registry http://ebit.tpb.vn/nexus/repository/npm-proxy01/
+    - npm config set _auth "YWRtaW46UnQ2R01namJDNVN0TVBnYg=="
     - npm set strict-ssl false
   script:
     - npm install
