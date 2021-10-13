@@ -11,11 +11,12 @@ build:code:
   tags:
     - k8s
   before_script:
+    - echo test
 #    - npm config set proxy http://$PROXY_HOST:$PROXY_PORT
-    - npm config set registry http://ebit.tpb.vn/nexus/repository/npm-proxy01/
+  script:
+    - npm config set registry "http://ebit.tpb.vn/nexus/repository/npm-proxy01/"
     - npm config set _auth "YWRtaW46UnQ2R01namJDNVN0TVBnYg=="
     - npm set strict-ssl false
-  script:
     - npm install
     - npx ngcc --properties es2015 --create-ivy-entry-points
     - npm run ng build -- --configuration=$PROFILE
