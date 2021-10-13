@@ -331,3 +331,11 @@
     overflow-y: visible;
   }
 }
+#tableInsurance {
+  border-collapse: collapse;
+  border: 1px solid black;
+  th, td {
+    border: 1px solid black;
+    padding: 10px 0 10px 22px;
+  }
+}

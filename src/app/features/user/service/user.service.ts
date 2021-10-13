@@ -39,10 +39,10 @@ export class UserService extends BaseService{
 
 
   filterUser(request: FilterUserRequest, isApprove: boolean): Observable<FilterUserResponse> {
-    request.userType = '';
+    // request.userType = '';
     let url = '/admin/userPortal/filter';
     if(isApprove) {
-      url = '/admin/userPortal/filterUserApprove'
+      url = '/admin/userPortal/filterUserApprove';
     }
     return this.doPost(url, request).pipe(
       map(res => res.data ? res.data[0] : { listUser: [], totalRecord: 0 })

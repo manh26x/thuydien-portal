@@ -52,6 +52,10 @@ const routes: Routes = [
       {
         path: 'notification',
         loadChildren: () => import('./notification/notification.module').then(m => m.NotificationModule)
+      },
+      {
+        path: 'insurance',
+        loadChildren: () => import('./insurance/insurance.module').then(m => m.InsuranceModule)
       }
 
     ]

@@ -1,0 +1,30 @@
+{
+  "breadcrumb": {
+    "home": "Quản lý đơn đăng ký bảo hiểm",
+    "updateInsurance": "Cập nhật đơn bảo hiểm",
+    "viewInsurance": "Chi tiết đơn bảo hiểm"
+  },
+  "insurance": {
+    "title": "Danh sách đơn bảo hiểm",
+    "search": "Tên khách hàng",
+    "status": "Trạng thái",
+    "branch": "Chi nhánh",
+    "placeholder": "Nhập tên khách hàng",
+    "no": "STT",
+    "customerName": "Tên khách hàng",
+    "createdDate": "Ngày tạo",
+    "action": "Hành động",
+    "type": "Loại"
+  },
+  "car": {
+    "brand": {
+      "title": "Danh sách hãng xe"
+    },
+    "modal": {
+      "title": "Danh sách hiệu xe"
+    }
+  },
+  "const": {
+    "all": "Tất cả"
+  }
+}

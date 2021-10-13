@@ -81,7 +81,8 @@
 		"user": "Quản lý người dùng",
     "action-management": "Thống kê hành vi sử dụng app",
     "QA": "Quản lý bản tin Q&A",
-    "notification": "Quản lý thông báo"
+    "notification": "Quản lý thông báo",
+    "insurance": "Quản lý bảo hiểm"
   },
 	"message": {
 		"accept": "Có",

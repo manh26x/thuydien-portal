@@ -1,0 +1,93 @@
+<form class="p-grid p-fluid p-mb-6" [formGroup]="formFilter" (keyup.enter)="doFilter()">
+  <div class="p-md-3 p-col-3 p-field">
+    <label>{{'insurance.search' | translate}}</label>
+    <input type="text" id="s-valueInsurance"  pInputText placeholder="{{'insurance.placeholder' | translate}}" formControlName="searchValue" />
+    <small *ngIf="hasErrorFilter('searchValue', 'pattern')" class="p-invalid">
+      {{'insurance.search.pattern' | translate}}
+    </small>
+  </div>
+  <div class="p-lg-2 p-col-2 p-field p-ml-3" >
+    <label>{{'insurance.status' | translate}}</label>
+    <p-dropdown [options]="statusList" optionLabel="label" dataKey="code" formControlName="status"></p-dropdown>
+  </div>
+  <div class="p-lg-2 p-col-2 p-field p-ml-2" >
+    <label>{{'insurance.branch' | translate}}</label>
+    <p-dropdown [options]="branchList" optionLabel="name" dataKey="code" formControlName="branch"></p-dropdown>
+  </div>
+  <div class="p-col-2  p-d-flex  p-mt-1 p-pl-3 p-lg-2 p-field p-pt-5">
+    <button (click)="doFilter()"   pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
+  </div>
+  <div class="p-col-2  p-d-flex p-mt-1 p-pl-3 p-lg-2 p-field p-pt-5">
+    <button (click)="doExport()"   pButton type="button" label="{{'export' | translate}}" class="p-button-primary" style="height: 46px"></button>
+  </div>
+
+</form>
+<p-table [value]="insuranceList" dataKey="id" styleClass="table-responsive"
+         [customSort]="true"
+         [autoLayout]="true"
+         [lazy]="true"
+         sortField="createdDate"
+         [sortOrder]="-1"
+         (onLazyLoad)="lazyLoadInsurance($event)">
+  <ng-template pTemplate="header">
+    <tr>
+      <th id="noId" style="width: 50px;">{{'insurance.no' | translate}}</th>
+
+      <th pSortableColumn="name">{{'insurance.customerName' | translate}} <p-sortIcon field="name"></p-sortIcon></th>
+      <th id="typeId" pSortableColumn="createdDate">{{'insurance.type' | translate}} <p-sortIcon field="type"></p-sortIcon></th>
+      <th id="statusId" pSortableColumn="status">{{'insurance.status' | translate}} <p-sortIcon field="status"></p-sortIcon></th>
+      <th  >{{'insurance.branch' | translate}}</th>
+      <th id="createdDate" >{{'insurance.createdDate' | translate}}</th>
+      <th id="actionId">{{'insurance.action' | translate}}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-insurance let-index="rowIndex">
+    <tr>
+      <td>{{(page * pageSize) + 1 + index}}</td>
+      <td>{{insurance.customerName}}</td>
+      <td>{{insurance.type}}</td>
+      <td>
+        <ng-container [ngSwitch]="insurance.status">
+
+        </ng-container>
+      </td>
+      <td>{{insurance.branch}}</td>
+      <td>{{insurance.createdDate | date: 'dd/MM/yyyy HH:mm'}}</td>
+
+      <td>
+        <button (click)="gotoView(insurance.id)" pButton type="button" icon="pi pi-eye" class="p-button-rounded p-button-text"></button>
+        <button  pButton
+                 type="button"
+                 icon="pi pi-pencil"
+                 class="p-button-rounded p-button-secondary p-button-text"
+                 (click)="gotoUpdate(insurance.id)"
+        >
+        </button>
+        <button  pButton
+                 type="button"
+                 icon="pi pi-trash"
+                 class="p-button-rounded p-button-danger p-button-text"
+                 (click)="deleteInsurance(insurance)"
+
+        >
+        </button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td [attr.colspan]="9">
+        {{'noData' | translate}}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-paginator #insurancePaging [rows]="10"
+             [hidden]="totalItems <= 0"
+             [totalRecords]="totalItems"
+             [rowsPerPageOptions]="[10, 20, 50, 100]"
+             [showCurrentPageReport]="true"
+             (onPageChange)="changePage($event)"
+             currentPageReportTemplate="{{ 'paging' | translate }}">
+</p-paginator>

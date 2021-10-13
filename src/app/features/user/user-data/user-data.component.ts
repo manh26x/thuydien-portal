@@ -107,6 +107,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
           {code: UserEnum.WAIT_APPROVE, name: res.resLang.waitApprove},
           {code: UserEnum.CANCEL, name: res.resLang.cancel},
           this.typeUserList = [
+            {code: 'AlL', name: res.resLang.all}, // back-end quy dinh - anhlnd.pn
             {code: null, name: res.resLang.other},
             {code: UserEnum.CB, name: res.resLang.cb},
             {code: UserEnum.RB, name: res.resLang.rb},
@@ -203,6 +204,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   }
 
   getUserList() {
+    debugger
     this.indicator.showActivityIndicator();
     const request: FilterUserRequest = {
       keyword: this.searchForm.value.keySearch,
@@ -212,7 +214,8 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       sortOrder: this.sortOrder,
       page: this.page,
       pageSize: this.pageSize,
-      branchId: this.searchForm.value.branch.code
+      branchId: this.searchForm.value.branch.code,
+      userType: this.searchForm.value.userType.code
     };
 
     this.userService.filterUser(request, this.isApprove).pipe(

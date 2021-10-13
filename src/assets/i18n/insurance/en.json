@@ -1,0 +1,31 @@
+{
+  "breadcrumb": {
+    "home": "Insurance Management",
+    "updateInsurance": "Update Insurance",
+    "viewInsurance": "View Insurance"
+  },
+  "insurance": {
+    "title": "Insurance Management",
+    "search": "Customer name",
+    "status": "Status",
+    "branch": "Branch",
+    "placeholder": "Enter customer name",
+    "no": "No.",
+    "customerName": "Customer name",
+    "createdDate": "Created Date",
+    "action": "Action",
+    "type": "Type"
+  },
+  "car": {
+    "brand": {
+      "title": "Car brand list"
+    },
+    "modal": {
+      "title": "Car modal list"
+    }
+  },
+  "const": {
+    "all": "All"
+  }
+
+}

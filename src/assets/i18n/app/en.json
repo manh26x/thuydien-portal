@@ -81,7 +81,8 @@
 		"user": "User management",
     "action-management": "Tracking Sale App Management",
     "QA": "Q&A management",
-    "notification": "Notification management"
+    "notification": "Notification management",
+    "insurance": "Insurance Management"
 	},
 	"message": {
 		"accept": "Yes",
