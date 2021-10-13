@@ -18,7 +18,7 @@ build:code:
     - npm config set _auth "YWRtaW46UnQ2R01namJDNVN0TVBnYg=="
     - npm set strict-ssl false
     - npm config list
-    - npm install
+    - npm install --loglevel verbose
     - npx ngcc --properties es2015 --create-ivy-entry-points
     - npm run ng build -- --configuration=$PROFILE
     - mkdir portal
