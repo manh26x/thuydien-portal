@@ -291,7 +291,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       role: [{code: ''}],
       status: [{code: UserEnum.STATUS_ALL}],
       branch: [{code: UserEnum.STATUS_ALL}],
-      userType: [{code: UserEnum.STATUS_ALL}]
+      userType: [{code: UserEnum.STATUS_USER_TYPE_ALL}]
     });
 
   }

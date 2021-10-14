@@ -8,6 +8,6 @@ export enum UserEnum {
   CANCEL = '3',
   LOCK = '4',
   CB = 'CB',
-  RB = 'RB'
-
+  RB = 'RB',
+  STATUS_USER_TYPE_ALL= 'ALL'
 }
