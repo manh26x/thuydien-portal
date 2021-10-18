@@ -34,9 +34,12 @@ import { CarBrandCreateComponent } from './car-brand/car-brand-create/car-brand-
 import { CarModalFormComponent } from './car-modal/car-modal-form/car-modal-form.component';
 import { CarModalUpdateComponent } from './car-modal/car-modal-update/car-modal-update.component';
 import { CarModalCreateComponent } from './car-modal/car-modal-create/car-modal-create.component';
+import {InsuranceService} from "./service/insurance.service";
+import {ToastModule} from "primeng/toast";
 
 // @ts-ignore
 @NgModule({
+  // tslint:disable-next-line:max-line-length
   declarations: [InsuranceComponent, CarBrandComponent, CarModalComponent, InsuranceDataComponent, InsuranceFormComponent, InsuranceViewComponent, InsuranceUpdateComponent, InsuranceTabviewComponent, CarBrandFormComponent, CarBrandUpdateComponent, CarBrandCreateComponent, CarModalFormComponent, CarModalUpdateComponent, CarModalCreateComponent],
   imports: [
     CommonModule,
@@ -64,6 +67,7 @@ import { CarModalCreateComponent } from './car-modal/car-modal-create/car-modal-
     PaginatorModule,
     TableModule,
     CardModule,
+    ToastModule,
   ],
   providers: [
     {
@@ -72,7 +76,8 @@ import { CarModalCreateComponent } from './car-modal/car-modal-create/car-modal-
 
     },
     BranchService,
-    MessageService
+    MessageService,
+    InsuranceService
   ],
   exports: [InsuranceFormComponent]
 })

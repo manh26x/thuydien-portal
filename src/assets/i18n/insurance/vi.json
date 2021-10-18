@@ -28,7 +28,52 @@
       "title": "Danh sách hiệu xe"
     }
   },
+  "car-brand": {
+    "search": "Tên hãng xe",
+    "placeholder": "Nhập tên hãng xe",
+    "no": "STT",
+    "name": "Tên hãng xe",
+    "createdDate": "Ngày tạo",
+    "modifiedDate": "Ngày cập nhật",
+    "status": "Trạng thái"
+  },
+  "car-modal": {
+    "search": "Tên hiệu xe",
+    "placeholder": "Nhập tên hiệu xe",
+    "no": "STT",
+    "name": "Tên hiệu xe",
+    "brand": "Tên hãng xe",
+    "createdDate": "Ngày tạo",
+    "modifiedDate": "Ngày cập nhật",
+    "status": "Trạng thái"
+  },
   "const": {
-    "all": "Tất cả"
+    "all": "Tất cả",
+    "active": "Hoạt động",
+    "inactive": "Ngưng hoạt động"
+  },
+  "btn": {
+    "insert": "Thêm mới",
+    "cancel": "Hủy",
+    "save": "Lưu"
+  },
+  "filter": "Lọc kết quả",
+  "paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
+  "message": {
+    "insertExisted": "Dữ liệu đã tồn tại. Thêm mới thất bại.",
+    "insertSuccess": "Thêm mới dữ liệu thành công",
+    "updateNotFound": "Dữ liệu không tồn tại hoặc đã bị xóa",
+    "updateNotPermission": "Bạn không có quyền cập nhật đơn đăng ký bảo hiểm",
+
+    "updateSuccess": "Cập nhật thành công"
+  },
+  "confirm": {
+    "accept": "Có",
+    "delete": "Xác nhận xóa",
+    "deleteMessage": "Bạn có chắc chắn muốn xóa \"{{name}}\"",
+    "reject": "Không"
+  },
+  "invalid": {
+    "required": "Giá trị không được để trống"
   }
 }

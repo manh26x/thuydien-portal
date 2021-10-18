@@ -26,10 +26,52 @@
     },
     "modal": {
       "title": "Car modal list"
+    },
+    "car-brand": {
+      "search": "Car Brand",
+      "placeholder": "Car brand",
+      "no": "NO.",
+      "name": "Brand name",
+      "createdDate": "Created date",
+      "modifiedDate": "Modified date",
+      "status": "Status"
+    },
+    "car-modal": {
+      "search": "Car Model",
+      "placeholder": "Car model",
+      "no": "NO.",
+      "name": "Model name",
+      "createdDate": "Created date",
+      "modifiedDate": "Modified date",
+      "status": "Status"
     }
   },
   "const": {
-    "all": "All"
+    "all": "All",
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "btn": {
+    "insert": "Add",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "filter": "Filter",
+  "paging": "Showing {first} to {last} in {totalRecords} records",
+  "message": {
+    "insertExisted": "Data already exists. New addition failed.",
+    "insertSuccess": "Add new data successfully",
+    "updateNotFound": "Data does not exist or has been deleted",
+    "updateNotPermission": "You do not have permission to update this data",
+    "updateSuccess": "Successful information update"
+  },
+  "confirm": {
+    "accept": "Yes",
+    "delete": "Delete Confirmation",
+    "deleteMessage": "Are you sure you want to remove \"{{name}}\"",
+    "reject": "No"
+  },
+  "invalid": {
+    "required": "Value cannot be blank"
   }
-
 }

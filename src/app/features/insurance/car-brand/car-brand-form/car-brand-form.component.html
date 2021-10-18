@@ -3,9 +3,9 @@
 
   <div class="p-md-6 p-col-6 p-field">
     <label>{{'car-brand.name' | translate}}  <span class="p-invalid">*</span></label>
-    <input type="text" id="s-valueInsurance"  pInputText placeholder="{{'car-brand.placeholder' | translate}}" formControlName="searchValue" />
-    <small *ngIf="hasErrorFilter('searchValue', 'pattern')" class="p-invalid">
-      {{'insurance.search.pattern' | translate}}
+    <input type="text" id="s-valueInsurance"  pInputText placeholder="{{'car-brand.placeholder' | translate}}" formControlName="brand" />
+    <small *ngIf="hasErrorInput('brand', 'required')" class="p-invalid">
+      {{'car-brand.brand.required' | translate}}
     </small>
   </div>
   <div class="p-lg-6 p-col-6 p-field" >
@@ -18,7 +18,7 @@
   <div class="p-text-center">
     <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
     <button *ngIf="isEdit" pButton (click)="save()" type="button" label="{{'btn.save' | translate}}" class="p-button-raised p-button-secondary"></button>
-    <button *ngIf="!isEdit" pButton (click)="save()" type="button" label="{{'btn.add' | translate}}" class="p-button-raised p-button-secondary"></button>
+    <button *ngIf="!isEdit" pButton (click)="create()" type="button" label="{{'btn.insert' | translate}}" class="p-button-raised p-button-secondary"></button>
   </div>
 </p-card>
 
