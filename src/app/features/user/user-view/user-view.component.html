@@ -5,7 +5,10 @@
       <label class="title-left">{{'user.userName' | translate}}:</label>
       <div class="title-right">{{userDetail.user?.userName}}</div>
     </div>
-
+    <div class="p-md-6 p-col-12 detail" *ngIf="isApprove">
+      <label class="title-left">{{'user.createBy' | translate}}:</label>
+      <div class="title-right">{{userDetail.user.createdBy}}</div>
+    </div>
     <div class="p-md-6 p-col-12 detail" *ngIf="!isApprove">
       <label class="title-left">{{'user.status' | translate}}:</label>
       <div class="title-right">
@@ -94,6 +97,11 @@
         <span *ngSwitchCase="null">{{'userTypeTitle.Other' | translate}}</span>
       </div>
     </div>
+    <div class="p-md-6 p-col-12 detail" *ngIf="isApprove === true">
+      <label class="title-left">{{'user.approveBy' | translate}}:</label>
+      <div class="title-right">{{userDetail.user.userApprove}}
+      </div>
+    </div>
   </div>
 
   <div class="p-fluid p-grid p-mt-2"  *ngIf="isApprove === true">
@@ -107,20 +115,9 @@
         </ng-container>
       </div>
     </div>
-
-    <div class="p-md-6 p-col-12 detail">
-      <label class="title-left">{{'user.createBy' | translate}}:</label>
-      <div class="title-right">{{userDetail.user.createdBy}}</div>
-    </div>
   </div>
 
-  <div class="p-fluid p-grid p-mt-2" *ngIf="isApprove === true">
-    <div class="p-md-6 p-col-12 detail">
-      <label class="title-left">{{'user.approveBy' | translate}}:</label>
-      <div class="title-right">{{userDetail.user.userApprove}}
-      </div>
-    </div>
-  </div>
+
   <div class="split-horizontal"></div>
   <div class="p-text-center">
     <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>

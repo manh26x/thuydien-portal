@@ -10,6 +10,7 @@ import {FormLeaveGuard} from '../../core/form-leave.guard';
 import {RoleEnum} from '../../shared/model/role';
 import {FeatureGuard} from '../feature.guard';
 import {FeatureEnum} from '../../shared/model/feature.enum';
+import {NewsTabComponent} from "./news-tab/news-tab.component";
 
 const routes: Routes = [
   { path: '',
@@ -17,7 +18,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: NewsDataComponent,
+        component: NewsTabComponent,
         canActivate: [AuthGuard, FeatureGuard],
         data: {feature: FeatureEnum.NEWS, role: RoleEnum.ACTION_VIEW}
       },

@@ -1,11 +1,11 @@
-<p-panel header="{{'list' | translate}}">
-  <ng-template pTemplate="icons">
-    <button class="p-panel-header-icon p-link" (click)="refreshSearch()" pTooltip="{{'btn.refresh' | translate}}" tooltipPosition="bottom">
+<p-panel header="{{'list' | translate}}" [showHeader]="!isApprove">
+  <ng-template pTemplate="icons" >
+    <button *ngIf="!isApprove" class="p-panel-header-icon p-link" (click)="refreshSearch()" pTooltip="{{'btn.refresh' | translate}}" tooltipPosition="bottom">
       <i class="pi pi-refresh"></i>
     </button>
   </ng-template>
   <form class="p-grid p-fluid p-mb-3" [formGroup]="formFilter">
-    <div class="p-md-3 p-col-6 p-field">
+    <div class="p-md-3 p-col-6 p-field" [class.p-md-5]="isApprove">
       <label for="s-value">{{'news.name' | translate}}</label>
       <input type="text" id="s-value" (keyup.enter)="doFilter()" pInputText placeholder="{{'search' | translate}}" formControlName="searchValue" />
     </div>
@@ -14,7 +14,7 @@
       <label>{{'news.tags' | translate}}</label>
       <p-multiSelect formControlName="tags" [options]="tagsList" optionLabel="value" dataKey="id"></p-multiSelect>
     </div>
-    <div class="p-md-2 p-col-6 p-field">
+    <div class="p-md-2 p-col-6 p-field"  *ngIf="!isApprove">
       <label>{{'news.status' | translate}}</label>
       <p-dropdown formControlName="status" [options]="statusList"></p-dropdown>
     </div>
@@ -26,6 +26,14 @@
       <button (click)="doFilter()" pButton type="button" label="{{'filter' | translate}}" class="p-button-secondary" style="height: 46px"></button>
     </div>
   </form>
+  <div class="p-d-flex p-justify-start p-align-start" *ngIf="isApprove" style="height: 70px; border-top: 1px solid #E6E6E6; border-bottom: 1px solid #E6E6E6; display: flex; align-items: center">
+    <div class="p-field-checkbox" id="userCheckBoxCustom">
+      <p-checkbox [(ngModel)]="choosen" binary="true" inputId="binary" (click)="checkAllRows()"></p-checkbox>
+      <label for="binary">{{ 'btn.choose' | translate}}</label>
+    </div>
+    <button pButton icon="pi pi-check-circle" label=" {{ 'btn.approve' | translate}}" (click)="gotoApprove('1')" class="p-button-outlined" style="margin-left: 70px"></button>
+    <button pButton icon="pi pi-times-circle" label=" {{ 'btn.cancel' | translate}}" (click)="gotoApprove('3')" class="p-button-outlined" style="margin-left: 70px" ></button>
+  </div>
   <p-table [value]="newsList" dataKey="id" styleClass="table-responsive"
            [customSort]="true"
            [autoLayout]="true"
@@ -35,7 +43,10 @@
            (onLazyLoad)="lazyLoadNews($event)">
     <ng-template pTemplate="header">
       <tr>
-        <th style="width: 50px;">{{'no' | translate}}</th>
+        <th style="width: 50px;" *ngIf="!isApprove">{{ 'no' | translate}}</th>
+        <th style="width: 3rem" *ngIf="isApprove">
+          <p-tableHeaderCheckbox #checkAll [hidden]="true"></p-tableHeaderCheckbox>
+        </th>
         <th style="width: 70px;" pSortableColumn="id">{{'news.id' | translate}} <p-sortIcon field="id"></p-sortIcon></th>
         <th pSortableColumn="title">{{'news.name' | translate}} <p-sortIcon field="title"></p-sortIcon></th>
         <th pSortableColumn="status">{{'news.status' | translate}} <p-sortIcon field="status"></p-sortIcon></th>
@@ -50,7 +61,10 @@
     </ng-template>
     <ng-template pTemplate="body" let-news let-index="rowIndex">
       <tr>
-        <td>{{(page * pageSize) + 1 + index}}</td>
+        <td *ngIf="!isApprove">{{(page * pageSize) + 1 + index}}</td>
+        <td *ngIf="isApprove">
+          <p-tableCheckbox [value]="news" ></p-tableCheckbox>
+        </td>
         <td>{{news.id}}</td>
         <td>{{news.title}}</td>
         <td>
@@ -96,7 +110,7 @@
                   icon="pi pi-pencil"
                   class="p-button-rounded p-button-secondary p-button-text">
           </button>
-          <button *ngIf="isHasDel && news.status != newsConst.STATUS_DELETED" (click)="doDelete(news)" pButton
+          <button *ngIf="isHasDel && news.status != newsConst.STATUS_DELETED && !isApprove" (click)="doDelete(news)" pButton
                   type="button"
                   icon="pi pi-trash"
                   class="p-button-rounded p-button-danger p-button-text">

@@ -60,4 +60,10 @@ export class NewsService extends BaseService{
   setPage(page: '' | 'create' | 'update' | 'view') {
     this.currentPage.next(page);
   }
+
+  checkDataImport(file: FormData): Observable<any> {
+    return this.doPost('/saleskit/news/readExcel', file).pipe(
+      map(res => res.data ? res.data[0] : {})
+    );
+  }
 }

@@ -50,6 +50,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
   fileDocDisplay = '';
   isChangeImage = false;
   isChangeDoc = false;
+  private fileImport: any;
   readonly tinyMceInit = {
     base_url: '/tinymce',
     suffix: '.min',
@@ -82,6 +83,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
   @Output() draft: EventEmitter<any> = new EventEmitter<any>();
   @Input() groupViewState: GroupViewState = {branchList: [], roleList: [], unitList: []};
   @Input() tagList: TagDetail[] = [];
+  userList = '';
   constructor(
     private fb: FormBuilder,
     private tagService: TagsService,
@@ -93,7 +95,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
     private branchService: BranchService,
     private newsService: NewsService,
     private indicator: IndicatorService,
-    private messageService: MessageService
+    private messageService: MessageService,
   ) {
     super();
     this.initForm();
@@ -166,6 +168,11 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
         break;
       case NewsEnum.GROUP_VIEW_UNIT:
         this.groupViewList = this.groupViewState.unitList;
+        break;
+
+      case NewsEnum.GROUP_VIEW_PERSON:
+        this.groupViewList = undefined;
+
         break;
       default:
         break;
@@ -281,7 +288,8 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
       isSendNotification: [false],
       groupViewType: [NewsEnum.GROUP_VIEW_BRANCH],
       groupViewValue: ['', Validators.required],
-      publishType: [NewsEnum.PUBLISH_NOW]
+      publishType: [NewsEnum.PUBLISH_NOW],
+      listAnyId: ['']
     }, { validators: this.publishDateMatcher });
   }
 
@@ -365,4 +373,31 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
     return sizeFile > 5;
   }
 
+  doChangeFile(files) {
+    this.fileImport = files;
+  }
+
+  doCheckFile() {
+    if (this.fileImport && this.fileImport.length > 0) {
+      const fileFormData: FormData = new FormData();
+      fileFormData.append('file', this.fileImport[0], this.fileImport[0].name);
+      this.newsService.checkDataImport(fileFormData).subscribe(res => {
+        this.dialog.confirm({
+          key: 'globalDialog',
+          header: this.translate.instant('confirm.userNotiHeader'),
+          message: this.translate.instant('confirm.userNoti', {validUser: res.listValidUser, invalidUser: res.listInvalidUser}),
+          rejectLabel: this.translate.instant('confirm.reject'),
+          acceptLabel: this.translate.instant('confirm.accept'),
+          accept: () => {
+            this.userList = this.formNews.get('listAnyId').value;
+            this.userList += this.userList.length > 0 ? ';' : '';
+            res.listValidUser.forEach(user => this.userList += user + ';');
+            this.userList = this.userList.slice(0, this.userList.length - 1);
+            this.formNews.patchValue({listAnyId: this.userList});
+          },
+          reject: () => {}
+        });
+      }, error => console.log(error));
+    }
+  }
 }

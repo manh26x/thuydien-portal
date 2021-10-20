@@ -10,7 +10,9 @@ export enum NewsEnum {
   GROUP_VIEW_BRANCH = 'BRANCH',
   STATUS_DELETED = 10,
   PUBLISH_NOW = 1,
-  PUBLISH_SCHEDULE = 0
+  PUBLISH_SCHEDULE = 0,
+  GROUP_VIEW_PERSON = 'PERSON'
+
 }
 
 export enum CommentEnum {

@@ -5,6 +5,10 @@
 		"update": "Chỉnh sửa bản tin",
 		"view": "Chi tiết bản tin"
 	},
+  "tabHeader": {
+    "newsList": "Danh sách bản tin bán hàng",
+    "newsApprove": "Duyệt bản tin bán hàng"
+  },
 	"btn": {
 		"cancel": "Hủy",
 		"delete": "Xóa",
@@ -14,16 +18,21 @@
 		"save": "Lưu thay đổi",
 		"saveAndPublish": "Lưu thay đổi và xuất bản",
     "send": "Gửi",
-    "export": "Export"
-	},
+    "export": "Export",
+    "choose": "Chọn",
+    "approve": "Duyệt",
+    "checkData": "Kiểm tra dữ liệu"
+  },
 	"confirm": {
 		"accept": "Có",
 		"delete": "Xác nhận xóa",
 		"deleteImage": "Bạn có chắc chắn xóa ảnh từ bản tin?",
 		"deleteMessage": "Bạn có chắc chắn muốn xóa bản tin \"{{name}}\"",
     "deleteCmtMessage": "Bạn có chắc chắn muốn xóa bình luận \"{{name}}\"",
-		"reject": "Không"
-	},
+		"reject": "Không",
+    "userNotiHeader": "Thông báo",
+    "userNoti": "Các User đã xác định: {{validUser}} <br> Các dữ liệu chưa xác định: {{invalidUser}} <br><br>Tiếp tục import các user đã xác định?"
+  },
 	"const": {
 		"active": "Hoạt động",
 		"all": "Tất cả",
@@ -82,7 +91,7 @@
 		"updateSuccess": "Cập nhật bản tin thành công",
     "deleteCmtSuccess": "Xóa bình luận thành công",
     "deleteCmtNotFound": "Bình luận không tồn tại hoặc đã bị xóa"
-  },
+    },
 	"news": {
 		"author": "Tác giả",
 		"branch": "Chi nhánh",
@@ -105,8 +114,13 @@
 		"tags": "Tags",
 		"title": "Tiêu đề",
 		"unit": "Đơn vị",
-    "comment": "Bình luận"
-	},
+    "comment": "Bình luận",
+    "person": "Cá nhân",
+    "patternFile": "Tải file mẫu",
+    "atHere": "tại đây",
+    "upload": "Chọn file",
+    "userListNoti": "Danh sách user xem bản tin"
+  },
 	"no": "STT",
 	"noData": "Không có kết quả nào phù hợp",
 	"paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",

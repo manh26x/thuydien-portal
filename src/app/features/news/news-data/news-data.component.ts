@@ -1,7 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {NewsService} from '../service/news.service';
-import {FilterNewsRequest, News} from '../model/news';
+import {FilterNewsRequest, News, NewsDetail} from '../model/news';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {concatMap, finalize, map, startWith, takeUntil} from 'rxjs/operators';
 import {NewsEnum} from '../model/news.enum';
@@ -19,6 +19,7 @@ import {AuthService} from '../../../auth/auth.service';
 import {FeatureEnum} from '../../../shared/model/feature.enum';
 import {RoleEnum} from '../../../shared/model/role';
 import {Paginator} from 'primeng/paginator';
+import {UserDetail} from "../../user/model/user";
 
 @Component({
   selector: 'aw-news-data',
@@ -27,6 +28,7 @@ import {Paginator} from 'primeng/paginator';
 export class NewsDataComponent extends BaseComponent implements OnInit {
   @ViewChild('newPaging') paging: Paginator;
   // filter
+  @Input() isApprove;
   statusList: SelectItem[] = [];
   tagsList: TagsUser[] = [];
   levelList = [];
@@ -43,6 +45,9 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
   isHasInsert = false;
   isHasEdit = false;
   isHasDel = false;
+  selectedNews: News[];
+  choosen = false;
+  @ViewChild('checkAll')checkAll: any;
   constructor(
     private router: Router,
     private newsService: NewsService,
@@ -200,4 +205,17 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
     });
   }
 
+  checkAllRows() {
+    if (this.checkAll.checked) {
+      this.selectedNews = [];
+
+    } else {
+      this.selectedNews = this.newsList;
+    }
+
+  }
+
+  gotoApprove(s: string) {
+
+  }
 }

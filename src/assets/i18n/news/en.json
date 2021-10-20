@@ -5,6 +5,10 @@
 		"update": "Edit news ",
 		"view": "News detail"
 	},
+  "tabHeader": {
+    "newsList": "News List",
+    "newsApprove": "News Approve"
+  },
 	"btn": {
 		"cancel": "Cancel",
 		"delete": "Delete",
@@ -14,7 +18,9 @@
 		"save": "Save changes",
 		"saveAndPublish": "Save changes and publish",
     "send": "Send",
-    "export": "Export"
+    "export": "Export",
+    "choose": "Choose",
+    "approve": "Approve"
 	},
 	"confirm": {
 		"accept": "Yes",
@@ -22,8 +28,10 @@
 		"deleteImage": "Are you sure to delete the photo from the newsletter?",
 		"deleteMessage": "Are you sure you want to remove news \"{{name}}\"",
     "deleteCmtMessage": "Are you sure you want to remove comment \"{{name}}\"",
-		"reject": "No"
-	},
+		"reject": "No",
+    "userNotiHeader": "Notification",
+    "userNoti": "User valid: {{validUser}} <br> User invalid: {{invalidUser}} <br/><br/>Continue to import data?"
+  },
 	"const": {
 		"active": "Active",
 		"all": "All",
@@ -82,7 +90,7 @@
 		"updateSuccess": "Update news successfully",
     "deleteCmtSuccess": "Deleted comment successfully",
     "deleteCmtNotFound": "The comment does not exist or has been deleted"
-	},
+  },
 	"news": {
 		"author": "Author",
 		"branch": "Branch",
@@ -105,8 +113,14 @@
 		"tags": "Tags",
 		"title": "Title",
 		"unit": "Unit",
-    "comment": "Comment"
-	},
+    "comment": "Comment",
+    "person": "Person",
+    "patternFile": "Download the sample file",
+    "atHere": "at here",
+    "checkData": "Check Data",
+    "upload": "Upload",
+    "userListNoti": "User list view news"
+  },
 	"no": "No.",
 	"noData": "No results match",
 	"paging": "Showing {first} to {last} in {totalRecords} records",

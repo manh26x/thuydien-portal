@@ -44,6 +44,8 @@ import { NewsCommentComponent } from './news-comment/news-comment.component';
 import {TreeTableModule} from 'primeng/treetable';
 import {CommentService} from './service/comment.service';
 import {GalleriaModule} from "primeng/galleria";
+import { NewsTabComponent } from './news-tab/news-tab.component';
+import {TabViewModule} from "primeng/tabview";
 
 @NgModule({
     declarations: [
@@ -53,7 +55,8 @@ import {GalleriaModule} from "primeng/galleria";
         NewsDataComponent,
         NewsViewComponent,
         NewsUpdateComponent,
-        NewsCommentComponent
+        NewsCommentComponent,
+        NewsTabComponent
     ],
     imports: [
         CommonModule,
@@ -93,7 +96,8 @@ import {GalleriaModule} from "primeng/galleria";
         ToastModule,
         TooltipModule,
         CustomFileUploadModule,
-        MatRadioModule
+        MatRadioModule,
+        TabViewModule
     ],
     providers: [
       {
