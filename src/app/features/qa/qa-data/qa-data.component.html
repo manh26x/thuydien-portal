@@ -2,8 +2,15 @@
   <aw-qa-import (doFilter)="doFilter()"></aw-qa-import>
 </p-card>
 <div class="p-mt-5"></div>
-<p-card>
-  <h2 class="custom-title">{{'qa.qa-data.title' | translate}}</h2>
+<p-panel >
+  <ng-template pTemplate="header" >
+    <h2 class="custom-title">{{'qa.qa-data.title' | translate}}</h2>
+  </ng-template>
+  <ng-template pTemplate="icons" >
+    <button class="p-panel-header-icon p-link" (click)="refreshSearch()" pTooltip="{{'btn.refresh' | translate}}" tooltipPosition="bottom">
+      <i class="pi pi-refresh"></i>
+    </button>
+  </ng-template>
   <form class="p-grid p-fluid p-mb-6" [formGroup]="formFilter" (keyup.enter)="doFilter()">
     <div class="p-md-6 p-col-8 p-field">
       <label>{{'qa.search' | translate}}</label>
@@ -61,6 +68,13 @@
         </td>
       </tr>
     </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td [attr.colspan]="5">
+          {{'noData' | translate}}
+        </td>
+      </tr>
+    </ng-template>
   </p-table>
   <p-paginator #qaPaging [rows]="pageSize"
                [totalRecords]="totalItem"
@@ -70,4 +84,4 @@
                currentPageReportTemplate="{{ 'paging' | translate }}">
   </p-paginator>
 
-</p-card>
+</p-panel>

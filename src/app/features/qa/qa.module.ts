@@ -28,6 +28,8 @@ import { QaUpdateComponent } from './qa-update/qa-update.component';
 import { QaCreateComponent } from './qa-create/qa-create.component';
 import { QaFormComponent } from './qa-form/qa-form.component';
 import {InputTextareaModule} from "primeng/inputtextarea";
+import {TooltipModule} from "primeng/tooltip";
+import {PanelModule} from "primeng/panel";
 
 const routes: Routes = [
   {
@@ -72,6 +74,8 @@ const routes: Routes = [
     InputTextModule,
     PaginatorModule,
     InputTextareaModule,
+    TooltipModule,
+    PanelModule,
   ],
   providers: [
     {

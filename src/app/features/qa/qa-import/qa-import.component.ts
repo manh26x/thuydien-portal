@@ -9,6 +9,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {IndicatorService} from "../../../shared/indicator/indicator.service";
 import {AppTranslateService} from "../../../core/service/translate.service";
 import {TranslateService} from "@ngx-translate/core";
+import {InputUploadComponent} from "../../../shared/custom-file-upload/input-upload/input-upload.component";
 
 @Component({
   selector: 'aw-qa-import',
@@ -23,7 +24,7 @@ export class QaImportComponent extends BaseComponent implements AfterViewInit {
   tableEmit$: BehaviorSubject<Table>;
   qnaList = [];
   @Output() doFilter: EventEmitter<any> = new EventEmitter<any>();
-
+  @ViewChild(InputUploadComponent, {static: true}) inputFile: InputUploadComponent;
   constructor(
     private confirmDialog: ConfirmationService,
     private messageService: MessageService,
@@ -59,6 +60,7 @@ export class QaImportComponent extends BaseComponent implements AfterViewInit {
   doSave() {
     this.qaService.saveList(this.qnaList).subscribe(() => {
       this.display = false;
+      this.inputFile.clearFile();
       this.messageService.add({
         severity: 'success',
         detail: this.translate.instant('qa.message.insertSuccess')

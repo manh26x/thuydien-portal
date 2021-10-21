@@ -41,8 +41,8 @@
     "checkData": "Kiểm tra dữ liệu",
     "cancel": "Hủy",
     "save": "Lưu",
-    "create": "Thêm mới"
-
+    "create": "Thêm mới",
+    "refresh": "Tải lại"
   },
   "no":"STT",
   "const": {
@@ -50,6 +50,7 @@
     "active": "Hoạt động",
     "all": "Tất cả"
   },
+  "noData": "Không có kết quả nào phù hợp",
   "filter": "Lọc kết quả",
   "search": "Nhập từ khóa",
   "paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",

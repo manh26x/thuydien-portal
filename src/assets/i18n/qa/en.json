@@ -38,7 +38,8 @@
   "btn": {
     "checkData": "Check Data",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "refresh": "Refresh"
   },
   "no": "NO. ",
   "const": {
@@ -46,6 +47,7 @@
     "active": "Active",
     "all": "All"
   },
+  "noData": "No results match",
   "filter": "Filter",
   "search": "Search",
   "paging": "Showing {first} to {last} in {totalRecords} records",

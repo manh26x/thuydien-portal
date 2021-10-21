@@ -155,4 +155,9 @@ export class QaDataComponent extends BaseComponent implements OnInit {
       status: [{value:null}]
     });
   }
+
+  refreshSearch() {
+    this.initForm();
+    this.getListQa();
+  }
 }
