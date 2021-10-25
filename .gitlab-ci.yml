@@ -9,7 +9,7 @@ build:code:
   image: ebit.tpb.vn/node:12-alpine
   stage: build-code
   tags:
-    - k8s
+    - k8sv2
   before_script:
     - echo test
 #    - npm config set proxy http://$PROXY_HOST:$PROXY_PORT
@@ -43,9 +43,9 @@ build:code:
 
 build:container:
   stage: build-container
-  image: ebit.tpb.vn/docker:19.03.12
+  image: ebit.tpb.vn/podman/stable:v3.4.0
   tags:
-    - k8s
+    - k8sv2
   dependencies:
     - "build:code"
   rules:
@@ -59,10 +59,10 @@ build:container:
       variables:
         IMG_SRC: $REGISTRY_SRC_HOST/$K8S_NS_UAT/$MODULE:$CI_PIPELINE_IID
   before_script:
-    - echo $REGISTRY_SRC_PASS | docker login $REGISTRY_SRC_HOST --username $REGISTRY_SRC_USER --password-stdin
+    - echo $REGISTRY_SRC_PASS | podman login $REGISTRY_SRC_HOST --username $REGISTRY_SRC_USER --password-stdin
   variables:
     GIT_STRATEGY: none
   script:
     - cd portal
-    - docker build -f ./Dockerfile_runner -t $IMG_SRC .
-    - docker push $IMG_SRC
+    - podman build -f ./Dockerfile_runner -t $IMG_SRC .
+    - podman push $IMG_SRC
