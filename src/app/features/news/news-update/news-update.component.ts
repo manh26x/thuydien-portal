@@ -54,6 +54,7 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
     const obsBranch = this.branchService.getBranchList();
     const obsRole = this.roleService.getRoleActive();
     const obsUnit = this.unitService.getAllUnit();
+    let listAnyId = [];
     this.route.paramMap.pipe(
       takeUntil(this.nextOnDestroy),
       map(res => res.get('id')),
@@ -63,6 +64,7 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
             const branchMap: MultiSelectItem[] = [];
             const roleMap: MultiSelectItem[] = [];
             const unitMap: MultiSelectItem[] = [];
+            const userMap: string[] = [];
             if (this.util.canForEach(res[1])) {
               res[1].forEach((branch) => {
                 branchMap.push({id: branch.code, code: branch.code, name: branch.name, display: `${branch.code} - ${branch.name}`});
@@ -80,7 +82,7 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
             }
             // get group view
             const groupViewOfNews: MultiSelectItem[] = [];
-            let groupViewCurrent: MultiSelectItem[] = [];
+            let groupViewCurrent;
             switch (resNews.newsDto.userViewType) {
               case NewsEnum.GROUP_VIEW_BRANCH:
                 if (this.util.canForEach(resNews.listBranch)) {
@@ -109,6 +111,10 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
                 }
                 groupViewCurrent = unitMap;
                 break;
+
+              case NewsEnum.GROUP_VIEW_PERSON:
+                listAnyId = resNews.listUser;
+                break;
             }
             resNews.newsDto.groupViewValue = groupViewOfNews;
             return {
@@ -117,7 +123,8 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
               resRole: roleMap,
               resUnit: unitMap,
               newsData: resNews,
-              resGroupView: groupViewCurrent
+              resGroupView: groupViewCurrent,
+              listUser: listAnyId
             };
           })
         )),
@@ -132,6 +139,7 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
   }
 
   doSave(evt, draft) {
+    debugger
     // 0: file docs 1: file image
     const listObs: Observable<string>[] = [];
     // file docs
@@ -166,6 +174,7 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
         groupView.push(g.id);
       });
     }
+    const listAnyId = value.listAnyId.split(';');
     const body: NewsInfoRequest = {
       id: value.id,
       title: value.title,
@@ -174,7 +183,7 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
       filePath: '',
       imgPath: '',
       listNewsTag: tagsInsert,
-      listAnyId: groupView,
+      listAnyId,
       priority: value.level,
       publishTime: value.publishDate,
       sendNotification: value.isSendNotification ? 1 : 0,

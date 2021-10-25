@@ -74,6 +74,7 @@ export interface NewsDetail {
   listBranch?: Branch[];
   listRole?: Role[];
   listUnit?: Unit[];
+  listUser?: string[];
 }
 
 export interface MultiSelectItem {

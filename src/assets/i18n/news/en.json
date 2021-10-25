@@ -12,7 +12,7 @@
 	"btn": {
 		"cancel": "Cancel",
 		"delete": "Delete",
-		"draft": "Save the draft",
+		"draft": "Save",
 		"insert": "Add new",
 		"refresh": "Refresh",
 		"save": "Save changes",
@@ -30,7 +30,9 @@
     "deleteCmtMessage": "Are you sure you want to remove comment \"{{name}}\"",
 		"reject": "No",
     "userNotiHeader": "Notification",
-    "userNoti": "User valid: {{validUser}} <br> User invalid: {{invalidUser}} <br/><br/>Continue to import data?"
+    "userNoti": "User valid: {{validUser}} <br> User invalid: {{invalidUser}} <br/><br/>Continue to import data?",
+    "approvedMessage": "Are you sure you want to approve the news you selected?",
+    "cancelMessage": "Are you sure you want to disapprove the news you selected?"
   },
 	"const": {
 		"active": "Active",
@@ -89,7 +91,9 @@
 		"updateNotFound": "The news does not exist or has been deleted",
 		"updateSuccess": "Update news successfully",
     "deleteCmtSuccess": "Deleted comment successfully",
-    "deleteCmtNotFound": "The comment does not exist or has been deleted"
+    "deleteCmtNotFound": "The comment does not exist or has been deleted",
+    "approveSuccess": "Approve Successfully!!!",
+    "cancelSuccess": "Cancel successfully"
   },
 	"news": {
 		"author": "Author",

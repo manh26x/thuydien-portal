@@ -31,8 +31,8 @@
       <p-checkbox [(ngModel)]="choosen" binary="true" inputId="binary" (click)="checkAllRows()"></p-checkbox>
       <label for="binary">{{ 'btn.choose' | translate}}</label>
     </div>
-    <button pButton icon="pi pi-check-circle" label=" {{ 'btn.approve' | translate}}" (click)="gotoApprove('1')" class="p-button-outlined" style="margin-left: 70px"></button>
-    <button pButton icon="pi pi-times-circle" label=" {{ 'btn.cancel' | translate}}" (click)="gotoApprove('3')" class="p-button-outlined" style="margin-left: 70px" ></button>
+    <button pButton icon="pi pi-check-circle" label=" {{ 'btn.approve' | translate}}" (click)="gotoApprove(newsConst.APPROVED)" class="p-button-outlined" style="margin-left: 70px"></button>
+    <button pButton icon="pi pi-times-circle" label=" {{ 'btn.cancel' | translate}}" (click)="gotoApprove(newsConst.DISAPPROVED)" class="p-button-outlined" style="margin-left: 70px" ></button>
   </div>
   <p-table [value]="newsList" dataKey="id" styleClass="table-responsive"
            [customSort]="true"
@@ -40,6 +40,7 @@
            [lazy]="true"
            sortField="pubDate"
            [sortOrder]="-1"
+           [(selection)]="selectedNews"
            (onLazyLoad)="lazyLoadNews($event)">
     <ng-template pTemplate="header">
       <tr>

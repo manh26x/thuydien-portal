@@ -19,7 +19,6 @@ import {AuthService} from '../../../auth/auth.service';
 import {FeatureEnum} from '../../../shared/model/feature.enum';
 import {RoleEnum} from '../../../shared/model/role';
 import {Paginator} from 'primeng/paginator';
-import {UserDetail} from "../../user/model/user";
 
 @Component({
   selector: 'aw-news-data',
@@ -45,7 +44,7 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
   isHasInsert = false;
   isHasEdit = false;
   isHasDel = false;
-  selectedNews: News[];
+  selectedNews = [];
   choosen = false;
   @ViewChild('checkAll')checkAll: any;
   constructor(
@@ -171,7 +170,7 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
       status: filterValue.status,
       tagValue: tagSearch
     };
-    this.newsService.filterNews(body).pipe(
+    this.newsService.filterNews(body, this.isApprove).pipe(
       map(res => {
         if (this.util.canForEach(res.listNews)) {
           res.listNews.forEach(item => {
@@ -215,7 +214,52 @@ export class NewsDataComponent extends BaseComponent implements OnInit {
 
   }
 
-  gotoApprove(s: string) {
 
+  gotoApprove(status) {
+    if (this.selectedNews.length === 0) {
+      return;
+    }
+    const newsApprove = [];
+    this.selectedNews.forEach(e => {
+      newsApprove.push({newsId: e.id, approveStatus:  status});
+    });
+    let msgResult = '';
+    let confirmMsg = '';
+    if (status === this.newsConst.APPROVED) {
+      msgResult = this.translate.instant('message.approveSuccess');
+      confirmMsg = this.translate.instant('confirm.approvedMessage');
+    } else if (status === this.newsConst.DISAPPROVED) {
+      msgResult = this.translate.instant('message.cancelSuccess');
+      confirmMsg = this.translate.instant('confirm.cancelMessage');
+    }
+    this.dialog.confirm({
+      key: 'globalDialog',
+      header: this.translate.instant('confirm.delete'),
+      message: confirmMsg,
+      acceptLabel: this.translate.instant('confirm.accept'),
+      rejectLabel: this.translate.instant('confirm.reject'),
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.indicator.showActivityIndicator();
+        this.newsService.approved(newsApprove).subscribe(() => {
+          this.messageService.add({
+            severity: 'success',
+            detail: msgResult
+          });
+          this.getListNews();
+        }, err => {
+          this.indicator.hideActivityIndicator();
+          if (err instanceof ApiErrorResponse && err.code === '201') {
+            this.messageService.add({
+              severity: 'error',
+              detail: this.translate.instant('message.deleteNotFound')
+            });
+          } else {
+            throw err;
+          }
+        });
+      },
+      reject: () => {}
+    });
   }
 }

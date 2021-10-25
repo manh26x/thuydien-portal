@@ -85,7 +85,7 @@
             <label>File Import</label>
             <aw-input-upload (changeFile)="doChangeFile($event)" selectLabel="{{'news.upload' | translate}}"></aw-input-upload>
             <span class="p-mt-2 p-d-block"> {{'news.patternFile' | translate}}
-              <a href="assets/resource/Sample_QnA.xlsx" target="_blank"> {{'news.atHere' | translate}}</a>
+              <a href="assets/resource/Sample_User_News.xlsx" target="_blank"> {{'news.atHere' | translate}}</a>
             </span>
           </div>
 
@@ -200,11 +200,11 @@
   <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
   <ng-container *ngIf="mode == 'create'">
     <button pButton (click)="doSaveDraft()" type="button" label="{{'btn.draft' | translate}}" class="p-button-raised p-button-secondary p-mr-3"></button>
-    <button pButton (click)="doSave()" type="button" label="{{'btn.insert' | translate}}" class="p-button-raised p-mr-3"></button>
+<!--    <button pButton (click)="doSave()" type="button" label="{{'btn.insert' | translate}}" class="p-button-raised p-mr-3"></button>-->
   </ng-container>
   <ng-container *ngIf="mode == 'update' && isNotPublished">
     <button pButton (click)="doSaveDraft()" type="button" label="{{'btn.draft' | translate}}" class="p-button-raised p-button-secondary p-mr-3"></button>
-    <button pButton (click)="doUpdate()" type="button" label="{{'btn.saveAndPublish' | translate}}" class="p-button-raised"></button>
+<!--    <button pButton (click)="doUpdate()" type="button" label="{{'btn.saveAndPublish' | translate}}" class="p-button-raised"></button>-->
   </ng-container>
 </div>
 

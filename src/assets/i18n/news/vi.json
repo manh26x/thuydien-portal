@@ -12,7 +12,7 @@
 	"btn": {
 		"cancel": "Hủy",
 		"delete": "Xóa",
-		"draft": "Lưu bản nháp",
+		"draft": "Lưu",
 		"insert": "Thêm mới",
 		"refresh": "Tải lại",
 		"save": "Lưu thay đổi",
@@ -31,7 +31,9 @@
     "deleteCmtMessage": "Bạn có chắc chắn muốn xóa bình luận \"{{name}}\"",
 		"reject": "Không",
     "userNotiHeader": "Thông báo",
-    "userNoti": "Các User đã xác định: {{validUser}} <br> Các dữ liệu chưa xác định: {{invalidUser}} <br><br>Tiếp tục import các user đã xác định?"
+    "userNoti": "Các User đã xác định: {{validUser}} <br> Các dữ liệu chưa xác định: {{invalidUser}} <br><br>Tiếp tục import các user đã xác định?",
+    "approvedMessage": "Bạn có chắc muốn duyệt các bản tin đã chọn?",
+    "cancelMessage": "Bạn có chắc muốn hủy các bản tin đã chọn?"
   },
 	"const": {
 		"active": "Hoạt động",
@@ -90,7 +92,9 @@
 		"updateNotFound": "Bản tin không tồn tại hoặc đã bị xóa",
 		"updateSuccess": "Cập nhật bản tin thành công",
     "deleteCmtSuccess": "Xóa bình luận thành công",
-    "deleteCmtNotFound": "Bình luận không tồn tại hoặc đã bị xóa"
+    "deleteCmtNotFound": "Bình luận không tồn tại hoặc đã bị xóa",
+    "approveSuccess": "Phê duyệt thành công!",
+    "cancelSuccess": "Hủy duyệt thành công"
     },
 	"news": {
 		"author": "Tác giả",

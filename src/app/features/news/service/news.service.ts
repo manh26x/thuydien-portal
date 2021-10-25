@@ -41,7 +41,12 @@ export class NewsService extends BaseService{
     return this.doPost('/saleskit/news/delete', body);
   }
 
-  filterNews(request: FilterNewsRequest): Observable<NewsPaging> {
+  filterNews(request: FilterNewsRequest, isApprove: boolean): Observable<NewsPaging> {
+    if (isApprove) {
+      return this.doPost('/saleskit/news/filterNewsApproving', request).pipe(
+        map(res => res.data[0])
+      );
+    }
     return this.doPost('/saleskit/news/filterPortal', request).pipe(
       map(res => res.data[0])
     );
@@ -64,6 +69,12 @@ export class NewsService extends BaseService{
   checkDataImport(file: FormData): Observable<any> {
     return this.doPost('/saleskit/news/readExcel', file).pipe(
       map(res => res.data ? res.data[0] : {})
+    );
+  }
+
+  approved(newsAprrove: any) {
+    return this.doPost('/saleskit/news/approveNews', newsAprrove).pipe(
+      map(res => res)
     );
   }
 }

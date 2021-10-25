@@ -79,6 +79,7 @@ export class NewsCreateComponent extends BaseComponent implements OnInit, Before
   }
 
   doSave(evt, draft: boolean) {
+    debugger
     // 0: file docs 1: file image
     const listObs: Observable<string>[] = [];
     // file docs
@@ -113,6 +114,7 @@ export class NewsCreateComponent extends BaseComponent implements OnInit, Before
         groupView.push(g.id);
       });
     }
+    const listAnyId = value.listAnyId.split(';');
     const body: NewsInfoRequest = {
       title: value.title,
       shortContent: value.shortContent,
@@ -120,13 +122,13 @@ export class NewsCreateComponent extends BaseComponent implements OnInit, Before
       filePath: '',
       imgPath: '',
       listNewsTag: tagsInsert,
-      listAnyId: groupView,
+      listAnyId,
       priority: value.level,
       publishTime: value.publishDate,
       sendNotification: value.isSendNotification ? 1 : 0,
       isDraft: draft ? 1 : 0,
       userViewType: value.groupViewType,
-      isPublished: value.publishType
+      isPublished: value.publishType,
     };
     this.indicator.showActivityIndicator();
     forkJoin(listObs).pipe(

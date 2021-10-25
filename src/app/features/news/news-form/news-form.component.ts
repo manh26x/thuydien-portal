@@ -149,8 +149,10 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
           image: news.newsDto.image,
           isSendNotification: false,
           groupViewType: news.newsDto.userViewType,
-          groupViewValue: news.newsDto.groupViewValue
+          groupViewValue: news.newsDto.groupViewValue,
+          listAnyId: ''
         });
+        this.doCheckListAnyId({listValidUser: news.listUser});
       }
     }
   }
@@ -203,6 +205,7 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
   }
 
   doUpdate() {
+    debugger
     const value = this.formNews.getRawValue();
     this.formNews.patchValue({
       title: value.title.trim()
@@ -389,15 +392,18 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
           rejectLabel: this.translate.instant('confirm.reject'),
           acceptLabel: this.translate.instant('confirm.accept'),
           accept: () => {
-            this.userList = this.formNews.get('listAnyId').value;
-            this.userList += this.userList.length > 0 ? ';' : '';
-            res.listValidUser.forEach(user => this.userList += user + ';');
-            this.userList = this.userList.slice(0, this.userList.length - 1);
-            this.formNews.patchValue({listAnyId: this.userList});
+            this.doCheckListAnyId(res);
           },
           reject: () => {}
         });
       }, error => console.log(error));
     }
+  }
+  doCheckListAnyId(res: any) {
+    this.userList = this.formNews.get('listAnyId').value;
+    this.userList += this.userList.length > 0 ? ';' : '';
+    res.listValidUser.forEach(user => this.userList += user + ';');
+    this.userList = this.userList.slice(0, this.userList.length - 1);
+    this.formNews.patchValue({listAnyId: this.userList});
   }
 }
