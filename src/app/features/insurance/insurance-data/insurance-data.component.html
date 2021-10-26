@@ -45,9 +45,9 @@
   <ng-template pTemplate="body" let-insurance let-index="rowIndex">
     <tr>
       <td>{{(page * pageSize) + 1 + index}}</td>
-      <td>{{insurance.customerName}}</td>
+      <td>{{insurance.ten}}</td>
       <td>{{insurance.type}}</td>
-      <td>
+      <td>{{insurance.status}}
         <ng-container [ngSwitch]="insurance.status">
 
         </ng-container>
@@ -83,7 +83,7 @@
     </tr>
   </ng-template>
 </p-table>
-<p-paginator #insurancePaging [rows]="10"
+<p-paginator #paging [rows]="10"
              [hidden]="totalItems <= 0"
              [totalRecords]="totalItems"
              [rowsPerPageOptions]="[10, 20, 50, 100]"

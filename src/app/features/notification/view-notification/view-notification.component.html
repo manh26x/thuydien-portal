@@ -1,1 +1,88 @@
-<aw-form-notification></aw-form-notification>
+<p-card xmlns="http://www.w3.org/1999/html">
+  <form class="p-grid">
+    <div class="p-md-8 p-col-8">
+      <div class="p-fluid">
+        <div class="p-col-12 p-field detail">
+          <label for="n-title" class="title-left">{{'notification.title' | translate}}</label>
+          <div class="title-right">{{notificationDetail.notificationDetailDto.title}}</div>
+        </div>
+      </div>
+      <div class="p-fluid">
+        <div class="p-col-12 p-field detail">
+          <label for="n-content">{{'notification.content' | translate}} <span class="p-invalid">*</span></label>
+          <div class="title-right" style="height: 400px;">{{notificationDetail.notificationDetailDto.content}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="p-md-4 p-col-4">
+      <div class="p-fluid">
+        <div class="p-col-12 p-field detail">
+          <label for="n-status">{{'notification.status' | translate}} <span class="p-invalid">*</span></label>
+          <div class="title-right">
+            <ng-container [ngSwitch]="notificationDetail.notificationDetailDto.status">
+              <ng-container *ngSwitchCase="notificationConst.SENT">{{'const.sent' | translate}}</ng-container>
+              <ng-container *ngSwitchCase="notificationConst.WAIT_SEND">{{'const.nosend' | translate}}</ng-container>
+              <ng-container *ngSwitchCase="notificationConst.INACTIVE">{{'const.inactive' | translate}}</ng-container>
+              <ng-container *ngSwitchCase="notificationConst.DRAFT">{{'const.draft' | translate}}</ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="p-fluid">
+        <div class="p-col-12 p-field detail">
+          <label for="n-tags">{{'notification.tags' | translate}}</label>
+          <div class="title-right">
+            <ng-container *ngFor="let item of notificationDetail.tagValue">
+              <li>{{item.tagValue}}</li>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="p-fluid">
+        <div class="p-col-12 p-field detail">
+          <label for="n-group">{{'notification.groupObject.title' | translate}} <span class="p-invalid">*</span></label>
+          <ng-container [ngSwitch]="notificationDetail.notificationDetailDto.userViewType">
+            <ng-container *ngSwitchCase="notificationConst.GROUP_VIEW_BRANCH">
+              <h5>{{'news.branch' | translate}}</h5>
+              <ng-container *ngFor="let item of notificationDetail.listBranch">
+                <li>{{item.code}} - {{item.name}}</li>
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="notificationConst.GROUP_VIEW_ROLE">
+              <h5>{{'news.role' | translate}}</h5>
+              <ng-container *ngFor="let item of notificationDetail.listRole">
+                <li>{{item.name}}</li>
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="notificationConst.GROUP_VIEW_UNIT">
+              <h5>{{'news.unit' | translate}}</h5>
+              <ng-container *ngFor="let item of notificationDetail.listUnit">
+                <li>{{item.name}}</li>
+              </ng-container>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="notificationConst.GROUP_VIEW_PERSON">
+              <h5>{{'news.person' | translate}}</h5>
+              <ng-container *ngFor="let item of notificationDetail.listUser">
+                {{item}};
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="p-col-12  p-fluid p-field">
+        <label for="n-send">{{'notification.send' | translate}}</label>
+      </div>
+      <div class="p-col-12 p-field">
+        <label for="n-image">{{'notification.image' | translate}}</label>
+      </div>
+    </div>
+    <div class="split-horizontal"></div>
+    <div class="p-text-center p-flex-row p-justify-center p-align-center" style="display: flex; width: 100%">
+      <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
+    </div>
+  </form>
+</p-card>

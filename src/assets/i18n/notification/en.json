@@ -62,11 +62,18 @@
       "title": "Notice",
       "pattern": "Users identify: {{userSuccess}} <br />Data not identity: {{userFail}}"
     },
+    "userNotiHeader": "Notification",
+    "userNoti": "User valid: {{validUser}} <br> User invalid: {{invalidUser}} <br/><br/>Continue to import data?",
     "accept": "Yes",
     "delete": "Delete Confirmation",
     "deleteImage": "Are you sure to delete the photo from the newsletter?",
     "deleteMessage": "Are you sure you want to remove news \"{{name}}\"",
     "deleteCmtMessage": "Are you sure you want to remove comment \"{{name}}\"",
     "reject": "No"
+  },
+  "noData": "No results match",
+  "invalid": {
+    "maxLength": "The value must not exceed {{length}} characters",
+    "required": "Value cannot be blank"
   }
 }

@@ -205,7 +205,6 @@ export class NewsFormComponent extends BaseComponent implements OnInit, OnChange
   }
 
   doUpdate() {
-    debugger
     const value = this.formNews.getRawValue();
     this.formNews.patchValue({
       title: value.title.trim()

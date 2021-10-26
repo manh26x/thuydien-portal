@@ -61,11 +61,19 @@
       "title": "Thông báo",
       "pattern": "Các user đã xác định: {{userSuccess}} <br />Các dữ liệu chưa xác định: {{userFail}}"
     },
+    "userNotiHeader": "Thông báo",
+    "userNoti": "Các User đã xác định: {{validUser}} <br> Các dữ liệu chưa xác định: {{invalidUser}} <br><br>Tiếp tục import các user đã xác định?",
+
     "accept": "Có",
     "delete": "Xác nhận xóa",
     "deleteImage": "Bạn có chắc chắn xóa ảnh từ bản tin?",
     "deleteMessage": "Bạn có chắc chắn muốn xóa bản tin \"{{name}}\"",
     "deleteCmtMessage": "Bạn có chắc chắn muốn xóa bình luận \"{{name}}\"",
     "reject": "Không"
+  },
+  "noData": "Không có kết quả nào phù hợp",
+  "invalid": {
+    "required": "Giá trị không được để trống",
+    "maxLength": "Giá trị không được vượt quá {{length}} ký tự"
   }
 }

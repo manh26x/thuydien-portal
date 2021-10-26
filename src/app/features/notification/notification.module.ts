@@ -35,6 +35,9 @@ import {CustomFileUploadModule} from '../../shared/custom-file-upload/custom-fil
 import {CalendarModule} from 'primeng/calendar';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {DialogModule} from "primeng/dialog";
+import {MatRadioModule} from "@angular/material/radio";
+import {EditorModule, TINYMCE_SCRIPT_SRC} from "@tinymce/tinymce-angular";
+import {ToastModule} from "primeng/toast";
 
 
 @NgModule({
@@ -77,6 +80,9 @@ import {DialogModule} from "primeng/dialog";
     CustomFileUploadModule,
     CalendarModule,
     DialogModule,
+    MatRadioModule,
+    EditorModule,
+    ToastModule,
   ],
   providers: [
     NotificationService,
@@ -88,8 +94,10 @@ import {DialogModule} from "primeng/dialog";
     TagsService,
     BranchService,
     RoleService,
+    UnitService,
     ConfirmationService,
-    UnitService
+    UnitService,
+    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
   ],
   exports: [
     FormNotificationComponent

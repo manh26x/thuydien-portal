@@ -18,7 +18,8 @@
     "customerName": "Customer name",
     "createdDate": "Created Date",
     "action": "Action",
-    "type": "Type"
+    "type": "Type",
+    "miscode": "MIScode CBBH"
   },
   "car": {
     "brand": {

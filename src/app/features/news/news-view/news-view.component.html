@@ -60,6 +60,13 @@
                   <li>{{item.name}}</li>
                 </ng-container>
               </ng-container>
+
+              <ng-container *ngSwitchCase="newsConst.GROUP_VIEW_PERSON">
+                <h5>{{'news.person' | translate}}</h5>
+                <ng-container *ngFor="let item of newsDetail.listUser">
+                  {{item}};
+                </ng-container>
+              </ng-container>
             </ng-container>
           </div>
         </div>

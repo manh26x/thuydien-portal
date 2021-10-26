@@ -6,7 +6,7 @@
         <label for="n-title">{{'notification.title' | translate}} <span class="p-invalid">*</span></label>
         <input formControlName="title" id="n-title" type="text" pInputText />
         <small *ngIf="hasErrorInput('title', 'required')" class="p-invalid">
-          {{'invalid.title.required' | translate}}
+          {{'invalid.required' | translate}}
         </small>
         <small *ngIf="hasErrorInput('title', 'maxlength')" class="p-invalid">
           {{ 'invalid.title.maxLength' | translate:{length: 500} }}
@@ -16,11 +16,14 @@
     <div class="p-fluid">
       <div class="p-col-12 p-field">
         <label for="n-content">{{'notification.content' | translate}} <span class="p-invalid">*</span></label>
-        <textarea formControlName="content" [rows]="36" id="n-content" pInputTextarea ></textarea>
-        <small *ngIf="hasErrorInput('title', 'required')" class="p-invalid">
-          {{'invalid.title.required' | translate}}
+        <editor
+          formControlName="content"
+          [init]="tinyMceInit">
+        </editor>
+        <small *ngIf="hasErrorInput('content', 'required')" class="p-invalid">
+          {{'invalid.required' | translate}}
         </small>
-        <small *ngIf="hasErrorInput('title', 'maxlength')" class="p-invalid">
+        <small *ngIf="hasErrorInput('content', 'maxlength')" class="p-invalid">
           {{ 'invalid.title.maxLength' | translate:{length: 500} }}
         </small>
       </div>
@@ -31,8 +34,8 @@
       <div class="p-col-12 p-field">
         <label for="n-status">{{'notification.status' | translate}} <span class="p-invalid">*</span></label>
         <p-dropdown formControlName="status" id="n-status" [options]="statusList" dataKey="code" optionLabel="label"></p-dropdown>
-        <small *ngIf="hasErrorInput('tags', 'required')" class="p-invalid">
-          {{'invalid.tags.required' | translate}}
+        <small *ngIf="hasErrorInput('status', 'required')" class="p-invalid">
+          {{'invalid.required' | translate}}
         </small>
       </div>
     </div>
@@ -41,37 +44,46 @@
         <label for="n-tags">{{'notification.tags' | translate}}</label>
         <p-multiSelect formControlName="tags" id="n-tags" [options]="tagList" dataKey="id" optionLabel="value"></p-multiSelect>
         <small *ngIf="hasErrorInput('tags', 'required')" class="p-invalid">
-            {{'invalid.tags.required' | translate}}
+            {{'invalid.required' | translate}}
         </small>
       </div>
     </div>
     <div class="p-fluid">
-      <div class="p-col-12 p-field">
+      <div class="p-field p-mb-3">
         <label for="n-group">{{'notification.groupObject.title' | translate}} <span class="p-invalid">*</span></label>
-        <div class="p-grid" id="n-group">
-          <div class="p-field-radiobutton p-md-6">
-            <p-radioButton name="groupObject" value="personal" [(ngModel)]="groupObject"  formControlName="groupObject"></p-radioButton>
-            <label>{{'notification.groupObject.personal' | translate}}</label>
-          </div>
-          <div class="p-field-radiobutton p-md-6">
-            <p-radioButton name="groupObject" value="role" [(ngModel)]="groupObject" formControlName="groupObject"></p-radioButton>
-            <label>{{'notification.groupObject.role' | translate}}</label>
-          </div>
-          <div class="p-field-radiobutton p-md-6">
-            <p-radioButton name="groupObject" value="unit" [(ngModel)]="groupObject"  formControlName="groupObject"></p-radioButton>
-            <label>{{'notification.groupObject.unit' | translate}}</label>
-          </div>
-          <div class="p-field-radiobutton p-md-6">
-            <p-radioButton name="groupObject" value="branch" [(ngModel)]="groupObject"  formControlName="groupObject"></p-radioButton>
-            <label>{{'notification.groupObject.branch' | translate}}</label>
-          </div>
-        </div>
-
-        <small *ngIf="hasErrorInput('tags', 'required')" class="p-invalid">
-          {{'invalid.tags.required' | translate}}
-        </small>
+          <mat-radio-group aria-label="Select group view" (change)="doChangeGroupView($event)" formControlName="groupViewType">
+            <div class="p-row">
+              <mat-radio-button color="primary" [value]="notificationConst.GROUP_VIEW_PERSON">{{'notification.groupObject.personal' | translate}}</mat-radio-button>
+              <span class="p-mr-4 p-ml-4"></span>
+              <mat-radio-button color="primary" [value]="notificationConst.GROUP_VIEW_BRANCH">{{'notification.groupObject.branch' | translate}}</mat-radio-button>
+            </div>
+            <div class="p-row p-mt-4">
+              <mat-radio-button color="primary" [value]="notificationConst.GROUP_VIEW_UNIT">{{'notification.groupObject.unit' | translate}}</mat-radio-button>
+              <span class="p-mr-5 p-ml-5"></span>
+              <mat-radio-button color="primary" [value]="notificationConst.GROUP_VIEW_ROLE">{{'notification.groupObject.role' | translate}}</mat-radio-button>
+            </div>
+          </mat-radio-group>
       </div>
-    </div>
+
+    <p-multiSelect *ngIf="groupViewList"
+                   [showToggleAll]="true"
+                   [filter]="true"
+                   filterBy="label,value.code"
+                   formControlName="groupViewValue"
+                   inputId="n-group-customer"
+                   [options]="groupViewList"
+                   optionLabel="display"
+                   dataKey="id">
+      <ng-template let-item pTemplate="item">
+        <div>{{item.value.display}}</div>
+      </ng-template>
+    </p-multiSelect>
+    <small *ngIf="hasErrorInput('groupViewValue', 'required') && groupViewList" class="p-invalid">
+      {{'invalid.required' | translate}}
+    </small>
+  </div>
+
+  <div *ngIf="!groupViewList">
     <div class="p-fluid p-grid">
       <div class="p-col-12 p-md-12 p-field">
         <label>File Import</label>
@@ -89,7 +101,9 @@
         </div>
       </div>
     </div>
-    <div class="p-col-12  p-fluid p-field">
+  </div>
+
+  <div class="p-col-12  p-fluid p-field p-mt-3">
       <label for="n-send">{{'notification.send' | translate}}</label>
       <p-calendar id="n-send"
                   formControlName="publishDate"
@@ -139,7 +153,7 @@
 </p-card>
 <p-dialog [visible]="display" [closable]="false" modal="true"   [style]="{width: '50vw'}">
   <ng-template pTemplate="header"><h2>{{'confirm.listUser.title' | translate}}</h2></ng-template>
-  <ng-template pTemplate="body">{{'confirm.listUser.pattern' | translate}}</ng-template>
+  <ng-template pTemplate="body">{{'confirm.userNoti' | translate: {validUser: userList, invalidUser: invalidUserList}  }}</ng-template>
 <ng-template pTemplate="footer">
   <div class="p-grid p-fluid" style="display: flex; justify-content: center; align-items: center; margin: 20px 0">
     <button type="button" pButton (click)="display = false" class="p-button-primary p-button-outlined p-md-6 p-col-6" style="width: 45%; height: 45px" label="{{'btn.no' | translate}}"></button>

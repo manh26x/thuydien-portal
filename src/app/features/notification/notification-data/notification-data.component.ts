@@ -1,14 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import {BaseComponent} from "../../../core/base.component";
-import {NotificationConst} from "../notification";
-import {Router} from "@angular/router";
-import {TranslateService} from "@ngx-translate/core";
-import {AppTranslateService} from "../../../core/service/translate.service";
-import {concatMap, startWith, takeUntil} from "rxjs/operators";
-import {NewsEnum} from "../../news/model/news.enum";
-import {TagsService} from "../../tags/service/tags.service";
-import {FormBuilder} from "@angular/forms";
-import {NotificationService} from "../service/notification.service";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {BaseComponent} from '../../../core/base.component';
+import {NotificationConst} from '../notification';
+import {Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {AppTranslateService} from '../../../core/service/translate.service';
+import {concatMap, startWith, takeUntil} from 'rxjs/operators';
+import {TagsService} from '../../tags/service/tags.service';
+import {FormBuilder} from '@angular/forms';
+import {NotificationService} from '../service/notification.service';
+import {Paginator} from 'primeng/paginator';
+import {PageChangeEvent} from '../../../shared/model/page-change-event';
+import {IndicatorService} from '../../../shared/indicator/indicator.service';
+import {UtilService} from '../../../core/service/util.service';
+import {ConfirmationService, MessageService} from 'primeng/api';
+import {AuthService} from '../../../auth/auth.service';
+import {ApiErrorResponse} from '../../../core/model/error-response';
 
 @Component({
   selector: 'aw-notification-data',
@@ -18,28 +24,18 @@ import {NotificationService} from "../service/notification.service";
 })
 export class NotificationDataComponent extends BaseComponent implements OnInit {
   formFilter: any;
+  @ViewChild('paging') paging: Paginator;
   statusList: any;
   isHasEdit = true;
   isHasDel = true;
   notificationConst = NotificationConst;
   pageSize = 10;
-  totalItem = 12;
+  totalItem = 0;
   tagsList = [];
-  notificationList = [
-    {id: 1, title: 'Thông báo số 1', status: '1', time: new Date(), tags: 'kpi'},
-    {id: 1, title: 'Thông báo số 2', status: '0', time: new Date(), tags: 'kpi'},
-    {id: 1, title: 'Thông báo số 3', status: '1', time: new Date(), tags: 'kpi'},
-    {id: 1, title: 'Thông báo số 4', status: '2', time: new Date(), tags: 'kpi'},
-    {id: 1, title: 'Thông báo số 5', status: '2', time: new Date(), tags: 'kpi'},
-    {id: 1, title: 'Thông báo số 6', status: '0', time: new Date(), tags: 'kpi'},
-    {id: 1, title: 'Thông báo số 7', status: '1', time: new Date(), tags: 'kpi'},
-    {id: 1, title: 'Thông báo số 8', status: '1', time: new Date(), tags: 'kpi'},
-    {id: 1, title: 'Thông báo số 9', status: '1', time: new Date(), tags: 'kpi'},
-    {id: 1, title: 'Thông báo số 10', status: '1', time: new Date(), tags: 'kpi'},
-    {id: 1, title: 'Thông báo số 11', status: '1', time: new Date(), tags: 'kpi'},
-    {id: 1, title: 'Thông báo số 12', status: '1', time: new Date(), tags: 'kpi'},
-
-  ];
+  notificationList = [];
+  sortBy: any;
+  sortOrder: string;
+  page = 0;
 
   constructor(
     private router: Router,
@@ -47,17 +43,24 @@ export class NotificationDataComponent extends BaseComponent implements OnInit {
     private appTranslate: AppTranslateService,
     private tagService: TagsService,
     private fb: FormBuilder,
+    private indicator: IndicatorService,
+    private util: UtilService,
+    private dialog: ConfirmationService,
+    private messageService: MessageService,
+    private auth: AuthService,
     private notificationService: NotificationService
+
   ) {
     super();
   }
 
   ngOnInit(): void {
+    this.indicator.showActivityIndicator();
     this.notificationService.setPage('');
     this.formFilter = this.fb.group({
       searchValue: [''],
-      status: [null],
-      tags: [null]
+      status: [{code: null}],
+      tags: [{id: null}]
     });
     this.appTranslate.languageChanged$.pipe(
       takeUntil(this.nextOnDestroy),
@@ -74,21 +77,24 @@ export class NotificationDataComponent extends BaseComponent implements OnInit {
         this.tagsList = tagsList;
         this.tagsList.unshift({id: null, value: res.all});
       });
+      this.indicator.hideActivityIndicator();
     });
 
 
   }
 
   doFilter() {
-
+    this.paging.changePage(0);
   }
 
   hasErrorFilter(searchValue: string, pattern: string) {
 
   }
 
-  lazyLoadUser($event: any) {
-
+  lazyLoadUser(evt) {
+    this.sortBy = evt.sortField;
+    this.sortOrder = evt.sortOrder === 1 ? 'ASC' : 'DESC';
+    this.getListNotifications();
   }
 
   gotoCreate() {
@@ -103,11 +109,64 @@ export class NotificationDataComponent extends BaseComponent implements OnInit {
     this.router.navigate(['notification', 'update', id]);
   }
 
-  doDelete(notification: any) {
-
+  doDelete(notification) {
+    this.dialog.confirm({
+      key: 'globalDialog',
+      header: this.translate.instant('confirm.delete'),
+      message: this.translate.instant('confirm.deleteMessage', { name: notification.title }),
+      acceptLabel: this.translate.instant('confirm.accept'),
+      rejectLabel: this.translate.instant('confirm.reject'),
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.indicator.showActivityIndicator();
+        this.notificationService.deleteNotifcation(notification.id.toString()).pipe(
+        ).subscribe(() => {
+          this.messageService.add({
+            severity: 'success',
+            detail: this.translate.instant('message.deleteSuccess')
+          });
+          this.getListNotifications();
+        }, err => {
+          this.indicator.hideActivityIndicator();
+          if (err instanceof ApiErrorResponse && err.code === '201') {
+            this.messageService.add({
+              severity: 'error',
+              detail: this.translate.instant('message.deleteNotFound')
+            });
+          } else {
+            throw err;
+          }
+        });
+      },
+      reject: () => {}
+    });
   }
 
-  changePage($event: any) {
+  changePage(evt: PageChangeEvent) {
+    this.page = evt.page;
+    this.pageSize = evt.rows;
+    this.getListNotifications();
+  }
 
+  private getListNotifications() {
+    const filterValue = this.formFilter.value;
+    const tagSearch: number[] = [];
+    this.indicator.showActivityIndicator();
+    const body = {
+      keyword: filterValue.searchValue,
+      page: this.page,
+      pageSize: this.pageSize,
+      sortBy: this.sortBy,
+      sortOrder: this.sortOrder,
+      status: filterValue.status.code,
+      tagId: filterValue.tags.id
+    };
+    this.notificationService.filterNotification(body).subscribe(res => {
+      res.listNoti.forEach(e => e.tagList = e.tagList.map(tag => tag.tagValue));
+      this.notificationList = res.listNoti;
+      this.totalItem = res.totalRecords;
+    },
+        () => this.indicator.hideActivityIndicator(),
+        () => this.indicator.hideActivityIndicator());
   }
 }

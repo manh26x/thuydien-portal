@@ -73,4 +73,8 @@ export class InsuranceService extends BaseService {
   deleteCarModel(id: number): Observable<ApiResultResponse> {
     return this.doPost('/insurance/car/model/delete', id);
   }
+
+  getListInsurance(body) {
+    return this.doPost('/insurance/portalFilter', body).pipe(map(res => res.data[0] || []));
+  }
 }

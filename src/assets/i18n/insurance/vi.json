@@ -18,7 +18,8 @@
     "customerName": "Tên khách hàng",
     "createdDate": "Ngày tạo",
     "action": "Hành động",
-    "type": "Loại"
+    "type": "Loại bảo hiểm",
+    "miscode": "MIScode CBBH"
   },
   "car": {
     "brand": {
