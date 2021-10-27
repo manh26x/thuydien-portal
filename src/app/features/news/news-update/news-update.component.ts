@@ -168,13 +168,14 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
         });
       });
     }
-    const groupView: string[] = [];
+    let groupView: string[] = [];
     if (this.util.canForEach(value.groupViewValue)) {
       value.groupViewValue.forEach(g => {
         groupView.push(g.id);
       });
+    } else {
+      groupView = value.listAnyId.split(';');
     }
-    const listAnyId = value.listAnyId.split(';');
     const body: NewsInfoRequest = {
       id: value.id,
       title: value.title,
@@ -183,7 +184,7 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
       filePath: '',
       imgPath: '',
       listNewsTag: tagsInsert,
-      listAnyId,
+      listAnyId: groupView,
       priority: value.level,
       publishTime: value.publishDate,
       sendNotification: value.isSendNotification ? 1 : 0,

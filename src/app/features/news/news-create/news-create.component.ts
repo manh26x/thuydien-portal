@@ -107,7 +107,7 @@ export class NewsCreateComponent extends BaseComponent implements OnInit, Before
         });
       });
     }
-    const groupView: string[] = [];
+    let groupView: string[] = [];
     if (this.util.canForEach(value.groupViewValue)) {
       value.groupViewValue.forEach(g => {
         groupView.push(g.id);
