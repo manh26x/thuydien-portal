@@ -6,6 +6,10 @@
     "view": "View Notification"
   },
   "notification": {
+    "branch": "Branch",
+    "role": "Role",
+    "person": "Person",
+    "unit": "Unit",
     "notification-data": {
       "title": "List of Notification"
     },
@@ -26,7 +30,8 @@
     "patternFile": "Download the pattern file",
     "atHere": "at here",
     "send": "Send notification",
-    "image": "Image"
+    "image": "Image",
+    "userListNoti": "User list receive notification"
   },
   "no": "No.",
   "search": "Search",

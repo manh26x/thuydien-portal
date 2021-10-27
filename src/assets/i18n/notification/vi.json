@@ -2,13 +2,17 @@
   "breadcrumb": {
     "home": "Danh sách thông báo",
     "create": "Thêm mới thông báo",
-    "update": "Cập nhật thông báp",
+    "update": "Cập nhật thông báo",
     "view": "Xem chi tiết thông báo"
   },
   "notification": {
     "notification-data": {
       "title": "Danh sách thông báo"
     },
+    "branch": "Chi nhánh",
+    "role": "Role",
+    "unit": "Đơn vị",
+    "person": "Cá nhân",
     "search": "Tiêu đề thông báo",
     "status": "Trạng thái",
     "tags": "Tags",
@@ -26,7 +30,8 @@
     "patternFile": "Tải file mẫu",
     "atHere": "tại đây",
     "send": "Gửi thông báo",
-    "image": "Ảnh"
+    "image": "Ảnh",
+    "userListNoti": "Danh sách user nhận thông báo"
   },
   "no": "STT",
   "search": "Nhập thông tin để tìm kiếm",

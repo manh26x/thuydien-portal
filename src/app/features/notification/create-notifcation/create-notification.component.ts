@@ -2,14 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import {BaseComponent} from "../../../core/base.component";
 import {NotificationService} from "../service/notification.service";
 import {GroupViewState, MultiSelectItem} from "../../news/model/news";
-import {forkJoin} from "rxjs";
-import {finalize, map, takeUntil} from "rxjs/operators";
+import {forkJoin, Observable, of} from "rxjs";
+import {concatMap, finalize, map, takeUntil} from "rxjs/operators";
 import {UtilService} from "../../../core/service/util.service";
 import {IndicatorService} from "../../../shared/indicator/indicator.service";
 import {RoleService} from "../../../shared/service/role.service";
 import {UnitService} from "../../../shared/service/unit.service";
 import {TagsService} from "../../tags/service/tags.service";
 import {BranchService} from "../../../shared/service/branch.service";
+import {Tags} from "../../tags/model/tags";
+import {MessageService} from "primeng/api";
+import {TranslateService} from "@ngx-translate/core";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'aw-create-notifcation',
@@ -25,6 +29,9 @@ export class CreateNotificationComponent extends BaseComponent implements OnInit
     private notificationService: NotificationService,
     private util: UtilService,
     private indicator: IndicatorService,
+    private messageService: MessageService,
+    private translate: TranslateService,
+    private router: Router,
     private roleService: RoleService,
     private unitService: UnitService,
     private tagService: TagsService,
@@ -68,6 +75,65 @@ export class CreateNotificationComponent extends BaseComponent implements OnInit
       this.groupViewState = { unitList: res.resUnit, roleList: res.resRole, branchList: res.resBranch };
       this.tagList = res.resTag;
       this.groupViewList = res.resBranch;
+    });
+  }
+
+  doSave(evt) {
+    console.log(evt);
+    // 0: file docs 1: file image
+    const listObs: Observable<string>[] = [];
+    // file image
+    if (evt.fileImageList && evt.fileImageList.length > 0) {
+      const listFormData: FormData = new FormData();
+      listFormData.append('file', evt.fileImageList[0], evt.fileImageList[0].name);
+      listObs.push(this.notificationService.uploadFile(listFormData));
+    } else {
+      listObs.push(of(''));
+    }
+    const value = evt.notification;
+    const tagsInsert = [];
+    if (this.util.canForEach(value.tags)) {
+      value.tags.forEach(e => tagsInsert.push({tagId: e.id, tagValue: e.value}));
+    }
+    let groupView = [];
+    if (this.util.canForEach(value.groupViewValue)) {
+      value.groupViewValue.forEach(g => {
+        groupView.push({idAny: g.id, anyValue: g.name});
+      });
+    } else {
+      groupView = value.listAnyId.split(';').map(e => ({idAny: e, anyValue: e}));
+    }
+    value.listTags = tagsInsert;
+    console.log(value);
+    console.log(groupView);
+    const body = {
+      title: value.title,
+      content: value.content,
+      status: value.status.code,
+      publishDate: value.publishDate,
+      isDraft: evt.draft,
+      userViewType: value.groupViewType,
+      listAnyId: groupView,
+      listTag: tagsInsert,
+      coverImage: undefined
+    };
+    this.indicator.showActivityIndicator();
+    forkJoin(listObs).pipe(
+      concatMap(fileInfo => {
+        body.coverImage = fileInfo[0];
+        return this.notificationService.createNotification(body).pipe(
+          finalize(() => this.indicator.hideActivityIndicator())
+        );
+      })
+    ).subscribe(() => {
+      this.messageService.add({
+        severity: 'success',
+        detail: evt.draft ? this.translate.instant('message.draftSuccess') : this.translate.instant('message.insertSuccess')
+      });
+      this.router.navigate(['notification']);
+    }, err => {
+      this.indicator.hideActivityIndicator();
+      throw err;
     });
   }
 

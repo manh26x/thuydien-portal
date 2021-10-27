@@ -139,7 +139,6 @@ export class NewsUpdateComponent extends BaseComponent implements OnInit {
   }
 
   doSave(evt, draft) {
-    debugger
     // 0: file docs 1: file image
     const listObs: Observable<string>[] = [];
     // file docs

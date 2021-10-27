@@ -101,10 +101,14 @@
         </div>
       </div>
     </div>
+    <div class="p-fluid p-field">
+      <label for="n-order">{{'notification.userListNoti' | translate}}</label>
+      <input pInputText  type="text" formControlName="listAnyId">
+    </div>
   </div>
 
   <div class="p-col-12  p-fluid p-field p-mt-3">
-      <label for="n-send">{{'notification.send' | translate}}</label>
+      <label for="n-send">{{'notification.send' | translate}} <span class="p-invalid">*</span></label>
       <p-calendar id="n-send"
                   formControlName="publishDate"
                   dateFormat="dd/mm/yy"
@@ -122,6 +126,9 @@
       </p-calendar>
       <small *ngIf="hasErrorInput('publishDate', 'mustAfterNow')" class="p-invalid">
         {{'invalid.publishDate.mustAfterNow' | translate}}
+      </small>
+      <small *ngIf="hasErrorInput('publishDate', 'required')" class="p-invalid">
+        {{'invalid.required' | translate}}
       </small>
     </div>
     <div class="p-col-12 p-field">
@@ -151,13 +158,3 @@
   </div>
 </form>
 </p-card>
-<p-dialog [visible]="display" [closable]="false" modal="true"   [style]="{width: '50vw'}">
-  <ng-template pTemplate="header"><h2>{{'confirm.listUser.title' | translate}}</h2></ng-template>
-  <ng-template pTemplate="body">{{'confirm.userNoti' | translate: {validUser: userList, invalidUser: invalidUserList}  }}</ng-template>
-<ng-template pTemplate="footer">
-  <div class="p-grid p-fluid" style="display: flex; justify-content: center; align-items: center; margin: 20px 0">
-    <button type="button" pButton (click)="display = false" class="p-button-primary p-button-outlined p-md-6 p-col-6" style="width: 45%; height: 45px" label="{{'btn.no' | translate}}"></button>
-    <button type="submit" pButton class="p-button-secondary p-md-6 p-col-6" style="width: 45%; height: 45px" label="{{'btn.yes' | translate}}"></button>
-  </div>
-</ng-template>
-</p-dialog>

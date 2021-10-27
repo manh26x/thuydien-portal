@@ -9,15 +9,15 @@
       </div>
       <div class="p-fluid">
         <div class="p-col-12 p-field detail">
-          <label for="n-content">{{'notification.content' | translate}} <span class="p-invalid">*</span></label>
-          <div class="title-right" style="height: 400px;">{{notificationDetail.notificationDetailDto.content}}</div>
+          <label for="n-content">{{'notification.content' | translate}}</label>
+          <div class="title-right" style="height: 400px;" [innerHTML]="trustHtmlContent"></div>
         </div>
       </div>
     </div>
     <div class="p-md-4 p-col-4">
       <div class="p-fluid">
         <div class="p-col-12 p-field detail">
-          <label for="n-status">{{'notification.status' | translate}} <span class="p-invalid">*</span></label>
+          <label for="n-status">{{'notification.status' | translate}}</label>
           <div class="title-right">
             <ng-container [ngSwitch]="notificationDetail.notificationDetailDto.status">
               <ng-container *ngSwitchCase="notificationConst.SENT">{{'const.sent' | translate}}</ng-container>
@@ -40,44 +40,39 @@
       </div>
       <div class="p-fluid">
         <div class="p-col-12 p-field detail">
-          <label for="n-group">{{'notification.groupObject.title' | translate}} <span class="p-invalid">*</span></label>
-          <ng-container [ngSwitch]="notificationDetail.notificationDetailDto.userViewType">
-            <ng-container *ngSwitchCase="notificationConst.GROUP_VIEW_BRANCH">
-              <h5>{{'news.branch' | translate}}</h5>
-              <ng-container *ngFor="let item of notificationDetail.listBranch">
-                <li>{{item.code}} - {{item.name}}</li>
+          <label for="n-group">{{'notification.groupObject.title' | translate}}</label>
+          <div class="title-right">
+            <ng-container [ngSwitch]="notificationDetail.notificationDetailDto.userViewType">
+              <ng-container *ngSwitchCase="notificationConst.GROUP_VIEW_BRANCH">
+                <h5>{{'notification.branch' | translate}}</h5>
+              </ng-container>
+              <ng-container *ngSwitchCase="notificationConst.GROUP_VIEW_ROLE">
+                <h5>{{'notification.role' | translate}}</h5>
+              </ng-container>
+              <ng-container *ngSwitchCase="notificationConst.GROUP_VIEW_UNIT">
+                <h5>{{'notification.unit' | translate}}</h5>
+              </ng-container>
+              <ng-container *ngSwitchCase="notificationConst.GROUP_VIEW_PERSON">
+                <h5>{{'notification.person' | translate}}</h5>
+              </ng-container>
+              <ng-container *ngFor="let item of notificationDetail.listAnyId">
+                <li>{{item.tagId}} - {{item.tagValue}}</li>
               </ng-container>
             </ng-container>
+          </div>
 
-            <ng-container *ngSwitchCase="notificationConst.GROUP_VIEW_ROLE">
-              <h5>{{'news.role' | translate}}</h5>
-              <ng-container *ngFor="let item of notificationDetail.listRole">
-                <li>{{item.name}}</li>
-              </ng-container>
-            </ng-container>
-
-            <ng-container *ngSwitchCase="notificationConst.GROUP_VIEW_UNIT">
-              <h5>{{'news.unit' | translate}}</h5>
-              <ng-container *ngFor="let item of notificationDetail.listUnit">
-                <li>{{item.name}}</li>
-              </ng-container>
-            </ng-container>
-
-            <ng-container *ngSwitchCase="notificationConst.GROUP_VIEW_PERSON">
-              <h5>{{'news.person' | translate}}</h5>
-              <ng-container *ngFor="let item of notificationDetail.listUser">
-                {{item}};
-              </ng-container>
-            </ng-container>
-          </ng-container>
         </div>
       </div>
 
-      <div class="p-col-12  p-fluid p-field">
+      <div class="p-col-12  p-fluid p-field detail">
         <label for="n-send">{{'notification.send' | translate}}</label>
+        <div class="title-right">{{notificationDetail.notificationDetailDto.publishDate | date: 'dd/MM/yyyy HH:mm'}}</div>
       </div>
       <div class="p-col-12 p-field">
         <label for="n-image">{{'notification.image' | translate}}</label>
+        <div class="title-right">
+          <img style="width: 100%;" [src]="trustUrlImg">
+        </div>
       </div>
     </div>
     <div class="split-horizontal"></div>

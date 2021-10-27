@@ -3,6 +3,7 @@ import {BaseService} from "../../../core/service/base.service";
 import {BehaviorSubject, Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
+import {ApiResultResponse} from "../../../core/model/result-response";
 
 @Injectable({
   providedIn: 'root'
@@ -48,4 +49,15 @@ export class NotificationService extends BaseService{
       map(res => res.data ? res.data[0] : {})
     );
   }
+
+  uploadFile(file: FormData): Observable<string> {
+    return this.doPost('/uploads/file', file).pipe(
+      map(res => res.data[0] || '')
+    );
+  }
+
+  createNotification(body): Observable<ApiResultResponse> {
+    return this.doPost('/admin-noti/manage/create', body);
+  }
+
 }

@@ -6,6 +6,7 @@ import {IndicatorService} from "../../../shared/indicator/indicator.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {finalize} from "rxjs/operators";
 import {NotificationConst} from "../notification";
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'aw-view-notification',
@@ -17,6 +18,8 @@ export class ViewNotificationComponent extends BaseComponent implements OnInit {
 
   notificationDetail: any;
   notificationConst = NotificationConst;
+  trustHtmlContent: any;
+  trustUrlImg: any = '';
   constructor(
     private notificationService: NotificationService,
     private router: Router,
@@ -32,7 +35,13 @@ export class ViewNotificationComponent extends BaseComponent implements OnInit {
     this.notificationService.setPage('view');
     this.notificationService.detailNotification(this.route.snapshot.paramMap.get('id'))
       .pipe(finalize(() => this.indicator.hideActivityIndicator()))
-      .subscribe(res => this.notificationDetail = res);
+      .subscribe(res => {
+        this.notificationDetail = res;
+        this.trustHtmlContent = this.sanitizer.bypassSecurityTrustHtml(res.notificationDetailDto.content);
+        if (res.notificationDetailDto?.coverImage) {
+          this.trustUrlImg = this.sanitizer.bypassSecurityTrustUrl(`${environment.mediaUrl}${res.notificationDetailDto?.coverImage}`);
+        }
+      });
   }
 
   doCancel() {

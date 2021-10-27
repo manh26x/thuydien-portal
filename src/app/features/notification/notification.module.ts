@@ -95,7 +95,6 @@ import {ToastModule} from "primeng/toast";
     BranchService,
     RoleService,
     UnitService,
-    ConfirmationService,
     UnitService,
     { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
   ],

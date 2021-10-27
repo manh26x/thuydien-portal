@@ -1,18 +1,31 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {concatMap, finalize, startWith, takeUntil} from "rxjs/operators";
-import {NotificationConst} from "../notification";
-import {TranslateService} from "@ngx-translate/core";
-import {AppTranslateService} from "../../../core/service/translate.service";
-import {BaseComponent} from "../../../core/base.component";
-import {TagsService} from "../../tags/service/tags.service";
-import {ConfirmationService} from "primeng/api";
-import {FormBuilder, Validators} from "@angular/forms";
-import {GroupViewState, MultiSelectItem} from "../../news/model/news";
-import {MatRadioChange} from "@angular/material/radio";
-import {NewsEnum} from "../../news/model/news.enum";
-import {UtilService} from "../../../core/service/util.service";
-import {environment} from "../../../../environments/environment";
-import {NotificationService} from "../service/notification.service";
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
+import {concatMap, startWith, takeUntil} from 'rxjs/operators';
+import {NotificationConst} from '../notification';
+import {TranslateService} from '@ngx-translate/core';
+import {AppTranslateService} from '../../../core/service/translate.service';
+import {BaseComponent} from '../../../core/base.component';
+import {TagsService} from '../../tags/service/tags.service';
+import {ConfirmationService} from 'primeng/api';
+import {FormBuilder, Validators} from '@angular/forms';
+import {GroupViewState, MultiSelectItem, NewsDetail} from '../../news/model/news';
+import {MatRadioChange} from '@angular/material/radio';
+import {NewsEnum} from '../../news/model/news.enum';
+import {UtilService} from '../../../core/service/util.service';
+import {NotificationService} from '../service/notification.service';
+import {Router} from '@angular/router';
+import {environment} from '../../../../environments/environment';
+import {ImageUploadComponent} from '../../../shared/custom-file-upload/image-upload/image-upload.component';
+import {Notification} from 'rxjs';
 
 @Component({
   selector: 'aw-form-notification',
@@ -20,7 +33,7 @@ import {NotificationService} from "../service/notification.service";
   styles: [
   ]
 })
-export class FormNotificationComponent extends BaseComponent implements OnInit {
+export class FormNotificationComponent extends BaseComponent implements OnInit, OnChanges {
   tagList = [];
   statusList = [];
   private fileImport: any;
@@ -61,11 +74,13 @@ export class FormNotificationComponent extends BaseComponent implements OnInit {
   };
   private callbackEvent: any;
   private userList = '';
+  @ViewChild(ImageUploadComponent, {static: true}) imgUploadComponent: ImageUploadComponent;
   constructor(private translate: TranslateService,
               private tagService: TagsService,
               private fb: FormBuilder,
               private dialog: ConfirmationService,
               private util: UtilService,
+              private router: Router,
               private notificationService: NotificationService,
               private appTranslate: AppTranslateService) {
     super();
@@ -74,6 +89,7 @@ export class FormNotificationComponent extends BaseComponent implements OnInit {
   groupObject: any = null;
   notificationConst = NotificationConst;
   invalidUserList = '';
+  @Input() valueForm;
   ngOnInit(): void {
     this.formNoti = this.fb.group({
       groupViewType: [NotificationConst.GROUP_VIEW_BRANCH, [Validators.required]],
@@ -81,8 +97,9 @@ export class FormNotificationComponent extends BaseComponent implements OnInit {
       content: ['', [Validators.required]],
       status: [{code: NotificationConst.WAIT_SEND}, [Validators.required]],
       tags: ['', [Validators.required]],
-      groupViewValue: [null, [Validators.required]],
-      listAnyId: ['']
+      groupViewValue: [null],
+      listAnyId: [''],
+      publishDate: ['', [Validators.required]]
     });
     this.appTranslate.languageChanged$.pipe(
       takeUntil(this.nextOnDestroy),
@@ -102,6 +119,35 @@ export class FormNotificationComponent extends BaseComponent implements OnInit {
     });
   }
 
+
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.valueForm) {
+      if (!changes.valueForm.firstChange) {
+        const noti = changes.valueForm.currentValue;
+        if (this.mode === 'update') {
+          if (noti.notificationDetailDto?.coverImage) {
+            this.imgUploadComponent.previewAsUrl(`${environment.mediaUrl}${noti.notificationDetailDto?.coverImage}`);
+          }
+        }
+
+        this.formNoti.patchValue({
+          id: noti.notificationDetailDto?.id,
+          title: noti.notificationDetailDto?.title,
+          content: noti.notificationDetailDto?.content,
+          publishDate: new Date(noti.notificationDetailDto?.publishDate),
+          coverImage: noti.notificationDetailDto?.coverImage,
+          groupViewType: noti.notificationDetailDto?.userViewType,
+          groupViewValue: noti.notificationDetailDto?.groupViewValue,
+          listAnyId: ''
+        });
+        if (noti.notificationDetailDto?.userViewType === NotificationConst.GROUP_VIEW_PERSON) {
+          this.doCheckListAnyId({listValidUser: noti.listAnyId});
+        }
+      }
+    }
+  }
+
   hasErrorInput(controlName: string, errorName: string): boolean {
     const control = this.formNoti.get(controlName);
     if (control == null) {
@@ -115,15 +161,19 @@ export class FormNotificationComponent extends BaseComponent implements OnInit {
   }
 
   doCancel() {
-
+    this.router.navigate(['notification']);
   }
 
   doSaveDraft() {
-
+    const value = this.formNoti.getRawValue();
+    this.formNoti.patchValue({
+      title: value.title.trim(),
+      content: value.content.trim()
+    });
+    this.save.emit( { notification: value, fileImageList: this.filesImage, draft: 1});
   }
 
   doSave() {
-    debugger
     const value = this.formNoti.getRawValue();
     this.formNoti.patchValue({
       title: value.title.trim(),
@@ -132,7 +182,7 @@ export class FormNotificationComponent extends BaseComponent implements OnInit {
     if (this.formNoti.invalid) {
       this.util.validateAllFields(this.formNoti);
     } else {
-      this.save.emit( { notification: value, fileImageList: this.filesImage});
+      this.save.emit( { notification: value, fileImageList: this.filesImage, draft: 0});
     }
   }
 
@@ -175,8 +225,17 @@ export class FormNotificationComponent extends BaseComponent implements OnInit {
       const fileFormData: FormData = new FormData();
       fileFormData.append('file', this.fileImport[0], this.fileImport[0].name);
       this.notificationService.checkDataImport(fileFormData).subscribe(res => {
-        this.doCheckListAnyId(res);
-        this.display = true;
+        this.dialog.confirm({
+          key: 'globalDialog',
+          header: this.translate.instant('confirm.userNotiHeader'),
+          message: this.translate.instant('confirm.userNoti', {validUser: res.listValidUser, invalidUser: res.listInvalidUser}),
+          rejectLabel: this.translate.instant('confirm.reject'),
+          acceptLabel: this.translate.instant('confirm.accept'),
+          accept: () => {
+            this.doCheckListAnyId(res);
+          },
+          reject: () => {}
+        });
       }, error => console.log(error));
     }
   }

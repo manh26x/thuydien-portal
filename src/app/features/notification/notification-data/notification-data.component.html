@@ -53,7 +53,7 @@
             <div *ngSwitchCase="notificationConst.INACTIVE" class="p-invalid">{{'const.inactive' | translate}}</div>
           </ng-container>
         </td>
-        <td>{{notification.publishDate}}</td>
+        <td>{{notification.publishDate | date : 'dd/MM/yyyy HH:mm'}}</td>
         <td>{{notification.tagList}}</td>
         <td style="min-width: 175px">
           <div>
