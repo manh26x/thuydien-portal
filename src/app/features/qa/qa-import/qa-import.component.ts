@@ -3,7 +3,7 @@ import {Table} from 'primeng/table';
 import {BehaviorSubject} from 'rxjs';
 import {QaService} from "../service/qa.service";
 import {BaseComponent} from "../../../core/base.component";
-import {switchMap} from "rxjs/operators";
+import {finalize, switchMap} from "rxjs/operators";
 import {ApiErrorResponse} from "../../../core/model/error-response";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {IndicatorService} from "../../../shared/indicator/indicator.service";
@@ -47,13 +47,21 @@ export class QaImportComponent extends BaseComponent implements AfterViewInit {
   }
 
   doCheckFile() {
+    this.indicator.showActivityIndicator();
     if (this.fileImport && this.fileImport.length > 0) {
       const fileFormData: FormData = new FormData();
       fileFormData.append('file', this.fileImport[0], this.fileImport[0].name);
-      this.qaService.checkDataImport(fileFormData).subscribe(res => {
+      this.qaService.checkDataImport(fileFormData)
+        .pipe(finalize(() => this.indicator.hideActivityIndicator()))
+        .subscribe(res => {
         this.qnaList = res;
         this.display = true;
-      }, error => console.log(error));
+      }, error => {
+          this.messageService.add({
+            severity: 'error',
+            detail: this.translate.instant('qa.message.importError')
+          });
+        });
     }
   }
 

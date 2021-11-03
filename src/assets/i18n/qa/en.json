@@ -27,7 +27,8 @@
       "updateSuccess": "Update Q&A Successfully",
       "updateError": "Update Q&A Failed",
       "deleteSuccess": "Delete QA Successfully",
-      "deleteFail": "Delete QA failed"
+      "deleteFail": "Delete QA failed",
+      "importError": "Import Q&A Failed"
     },
     "answer": "Answer",
     "search": "Q&A",

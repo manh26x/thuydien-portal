@@ -32,6 +32,8 @@ export class QaDataComponent extends BaseComponent implements OnInit {
   isHasDel = false;
   isHasEdit = false;
   isHasInsert = false;
+  isHasImport = false;
+  isHasExport = false;
   pageSize = 10;
   page = 0;
   totalItem = 14;
@@ -54,6 +56,8 @@ export class QaDataComponent extends BaseComponent implements OnInit {
     this.isHasEdit = this.auth.isHasRole(FeatureEnum.QA, RoleEnum.ACTION_EDIT);
     this.isHasDel = this.auth.isHasRole(FeatureEnum.QA, RoleEnum.ACTION_DELETE);
     this.isHasDel = this.auth.isHasRole(FeatureEnum.QA, RoleEnum.ACTION_DELETE);
+    this.isHasImport = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_IMPORT);
+    this.isHasExport = this.auth.isHasRole(FeatureEnum.USER, RoleEnum.ACTION_EXPORT);
     this.appTranslate.languageChanged$.pipe(
       takeUntil(this.nextOnDestroy),
       startWith(''),

@@ -28,7 +28,8 @@
       "updateSuccess": "Cập nhật Q&A thành công",
       "updateError": "Cập nhật Q&A thất bại",
       "deleteSuccess": "Xóa Q&A thành công",
-      "deleteFail": "Xóa Q&A thất bại"
+      "deleteFail": "Xóa Q&A thất bại",
+      "importError": "Import Q&A thất bại, kiểm tra dữ liệu"
     },
     "question": "Câu hỏi",
     "createDate": "Ngày thêm mới",
