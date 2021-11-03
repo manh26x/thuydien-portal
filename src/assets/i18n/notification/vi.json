@@ -33,6 +33,16 @@
     "image": "Ảnh",
     "userListNoti": "Danh sách user nhận thông báo"
   },
+  "message": {
+    "insertSuccess": "Thêm mới thông báo thành công",
+    "insertError": "Thêm mới thất bại",
+    "updateSuccess": "Cập nhật thông báo thành công",
+    "updateError": "Cập nhật thông báo thất bại",
+    "deleteSuccess": "Xóa thông báo thành công",
+    "deleteFail": "Xóa thông báo thất bại",
+    "draftSuccess": "Lưu nháp thành công"
+
+  },
   "no": "STT",
   "search": "Nhập thông tin để tìm kiếm",
   "paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",

@@ -33,6 +33,15 @@
     "image": "Image",
     "userListNoti": "User list receive notification"
   },
+  "message": {
+    "insertSuccess": "Add new notification Successfully",
+    "insertError": "Add new notificationFailed",
+    "updateSuccess": "Update notification Successfully",
+    "updateError": "Update notification Failed",
+    "deleteSuccess": "Delete notification Successfully",
+    "deleteFail": "Delete notification failed",
+    "draftSuccess": "Save draft successfully"
+  },
   "no": "No.",
   "search": "Search",
   "paging": "Showing {first} to {last} in {totalRecords} records",
