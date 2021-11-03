@@ -36,39 +36,45 @@ import { CarModalUpdateComponent } from './car-modal/car-modal-update/car-modal-
 import { CarModalCreateComponent } from './car-modal/car-modal-create/car-modal-create.component';
 import {InsuranceService} from "./service/insurance.service";
 import {ToastModule} from "primeng/toast";
+import {CalendarModule} from "primeng/calendar";
+import {CheckboxModule} from "primeng/checkbox";
+import {DialogModule} from "primeng/dialog";
 
 // @ts-ignore
 @NgModule({
   // tslint:disable-next-line:max-line-length
   declarations: [InsuranceComponent, CarBrandComponent, CarModalComponent, InsuranceDataComponent, InsuranceFormComponent, InsuranceViewComponent, InsuranceUpdateComponent, InsuranceTabviewComponent, CarBrandFormComponent, CarBrandUpdateComponent, CarBrandCreateComponent, CarModalFormComponent, CarModalUpdateComponent, CarModalCreateComponent],
-  imports: [
-    CommonModule,
-    InsuranceRoutingModule,
-    TabViewModule,
-    BreadcrumbModule,
-    TranslateModule.forChild({
-      missingTranslationHandler: {
-        provide: MissingTranslationHandler,
-        useClass: CustomMissingTranslationHandler,
-        deps: [AppTranslateService]
-      },
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (CustomTranslateLoader),
-        deps: [LANGUAGE_FILE_PATH, HttpClient]
-      },
-      isolate: true,
-      useDefaultLang: false
-    }),
-    ReactiveFormsModule,
-    DropdownModule,
-    ButtonModule,
-    InputTextModule,
-    PaginatorModule,
-    TableModule,
-    CardModule,
-    ToastModule,
-  ],
+    imports: [
+        CommonModule,
+        InsuranceRoutingModule,
+        TabViewModule,
+        BreadcrumbModule,
+        TranslateModule.forChild({
+            missingTranslationHandler: {
+                provide: MissingTranslationHandler,
+                useClass: CustomMissingTranslationHandler,
+                deps: [AppTranslateService]
+            },
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (CustomTranslateLoader),
+                deps: [LANGUAGE_FILE_PATH, HttpClient]
+            },
+            isolate: true,
+            useDefaultLang: false
+        }),
+        ReactiveFormsModule,
+        DropdownModule,
+        ButtonModule,
+        InputTextModule,
+        PaginatorModule,
+        TableModule,
+        CardModule,
+        ToastModule,
+        CalendarModule,
+        CheckboxModule,
+        DialogModule,
+    ],
   providers: [
     {
       provide: LANGUAGE_FILE_PATH,

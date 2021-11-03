@@ -19,7 +19,43 @@
     "createdDate": "Created Date",
     "action": "Action",
     "type": "Type",
-    "miscode": "MIScode CBBH"
+    "miscode": "MIScode CBBH",
+    "fromDate": "From date",
+    "toDate": "To date",
+    "form": {
+      "car": {
+        "title": "Car Information"
+      },
+      "insurance-scope": {
+        "title": "Insurance Scope"
+      },
+      "car-owner": {
+        "title": "Car owner"
+      },
+      "customer-type": "Customer type",
+      "name": "Name",
+      "phone": "Phone",
+      "address": "Address",
+      "id-number": "ID",
+      "scope-from-date": "From date",
+      "scope-to-date": "To date",
+      "scope-people-number": "People",
+      "scope-car-value": "Car value",
+      "scope-money-insurance": "Money insurance",
+      "scope-term": "Term",
+      "car-brand": "Car brand",
+      "car-modal": "Car model",
+      "car-number": "License plate",
+      "car-engine-number": "Car engine number",
+      "car-chassis-number": "Car chassis number",
+      "car-seat-size": "Car seat size",
+      "car-capacity": "Car Capacity",
+      "car-value": "Car value",
+      "car-business": "Car business",
+      "car-type": "Car type",
+      "car-target": "Car target",
+      "car-manufacture-year": "Car manufacture year"
+    }
   },
   "car": {
     "brand": {
@@ -55,7 +91,8 @@
   "btn": {
     "insert": "Add",
     "cancel": "Cancel",
-    "save": "Save"
+    "save": "Save",
+    "export": "Export"
   },
   "filter": "Filter",
   "paging": "Showing {first} to {last} in {totalRecords} records",
@@ -74,5 +111,7 @@
   },
   "invalid": {
     "required": "Value cannot be blank"
-  }
+  },
+  "noData": "No matching results",
+  "export": "Export"
 }

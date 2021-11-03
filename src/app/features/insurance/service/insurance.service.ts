@@ -37,6 +37,10 @@ export class InsuranceService extends BaseService {
   carBrandActive(): Observable<any> {
     return this.doPost('/insurance/car/brand/listActive', null).pipe(map(res => res.data || []));
   }
+
+  carModelActive(brandId): Observable<any> {
+    return this.doPost('/insurance/car/model/listActive', brandId).pipe(map(res => res.data || []));
+  }
   carModalFilter(body: any): Observable<any> {
     return this.doPost('/insurance/car/model/filter', body).pipe(map(res => res.data[0] || []));
   }
@@ -76,5 +80,22 @@ export class InsuranceService extends BaseService {
 
   getListInsurance(body) {
     return this.doPost('/insurance/portalFilter', body).pipe(map(res => res.data[0] || []));
+  }
+
+  insuranceDetail(id: any): Observable<any> {
+    const body = +id;
+    return this.doPost('/insurance/insuranceDetail', body).pipe(map(res => res.data[0] || null));
+  }
+
+  insuranceBphi(request: any): Observable<any> {
+    return this.doPost('/insurance/mic/bphi', request);
+  }
+  insuranceTra(request: any): Observable<any> {
+    return this.doPost('/insurance/mic/tra', request);
+  }
+
+
+  export(body): Observable<any> {
+    return this.postDataBlob('/insurance/exportExcel', body);
   }
 }

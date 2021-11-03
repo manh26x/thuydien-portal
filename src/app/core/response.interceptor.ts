@@ -23,7 +23,7 @@ export class ResponseInterceptor implements HttpInterceptor {
   private readonly IGNORE_URLS = ['/assets/i18n', '/userPortal/exportUserExcel', '/role/exportRoleExcel',
     '/comment/export', '/admin/unit/exportExcel', '/admin/department/exportExcel', '/admin/branch/exportExcel',
     '/firebase', '/firebase-cloud-messaging-push-scope',
-    '/firebase-messaging-sw.js', '/manifest.json'];
+    '/firebase-messaging-sw.js', '/manifest.json', '/insurance/exportExcel'];
   private readonly CLIENT_LOG_API = '/common/log';
   private readonly NOT_FOUND_WILL_THROW = [
     '/userPortal/detail'

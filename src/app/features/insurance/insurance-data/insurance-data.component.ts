@@ -1,14 +1,17 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 import {AppTranslateService} from "../../../core/service/translate.service";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {concatMap, finalize, startWith, takeUntil} from "rxjs/operators";
 import {BaseComponent} from "../../../core/base.component";
 import {BranchService} from "../../../shared/service/branch.service";
 import {InsuranceService} from "../service/insurance.service";
 import {Paginator} from "primeng/paginator";
 import {IndicatorService} from "../../../shared/indicator/indicator.service";
+import { saveAs } from 'file-saver';
+import {UtilService} from "../../../core/service/util.service";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'aw-insurance-data',
@@ -16,7 +19,7 @@ import {IndicatorService} from "../../../shared/indicator/indicator.service";
   styles: [
   ]
 })
-export class InsuranceDataComponent extends BaseComponent implements OnInit {
+export class InsuranceDataComponent extends BaseComponent implements OnInit, AfterViewInit {
   @ViewChild('paging') paging: Paginator;
   formFilter: any;
   statusList: any;
@@ -27,7 +30,11 @@ export class InsuranceDataComponent extends BaseComponent implements OnInit {
   insuranceList = [];
   totalItems = 0;
   page = 0;
-
+  initMaxShow = 2;
+  displayExport = false;
+  exportForm: any;
+  readonly yearSelect = `${new Date().getFullYear() - 100}:${new Date().getFullYear() + 100}`;
+  pipe = new DatePipe('en-US');
   constructor(
     private router: Router,
     private translate: TranslateService,
@@ -35,9 +42,11 @@ export class InsuranceDataComponent extends BaseComponent implements OnInit {
     private branchService: BranchService,
     private fb: FormBuilder,
     private insuranceService: InsuranceService,
-    private indicator: IndicatorService
+    private indicator: IndicatorService,
+    private util: UtilService
   ) {
     super();
+
   }
 
   ngOnInit(): void {
@@ -46,6 +55,11 @@ export class InsuranceDataComponent extends BaseComponent implements OnInit {
       searchValue: [''],
       status: [{code: null}],
       branch: [{code: null}]
+    });
+    this.exportForm = this.fb.group({
+      branchCode: [null],
+      fromDate: [new Date(), [Validators.required]],
+      toDate: [new Date(), [Validators.required]]
     });
     this.appTranslate.languageChanged$.pipe(
       takeUntil(this.nextOnDestroy),
@@ -59,7 +73,6 @@ export class InsuranceDataComponent extends BaseComponent implements OnInit {
         this.branchList = branchList;
         this.branchList.unshift({name: res.all, code: null});
       });
-      this.doFilter();
     });
 
 
@@ -72,7 +85,13 @@ export class InsuranceDataComponent extends BaseComponent implements OnInit {
   hasErrorFilter(searchValue: string, pattern: string) {
 
   }
-
+  hasErrorInput(controlName: string, errorName: string): boolean {
+    const control = this.exportForm.get(controlName);
+    if (control == null) {
+      return false;
+    }
+    return (control.dirty || control.touched) && control.hasError(errorName);
+  }
   lazyLoadUser(evt) {
 
   }
@@ -100,18 +119,30 @@ export class InsuranceDataComponent extends BaseComponent implements OnInit {
   }
 
   doExport() {
+    if (this.exportForm.invalid) {
+      this.util.validateAllFields(this.exportForm);
+    }
+    const body = this.exportForm.value;
+    body.fromDate = this.pipe.transform(body.fromDate, 'dd/MM/yyyy');
+    body.toDate = this.pipe.transform(body.toDate, 'dd/MM/yyyy');
+    this.indicator.showActivityIndicator();
 
+    this.insuranceService.export(body).pipe(
+      takeUntil(this.nextOnDestroy),
+      finalize(() => this.indicator.hideActivityIndicator())
+    ).subscribe(res => {
+      const myBlob: Blob = new Blob([res], { type: 'application/ms-excel' });
+      saveAs(myBlob, 'insurance_export.xlsx');
+    });
   }
 
   lazyLoadInsurance($event: any) {
 
   }
 
-  deleteInsurance(insurance: any) {
-
-  }
 
   private getListInsurance() {
+    this.indicator.showActivityIndicator();
     const body = {
       customerName: this.formFilter.get('searchValue').value,
       status: this.formFilter.get('status').value.code,
@@ -119,12 +150,17 @@ export class InsuranceDataComponent extends BaseComponent implements OnInit {
       page: this.page,
       pageSize: this.pageSize
     };
-    this.indicator.showActivityIndicator();
     this.insuranceService.getListInsurance(body)
       .pipe(finalize(() => this.indicator.hideActivityIndicator()))
       .subscribe(res => {
+
       this.insuranceList = res.listInsurance;
       this.totalItems = res.totalRecords;
+      this.insuranceList.forEach(e => e.maxShowBranch = this.initMaxShow);
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.getListInsurance();
   }
 }

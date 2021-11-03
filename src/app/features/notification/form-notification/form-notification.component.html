@@ -153,7 +153,7 @@
     </ng-container>
     <ng-container *ngIf="mode == 'update' && isNotPublished">
       <button pButton (click)="doSaveDraft()" type="button" label="{{'btn.draft' | translate}}" class="p-button-raised p-button-secondary p-mr-3"></button>
-      <button pButton (click)="doUpdate()" type="button" label="{{'btn.saveAndPublish' | translate}}" class="p-button-raised"></button>
+      <button pButton (click)="doSave()" type="button" label="{{'btn.saveAndPublish' | translate}}" class="p-button-raised"></button>
     </ng-container>
   </div>
 </form>

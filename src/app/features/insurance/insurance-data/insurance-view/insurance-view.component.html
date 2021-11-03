@@ -1,1 +1,204 @@
-<aw-insurance-form [isEdit]="false"></aw-insurance-form>
+<p-card>
+  <p style="color: rgba(70, 37, 116, 1)">Đăng ký bảo hiểm tại Công ty Cổ phần Bảo hiểm Quân Đội</p>
+  <p style="color: rgba(70, 37, 116, 1)">Cán bộ bán hàng: {{insurance.createdBy}}</p>
+  <table id="tableInsurance" style=" border-collapse: collapse; width: 50%;">
+    <tr>
+      <td>Trạng thái</td>
+      <td>
+        <ng-container [ngSwitch]="insurance.status">
+          <ng-container  *ngSwitchCase="4">Chưa thanh toán</ng-container>
+          <ng-container  *ngSwitchCase="5">Đang tạo giấy chứng nhận</ng-container>
+          <ng-container  *ngSwitchCase="6">Hoàn thành</ng-container>
+        </ng-container>
+      </td>
+    </tr>
+    <tr>
+      <td>Ngày hiệu lực</td>
+      <td>{{insurance.ngay_HL}}</td>
+    </tr>
+    <tr>
+      <td>Phí (Bao gồm VAT)</td>
+      <td>{{insurance.ttoan }} đ</td>
+    </tr>
+    <tr>
+      <td>Thông tin thanh toán</td>
+      <td  ><pre>{{insurance.transfer_FILE}}</pre></td>
+    </tr>
+    <tr>
+      <td>Giấy chứng nhận bảo hiểm</td>
+      <td><ng-container [ngSwitch]="insurance.status">
+        <ng-container  *ngSwitchCase="4">Chưa thanh toán</ng-container>
+        <ng-container  *ngSwitchCase="5">Đang tạo giấy chứng nhận</ng-container>
+        <ng-container  *ngSwitchCase="6"><a [href]="insurance.gcn_FILE" download>@File</a> </ng-container>
+      </ng-container></td>
+    </tr>
+  </table>
+</p-card>
+<div class="p-mt-5"></div>
+<form >
+  <p-card>
+    <p-tabView >
+      <p-tabPanel header="{{'insurance.form.car.title' | translate | uppercase}}">
+        <ng-template pTemplate="body"  >
+          <div class="p-grid p-fluid">
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label class="title-left ">{{'insurance.form.car-brand' | translate}}</label>
+              <div class="title-right ">{{insurance.hang_XE}}</div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.car-modal' | translate}}</label>
+              <div class="title-right ">{{insurance.hieu_XE}}</div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.car-number' | translate}}</label>
+              <div class="title-right ">{{insurance.bien_XE}}</div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.car-engine-number' | translate}}</label>
+              <div class="title-right ">{{insurance.so_MAY}}</div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.car-chassis-number' | translate}}</label>
+              <div class="title-right ">{{insurance.so_KHUNG}}</div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.car-capacity' | translate}}</label>
+              <div class="title-right ">{{insurance.ttai}}</div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.car-seat-size' | translate}}</label>
+              <div class="title-right ">{{insurance.so_CN}}</div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.car-business' | translate}}</label>
+              <div class="title-right ">{{insurance.mdsd === 'C' ? 'Có' : 'Không'}}</div>
+            </div>
+
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.car-value' | translate}}</label>
+              <div class="title-right ">{{insurance.gia_XE}}</div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.car-target' | translate}}</label>
+              <div class="title-right ">
+                <ng-container *ngIf="insurance.mdsdn === 'C'">Xe chở người</ng-container>
+                <ng-container *ngIf="insurance.mdsdh === 'C'">Xe chở hàng</ng-container>
+                <ng-container *ngIf="insurance.mdsdt === 'C'">Xe chở người và hàng</ng-container>
+              </div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.car-type' | translate}}</label>
+              <div class="title-right ">
+                <ng-container *ngIf="insurance.xen1 === 'C'">Xe không kinh doanh</ng-container>
+                <ng-container *ngIf="insurance.xen2 === 'C'">Xe chạy trong khu nội bộ</ng-container>
+                <ng-container *ngIf="insurance.xen3 === 'C'">Xe khách liên tỉnh</ng-container>
+                <ng-container *ngIf="insurance.xen4 === 'C'">Xe bus</ng-container>
+                <ng-container *ngIf="insurance.xen5 === 'C'">Xe grap và loại hình tương tự</ng-container>
+                <ng-container *ngIf="insurance.xen6 === 'C'">Xe taxi</ng-container>
+                <ng-container *ngIf="insurance.xen7 === 'C'">Xe tập lái</ng-container>
+                <ng-container *ngIf="insurance.xen8 === 'C'">Xe cứu thương</ng-container>
+                <ng-container *ngIf="insurance.xen10 === 'C'">Xe kinh doanh khác</ng-container>
+
+                <ng-container *ngIf="insurance.xeh1 === 'C'">Xe rơ mooc</ng-container>
+                <ng-container *ngIf="insurance.xeh2 === 'C'">Xe tải trên 10 tấn</ng-container>
+                <ng-container *ngIf="insurance.xeh3 === 'C'">Xe đầu kéo, xe đông lạnh trên 3.5 tấn</ng-container>
+                <ng-container *ngIf="insurance.xeh4 === 'C'">Xe kinh doanh vận tải hàng hóa</ng-container>
+                <ng-container *ngIf="insurance.xeh5 === 'C'">Xe trong vùng khoáng sản</ng-container>
+                <ng-container *ngIf="insurance.xeh6 === 'C'">Xe chở hàng còn lại</ng-container>
+                <ng-container *ngIf="insurance.xeh7 === 'C'">Xe rở mooc ben</ng-container>
+                <ng-container *ngIf="insurance.xeh8 === 'C'">Xe chở tiền</ng-container>
+
+                <ng-container *ngIf="insurance.xet1 === 'C'">Xe bán tải</ng-container>
+                <ng-container *ngIf="insurance.xet2 === 'C'">Xe chở hàng còn lại</ng-container>
+              </div>
+            </div>
+
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.car-manufacture-year' | translate}}</label>
+              <div class="title-right ">{{insurance.nam_SX}}</div>
+            </div>
+          </div>
+        </ng-template>
+
+
+      </p-tabPanel>
+      <p-tabPanel header="{{'insurance.form.insurance-scope.title' | translate | uppercase}}">
+        <ng-template pTemplate="body"  >
+          <div class="p-grid p-fluid">
+            <div class="p-md-6 p-col-6 p-field detail" >
+              <label>{{'insurance.form.scope-from-date' | translate}}</label>
+              <div class="title-right ">{{insurance.ngay_HL}}</div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.scope-to-date' | translate}}</label>
+              <div class="title-right ">{{insurance.ngay_KT}}</div>
+            </div>
+            <div class="p-md-12" >
+              <span *ngIf="insurance.bbtn === 'C'" style="font-size: 18px; color: #4F4F4F;">TNDS BẮT BUỘC</span>
+              <span *ngIf="insurance.tl" style="font-size: 18px; color: #4F4F4F;">TAI NẠN LÁI, PHỤ XE</span>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.scope-people-number' | translate}}</label>
+              <div class="title-right ">{{insurance.so_LPX}}</div>
+            </div>
+            <div class="p-md-12">
+              <span style="font-size: 18px; color: #4F4F4F;">VẬT CHẤT XE</span>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.scope-car-value' | translate}}</label>
+              <div class="title-right ">{{insurance.gia_XE}}</div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.scope-money-insurance' | translate}}</label>
+              <div class="title-right ">{{insurance.tv}}</div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field">
+              <label>{{'insurance.form.scope-term' | translate}}</label>
+              <div class="title-right ">{{insurance.bs002 === 'C' ? 'Có' : 'Không'}}</div>
+            </div>
+          </div>
+        </ng-template>
+
+      </p-tabPanel>
+      <p-tabPanel header="{{'insurance.form.car-owner.title' | translate | uppercase}}">
+        <ng-template pTemplate="body"  >
+          <div class="p-grid p-fluid">
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.customer-type' | translate}}</label>
+              <div class="title-right ">
+                <ng-container *ngIf="insurance.lkh === 'C'">Cá nhân</ng-container>
+                <ng-container *ngIf="insurance.lkh === 'K'">Tổ chức</ng-container></div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.name' | translate}}</label>
+              <div class="title-right ">{{insurance.ten}}</div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.phone' | translate}}</label>
+              <div class="title-right ">{{insurance.mobi}}</div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.address' | translate}}</label>
+              <div class="title-right ">{{insurance.dchi}}</div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>{{'insurance.form.id-number' | translate}}</label>
+              <div class="title-right ">{{insurance.cmt}}</div>
+            </div>
+            <div class="p-md-6 p-col-6 p-field detail">
+              <label>Email</label>
+              <div class="title-right ">{{insurance.email}}</div>
+            </div>
+          </div>
+        </ng-template>
+      </p-tabPanel>
+    </p-tabView>
+    <div class="split-horizontal"></div>
+    <div class="p-text-center">
+      <button pButton (click)="doCancel()" type="button" label="{{'btn.cancel' | translate}}" class="p-button-raised p-button-text p-button-plain p-mr-3"></button>
+
+    </div>
+  </p-card>
+</form>
+
+

@@ -19,7 +19,43 @@
     "createdDate": "Ngày tạo",
     "action": "Hành động",
     "type": "Loại bảo hiểm",
-    "miscode": "MIScode CBBH"
+    "miscode": "MIScode CBBH",
+    "fromDate": "Từ ngày",
+    "toDate": "Đến ngày",
+    "form": {
+      "car": {
+        "title": "Thông tin về xe"
+      },
+      "insurance-scope": {
+        "title": "Phạm vi bảo hiểm"
+      },
+      "car-owner": {
+        "title": "Thông tin chủ xe"
+      },
+      "customer-type": "Loại khách hàng",
+      "name": "Tên",
+      "phone": "Số điện thoại",
+      "address": "Địa chỉ",
+      "id-number": "CMND/CCCD",
+      "scope-from-date": "Từ ngày",
+      "scope-to-date": "Đến ngày",
+      "scope-people-number": "Số lái, phụ xe",
+      "scope-car-value": "Giá trị xe",
+      "scope-money-insurance": "Số tiền bảo hiểm",
+      "scope-term": "Điều khoản bổ sung",
+      "car-brand": "Hãng xe",
+      "car-modal": "Hiệu xe",
+      "car-number": "Biển xe (không bắt buộc nếu nhập số khung, số máy)",
+      "car-engine-number": "Số máy (không bắt buộc nếu nhập biển xe)",
+      "car-chassis-number": "Số khung (không bắt buộc nếu nhập biển xe)",
+      "car-seat-size": "Số chỗ",
+      "car-capacity": "Số tấn trọng tải",
+      "car-value": "Giá trị xe theo khai báo",
+      "car-business": "Sử dụng xe trong kinh doanh",
+      "car-type": "Loại xe",
+      "car-target": "Mục đích sử dụng",
+      "car-manufacture-year": "Năm sản xuất"
+    }
   },
   "car": {
     "brand": {
@@ -56,7 +92,8 @@
   "btn": {
     "insert": "Thêm mới",
     "cancel": "Hủy",
-    "save": "Lưu"
+    "save": "Lưu",
+    "export": "Xuất"
   },
   "filter": "Lọc kết quả",
   "paging": "Hiển thị {first} đến {last} trong {totalRecords} bản ghi",
@@ -76,5 +113,7 @@
   },
   "invalid": {
     "required": "Giá trị không được để trống"
-  }
+  },
+  "noData": "Không có kết quả nào phù hợp",
+  "export": "Xuất báo cáo"
 }
