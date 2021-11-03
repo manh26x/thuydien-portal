@@ -68,6 +68,13 @@ export class InsuranceDataComponent extends BaseComponent implements OnInit, Aft
     ).subscribe(res => {
       this.statusList = [
         { label: res.all, code: null },
+        { label: 'Xóa', code: 0 },
+        { label: 'Nháp', code: 1 },
+        { label: 'Đang lấy phí', code: 2 },
+        { label: 'Chưa gửi thông tin', code: 3 },
+        { label: 'Chưa thanh toán', code: 4 },
+        { label: 'Đang tao giấy chứng nhận', code: 5 },
+        { label: 'Hoàn thành', code: 6 }
       ];
       this.branchService.postBranchListOfUser().subscribe(branchList => {
         this.branchList = branchList;
