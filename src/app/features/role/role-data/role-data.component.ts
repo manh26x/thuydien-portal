@@ -61,7 +61,7 @@ export class RoleDataComponent extends BaseComponent implements OnInit {
       concatMap(() => this.translate.get('const'))
     ).subscribe(res => {
       this.statusList = [
-        { label: res.all, value: '' },
+        { label: res.all, value: null },
         { label: res.active, value: RoleEnum.STATUS_ACTIVE },
         { label: res.inactive, value: RoleEnum.STATUS_INACTIVE }
       ];
@@ -102,7 +102,7 @@ export class RoleDataComponent extends BaseComponent implements OnInit {
   initForm() {
     this.formFilter = this.fb.group({
       name: [''],
-      status: ['']
+      status: [null]
     });
   }
 

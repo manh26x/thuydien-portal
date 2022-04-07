@@ -41,12 +41,10 @@ export interface RoleFeature {
 
 export interface InsertRoleRequest {
   roleInfo: Role;
-  tagList: RoleTag[];
   menuRightList: RoleFeature[];
 }
 
 export interface RoleDetail {
   menuRightList?: RoleFeature[];
   roleInfo?: Role;
-  tagList?: RoleTag[];
 }

@@ -204,7 +204,6 @@ export class UserDataComponent extends BaseComponent implements OnInit {
   }
 
   getUserList() {
-    debugger
     this.indicator.showActivityIndicator();
     const request: FilterUserRequest = {
       keyword: this.searchForm.value.keySearch,
@@ -289,7 +288,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
     this.searchForm = this.fb.group({
       keySearch: [''], // username and fullName
       role: [{code: ''}],
-      status: [{code: UserEnum.STATUS_ALL}],
+      status: [{code: null}],
       branch: [{code: UserEnum.STATUS_ALL}],
       userType: [{code: UserEnum.STATUS_USER_TYPE_ALL}]
     });

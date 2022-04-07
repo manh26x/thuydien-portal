@@ -24,12 +24,10 @@ import {TableModule} from 'primeng/table';
 import { RoleCreateComponent } from './role-create/role-create.component';
 import {TabViewModule} from 'primeng/tabview';
 import { RoleFormComponent } from './role-form/role-form.component';
-import { TagListComponent } from './tag-list/tag-list.component';
 import { FeatureListComponent } from './feature-list/feature-list.component';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {CheckboxModule} from 'primeng/checkbox';
 import {PickListModule} from 'primeng/picklist';
-import {TagsService} from '../tags/service/tags.service';
 import {FeatureService} from '../../shared/service/feature.service';
 import {CardModule} from 'primeng/card';
 import {MessagesModule} from 'primeng/messages';
@@ -44,7 +42,6 @@ import {ExportService} from '../../shared/service/export.service';
     RoleDataComponent,
     RoleCreateComponent,
     RoleFormComponent,
-    TagListComponent,
     FeatureListComponent,
     RoleUpdateComponent
   ],
@@ -89,7 +86,6 @@ import {ExportService} from '../../shared/service/export.service';
       useValue: { path: './assets/i18n/role/' }
     },
     MessageService,
-    TagsService,
     FeatureService,
     ExportService
   ]

@@ -5,7 +5,7 @@ export const environment = {
   tokenEx: 43199,
   refreshTokenEx: 43199,
   clientId: 'YnJvd3NlcjoxMjM0',
-  baseUrl: 'https://gateway-xplat-saleapp-dev.apps.dc-xplat-uat.nor.tpb.com',
+  baseUrl: 'http://localhost:8080',
   basePath: '',
   logServer: false,
   logClient: false,

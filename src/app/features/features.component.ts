@@ -58,8 +58,6 @@ export class FeaturesComponent extends IndicatorComponent implements OnInit, Aft
       }
     });
     this.loadUserInformation();
-    this.messagingService.requestPermission();
-    this.messagingService.receiveMessage();
   }
 
   ngAfterViewInit() {

@@ -9,9 +9,7 @@ import {CustomMissingTranslationHandler} from '../../core/translate.missing';
 import {AppTranslateService} from '../../core/service/translate.service';
 import {CustomTranslateLoader, LANGUAGE_FILE_PATH} from '../../core/translate.loader';
 import {HttpClient} from '@angular/common/http';
-import {NewsService} from '../news/service/news.service';
 import {MessageService} from 'primeng/api';
-import {TagsService} from '../tags/service/tags.service';
 import {BranchService} from '../../shared/service/branch.service';
 import {RoleService} from '../../shared/service/role.service';
 import {UnitService} from '../../shared/service/unit.service';
@@ -70,9 +68,7 @@ import {DialogModule} from 'primeng/dialog';
       provide: LANGUAGE_FILE_PATH,
       useValue: {path: './assets/i18n/branch-unit-department/'}
     },
-    NewsService,
     MessageService,
-    TagsService,
     BranchService,
     RoleService,
     UnitService

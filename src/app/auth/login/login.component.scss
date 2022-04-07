@@ -1,11 +1,12 @@
 .login-body {
-  //background: linear-gradient(180deg, #583894 0%, #2C1653 100%);
+  //background: linear-gradient(180deg, #3b53d2  0%, #2C1653 100%);
   background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
-  background-image: url("../../../assets/images/bg-logo-full.png");
+  //background-image: url("../../../assets/images/bg-logo-full.png");
+  background: linear-gradient(#1E3DAD, #2d55d7 );
   .logo-container{
     text-align: center;
     min-height: 65px;
@@ -16,7 +17,7 @@
   .logo {
     margin-top: 3px;
     width: 160px;
-    height: 40px;
+    //height: 40px;
   }
   .form-container {
     background-color: #FFFFFF;

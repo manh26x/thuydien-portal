@@ -1,10 +1,6 @@
 import {AfterViewInit, Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {RoleService} from '../../../shared/service/role.service';
-import {TagsEnum} from '../../tags/model/tags.enum';
-import {forkJoin} from 'rxjs';
 import {concatMap, delay, finalize, map, mergeMap, startWith, takeUntil, tap} from 'rxjs/operators';
-import {TagsService} from '../../tags/service/tags.service';
-import {TagDetail} from '../../tags/model/tags';
 import {IndicatorService} from '../../../shared/indicator/indicator.service';
 import {TabView} from 'primeng/tabview';
 import {AppTranslateService} from '../../../core/service/translate.service';
@@ -29,10 +25,6 @@ import {ApiErrorResponse} from '../../../core/model/error-response';
 export class RoleCreateComponent extends BaseComponent implements OnInit, AfterViewInit, BeforeLeave {
   roleForm: FormGroup;
   @ViewChild('tabView') tabView: TabView;
-  tagNewsList: TagDetail[] = [];
-  tagKpiList: TagDetail[] = [];
-  tagNewsSelectedList: TagDetail[] = [];
-  tagKpiSelectedList: TagDetail[] = [];
   featureList: FeatureMenu[] = [];
   isLoadedTag = false;
   isLoadedFeature = false;
@@ -40,7 +32,6 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
   isLeave = false;
   constructor(
     private roleService: RoleService,
-    private tagService: TagsService,
     private indicator: IndicatorService,
     private appTranslate: AppTranslateService,
     private featureService: FeatureService,
@@ -82,12 +73,6 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
         portalActive: value.isAdminPortal ? 1 : 0
       };
 
-      const tagData: RoleTag[] = [...this.tagKpiSelectedList, ...this.tagNewsSelectedList].map(item => ({ tagId: item.id }));
-
-      if(tagData.length === 0 && roleData.portalActive === 1) {
-       this.messageService.add({ key: 'add-role', severity: 'error', detail: this.translate.instant('invalid.requiredTag') });
-       return;
-     }
 
       const featureData: RoleFeature[] = [];
 
@@ -133,7 +118,6 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
       this.roleService.insertRole({
         menuRightList: featureData,
         roleInfo: roleData,
-        tagList: tagData
       }).pipe(
         finalize(() => this.indicator.hideActivityIndicator())
       ).subscribe(_ => {
@@ -162,13 +146,8 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
 
   doChangeTab(evt: any) {
     switch (evt.index) {
+
       case 1: {
-        if (!this.isLoadedTag) {
-          this.getTags();
-        }
-        break;
-      }
-      case 2: {
         if (!this.isLoadedFeature) {
           this.getFeature();
         }
@@ -176,20 +155,6 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
     }
   }
 
-  getTags() {
-    this.indicator.showActivityIndicator();
-    const obsTagNews = this.filterTagByType('', TagsEnum.NEWS);
-    const obsTagKpi = this.filterTagByType('', TagsEnum.KPI);
-    forkJoin([obsTagNews, obsTagKpi]).pipe(
-      takeUntil(this.nextOnDestroy),
-      map(res => ({ resNews: res[0].tagsList, resKpi: res[1].tagsList })),
-      finalize(() => this.indicator.hideActivityIndicator())
-    ).subscribe(res => {
-      this.isLoadedTag = true;
-      this.tagNewsList = res.resNews;
-      this.tagKpiList = res.resKpi;
-    });
-  }
 
   getFeature() {
     this.indicator.showActivityIndicator();
@@ -240,9 +205,6 @@ export class RoleCreateComponent extends BaseComponent implements OnInit, AfterV
     });
   }
 
-  filterTagByType(query, type) {
-    return this.tagService.searchTagExp({tagType: [type], sortOrder: 'ASC', sortBy: 'id', page: 0, pageSize: 500, searchValue: query });
-  }
 
   initForm() {
     this.roleForm = this.fb.group({

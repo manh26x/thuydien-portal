@@ -4,14 +4,6 @@
     <p-tabPanel header="{{'addNewRole' | translate}}">
       <aw-role-form [roleForm]="roleForm"></aw-role-form>
     </p-tabPanel>
-    <p-tabPanel header="{{'assignTagToRole' | translate}}">
-      <aw-tag-list
-        [tagNewsList]="tagNewsList"
-        [tagKpiList]="tagKpiList"
-        [tagNewsSelectedList]="tagNewsSelectedList"
-        [tagKpiSelectedList]="tagKpiSelectedList">
-      </aw-tag-list>
-    </p-tabPanel>
     <p-tabPanel header="{{'assignFeatureToRole' | translate}}">
       <aw-feature-list [featureList]="featureList"></aw-feature-list>
     </p-tabPanel>
