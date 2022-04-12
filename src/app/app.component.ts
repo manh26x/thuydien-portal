@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AppTranslateService} from './core/service/translate.service';
 import {Title} from '@angular/platform-browser';
-import {MessagingFirebaseService} from './core/service/messaging-firebase.service';
 
 @Component({
   selector: 'aw-root',

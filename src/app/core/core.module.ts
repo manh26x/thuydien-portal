@@ -10,7 +10,6 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import {DialogErrorHandle} from './dialog-error-handle';
 import {AppTranslateService} from './service/translate.service';
-import {MessagingFirebaseService} from './service/messaging-firebase.service';
 
 
 @NgModule({
@@ -49,7 +48,6 @@ import {MessagingFirebaseService} from './service/messaging-firebase.service';
     },
     ConfirmationService,
     AppTranslateService,
-    MessagingFirebaseService
   ],
   exports: [
     HttpClientModule,
