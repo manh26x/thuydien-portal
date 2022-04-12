@@ -14,7 +14,6 @@ import {ExportService} from '../../../shared/service/export.service';
 import {UtilService} from '../../../core/service/util.service';
 import {AuthService} from '../../../auth/auth.service';
 import {FeatureEnum} from '../../../shared/model/feature.enum';
-import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'aw-role-data',
@@ -94,7 +93,6 @@ export class RoleDataComponent extends BaseComponent implements OnInit {
         finalize(() => this.indicator.hideActivityIndicator())
       ).subscribe(res => {
         const myBlob: Blob = new Blob([res], { type: 'application/ms-excel' });
-        saveAs(myBlob, 'role_export.xlsx');
       });
     }
   }

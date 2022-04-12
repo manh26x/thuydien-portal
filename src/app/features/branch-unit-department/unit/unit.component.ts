@@ -11,7 +11,6 @@ import {UnitFilterRequest, UnitFilterResponse} from './model/unit';
 import {concatMap, finalize, startWith, switchMap, takeUntil} from 'rxjs/operators';
 import {ApiErrorResponse} from '../../../core/model/error-response';
 import {UnitEnum} from './model/unit.enum';
-import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'aw-unit',
@@ -244,7 +243,6 @@ export class UnitComponent extends BaseComponent implements OnInit, AfterViewIni
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe(res => {
       const myBlob: Blob = new Blob([res], { type: 'application/ms-excel' });
-      saveAs(myBlob, 'don_vi.xlsx');
     }, error => {
       this.indicator.hideActivityIndicator();
 

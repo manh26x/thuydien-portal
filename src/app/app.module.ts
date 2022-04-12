@@ -14,8 +14,6 @@ import {environment} from '../environments/environment';
   imports: [
     AppRoutingModule,
     CoreModule,
-    AngularFireModule.initializeApp(environment.FirebaseConfig),
-    AngularFireMessagingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

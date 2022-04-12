@@ -7,10 +7,26 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class DashboardComponent implements OnInit {
+  options: any;
 
+  overlays: any[];
   constructor() { }
 
-  ngOnInit(): void {
+
+  ngOnInit() {
+    this.options = {
+      center: {lat: 20.976794764101914, lng: 105.78475211270884},
+      zoom: 12
+    };
   }
+
+  handleMapClick($event: any) {
+
+  }
+
+  handleOverlayClick($event: any) {
+
+  }
+
 
 }

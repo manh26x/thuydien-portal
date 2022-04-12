@@ -19,7 +19,7 @@ import {RoleService} from '../../../shared/service/role.service';
 import {Role, RoleEnum} from '../../../shared/model/role';
 import {FeatureEnum} from '../../../shared/model/feature.enum';
 import {UtilService} from '../../../core/service/util.service';
-import { saveAs } from 'file-saver';
+// import { saveAs } from 'file-saver';
 import {Paginator} from 'primeng/paginator';
 import {BranchService} from '../../../shared/service/branch.service';
 
@@ -187,7 +187,7 @@ export class UserDataComponent extends BaseComponent implements OnInit {
       finalize(() => this.indicator.hideActivityIndicator())
     ).subscribe(res => {
       const myBlob: Blob = new Blob([res], { type: 'application/ms-excel' });
-      saveAs(myBlob, 'user_list.xlsx');
+      // saveAs(myBlob, 'user_list.xlsx');
     });
   }
 

@@ -5,13 +5,16 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import {DashboardComponent} from './dashboard.component';
 import {TranslateModule} from '@ngx-translate/core';
 
+import {GMapModule} from 'primeng/gmap';
+
 
 @NgModule({
   declarations: [DashboardComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    TranslateModule
+    TranslateModule,
+    GMapModule
   ]
 })
 export class DashboardModule { }
